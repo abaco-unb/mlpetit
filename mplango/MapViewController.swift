@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  mplango
 //
-//  Created by Carlos Wagner Pereira de Morais on 12/05/15.
+//  Created by Bruno Ferreira on 12/05/15.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
