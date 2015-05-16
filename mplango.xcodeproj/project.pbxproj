@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE171B0143AF0085F9A6 /* AppDelegate.swift */; };
 		8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */; };
-		8283BE1D1B0143AF0085F9A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE1C1B0143AF0085F9A6 /* ViewController.swift */; };
+		8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */; };
 		8283BE201B0143AF0085F9A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE1E1B0143AF0085F9A6 /* Main.storyboard */; };
 		8283BE221B0143AF0085F9A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE211B0143AF0085F9A6 /* Images.xcassets */; };
 		8283BE251B0143AF0085F9A6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */; };
 		8283BE311B0143AF0085F9A6 /* mplangoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE301B0143AF0085F9A6 /* mplangoTests.swift */; };
+		8283BE3D1B0162F00085F9A6 /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE3C1B0162F00085F9A6 /* MUser.swift */; };
+		8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE421B0233440085F9A6 /* LoginViewController.swift */; };
+		8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */; };
+		8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE461B0236880085F9A6 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +35,17 @@
 		8283BE161B0143AF0085F9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8283BE171B0143AF0085F9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8283BE1A1B0143AF0085F9A6 /* mplango.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mplango.xcdatamodel; sourceTree = "<group>"; };
-		8283BE1C1B0143AF0085F9A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		8283BE1F1B0143AF0085F9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8283BE211B0143AF0085F9A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8283BE241B0143AF0085F9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8283BE2A1B0143AF0085F9A6 /* mplangoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mplangoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8283BE2F1B0143AF0085F9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8283BE301B0143AF0085F9A6 /* mplangoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mplangoTests.swift; sourceTree = "<group>"; };
+		8283BE3C1B0162F00085F9A6 /* MUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUser.swift; sourceTree = "<group>"; };
+		8283BE421B0233440085F9A6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPassViewController.swift; sourceTree = "<group>"; };
+		8283BE461B0236880085F9A6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +88,11 @@
 			isa = PBXGroup;
 			children = (
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
-				8283BE1C1B0143AF0085F9A6 /* ViewController.swift */,
+				8283BE3C1B0162F00085F9A6 /* MUser.swift */,
+				8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */,
+				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
+				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
+				8283BE461B0236880085F9A6 /* MapViewController.swift */,
 				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
@@ -215,7 +227,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8283BE1D1B0143AF0085F9A6 /* ViewController.swift in Sources */,
+				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
+				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
+				8283BE3D1B0162F00085F9A6 /* MUser.swift in Sources */,
+				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
+				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,
 				8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */,
 			);
@@ -413,6 +429,7 @@
 				8283BE361B0143AF0085F9A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8283BE371B0143AF0085F9A6 /* Build configuration list for PBXNativeTarget "mplangoTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +438,7 @@
 				8283BE391B0143AF0085F9A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
