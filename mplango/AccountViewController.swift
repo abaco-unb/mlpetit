@@ -115,11 +115,8 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         var confirmPassword: String = textFieldConfPass.text
         var nationality: String = labelPicker.text!
         
-        println(pickerView.selectedRowInComponent(<#component: Int#>)
-        
     
         if (!email.isEmail()) {
-            
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "Pr favor, insira um email válido"
