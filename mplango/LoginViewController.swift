@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
         
         NSLog("PostData: %@",post);
         
-        var url:NSURL = NSURL(string: "http://service.maplango.com/login.php")!
+        var url:NSURL = NSURL(string: "http://service.maplango.com/login")!
         
         var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
         

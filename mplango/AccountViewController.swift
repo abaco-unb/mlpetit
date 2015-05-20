@@ -30,11 +30,13 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var takePhoto: UIButton!
     @IBOutlet weak var libraryPhoto: UIButton!
     
+    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     var userName: String = ""
     var imagePicker: UIImagePickerController!
     var gender:String = ""
+    var nationality: String = ""
     
     let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
     
@@ -88,7 +90,8 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        labelPicker.text = natData[row]
+        nationality = natData[row]
+        labelPicker.text = nationality
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
@@ -107,16 +110,36 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         Validar email
     */
     
-    @IBAction func saveTapped(sender: UIBarButtonItem) {
+    
+    @IBAction func saveTapped(sender: AnyObject) {
         
+        println("OK")
+    
         var username: String = textFieldName.text as String
         var email: String = textFieldEmail.text as String
         var password: String = textFieldPassword.text
         var confirmPassword: String = textFieldConfPass.text
-        var nationality: String = labelPicker.text!
         
-    
-        if (!email.isEmail()) {
+        
+        if ( username.isEmpty ) {
+            
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Erro ao tentar Registrar os Dados!"
+            alertView.message = "O nome é obrigatório"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
+        } else if ( email.isEmpty ) {
+            
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Erro ao tentar Registrar os Dados!"
+            alertView.message = "Campo email obrigatório"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
+        } else if (!email.isEmail()) {
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "Pr favor, insira um email válido"
@@ -124,11 +147,11 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             alertView.addButtonWithTitle("OK")
             alertView.show()
             
-        } else if ( username.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty ) {
+        } else if ( password.isEmpty  || confirmPassword.isEmpty) {
             
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "Todos os campos são obrigatórios"
+            alertView.message = "Campo senha obrigatório"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
@@ -142,17 +165,35 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             alertView.addButtonWithTitle("OK")
             alertView.show()
             
+        } else if ( gender.isEmpty ) {
+            
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Erro ao tentar Registrar os Dados!"
+            alertView.message = "É necessário escolher o seu gênero"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
+        } else if ( nationality.isEmpty ) {
+            
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Erro ao tentar Registrar os Dados!"
+            alertView.message = "É necessário escolher sua nacionalidade"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
         } else {
-        
+            
             //Recuperando o Delegate do projeto
             let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
+            
             //Recuperando o contexto dos objetos do CoreData
             let contxt: NSManagedObjectContext = appDel.managedObjectContext!
-        
+            
             // Preparando a entidade User para a adição de registros
             let en = NSEntityDescription.entityForName("User", inManagedObjectContext: contxt)
-        
+            
             //Criando uma nova instância de dados para inserção
             var newUser = MUser(entity: en!, insertIntoManagedObjectContext: contxt)
             
@@ -160,101 +201,103 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             newUser.name = textFieldName.text
             newUser.email = textFieldEmail.text
             newUser.password = textFieldPassword.text
-            newUser.gender = "Homme"//segmentControl.valueForKey(0)
-            newUser.nationality = labelPicker.text!
+            newUser.gender = gender
+            newUser.nationality = nationality
             println(newUser)
             contxt.save(nil)
-            
-            //self.navigadismissViewControllerAnimated(true, completion: nil)
-        
-            /*
-            var post:NSString = "username=\(username)&email=\(email)&password=\(password)&c_password=\(confirm_password)"
-            
-            NSLog("PostData: %@",post);
-            
-            var url:NSURL = NSURL(string: "https://service.maplango.com.br/register.php")!
-            
-            var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
-            
-            var postLength:NSString = String( postData.length )
-            
-            var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-            request.HTTPMethod = "POST"
-            request.HTTPBody = postData
-            request.setValue(postLength, forHTTPHeaderField: "Content-Length")
-            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            
-            
-            var reponseError: NSError?
-            var response: NSURLResponse?
-            
-            var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
-
-            if ( urlData != nil ) {
-                let res = response as NSHTTPURLResponse!;
-
-                NSLog("Response code: %ld", res.statusCode);
-
-                if (res.statusCode >= 200 && res.statusCode < 300)
-                {
-                    var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
-
-                        NSLog("Response ==> %@", responseData);
-
-                        var error: NSError?
-
-                        let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
-
-
-                        let success:NSInteger = jsonData.valueForKey("success") as NSInteger
-
-                        //[jsonData[@"success"] integerValue];
-
-                        NSLog("Success: %ld", success);
-
-                        if(success == 1)
-                        {
-                            NSLog("Cadastro realizado com sucesso");
-                            self.dismissViewControllerAnimated(true, completion: nil)
-                        } else {
-                            var error_msg:NSString
-                            if jsonData["error_message"] as? NSString != nil {
-                            error_msg = jsonData["error_message"] as NSString
-                        } else {
-                            error_msg = "Erro desconhecido"
-                        }
-                        var alertView:UIAlertView = UIAlertView()
-                        alertView.title = "Cadastro falhou!"
-                        alertView.message = error_msg
-                        alertView.delegate = self
-                        alertView.addButtonWithTitle("OK")
-                        alertView.show()
-
-                    }
-
-                } else {
-                    var alertView:UIAlertView = UIAlertView()
-                    alertView.title = "Cadastro falhou!"
-                    alertView.message = "Não tem Connexão"
-                    alertView.delegate = self
-                    alertView.addButtonWithTitle("OK")
-                    alertView.show()
-                }
-            }  else {
-                var alertView:UIAlertView = UIAlertView()
-                alertView.title = "Cadastro falhou!"
-                alertView.message = "Não tem conexão"
-                if let error = reponseError {
-                    alertView.message = (error.localizedDescription)
-                }
-                alertView.delegate = self
-                alertView.addButtonWithTitle("OK")
-                alertView.show()
-            }*/
+            self.performSegueWithIdentifier("goto_login", sender: self)
         }
     }
-
+    
+    func remoteSynch(sender: AnyObject) {
+        //self.navigadismissViewControllerAnimated(true, completion: nil)
+        
+        /*
+        var post:NSString = "username=\(username)&email=\(email)&password=\(password)&c_password=\(confirm_password)"
+        
+        NSLog("PostData: %@",post);
+        
+        var url:NSURL = NSURL(string: "https://service.maplango.com.br/user")!
+        
+        var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+        
+        var postLength:NSString = String( postData.length )
+        
+        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = postData
+        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        
+        var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+        
+        if ( urlData != nil ) {
+        let res = response as NSHTTPURLResponse!;
+        
+        NSLog("Response code: %ld", res.statusCode);
+        
+        if (res.statusCode >= 200 && res.statusCode < 300)
+        {
+        var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+        
+        NSLog("Response ==> %@", responseData);
+        
+        var error: NSError?
+        
+        let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+        
+        
+        let success:NSInteger = jsonData.valueForKey("success") as NSInteger
+        
+        //[jsonData[@"success"] integerValue];
+        
+        NSLog("Success: %ld", success);
+        
+        if(success == 1)
+        {
+        NSLog("Cadastro realizado com sucesso");
+        self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+        var error_msg:NSString
+        if jsonData["error_message"] as? NSString != nil {
+        error_msg = jsonData["error_message"] as NSString
+        } else {
+        error_msg = "Erro desconhecido"
+        }
+        var alertView:UIAlertView = UIAlertView()
+        alertView.title = "Cadastro falhou!"
+        alertView.message = error_msg
+        alertView.delegate = self
+        alertView.addButtonWithTitle("OK")
+        alertView.show()
+        
+        }
+        
+        } else {
+        var alertView:UIAlertView = UIAlertView()
+        alertView.title = "Cadastro falhou!"
+        alertView.message = "Não tem Connexão"
+        alertView.delegate = self
+        alertView.addButtonWithTitle("OK")
+        alertView.show()
+        }
+        }  else {
+        var alertView:UIAlertView = UIAlertView()
+        alertView.title = "Cadastro falhou!"
+        alertView.message = "Não tem conexão"
+        if let error = reponseError {
+        alertView.message = (error.localizedDescription)
+        }
+        alertView.delegate = self
+        alertView.addButtonWithTitle("OK")
+        alertView.show()
+        }*/
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
