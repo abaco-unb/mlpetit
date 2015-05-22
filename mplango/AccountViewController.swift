@@ -60,6 +60,7 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         
     }
+    
     @IBAction func takePhoto(sender: UIButton) {
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -76,6 +77,7 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -103,13 +105,7 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         default:
             break
         }
-        //labelUserName.text = gender
     }
-    
-    /*
-        Validar email
-    */
-    
     
     @IBAction func saveTapped(sender: AnyObject) {
         
