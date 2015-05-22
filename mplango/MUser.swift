@@ -17,5 +17,6 @@ class MUser: NSManagedObject {
     @NSManaged var name:String
     @NSManaged var nationality:String
     @NSManaged var password:String
+    @NSManaged var image:NSData
     
 }
