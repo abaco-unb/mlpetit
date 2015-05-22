@@ -28,26 +28,66 @@ class LoginViewController: UIViewController {
         var username:String = textFieldUsername.text
         var password:String = textFieldPassword.text
         
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let contxt: NSManagedObjectContext = appDel.managedObjectContext!
-        
         if ( username.isEmpty || password.isEmpty ) {
             
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Login falhou!"
-            alertView.message = "Favor inserir um usu[ario e senha válidos"
+            alertView.message = "É necessário inserir seu email e senha"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
             
         } else {
             
-            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            prefs.setObject(username, forKey: "USERNAME")
-            prefs.setInteger(1, forKey: "ISLOGGEDIN")
-            prefs.synchronize()
+            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let contxt: NSManagedObjectContext = appDel.managedObjectContext!
+            let fetchRequest = NSFetchRequest(entityName: "User")
+            let predicate = NSPredicate(format: "name == %@ && password == %@", username, password)
+            fetchRequest.predicate = predicate
             
-            self.performSegueWithIdentifier("goto_map", sender: self)
+            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [MUser] {
+                
+                if (fetchResults.count > 0) {
+                    
+                    var email: String = fetchResults[0].email
+                    var pwd: String   = fetchResults[0].password
+                    
+                    NSLog("login autenticado: %ld", email)
+                    NSLog("pwd autenticada: %ld", pwd)
+                    
+                    var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                    //prefs.setObject(fetchResults[0], forKey: "USER")
+                    prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
+                    prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                    prefs.synchronize()
+                    
+                    self.performSegueWithIdentifier("goto_map", sender: self)
+                
+                } else {
+                    var alertView:UIAlertView = UIAlertView()
+                    alertView.title = "Login falhou!"
+                    alertView.message = "Usuário ou senha inexistente no banco de dados!"
+                    alertView.delegate = self
+                    alertView.addButtonWithTitle("OK")
+                    alertView.show()
+                }
+                
+            }
+        }
+        
+        
+    }
+    
+    var users = [MUser]()
+    
+    func fetchUser() {
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        let sortDescriptor = NSSortDescriptor(key: "email", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let contxt: NSManagedObjectContext = appDel.managedObjectContext!
+        if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [MUser] {
+            users = fetchResults
         }
     }
     

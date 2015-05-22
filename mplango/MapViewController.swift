@@ -18,8 +18,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func zoomIn(sender: AnyObject) {
     }
-    
-    
     @IBAction func changeMapType(sender: AnyObject) {
     }
     
@@ -27,12 +25,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        if (isLoggedIn != 1) {
-            print("entrou aqui")
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            self.labelUsername.text = prefs.valueForKey("USERNAME") as? String
+        
+        var isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        
+        NSLog("status autenticação: %ld", isLoggedIn)
+        
+        if (isLoggedIn < 1) {
+            NSLog("status autenticação é nullo - não autorizado!")
+            self.performSegueWithIdentifier("gobk_login", sender: self)
         }
     }
     
