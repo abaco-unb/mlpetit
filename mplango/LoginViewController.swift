@@ -74,8 +74,6 @@ class LoginViewController: UIViewController {
                 
             }
         }
-        
-        
     }
     
     var users = [MUser]()
