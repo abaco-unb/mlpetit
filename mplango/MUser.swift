@@ -12,11 +12,13 @@ import CoreData
 @objc(MUser)
 class MUser: NSManagedObject {
 
+    @NSManaged var profile:Int16
     @NSManaged var email:String
     @NSManaged var gender:String
     @NSManaged var name:String
     @NSManaged var nationality:String
     @NSManaged var password:String
     @NSManaged var image:NSData
+    
     
 }

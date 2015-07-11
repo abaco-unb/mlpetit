@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		823CC0091B46291700F633F8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* Post.swift */; };
+		823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00A1B46297500F633F8 /* PostAnnotation.swift */; };
+		823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00C1B4629C000F633F8 /* VCMapView.swift */; };
+		8256CAFC1B40FC750002708C /* ListUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFB1B40FC750002708C /* ListUsers.swift */; };
+		8256CAFE1B40FD730002708C /* ListUsersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFD1B40FD730002708C /* ListUsersTVC.swift */; };
 		8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE171B0143AF0085F9A6 /* AppDelegate.swift */; };
 		8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */; };
 		8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */; };
@@ -31,6 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		823CC0081B46291700F633F8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		823CC00A1B46297500F633F8 /* PostAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAnnotation.swift; sourceTree = "<group>"; };
+		823CC00C1B4629C000F633F8 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
+		8256CAFB1B40FC750002708C /* ListUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsers.swift; sourceTree = "<group>"; };
+		8256CAFD1B40FD730002708C /* ListUsersTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersTVC.swift; sourceTree = "<group>"; };
 		8283BE121B0143AF0085F9A6 /* mplango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mplango.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8283BE161B0143AF0085F9A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8283BE171B0143AF0085F9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +103,11 @@
 				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
 				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
 				8283BE461B0236880085F9A6 /* MapViewController.swift */,
+				823CC0081B46291700F633F8 /* Post.swift */,
+				823CC00A1B46297500F633F8 /* PostAnnotation.swift */,
+				823CC00C1B4629C000F633F8 /* VCMapView.swift */,
+				8256CAFB1B40FC750002708C /* ListUsers.swift */,
+				8256CAFD1B40FD730002708C /* ListUsersTVC.swift */,
 				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
@@ -227,13 +242,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */,
+				8256CAFC1B40FC750002708C /* ListUsers.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
+				823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* MUser.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,
+				8256CAFE1B40FD730002708C /* ListUsersTVC.swift in Sources */,
 				8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */,
+				823CC0091B46291700F633F8 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
