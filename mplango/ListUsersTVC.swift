@@ -5,7 +5,6 @@
 //  Created by Carlos Wagner Pereira de Morais on 28/06/15.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
-
 import UIKit
 import CoreData
 
@@ -18,10 +17,7 @@ class ListUsersTVC: UITableViewController {
     
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
     var users = [MUser]()
-    
-    
     
     override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,7 +35,6 @@ class ListUsersTVC: UITableViewController {
        var error: NSError?
        let request = NSFetchRequest(entityName:"User")
        users = moContext?.executeFetchRequest(request, error: &error) as! [MUser]
-    
        self.tableView.reloadData()
     }
     
@@ -135,11 +130,9 @@ class ListUsersTVC: UITableViewController {
     @IBAction func indexSegment(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             println("Apprenants");
-            
             self.tableView.reloadData()
         } else if sender.selectedSegmentIndex == 1{
             println("Médiateurs");
-            self.tableView.reloadData()
         } else {
             println("All")
         }

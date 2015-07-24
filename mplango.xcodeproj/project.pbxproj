@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82288E8E1B51C878006BC80F /* ListUsersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFD1B40FD730002708C /* ListUsersTVC.swift */; };
 		823CC0091B46291700F633F8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* Post.swift */; };
 		823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00A1B46297500F633F8 /* PostAnnotation.swift */; };
 		823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00C1B4629C000F633F8 /* VCMapView.swift */; };

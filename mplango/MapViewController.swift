@@ -22,7 +22,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             mkMapView.showsUserLocation = true
         } else {
-            println("ttsssss");
             //locationManager.requestAlwaysAuthorization()
             //locationManager.desiredAccuracy = kCLLocationAccuracyBest
             //locationManager.delegate = self
