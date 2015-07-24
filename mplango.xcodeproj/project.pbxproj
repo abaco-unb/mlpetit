@@ -23,6 +23,19 @@
 		8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE421B0233440085F9A6 /* LoginViewController.swift */; };
 		8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */; };
 		8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE461B0236880085F9A6 /* MapViewController.swift */; };
+		82842E351B61E38700E7C860 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE171B0143AF0085F9A6 /* AppDelegate.swift */; };
+		82842E361B61E62D00E7C860 /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE3C1B0162F00085F9A6 /* MUser.swift */; };
+		82842E371B61E65200E7C860 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */; };
+		82842E381B61E65600E7C860 /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */; };
+		82842E391B61E65B00E7C860 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE421B0233440085F9A6 /* LoginViewController.swift */; };
+		82842E3A1B61E65E00E7C860 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE461B0236880085F9A6 /* MapViewController.swift */; };
+		82842E3B1B61E66100E7C860 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* Post.swift */; };
+		82842E3C1B61E66500E7C860 /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00A1B46297500F633F8 /* PostAnnotation.swift */; };
+		82842E3D1B61E66800E7C860 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00C1B4629C000F633F8 /* VCMapView.swift */; };
+		82842E3E1B61E66C00E7C860 /* ListUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFB1B40FC750002708C /* ListUsers.swift */; };
+		82842E3F1B61E9D200E7C860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE1E1B0143AF0085F9A6 /* Main.storyboard */; };
+		82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82842E431B61EA7900E7C860 /* InitialViewController.swift */; };
+		82842E451B61EA7900E7C860 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82842E431B61EA7900E7C860 /* InitialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +69,7 @@
 		8283BE421B0233440085F9A6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPassViewController.swift; sourceTree = "<group>"; };
 		8283BE461B0236880085F9A6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		82842E431B61EA7900E7C860 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +114,7 @@
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
 				8283BE3C1B0162F00085F9A6 /* MUser.swift */,
 				8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */,
+				82842E431B61EA7900E7C860 /* InitialViewController.swift */,
 				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
 				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
 				8283BE461B0236880085F9A6 /* MapViewController.swift */,
@@ -232,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82842E3F1B61E9D200E7C860 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */,
+				82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */,
 				8256CAFC1B40FC750002708C /* ListUsers.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */,
@@ -261,7 +278,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82842E3E1B61E66C00E7C860 /* ListUsers.swift in Sources */,
+				82842E451B61EA7900E7C860 /* InitialViewController.swift in Sources */,
+				82842E391B61E65B00E7C860 /* LoginViewController.swift in Sources */,
+				82842E351B61E38700E7C860 /* AppDelegate.swift in Sources */,
+				82842E371B61E65200E7C860 /* AccountViewController.swift in Sources */,
+				82842E381B61E65600E7C860 /* ForgotPassViewController.swift in Sources */,
+				82842E3D1B61E66800E7C860 /* VCMapView.swift in Sources */,
+				82842E3C1B61E66500E7C860 /* PostAnnotation.swift in Sources */,
+				82288E8E1B51C878006BC80F /* ListUsersTVC.swift in Sources */,
+				82842E361B61E62D00E7C860 /* MUser.swift in Sources */,
+				82842E3B1B61E66100E7C860 /* Post.swift in Sources */,
 				8283BE311B0143AF0085F9A6 /* mplangoTests.swift in Sources */,
+				82842E3A1B61E65E00E7C860 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
