@@ -22,12 +22,12 @@ class InitialViewController: UIViewController {
         let cornerRadius : CGFloat = 5.0
         
         btnConnection.backgroundColor = UIColor.clearColor()
-        btnConnection.layer.borderWidth = 1.0
+        btnConnection.layer.borderWidth = 2.0
         btnConnection.layer.borderColor = UIColor(white: 1.0, alpha: borderAlpha).CGColor
         btnConnection.layer.cornerRadius = cornerRadius
         
         btnInscription.backgroundColor = UIColor.clearColor()
-        btnInscription.layer.borderWidth = 1.0
+        btnInscription.layer.borderWidth = 2.0
         btnInscription.layer.borderColor = UIColor(white: 1.0, alpha: borderAlpha).CGColor
         btnInscription.layer.cornerRadius = cornerRadius
 
