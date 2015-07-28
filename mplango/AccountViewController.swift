@@ -18,15 +18,15 @@ extension String {
     }
 }
 
-class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AccountViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var textFieldConfPass: UITextField!
-    @IBOutlet weak var labelPicker: UILabel!
+    @IBOutlet weak var textFieldNationality: UITextField!
 
-    @IBOutlet weak var pickerView: UIPickerView!
+    /*@IBOutlet weak var pickerView: UIPickerView!*/
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var takePhoto: UIButton!
     @IBOutlet weak var libraryPhoto: UIButton!
@@ -37,19 +37,19 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var userName: String = ""
     var imagePicker: UIImagePickerController!
     var gender:String = ""
-    var nationality: String = ""
     
+    /*var nationality: String = ""
     let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pickerView.dataSource = self
-        self.pickerView.delegate = self
+        /*self.pickerView.dataSource = self
+        self.pickerView.delegate = self*/
         
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         
     }
     
@@ -84,7 +84,7 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+    /*
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return  natData.count
     }
@@ -97,6 +97,7 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         nationality = natData[row]
         labelPicker.text = nationality
     }
+    */
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
@@ -115,6 +116,7 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         var email: String = textFieldEmail.text as String
         var password: String = textFieldPassword.text
         var confirmPassword: String = textFieldConfPass.text
+        var nationality: String = textFieldNationality.text
         
         
         if ( username.isEmpty ) {
@@ -178,7 +180,6 @@ class AccountViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
-            
         } else {
             
             //Recuperando o Delegate do projeto

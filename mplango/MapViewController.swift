@@ -12,8 +12,8 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
-    @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var mkMapView: MKMapView!
+    @IBOutlet weak var btnContacts: UIButton!
     
     var locationManager = CLLocationManager()
     var posts = [Post]()
@@ -44,9 +44,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mkMapView.addAnnotation(post)
     }
     
-    @IBAction func zoomIn(sender: AnyObject) {
-    }
-    
     @IBAction func changeMapType(sender: AnyObject) {
     }
     
@@ -68,6 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mkMapView.showsUserLocation = true
         self.mkMapView.delegate = self
         self.mkMapView.mapType = MKMapType.Standard
+        self.mkMapView.backgroundColor = UIColor.blueColor()
         
         //self.mkMapView.userTrackingMode = MKUserTrackingModeFollow;
         

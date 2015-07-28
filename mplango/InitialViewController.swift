@@ -21,21 +21,16 @@ class InitialViewController: UIViewController {
         let borderAlpha : CGFloat = 0.7
         let cornerRadius : CGFloat = 5.0
         
-        btnConnection.frame = CGRectMake(100, 100, 200, 40)
-        btnConnection.setTitle("CONNECTION", forState: UIControlState.Normal)
-        btnConnection.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         btnConnection.backgroundColor = UIColor.clearColor()
         btnConnection.layer.borderWidth = 1.0
         btnConnection.layer.borderColor = UIColor(white: 1.0, alpha: borderAlpha).CGColor
         btnConnection.layer.cornerRadius = cornerRadius
         
-        btnInscription.frame = CGRectMake(100, 100, 200, 40)
-        btnInscription.setTitle("INSCRIPTION", forState: UIControlState.Normal)
-        btnInscription.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         btnInscription.backgroundColor = UIColor.clearColor()
         btnInscription.layer.borderWidth = 1.0
         btnInscription.layer.borderColor = UIColor(white: 1.0, alpha: borderAlpha).CGColor
         btnInscription.layer.cornerRadius = cornerRadius
+
     }
 
     override func didReceiveMemoryWarning() {

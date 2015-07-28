@@ -11,17 +11,14 @@ import CoreData
 
 class ListUsersTVC: UITableViewController {
     
-    
-    
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var users = [MUser]()
     
     override func viewDidLoad() {
     super.viewDidLoad()
-    
+    //self.ttableView = delegate
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
