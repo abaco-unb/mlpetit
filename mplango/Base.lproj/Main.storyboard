@@ -21,12 +21,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="ekf-dO-AxS">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-9A-Pfv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-9A-Pfv">
                                 <rect key="frame" x="114" y="42" width="62" height="70"/>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="200" y="33" width="0.0" height="18"/>
-                                </variation>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9H5-qT-EyD">
                                 <rect key="frame" x="105" y="17" width="58" height="30"/>
@@ -34,9 +31,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="179" y="226" width="43" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="libraryPhoto:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qfq-Hj-hcz"/>
                                 </connections>
@@ -47,9 +41,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="175" y="186" width="51" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="takePhoto:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n7i-hC-vhY"/>
                                 </connections>
@@ -61,9 +52,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="495" width="360" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="saveTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ykd-a9-Q7Q"/>
                                     <segue destination="FEV-j8-LBQ" kind="presentation" identifier="goto_login" id="wCL-AK-u2b"/>
@@ -76,9 +64,6 @@
                                     <segment title="Homme"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="457" width="360" height="29"/>
-                                </variation>
                                 <connections>
                                     <action selector="indexChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="w3K-ba-AKU"/>
                                 </connections>
@@ -88,18 +73,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="306" width="360" height="30"/>
-                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mot de passe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fi3-eE-6iZ">
                                 <rect key="frame" x="16" y="200" width="289" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <rect key="frame" x="20" y="346" width="360" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmer mot de passe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ai-m4-UWS">
@@ -107,18 +88,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="386" width="360" height="30"/>
-                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nationalité" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="glp-fm-Gdk">
                                 <rect key="frame" x="16" y="276" width="288" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="426" width="360" height="30"/>
-                                </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pN1-CJ-b7X">
                                 <rect key="frame" x="16" y="417" width="288" height="30"/>
@@ -127,9 +102,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="535" width="360" height="30"/>
-                                </variation>
                                 <connections>
                                     <segue destination="0Aw-5F-vHQ" kind="presentation" identifier="goback_login" id="a0H-Ea-gmv"/>
                                 </connections>
@@ -146,9 +118,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="266" width="360" height="30"/>
-                                </variation>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -184,10 +153,14 @@
                             <constraint firstAttribute="centerX" secondItem="pN1-CJ-b7X" secondAttribute="centerX" id="PRU-kw-tgk"/>
                             <constraint firstAttribute="trailing" secondItem="fJ3-LE-avE" secondAttribute="trailing" constant="20" id="RHz-0V-GU0"/>
                             <constraint firstAttribute="centerX" secondItem="bSA-bw-3jU" secondAttribute="centerX" id="Rrv-jt-tB8"/>
+                            <constraint firstItem="CpT-9A-Pfv" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="SNL-X6-fiU"/>
                             <constraint firstItem="1tT-o9-ySp" firstAttribute="top" secondItem="bSA-bw-3jU" secondAttribute="bottom" constant="45" id="Sat-i7-cyg">
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
                             <constraint firstAttribute="centerY" secondItem="7Ai-m4-UWS" secondAttribute="centerY" id="T9q-DM-KsU"/>
+                            <constraint firstAttribute="bottom" secondItem="CpT-9A-Pfv" secondAttribute="bottom" constant="836" id="TbL-RJ-cM1">
+                                <variation key="heightClass=regular-widthClass=compact" constant="500"/>
+                            </constraint>
                             <constraint firstItem="glp-fm-Gdk" firstAttribute="top" secondItem="7Ai-m4-UWS" secondAttribute="bottom" constant="44" id="TeA-S1-ozP">
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
@@ -237,10 +210,16 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
                             <constraint firstItem="7Ai-m4-UWS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="ttn-WF-vkO"/>
+                            <constraint firstItem="CpT-9A-Pfv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="400" id="tun-0t-Cth">
+                                <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                            </constraint>
                             <constraint firstAttribute="trailing" secondItem="ljD-RU-ABw" secondAttribute="trailing" constant="20" id="uGG-Le-Tm0"/>
                             <constraint firstAttribute="bottom" secondItem="ekf-dO-AxS" secondAttribute="bottom" id="udE-3e-nGB"/>
                             <constraint firstItem="fi3-eE-6iZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="vPp-GX-EpI"/>
                             <constraint firstAttribute="centerX" secondItem="7Ai-m4-UWS" secondAttribute="centerX" id="xOL-qj-aov"/>
+                            <constraint firstAttribute="trailing" secondItem="CpT-9A-Pfv" secondAttribute="trailing" constant="200" id="ydp-sV-L5s">
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                            </constraint>
                             <constraint firstItem="nuw-Un-mg0" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="yhv-dO-yO8"/>
                             <constraint firstAttribute="trailing" secondItem="1tT-o9-ySp" secondAttribute="trailing" constant="20" id="ykb-2i-bMk"/>
                         </constraints>
@@ -263,6 +242,10 @@
                                 <exclude reference="Uw8-4V-S2o"/>
                                 <exclude reference="qr8-hf-vSc"/>
                                 <exclude reference="1zX-VA-26m"/>
+                                <exclude reference="SNL-X6-fiU"/>
+                                <exclude reference="TbL-RJ-cM1"/>
+                                <exclude reference="tun-0t-Cth"/>
+                                <exclude reference="ydp-sV-L5s"/>
                                 <exclude reference="WVb-F6-Tlg"/>
                                 <exclude reference="a8I-v7-NNR"/>
                                 <exclude reference="lw2-tK-KFv"/>
@@ -332,7 +315,11 @@
                                 <include reference="udE-3e-nGB"/>
                                 <include reference="Uw8-4V-S2o"/>
                                 <include reference="qr8-hf-vSc"/>
-                                <include reference="1zX-VA-26m"/>
+                                <exclude reference="1zX-VA-26m"/>
+                                <include reference="SNL-X6-fiU"/>
+                                <include reference="TbL-RJ-cM1"/>
+                                <include reference="tun-0t-Cth"/>
+                                <include reference="ydp-sV-L5s"/>
                                 <include reference="WVb-F6-Tlg"/>
                                 <include reference="a8I-v7-NNR"/>
                                 <include reference="lw2-tK-KFv"/>
@@ -625,12 +612,12 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Maplango" id="6iX-vc-lPH">
                         <barButtonItem key="backBarButtonItem" title="carte" id="4dO-mO-Xsw"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="add" id="Atb-nh-cQf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Atb-nh-cQf">
                             <connections>
                                 <segue destination="4se-Z2-Fui" kind="show" id="Rm4-fi-Bug"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="stop" id="sK3-Gb-RZK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="sK3-Gb-RZK"/>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
@@ -1060,18 +1047,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ueN-8R-fxp">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ueN-8R-fxp" id="mbv-HS-qb9">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4HW-wY-CAa">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4HW-wY-CAa" id="MWh-2f-Tqy">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -1179,6 +1154,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wCL-AK-u2b"/>
-        <segue reference="ezw-hn-Hzp"/>
+        <segue reference="a0H-Ea-gmv"/>
     </inferredMetricsTieBreakers>
 </document>
