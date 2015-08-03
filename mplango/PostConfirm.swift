@@ -1,36 +1,30 @@
 //
-//  InitialViewController.swift
+//  PostConfirm.swift
 //  mplango
 //
-//  Created by Carlos Wagner Pereira de Morais on 24/07/15.
+//  Created by Thomas Petit on 01/08/2015.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
 import UIKit
 
+class PostConfirm: UIViewController {
 
-class InitialViewController: UIViewController {
-
-    @IBOutlet weak var btnConnection: UIButton!
-    @IBOutlet weak var btnInscription: UIButton!
-    @IBOutlet weak var btnFace: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let borderAlpha : CGFloat = 0.7
-        let cornerRadius : CGFloat = 5.0
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        btnConnection.backgroundColor = UIColor.clearColor()
-        btnConnection.layer.borderWidth = 3.0
-        btnConnection.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        // Set navigation bar background colour
+        self.navigationController!.navigationBar.barTintColor = UIColor(hex: 0xFF6666)
         
+        // Set navigation bar title text colour
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        btnInscription.backgroundColor = UIColor.clearColor()
-        btnInscription.layer.borderWidth = 3.0
-        btnInscription.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
-
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,10 +10,12 @@ import UIKit
 import CoreData
 import MapKit
 
+
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mkMapView: MKMapView!
     @IBOutlet weak var btnContacts: UIButton!
+    
     
     var locationManager = CLLocationManager()
     var posts = [Post]()
@@ -46,6 +48,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func changeMapType(sender: AnyObject) {
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

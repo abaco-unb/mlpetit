@@ -47,6 +47,41 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         /*self.pickerView.dataSource = self
         self.pickerView.delegate = self*/
         
+        // Do any additional setup after loading the view.
+        let borderAlpha : CGFloat = 0.7
+        let cornerRadius : CGFloat = 5.0
+        
+        textFieldName.backgroundColor = UIColor.clearColor()
+        textFieldName.layer.borderWidth = 3.0
+        textFieldName.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldName.attributedPlaceholder =
+            NSAttributedString(string: "Nom d'utilisateur", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        textFieldEmail.backgroundColor = UIColor.clearColor()
+        textFieldEmail.layer.borderWidth = 3.0
+        textFieldEmail.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldEmail.attributedPlaceholder =
+            NSAttributedString(string: "Email valide", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        textFieldPassword.backgroundColor = UIColor.clearColor()
+        textFieldPassword.layer.borderWidth = 3.0
+        textFieldPassword.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldPassword.attributedPlaceholder =
+            NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        textFieldConfPass.backgroundColor = UIColor.clearColor()
+        textFieldConfPass.layer.borderWidth = 3.0
+        textFieldConfPass.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldConfPass.attributedPlaceholder =
+            NSAttributedString(string: "Confirmer mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        textFieldNationality.backgroundColor = UIColor.clearColor()
+        textFieldNationality.layer.borderWidth = 3.0
+        textFieldNationality.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldNationality.attributedPlaceholder =
+            NSAttributedString(string: "Nationalité", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){

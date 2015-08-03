@@ -17,6 +17,19 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textFieldUsername.backgroundColor = UIColor.clearColor()
+        textFieldUsername.layer.borderWidth = 3.0
+        textFieldUsername.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldUsername.attributedPlaceholder =
+            NSAttributedString(string: "Email ou nom d'utilisateur", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        textFieldPassword.backgroundColor = UIColor.clearColor()
+        textFieldPassword.layer.borderWidth = 3.0
+        textFieldPassword.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        textFieldPassword.attributedPlaceholder =
+            NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+
+        
     }
     
     override func viewDidAppear(animated: Bool) {
