@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
+		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
 		54D48D411B6D7ED90087F6BB /* PostNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D401B6D7ED90087F6BB /* PostNew.swift */; };
+		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
+		54D750641B763F9F00A78824 /* CarnetTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750631B763F9F00A78824 /* CarnetTVCell.swift */; };
+		54D750661B76407A00A78824 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750651B76407A00A78824 /* Word.swift */; };
+		54D750671B76407C00A78824 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750651B76407A00A78824 /* Word.swift */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
 		54E971951B6ED25B005F27F1 /* FiraMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */; };
 		54E971961B6ED25B005F27F1 /* FiraMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */; };
@@ -87,8 +93,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
+		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
 		54D48D401B6D7ED90087F6BB /* PostNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNew.swift; sourceTree = "<group>"; };
+		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
+		54D750631B763F9F00A78824 /* CarnetTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVCell.swift; sourceTree = "<group>"; };
+		54D750651B76407A00A78824 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
 		54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -198,6 +209,11 @@
 				823CC00C1B4629C000F633F8 /* VCMapView.swift */,
 				8256CAFB1B40FC750002708C /* ListUsers.swift */,
 				8256CAFD1B40FD730002708C /* ListUsersTVC.swift */,
+				542B4B0F1B73F4100099349E /* CarnetViewController.swift */,
+				54D750611B763F7200A78824 /* CarnetTVC.swift */,
+				54D750631B763F9F00A78824 /* CarnetTVCell.swift */,
+				542B4B031B73A06F0099349E /* CarnetAddVC.swift */,
+				54D750651B76407A00A78824 /* Word.swift */,
 				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
 				54D48D401B6D7ED90087F6BB /* PostNew.swift */,
 				54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */,
@@ -405,12 +421,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D750641B763F9F00A78824 /* CarnetTVCell.swift in Sources */,
 				823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */,
+				542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */,
 				54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */,
 				82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */,
 				8256CAFC1B40FC750002708C /* ListUsers.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */,
+				54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* MUser.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
@@ -418,6 +437,8 @@
 				54D48D411B6D7ED90087F6BB /* PostNew.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,
 				8256CAFE1B40FD730002708C /* ListUsersTVC.swift in Sources */,
+				542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */,
+				54D750661B76407A00A78824 /* Word.swift in Sources */,
 				8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */,
 				823CC0091B46291700F633F8 /* Post.swift in Sources */,
 			);
@@ -428,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82842E3E1B61E66C00E7C860 /* ListUsers.swift in Sources */,
+				54D750671B76407C00A78824 /* Word.swift in Sources */,
 				82842E451B61EA7900E7C860 /* InitialViewController.swift in Sources */,
 				82842E391B61E65B00E7C860 /* LoginViewController.swift in Sources */,
 				82842E351B61E38700E7C860 /* AppDelegate.swift in Sources */,

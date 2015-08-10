@@ -26,6 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
+        //var pageController = UIPageControl.appearance()
+        //pageController.pageIndicatorTintColor = UIColor.lightGrayColor()
+        //pageController.currentPageIndicatorTintColor = UIColor.blackColor()
+        
+        
         // Set navigation bar tint / background colour
         UINavigationBar.appearance().barTintColor = UIColor(hex: 0x3399CC)
         
