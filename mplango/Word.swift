@@ -14,19 +14,20 @@ class Word {
     
     
     var name:String
-    var description: String
+    var desc: String
     var photo: UIImage?
     
     
     
     //MARK: Initialization
     
-    init?(name: String, description: String, photo: UIImage?) {
+    init?(name: String, desc: String, photo: UIImage?) {
         
         //Initialize stored properties
         self.name = name
+        self.desc = desc
         self.photo = photo
-        self.description = description
+    
         
         // Initialization should fail if there is no name.
         if name.isEmpty {

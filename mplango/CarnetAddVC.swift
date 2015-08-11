@@ -35,7 +35,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         if let word = word {
             navigationItem.title = word.name
             WordTextField.text = word.name
-            WordDescriptionTextField.text = word.description
+            WordDescriptionTextField.text = word.desc
             WordImage.image = word.photo
             
         }
@@ -117,11 +117,11 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         if saveWordButton === sender {
             let name = WordTextField.text ?? ""
-            let description = WordDescriptionTextField.text ?? ""
+            let desc = WordDescriptionTextField.text ?? ""
             let photo = WordImage.image
             
             // Set the word to be passed to CarnetTVC after the unwind segue.
-            word = Word(name: name, description: description, photo: photo)
+            word = Word(name: name, desc: desc, photo: photo)
             
         }
 

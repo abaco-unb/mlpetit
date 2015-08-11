@@ -28,8 +28,8 @@ class CarnetTVC: UITableViewController {
     }
     
     func loadSampleWords() {
-        let word1 = Word(name: "MapLango", description: "MapLango est une appli pour l'apprentissage nomade des langues", photo: nil)!
-        let word2 = Word(name: "Exemple", description: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
+        let word1 = Word(name: "MapLango", desc: "MapLango est une appli pour l'apprentissage nomade des langues", photo: nil)!
+        let word2 = Word(name: "Exemple", desc: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
     words += [word1, word2]
     }
     

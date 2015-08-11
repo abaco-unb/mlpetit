@@ -36,7 +36,7 @@ class CarnetViewController: UIViewController {
         if let word = word {
             navigationItem.title = word.name
             WordNameLabel.text = word.name
-            WordDescriptionLabel.text = word.description
+            WordDescriptionLabel.text = word.desc
             WordSelectedImage.image = word.photo
             
         
@@ -67,11 +67,11 @@ class CarnetViewController: UIViewController {
         
         if saveWord === sender {
             let name = WordNameLabel.text ?? ""
-            let description = WordDescriptionLabel.text ?? ""
+            let desc = WordDescriptionLabel.text ?? ""
             let photo = WordSelectedImage.image
             
             //Set the word to be passed to CarnetTVC after the unwind segue.
-            word = Word(name: name, description: description, photo: photo)
+            word = Word(name: name, desc: desc, photo: photo)
             
         }
 
