@@ -366,6 +366,9 @@
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="121" width="360" height="19"/>
+                                </variation>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Nom d'utilisateur" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ljD-RU-ABw">
                                 <rect key="frame" x="16" y="125" width="288" height="30"/>
@@ -800,6 +803,9 @@
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="153" y="120" width="95" height="90"/>
+                                </variation>
                             </label>
                         </subviews>
                         <constraints>
@@ -1142,12 +1148,18 @@
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je parle un petit peu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSg-n5-Bnf">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obtenu !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDs-1k-9lD">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1261,12 +1273,18 @@
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="356" width="360" height="88"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je me débrouille" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-Jf-sPj">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="266" width="360" height="30"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1362,12 +1380,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J'intéragis plutôt bien" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rP4-go-vHx">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1470,12 +1494,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je maitrise bien" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVw-Hq-fKI">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1557,6 +1587,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Illustre une situation de non respect de l'environnement et propose une solution préférable." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CN6-Zx-f0V">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1583,17 +1616,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Y99-3b-HDb"/>
                                         <exclude reference="gmQ-TJ-qF6"/>
                                         <exclude reference="zhE-5a-8KK"/>
-                                        <exclude reference="Y99-3b-HDb"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="249" width="266" height="150"/>
                                     <mask key="constraints">
+                                        <include reference="Y99-3b-HDb"/>
                                         <include reference="gmQ-TJ-qF6"/>
                                         <include reference="zhE-5a-8KK"/>
-                                        <include reference="Y99-3b-HDb"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -1647,21 +1680,21 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="0Cg-WS-kth"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="IuC-L8-UDI"/>
+                                <exclude reference="Qt0-h5-c95"/>
+                                <exclude reference="bMv-c5-Kgb"/>
                                 <exclude reference="Akn-Hj-zlF"/>
                                 <exclude reference="Jmj-po-OGU"/>
                                 <exclude reference="UOa-m4-06F"/>
                                 <exclude reference="ch3-uY-wtS"/>
-                                <exclude reference="IuC-L8-UDI"/>
-                                <exclude reference="Qt0-h5-c95"/>
-                                <exclude reference="bMv-c5-Kgb"/>
+                                <exclude reference="f2V-Bm-6GJ"/>
+                                <exclude reference="lGI-vt-LvC"/>
+                                <exclude reference="Vct-ru-wwE"/>
+                                <exclude reference="tAN-Yo-XZX"/>
                                 <exclude reference="DsA-8i-oSC"/>
                                 <exclude reference="TAz-UV-4dO"/>
                                 <exclude reference="VQM-sk-cqy"/>
                                 <exclude reference="xDd-G3-wEo"/>
-                                <exclude reference="Vct-ru-wwE"/>
-                                <exclude reference="tAN-Yo-XZX"/>
-                                <exclude reference="f2V-Bm-6GJ"/>
-                                <exclude reference="lGI-vt-LvC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1673,21 +1706,21 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="0Cg-WS-kth"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="IuC-L8-UDI"/>
+                                <include reference="Qt0-h5-c95"/>
+                                <include reference="bMv-c5-Kgb"/>
                                 <include reference="Akn-Hj-zlF"/>
                                 <include reference="Jmj-po-OGU"/>
                                 <include reference="UOa-m4-06F"/>
                                 <include reference="ch3-uY-wtS"/>
-                                <include reference="IuC-L8-UDI"/>
-                                <include reference="Qt0-h5-c95"/>
-                                <include reference="bMv-c5-Kgb"/>
+                                <include reference="f2V-Bm-6GJ"/>
+                                <include reference="lGI-vt-LvC"/>
+                                <include reference="Vct-ru-wwE"/>
+                                <include reference="tAN-Yo-XZX"/>
                                 <include reference="DsA-8i-oSC"/>
                                 <include reference="TAz-UV-4dO"/>
                                 <include reference="VQM-sk-cqy"/>
                                 <include reference="xDd-G3-wEo"/>
-                                <include reference="Vct-ru-wwE"/>
-                                <include reference="tAN-Yo-XZX"/>
-                                <include reference="f2V-Bm-6GJ"/>
-                                <include reference="lGI-vt-LvC"/>
                             </mask>
                         </variation>
                     </view>
@@ -1727,12 +1760,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je veux être médiateur" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbB-kb-Hjb">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2237,6 +2276,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <state key="normal" title="Catégorie 1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="40" y="184" width="80" height="30"/>
+                                </variation>
                                 <connections>
                                     <segue destination="Oac-c9-RDC" kind="presentation" identifier="NewPost" id="stY-4Y-WSs"/>
                                 </connections>
@@ -2246,6 +2288,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <state key="normal" title="Catégorie 2">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="280" y="184" width="80" height="30"/>
+                                </variation>
                                 <connections>
                                     <segue destination="Oac-c9-RDC" kind="presentation" identifier="NewPost" id="CqT-qP-hQD"/>
                                 </connections>
@@ -2255,6 +2300,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <state key="normal" title="Catégorie 3">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="40" y="581" width="80" height="30"/>
+                                </variation>
                                 <connections>
                                     <segue destination="Oac-c9-RDC" kind="presentation" id="nbj-OS-Eae"/>
                                 </connections>
@@ -2264,6 +2312,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <state key="normal" title="Catégorie 4">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="280" y="581" width="80" height="30"/>
+                                </variation>
                                 <connections>
                                     <segue destination="Oac-c9-RDC" kind="presentation" identifier="NewPost" id="Zhf-nH-Hkw"/>
                                 </connections>
@@ -2273,30 +2324,45 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="114" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Défi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHW-yT-bJW">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="65" y="234" width="31" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activité" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-d0-wnE">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="292" y="234" width="57" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astuce" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwW-W6-Cpq">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="54" y="631" width="53" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sN0-id-elu">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="303" y="631" width="35" height="20"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2618,6 +2684,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <fontDescription key="fontDescription" name="FiraSans-SemiBold" family="Fira Sans" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="153" y="30" width="95" height="20"/>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
@@ -2654,7 +2723,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="20" y="94" width="360" height="30"/>
                                 </variation>
                             </label>
@@ -2663,7 +2732,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="20" y="154" width="360" height="21"/>
                                 </variation>
                             </label>
@@ -2672,7 +2741,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="50"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="175" y="195" width="50" height="60"/>
                                 </variation>
                             </label>
@@ -2681,7 +2750,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="20" y="275" width="360" height="21"/>
                                 </variation>
                             </label>
@@ -2690,7 +2759,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="20" y="298" width="360" height="21"/>
                                 </variation>
                             </label>
@@ -2699,6 +2768,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="630" width="360" height="20"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2885,7 +2957,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome palavra" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkC-9a-Y99">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                                 <rect key="frame" x="8" y="11" width="340" height="21"/>
@@ -2905,7 +2977,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="WordItemList" destination="IkC-9a-Y99" id="1rE-bR-FIT"/>
-                                    <segue destination="6Oc-Mm-3p6" kind="show" identifier="ShowWord" id="ZFI-QO-zJE"/>
+                                    <segue destination="6Oc-Mm-3p6" kind="show" identifier="ShowWord" id="h81-Ib-a5I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3088,9 +3160,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <action selector="cancelAddindWord:" destination="IxI-Zr-qM7" id="ao9-tw-GcE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Continuer" id="1Tf-Mp-Dir">
+                        <barButtonItem key="rightBarButtonItem" title="Enregistrer" id="1Tf-Mp-Dir">
                             <connections>
-                                <segue destination="6Oc-Mm-3p6" kind="show" id="fNN-dn-5zA"/>
+                                <segue destination="t13-DG-B2o" kind="unwind" unwindAction="unwindToWordList:" id="4zC-8G-vx7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -3100,11 +3172,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="WordDescriptionTextField" destination="Wnq-qF-Aij" id="YVo-2s-qiy"/>
                         <outlet property="WordImage" destination="iJN-mu-MiI" id="9fs-HE-DtH"/>
                         <outlet property="WordTextField" destination="1wd-42-TbP" id="vdT-J6-rp9"/>
-                        <outlet property="continueWordButton" destination="1Tf-Mp-Dir" id="cs4-hl-QNr"/>
                         <outlet property="saveWordButton" destination="1Tf-Mp-Dir" id="tfy-MP-kra"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VF4-Za-dWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="t13-DG-B2o" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="Itu-Cf-OKG">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="IxI-Zr-qM7" id="hNn-SH-vWR"/>
@@ -3130,6 +3202,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="98" width="368" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commentaire" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVL-7K-4Lk">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3146,7 +3221,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="kqv-Pl-HoD"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="138" width="368" height="100"/>
                                     <mask key="constraints">
                                         <include reference="kqv-Pl-HoD"/>
                                     </mask>
@@ -3162,7 +3238,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="lAH-L4-krz"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="253" width="368" height="368"/>
                                     <mask key="constraints">
                                         <include reference="lAH-L4-krz"/>
                                     </mask>
@@ -3225,24 +3302,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ReM-HE-eJV">
-                        <barButtonItem key="rightBarButtonItem" title="Enregistrer" id="upL-ht-hGX">
-                            <connections>
-                                <segue destination="3V6-pD-MP3" kind="unwind" unwindAction="unwindToWordList:" id="QTC-2U-9on"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="ReM-HE-eJV"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="WordDescriptionLabel" destination="ZVL-7K-4Lk" id="bJ6-ik-lcA"/>
                         <outlet property="WordNameLabel" destination="VOq-al-Jsh" id="01s-qU-SjU"/>
                         <outlet property="WordSelectedImage" destination="5PL-rr-F8j" id="b10-NM-H4d"/>
-                        <outlet property="saveWord" destination="upL-ht-hGX" id="roK-xY-y2c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlF-OF-xCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="3V6-pD-MP3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-447" y="-93"/>
         </scene>
@@ -3417,10 +3486,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="M6y-mM-eic"/>
                                 <exclude reference="NRo-f1-snQ"/>
                                 <exclude reference="uGe-U1-HZJ"/>
-                                <exclude reference="6tB-fO-hOf"/>
-                                <exclude reference="x8g-1T-XbV"/>
                                 <exclude reference="XJw-Cv-cFU"/>
                                 <exclude reference="bO7-sP-KUB"/>
+                                <exclude reference="6tB-fO-hOf"/>
+                                <exclude reference="x8g-1T-XbV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3437,10 +3506,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="M6y-mM-eic"/>
                                 <include reference="NRo-f1-snQ"/>
                                 <include reference="uGe-U1-HZJ"/>
-                                <include reference="6tB-fO-hOf"/>
-                                <include reference="x8g-1T-XbV"/>
                                 <include reference="XJw-Cv-cFU"/>
                                 <include reference="bO7-sP-KUB"/>
+                                <include reference="6tB-fO-hOf"/>
+                                <include reference="x8g-1T-XbV"/>
                             </mask>
                         </variation>
                     </view>
@@ -3469,6 +3538,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un touriste veut trouver un bon restaurant avec un prix raisonnable. Conseille-lui le meilleur de la ville !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-CC-wp4">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3533,10 +3605,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="Ihz-du-i7a"/>
                                 <exclude reference="moB-n5-Cu2"/>
                                 <exclude reference="naK-Q9-bvv"/>
-                                <exclude reference="86B-Bm-B0X"/>
-                                <exclude reference="m4T-8c-uYF"/>
                                 <exclude reference="Ayq-e3-nUJ"/>
                                 <exclude reference="Q7L-Ge-DyS"/>
+                                <exclude reference="86B-Bm-B0X"/>
+                                <exclude reference="m4T-8c-uYF"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3553,10 +3625,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="Ihz-du-i7a"/>
                                 <include reference="moB-n5-Cu2"/>
                                 <include reference="naK-Q9-bvv"/>
-                                <include reference="86B-Bm-B0X"/>
-                                <include reference="m4T-8c-uYF"/>
                                 <include reference="Ayq-e3-nUJ"/>
                                 <include reference="Q7L-Ge-DyS"/>
+                                <include reference="86B-Bm-B0X"/>
+                                <include reference="m4T-8c-uYF"/>
                             </mask>
                         </variation>
                     </view>
@@ -3585,6 +3657,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poste la photo d'un de tes paysages préférés et décris-le en expliquant ton choix." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46B-XP-l5j">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3611,16 +3686,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="ISy-7p-P1V"/>
                                         <exclude reference="6Od-Sk-EGX"/>
+                                        <exclude reference="ISy-7p-P1V"/>
                                         <exclude reference="ohT-zK-7Ob"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="231" width="266" height="150"/>
                                     <mask key="constraints">
-                                        <include reference="ISy-7p-P1V"/>
                                         <include reference="6Od-Sk-EGX"/>
+                                        <include reference="ISy-7p-P1V"/>
                                         <include reference="ohT-zK-7Ob"/>
                                     </mask>
                                 </variation>
@@ -3637,7 +3712,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="5Ag-zh-ADZ"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="396" width="266" height="100"/>
                                     <mask key="constraints">
                                         <include reference="5Ag-zh-ADZ"/>
@@ -3683,21 +3758,21 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="P6O-SD-d1D"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ggU-PE-dy1"/>
-                                <exclude reference="gpZ-bV-RR4"/>
-                                <exclude reference="ooB-jl-6HV"/>
                                 <exclude reference="DCr-5R-xq9"/>
                                 <exclude reference="Gk8-za-Swt"/>
                                 <exclude reference="M7S-9V-p5Q"/>
+                                <exclude reference="ZBv-0m-5X6"/>
+                                <exclude reference="bQh-B8-EuY"/>
+                                <exclude reference="ggU-PE-dy1"/>
+                                <exclude reference="gpZ-bV-RR4"/>
+                                <exclude reference="ooB-jl-6HV"/>
+                                <exclude reference="6wH-Ts-UXb"/>
+                                <exclude reference="HL3-6x-ok9"/>
                                 <exclude reference="7JT-RU-nFP"/>
                                 <exclude reference="NFR-TB-E8V"/>
                                 <exclude reference="NJJ-45-Nmc"/>
                                 <exclude reference="ZWe-o5-3en"/>
                                 <exclude reference="z2h-h5-gSF"/>
-                                <exclude reference="ZBv-0m-5X6"/>
-                                <exclude reference="bQh-B8-EuY"/>
-                                <exclude reference="6wH-Ts-UXb"/>
-                                <exclude reference="HL3-6x-ok9"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3709,21 +3784,21 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="P6O-SD-d1D"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ggU-PE-dy1"/>
-                                <include reference="gpZ-bV-RR4"/>
-                                <include reference="ooB-jl-6HV"/>
                                 <include reference="DCr-5R-xq9"/>
                                 <include reference="Gk8-za-Swt"/>
                                 <include reference="M7S-9V-p5Q"/>
+                                <include reference="ZBv-0m-5X6"/>
+                                <include reference="bQh-B8-EuY"/>
+                                <include reference="ggU-PE-dy1"/>
+                                <include reference="gpZ-bV-RR4"/>
+                                <include reference="ooB-jl-6HV"/>
+                                <include reference="6wH-Ts-UXb"/>
+                                <include reference="HL3-6x-ok9"/>
                                 <include reference="7JT-RU-nFP"/>
                                 <include reference="NFR-TB-E8V"/>
                                 <include reference="NJJ-45-Nmc"/>
                                 <include reference="ZWe-o5-3en"/>
                                 <include reference="z2h-h5-gSF"/>
-                                <include reference="ZBv-0m-5X6"/>
-                                <include reference="bQh-B8-EuY"/>
-                                <include reference="6wH-Ts-UXb"/>
-                                <include reference="HL3-6x-ok9"/>
                             </mask>
                         </variation>
                     </view>
@@ -3752,6 +3827,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smW-WU-Htm">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3818,10 +3896,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="AHv-D5-3bW"/>
                                 <exclude reference="s0C-sI-oNK"/>
                                 <exclude reference="zfH-UK-JOl"/>
-                                <exclude reference="2g0-mR-0hv"/>
-                                <exclude reference="wz8-xT-Q8A"/>
                                 <exclude reference="VvQ-TH-urS"/>
                                 <exclude reference="fLv-Jy-LR8"/>
+                                <exclude reference="2g0-mR-0hv"/>
+                                <exclude reference="wz8-xT-Q8A"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3839,10 +3917,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="AHv-D5-3bW"/>
                                 <include reference="s0C-sI-oNK"/>
                                 <include reference="zfH-UK-JOl"/>
-                                <include reference="2g0-mR-0hv"/>
-                                <include reference="wz8-xT-Q8A"/>
                                 <include reference="VvQ-TH-urS"/>
                                 <include reference="fLv-Jy-LR8"/>
+                                <include reference="2g0-mR-0hv"/>
+                                <include reference="wz8-xT-Q8A"/>
                             </mask>
                         </variation>
                     </view>
@@ -3871,6 +3949,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Illustre une situation où il est interdit de faire quelque chose. Dis si tu es d'accord ou non." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="202-pP-Zg3">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3897,17 +3978,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="ff7-Tg-Qwx"/>
-                                        <exclude reference="ZB5-8h-jOt"/>
                                         <exclude reference="JJi-Nf-Me7"/>
+                                        <exclude reference="ZB5-8h-jOt"/>
+                                        <exclude reference="ff7-Tg-Qwx"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="211" width="266" height="150"/>
                                     <mask key="constraints">
-                                        <include reference="ff7-Tg-Qwx"/>
-                                        <include reference="ZB5-8h-jOt"/>
                                         <include reference="JJi-Nf-Me7"/>
+                                        <include reference="ZB5-8h-jOt"/>
+                                        <include reference="ff7-Tg-Qwx"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -3923,7 +4004,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="SA0-MA-h8D"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="376" width="266" height="100"/>
                                     <mask key="constraints">
                                         <include reference="SA0-MA-h8D"/>
@@ -3970,23 +4051,23 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="68r-o8-ash"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="BwY-ts-bkm"/>
+                                <exclude reference="ZyX-Dg-oTA"/>
+                                <exclude reference="cSu-7T-6tg"/>
+                                <exclude reference="3Cy-3A-1oX"/>
+                                <exclude reference="7rn-Mv-aiJ"/>
                                 <exclude reference="3fX-zG-UWi"/>
                                 <exclude reference="N0u-zo-cc0"/>
                                 <exclude reference="USl-Fg-RUb"/>
                                 <exclude reference="rbV-PU-bKm"/>
-                                <exclude reference="BwY-ts-bkm"/>
-                                <exclude reference="ZyX-Dg-oTA"/>
-                                <exclude reference="cSu-7T-6tg"/>
+                                <exclude reference="Zp5-cm-6FG"/>
+                                <exclude reference="sIp-YR-0bO"/>
                                 <exclude reference="6gf-Db-42w"/>
                                 <exclude reference="JmT-Ss-mr7"/>
                                 <exclude reference="cgw-Hn-LtI"/>
                                 <exclude reference="nDb-do-GHG"/>
                                 <exclude reference="o97-QG-XZ0"/>
                                 <exclude reference="q4M-8Q-4Z4"/>
-                                <exclude reference="3Cy-3A-1oX"/>
-                                <exclude reference="7rn-Mv-aiJ"/>
-                                <exclude reference="Zp5-cm-6FG"/>
-                                <exclude reference="sIp-YR-0bO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3998,23 +4079,23 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="68r-o8-ash"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="BwY-ts-bkm"/>
+                                <include reference="ZyX-Dg-oTA"/>
+                                <include reference="cSu-7T-6tg"/>
+                                <include reference="3Cy-3A-1oX"/>
+                                <include reference="7rn-Mv-aiJ"/>
                                 <include reference="3fX-zG-UWi"/>
                                 <include reference="N0u-zo-cc0"/>
                                 <include reference="USl-Fg-RUb"/>
                                 <include reference="rbV-PU-bKm"/>
-                                <include reference="BwY-ts-bkm"/>
-                                <include reference="ZyX-Dg-oTA"/>
-                                <include reference="cSu-7T-6tg"/>
+                                <include reference="Zp5-cm-6FG"/>
+                                <include reference="sIp-YR-0bO"/>
                                 <include reference="6gf-Db-42w"/>
                                 <include reference="JmT-Ss-mr7"/>
                                 <include reference="cgw-Hn-LtI"/>
                                 <include reference="nDb-do-GHG"/>
                                 <include reference="o97-QG-XZ0"/>
                                 <include reference="q4M-8Q-4Z4"/>
-                                <include reference="3Cy-3A-1oX"/>
-                                <include reference="7rn-Mv-aiJ"/>
-                                <include reference="Zp5-cm-6FG"/>
-                                <include reference="sIp-YR-0bO"/>
                             </mask>
                         </variation>
                     </view>
@@ -4043,6 +4124,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" currentPage="6" translatesAutoresizingMaskIntoConstraints="NO" id="6HB-tq-E4b">
                                 <rect key="frame" x="-19" y="-18" width="39" height="37"/>
@@ -4101,17 +4185,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="NlV-EY-SNY"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2aM-bh-g9V"/>
+                                <exclude reference="nkC-Cb-o1X"/>
+                                <exclude reference="t2l-p1-zvn"/>
                                 <exclude reference="6xC-av-lh5"/>
                                 <exclude reference="Jmn-f4-jiF"/>
                                 <exclude reference="RhU-i8-4sC"/>
                                 <exclude reference="yCd-85-eBX"/>
-                                <exclude reference="2aM-bh-g9V"/>
-                                <exclude reference="nkC-Cb-o1X"/>
-                                <exclude reference="t2l-p1-zvn"/>
-                                <exclude reference="AqL-L2-4W0"/>
-                                <exclude reference="uBO-F1-FbH"/>
                                 <exclude reference="law-gD-Cdl"/>
                                 <exclude reference="wO5-2l-j7E"/>
+                                <exclude reference="AqL-L2-4W0"/>
+                                <exclude reference="uBO-F1-FbH"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -4122,17 +4206,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="NlV-EY-SNY"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2aM-bh-g9V"/>
+                                <include reference="nkC-Cb-o1X"/>
+                                <include reference="t2l-p1-zvn"/>
                                 <include reference="6xC-av-lh5"/>
                                 <include reference="Jmn-f4-jiF"/>
                                 <include reference="RhU-i8-4sC"/>
                                 <include reference="yCd-85-eBX"/>
-                                <include reference="2aM-bh-g9V"/>
-                                <include reference="nkC-Cb-o1X"/>
-                                <include reference="t2l-p1-zvn"/>
-                                <include reference="AqL-L2-4W0"/>
-                                <include reference="uBO-F1-FbH"/>
                                 <include reference="law-gD-Cdl"/>
                                 <include reference="wO5-2l-j7E"/>
+                                <include reference="AqL-L2-4W0"/>
+                                <include reference="uBO-F1-FbH"/>
                             </mask>
                         </variation>
                     </view>
@@ -4161,6 +4245,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tu es à la pharmacie pour acheter des médicaments. Explique ta situation au pharmacien." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u3-9S-rCx">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -4219,17 +4306,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="4qw-SN-puV"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="4of-2S-c1S"/>
+                                <exclude reference="YzK-03-taO"/>
+                                <exclude reference="sTw-zP-M2f"/>
                                 <exclude reference="Pgl-Ba-xDj"/>
                                 <exclude reference="gCf-1T-09b"/>
                                 <exclude reference="rDI-uB-C2c"/>
                                 <exclude reference="xIM-ro-ilN"/>
-                                <exclude reference="4of-2S-c1S"/>
-                                <exclude reference="YzK-03-taO"/>
-                                <exclude reference="sTw-zP-M2f"/>
-                                <exclude reference="DPW-Rv-kWp"/>
-                                <exclude reference="qOo-2h-ynp"/>
                                 <exclude reference="5Ez-4Q-exz"/>
                                 <exclude reference="wjc-Xr-lXh"/>
+                                <exclude reference="DPW-Rv-kWp"/>
+                                <exclude reference="qOo-2h-ynp"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -4240,17 +4327,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="4qw-SN-puV"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="4of-2S-c1S"/>
+                                <include reference="YzK-03-taO"/>
+                                <include reference="sTw-zP-M2f"/>
                                 <include reference="Pgl-Ba-xDj"/>
                                 <include reference="gCf-1T-09b"/>
                                 <include reference="rDI-uB-C2c"/>
                                 <include reference="xIM-ro-ilN"/>
-                                <include reference="4of-2S-c1S"/>
-                                <include reference="YzK-03-taO"/>
-                                <include reference="sTw-zP-M2f"/>
-                                <include reference="DPW-Rv-kWp"/>
-                                <include reference="qOo-2h-ynp"/>
                                 <include reference="5Ez-4Q-exz"/>
                                 <include reference="wjc-Xr-lXh"/>
+                                <include reference="DPW-Rv-kWp"/>
+                                <include reference="qOo-2h-ynp"/>
                             </mask>
                         </variation>
                     </view>
@@ -4445,6 +4532,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tu t'abonnes à la bibliothèque. Donne les informations par téléphone." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZD-sK-mXK">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -4719,6 +4809,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cite quelque chose que :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsr-ep-aiD">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -4933,6 +5026,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poste l'image d'un lieu où on achète de la nourriture." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7K-6A-1bt">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5020,14 +5116,14 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="AO4-ny-38V"/>
                                 <exclude reference="ggu-gS-Pew"/>
                                 <exclude reference="xh1-gW-op9"/>
+                                <exclude reference="27t-QJ-INC"/>
+                                <exclude reference="4mN-4r-kfC"/>
+                                <exclude reference="ROe-y9-Z8U"/>
                                 <exclude reference="9Px-oj-R2t"/>
                                 <exclude reference="BJF-it-qDv"/>
                                 <exclude reference="Hej-Ht-WnL"/>
                                 <exclude reference="O2U-3m-cXx"/>
                                 <exclude reference="WT5-g0-HMQ"/>
-                                <exclude reference="27t-QJ-INC"/>
-                                <exclude reference="4mN-4r-kfC"/>
-                                <exclude reference="ROe-y9-Z8U"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -5044,14 +5140,14 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="AO4-ny-38V"/>
                                 <include reference="ggu-gS-Pew"/>
                                 <include reference="xh1-gW-op9"/>
+                                <include reference="27t-QJ-INC"/>
+                                <include reference="4mN-4r-kfC"/>
+                                <exclude reference="ROe-y9-Z8U"/>
                                 <exclude reference="9Px-oj-R2t"/>
                                 <include reference="BJF-it-qDv"/>
                                 <exclude reference="Hej-Ht-WnL"/>
                                 <exclude reference="O2U-3m-cXx"/>
                                 <include reference="WT5-g0-HMQ"/>
-                                <include reference="27t-QJ-INC"/>
-                                <include reference="4mN-4r-kfC"/>
-                                <exclude reference="ROe-y9-Z8U"/>
                             </mask>
                         </variation>
                     </view>
@@ -5080,6 +5176,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demande des nouvelles à un ami par sms." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5y-Qe-Ib7">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5215,6 +5314,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fais une simple description d'un(e) ami(e) ou de quelqu'un de ta famille." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-dX-CIf">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5332,6 +5434,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment aller de A à B ?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yl-aL-Uv0">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5363,7 +5468,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="e4O-Dh-X4N"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="213" width="266" height="150"/>
                                     <mask key="constraints">
                                         <include reference="Ple-lP-f9E"/>
@@ -5384,7 +5489,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="uo1-hQ-KQB"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="393" width="266" height="100"/>
                                     <mask key="constraints">
                                         <include reference="uo1-hQ-KQB"/>
@@ -5430,22 +5535,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="8hA-Bg-My6"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Rth-rb-Yvq"/>
+                                <exclude reference="bfr-lI-NXg"/>
+                                <exclude reference="fBS-bn-TCN"/>
+                                <exclude reference="gK6-fw-Cf4"/>
+                                <exclude reference="xuv-eR-ebY"/>
                                 <exclude reference="gdr-F8-wav"/>
                                 <exclude reference="jJb-5f-hVq"/>
                                 <exclude reference="kjc-fi-84K"/>
                                 <exclude reference="vwS-Xd-01g"/>
-                                <exclude reference="Rth-rb-Yvq"/>
-                                <exclude reference="bfr-lI-NXg"/>
-                                <exclude reference="fBS-bn-TCN"/>
+                                <exclude reference="IBR-ka-Ed3"/>
+                                <exclude reference="Sfq-Xb-DRn"/>
                                 <exclude reference="9D8-Jz-sm6"/>
                                 <exclude reference="Szq-9q-LhM"/>
                                 <exclude reference="Xzl-jX-ZO7"/>
                                 <exclude reference="alg-3B-Wh6"/>
                                 <exclude reference="gRO-lo-8w8"/>
-                                <exclude reference="gK6-fw-Cf4"/>
-                                <exclude reference="xuv-eR-ebY"/>
-                                <exclude reference="IBR-ka-Ed3"/>
-                                <exclude reference="Sfq-Xb-DRn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -5457,22 +5562,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="8hA-Bg-My6"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Rth-rb-Yvq"/>
+                                <include reference="bfr-lI-NXg"/>
+                                <include reference="fBS-bn-TCN"/>
+                                <include reference="gK6-fw-Cf4"/>
+                                <include reference="xuv-eR-ebY"/>
                                 <include reference="gdr-F8-wav"/>
                                 <include reference="jJb-5f-hVq"/>
                                 <include reference="kjc-fi-84K"/>
                                 <include reference="vwS-Xd-01g"/>
-                                <include reference="Rth-rb-Yvq"/>
-                                <include reference="bfr-lI-NXg"/>
-                                <include reference="fBS-bn-TCN"/>
+                                <include reference="IBR-ka-Ed3"/>
+                                <include reference="Sfq-Xb-DRn"/>
                                 <include reference="9D8-Jz-sm6"/>
                                 <include reference="Szq-9q-LhM"/>
                                 <include reference="Xzl-jX-ZO7"/>
                                 <include reference="alg-3B-Wh6"/>
                                 <include reference="gRO-lo-8w8"/>
-                                <include reference="gK6-fw-Cf4"/>
-                                <include reference="xuv-eR-ebY"/>
-                                <include reference="IBR-ka-Ed3"/>
-                                <include reference="Sfq-Xb-DRn"/>
                             </mask>
                         </variation>
                     </view>
@@ -5501,6 +5606,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poste l'image d'une petite voiture rouge." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yax-Ms-rtG">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5529,16 +5637,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="MZk-iL-zpZ"/>
                                         <exclude reference="Gnq-2I-Xgb"/>
+                                        <exclude reference="MZk-iL-zpZ"/>
                                         <exclude reference="ZmW-wa-4aY"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="75" y="213" width="250" height="250"/>
                                     <mask key="constraints">
-                                        <exclude reference="MZk-iL-zpZ"/>
                                         <include reference="Gnq-2I-Xgb"/>
+                                        <exclude reference="MZk-iL-zpZ"/>
                                         <include reference="ZmW-wa-4aY"/>
                                     </mask>
                                 </variation>
@@ -5585,12 +5693,12 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="Euu-Fw-Ga4"/>
                                 <exclude reference="hkJ-af-B8D"/>
                                 <exclude reference="xuk-pU-Z5e"/>
+                                <exclude reference="BDQ-Nb-dzV"/>
+                                <exclude reference="GX5-78-Pfc"/>
                                 <exclude reference="HBt-Xf-lfp"/>
                                 <exclude reference="Zbp-hg-rWY"/>
                                 <exclude reference="u7y-vX-nBN"/>
                                 <exclude reference="wsJ-v1-kNe"/>
-                                <exclude reference="BDQ-Nb-dzV"/>
-                                <exclude reference="GX5-78-Pfc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -5608,12 +5716,12 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="Euu-Fw-Ga4"/>
                                 <include reference="hkJ-af-B8D"/>
                                 <include reference="xuk-pU-Z5e"/>
+                                <include reference="BDQ-Nb-dzV"/>
+                                <include reference="GX5-78-Pfc"/>
                                 <exclude reference="HBt-Xf-lfp"/>
                                 <include reference="Zbp-hg-rWY"/>
                                 <include reference="u7y-vX-nBN"/>
                                 <include reference="wsJ-v1-kNe"/>
-                                <include reference="BDQ-Nb-dzV"/>
-                                <include reference="GX5-78-Pfc"/>
                             </mask>
                         </variation>
                     </view>
@@ -5694,17 +5802,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="ZsR-we-rmf"/>
                                         <exclude reference="3bp-8h-p3a"/>
                                         <exclude reference="Vvb-Wu-qRS"/>
+                                        <exclude reference="ZsR-we-rmf"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="75" y="249" width="250" height="250"/>
                                     <mask key="constraints">
-                                        <include reference="ZsR-we-rmf"/>
                                         <include reference="3bp-8h-p3a"/>
                                         <include reference="Vvb-Wu-qRS"/>
+                                        <include reference="ZsR-we-rmf"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -5750,11 +5858,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="VMX-tt-a8W"/>
                                 <exclude reference="WfC-yj-cUY"/>
                                 <exclude reference="lKv-Z4-kIi"/>
+                                <exclude reference="UBG-J4-LNp"/>
+                                <exclude reference="b3O-wD-dA6"/>
                                 <exclude reference="6zG-jR-zzr"/>
                                 <exclude reference="CuX-cM-xLa"/>
                                 <exclude reference="WhZ-kb-XOB"/>
-                                <exclude reference="UBG-J4-LNp"/>
-                                <exclude reference="b3O-wD-dA6"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -5772,11 +5880,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="VMX-tt-a8W"/>
                                 <include reference="WfC-yj-cUY"/>
                                 <include reference="lKv-Z4-kIi"/>
+                                <include reference="UBG-J4-LNp"/>
+                                <include reference="b3O-wD-dA6"/>
                                 <include reference="6zG-jR-zzr"/>
                                 <include reference="CuX-cM-xLa"/>
                                 <include reference="WhZ-kb-XOB"/>
-                                <include reference="UBG-J4-LNp"/>
-                                <include reference="b3O-wD-dA6"/>
                             </mask>
                         </variation>
                     </view>
@@ -5805,6 +5913,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Présente ta ville :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48S-Qu-ngd">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5904,22 +6015,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="S4R-A1-qfe"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Dlv-k1-DHD"/>
-                                <exclude reference="n0N-OD-ZsU"/>
-                                <exclude reference="uH0-KD-nB2"/>
                                 <exclude reference="5Ay-Hs-oE8"/>
                                 <exclude reference="Lbw-m4-G93"/>
                                 <exclude reference="Yip-gH-snU"/>
-                                <exclude reference="dMX-ZX-AHX"/>
-                                <exclude reference="soz-9q-ba0"/>
-                                <exclude reference="0Iq-fN-YJN"/>
-                                <exclude reference="YNo-AM-ArO"/>
                                 <exclude reference="L6a-yp-zWl"/>
                                 <exclude reference="jSt-QK-w6a"/>
-                                <exclude reference="2I3-tq-H01"/>
-                                <exclude reference="rbL-Li-Air"/>
+                                <exclude reference="Dlv-k1-DHD"/>
+                                <exclude reference="n0N-OD-ZsU"/>
+                                <exclude reference="uH0-KD-nB2"/>
+                                <exclude reference="dMX-ZX-AHX"/>
+                                <exclude reference="soz-9q-ba0"/>
                                 <exclude reference="KrN-Ow-lYs"/>
                                 <exclude reference="epu-Xl-5uS"/>
+                                <exclude reference="2I3-tq-H01"/>
+                                <exclude reference="rbL-Li-Air"/>
+                                <exclude reference="0Iq-fN-YJN"/>
+                                <exclude reference="YNo-AM-ArO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -5933,22 +6044,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="S4R-A1-qfe"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Dlv-k1-DHD"/>
-                                <include reference="n0N-OD-ZsU"/>
-                                <include reference="uH0-KD-nB2"/>
                                 <include reference="5Ay-Hs-oE8"/>
                                 <include reference="Lbw-m4-G93"/>
                                 <include reference="Yip-gH-snU"/>
-                                <include reference="dMX-ZX-AHX"/>
-                                <include reference="soz-9q-ba0"/>
-                                <include reference="0Iq-fN-YJN"/>
-                                <include reference="YNo-AM-ArO"/>
                                 <include reference="L6a-yp-zWl"/>
                                 <include reference="jSt-QK-w6a"/>
-                                <include reference="2I3-tq-H01"/>
-                                <include reference="rbL-Li-Air"/>
+                                <include reference="Dlv-k1-DHD"/>
+                                <include reference="n0N-OD-ZsU"/>
+                                <include reference="uH0-KD-nB2"/>
+                                <include reference="dMX-ZX-AHX"/>
+                                <include reference="soz-9q-ba0"/>
                                 <include reference="KrN-Ow-lYs"/>
                                 <include reference="epu-Xl-5uS"/>
+                                <include reference="2I3-tq-H01"/>
+                                <include reference="rbL-Li-Air"/>
+                                <include reference="0Iq-fN-YJN"/>
+                                <include reference="YNo-AM-ArO"/>
                             </mask>
                         </variation>
                     </view>
@@ -6038,16 +6149,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="Wp2-hf-Z2Q"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="DCD-3A-iMF"/>
-                                <exclude reference="GZu-bZ-Urx"/>
-                                <exclude reference="tFv-1G-ipT"/>
                                 <exclude reference="R1l-Io-3I5"/>
                                 <exclude reference="Stt-hK-LwS"/>
                                 <exclude reference="otR-3P-Wfl"/>
-                                <exclude reference="lpx-Hw-EwW"/>
-                                <exclude reference="vnV-5r-9wi"/>
+                                <exclude reference="DCD-3A-iMF"/>
+                                <exclude reference="GZu-bZ-Urx"/>
+                                <exclude reference="tFv-1G-ipT"/>
                                 <exclude reference="JJk-yX-BHq"/>
                                 <exclude reference="w3V-cT-8NN"/>
+                                <exclude reference="lpx-Hw-EwW"/>
+                                <exclude reference="vnV-5r-9wi"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6058,16 +6169,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="Wp2-hf-Z2Q"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="DCD-3A-iMF"/>
-                                <include reference="GZu-bZ-Urx"/>
-                                <include reference="tFv-1G-ipT"/>
                                 <include reference="R1l-Io-3I5"/>
                                 <include reference="Stt-hK-LwS"/>
                                 <include reference="otR-3P-Wfl"/>
-                                <include reference="lpx-Hw-EwW"/>
-                                <include reference="vnV-5r-9wi"/>
+                                <include reference="DCD-3A-iMF"/>
+                                <include reference="GZu-bZ-Urx"/>
+                                <include reference="tFv-1G-ipT"/>
                                 <include reference="JJk-yX-BHq"/>
                                 <include reference="w3V-cT-8NN"/>
+                                <include reference="lpx-Hw-EwW"/>
+                                <include reference="vnV-5r-9wi"/>
                             </mask>
                         </variation>
                     </view>
@@ -6096,6 +6207,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un locuteur du niveau 3 a publié le post suivant :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heo-Mv-4zF">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -6199,24 +6313,24 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="sHw-kO-SgQ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="H9w-gX-gC3"/>
+                                <exclude reference="Rga-KU-DHY"/>
+                                <exclude reference="efF-C8-ZjI"/>
                                 <exclude reference="BDs-Ic-kNj"/>
                                 <exclude reference="Fob-vC-eew"/>
                                 <exclude reference="MmO-Fp-dlA"/>
-                                <exclude reference="6h8-zd-R3C"/>
-                                <exclude reference="Mx6-Gw-XW7"/>
-                                <exclude reference="Vwt-aX-SqR"/>
                                 <exclude reference="180-VB-lls"/>
                                 <exclude reference="Fjw-8y-nen"/>
                                 <exclude reference="R0N-DE-bQ8"/>
                                 <exclude reference="SRU-8G-ams"/>
                                 <exclude reference="h5S-Lt-cmr"/>
                                 <exclude reference="oO9-pq-qqn"/>
+                                <exclude reference="6h8-zd-R3C"/>
+                                <exclude reference="Mx6-Gw-XW7"/>
+                                <exclude reference="Vwt-aX-SqR"/>
                                 <exclude reference="5ht-ov-OOR"/>
                                 <exclude reference="cs3-H3-ono"/>
                                 <exclude reference="d9u-uL-wbJ"/>
-                                <exclude reference="H9w-gX-gC3"/>
-                                <exclude reference="Rga-KU-DHY"/>
-                                <exclude reference="efF-C8-ZjI"/>
                                 <exclude reference="WB0-y5-zxh"/>
                                 <exclude reference="eYq-J1-H2d"/>
                             </mask>
@@ -6231,24 +6345,24 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="sHw-kO-SgQ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="H9w-gX-gC3"/>
+                                <include reference="Rga-KU-DHY"/>
+                                <exclude reference="efF-C8-ZjI"/>
                                 <include reference="BDs-Ic-kNj"/>
                                 <include reference="Fob-vC-eew"/>
                                 <include reference="MmO-Fp-dlA"/>
-                                <include reference="6h8-zd-R3C"/>
-                                <include reference="Mx6-Gw-XW7"/>
-                                <include reference="Vwt-aX-SqR"/>
                                 <include reference="180-VB-lls"/>
                                 <include reference="Fjw-8y-nen"/>
                                 <include reference="R0N-DE-bQ8"/>
                                 <include reference="SRU-8G-ams"/>
                                 <include reference="h5S-Lt-cmr"/>
                                 <include reference="oO9-pq-qqn"/>
+                                <include reference="6h8-zd-R3C"/>
+                                <include reference="Mx6-Gw-XW7"/>
+                                <include reference="Vwt-aX-SqR"/>
                                 <include reference="5ht-ov-OOR"/>
                                 <include reference="cs3-H3-ono"/>
                                 <include reference="d9u-uL-wbJ"/>
-                                <include reference="H9w-gX-gC3"/>
-                                <include reference="Rga-KU-DHY"/>
-                                <exclude reference="efF-C8-ZjI"/>
                                 <include reference="WB0-y5-zxh"/>
                                 <include reference="eYq-J1-H2d"/>
                             </mask>
@@ -6279,6 +6393,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poste la photo de ton monument préféré et décris-le." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA0-RZ-zMg">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -6310,7 +6427,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="mSC-np-df1"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="231" width="266" height="150"/>
                                     <mask key="constraints">
                                         <include reference="30A-OL-JqS"/>
@@ -6331,7 +6448,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="5op-SD-6OK"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="396" width="266" height="100"/>
                                     <mask key="constraints">
                                         <include reference="5op-SD-6OK"/>
@@ -6377,20 +6494,20 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="lQu-1b-8t4"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="7bJ-qb-zMn"/>
+                                <exclude reference="CoG-he-jGT"/>
+                                <exclude reference="mUp-bz-no8"/>
+                                <exclude reference="Lcp-83-Gxz"/>
                                 <exclude reference="4Bf-tV-pDi"/>
                                 <exclude reference="CBV-zT-oJB"/>
                                 <exclude reference="hyc-ck-rot"/>
                                 <exclude reference="xSW-77-QWx"/>
-                                <exclude reference="7bJ-qb-zMn"/>
-                                <exclude reference="CoG-he-jGT"/>
-                                <exclude reference="mUp-bz-no8"/>
+                                <exclude reference="TIN-Fw-3ks"/>
+                                <exclude reference="mww-7N-vYW"/>
                                 <exclude reference="5DR-Op-SZy"/>
                                 <exclude reference="7ON-y2-1up"/>
                                 <exclude reference="Upq-Os-cks"/>
                                 <exclude reference="a8l-0Y-yTA"/>
-                                <exclude reference="Lcp-83-Gxz"/>
-                                <exclude reference="TIN-Fw-3ks"/>
-                                <exclude reference="mww-7N-vYW"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6402,20 +6519,20 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="lQu-1b-8t4"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="7bJ-qb-zMn"/>
+                                <include reference="CoG-he-jGT"/>
+                                <include reference="mUp-bz-no8"/>
+                                <include reference="Lcp-83-Gxz"/>
                                 <include reference="4Bf-tV-pDi"/>
                                 <include reference="CBV-zT-oJB"/>
                                 <include reference="hyc-ck-rot"/>
                                 <include reference="xSW-77-QWx"/>
-                                <include reference="7bJ-qb-zMn"/>
-                                <include reference="CoG-he-jGT"/>
-                                <include reference="mUp-bz-no8"/>
+                                <include reference="TIN-Fw-3ks"/>
+                                <include reference="mww-7N-vYW"/>
                                 <include reference="5DR-Op-SZy"/>
                                 <include reference="7ON-y2-1up"/>
                                 <include reference="Upq-Os-cks"/>
                                 <include reference="a8l-0Y-yTA"/>
-                                <include reference="Lcp-83-Gxz"/>
-                                <include reference="TIN-Fw-3ks"/>
-                                <include reference="mww-7N-vYW"/>
                             </mask>
                         </variation>
                     </view>
@@ -6444,6 +6561,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Que vas-tu faire ce weekend ? (attention à la météo)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSl-9k-ifV">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -6635,37 +6755,37 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="CNO-ps-Uas"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="A8V-sf-hOv"/>
-                                <exclude reference="QRk-1w-cgs"/>
-                                <exclude reference="baU-Gb-W2a"/>
+                                <exclude reference="Q9A-9F-hSi"/>
+                                <exclude reference="Td7-hA-e4x"/>
+                                <exclude reference="haq-oc-USp"/>
+                                <exclude reference="vj4-Kw-tnr"/>
+                                <exclude reference="yan-mM-RPb"/>
                                 <exclude reference="DF0-kD-EGE"/>
                                 <exclude reference="N18-BQ-mw8"/>
                                 <exclude reference="cck-sS-UfW"/>
                                 <exclude reference="z4e-9J-GNA"/>
                                 <exclude reference="1jn-MB-e4S"/>
                                 <exclude reference="tkw-am-IPv"/>
-                                <exclude reference="Snu-Md-9rA"/>
-                                <exclude reference="mat-f3-Jrc"/>
-                                <exclude reference="wjU-K2-X0e"/>
-                                <exclude reference="Q9A-9F-hSi"/>
-                                <exclude reference="Td7-hA-e4x"/>
-                                <exclude reference="haq-oc-USp"/>
-                                <exclude reference="vj4-Kw-tnr"/>
-                                <exclude reference="yan-mM-RPb"/>
                                 <exclude reference="iMH-jb-pUf"/>
                                 <exclude reference="wIx-UK-gCN"/>
-                                <exclude reference="53F-NC-ZPJ"/>
-                                <exclude reference="D3R-Uc-ZM4"/>
-                                <exclude reference="qbU-jR-7ML"/>
-                                <exclude reference="Hs4-MN-chJ"/>
-                                <exclude reference="jvc-97-Nbk"/>
                                 <exclude reference="2e1-zJ-dne"/>
                                 <exclude reference="81C-8T-QeP"/>
                                 <exclude reference="ZM1-t6-TNp"/>
-                                <exclude reference="Yyn-Vz-h9z"/>
-                                <exclude reference="tFs-5N-ReI"/>
+                                <exclude reference="A8V-sf-hOv"/>
+                                <exclude reference="QRk-1w-cgs"/>
+                                <exclude reference="baU-Gb-W2a"/>
                                 <exclude reference="UMQ-mu-81P"/>
                                 <exclude reference="jrC-NI-QKj"/>
+                                <exclude reference="Yyn-Vz-h9z"/>
+                                <exclude reference="tFs-5N-ReI"/>
+                                <exclude reference="Hs4-MN-chJ"/>
+                                <exclude reference="jvc-97-Nbk"/>
+                                <exclude reference="Snu-Md-9rA"/>
+                                <exclude reference="mat-f3-Jrc"/>
+                                <exclude reference="wjU-K2-X0e"/>
+                                <exclude reference="53F-NC-ZPJ"/>
+                                <exclude reference="D3R-Uc-ZM4"/>
+                                <exclude reference="qbU-jR-7ML"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6683,37 +6803,37 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="CNO-ps-Uas"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="A8V-sf-hOv"/>
-                                <include reference="QRk-1w-cgs"/>
-                                <include reference="baU-Gb-W2a"/>
+                                <include reference="Q9A-9F-hSi"/>
+                                <include reference="Td7-hA-e4x"/>
+                                <exclude reference="haq-oc-USp"/>
+                                <include reference="vj4-Kw-tnr"/>
+                                <include reference="yan-mM-RPb"/>
                                 <include reference="DF0-kD-EGE"/>
                                 <include reference="N18-BQ-mw8"/>
                                 <include reference="cck-sS-UfW"/>
                                 <include reference="z4e-9J-GNA"/>
                                 <include reference="1jn-MB-e4S"/>
                                 <include reference="tkw-am-IPv"/>
-                                <exclude reference="Snu-Md-9rA"/>
-                                <include reference="mat-f3-Jrc"/>
-                                <include reference="wjU-K2-X0e"/>
-                                <include reference="Q9A-9F-hSi"/>
-                                <include reference="Td7-hA-e4x"/>
-                                <exclude reference="haq-oc-USp"/>
-                                <include reference="vj4-Kw-tnr"/>
-                                <include reference="yan-mM-RPb"/>
                                 <include reference="iMH-jb-pUf"/>
                                 <include reference="wIx-UK-gCN"/>
-                                <include reference="53F-NC-ZPJ"/>
-                                <exclude reference="D3R-Uc-ZM4"/>
-                                <include reference="qbU-jR-7ML"/>
-                                <include reference="Hs4-MN-chJ"/>
-                                <include reference="jvc-97-Nbk"/>
                                 <include reference="2e1-zJ-dne"/>
                                 <exclude reference="81C-8T-QeP"/>
                                 <include reference="ZM1-t6-TNp"/>
-                                <include reference="Yyn-Vz-h9z"/>
-                                <include reference="tFs-5N-ReI"/>
+                                <include reference="A8V-sf-hOv"/>
+                                <include reference="QRk-1w-cgs"/>
+                                <include reference="baU-Gb-W2a"/>
                                 <include reference="UMQ-mu-81P"/>
                                 <include reference="jrC-NI-QKj"/>
+                                <include reference="Yyn-Vz-h9z"/>
+                                <include reference="tFs-5N-ReI"/>
+                                <include reference="Hs4-MN-chJ"/>
+                                <include reference="jvc-97-Nbk"/>
+                                <exclude reference="Snu-Md-9rA"/>
+                                <include reference="mat-f3-Jrc"/>
+                                <include reference="wjU-K2-X0e"/>
+                                <include reference="53F-NC-ZPJ"/>
+                                <exclude reference="D3R-Uc-ZM4"/>
+                                <include reference="qbU-jR-7ML"/>
                             </mask>
                         </variation>
                     </view>
@@ -6742,6 +6862,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2X-5p-4WH">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -6808,10 +6931,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="9q6-5q-SbJ"/>
                                 <exclude reference="bgU-oz-nIt"/>
                                 <exclude reference="ii4-8H-1X5"/>
-                                <exclude reference="4DJ-QD-mNm"/>
-                                <exclude reference="KyY-Ra-MC0"/>
                                 <exclude reference="Qwi-lt-Tk8"/>
                                 <exclude reference="lYr-uk-yr0"/>
+                                <exclude reference="4DJ-QD-mNm"/>
+                                <exclude reference="KyY-Ra-MC0"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6829,10 +6952,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="9q6-5q-SbJ"/>
                                 <include reference="bgU-oz-nIt"/>
                                 <include reference="ii4-8H-1X5"/>
-                                <include reference="4DJ-QD-mNm"/>
-                                <include reference="KyY-Ra-MC0"/>
                                 <include reference="Qwi-lt-Tk8"/>
                                 <include reference="lYr-uk-yr0"/>
+                                <include reference="4DJ-QD-mNm"/>
+                                <include reference="KyY-Ra-MC0"/>
                             </mask>
                         </variation>
                     </view>
@@ -6861,6 +6984,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imagine un post qui serait une activité proposée à tes apprenants (niveau de ton choix) sur MapLango :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zoq-2x-8Wt">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -6892,7 +7018,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="ybL-bA-XwN"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="344" width="266" height="150"/>
                                     <mask key="constraints">
                                         <include reference="KrZ-oK-YQh"/>
@@ -6913,7 +7039,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="LeY-gd-c2L"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="67" y="229" width="266" height="100"/>
                                     <mask key="constraints">
                                         <include reference="LeY-gd-c2L"/>
@@ -6969,12 +7095,14 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="7kj-K3-4aZ"/>
                                 <exclude reference="VLI-5L-7NM"/>
                                 <exclude reference="eXG-pZ-Hza"/>
-                                <exclude reference="Am0-ii-36Q"/>
-                                <exclude reference="RrC-Vn-0Cz"/>
-                                <exclude reference="WWA-JD-znp"/>
                                 <exclude reference="BcP-HK-Dab"/>
                                 <exclude reference="MCF-mp-tX9"/>
                                 <exclude reference="U2s-gx-D6Q"/>
+                                <exclude reference="Am0-ii-36Q"/>
+                                <exclude reference="RrC-Vn-0Cz"/>
+                                <exclude reference="WWA-JD-znp"/>
+                                <exclude reference="UMe-cY-ClO"/>
+                                <exclude reference="UUb-ie-VbG"/>
                                 <exclude reference="G15-Tk-0an"/>
                                 <exclude reference="WW7-De-O1j"/>
                                 <exclude reference="cvV-7i-RPH"/>
@@ -6982,8 +7110,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="ixa-k7-a93"/>
                                 <exclude reference="p1g-Cm-2pi"/>
                                 <exclude reference="zCp-JZ-1ok"/>
-                                <exclude reference="UMe-cY-ClO"/>
-                                <exclude reference="UUb-ie-VbG"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6998,12 +7124,14 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="7kj-K3-4aZ"/>
                                 <include reference="VLI-5L-7NM"/>
                                 <include reference="eXG-pZ-Hza"/>
-                                <include reference="Am0-ii-36Q"/>
-                                <include reference="RrC-Vn-0Cz"/>
-                                <include reference="WWA-JD-znp"/>
                                 <include reference="BcP-HK-Dab"/>
                                 <include reference="MCF-mp-tX9"/>
                                 <exclude reference="U2s-gx-D6Q"/>
+                                <include reference="Am0-ii-36Q"/>
+                                <include reference="RrC-Vn-0Cz"/>
+                                <include reference="WWA-JD-znp"/>
+                                <include reference="UMe-cY-ClO"/>
+                                <include reference="UUb-ie-VbG"/>
                                 <include reference="G15-Tk-0an"/>
                                 <include reference="WW7-De-O1j"/>
                                 <exclude reference="cvV-7i-RPH"/>
@@ -7011,8 +7139,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="ixa-k7-a93"/>
                                 <include reference="p1g-Cm-2pi"/>
                                 <include reference="zCp-JZ-1ok"/>
-                                <include reference="UMe-cY-ClO"/>
-                                <include reference="UUb-ie-VbG"/>
                             </mask>
                         </variation>
                     </view>
@@ -7041,6 +7167,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Réponds à ces deux questions sur des événements passés." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuW-fm-vpo">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -7149,11 +7278,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="CfS-p4-B1d"/>
                                 <exclude reference="aQz-0I-iHU"/>
                                 <exclude reference="pex-fZ-7rm"/>
-                                <exclude reference="2KU-3h-yN5"/>
-                                <exclude reference="4sp-oC-THl"/>
-                                <exclude reference="Qes-3p-gua"/>
-                                <exclude reference="TBK-kl-ySm"/>
-                                <exclude reference="bEX-5t-ggy"/>
+                                <exclude reference="R5l-RW-QBL"/>
+                                <exclude reference="hjD-pY-5HD"/>
                                 <exclude reference="578-8V-kvA"/>
                                 <exclude reference="KnT-Eb-bG7"/>
                                 <exclude reference="upH-ic-zHf"/>
@@ -7161,8 +7287,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="LaB-YX-3Gv"/>
                                 <exclude reference="ZIr-QL-Mbg"/>
                                 <exclude reference="ev3-rp-qZz"/>
-                                <exclude reference="R5l-RW-QBL"/>
-                                <exclude reference="hjD-pY-5HD"/>
+                                <exclude reference="2KU-3h-yN5"/>
+                                <exclude reference="4sp-oC-THl"/>
+                                <exclude reference="Qes-3p-gua"/>
+                                <exclude reference="TBK-kl-ySm"/>
+                                <exclude reference="bEX-5t-ggy"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -7183,11 +7312,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="CfS-p4-B1d"/>
                                 <include reference="aQz-0I-iHU"/>
                                 <include reference="pex-fZ-7rm"/>
-                                <include reference="2KU-3h-yN5"/>
-                                <include reference="4sp-oC-THl"/>
-                                <include reference="Qes-3p-gua"/>
-                                <include reference="TBK-kl-ySm"/>
-                                <include reference="bEX-5t-ggy"/>
+                                <include reference="R5l-RW-QBL"/>
+                                <include reference="hjD-pY-5HD"/>
                                 <include reference="578-8V-kvA"/>
                                 <include reference="KnT-Eb-bG7"/>
                                 <include reference="upH-ic-zHf"/>
@@ -7195,8 +7321,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="LaB-YX-3Gv"/>
                                 <include reference="ZIr-QL-Mbg"/>
                                 <include reference="ev3-rp-qZz"/>
-                                <include reference="R5l-RW-QBL"/>
-                                <include reference="hjD-pY-5HD"/>
+                                <include reference="2KU-3h-yN5"/>
+                                <include reference="4sp-oC-THl"/>
+                                <include reference="Qes-3p-gua"/>
+                                <include reference="TBK-kl-ySm"/>
+                                <include reference="bEX-5t-ggy"/>
                             </mask>
                         </variation>
                     </view>
@@ -7225,6 +7354,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tu sors du supermarché. Imagine 3 choses que tu viens d'acheter." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwg-MX-34m">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -7293,17 +7425,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="hlp-2c-Kl8"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="gQv-OT-Cg6"/>
-                                <exclude reference="neU-d1-Arj"/>
-                                <exclude reference="s1d-uF-EXg"/>
-                                <exclude reference="xHS-wz-5VF"/>
-                                <exclude reference="8RU-Cm-E4J"/>
-                                <exclude reference="hwF-Bk-H63"/>
-                                <exclude reference="rdP-cq-kDy"/>
                                 <exclude reference="73i-Ln-W9c"/>
                                 <exclude reference="GfQ-ds-dx7"/>
                                 <exclude reference="tgG-1A-U5b"/>
                                 <exclude reference="wTc-H3-ew8"/>
+                                <exclude reference="8RU-Cm-E4J"/>
+                                <exclude reference="hwF-Bk-H63"/>
+                                <exclude reference="rdP-cq-kDy"/>
+                                <exclude reference="gQv-OT-Cg6"/>
+                                <exclude reference="neU-d1-Arj"/>
+                                <exclude reference="s1d-uF-EXg"/>
+                                <exclude reference="xHS-wz-5VF"/>
                                 <exclude reference="77G-mY-9QC"/>
                                 <exclude reference="scU-wf-7dm"/>
                             </mask>
@@ -7316,17 +7448,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="hlp-2c-Kl8"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="gQv-OT-Cg6"/>
-                                <include reference="neU-d1-Arj"/>
-                                <include reference="s1d-uF-EXg"/>
-                                <include reference="xHS-wz-5VF"/>
-                                <include reference="8RU-Cm-E4J"/>
-                                <include reference="hwF-Bk-H63"/>
-                                <include reference="rdP-cq-kDy"/>
                                 <include reference="73i-Ln-W9c"/>
                                 <include reference="GfQ-ds-dx7"/>
                                 <include reference="tgG-1A-U5b"/>
                                 <include reference="wTc-H3-ew8"/>
+                                <include reference="8RU-Cm-E4J"/>
+                                <include reference="hwF-Bk-H63"/>
+                                <include reference="rdP-cq-kDy"/>
+                                <include reference="gQv-OT-Cg6"/>
+                                <include reference="neU-d1-Arj"/>
+                                <include reference="s1d-uF-EXg"/>
+                                <include reference="xHS-wz-5VF"/>
                                 <include reference="77G-mY-9QC"/>
                                 <include reference="scU-wf-7dm"/>
                             </mask>
@@ -7357,6 +7489,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tu es en train de visiter un appartement. Quelles informations tu demandes au propriétaire ?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-Lh-1MD">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -7414,17 +7549,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="2vh-2p-3qI"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="KQr-UW-IfR"/>
+                                <exclude reference="LE1-JM-riZ"/>
+                                <exclude reference="UH2-XO-0dq"/>
                                 <exclude reference="OC1-ys-hTO"/>
                                 <exclude reference="bhT-lS-iCs"/>
                                 <exclude reference="md4-6f-JGJ"/>
                                 <exclude reference="oVd-NK-aD1"/>
-                                <exclude reference="KQr-UW-IfR"/>
-                                <exclude reference="LE1-JM-riZ"/>
-                                <exclude reference="UH2-XO-0dq"/>
-                                <exclude reference="0Fh-uf-SX9"/>
-                                <exclude reference="ORI-u3-Z6x"/>
                                 <exclude reference="28e-SY-8YO"/>
                                 <exclude reference="G41-dw-b2R"/>
+                                <exclude reference="0Fh-uf-SX9"/>
+                                <exclude reference="ORI-u3-Z6x"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -7435,17 +7570,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="2vh-2p-3qI"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="KQr-UW-IfR"/>
+                                <include reference="LE1-JM-riZ"/>
+                                <include reference="UH2-XO-0dq"/>
                                 <include reference="OC1-ys-hTO"/>
                                 <include reference="bhT-lS-iCs"/>
                                 <include reference="md4-6f-JGJ"/>
                                 <include reference="oVd-NK-aD1"/>
-                                <include reference="KQr-UW-IfR"/>
-                                <include reference="LE1-JM-riZ"/>
-                                <include reference="UH2-XO-0dq"/>
-                                <include reference="0Fh-uf-SX9"/>
-                                <include reference="ORI-u3-Z6x"/>
                                 <include reference="28e-SY-8YO"/>
                                 <include reference="G41-dw-b2R"/>
+                                <include reference="0Fh-uf-SX9"/>
+                                <include reference="ORI-u3-Z6x"/>
                             </mask>
                         </variation>
                     </view>
@@ -7474,6 +7609,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="94" width="360" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tu rencontres une amie dans un café. Une chaise est libre à la table d'à côté. Comment tu peux demander si tu peux la prendre ?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJj-YN-1qD">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -7531,17 +7669,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="BEl-Ie-Sqe"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="bNW-a5-vtX"/>
+                                <exclude reference="qCa-VI-tH3"/>
+                                <exclude reference="wW7-Dx-Z2d"/>
                                 <exclude reference="8Ca-ck-7SM"/>
                                 <exclude reference="MSG-hw-GLp"/>
                                 <exclude reference="TRb-cQ-fjr"/>
                                 <exclude reference="dLl-4N-9ee"/>
-                                <exclude reference="bNW-a5-vtX"/>
-                                <exclude reference="qCa-VI-tH3"/>
-                                <exclude reference="wW7-Dx-Z2d"/>
-                                <exclude reference="0GR-LK-lfx"/>
-                                <exclude reference="AnT-ev-TDT"/>
                                 <exclude reference="BUl-Bf-fa3"/>
                                 <exclude reference="mpR-zF-C6T"/>
+                                <exclude reference="0GR-LK-lfx"/>
+                                <exclude reference="AnT-ev-TDT"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -7552,17 +7690,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="BEl-Ie-Sqe"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="bNW-a5-vtX"/>
+                                <include reference="qCa-VI-tH3"/>
+                                <include reference="wW7-Dx-Z2d"/>
                                 <include reference="8Ca-ck-7SM"/>
                                 <include reference="MSG-hw-GLp"/>
                                 <include reference="TRb-cQ-fjr"/>
                                 <include reference="dLl-4N-9ee"/>
-                                <include reference="bNW-a5-vtX"/>
-                                <include reference="qCa-VI-tH3"/>
-                                <include reference="wW7-Dx-Z2d"/>
-                                <include reference="0GR-LK-lfx"/>
-                                <include reference="AnT-ev-TDT"/>
                                 <include reference="BUl-Bf-fa3"/>
                                 <include reference="mpR-zF-C6T"/>
+                                <include reference="0GR-LK-lfx"/>
+                                <include reference="AnT-ev-TDT"/>
                             </mask>
                         </variation>
                     </view>
@@ -8819,12 +8957,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="356" width="360" height="88"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je me débrouille" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBl-lj-Mdk">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="266" width="360" height="30"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obtenu !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1W-YA-PXd">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -9327,12 +9471,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J'intéragis plutôt bien" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EId-3i-ylx">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obtenu !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YdK-JG-x3S">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -9427,12 +9577,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je maitrise bien" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3O-MH-c5R">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obtenu !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1e9-XE-evW">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -9524,12 +9680,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="348" width="360" height="105"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je veux être médiateur" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbe-sR-nU3">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="258" width="360" height="30"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obtenu !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOh-Re-hRB">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -9647,10 +9809,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="MnM-Fe-5nH"/>
         <segue reference="zQd-mS-QGF"/>
         <segue reference="ezw-hn-Hzp"/>
-        <segue reference="MnM-Fe-5nH"/>
         <segue reference="stY-4Y-WSs"/>
-        <segue reference="fNN-dn-5zA"/>
     </inferredMetricsTieBreakers>
 </document>

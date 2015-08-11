@@ -13,7 +13,7 @@ class CarnetTVC: UITableViewController {
     //MARK: Properties
     
     var words = [Word] ()
-    
+    var word = Word?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,28 +76,15 @@ class CarnetTVC: UITableViewController {
     @IBAction func unwindToWordList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as?
-            CarnetViewController, word = sourceViewController.word {
-                
-                /*
-                if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                    // Update an existing word.
-                    words[selectedIndexPath.row] = word
-                    tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
-                }
-                else {
-                    // Add a new word.
-                    let newIndexPath = NSIndexPath(forRow: words.count, inSection: 0)
-                    words.append(meal)
-                    tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-                }*/
-                
-                //Add a new word
+            CarnetAddVC, word = sourceViewController.word {
+        
+        // Add a new meal.
                 let newIndexPath = NSIndexPath(forRow: words.count, inSection: 0)
                 words.append(word)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-                
-                
-        }
+            
+                }
+        
         
     }
     
@@ -137,6 +124,7 @@ class CarnetTVC: UITableViewController {
     return true
     }
 
+
     
  
    
@@ -166,5 +154,5 @@ class CarnetTVC: UITableViewController {
     // Pass the selected object to the new view controller.
     }
     */
-    
+
 }

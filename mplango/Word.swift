@@ -21,7 +21,7 @@ class Word {
     
     //MARK: Initialization
     
-    init?(name: String, description: String, photo:UIImage?) {
+    init?(name: String, description: String, photo: UIImage?) {
         
         //Initialize stored properties
         self.name = name

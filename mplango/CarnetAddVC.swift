@@ -16,7 +16,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var WordDescriptionTextField: UITextField!
     @IBOutlet weak var WordImage: UIImageView!
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
-    @IBOutlet weak var continueWordButton: UIBarButtonItem!
 
     @IBAction func cancelAddindWord(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -33,8 +32,18 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         WordTextField.delegate = self
         WordDescriptionTextField.delegate = self
         
+        if let word = word {
+            navigationItem.title = word.name
+            WordTextField.text = word.name
+            WordDescriptionTextField.text = word.description
+            WordImage.image = word.photo
+            
+        }
+        
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
+    
+            
         
         // Custom the visual identity of Text Fields
         WordTextField.backgroundColor = UIColor.clearColor()
@@ -47,7 +56,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         WordDescriptionTextField.layer.borderWidth = 1
         WordDescriptionTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         WordDescriptionTextField.attributedPlaceholder =
-            NSAttributedString(string: "Intégrer une petite description (facultatif)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
+            NSAttributedString(string: "Intégrer un commentaire (facultatif)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
         
         // Custom the visual identity of Image View
         WordImage.layer.borderWidth = 1
@@ -73,14 +82,14 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        // Disable the continueWord button while editing.
-        continueWordButton.enabled = false
+        // Disable the Save button while editing.
+        saveWordButton.enabled = false
     }
     
     func checkValidWordName() {
         // Disable the Save button if the text field is empty.
         let text = WordTextField.text ?? ""
-        continueWordButton.enabled = !text.isEmpty
+        saveWordButton.enabled = !text.isEmpty
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
@@ -94,20 +103,27 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        
+        /* código usado inicialmente quando tinha 3 telas (com uma de confirmação)
+        
         var DestCarnetAddVC : CarnetViewController = segue.destinationViewController as! CarnetViewController
         
         DestCarnetAddVC.WordText = WordTextField.text
         DestCarnetAddVC.LabelText = WordDescriptionTextField.text
         DestCarnetAddVC.WordPhoto = WordImage.image!
         
-        /*
+        */
+        
+        
         if saveWordButton === sender {
             let name = WordTextField.text ?? ""
+            let description = WordDescriptionTextField.text ?? ""
+            let photo = WordImage.image
             
             // Set the word to be passed to CarnetTVC after the unwind segue.
-            word = Word(name: name)
+            word = Word(name: name, description: description, photo: photo)
             
-        }*/
+        }
 
         
     }
