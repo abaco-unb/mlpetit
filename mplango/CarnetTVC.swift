@@ -7,19 +7,29 @@
 //
 
 import UIKit
+import CoreData
 
 class CarnetTVC: UITableViewController {
     
     //MARK: Properties
     
-    var carnet = [Word] ()
+    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var carnet = [Carnet] ()
+    
+    //antiga versão
+    //var itens = [Word] ()
     var item = Word?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Load the sample data.
-        loadSampleWords()
+        //loadSampleWords()
+        
+        var error: NSError?
+        let request = NSFetchRequest(entityName:"Carnet")
+        carnet = moContext?.executeFetchRequest(request, error: &error) as! [Carnet]
+        self.tableView.reloadData()
 
         navigationItem.leftBarButtonItem = editButtonItem()
         
@@ -27,12 +37,13 @@ class CarnetTVC: UITableViewController {
         
     }
     
+    /*
     func loadSampleWords() {
         let item1 = Word(word: "MapLango", desc: "MapLango est une appli pour l'apprentissage nomade des langues", photo: nil)!
         let item2 = Word(word: "Exemple", desc: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
-    carnet += [item1, item2]
+    itens += [item1, item2]
     }
-    
+    */
     
     
     override func didReceiveMemoryWarning() {
@@ -78,12 +89,37 @@ class CarnetTVC: UITableViewController {
         if let sourceViewController = sender.sourceViewController as?
             CarnetAddVC, item = sourceViewController.item {
         
+                /*
         // Add a new word.
                 let newIndexPath = NSIndexPath(forRow: carnet.count, inSection: 0)
-                carnet.append(item)
+                itens.append(item)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                */
             
+                
+                let entity =  NSEntityDescription.entityForName("Carnet",inManagedObjectContext: moContext!)
+                let entityItem = Carnet(entity: entity!,insertIntoManagedObjectContext:moContext)
+                
+                //3
+                entityItem.setValue(item.word, forKey: "word")
+                entityItem.setValue(item.desc, forKey: "desc")
+                entityItem.setValue(item.photo, forKey: "photo")
+                entityItem.setValue(1, forKey: "type")
+                
+                
+                //4
+                var error: NSError?
+                
+                if !moContext!.save(&error) {
+                    println("Could not save \(error), \(error?.userInfo)")
                 }
+                //var teste : Carnet = entityItem
+                
+                //5
+                carnet.append(entityItem)
+
+                
+            }
         
         
     }
@@ -96,7 +132,10 @@ class CarnetTVC: UITableViewController {
             if let selectedWordCell = sender as? CarnetTVCell {
                 let indexPath = tableView.indexPathForCell(selectedWordCell)!
                 let selectedWord = carnet[indexPath.row]
-                itemDetailViewController.item = selectedWord
+            
+                var newItem = Word(word: "", desc: "", photo: nil)
+                //newItem.word = selectedWord.entity.word
+                itemDetailViewController.item = newItem
             }
         }
         else if segue.identifier == "AddWord" {
