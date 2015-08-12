@@ -2977,7 +2977,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="WordItemList" destination="IkC-9a-Y99" id="1rE-bR-FIT"/>
-                                    <segue destination="6Oc-Mm-3p6" kind="show" identifier="ShowWord" id="ZFI-QO-zJE"/>
+                                    <segue destination="6Oc-Mm-3p6" kind="show" identifier="ShowWord" id="h81-Ib-a5I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3160,9 +3160,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <action selector="cancelAddindWord:" destination="IxI-Zr-qM7" id="ao9-tw-GcE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Continuer" id="1Tf-Mp-Dir">
+                        <barButtonItem key="rightBarButtonItem" title="Enregistrer" id="1Tf-Mp-Dir">
                             <connections>
-                                <segue destination="6Oc-Mm-3p6" kind="show" id="fNN-dn-5zA"/>
+                                <segue destination="t13-DG-B2o" kind="unwind" unwindAction="unwindToWordList:" id="4zC-8G-vx7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -3172,11 +3172,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="WordDescriptionTextField" destination="Wnq-qF-Aij" id="YVo-2s-qiy"/>
                         <outlet property="WordImage" destination="iJN-mu-MiI" id="9fs-HE-DtH"/>
                         <outlet property="WordTextField" destination="1wd-42-TbP" id="vdT-J6-rp9"/>
-                        <outlet property="continueWordButton" destination="1Tf-Mp-Dir" id="cs4-hl-QNr"/>
                         <outlet property="saveWordButton" destination="1Tf-Mp-Dir" id="tfy-MP-kra"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VF4-Za-dWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="t13-DG-B2o" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="Itu-Cf-OKG">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="IxI-Zr-qM7" id="hNn-SH-vWR"/>
@@ -3302,24 +3302,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ReM-HE-eJV">
-                        <barButtonItem key="rightBarButtonItem" title="Enregistrer" id="upL-ht-hGX">
-                            <connections>
-                                <segue destination="3V6-pD-MP3" kind="unwind" unwindAction="unwindToWordList:" id="QTC-2U-9on"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="ReM-HE-eJV"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="WordDescriptionLabel" destination="ZVL-7K-4Lk" id="bJ6-ik-lcA"/>
                         <outlet property="WordNameLabel" destination="VOq-al-Jsh" id="01s-qU-SjU"/>
                         <outlet property="WordSelectedImage" destination="5PL-rr-F8j" id="b10-NM-H4d"/>
-                        <outlet property="saveWord" destination="upL-ht-hGX" id="roK-xY-y2c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlF-OF-xCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="3V6-pD-MP3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-447" y="-93"/>
         </scene>
@@ -9817,10 +9809,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="MnM-Fe-5nH"/>
         <segue reference="zQd-mS-QGF"/>
         <segue reference="ezw-hn-Hzp"/>
-        <segue reference="MnM-Fe-5nH"/>
         <segue reference="stY-4Y-WSs"/>
-        <segue reference="fNN-dn-5zA"/>
     </inferredMetricsTieBreakers>
 </document>
