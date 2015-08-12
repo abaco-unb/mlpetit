@@ -12,8 +12,8 @@ class CarnetTVC: UITableViewController {
     
     //MARK: Properties
     
-    var words = [Word] ()
-    var word = Word?()
+    var carnet = [Word] ()
+    var item = Word?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,9 @@ class CarnetTVC: UITableViewController {
     }
     
     func loadSampleWords() {
-        let word1 = Word(name: "MapLango", desc: "MapLango est une appli pour l'apprentissage nomade des langues", photo: nil)!
-        let word2 = Word(name: "Exemple", desc: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
-    words += [word1, word2]
+        let item1 = Word(word: "MapLango", desc: "MapLango est une appli pour l'apprentissage nomade des langues", photo: nil)!
+        let item2 = Word(word: "Exemple", desc: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
+    carnet += [item1, item2]
     }
     
     
@@ -49,7 +49,7 @@ class CarnetTVC: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return words.count
+        return carnet.count
     }
     
     
@@ -64,10 +64,10 @@ class CarnetTVC: UITableViewController {
         
         // Fetches the appropriate word for the data source layout.
         
-        let word = words[indexPath.row]
+        let item = carnet[indexPath.row]
         
         
-        cell.WordItemList.text = word.name
+        cell.WordItemList.text = item.word
         
         
         return cell
@@ -76,11 +76,11 @@ class CarnetTVC: UITableViewController {
     @IBAction func unwindToWordList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as?
-            CarnetAddVC, word = sourceViewController.word {
+            CarnetAddVC, item = sourceViewController.item {
         
-        // Add a new meal.
-                let newIndexPath = NSIndexPath(forRow: words.count, inSection: 0)
-                words.append(word)
+        // Add a new word.
+                let newIndexPath = NSIndexPath(forRow: carnet.count, inSection: 0)
+                carnet.append(item)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
             
                 }
@@ -90,13 +90,13 @@ class CarnetTVC: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowWord" {
-            let wordDetailViewController = segue.destinationViewController as! CarnetViewController
+            let itemDetailViewController = segue.destinationViewController as! CarnetViewController
             
             // Get the cell that generated this segue.
             if let selectedWordCell = sender as? CarnetTVCell {
                 let indexPath = tableView.indexPathForCell(selectedWordCell)!
-                let selectedWord = words[indexPath.row]
-                wordDetailViewController.word = selectedWord
+                let selectedWord = carnet[indexPath.row]
+                itemDetailViewController.item = selectedWord
             }
         }
         else if segue.identifier == "AddWord" {
@@ -109,7 +109,7 @@ class CarnetTVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            words.removeAtIndex(indexPath.row)
+            carnet.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

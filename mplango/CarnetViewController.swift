@@ -21,7 +21,7 @@ class CarnetViewController: UIViewController {
     var LabelText = String ()
     var WordText = String ()
     var WordPhoto = UIImage ()
-    var word = Word?()
+    var item = Word?()
     
 
     
@@ -33,11 +33,11 @@ class CarnetViewController: UIViewController {
         WordSelectedImage.image = WordPhoto
         
         
-        if let word = word {
-            navigationItem.title = word.name
-            WordNameLabel.text = word.name
-            WordDescriptionLabel.text = word.desc
-            WordSelectedImage.image = word.photo
+        if let item = item {
+            navigationItem.title = item.word
+            WordNameLabel.text = item.word
+            WordDescriptionLabel.text = item.desc
+            WordSelectedImage.image = item.photo
             
         
         //Hides and disables Save Button in reading mode.
@@ -66,12 +66,12 @@ class CarnetViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if saveWord === sender {
-            let name = WordNameLabel.text ?? ""
+            let word = WordNameLabel.text ?? ""
             let desc = WordDescriptionLabel.text ?? ""
             let photo = WordSelectedImage.image
             
             //Set the word to be passed to CarnetTVC after the unwind segue.
-            word = Word(name: name, desc: desc, photo: photo)
+            item = Word(word: word, desc: desc, photo: photo)
             
         }
 

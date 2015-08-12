@@ -13,7 +13,7 @@ class Word {
     //MARK Properties
     
     
-    var name:String
+    var word:String
     var desc: String
     var photo: UIImage?
     
@@ -21,16 +21,16 @@ class Word {
     
     //MARK: Initialization
     
-    init?(name: String, desc: String, photo: UIImage?) {
+    init?(word: String, desc: String, photo: UIImage?) {
         
         //Initialize stored properties
-        self.name = name
+        self.word = word
         self.desc = desc
         self.photo = photo
     
         
         // Initialization should fail if there is no name.
-        if name.isEmpty {
+        if word.isEmpty {
             return nil
         }
         
