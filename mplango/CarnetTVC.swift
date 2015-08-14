@@ -25,44 +25,18 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         fetchedResultController.delegate = self
         fetchedResultController.performFetch(nil)
         
-        // Load the sample data.
-        //loadSampleWords()
         
         /*
         var error: NSError?
         let request = NSFetchRequest(entityName:"Carnet")
         carnet = moContext?.executeFetchRequest(request, error: &error) as! [Carnet]
         self.tableView.reloadData()
-        
-        navigationItem.leftBarButtonItem = editButtonItem()
         */
         
+        navigationItem.leftBarButtonItem = editButtonItem()
         
     }
     
-    
-    //MARK: PrepareForSegue
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "ShowWord" {
-    let itemDetailViewController = segue.destinationViewController as! CarnetViewController
-    
-    // Get the cell that generated this segue.
-    if let selectedWordCell = sender as? CarnetTVCell {
-    let indexPath = tableView.indexPathForCell(selectedWordCell)!
-    //let selectedWord = carnet[indexPath.row]
-    
-    var newItem = Word(word: "", desc: "", photo: nil)
-    //newItem.word = selectedWord.entity.word
-    itemDetailViewController.item = newItem
-    }
-    }
-    else if segue.identifier == "AddWord" {
-    print("Adding new Word.")
-    }
-    }
-    */
-
     
     // MARK:- Retrieve Tasks
     
@@ -91,6 +65,8 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Table view data source
     
+    let sections:Array<AnyObject> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let numberOfSections = fetchedResultController.sections?.count
         return numberOfSections!
@@ -111,6 +87,20 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     }
     
     
+    //Para mostrar o index do alfabeto à direita da tela
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        return self.sections
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return index
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.sections[section] as? String
+    }
+    
+    
     
     // MARK: - TableView Refresh
     
@@ -128,9 +118,20 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     }
     
     
+    //MARK: PrepareForSegue
     
-    
- 
-   
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
+        
+        if segue.identifier == "seeItem" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
+            let item:Carnet = fetchedResultController.objectAtIndexPath(indexPath!) as! Carnet
+            itemController.item = item
+            
+        }
+
+    }
   
 }

@@ -98,6 +98,7 @@
 		54241A0E1B7E321E0074D350 /* mplango 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 5.xcdatamodel"; sourceTree = "<group>"; };
 		54241A0F1B7E34130074D350 /* mplango 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 6.xcdatamodel"; sourceTree = "<group>"; };
 		54241A101B7E35040074D350 /* Carnet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carnet.swift; sourceTree = "<group>"; };
+		54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 7.xcdatamodel"; sourceTree = "<group>"; };
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
@@ -676,13 +677,14 @@
 		8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */,
 				54241A0F1B7E34130074D350 /* mplango 6.xcdatamodel */,
 				54241A0E1B7E321E0074D350 /* mplango 5.xcdatamodel */,
 				54241A0D1B7E31BF0074D350 /* mplango 4.xcdatamodel */,
 				54241A0C1B7E1B1E0074D350 /* mplango 3.xcdatamodel */,
 				8283BE1A1B0143AF0085F9A6 /* mplango.xcdatamodel */,
 			);
-			currentVersion = 54241A0F1B7E34130074D350 /* mplango 6.xcdatamodel */;
+			currentVersion = 54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */;
 			path = mplango.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

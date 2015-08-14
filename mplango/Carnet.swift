@@ -13,5 +13,6 @@ class Carnet: NSManagedObject {
 
     @NSManaged var word: String
     @NSManaged var desc: String
+    @NSManaged var photo: NSData
 
 }

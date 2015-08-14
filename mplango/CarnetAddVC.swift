@@ -15,10 +15,11 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     //MARK: Properties
     
-    @IBOutlet var WordTextField: UITextField!
-    @IBOutlet var WordDescriptionTextField: UITextField!
-    @IBOutlet var WordImage: UIImageView!
-    @IBOutlet var saveWordButton: UIBarButtonItem!
+    @IBOutlet var wordTextField: UITextField!
+    @IBOutlet var descTextField: UITextField!
+    @IBOutlet var photoImage: UIImageView!
+    @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    
     
     var item: Carnet? = nil
     
@@ -27,22 +28,15 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         super.viewDidLoad()
         
         // Handle the text field’s user input through delegate callbacks.
-        //WordTextField.delegate = self
-        //WordDescriptionTextField.delegate = self
+        wordTextField.delegate = self
+        descTextField.delegate = self
+        
         
         if item != nil {
-            WordTextField.text = item?.word
+            wordTextField.text = item?.word
+            
         }
         
-        /*
-        if let item = item {
-        navigationItem.title = item.word
-        WordTextField.text = item.word
-        WordDescriptionTextField.text = item.desc
-        WordImage.image = item.photo
-        
-        }
-        */
         
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
@@ -50,23 +44,23 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         
         // Custom the visual identity of Text Fields
-        WordTextField.backgroundColor = UIColor.clearColor()
-        WordTextField.layer.borderWidth = 1
-        WordTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
-        WordTextField.attributedPlaceholder =
+        wordTextField.backgroundColor = UIColor.clearColor()
+        wordTextField.layer.borderWidth = 1
+        wordTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        wordTextField.attributedPlaceholder =
             NSAttributedString(string: "Entrer un nom (obligatoire)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
         
-        WordDescriptionTextField.backgroundColor = UIColor.clearColor()
-        WordDescriptionTextField.layer.borderWidth = 1
-        WordDescriptionTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
-        WordDescriptionTextField.attributedPlaceholder =
+        descTextField.backgroundColor = UIColor.clearColor()
+        descTextField.layer.borderWidth = 1
+        descTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        descTextField.attributedPlaceholder =
             NSAttributedString(string: "Intégrer un commentaire (facultatif)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
         
         // Custom the visual identity of Image View
-        WordImage.layer.borderWidth = 1
-        WordImage.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
-        WordImage.layer.cornerRadius = 12
-        WordImage.layer.masksToBounds = true
+        photoImage.layer.borderWidth = 1
+        photoImage.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
+        photoImage.layer.cornerRadius = 12
+        photoImage.layer.masksToBounds = true
         
         
     }
@@ -81,24 +75,20 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         } else {
             createItemCarnet()
         }
-        dismissViewController()
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
     
     @IBAction func cancel(sender: AnyObject) {
-        dismissViewController()
-    }
-    
-    func dismissViewController() {
-        navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
     
     
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         //Hide the keyboard
-        WordTextField.resignFirstResponder()
-        WordDescriptionTextField.resignFirstResponder()
+        wordTextField.resignFirstResponder()
+        descTextField.resignFirstResponder()
         
         // UIImagePickerController is a view controller that lets a user pick media from their photo library
         let imagePickerController = UIImagePickerController ()
@@ -128,7 +118,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         //Set photoImageView to display the selected image
-        WordImage.image = selectedImage
+        photoImage.image = selectedImage
         
         //Dismiss the picker
         dismissViewControllerAnimated(true, completion: nil)
@@ -141,7 +131,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     func createItemCarnet() {
         let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
         let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-        item.word = WordTextField.text
+        item.word = wordTextField.text
+        item.desc = descTextField.text
+        //falta foto
+        //falta som
         moContext?.save(nil)
     
     }
@@ -149,7 +142,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     // MARK:- Edit Item Carnet
     
     func editItemCarnet() {
-        item?.word = WordTextField.text
+        item?.word = wordTextField.text
+        item?.desc = descTextField.text
+        //falta foto
+        //falta som
         moContext?.save(nil)
     }
     
@@ -176,13 +172,13 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     func checkValidWordName() {
         // Disable the Save button if the text field is empty.
-        let text = WordTextField.text ?? ""
+        let text = wordTextField.text ?? ""
         saveWordButton.enabled = !text.isEmpty
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
         checkValidWordName()
-        navigationItem.title = WordTextField.text
+        navigationItem.title = wordTextField.text
     }
     
 
@@ -191,35 +187,19 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
-        /* código usado inicialmente quando tinha 3 telas (com uma de confirmação)
-        
-        var DestCarnetAddVC : CarnetViewController = segue.destinationViewController as! CarnetViewController
-        
-        DestCarnetAddVC.WordText = WordTextField.text
-        DestCarnetAddVC.LabelText = WordDescriptionTextField.text
-        DestCarnetAddVC.WordPhoto = WordImage.image!
-        
-        */
-        
-        /*
         if saveWordButton === sender {
-            let word = WordTextField.text ?? ""
-            let desc = WordDescriptionTextField.text ?? ""
-            let photo = WordImage.image
+            let word = wordTextField.text ?? ""
+            let desc = descTextField.text ?? ""
+            let photo = photoImage.image
+            //falta som
             
-            // Set the word to be passed to CarnetTVC after the unwind segue.
-            item = Word(word: word, desc: desc, photo: photo)
+
             
         }
-        */
+        
         
     }
     
-    
-    
-
-
     
 
 }

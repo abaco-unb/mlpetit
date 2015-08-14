@@ -12,34 +12,30 @@ import CoreData
 
 class CarnetViewController: UIViewController {
     
+    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: Properties
     
-    @IBOutlet weak var WordNameLabel: UILabel!
-    @IBOutlet weak var WordDescriptionLabel: UILabel!
-    @IBOutlet weak var WordSelectedImage: UIImageView!
+    @IBOutlet weak var itemWordLabel: UILabel!
+    @IBOutlet weak var itemDescLabel: UILabel!
+    @IBOutlet weak var itemPhoto: UIImageView!
 
     
-    var LabelText = String ()
-    var WordText = String ()
-    var WordPhoto = UIImage ()
+    var item: Carnet? = nil
+
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        WordNameLabel.text = WordText
-        WordDescriptionLabel.text = LabelText
-        WordSelectedImage.image = WordPhoto
         
+        if item != nil {
+            itemWordLabel.text = item?.word
+            itemDescLabel.text = item?.desc
+            navigationItem.title = item!.word
+        }
         
         /*
-        if let item = item {
-            navigationItem.title = item.word
-            WordNameLabel.text = item.word
-            WordDescriptionLabel.text = item.desc
-            WordSelectedImage.image = item.photo
-            
         
         //Hides and disables Save Button in reading mode.
         navigationItem.rightBarButtonItem?.enabled = false
@@ -49,10 +45,10 @@ class CarnetViewController: UIViewController {
         */
         
         // Custom the visual identity of Image View
-        WordSelectedImage.layer.borderWidth = 1
-        WordSelectedImage.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
-        WordSelectedImage.layer.cornerRadius = 12
-        WordSelectedImage.layer.masksToBounds = true
+        itemPhoto.layer.borderWidth = 1
+        itemPhoto.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
+        itemPhoto.layer.cornerRadius = 12
+        itemPhoto.layer.masksToBounds = true
         }
 
 
