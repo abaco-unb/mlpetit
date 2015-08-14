@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: Properties
     
@@ -16,13 +19,27 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var WordDescriptionTextField: UITextField!
     @IBOutlet weak var WordImage: UIImageView!
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    
+    @IBAction func saveWordButton(sender: AnyObject) {
+        createItemCarnet()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
     @IBAction func cancelAddindWord(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    var item = Word?()
+    
+    func createItemCarnet() {
+        let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: managedObjectContext!)
+        let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext)
+        item.word = WordTextField.text
+        managedObjectContext?.save(nil)
+    
+    }
+    
+    //var item = Word?()
 
     
     override func viewDidLoad() {
@@ -32,6 +49,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         WordTextField.delegate = self
         WordDescriptionTextField.delegate = self
         
+        /*
         if let item = item {
             navigationItem.title = item.word
             WordTextField.text = item.word
@@ -39,6 +57,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             WordImage.image = item.photo
             
         }
+        */
         
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
@@ -114,7 +133,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         */
         
-        
+        /*
         if saveWordButton === sender {
             let word = WordTextField.text ?? ""
             let desc = WordDescriptionTextField.text ?? ""
@@ -124,7 +143,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             item = Word(word: word, desc: desc, photo: photo)
             
         }
-
+        */
         
     }
     

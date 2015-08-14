@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
-		5490734C1B7B9BAC005E80CA /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490734B1B7B9BAC005E80CA /* Carnet.swift */; };
+		546D099E1B7D32E30009CA4B /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D099D1B7D32E30009CA4B /* Carnet.swift */; };
 		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
 		54D48D411B6D7ED90087F6BB /* PostNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D401B6D7ED90087F6BB /* PostNew.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
-		54D750641B763F9F00A78824 /* CarnetTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750631B763F9F00A78824 /* CarnetTVCell.swift */; };
 		54D750661B76407A00A78824 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750651B76407A00A78824 /* Word.swift */; };
 		54D750671B76407C00A78824 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750651B76407A00A78824 /* Word.swift */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
@@ -94,13 +93,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		542787311B7D54CC005FDD8E /* mplango 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 2.xcdatamodel"; sourceTree = "<group>"; };
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
-		5490734B1B7B9BAC005E80CA /* Carnet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carnet.swift; sourceTree = "<group>"; };
+		546D099D1B7D32E30009CA4B /* Carnet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Carnet.swift; path = ../Carnet.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
 		54D48D401B6D7ED90087F6BB /* PostNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNew.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
-		54D750631B763F9F00A78824 /* CarnetTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVCell.swift; sourceTree = "<group>"; };
 		54D750651B76407A00A78824 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
@@ -201,7 +200,7 @@
 			children = (
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
 				8283BE3C1B0162F00085F9A6 /* MUser.swift */,
-				5490734B1B7B9BAC005E80CA /* Carnet.swift */,
+				546D099D1B7D32E30009CA4B /* Carnet.swift */,
 				8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */,
 				82842E431B61EA7900E7C860 /* InitialViewController.swift */,
 				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
@@ -214,7 +213,6 @@
 				8256CAFD1B40FD730002708C /* ListUsersTVC.swift */,
 				542B4B0F1B73F4100099349E /* CarnetViewController.swift */,
 				54D750611B763F7200A78824 /* CarnetTVC.swift */,
-				54D750631B763F9F00A78824 /* CarnetTVCell.swift */,
 				542B4B031B73A06F0099349E /* CarnetAddVC.swift */,
 				54D750651B76407A00A78824 /* Word.swift */,
 				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
@@ -424,12 +422,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D750641B763F9F00A78824 /* CarnetTVCell.swift in Sources */,
 				823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */,
 				542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */,
 				54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */,
-				5490734C1B7B9BAC005E80CA /* Carnet.swift in Sources */,
 				82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */,
+				546D099E1B7D32E30009CA4B /* Carnet.swift in Sources */,
 				8256CAFC1B40FC750002708C /* ListUsers.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */,
@@ -670,9 +667,10 @@
 		8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				542787311B7D54CC005FDD8E /* mplango 2.xcdatamodel */,
 				8283BE1A1B0143AF0085F9A6 /* mplango.xcdatamodel */,
 			);
-			currentVersion = 8283BE1A1B0143AF0085F9A6 /* mplango.xcdatamodel */;
+			currentVersion = 542787311B7D54CC005FDD8E /* mplango 2.xcdatamodel */;
 			path = mplango.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

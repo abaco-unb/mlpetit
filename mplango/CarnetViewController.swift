@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
+/*
 import UIKit
 
 class CarnetViewController: UIViewController {
@@ -79,3 +80,4 @@ class CarnetViewController: UIViewController {
     }
 
 }
+*/

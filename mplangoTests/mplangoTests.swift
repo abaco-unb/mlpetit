@@ -33,16 +33,5 @@ class mplangoTests: XCTestCase {
         }
     }
     
-    // Tests to confirm that the Word initializer returns when no name is provided.
-    func testWordInitialization() {
-        // Success case.
-        let potentialItem = Word(word: "MapLango", desc: "Nil", photo: nil)
-        XCTAssertNotNil(potentialItem)
-        
-        // Failure cases.
-        let noName = Word(word: "", desc: "", photo: nil)
-        XCTAssertNil(noName, "Empty name is invalid")
-        
-    }
     
 }

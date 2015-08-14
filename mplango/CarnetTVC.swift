@@ -9,30 +9,55 @@
 import UIKit
 import CoreData
 
-class CarnetTVC: UITableViewController {
+class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     //MARK: Properties
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    var carnet = [Carnet] ()
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
+    
+
+    //let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    //var carnet = [Carnet] ()
     
     //antiga versão
     //var itens = [Word] ()
-    var item = Word?()
+    //var item = Word?()
+    
+    func getFetchedResultController() -> NSFetchedResultsController {
+        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultController
+        
+    }
+    
+    func itemFetchRequest() -> NSFetchRequest {
+        let fetchRequest = NSFetchRequest(entityName: "Carnet")
+        let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return fetchRequest
+        
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchedResultController = getFetchedResultController()
+        fetchedResultController.delegate = self
+        fetchedResultController.performFetch(nil)
+        
         // Load the sample data.
         //loadSampleWords()
         
+        /*
         var error: NSError?
         let request = NSFetchRequest(entityName:"Carnet")
         carnet = moContext?.executeFetchRequest(request, error: &error) as! [Carnet]
         self.tableView.reloadData()
 
         navigationItem.leftBarButtonItem = editButtonItem()
-        
+        */
         
         
     }
@@ -43,8 +68,8 @@ class CarnetTVC: UITableViewController {
         let item2 = Word(word: "Exemple", desc: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
     itens += [item1, item2]
     }
+
     */
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,36 +79,44 @@ class CarnetTVC: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
+        let numberOfSections = fetchedResultController.sections?.count
+        return numberOfSections!
     }
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return carnet.count
+        let numberOfRowsInSection = fetchedResultController.sections?[section].numberOfObjects
+        return numberOfRowsInSection!
     }
-    
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
+        cell.textLabel?.text = item.word
+        return cell
         
         // Table view cells are reused and should be dequeued using a cell identifier.
-        let cellIdentifier = "CarnetTVCell"
+        //let cellIdentifier = "CarnetTVCell"
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CarnetTVCell
+        //let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CarnetTVCell
         
         // Fetches the appropriate word for the data source layout.
         
-        let item = carnet[indexPath.row]
+        //let item = carnet[indexPath.row]
         
         
-        cell.WordItemList.text = item.word
+        //cell.WordItemList.text = item.word
         
-        
-        return cell
     }
     
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
+    }
+    
+    
+    
+    /*
     @IBAction func unwindToWordList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as?
@@ -123,7 +156,9 @@ class CarnetTVC: UITableViewController {
         
         
     }
+    */
     
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowWord" {
             let itemDetailViewController = segue.destinationViewController as! CarnetViewController
@@ -131,7 +166,7 @@ class CarnetTVC: UITableViewController {
             // Get the cell that generated this segue.
             if let selectedWordCell = sender as? CarnetTVCell {
                 let indexPath = tableView.indexPathForCell(selectedWordCell)!
-                let selectedWord = carnet[indexPath.row]
+                //let selectedWord = carnet[indexPath.row]
             
                 var newItem = Word(word: "", desc: "", photo: nil)
                 //newItem.word = selectedWord.entity.word
@@ -142,13 +177,13 @@ class CarnetTVC: UITableViewController {
             print("Adding new Word.")
         }
     }
-    
+    */
     
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            carnet.removeAtIndex(indexPath.row)
+            //carnet.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

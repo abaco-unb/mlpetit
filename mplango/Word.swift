@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
+/*
 import UIKit
 
 class Word {
@@ -37,3 +38,4 @@ class Word {
     }
     
 }
+*/
