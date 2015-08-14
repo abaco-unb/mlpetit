@@ -3245,7 +3245,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CarnetTVCell" id="CHJ-Zb-chO" customClass="CarnetTVCell" customModule="mplango" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="CHJ-Zb-chO" customClass="CarnetTVCell" customModule="mplango" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CHJ-Zb-chO" id="Kgb-U5-CL0">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -3458,7 +3458,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Enregistrer" id="1Tf-Mp-Dir">
                             <connections>
-                                <segue destination="t13-DG-B2o" kind="unwind" unwindAction="unwindToWordList:" id="4zC-8G-vx7"/>
+                                <action selector="saveWordButton:" destination="IxI-Zr-qM7" id="F7D-Qv-YCX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -3472,7 +3472,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VF4-Za-dWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="t13-DG-B2o" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="Itu-Cf-OKG">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="IxI-Zr-qM7" id="hNn-SH-vWR"/>
