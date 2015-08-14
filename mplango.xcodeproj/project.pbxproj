@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
@@ -176,6 +178,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541546181B7D1930008E182C /* Carnet */ = {
+			isa = PBXGroup;
+			children = (
+				54D750651B76407A00A78824 /* Word.swift */,
+				542B4B0F1B73F4100099349E /* CarnetViewController.swift */,
+				54D750611B763F7200A78824 /* CarnetTVC.swift */,
+				54D750631B763F9F00A78824 /* CarnetTVCell.swift */,
+				542B4B031B73A06F0099349E /* CarnetAddVC.swift */,
+			);
+			name = Carnet;
+			sourceTree = "<group>";
+		};
 		8283BE091B0143AF0085F9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -209,12 +223,9 @@
 				823CC00C1B4629C000F633F8 /* VCMapView.swift */,
 				8256CAFB1B40FC750002708C /* ListUsers.swift */,
 				8256CAFD1B40FD730002708C /* ListUsersTVC.swift */,
-				542B4B0F1B73F4100099349E /* CarnetViewController.swift */,
-				54D750611B763F7200A78824 /* CarnetTVC.swift */,
-				54D750631B763F9F00A78824 /* CarnetTVCell.swift */,
-				542B4B031B73A06F0099349E /* CarnetAddVC.swift */,
-				54D750651B76407A00A78824 /* Word.swift */,
+				541546181B7D1930008E182C /* Carnet */,
 				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
+				541546141B7D1548008E182C /* ProfileVC.swift */,
 				54D48D401B6D7ED90087F6BB /* PostNew.swift */,
 				54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
@@ -430,6 +441,7 @@
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				823CC00B1B46297500F633F8 /* PostAnnotation.swift in Sources */,
 				54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */,
+				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* MUser.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
