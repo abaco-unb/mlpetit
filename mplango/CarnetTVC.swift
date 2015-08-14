@@ -13,32 +13,10 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     //MARK: Properties
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
-
-    //let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    //var carnet = [Carnet] ()
-    
-    //antiga versão
-    //var itens = [Word] ()
-    //var item = Word?()
-    
-    func getFetchedResultController() -> NSFetchedResultsController {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultController
-        
-    }
-    
-    func itemFetchRequest() -> NSFetchRequest {
-        let fetchRequest = NSFetchRequest(entityName: "Carnet")
-        let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-        
-    }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,26 +33,61 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         let request = NSFetchRequest(entityName:"Carnet")
         carnet = moContext?.executeFetchRequest(request, error: &error) as! [Carnet]
         self.tableView.reloadData()
-
+        
         navigationItem.leftBarButtonItem = editButtonItem()
         */
         
         
     }
     
+    
+    //MARK: PrepareForSegue
     /*
-    func loadSampleWords() {
-        let item1 = Word(word: "MapLango", desc: "MapLango est une appli pour l'apprentissage nomade des langues", photo: nil)!
-        let item2 = Word(word: "Exemple", desc: "Exemple de note que tu peux ajouter au carnet", photo: nil)!
-    itens += [item1, item2]
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "ShowWord" {
+    let itemDetailViewController = segue.destinationViewController as! CarnetViewController
+    
+    // Get the cell that generated this segue.
+    if let selectedWordCell = sender as? CarnetTVCell {
+    let indexPath = tableView.indexPathForCell(selectedWordCell)!
+    //let selectedWord = carnet[indexPath.row]
+    
+    var newItem = Word(word: "", desc: "", photo: nil)
+    //newItem.word = selectedWord.entity.word
+    itemDetailViewController.item = newItem
+    }
+    }
+    else if segue.identifier == "AddWord" {
+    print("Adding new Word.")
+    }
+    }
+    */
+
+    
+    // MARK:- Retrieve Tasks
+    
+    func getFetchedResultController() -> NSFetchedResultsController {
+        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: moContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultController
+        
+    }
+    
+    func itemFetchRequest() -> NSFetchRequest {
+        let fetchRequest = NSFetchRequest(entityName: "Carnet")
+        let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return fetchRequest
+        
     }
 
-    */
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     // MARK: - Table view data source
     
@@ -93,140 +106,31 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
-        cell.textLabel?.text = item.word
+        cell.textLabel!.text = item.word
         return cell
-        
-        // Table view cells are reused and should be dequeued using a cell identifier.
-        //let cellIdentifier = "CarnetTVCell"
-        
-        //let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CarnetTVCell
-        
-        // Fetches the appropriate word for the data source layout.
-        
-        //let item = carnet[indexPath.row]
-        
-        
-        //cell.WordItemList.text = item.word
-        
     }
+    
+    
+    
+    // MARK: - TableView Refresh
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
     }
     
     
+    // MARK: - TableView Delete
     
-    /*
-    @IBAction func unwindToWordList(sender: UIStoryboardSegue) {
-        
-        if let sourceViewController = sender.sourceViewController as?
-            CarnetAddVC, item = sourceViewController.item {
-        
-                /*
-        // Add a new word.
-                let newIndexPath = NSIndexPath(forRow: carnet.count, inSection: 0)
-                itens.append(item)
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-                */
-            
-                
-                let entity =  NSEntityDescription.entityForName("Carnet",inManagedObjectContext: moContext!)
-                let entityItem = Carnet(entity: entity!,insertIntoManagedObjectContext:moContext)
-                
-                //3
-                entityItem.setValue(item.word, forKey: "word")
-                entityItem.setValue(item.desc, forKey: "desc")
-                entityItem.setValue(item.photo, forKey: "photo")
-                entityItem.setValue(1, forKey: "type")
-                
-                
-                //4
-                var error: NSError?
-                
-                if !moContext!.save(&error) {
-                    println("Could not save \(error), \(error?.userInfo)")
-                }
-                //var teste : Carnet = entityItem
-                
-                //5
-                carnet.append(entityItem)
-
-                
-            }
-        
-        
-    }
-    */
-    
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowWord" {
-            let itemDetailViewController = segue.destinationViewController as! CarnetViewController
-            
-            // Get the cell that generated this segue.
-            if let selectedWordCell = sender as? CarnetTVCell {
-                let indexPath = tableView.indexPathForCell(selectedWordCell)!
-                //let selectedWord = carnet[indexPath.row]
-            
-                var newItem = Word(word: "", desc: "", photo: nil)
-                //newItem.word = selectedWord.entity.word
-                itemDetailViewController.item = newItem
-            }
-        }
-        else if segue.identifier == "AddWord" {
-            print("Adding new Word.")
-        }
-    }
-    */
-    
-    // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            //carnet.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
+        let managedObject:NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
+        moContext?.deleteObject(managedObject)
+        moContext?.save(nil)
     }
     
     
     
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
-    }
-
-
     
  
    
   
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
-
 }

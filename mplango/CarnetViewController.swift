@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
-/*
+
 import UIKit
+import CoreData
 
 class CarnetViewController: UIViewController {
     
@@ -17,13 +18,11 @@ class CarnetViewController: UIViewController {
     @IBOutlet weak var WordNameLabel: UILabel!
     @IBOutlet weak var WordDescriptionLabel: UILabel!
     @IBOutlet weak var WordSelectedImage: UIImageView!
-    @IBOutlet weak var saveWord: UIBarButtonItem!
+
     
     var LabelText = String ()
     var WordText = String ()
     var WordPhoto = UIImage ()
-    var item = Word?()
-    
 
     
     override func viewDidLoad() {
@@ -34,6 +33,7 @@ class CarnetViewController: UIViewController {
         WordSelectedImage.image = WordPhoto
         
         
+        /*
         if let item = item {
             navigationItem.title = item.word
             WordNameLabel.text = item.word
@@ -46,6 +46,7 @@ class CarnetViewController: UIViewController {
         navigationItem.rightBarButtonItem?.title = nil
             
         }
+        */
         
         // Custom the visual identity of Image View
         WordSelectedImage.layer.borderWidth = 1
@@ -64,6 +65,7 @@ class CarnetViewController: UIViewController {
     // MARK: - Navigation
     
     
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if saveWord === sender {
@@ -78,6 +80,7 @@ class CarnetViewController: UIViewController {
 
         
     }
+    */
 
 }
-*/
+

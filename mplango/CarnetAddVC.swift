@@ -11,58 +11,43 @@ import CoreData
 
 class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: Properties
     
-    @IBOutlet weak var WordTextField: UITextField!
-    @IBOutlet weak var WordDescriptionTextField: UITextField!
-    @IBOutlet weak var WordImage: UIImageView!
-    @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    @IBOutlet var WordTextField: UITextField!
+    @IBOutlet var WordDescriptionTextField: UITextField!
+    @IBOutlet var WordImage: UIImageView!
+    @IBOutlet var saveWordButton: UIBarButtonItem!
     
-    @IBAction func saveWordButton(sender: AnyObject) {
-        createItemCarnet()
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    @IBAction func cancelAddindWord(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+    var item: Carnet? = nil
     
-    
-    
-    func createItemCarnet() {
-        let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: managedObjectContext!)
-        let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext)
-        item.word = WordTextField.text
-        managedObjectContext?.save(nil)
-    
-    }
-    
-    //var item = Word?()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Handle the text field’s user input through delegate callbacks.
-        WordTextField.delegate = self
-        WordDescriptionTextField.delegate = self
+        //WordTextField.delegate = self
+        //WordDescriptionTextField.delegate = self
+        
+        if item != nil {
+            WordTextField.text = item?.word
+        }
         
         /*
         if let item = item {
-            navigationItem.title = item.word
-            WordTextField.text = item.word
-            WordDescriptionTextField.text = item.desc
-            WordImage.image = item.photo
-            
+        navigationItem.title = item.word
+        WordTextField.text = item.word
+        WordDescriptionTextField.text = item.desc
+        WordImage.image = item.photo
+        
         }
         */
         
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
-    
-            
+        
+        
         
         // Custom the visual identity of Text Fields
         WordTextField.backgroundColor = UIColor.clearColor()
@@ -83,8 +68,92 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         WordImage.layer.cornerRadius = 12
         WordImage.layer.masksToBounds = true
         
+        
+    }
+
+    
+    //MARK: Actions
+
+    
+    @IBAction func saveWordButton(sender: AnyObject) {
+        if item != nil {
+            editItemCarnet()
+        } else {
+            createItemCarnet()
+        }
+        dismissViewController()
+    }
+    
+    
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewController()
+    }
+    
+    func dismissViewController() {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
+    
+    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+        //Hide the keyboard
+        WordTextField.resignFirstResponder()
+        WordDescriptionTextField.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library
+        let imagePickerController = UIImagePickerController ()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .PhotoLibrary
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        
+        presentViewController(imagePickerController, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    //MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        //Dismiss the picker if the user canceled
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[NSObject : AnyObject]) {
+        // The info dictionary contains multiple representations of the image, and this uses the original.
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        //Set photoImageView to display the selected image
+        WordImage.image = selectedImage
+        
+        //Dismiss the picker
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+
+    
+    // MARK:- Create Item Carnet
+    
+    func createItemCarnet() {
+        let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
+        let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
+        item.word = WordTextField.text
+        moContext?.save(nil)
     
     }
+    
+    // MARK:- Edit Item Carnet
+    
+    func editItemCarnet() {
+        item?.word = WordTextField.text
+        moContext?.save(nil)
+    }
+    
+    
     
     //MARK: UITextFieldDelegate
     
@@ -147,47 +216,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
     }
     
-    //MARK: Actions
-        
-    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
-        //Hide the keyboard
-        WordTextField.resignFirstResponder()
-        WordDescriptionTextField.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
-        
-    }
     
-    
-    //MARK: UIImagePickerControllerDelegate
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        //Dismiss the picker if the user canceled
-        dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[NSObject : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        //Set photoImageView to display the selected image
-        WordImage.image = selectedImage
-        
-        //Dismiss the picker
-        dismissViewControllerAnimated(true, completion: nil)
-        
-    }
     
 
 
