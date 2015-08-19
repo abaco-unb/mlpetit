@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
+       
     
     //MARK: Properties
     
@@ -17,6 +18,7 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
+    var segment:NSNumber = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +26,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         fetchedResultController = getFetchedResultController()
         fetchedResultController.delegate = self
         fetchedResultController.performFetch(nil)
-        
-        
-        /*
-        var error: NSError?
-        let request = NSFetchRequest(entityName:"Carnet")
-        carnet = moContext?.executeFetchRequest(request, error: &error) as! [Carnet]
-        self.tableView.reloadData()
-        */
-        
         navigationItem.leftBarButtonItem = editButtonItem()
         
     }
@@ -48,6 +41,11 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     func itemFetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Carnet")
+        if(segment != 2) {
+            println("fazer filtro")
+            let predicate = NSPredicate(format: "category == %@", segment)
+            fetchRequest.predicate = predicate
+        }
         let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
@@ -80,9 +78,15 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-        let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
-        cell.textLabel!.text = item.word
+        var cell: UITableViewCell!
+        if indexPath.row == 0 {
+            cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) as! UITableViewCell
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+            let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
+            cell.textLabel!.text = item.word
+        }
+        
         return cell
     }
     
@@ -105,6 +109,7 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     // MARK: - TableView Refresh
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        println("data changed")
         tableView.reloadData()
     }
     
@@ -122,7 +127,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
-        
         if segue.identifier == "seeItem" {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
@@ -133,5 +137,23 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         }
 
     }
+    
+    @IBAction func segumentedTapped(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            segment = 0
+        case 1:
+            segment = 1
+        default:
+            segment = 2
+            break
+        }
+        println("sender.selectedSegmentIndex")
+        println(sender.selectedSegmentIndex)
+        fetchedResultController = getFetchedResultController()
+        fetchedResultController.performFetch(nil)
+        tableView.reloadData()
+    }
+    
   
 }

@@ -18,11 +18,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet var wordTextField: UITextField!
     @IBOutlet var descTextField: UITextField!
     @IBOutlet var photoImage: UIImageView!
+    @IBOutlet weak var typeSegmentControl: UISegmentedControl!
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
     
     
     var item: Carnet? = nil
-    
+    var segment = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,14 +130,26 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     // MARK:- Create Item Carnet
     
     func createItemCarnet() {
-        let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
-        let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-        item.word = wordTextField.text
-        item.desc = descTextField.text
-        //falta foto
-        //falta som
-        moContext?.save(nil)
-    
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let email: String = prefs.objectForKey("USEREMAIL") as! String
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+            
+            let user: User = fetchResults[0];
+            let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
+            let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
+            item.word = wordTextField.text
+            item.desc = descTextField.text
+            item.category = segment
+            item.user = user
+            //falta foto
+            //falta som
+            moContext?.save(nil)
+
+            
+        }
     }
     
     // MARK:- Edit Item Carnet
@@ -181,6 +194,19 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         navigationItem.title = wordTextField.text
     }
     
+    @IBAction func segmentTapped(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            segment = 0
+        case 1:
+            segment = 1
+        default:
+            segment = 2
+            break
+        }
+    }
+    
+    
 
     // MARK: - Navigation
 
@@ -191,9 +217,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             let word = wordTextField.text ?? ""
             let desc = descTextField.text ?? ""
             let photo = photoImage.image
+            let category = segment
             //falta som
             
-
             
         }
         

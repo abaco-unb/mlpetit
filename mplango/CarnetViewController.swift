@@ -19,7 +19,6 @@ class CarnetViewController: UIViewController {
     @IBOutlet weak var itemWordLabel: UILabel!
     @IBOutlet weak var itemDescLabel: UILabel!
     @IBOutlet weak var itemPhoto: UIImageView!
-
     
     var item: Carnet? = nil
 
