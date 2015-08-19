@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="54r-Fm-iJ7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="54r-Fm-iJ7">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -9,6 +10,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FiraSans-Medium.ttf">
+            <string>FiraSans-Medium</string>
             <string>FiraSans-Medium</string>
             <string>FiraSans-Medium</string>
             <string>FiraSans-Medium</string>
@@ -974,7 +976,11 @@
                                 <segue destination="4se-Z2-Fui" kind="show" id="Rm4-fi-Bug"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="sK3-Gb-RZK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="sK3-Gb-RZK">
+                            <connections>
+                                <segue destination="9VO-0B-Pfw" kind="show" identifier="post" id="4d8-Pn-Vpg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -985,7 +991,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r0x-5U-TIX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7465.5" y="-105"/>
+            <point key="canvasLocation" x="-6184.5" y="-123"/>
         </scene>
         <!--testes_lista-->
         <scene sceneID="bRI-q8-udo">
@@ -1852,10 +1858,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
             </objects>
             <point key="canvasLocation" x="-10552.5" y="-105"/>
         </scene>
-        <!--List UsersTVC-->
+        <!--Contacts-->
         <scene sceneID="9SV-0r-Wli">
             <objects>
-                <tableViewController id="4se-Z2-Fui" customClass="ListUsersTVC" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4se-Z2-Fui" customClass="ContactViewController" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="SPg-Wq-sAw">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1867,7 +1873,54 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleAspectFit" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="bTK-ig-yke">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SegmentCell" id="g1b-aM-cC7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g1b-aM-cC7" id="Xvw-hg-km0">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ogy-Lz-33H">
+                                            <rect key="frame" x="215" y="7" width="170" height="30"/>
+                                            <segments>
+                                                <segment title="Apprenants"/>
+                                                <segment title="Médiateurs"/>
+                                            </segments>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="32" y="26" width="336" height="29"/>
+                                            </variation>
+                                            <connections>
+                                                <action selector="segmentedTapped:" destination="4se-Z2-Fui" eventType="valueChanged" id="VDt-dG-3ac"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ogy-Lz-33H" firstAttribute="centerX" secondItem="Xvw-hg-km0" secondAttribute="centerX" id="Hu5-Ef-ULe"/>
+                                        <constraint firstItem="ogy-Lz-33H" firstAttribute="leading" secondItem="Xvw-hg-km0" secondAttribute="leadingMargin" constant="17" id="Ohe-z0-go0"/>
+                                        <constraint firstItem="ogy-Lz-33H" firstAttribute="top" secondItem="Xvw-hg-km0" secondAttribute="topMargin" constant="18" id="jAq-kI-rCY"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="ogy-Lz-33H"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="Hu5-Ef-ULe"/>
+                                            <exclude reference="Ohe-z0-go0"/>
+                                            <exclude reference="jAq-kI-rCY"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="ogy-Lz-33H"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="Hu5-Ef-ULe"/>
+                                            <include reference="Ohe-z0-go0"/>
+                                            <include reference="jAq-kI-rCY"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="bTK-ig-yke">
                                 <rect key="frame" x="0.0" y="66" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" clipsSubviews="YES" contentMode="scaleAspectFit" tableViewCell="bTK-ig-yke" id="oyW-0S-jve">
@@ -1877,14 +1930,50 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Qnk-xl-iYN">
                                             <rect key="frame" x="236" y="24" width="59" height="22"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="59" id="Trr-ed-i0a"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <state key="normal" title="Seguindo">
+                                            <state key="normal" title="Suivre">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Trr-ed-i0a"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="307" y="29" width="59" height="26"/>
+                                                <mask key="constraints">
+                                                    <include reference="Trr-ed-i0a"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <action selector="followUserTapped:" destination="4se-Z2-Fui" eventType="touchUpInside" id="Y56-Tl-3l3"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5499999999999996"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Qnk-xl-iYN" secondAttribute="bottom" constant="20" id="0qE-Fo-dVk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Qnk-xl-iYN" secondAttribute="trailing" constant="19" id="A9r-M3-mCo"/>
+                                        <constraint firstItem="Qnk-xl-iYN" firstAttribute="top" secondItem="oyW-0S-jve" secondAttribute="topMargin" constant="21" id="ARD-uX-ot6"/>
+                                    </constraints>
                                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-3"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="0qE-Fo-dVk"/>
+                                            <exclude reference="A9r-M3-mCo"/>
+                                            <exclude reference="ARD-uX-ot6"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="0qE-Fo-dVk"/>
+                                            <include reference="A9r-M3-mCo"/>
+                                            <include reference="ARD-uX-ot6"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="-2" maxY="-2"/>
@@ -1895,24 +1984,12 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <outlet property="delegate" destination="4se-Z2-Fui" id="hK9-q6-8Kw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="g73-6B-Rpp">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ogy-Lz-33H">
-                            <rect key="frame" x="215" y="7" width="170" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Apprenants"/>
-                                <segment title="Médiateurs"/>
-                            </segments>
-                            <connections>
-                                <action selector="indexSegment:" destination="4se-Z2-Fui" eventType="valueChanged" id="0UL-oD-8ki"/>
-                            </connections>
-                        </segmentedControl>
+                    <navigationItem key="navigationItem" title="Contacts" id="g73-6B-Rpp">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="uib-JJ-0Wp"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="3t0-XW-7rO" id="tsq-wV-hEV"/>
-                        <outlet property="segmentControl" destination="ogy-Lz-33H" id="mZJ-ly-OAs"/>
                         <outlet property="tableView" destination="SPg-Wq-sAw" id="dXa-qG-O13"/>
                     </connections>
                 </tableViewController>
@@ -2557,7 +2634,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <!--categorias_post-->
         <scene sceneID="5KL-ug-AYC">
             <objects>
-                <viewController title="categorias_post" id="9VO-0B-Pfw" customClass="ChooseCateg" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="categorias_post" id="9VO-0B-Pfw" customClass="CategoryViewController" customModule="mplango" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z7k-3G-AIW"/>
                         <viewControllerLayoutGuide type="bottom" id="7ou-og-MxT"/>
@@ -2795,7 +2872,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <!--criacao_post-->
         <scene sceneID="NR0-5p-BPp">
             <objects>
-                <viewController title="criacao_post" hidesBottomBarWhenPushed="YES" id="HPR-tg-hFr" customClass="PostNew" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="criacao_post" hidesBottomBarWhenPushed="YES" id="HPR-tg-hFr" customClass="PostViewController" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DaI-vP-LcJ"/>
                         <viewControllerLayoutGuide type="bottom" id="eq9-vv-jhg"/>
@@ -2803,24 +2880,210 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     <view key="view" contentMode="scaleToFill" id="t8q-Om-2Az">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CW-Ob-q0k">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="Ceq-Nz-KL7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Ceq-Nz-KL7"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Ceq-Nz-KL7"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="jbC-fg-AE1">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-df-gvF">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Parar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopAudio:" destination="HPR-tg-hFr" eventType="touchUpInside" id="pTX-zg-leH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTv-BY-QCE">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Gravar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFO-9S-vAY">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Tocar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playAudio:" destination="HPR-tg-hFr" eventType="touchUpInside" id="7gQ-ba-U1J"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gravando..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnN-Rb-KcH">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="wfp-EB-aT0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="wfp-EB-aT0"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="wfp-EB-aT0"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwx-EC-EHl">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="fXv-Vx-V1e"/>
+                                </constraints>
+                                <state key="normal" title="Lentamente">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fXv-Vx-V1e"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="fXv-Vx-V1e"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="playSlowAudio:" destination="HPR-tg-hFr" eventType="touchUpInside" id="cHD-ny-fgV"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jbC-fg-AE1" firstAttribute="leading" secondItem="5CW-Ob-q0k" secondAttribute="leading" id="6l6-IY-ihC"/>
+                            <constraint firstItem="jwx-EC-EHl" firstAttribute="leading" secondItem="t8q-Om-2Az" secondAttribute="leading" constant="145" id="8Ms-va-eU4"/>
+                            <constraint firstItem="5CW-Ob-q0k" firstAttribute="top" secondItem="DaI-vP-LcJ" secondAttribute="bottom" constant="21" id="DIw-a9-ZaG"/>
+                            <constraint firstItem="Iny-df-gvF" firstAttribute="leading" secondItem="jwx-EC-EHl" secondAttribute="trailing" constant="29" id="KXq-C4-MnX"/>
+                            <constraint firstItem="LnN-Rb-KcH" firstAttribute="top" secondItem="RTv-BY-QCE" secondAttribute="bottom" constant="8" symbolic="YES" id="KsS-3u-sp4"/>
+                            <constraint firstItem="IFO-9S-vAY" firstAttribute="leading" secondItem="t8q-Om-2Az" secondAttribute="leadingMargin" constant="43" id="Otp-qC-FC0"/>
+                            <constraint firstItem="LnN-Rb-KcH" firstAttribute="centerX" secondItem="RTv-BY-QCE" secondAttribute="centerX" id="TIl-Oo-yR5"/>
+                            <constraint firstItem="5CW-Ob-q0k" firstAttribute="leading" secondItem="t8q-Om-2Az" secondAttribute="leadingMargin" constant="28" id="UrZ-hv-lDL"/>
+                            <constraint firstItem="IFO-9S-vAY" firstAttribute="baseline" secondItem="jwx-EC-EHl" secondAttribute="baseline" id="avO-gE-HBk"/>
+                            <constraint firstItem="RTv-BY-QCE" firstAttribute="centerX" secondItem="t8q-Om-2Az" secondAttribute="centerX" id="d9q-Jv-Z0S"/>
+                            <constraint firstItem="RTv-BY-QCE" firstAttribute="top" secondItem="jbC-fg-AE1" secondAttribute="bottom" constant="43" id="fQ7-TZ-dyA"/>
+                            <constraint firstItem="jwx-EC-EHl" firstAttribute="top" secondItem="LnN-Rb-KcH" secondAttribute="bottom" constant="10" id="hBI-Qb-vcU"/>
+                            <constraint firstItem="jbC-fg-AE1" firstAttribute="centerX" secondItem="RTv-BY-QCE" secondAttribute="centerX" id="hgN-Tx-xFe"/>
+                            <constraint firstItem="Iny-df-gvF" firstAttribute="baseline" secondItem="jwx-EC-EHl" secondAttribute="firstBaseline" id="kZS-Xa-9RE"/>
+                            <constraint firstItem="RTv-BY-QCE" firstAttribute="top" secondItem="t8q-Om-2Az" secondAttribute="top" constant="285" id="lNS-en-Arx"/>
+                            <constraint firstItem="jwx-EC-EHl" firstAttribute="leading" secondItem="IFO-9S-vAY" secondAttribute="trailing" constant="40" id="mq0-zM-ykl"/>
+                            <constraint firstItem="jbC-fg-AE1" firstAttribute="trailing" secondItem="5CW-Ob-q0k" secondAttribute="trailing" id="nQO-vp-lBm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Iny-df-gvF" secondAttribute="trailing" constant="76" id="olf-1T-jEK"/>
+                            <constraint firstItem="jbC-fg-AE1" firstAttribute="top" secondItem="5CW-Ob-q0k" secondAttribute="bottom" constant="8" symbolic="YES" id="vo0-Cf-iZl"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="5CW-Ob-q0k"/>
+                                <exclude reference="jbC-fg-AE1"/>
+                                <exclude reference="Iny-df-gvF"/>
+                                <exclude reference="RTv-BY-QCE"/>
+                                <exclude reference="IFO-9S-vAY"/>
+                                <exclude reference="LnN-Rb-KcH"/>
+                                <exclude reference="jwx-EC-EHl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="DIw-a9-ZaG"/>
+                                <exclude reference="UrZ-hv-lDL"/>
+                                <exclude reference="KsS-3u-sp4"/>
+                                <exclude reference="TIl-Oo-yR5"/>
+                                <exclude reference="6l6-IY-ihC"/>
+                                <exclude reference="hgN-Tx-xFe"/>
+                                <exclude reference="nQO-vp-lBm"/>
+                                <exclude reference="vo0-Cf-iZl"/>
+                                <exclude reference="Otp-qC-FC0"/>
+                                <exclude reference="avO-gE-HBk"/>
+                                <exclude reference="KXq-C4-MnX"/>
+                                <exclude reference="kZS-Xa-9RE"/>
+                                <exclude reference="olf-1T-jEK"/>
+                                <exclude reference="d9q-Jv-Z0S"/>
+                                <exclude reference="fQ7-TZ-dyA"/>
+                                <exclude reference="lNS-en-Arx"/>
+                                <exclude reference="8Ms-va-eU4"/>
+                                <exclude reference="hBI-Qb-vcU"/>
+                                <exclude reference="mq0-zM-ykl"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="5CW-Ob-q0k"/>
+                                <include reference="jbC-fg-AE1"/>
+                                <include reference="Iny-df-gvF"/>
+                                <include reference="RTv-BY-QCE"/>
+                                <include reference="IFO-9S-vAY"/>
+                                <include reference="LnN-Rb-KcH"/>
+                                <include reference="jwx-EC-EHl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="DIw-a9-ZaG"/>
+                                <include reference="UrZ-hv-lDL"/>
+                                <include reference="KsS-3u-sp4"/>
+                                <include reference="TIl-Oo-yR5"/>
+                                <include reference="6l6-IY-ihC"/>
+                                <include reference="hgN-Tx-xFe"/>
+                                <include reference="nQO-vp-lBm"/>
+                                <include reference="vo0-Cf-iZl"/>
+                                <include reference="Otp-qC-FC0"/>
+                                <include reference="avO-gE-HBk"/>
+                                <include reference="KXq-C4-MnX"/>
+                                <include reference="kZS-Xa-9RE"/>
+                                <include reference="olf-1T-jEK"/>
+                                <include reference="d9q-Jv-Z0S"/>
+                                <include reference="fQ7-TZ-dyA"/>
+                                <include reference="lNS-en-Arx"/>
+                                <include reference="8Ms-va-eU4"/>
+                                <include reference="hBI-Qb-vcU"/>
+                                <include reference="mq0-zM-ykl"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Nouveau post" id="z8F-0L-hOF">
                         <barButtonItem key="backBarButtonItem" title="modifier" id="QGx-fN-U1J"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uyz-T6-Hwo"/>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="fYr-ez-FLK">
+                        <barButtonItem key="rightBarButtonItem" title="Post" style="done" id="fYr-ez-FLK">
                             <connections>
-                                <segue destination="msY-w9-DsD" kind="show" id="DAx-wg-jKM"/>
+                                <action selector="addPost:" destination="HPR-tg-hFr" id="iY3-01-Q0e"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="fYr-ez-FLK" id="EaM-GI-8ul"/>
+                        <outlet property="locationLabel" destination="5CW-Ob-q0k" id="rwG-DS-OIV"/>
+                        <outlet property="playButton" destination="IFO-9S-vAY" id="Nqa-3e-3Gg"/>
+                        <outlet property="recordButton" destination="RTv-BY-QCE" id="S9L-71-VeO"/>
+                        <outlet property="recordingInProgress" destination="LnN-Rb-KcH" id="RZi-VU-aCT"/>
+                        <outlet property="slowButton" destination="jwx-EC-EHl" id="Kka-qC-RLK"/>
+                        <outlet property="stopButton" destination="Iny-df-gvF" id="GNO-L3-qKP"/>
+                        <outlet property="textTextField" destination="jbC-fg-AE1" id="hor-8S-mBT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dJ-aN-BnU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4189.5" y="615"/>
+            <point key="canvasLocation" x="-4203" y="781"/>
         </scene>
         <!--confirmar_post-->
         <scene sceneID="gX8-dS-OiB">
@@ -2876,6 +3139,29 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     <segue destination="UrV-np-uuG" kind="showDetail" id="ZYi-oR-wAd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6H8-sz-HTv">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9WX-b7-8W6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="12"/>
+                                <state key="normal" title="Je confirme !">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9WX-b7-8W6"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="10" y="760" width="400" height="50"/>
+                                    <mask key="constraints">
+                                        <include reference="9WX-b7-8W6"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2892,6 +3178,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <mask key="subviews">
                                 <exclude reference="om6-dk-6Pb"/>
                                 <exclude reference="wRK-ru-PXl"/>
+                                <exclude reference="6H8-sz-HTv"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="NGi-1s-3yV"/>
@@ -2904,6 +3191,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <mask key="subviews">
                                 <include reference="om6-dk-6Pb"/>
                                 <include reference="wRK-ru-PXl"/>
+                                <include reference="6H8-sz-HTv"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="NGi-1s-3yV"/>
@@ -3244,9 +3532,56 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="uYs-3x-5CL" style="IBUITableViewCellStyleDefault" id="CHJ-Zb-chO" customClass="CarnetTVCell" customModule="mplango" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SegmentCell" id="Lfs-cD-h06">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CHJ-Zb-chO" id="Kgb-U5-CL0">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lfs-cD-h06" id="WS8-cC-V0x">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Hg-Gt-cOV">
+                                            <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                            <segments>
+                                                <segment title="Mots"/>
+                                                <segment title="Expressions"/>
+                                            </segments>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="45" y="7" width="310" height="29"/>
+                                            </variation>
+                                            <connections>
+                                                <action selector="segumentedTapped:" destination="TRM-n5-1Vf" eventType="valueChanged" id="wyY-Dw-UOM"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8Hg-Gt-cOV" firstAttribute="bottom" secondItem="WS8-cC-V0x" secondAttribute="bottomMargin" id="Oqj-Zd-0oZ"/>
+                                        <constraint firstItem="8Hg-Gt-cOV" firstAttribute="centerX" secondItem="WS8-cC-V0x" secondAttribute="centerX" id="PDr-ab-RTT"/>
+                                        <constraint firstItem="8Hg-Gt-cOV" firstAttribute="leading" secondItem="WS8-cC-V0x" secondAttribute="leadingMargin" constant="30" id="S0z-w8-r5k"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="8Hg-Gt-cOV"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="Oqj-Zd-0oZ"/>
+                                            <exclude reference="PDr-ab-RTT"/>
+                                            <exclude reference="S0z-w8-r5k"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="8Hg-Gt-cOV"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="Oqj-Zd-0oZ"/>
+                                            <include reference="PDr-ab-RTT"/>
+                                            <include reference="S0z-w8-r5k"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="uYs-3x-5CL" style="IBUITableViewCellStyleDefault" id="CHJ-Zb-chO" customClass="CarnetTVCell" customModule="mplango" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" tableViewCell="CHJ-Zb-chO" id="Kgb-U5-CL0">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uYs-3x-5CL">
@@ -3311,19 +3646,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1wd-42-TbP">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="tP5-vA-a72"/>
+                                    <constraint firstAttribute="height" constant="40" id="zT2-gc-uhC"/>
                                 </constraints>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="tP5-vA-a72"/>
+                                        <exclude reference="zT2-gc-uhC"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="tP5-vA-a72"/>
+                                        <include reference="zT2-gc-uhC"/>
                                     </mask>
                                 </variation>
                             </textField>
@@ -3331,9 +3666,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3Cp-6t-Pve"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="GWZ-Gj-xpu">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="100" id="zre-z0-QyE"/>
                                 </constraints>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
@@ -3341,13 +3674,13 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="3Cp-6t-Pve"/>
-                                        <exclude reference="GWZ-Gj-xpu"/>
+                                        <exclude reference="zre-z0-QyE"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="3Cp-6t-Pve"/>
-                                        <include reference="GWZ-Gj-xpu"/>
+                                        <include reference="zre-z0-QyE"/>
                                     </mask>
                                 </variation>
                             </textField>
@@ -3355,21 +3688,21 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="289" id="EOv-R8-BkQ"/>
                                     <constraint firstAttribute="height" constant="200" id="Odc-Va-Xhg"/>
-                                    <constraint firstAttribute="width" secondItem="iJN-mu-MiI" secondAttribute="height" multiplier="1:1" id="vga-0i-Jtr"/>
                                     <constraint firstAttribute="width" secondItem="iJN-mu-MiI" secondAttribute="height" multiplier="1:1" id="x5u-Cx-Mfr"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="EOv-R8-BkQ"/>
                                         <exclude reference="Odc-Va-Xhg"/>
-                                        <exclude reference="vga-0i-Jtr"/>
                                         <exclude reference="x5u-Cx-Mfr"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
+                                        <include reference="EOv-R8-BkQ"/>
                                         <exclude reference="Odc-Va-Xhg"/>
-                                        <include reference="vga-0i-Jtr"/>
                                         <exclude reference="x5u-Cx-Mfr"/>
                                     </mask>
                                 </variation>
@@ -3377,43 +3710,54 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     <outletCollection property="gestureRecognizers" destination="Itu-Cf-OKG" appends="YES" id="W1E-ju-2yA"/>
                                 </connections>
                             </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VCQ-3t-Lcg">
+                                <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                <segments>
+                                    <segment title="Mots"/>
+                                    <segment title="Expressions"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentTapped:" destination="IxI-Zr-qM7" eventType="valueChanged" id="svq-bg-liA"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="e2P-Jl-hry" firstAttribute="top" secondItem="iJN-mu-MiI" secondAttribute="bottom" constant="270" id="1sn-NK-zOH"/>
-                            <constraint firstItem="1wd-42-TbP" firstAttribute="leading" secondItem="6qV-lj-xtV" secondAttribute="leading" constant="16" id="86U-Rw-9oi"/>
-                            <constraint firstItem="Wnq-qF-Aij" firstAttribute="leading" secondItem="1wd-42-TbP" secondAttribute="leading" id="BTv-cF-dIh"/>
-                            <constraint firstItem="iJN-mu-MiI" firstAttribute="leading" secondItem="Wnq-qF-Aij" secondAttribute="leading" id="E5i-ZK-gdH"/>
-                            <constraint firstAttribute="centerX" secondItem="1wd-42-TbP" secondAttribute="centerX" id="G2V-JE-WQV"/>
-                            <constraint firstItem="iJN-mu-MiI" firstAttribute="top" secondItem="Wnq-qF-Aij" secondAttribute="bottom" constant="14" id="Hfb-Gk-CXI">
-                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
-                            </constraint>
-                            <constraint firstItem="Wnq-qF-Aij" firstAttribute="trailing" secondItem="1wd-42-TbP" secondAttribute="trailing" id="IrM-4f-TPT"/>
-                            <constraint firstAttribute="trailing" secondItem="1wd-42-TbP" secondAttribute="trailing" constant="16" id="OTC-YS-P1H"/>
-                            <constraint firstItem="1wd-42-TbP" firstAttribute="top" secondItem="aer-ak-fXu" secondAttribute="bottom" constant="8" id="RWp-BL-41W"/>
-                            <constraint firstItem="iJN-mu-MiI" firstAttribute="trailing" secondItem="Wnq-qF-Aij" secondAttribute="trailing" id="TpG-DH-CbH"/>
-                            <constraint firstItem="Wnq-qF-Aij" firstAttribute="top" secondItem="1wd-42-TbP" secondAttribute="bottom" constant="17" id="oIg-Dh-13M">
-                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
-                            </constraint>
+                            <constraint firstItem="1wd-42-TbP" firstAttribute="centerX" secondItem="VCQ-3t-Lcg" secondAttribute="centerX" id="6jd-ls-b2d"/>
+                            <constraint firstItem="Wnq-qF-Aij" firstAttribute="top" secondItem="1wd-42-TbP" secondAttribute="bottom" constant="21" id="Awe-ds-0da"/>
+                            <constraint firstItem="VCQ-3t-Lcg" firstAttribute="top" secondItem="aer-ak-fXu" secondAttribute="bottom" constant="22" id="BuB-7V-Ege"/>
+                            <constraint firstItem="1wd-42-TbP" firstAttribute="trailing" secondItem="6qV-lj-xtV" secondAttribute="trailingMargin" id="CsY-mU-bZf"/>
+                            <constraint firstItem="iJN-mu-MiI" firstAttribute="top" secondItem="Wnq-qF-Aij" secondAttribute="bottom" constant="24" id="G0n-4m-T7M"/>
+                            <constraint firstItem="iJN-mu-MiI" firstAttribute="leading" secondItem="Wnq-qF-Aij" secondAttribute="leading" id="O4R-1h-ipR"/>
+                            <constraint firstItem="1wd-42-TbP" firstAttribute="top" secondItem="VCQ-3t-Lcg" secondAttribute="bottom" constant="22" id="W01-Mz-lhS"/>
+                            <constraint firstItem="VCQ-3t-Lcg" firstAttribute="leading" secondItem="6qV-lj-xtV" secondAttribute="leadingMargin" constant="46" id="eYc-Lt-MLb"/>
+                            <constraint firstItem="Wnq-qF-Aij" firstAttribute="trailing" secondItem="1wd-42-TbP" secondAttribute="trailing" id="gWI-jg-lZQ"/>
+                            <constraint firstItem="iJN-mu-MiI" firstAttribute="trailing" secondItem="Wnq-qF-Aij" secondAttribute="trailing" id="ots-Al-3np"/>
+                            <constraint firstItem="Wnq-qF-Aij" firstAttribute="leading" secondItem="1wd-42-TbP" secondAttribute="leading" id="p2U-O3-t3U"/>
+                            <constraint firstItem="1wd-42-TbP" firstAttribute="leading" secondItem="6qV-lj-xtV" secondAttribute="leadingMargin" id="pnD-6M-z4g"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="1wd-42-TbP"/>
                                 <exclude reference="Wnq-qF-Aij"/>
                                 <exclude reference="iJN-mu-MiI"/>
+                                <exclude reference="VCQ-3t-Lcg"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="86U-Rw-9oi"/>
-                                <exclude reference="G2V-JE-WQV"/>
-                                <exclude reference="OTC-YS-P1H"/>
-                                <exclude reference="RWp-BL-41W"/>
-                                <exclude reference="BTv-cF-dIh"/>
-                                <exclude reference="IrM-4f-TPT"/>
-                                <exclude reference="oIg-Dh-13M"/>
+                                <exclude reference="BuB-7V-Ege"/>
+                                <exclude reference="eYc-Lt-MLb"/>
+                                <exclude reference="6jd-ls-b2d"/>
+                                <exclude reference="CsY-mU-bZf"/>
+                                <exclude reference="W01-Mz-lhS"/>
+                                <exclude reference="pnD-6M-z4g"/>
+                                <exclude reference="Awe-ds-0da"/>
+                                <exclude reference="gWI-jg-lZQ"/>
+                                <exclude reference="p2U-O3-t3U"/>
+                                <exclude reference="G0n-4m-T7M"/>
+                                <exclude reference="O4R-1h-ipR"/>
+                                <exclude reference="ots-Al-3np"/>
                                 <exclude reference="1sn-NK-zOH"/>
-                                <exclude reference="E5i-ZK-gdH"/>
-                                <exclude reference="Hfb-Gk-CXI"/>
-                                <exclude reference="TpG-DH-CbH"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3421,19 +3765,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="1wd-42-TbP"/>
                                 <include reference="Wnq-qF-Aij"/>
                                 <include reference="iJN-mu-MiI"/>
+                                <include reference="VCQ-3t-Lcg"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="86U-Rw-9oi"/>
-                                <include reference="G2V-JE-WQV"/>
-                                <include reference="OTC-YS-P1H"/>
-                                <include reference="RWp-BL-41W"/>
-                                <include reference="BTv-cF-dIh"/>
-                                <include reference="IrM-4f-TPT"/>
-                                <include reference="oIg-Dh-13M"/>
+                                <include reference="BuB-7V-Ege"/>
+                                <include reference="eYc-Lt-MLb"/>
+                                <include reference="6jd-ls-b2d"/>
+                                <include reference="CsY-mU-bZf"/>
+                                <include reference="W01-Mz-lhS"/>
+                                <include reference="pnD-6M-z4g"/>
+                                <include reference="Awe-ds-0da"/>
+                                <include reference="gWI-jg-lZQ"/>
+                                <include reference="p2U-O3-t3U"/>
+                                <include reference="G0n-4m-T7M"/>
+                                <include reference="O4R-1h-ipR"/>
+                                <include reference="ots-Al-3np"/>
                                 <exclude reference="1sn-NK-zOH"/>
-                                <include reference="E5i-ZK-gdH"/>
-                                <include reference="Hfb-Gk-CXI"/>
-                                <include reference="TpG-DH-CbH"/>
                             </mask>
                         </variation>
                     </view>
@@ -3455,6 +3802,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="descTextField" destination="Wnq-qF-Aij" id="VMF-Ts-h8D"/>
                         <outlet property="photoImage" destination="iJN-mu-MiI" id="WA2-XW-o1e"/>
                         <outlet property="saveWordButton" destination="1Tf-Mp-Dir" id="Ahb-hl-DFJ"/>
+                        <outlet property="typeSegmentControl" destination="VCQ-3t-Lcg" id="Dss-nF-My0"/>
                         <outlet property="wordTextField" destination="1wd-42-TbP" id="o9c-mA-rBA"/>
                     </connections>
                 </viewController>
@@ -3488,6 +3836,23 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     <rect key="frame" x="16" y="98" width="368" height="20"/>
                                 </variation>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" translatesAutoresizingMaskIntoConstraints="NO" id="5PL-rr-F8j">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5PL-rr-F8j" secondAttribute="height" multiplier="1:1" id="lAH-L4-krz"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="lAH-L4-krz"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="253" width="368" height="368"/>
+                                    <mask key="constraints">
+                                        <include reference="lAH-L4-krz"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commentaire" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVL-7K-4Lk">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -3510,23 +3875,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" translatesAutoresizingMaskIntoConstraints="NO" id="5PL-rr-F8j">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="5PL-rr-F8j" secondAttribute="height" multiplier="1:1" id="lAH-L4-krz"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="lAH-L4-krz"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="253" width="368" height="368"/>
-                                    <mask key="constraints">
-                                        <include reference="lAH-L4-krz"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -3548,8 +3896,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="VOq-al-Jsh"/>
-                                <exclude reference="ZVL-7K-4Lk"/>
                                 <exclude reference="5PL-rr-F8j"/>
+                                <exclude reference="ZVL-7K-4Lk"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="BYJ-1F-cYH"/>
@@ -3567,8 +3915,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="VOq-al-Jsh"/>
-                                <include reference="ZVL-7K-4Lk"/>
                                 <include reference="5PL-rr-F8j"/>
+                                <include reference="ZVL-7K-4Lk"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="BYJ-1F-cYH"/>
@@ -10069,7 +10417,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <!--Navigation Controller-->
         <scene sceneID="sbM-H1-qIf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hF1-PA-3p0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wUX-I8-Jge" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FcY-Ic-nhW">
@@ -10081,6 +10428,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <segue destination="IxI-Zr-qM7" kind="relationship" relationship="rootViewController" id="I9B-eM-P0r"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hF1-PA-3p0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1315.5" y="600"/>
         </scene>
@@ -10093,7 +10441,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
     <inferredMetricsTieBreakers>
         <segue reference="MnM-Fe-5nH"/>
         <segue reference="wCL-AK-u2b"/>
-        <segue reference="ezw-hn-Hzp"/>
-        <segue reference="stY-4Y-WSs"/>
+        <segue reference="a0H-Ea-gmv"/>
+        <segue reference="4d8-Pn-Vpg"/>
+        <segue reference="Zhf-nH-Hkw"/>
     </inferredMetricsTieBreakers>
 </document>
