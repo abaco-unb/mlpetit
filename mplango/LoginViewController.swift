@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     
+    
+    var users = [User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,7 +61,7 @@ class LoginViewController: UIViewController {
             let predicate = NSPredicate(format: "name == %@ && password == %@", username, password)
             fetchRequest.predicate = predicate
             
-            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [MUser] {
+            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [User] {
                 
                 if (fetchResults.count > 0) {
                     
@@ -70,7 +73,9 @@ class LoginViewController: UIViewController {
                     
                     var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                     //prefs.setObject(fetchResults[0], forKey: "USER")
+                    //prefs.setObject(fetchResults[0] as MUser, forKey: "USER")
                     prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
+                    prefs.setObject(fetchResults[0].email, forKey: "USEREMAIL")
                     prefs.setInteger(1, forKey: "ISLOGGEDIN")
                     prefs.synchronize()
                     
@@ -89,15 +94,13 @@ class LoginViewController: UIViewController {
         }
     }
     
-    var users = [MUser]()
-    
     func fetchUser() {
         let fetchRequest = NSFetchRequest(entityName: "User")
         let sortDescriptor = NSSortDescriptor(key: "email", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let contxt: NSManagedObjectContext = appDel.managedObjectContext!
-        if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [MUser] {
+        if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [User] {
             users = fetchResults
         }
     }

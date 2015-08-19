@@ -24,7 +24,7 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
-    var user = [MUser]()
+    var user = [User]()
 
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         
         var error: NSError?
         let request = NSFetchRequest(entityName:"User")
-        user = moContext?.executeFetchRequest(request, error: &error) as! [MUser]
+        user = moContext?.executeFetchRequest(request, error: &error) as! [User]
         
 
     

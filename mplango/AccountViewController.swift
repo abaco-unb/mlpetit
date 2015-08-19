@@ -119,20 +119,6 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    /*
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return  natData.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return natData[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        nationality = natData[row]
-        labelPicker.text = nationality
-    }
-    */
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
@@ -228,7 +214,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             let predicate = NSPredicate(format: "name == %@ && email == %@", textFieldName.text, textFieldEmail.text)
             fetchRequest.predicate = predicate
             
-            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [MUser] {
+            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [User] {
                 if (fetchResults.count > 0) {
                     var alertView:UIAlertView = UIAlertView()
                     alertView.title = "Erro ao tentar Registrar os Dados!"
@@ -242,7 +228,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     let en = NSEntityDescription.entityForName("User", inManagedObjectContext: contxt)
                     
                     //Criando uma nova instância de dados para inserção
-                    var newUser = MUser(entity: en!, insertIntoManagedObjectContext: contxt)
+                    var newUser = User(entity: en!, insertIntoManagedObjectContext: contxt)
                     
                     //Salvando nosso contexto
                     newUser.name = textFieldName.text
@@ -250,6 +236,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     newUser.password = textFieldPassword.text
                     newUser.gender = gender
                     newUser.nationality = nationality
+                    newUser.profile = 1
                     newUser.image = UIImageJPEGRepresentation(imageView.image, 1)
                     println(newUser)
                     contxt.save(nil)
