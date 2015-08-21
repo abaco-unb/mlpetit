@@ -179,6 +179,7 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     
     @IBAction func followUserTapped(sender: UIButton) {
         println("add user to this")
+        
     }
     /*
     // Override to support conditional editing of the table view.
