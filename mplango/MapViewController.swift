@@ -13,45 +13,26 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     @IBOutlet weak var mkMapView: MKMapView!
-    @IBOutlet weak var btnContacts: UIButton!
     
-    
+    let regionRadius: CLLocationDistance = 1000
     var locationManager = CLLocationManager()
-    var posts = [Post]()
-    
-    func checkLocationAuthorizationStatus() {
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
-            mkMapView.showsUserLocation = true
-        } else {
-            //locationManager.requestAlwaysAuthorization()
-            //locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            //locationManager.delegate = self
-            //locationManager.startUpdatingLocation()
-        }
-    }
-    
-    func handleLongPress(getstureRecognizer : UIGestureRecognizer){
-        if getstureRecognizer.state != .Began { return }
-        
-        let touchPoint = getstureRecognizer.locationInView(self.mkMapView)
-        let touchMapCoordinate = mkMapView.convertPoint(touchPoint, toCoordinateFromView: mkMapView )
-        
-        
-        let post = Post(title: "Exemplo para o thomas",
-            locationName: "nome de teste agora",
-            category: "Teste",
-            coordinate: CLLocationCoordinate2D(latitude: touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude))
-        
-        mkMapView.addAnnotation(post)
-    }
-    
-    @IBAction func changeMapType(sender: AnyObject) {
-    }
+    var posts = [Annotation]()
+    var userLocation:CLLocationCoordinate2D!
+    var street: String!
+    var loggedUser: User!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        retrieveLoggedUser()
+        
+        
+        //let barViewController = self.tabBarController?.viewControllers
+        //println(barViewController)
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
@@ -65,6 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         checkLocationAuthorizationStatus()
+        
         self.mkMapView.showsUserLocation = true
         self.mkMapView.delegate = self
         self.mkMapView.mapType = MKMapType.Standard
@@ -72,46 +54,118 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //self.mkMapView.userTrackingMode = MKUserTrackingModeFollow;
         
-        let initialLocation:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -15.909975,longitude: -48.076578)
+        userLocation = CLLocationCoordinate2D(latitude: -15.9041234,longitude: -48.079856)
         
-        centerMapOnLocation(initialLocation)
+        /**
+        * GET STREET ADDRESS NAME
+        */
+        var location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        //MARK - add circle rounded user location
+        addRadiusCircle(location)
+        
+        var geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) {
+            (placemarks, error) -> Void in
+            if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
+                var placemark = placemarks[0]
+                //println("placemark")
+                //println(placemark)
+                // Street addres
+                //println("street")
+                //println(placemark)
+                    //self.street = st
+                    //println("self.street")
+                    //println(self.street)
+            }
+        }
+        //println("self.street")
+        //println(self.street)
+        centerMapOnLocation(userLocation)
         
         var longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
         
         longPressRecogniser.minimumPressDuration = 1.0
         mkMapView.addGestureRecognizer(longPressRecogniser)
         
-        
-        // show artwork on map
-        let post = Post(title: "Post exemplo 1",
-            locationName: "nome de teste 1",
-            category: "Challenge",
-            coordinate: CLLocationCoordinate2D(latitude: -15.910756, longitude: -48.076539))
-        
-        // show artwork on map
-        let post2 = Post(title: "Post exemplo 2",
-            locationName: "nome de teste 2",
-            category: "Default",
-            coordinate: CLLocationCoordinate2D(latitude: -15.911519, longitude: -48.089617))
-        
-        mkMapView.addAnnotation(post)
-        mkMapView.addAnnotation(post2)
+       
+        //MARK - retrieve all posts of Core Data
+        let request = NSFetchRequest(entityName: "Post")
+        if let posts = moContext?.executeFetchRequest(request, error: nil) as? [Post] {
+            
+            if (posts.count > 0) {
+                for post in posts {
+                    //println(post)
+                    var latDelta:CLLocationDegrees = 0.01
+                    var longDelta:CLLocationDegrees = 0.01
+                    
+                    // show post on map
+                    let annotation = Annotation(title: post.text,
+                        locationName: post.locationName,
+                        category: post.category,
+                        coordinate: CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude),
+                        userImage: UIImage(data: (post.user as! User).image)!,
+                        entity: post
+                        )
+                    
+                        mkMapView.addAnnotation(annotation)
+                }
+            }
+        }
     }
     
-    let regionRadius: CLLocationDistance = 1000
+    func retrieveLoggedUser() {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let email: String = prefs.objectForKey("USEREMAIL") as! String
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+            loggedUser = fetchResults[0];
+            
+        }
+    
+    }
+    
+    // MARK:- Retrieve Posts
+    
+    
+    func checkLocationAuthorizationStatus() {
+        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+            println("auth in usevlocalization")
+            mkMapView.showsUserLocation = true
+        } else {
+            println("auth in use non localication")
+            let locationManager = CLLocationManager()
+            locationManager.requestAlwaysAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.delegate = self
+            //mkMapView.showsUserLocation = true
+            //locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func handleLongPress(getstureRecognizer : UIGestureRecognizer){
+        if getstureRecognizer.state != .Began { return }
+        
+        let touchPoint = getstureRecognizer.locationInView(self.mkMapView)
+        let touchMapCoordinate = mkMapView.convertPoint(touchPoint, toCoordinateFromView: mkMapView )
+        
+        //MARK - 
+        let post = Annotation(title: "Exemplo para o thomas",
+            locationName: "nome de teste agora",
+            category: 2,
+            coordinate: CLLocationCoordinate2D(latitude: touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude),
+            userImage: UIImage(data: loggedUser.image)!,
+            entity: nil
+        )
+        
+        mkMapView.addAnnotation(post)
+    }
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location,
             regionRadius * 2.0, regionRadius * 2.0)
         mkMapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    @IBAction func logoutTapped(sender: UIButton) {
-        
-        let appDomain = NSBundle.mainBundle().bundleIdentifier
-        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
@@ -121,5 +175,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func addRadiusCircle(location: CLLocation){
+        var circle = MKCircle(centerCoordinate: location.coordinate, radius: 100 as CLLocationDistance)
+        mkMapView.addOverlay(circle)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        println("map controller")
+        println(segue.identifier)
+        println("*************************************")
+        
+        if segue.identifier == "post" {
+            
+            
+            println(street)
+            println(userLocation.latitude)
+            println(userLocation.longitude)
+            
+            let categoryController:CategoryViewController = segue.destinationViewController as! CategoryViewController
+            
+            let post = Annotation(title: "TESTE",
+                locationName: "Quadra 300 conjunto 14 cs 17",
+                category: 1,
+                coordinate: userLocation,
+                userImage: UIImage(data: loggedUser.image)!,
+                entity: nil
+            )
+            categoryController.post = post
+            println("prepareSegue MAp")
+            println(post)
+            
+        }
     }
 }
