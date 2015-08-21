@@ -24,25 +24,36 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
-    var user = [User]()
-
+    var user: User!
     
     override func viewDidLoad() {
-    super.viewDidLoad()
-        
+        super.viewDidLoad()
+        retrieveLoggedUser()
+        println("user data ")
+        println(user.name)
+        println(user.posts.count)
+        navigationItem.title = user.name
+        profileNumberPosts.text = user.posts.count.description
         
     }
     
+    func retrieveLoggedUser() {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let email: String = prefs.objectForKey("USEREMAIL") as! String
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+            user = fetchResults[0];
+            
+        }
+        
+    }
     
     override func viewDidAppear(animated: Bool) {
-        
-        
-        var error: NSError?
-        let request = NSFetchRequest(entityName:"User")
-        user = moContext?.executeFetchRequest(request, error: &error) as! [User]
-        
 
-    
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
