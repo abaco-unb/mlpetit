@@ -11,6 +11,9 @@
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
+		542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DEE3F1B8A178800A09A00 /* TabBarController.swift */; };
+		5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */; };
+		5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */; };
 		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
 		54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D401B6D7ED90087F6BB /* PostNViewController.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
@@ -110,6 +113,9 @@
 		54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 7.xcdatamodel"; sourceTree = "<group>"; };
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
+		542DEE3F1B8A178800A09A00 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
+		5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSegue.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
 		54D48D401B6D7ED90087F6BB /* PostNViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNViewController.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
@@ -193,6 +199,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54A32FF31B8A76D100623A61 /* Testes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Testes;
+			sourceTree = "<group>";
+		};
 		8283BE091B0143AF0085F9A6 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
+				542DEE3F1B8A178800A09A00 /* TabBarController.swift */,
 				828C717D1B83C3E8009FE9B5 /* Entity */,
 				828C717E1B83C409009FE9B5 /* Model */,
 				828C717F1B83C424009FE9B5 /* Controller */,
@@ -314,6 +328,7 @@
 				828C71831B83C573009FE9B5 /* User */,
 				828C71841B83C582009FE9B5 /* Post */,
 				82842E431B61EA7900E7C860 /* InitialViewController.swift */,
+				54A32FF31B8A76D100623A61 /* Testes */,
 				828C71821B83C54C009FE9B5 /* Map */,
 			);
 			name = Controller;
@@ -342,6 +357,8 @@
 			isa = PBXGroup;
 			children = (
 				541546141B7D1548008E182C /* ProfileVC.swift */,
+				5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */,
+				5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */,
 				8256CAFD1B40FD730002708C /* ContactViewController.swift */,
 				8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */,
 				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
@@ -502,15 +519,18 @@
 				823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */,
 				542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */,
 				54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */,
+				542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */,
 				82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */,
 				82D73C9C1B8139DB00DFEAB0 /* Post.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				82D73CA51B81720E00DFEAB0 /* PostViewController.swift in Sources */,
+				5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */,
 				54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */,
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
+				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,

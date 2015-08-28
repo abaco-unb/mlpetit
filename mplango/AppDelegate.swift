@@ -23,6 +23,7 @@ extension UIColor {
 class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -44,10 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         //Set navigation bar Back button tint colour
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
-        UITabBar.appearance().barTintColor = UIColor(hex: 0x3399CC)
         
-        UITabBar.appearance().tintColor = UIColor.whiteColor()
-
+    
         return true
         
     }

@@ -29,13 +29,34 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
-        println("user data ")
+        println("user data")
         println(user.name)
         println(user.posts.count)
+        println(user.image)
+        println(user.nationality)
+        println(user.gender)
+        
         navigationItem.title = user.name
         profileNumberPosts.text = user.posts.count.description
+        profileNationality.text = user.nationality
+        
+        //profileGender.image = user.gender
+        //profilePicture.image = user.image
+        
+        
+        //Para ir à tela da gamificação com gesto (e não botão)
+        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
+        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
         
     }
+    
+    func showProfileGameVC() {
+        self.performSegueWithIdentifier("showBadges", sender: self)
+    }
+    
+
+    
     
     func retrieveLoggedUser() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
