@@ -220,10 +220,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="ekf-dO-AxS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="ekf-dO-AxS">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-9A-Pfv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-9A-Pfv">
                                 <rect key="frame" x="114" y="42" width="62" height="70"/>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
@@ -279,8 +279,8 @@
                                     <constraint firstAttribute="height" constant="40" id="Pl9-9y-7Is"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Femme"/>
                                     <segment title="Homme"/>
+                                    <segment title="Femme"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <variation key="default">
@@ -719,7 +719,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="9tx-k3-Evb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="9tx-k3-Evb">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f53-FH-tSe">
@@ -2646,7 +2646,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-XK-f0m">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-XK-f0m">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cs-dh-lH5">
@@ -3883,7 +3883,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Carnet" id="wSh-1S-EMc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="k5L-3l-PQu">
+                        <barButtonItem key="rightBarButtonItem" image="add_btn" id="k5L-3l-PQu">
                             <connections>
                                 <segue destination="wUX-I8-Jge" kind="presentation" identifier="AddWord" id="BsH-Ml-pNM"/>
                             </connections>
@@ -11637,7 +11637,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="DPR-na-AF5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" image="badge_1_off" translatesAutoresizingMaskIntoConstraints="NO" id="DPR-na-AF5">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="KPu-4u-Gau">
@@ -11666,7 +11666,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="OBl-Ld-263">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" image="badge_5_off" translatesAutoresizingMaskIntoConstraints="NO" id="OBl-Ld-263">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OBl-Ld-263" secondAttribute="height" multiplier="1:1" id="5A6-z6-ddr">
@@ -11694,7 +11694,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="ej4-8S-7w0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" image="badge_3_off" translatesAutoresizingMaskIntoConstraints="NO" id="ej4-8S-7w0">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="85" id="Xxs-ss-aoP">
@@ -11721,7 +11721,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="fot-eo-W1c">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" image="badge_4_off" translatesAutoresizingMaskIntoConstraints="NO" id="fot-eo-W1c">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fot-eo-W1c" secondAttribute="height" multiplier="1:1" id="l5b-Lg-ABz"/>
@@ -11788,7 +11788,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" translatesAutoresizingMaskIntoConstraints="NO" id="qtd-eF-ma9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="70" image="badge_2_off" translatesAutoresizingMaskIntoConstraints="NO" id="qtd-eF-ma9">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="85" id="4Sx-3Z-rw8">
@@ -12077,13 +12077,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         </scene>
     </scenes>
     <resources>
-        <image name="Fundo_1" width="626" height="1108"/>
+        <image name="add_btn" width="25" height="25"/>
         <image name="atividade_aprovada" width="90" height="90"/>
         <image name="atividade_refazer" width="90" height="90"/>
+        <image name="badge_1_off" width="79" height="67"/>
+        <image name="badge_2_off" width="79" height="62"/>
+        <image name="badge_3_off" width="40" height="40"/>
+        <image name="badge_4_off" width="47" height="49"/>
+        <image name="badge_5_off" width="47" height="36"/>
         <image name="config_profile" width="25" height="25"/>
         <image name="defaultPhoto" width="540" height="540"/>
-        <image name="menu_carnet" width="28" height="29"/>
-        <image name="menu_carnet_selected" width="28" height="29"/>
+        <image name="fundo_1" width="314" height="563"/>
+        <image name="menu_carnet" width="27" height="29"/>
+        <image name="menu_carnet_selected" width="27" height="29"/>
         <image name="menu_map" width="34" height="29"/>
         <image name="menu_map_selected" width="34" height="29"/>
         <image name="menu_post" width="25" height="31"/>
@@ -12101,10 +12107,10 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <image name="sugest_contatos" width="43" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CD6-Ba-jH8"/>
+        <segue reference="MnM-Fe-5nH"/>
+        <segue reference="wCL-AK-u2b"/>
+        <segue reference="a0H-Ea-gmv"/>
         <segue reference="4d8-Pn-Vpg"/>
         <segue reference="Zhf-nH-Hkw"/>
-        <segue reference="a0H-Ea-gmv"/>
-        <segue reference="wCL-AK-u2b"/>
     </inferredMetricsTieBreakers>
 </document>
