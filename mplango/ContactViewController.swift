@@ -25,7 +25,10 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     
         fetchedResultController = getFetchedResultController()
         fetchedResultController.delegate = self
-        fetchedResultController.performFetch(nil)
+        do {
+            try fetchedResultController.performFetch()
+        } catch _ {
+        }
     }
     
     let sections:Array<AnyObject> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -41,7 +44,7 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     func itemFetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "User")
         if(profileFilter != 2) {
-            println("fazer filtro")
+            print("fazer filtro")
             let predicate = NSPredicate(format: "profile == %@", profileFilter)
             fetchRequest.predicate = predicate
         }
@@ -72,13 +75,13 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
         if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) 
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
             let user = fetchedResultController.objectAtIndexPath(indexPath) as! User
-            var image:UIImage = UIImage(data: user.image)!
+            let image:UIImage = UIImage(data: user.image)!
             let newImage = resizeImage(image, toTheSize: CGSizeMake(70, 70))
-            var cellImageLayer: CALayer?  = cell.imageView!.layer
+            let cellImageLayer: CALayer?  = cell.imageView!.layer
             cellImageLayer!.cornerRadius = 35
             cellImageLayer!.masksToBounds = true
             cell.textLabel!.text = user.name
@@ -89,9 +92,9 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     //Para mostrar o index do alfabeto à direita da tela
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return self.sections
-    }
+    //override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    //    return self.sections
+    //}
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index
@@ -108,12 +111,12 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     func resizeImage(image:UIImage, toTheSize size:CGSize)->UIImage{
-        var scale = CGFloat(max(size.width/image.size.width,
+        let scale = CGFloat(max(size.width/image.size.width,
             size.height/image.size.height))
-        var width:CGFloat  = image.size.width * scale
-        var height:CGFloat = image.size.height * scale;
+        let width:CGFloat  = image.size.width * scale
+        let height:CGFloat = image.size.height * scale;
         
-        var rr:CGRect = CGRectMake( 0, 0, width, height);
+        let rr:CGRect = CGRectMake( 0, 0, width, height);
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
         image.drawInRect(rr)
@@ -151,12 +154,12 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     
     @IBAction func indexSegment(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            println("Apprenants");
+            print("Apprenants");
             self.tableView.reloadData()
         } else if sender.selectedSegmentIndex == 1{
-            println("Médiateurs");
+            print("Médiateurs");
         } else {
-            println("All")
+            print("All")
         }
     }
     
@@ -170,15 +173,18 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
             profileFilter = 2
             break
         }
-        println("sender.selectedSegmentIndex")
-        println(sender.selectedSegmentIndex)
+        print("sender.selectedSegmentIndex")
+        print(sender.selectedSegmentIndex)
         fetchedResultController = getFetchedResultController()
-        fetchedResultController.performFetch(nil)
+        do {
+            try fetchedResultController.performFetch()
+        } catch _ {
+        }
         tableView.reloadData()
     }
     
     @IBAction func followUserTapped(sender: UIButton) {
-        println("add user to this")
+        print("add user to this")
         
     }
     /*

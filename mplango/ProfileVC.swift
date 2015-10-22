@@ -29,12 +29,12 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
-        println("user data")
-        println(user.name)
-        println(user.posts.count)
-        println(user.image)
-        println(user.nationality)
-        println(user.gender)
+        print("user data")
+        print(user.name)
+        print(user.posts.count)
+        print(user.image)
+        print(user.nationality)
+        print(user.gender)
         
         navigationItem.title = user.name
         profileNumberPosts.text = user.posts.count.description
@@ -45,7 +45,7 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         
         
         //Para ir à tela da gamificação com gesto (e não botão)
-        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
+        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeGestureRecognizer)
         
@@ -64,7 +64,7 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
             
         }

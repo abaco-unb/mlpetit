@@ -114,7 +114,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
@@ -135,18 +135,21 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             
             let user: User = fetchResults[0];
             let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
             let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-            item.word = wordTextField.text
-            item.desc = descTextField.text
+            item.word = wordTextField.text!
+            item.desc = descTextField.text!
             item.category = segment
             item.user = user
-            //falta foto
-            //falta som
-            moContext?.save(nil)
+            do {
+                //falta foto
+                //falta som
+                try moContext?.save()
+            } catch _ {
+            }
 
             
         }
@@ -155,11 +158,14 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     // MARK:- Edit Item Carnet
     
     func editItemCarnet() {
-        item?.word = wordTextField.text
-        item?.desc = descTextField.text
-        //falta foto
-        //falta som
-        moContext?.save(nil)
+        item?.word = wordTextField.text!
+        item?.desc = descTextField.text!
+        do {
+            //falta foto
+            //falta som
+            try moContext?.save()
+        } catch _ {
+        }
     }
     
     

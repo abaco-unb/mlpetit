@@ -37,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-        var isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         
         NSLog("status autenticação: %ld", isLoggedIn)
         
@@ -60,15 +60,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         /**
         * GET STREET ADDRESS NAME
         */
-        var location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        let location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
         //MARK - add circle rounded user location
         addRadiusCircle(location)
         
-        var geocoder = CLGeocoder()
+        let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) {
             (placemarks, error) -> Void in
-            if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
-                var placemark = placemarks[0]
+            //if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
+                //var placemark = placemarks[0]
+            
+            if let validPlacemark = placemarks?[0]{
+                let placemark = validPlacemark as? CLPlacemark;
+            
                 //println("placemark")
                 //println(placemark)
                 // Street addres
@@ -83,7 +87,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //println(self.street)
         centerMapOnLocation(userLocation)
         
-        var longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
         
         longPressRecogniser.minimumPressDuration = 1.0
         mkMapView.addGestureRecognizer(longPressRecogniser)
@@ -91,7 +95,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
        
         //MARK - retrieve all posts of Core Data
         let request = NSFetchRequest(entityName: "Post")
-        if let posts = moContext?.executeFetchRequest(request, error: nil) as? [Post] {
+        if let posts = (try? moContext?.executeFetchRequest(request)) as? [Post] {
             
             if (posts.count > 0) {
                 for post in posts {
@@ -120,7 +124,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             loggedUser = fetchResults[0];
             
         }
@@ -132,10 +136,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
-            println("auth in usevlocalization")
+            print("auth in usevlocalization")
             mkMapView.showsUserLocation = true
         } else {
-            println("auth in use non localication")
+            print("auth in use non localication")
             let locationManager = CLLocationManager()
             locationManager.requestAlwaysAuthorization()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -169,8 +173,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mkMapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
-        let regionToZone = MKCoordinateRegionMake(manager.location.coordinate, MKCoordinateSpanMake(1,10))
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        let regionToZone = MKCoordinateRegionMake(manager.location!.coordinate, MKCoordinateSpanMake(1,10))
         mkMapView.setRegion(regionToZone, animated: true)
     }
     
@@ -179,22 +183,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func addRadiusCircle(location: CLLocation){
-        var circle = MKCircle(centerCoordinate: location.coordinate, radius: 100 as CLLocationDistance)
+        let circle = MKCircle(centerCoordinate: location.coordinate, radius: 100 as CLLocationDistance)
         mkMapView.addOverlay(circle)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        println("map controller")
-        println(segue.identifier)
-        println("*************************************")
+        print("map controller")
+        print(segue.identifier)
+        print("*************************************")
         
         if segue.identifier == "post" {
             
             
-            println(street)
-            println(userLocation.latitude)
-            println(userLocation.longitude)
+            print(street)
+            print(userLocation.latitude)
+            print(userLocation.longitude)
             
             let categoryController:CategoryViewController = segue.destinationViewController as! CategoryViewController
             
@@ -206,8 +210,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 entity: nil
             )
             categoryController.post = post
-            println("prepareSegue MAp")
-            println(post)
+            print("prepareSegue MAp")
+            print(post)
             
         }
     }

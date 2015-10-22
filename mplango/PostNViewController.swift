@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class PostNViewController: UIViewController {
-
+    
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -34,7 +34,7 @@ class PostNViewController: UIViewController {
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -46,9 +46,9 @@ class PostNViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if addButton === sender {
-            println("addButton")
-            println(textTextField.text)
+            print("addButton")
+            print(textTextField.text)
         }
     }
-
+    
 }

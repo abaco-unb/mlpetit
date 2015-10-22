@@ -25,7 +25,7 @@ class TabBarController: UITabBarController, UINavigationControllerDelegate {
 
         
         // Uses the original colors for your images, so they aren't not rendered as grey automatically.
-        for item in self.tabBar.items as! [UITabBarItem] {
+        for item in (self.tabBar.items )! {
             if let image = item.image {
                 item.image = image.imageWithRenderingMode(.AlwaysOriginal)
             }

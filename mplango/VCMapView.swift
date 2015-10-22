@@ -10,7 +10,7 @@ import Foundation
 
 import MapKit
 
-extension MapViewController: MKMapViewDelegate {
+extension MapViewController {
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
 
@@ -39,17 +39,17 @@ extension MapViewController: MKMapViewDelegate {
                 imgv.layer.cornerRadius = 20
                 imgv.backgroundColor = UIColor.blueColor();
                 
-                var image:UIImage = UIImage(named: annotation.getCategoryImageName())!
+                let image:UIImage = UIImage(named: annotation.getCategoryImageName())!
                 view.image = image
                 view.canShowCallout = true
                 view.calloutOffset = CGPoint(x: -5, y: 5)
                 
-                var rightButton: AnyObject = UIButton.buttonWithType(UIButtonType.InfoLight)
+                let rightButton: AnyObject = UIButton(type: UIButtonType.InfoLight)
                 rightButton.addTarget(self, action: nil, forControlEvents: UIControlEvents.TouchUpInside)
                 
                 view.rightCalloutAccessoryView = rightButton as! UIView
                 
-                var imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+                let imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
                 imageview.image = annotation.userImage
                 view.leftCalloutAccessoryView = imageview
                 
@@ -60,12 +60,12 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func resizeImage(image:UIImage, toTheSize size:CGSize)-> UIImage{
-        var scale = CGFloat(max(size.width/image.size.width,
+        let scale = CGFloat(max(size.width/image.size.width,
             size.height/image.size.height))
-        var width:CGFloat  = image.size.width * scale
-        var height:CGFloat = image.size.height * scale;
+        let width:CGFloat  = image.size.width * scale
+        let height:CGFloat = image.size.height * scale;
         
-        var rr:CGRect = CGRectMake( 0, 0, width, height);
+        let rr:CGRect = CGRectMake( 0, 0, width, height);
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
         image.drawInRect(rr)
@@ -79,13 +79,13 @@ extension MapViewController: MKMapViewDelegate {
             let location = view.annotation as! Annotation
             //let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
             //location.mapItem().openInMapsWithLaunchOptions(launchOptions)
-            println(location.entity)
+            print(location.entity, terminator: "")
             
     }
     
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         if overlay is MKCircle {
-            var circle = MKCircleRenderer(overlay: overlay)
+            let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.blueColor()
             circle.fillColor = UIColor(red: 0, green: 0, blue: 255, alpha: 0.1)
             circle.lineWidth = 1

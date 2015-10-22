@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
@@ -31,9 +31,20 @@ class LoginViewController: UIViewController {
         textFieldPassword.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldPassword.attributedPlaceholder =
             NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
-
+        
         
     }
+    
+    //Text field delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_map", sender: self)
@@ -41,12 +52,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(sender: UIButton) {
         
-        var username:String = textFieldUsername.text
-        var password:String = textFieldPassword.text
+        let username:String = textFieldUsername.text!
+        let password:String = textFieldPassword.text!
         
         if ( username.isEmpty || password.isEmpty ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Login falhou!"
             alertView.message = "É necessário inserir seu email e senha"
             alertView.delegate = self
@@ -61,17 +72,17 @@ class LoginViewController: UIViewController {
             let predicate = NSPredicate(format: "name == %@ && password == %@", username, password)
             fetchRequest.predicate = predicate
             
-            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+            if let fetchResults = (try? contxt.executeFetchRequest(fetchRequest)) as? [User] {
                 
                 if (fetchResults.count > 0) {
                     
-                    var email: String = fetchResults[0].email
-                    var pwd: String   = fetchResults[0].password
+                    let email: String = fetchResults[0].email
+                    let pwd: String   = fetchResults[0].password
                     
                     NSLog("login autenticado: %ld", email)
                     NSLog("pwd autenticada: %ld", pwd)
                     
-                    var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                     //prefs.setObject(fetchResults[0], forKey: "USER")
                     //prefs.setObject(fetchResults[0] as MUser, forKey: "USER")
                     prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
@@ -82,7 +93,7 @@ class LoginViewController: UIViewController {
                     self.performSegueWithIdentifier("goto_map", sender: self)
                 
                 } else {
-                    var alertView:UIAlertView = UIAlertView()
+                    let alertView:UIAlertView = UIAlertView()
                     alertView.title = "Login falhou!"
                     alertView.message = "Usuário ou senha inexistente no banco de dados!"
                     alertView.delegate = self
@@ -100,7 +111,7 @@ class LoginViewController: UIViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let contxt: NSManagedObjectContext = appDel.managedObjectContext!
-        if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+        if let fetchResults = (try? contxt.executeFetchRequest(fetchRequest)) as? [User] {
             users = fetchResults
         }
     }

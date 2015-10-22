@@ -21,8 +21,8 @@ class ProfileGameVC: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
-        println("user data ")
-        println(user.name)
+        print("user data ")
+        print(user.name)
         navigationItem.title = user.name
         
         //navigationItem.setHidesBackButton(true, animated: true)
@@ -38,7 +38,7 @@ class ProfileGameVC: UIViewController, NSFetchedResultsControllerDelegate {
         let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = moContext?.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
             
         }

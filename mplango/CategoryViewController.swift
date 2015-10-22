@@ -9,26 +9,25 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
-
+    
     var post: Annotation? = nil
     var category: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("categoria controller segue ")
-        println(segue.identifier)
-        println(segue)
+        print("categoria controller segue ")
+        print(segue.identifier)
         
-        println(post)
+        print(post)
         
         if segue.identifier == "NewPost" {
             

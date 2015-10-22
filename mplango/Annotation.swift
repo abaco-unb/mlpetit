@@ -12,7 +12,7 @@ import MapKit
 import AddressBook
 
 class Annotation: NSObject, MKAnnotation {
-    let title: String
+    let title: String?
     let locationName: String
     let category: NSNumber
     let coordinate: CLLocationCoordinate2D
@@ -39,13 +39,13 @@ class Annotation: NSObject, MKAnnotation {
         
     }
     
-    var subtitle: String {
+    var subtitle: String? {
         return locationName
     }
     
     // annotation callout info button opens this mapItem in Maps app
     func mapItem() -> MKMapItem {
-        let addressDictionary = [String(kABPersonAddressStreetKey): subtitle]
+        let addressDictionary = [String(kABPersonAddressStreetKey): subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDictionary)
         
         let mapItem = MKMapItem(placemark: placemark)

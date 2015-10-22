@@ -13,12 +13,12 @@ import CoreData
 extension String {
     
     func isEmail() -> Bool {
-        let regex = NSRegularExpression(pattern: "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$", options: .CaseInsensitive, error: nil)
-        return regex?.firstMatchInString(self, options: nil, range: NSMakeRange(0, count(self))) != nil
+        let regex = try? NSRegularExpression(pattern: "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$", options: .CaseInsensitive)
+        return regex?.firstMatchInString(self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
     }
 }
 
-class AccountViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AccountViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
@@ -41,6 +41,16 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     /*var nationality: String = ""
     let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
     */
+    
+    //Text field delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,8 +58,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         self.pickerView.delegate = self*/
         
         // Do any additional setup after loading the view.
-        let borderAlpha : CGFloat = 0.7
-        let cornerRadius : CGFloat = 5.0
+        //_ : CGFloat = 0.7
+        //_ : CGFloat = 5.0
         
         textFieldName.backgroundColor = UIColor.clearColor()
         textFieldName.layer.borderWidth = 3.0
@@ -105,7 +115,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
@@ -133,16 +143,16 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     
     @IBAction func saveTapped(sender: AnyObject) {
         
-        var username: String = textFieldName.text as String
-        var email: String = textFieldEmail.text as String
-        var password: String = textFieldPassword.text
-        var confirmPassword: String = textFieldConfPass.text
-        var nationality: String = textFieldNationality.text
+        let username: String = textFieldName.text! as String
+        let email: String = textFieldEmail.text! as String
+        let password: String = textFieldPassword.text!
+        let confirmPassword: String = textFieldConfPass.text!
+        let nationality: String = textFieldNationality.text!
         
         
         if ( username.isEmpty ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "O nome é obrigatório"
             alertView.delegate = self
@@ -151,7 +161,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             
         } else if ( email.isEmpty ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "Campo email obrigatório"
             alertView.delegate = self
@@ -159,7 +169,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             alertView.show()
             
         } else if (!email.isEmail()) {
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "Pr favor, insira um email válido"
             alertView.delegate = self
@@ -168,7 +178,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             
         } else if ( password.isEmpty  || confirmPassword.isEmpty) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "Campo senha obrigatório"
             alertView.delegate = self
@@ -177,7 +187,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             
         } else if (password != confirmPassword) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "A senha não confere com a confirmação"
             alertView.delegate = self
@@ -186,7 +196,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             
         } else if ( gender.isEmpty ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "É necessário escolher o seu gênero"
             alertView.delegate = self
@@ -195,7 +205,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             
         } else if ( nationality.isEmpty ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Erro ao tentar Registrar os Dados!"
             alertView.message = "É necessário escolher sua nacionalidade"
             alertView.delegate = self
@@ -211,12 +221,12 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             
             
             let fetchRequest = NSFetchRequest(entityName: "User")
-            let predicate = NSPredicate(format: "name == %@ && email == %@", textFieldName.text, textFieldEmail.text)
+            let predicate = NSPredicate(format: "name == %@ && email == %@", textFieldName.text!, textFieldEmail.text!)
             fetchRequest.predicate = predicate
             
-            if let fetchResults = contxt.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+            if let fetchResults = (try? contxt.executeFetchRequest(fetchRequest)) as? [User] {
                 if (fetchResults.count > 0) {
-                    var alertView:UIAlertView = UIAlertView()
+                    let alertView:UIAlertView = UIAlertView()
                     alertView.title = "Erro ao tentar Registrar os Dados!"
                     alertView.message = "Conta já cadastrada em nosso banco de dados"
                     alertView.delegate = self
@@ -228,30 +238,33 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     let en = NSEntityDescription.entityForName("User", inManagedObjectContext: contxt)
                     
                     //Criando uma nova instância de dados para inserção
-                    var newUser = User(entity: en!, insertIntoManagedObjectContext: contxt)
+                    let newUser = User(entity: en!, insertIntoManagedObjectContext: contxt)
                     
                     //Salvando nosso contexto
-                    newUser.name = textFieldName.text
-                    newUser.email = textFieldEmail.text
-                    newUser.password = textFieldPassword.text
+                    newUser.name = textFieldName.text!
+                    newUser.email = textFieldEmail.text!
+                    newUser.password = textFieldPassword.text!
                     newUser.gender = gender
                     newUser.nationality = nationality
                     newUser.profile = 1
-                    newUser.image = UIImageJPEGRepresentation(imageView.image, 1)
-                    println(newUser)
-                    contxt.save(nil)
+                    newUser.image = UIImageJPEGRepresentation(imageView.image!, 1)!
+                    print(newUser)
+                    do {
+                        try contxt.save()
+                    } catch _ {
+                    }
                     
-                    var post:NSString = "name=\(username)&mail=\(email)&password=\(password)&gender=\(gender)&nationality=\(nationality)"
+                    let post:NSString = "name=\(username)&mail=\(email)&password=\(password)&gender=\(gender)&nationality=\(nationality)"
                     
                     NSLog("PostData: %@",post);
                     
-                    var url:NSURL = NSURL(string: "http://service.maplango.com.br/user")!
+                    let url:NSURL = NSURL(string: "http://service.maplango.com.br/user")!
                     
-                    var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+                    let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
                     
-                    var postLength:NSString = String( postData.length )
+                    let postLength:NSString = String( postData.length )
                     
-                    var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+                    let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
                     request.HTTPMethod = "POST"
                     request.HTTPBody = postData
                     request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
@@ -262,9 +275,15 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     var reponseError: NSError?
                     var response: NSURLResponse?
                     
-                    var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+                    var urlData: NSData?
+                    do {
+                        urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+                    } catch let error as NSError {
+                        reponseError = error
+                        urlData = nil
+                    }
                     
-                    println(urlData);
+                    print(urlData);
                     
                     if ( urlData != nil ) {
                         let res = response as! NSHTTPURLResponse!;
@@ -273,15 +292,15 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                         
                         if (res.statusCode >= 200 && res.statusCode < 300)
                         {
-                            var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+                            let responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                             
                             NSLog("Response ==> %@", responseData);
                             
                             var error: NSError?
                             
-                            let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
+                            let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
                             
-                            var success: String = jsonData.valueForKey("id") as! String
+                            let success: String = jsonData.valueForKey("id") as! String
                             
                             NSLog("Success: %ld", success);
                             
@@ -296,7 +315,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                                 } else {
                                     error_msg = "Erro desconhecido"
                                 }
-                                var alertView:UIAlertView = UIAlertView()
+                                let alertView:UIAlertView = UIAlertView()
                                 alertView.title = "Cadastro falhou!"
                                 alertView.message = error_msg as String
                                 alertView.delegate = self
@@ -306,7 +325,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             }
                             
                         } else {
-                            var alertView:UIAlertView = UIAlertView()
+                            let alertView:UIAlertView = UIAlertView()
                             alertView.title = "Cadastro falhou!"
                             alertView.message = "Não tem Connexão"
                             alertView.delegate = self
@@ -314,7 +333,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             alertView.show()
                         }
                     }  else {
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         alertView.title = "Cadastro falhou!"
                         alertView.message = "Não tem conexão"
                         if let error = reponseError {

@@ -1,30 +1,25 @@
 //
-//  PostConfirm.swift
+//  RewardViewController.swift
 //  mplango
 //
-//  Created by Thomas Petit on 01/08/2015.
+//  Created by Bruno on 29/08/15.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
 import UIKit
 
-class PostConfirm: UIViewController {
+class RewardViewController: UIViewController, UINavigationControllerDelegate{
+    
+    var points = 0
+    
+    @IBOutlet weak var pointsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Set navigation bar background colour
-        self.navigationController!.navigationBar.barTintColor = UIColor(hex: 0xFF6666)
-        
-        // Set navigation bar title text colour
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
+        print("points")
+        print(points)
+        pointsLabel.text = points.description
     }
     
     override func didReceiveMemoryWarning() {

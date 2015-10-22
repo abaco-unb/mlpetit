@@ -14,8 +14,8 @@ class ProfileSegue: UIStoryboardSegue {
     override func perform() {
         
         // Assign the source and destination views to local variables.
-        var ProfileVC = self.sourceViewController.view as UIView!
-        var ProfileGameVC = self.destinationViewController.view as UIView!
+        let ProfileVC = self.sourceViewController.view as UIView!
+        let ProfileGameVC = self.destinationViewController.view as UIView!
         
         // Get the screen width and height.
         let screenWidth = UIScreen.mainScreen().bounds.size.width
@@ -36,7 +36,7 @@ class ProfileSegue: UIStoryboardSegue {
             ProfileGameVC.frame = CGRectOffset(ProfileGameVC.frame, 0.0, -screenHeight)
             
             }) { (Finished) -> Void in
-                self.sourceViewController.presentViewController(self.destinationViewController as! UIViewController,
+                self.sourceViewController.presentViewController(self.destinationViewController ,
                     animated: false,
                     completion: nil)
                 
