@@ -20,17 +20,15 @@ extension String {
 
 class AccountViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var textFieldConfPass: UITextField!
     @IBOutlet weak var textFieldNationality: UITextField!
 
-    /*@IBOutlet weak var pickerView: UIPickerView!*/
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var takePhoto: UIButton!
-    @IBOutlet weak var libraryPhoto: UIButton!
-    
+
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
@@ -60,6 +58,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         // Do any additional setup after loading the view.
         //_ : CGFloat = 0.7
         //_ : CGFloat = 5.0
+        
+        scrollView.contentSize.height = 500
         
         textFieldName.backgroundColor = UIColor.clearColor()
         textFieldName.layer.borderWidth = 3.0
@@ -91,6 +91,17 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         textFieldNationality.attributedPlaceholder =
             NSAttributedString(string: "Nationalité", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
+        // Custom the visual identity of Image View
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        imageView.layer.cornerRadius = 45
+        imageView.layer.masksToBounds = true
+        
+        segmentControl.layer.borderWidth = 3
+        segmentControl.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        segmentControl.layer.cornerRadius = 20
+        segmentControl.layer.masksToBounds = true
+        
         
     }
 
@@ -98,6 +109,51 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         
     }
     
+    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+        //Hide the keyboard
+        textFieldName.resignFirstResponder()
+        textFieldEmail.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
+        textFieldConfPass.resignFirstResponder()
+        textFieldNationality.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library
+        let imagePickerController = UIImagePickerController ()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .PhotoLibrary
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        
+        presentViewController(imagePickerController, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    //MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        //Dismiss the picker if the user canceled
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
+        // The info dictionary contains multiple representations of the image, and this uses the original.
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        //Set photoImageView to display the selected image
+        imageView.image = selectedImage
+        
+        //Dismiss the picker
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+
+    
+    /*
     @IBAction func libraryPhoto(sender: UIButton) {
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -129,6 +185,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+
+    */
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
