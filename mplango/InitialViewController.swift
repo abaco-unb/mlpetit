@@ -14,10 +14,13 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var btnConnection: UIButton!
     @IBOutlet weak var btnInscription: UIButton!
     @IBOutlet weak var btnFace: UIButton!
+        
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
         let borderAlpha : CGFloat = 0.7
         let cornerRadius : CGFloat = 5.0

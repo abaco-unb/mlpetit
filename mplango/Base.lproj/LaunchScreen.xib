@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="435" height="656"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_1" translatesAutoresizingMaskIntoConstraints="NO" id="iCk-Ix-eiJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_3" translatesAutoresizingMaskIntoConstraints="NO" id="FUp-C4-kKG">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <animations/>
                 </imageView>
@@ -21,109 +22,100 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="maplango" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALS-bE-O1M">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marca" translatesAutoresizingMaskIntoConstraints="NO" id="4rW-If-QKN">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="4PE-o4-Saa"/>
+                        <constraint firstAttribute="width" constant="100" id="a66-pY-C1r"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="vrq-x1-kXv"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="vrq-x1-kXv"/>
+                            <exclude reference="a66-pY-C1r"/>
+                            <exclude reference="4PE-o4-Saa"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                        <rect key="frame" x="150" y="236" width="100" height="100"/>
+                        <mask key="constraints">
+                            <include reference="vrq-x1-kXv"/>
+                            <include reference="a66-pY-C1r"/>
+                            <exclude reference="4PE-o4-Saa"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="MapLango" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyJ-IA-hl9">
                     <rect key="frame" x="64" y="201" width="247" height="34"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                        <rect key="frame" x="145" y="393" width="76" height="21"/>
-                    </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marca" translatesAutoresizingMaskIntoConstraints="NO" id="zaY-TN-UR8">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <animations/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="i73-ic-TUP">
-                            <variation key="heightClass=regular-widthClass=compact" constant="70"/>
-                        </constraint>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="q2s-20-58h">
-                            <variation key="heightClass=regular-widthClass=compact" constant="70"/>
-                        </constraint>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="q2s-20-58h"/>
-                            <exclude reference="i73-ic-TUP"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="141" y="293" width="85" height="70"/>
-                        <mask key="constraints">
-                            <include reference="q2s-20-58h"/>
-                            <include reference="i73-ic-TUP"/>
-                        </mask>
-                    </variation>
-                </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="iCk-Ix-eiJ" secondAttribute="trailing" id="2u6-9r-saV"/>
-                <constraint firstItem="iCk-Ix-eiJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="76u-0d-u3i"/>
-                <constraint firstItem="ALS-bE-O1M" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Dq3-5D-Jlu"/>
-                <constraint firstItem="zaY-TN-UR8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HgN-Ry-I92"/>
+                <constraint firstItem="pyJ-IA-hl9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="395-CN-Bv6"/>
+                <constraint firstAttribute="trailing" secondItem="FUp-C4-kKG" secondAttribute="trailing" id="5PM-eE-8Dg"/>
+                <constraint firstAttribute="bottom" secondItem="FUp-C4-kKG" secondAttribute="bottom" id="EBo-Me-PKP"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstItem="iCk-Ix-eiJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="O8u-Z2-riQ"/>
-                <constraint firstItem="ALS-bE-O1M" firstAttribute="top" relation="lessThanOrEqual" secondItem="zaY-TN-UR8" secondAttribute="bottom" constant="10" id="Xo2-mH-UtF"/>
+                <constraint firstItem="FUp-C4-kKG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UIO-zM-4vQ"/>
+                <constraint firstItem="FUp-C4-kKG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VsK-bh-kqp"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="ALS-bE-O1M" firstAttribute="top" relation="lessThanOrEqual" secondItem="zaY-TN-UR8" secondAttribute="bottom" constant="28" id="dw4-n0-EUf">
-                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
-                </constraint>
+                <constraint firstItem="pyJ-IA-hl9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="d0Y-UB-374"/>
+                <constraint firstItem="4rW-If-QKN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hel-uX-8MQ"/>
                 <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="19" id="mYt-bx-fi2"/>
+                <constraint firstItem="pyJ-IA-hl9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4rW-If-QKN" secondAttribute="bottom" multiplier="1.1" constant="20" id="nbA-o6-ylz"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="rPF-WS-1GU"/>
-                <constraint firstItem="zaY-TN-UR8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ryX-ia-8c2"/>
-                <constraint firstAttribute="bottom" secondItem="iCk-Ix-eiJ" secondAttribute="bottom" id="wMO-u7-u4w"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="iCk-Ix-eiJ"/>
-                    <exclude reference="ALS-bE-O1M"/>
-                    <exclude reference="zaY-TN-UR8"/>
+                    <exclude reference="FUp-C4-kKG"/>
+                    <exclude reference="4rW-If-QKN"/>
+                    <exclude reference="pyJ-IA-hl9"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="2u6-9r-saV"/>
-                    <exclude reference="76u-0d-u3i"/>
-                    <exclude reference="O8u-Z2-riQ"/>
-                    <exclude reference="wMO-u7-u4w"/>
-                    <exclude reference="HgN-Ry-I92"/>
-                    <exclude reference="ryX-ia-8c2"/>
-                    <exclude reference="Dq3-5D-Jlu"/>
-                    <exclude reference="Xo2-mH-UtF"/>
-                    <exclude reference="dw4-n0-EUf"/>
+                    <exclude reference="5PM-eE-8Dg"/>
+                    <exclude reference="EBo-Me-PKP"/>
+                    <exclude reference="UIO-zM-4vQ"/>
+                    <exclude reference="VsK-bh-kqp"/>
+                    <exclude reference="hel-uX-8MQ"/>
+                    <exclude reference="395-CN-Bv6"/>
+                    <exclude reference="d0Y-UB-374"/>
+                    <exclude reference="nbA-o6-ylz"/>
                     <exclude reference="mYt-bx-fi2"/>
                     <exclude reference="rPF-WS-1GU"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
-                    <include reference="iCk-Ix-eiJ"/>
-                    <include reference="ALS-bE-O1M"/>
-                    <include reference="zaY-TN-UR8"/>
+                    <include reference="FUp-C4-kKG"/>
+                    <include reference="4rW-If-QKN"/>
+                    <include reference="pyJ-IA-hl9"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="2u6-9r-saV"/>
-                    <include reference="76u-0d-u3i"/>
-                    <include reference="O8u-Z2-riQ"/>
-                    <include reference="wMO-u7-u4w"/>
-                    <include reference="HgN-Ry-I92"/>
-                    <include reference="ryX-ia-8c2"/>
-                    <include reference="Dq3-5D-Jlu"/>
-                    <exclude reference="Xo2-mH-UtF"/>
-                    <include reference="dw4-n0-EUf"/>
+                    <include reference="5PM-eE-8Dg"/>
+                    <include reference="EBo-Me-PKP"/>
+                    <include reference="UIO-zM-4vQ"/>
+                    <include reference="VsK-bh-kqp"/>
+                    <include reference="hel-uX-8MQ"/>
+                    <include reference="395-CN-Bv6"/>
+                    <include reference="d0Y-UB-374"/>
+                    <include reference="nbA-o6-ylz"/>
                     <include reference="mYt-bx-fi2"/>
                     <include reference="rPF-WS-1GU"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="520.5" y="511"/>
+            <point key="canvasLocation" x="516" y="521"/>
         </view>
     </objects>
     <resources>
-        <image name="fundo_1" width="314" height="563"/>
+        <image name="fundo_3" width="312" height="559"/>
         <image name="marca" width="85" height="78"/>
     </resources>
 </document>

@@ -43,6 +43,12 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         //profileGender.image = user.gender
         //profilePicture.image = user.image
         
+        // Custom the visual identity of Image View
+        profilePicture.layer.borderWidth = 3
+        profilePicture.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        profilePicture.layer.cornerRadius = 40
+        profilePicture.layer.masksToBounds = true
+        
         
         //Para ir à tela da gamificação com gesto (e não botão)
         let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
