@@ -312,11 +312,11 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     } catch _ {
                     }
                     
-                    let post:NSString = "name=\(username)&mail=\(email)&password=\(password)&gender=\(gender)&nationality=\(nationality)"
+                    let post:NSString = "name=\(username)&email=\(email)&password=\(password)&gender=\(gender)&nationality=\(nationality)"
                     
                     NSLog("PostData: %@",post);
                     
-                    let url:NSURL = NSURL(string: "http://service.maplango.com.br/user")!
+                    let url:NSURL = NSURL(string: "http://server.maplango.com.br/user-rest")!
                     
                     let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
                     

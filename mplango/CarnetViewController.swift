@@ -16,16 +16,18 @@ class CarnetViewController: UIViewController {
     
     //MARK: Properties
     
+    @IBOutlet weak var backgroundRecord: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var itemWordLabel: UILabel!
     @IBOutlet weak var itemDescLabel: UILabel!
     @IBOutlet weak var itemPhoto: UIImageView!
     
     var item: Carnet? = nil
 
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
         if item != nil {
@@ -33,6 +35,11 @@ class CarnetViewController: UIViewController {
             itemDescLabel.text = item?.desc
             navigationItem.title = item!.word
         }
+        
+        backgroundRecord.layer.borderWidth = 1
+        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        backgroundRecord.layer.cornerRadius = 15
+        backgroundRecord.layer.masksToBounds = true
         
         /*
         
@@ -44,12 +51,24 @@ class CarnetViewController: UIViewController {
         */
         
         // Custom the visual identity of Image View
+        /*
         itemPhoto.layer.borderWidth = 1
         itemPhoto.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
         itemPhoto.layer.cornerRadius = 12
         itemPhoto.layer.masksToBounds = true
+
+        */
+        
         }
 
+
+    override func viewDidAppear(animated: Bool) {
+        
+
+        
+
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,25 +76,6 @@ class CarnetViewController: UIViewController {
     }
     
     
-    // MARK: - Navigation
     
-    
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if saveWord === sender {
-            let word = WordNameLabel.text ?? ""
-            let desc = WordDescriptionLabel.text ?? ""
-            let photo = WordSelectedImage.image
-            
-            //Set the word to be passed to CarnetTVC after the unwind segue.
-            item = Word(word: word, desc: desc, photo: photo)
-            
-        }
-
-        
-    }
-    */
-
 }
 

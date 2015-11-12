@@ -15,18 +15,28 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     //MARK: Properties
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var wordTextField: UITextField!
     @IBOutlet var descTextField: UITextField!
     @IBOutlet var photoImage: UIImageView!
     @IBOutlet weak var typeSegmentControl: UISegmentedControl!
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
     
+    @IBOutlet weak var recordBtn: UIButton!
+    @IBOutlet weak var backgroundRecord: UIView!
+    @IBOutlet weak var listenBtn: UIButton!
+    
+    @IBOutlet weak var addPicture: UIButton!
     
     var item: Carnet? = nil
     var segment = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.contentSize.height = 300
+
+
         
         // Handle the text field’s user input through delegate callbacks.
         wordTextField.delegate = self
@@ -58,10 +68,14 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             NSAttributedString(string: "Intégrer un commentaire (facultatif)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
         
         // Custom the visual identity of Image View
-        photoImage.layer.borderWidth = 1
-        photoImage.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
-        photoImage.layer.cornerRadius = 12
+    
+        photoImage.layer.cornerRadius = 10
         photoImage.layer.masksToBounds = true
+        
+        backgroundRecord.layer.borderWidth = 1
+        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        backgroundRecord.layer.cornerRadius = 15
+        backgroundRecord.layer.masksToBounds = true
         
         
     }
@@ -86,6 +100,25 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     
     
+    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
+        //Hide the keyboard
+        wordTextField.resignFirstResponder()
+        descTextField.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library
+        let imagePickerController = UIImagePickerController ()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .PhotoLibrary
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        
+        presentViewController(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    /*
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         //Hide the keyboard
         wordTextField.resignFirstResponder()
@@ -104,6 +137,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         
     }
+    */
     
     
     //MARK: UIImagePickerControllerDelegate
