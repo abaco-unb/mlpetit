@@ -18,7 +18,7 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
-    var segment:NSNumber = 2
+    //var segment:NSNumber = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +44,15 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     func itemFetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Carnet")
+        
+        /*
         if(segment != 2) {
             print("fazer filtro")
             let predicate = NSPredicate(format: "category == %@", segment)
             fetchRequest.predicate = predicate
         }
+        */
+        
         let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
@@ -82,13 +86,17 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
+        
+        /*
         if indexPath.row == 0 {
             cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) 
         } else {
+
+        */
             cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
             let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
             cell.textLabel!.text = item.word
-        }
+        //}
         
         return cell
     }
@@ -139,13 +147,17 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
+            //let itemController:UINavigationController = segue.destinationViewController as! UINavigationController
+            //let targetController = itemController.topViewController as! CarnetViewController
             let item:Carnet = fetchedResultController.objectAtIndexPath(indexPath!) as! Carnet
+            //targetController.item = item
             itemController.item = item
             
         }
 
     }
     
+    /*
     @IBAction func segumentedTapped(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -165,6 +177,7 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         }
         tableView.reloadData()
     }
+    */
     
   
 }

@@ -19,8 +19,10 @@ class CarnetViewController: UIViewController {
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var itemWordLabel: UILabel!
-    @IBOutlet weak var itemDescLabel: UILabel!
     @IBOutlet weak var itemPhoto: UIImageView!
+    @IBOutlet weak var itemDescLabel: UITextView!
+    @IBOutlet weak var listenBtn: UIButton!
+    @IBOutlet weak var listenSlowBtn: UIButton!
     
     var item: Carnet? = nil
 
@@ -28,12 +30,14 @@ class CarnetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        scrollView.contentSize.height = 300
+
         
         if item != nil {
             itemWordLabel.text = item?.word
             itemDescLabel.text = item?.desc
             navigationItem.title = item!.word
+            //itemPhoto.image = item?.photo
         }
         
         backgroundRecord.layer.borderWidth = 1
@@ -50,25 +54,19 @@ class CarnetViewController: UIViewController {
         }
         */
         
-        // Custom the visual identity of Image View
-        /*
-        itemPhoto.layer.borderWidth = 1
-        itemPhoto.layer.borderColor = UIColor(hex: 0x3399CC).CGColor
-        itemPhoto.layer.cornerRadius = 12
-        itemPhoto.layer.masksToBounds = true
-
-        */
-        
         }
 
 
     override func viewDidAppear(animated: Bool) {
         
-
+        
         
 
     }
     
+    override func viewDidLayoutSubviews() {
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

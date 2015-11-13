@@ -19,24 +19,22 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet var wordTextField: UITextField!
     @IBOutlet var descTextField: UITextField!
     @IBOutlet var photoImage: UIImageView!
-    @IBOutlet weak var typeSegmentControl: UISegmentedControl!
+    //@IBOutlet weak var typeSegmentControl: UISegmentedControl!
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
     
-    @IBOutlet weak var recordBtn: UIButton!
     @IBOutlet weak var backgroundRecord: UIView!
-    @IBOutlet weak var listenBtn: UIButton!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var recordButton: UIButton!
     
     @IBOutlet weak var addPicture: UIButton!
     
     var item: Carnet? = nil
-    var segment = 2
+    //var segment = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.contentSize.height = 300
-
-
         
         // Handle the text field’s user input through delegate callbacks.
         wordTextField.delegate = self
@@ -51,7 +49,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
-        
         
         
         // Custom the visual identity of Text Fields
@@ -99,6 +96,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     }
     
     
+    //MARK: Actions Image
+    
     
     @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
         //Hide the keyboard
@@ -120,22 +119,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     /*
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
-        //Hide the keyboard
-        wordTextField.resignFirstResponder()
-        descTextField.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
-        
+    
     }
     */
     
@@ -161,7 +145,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     }
 
     
-    // MARK:- Create Item Carnet
+    // MARK:- Create and Edit Item Carnet
     
     func createItemCarnet() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -176,7 +160,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
             item.word = wordTextField.text!
             item.desc = descTextField.text!
-            item.category = segment
+            //item.photo = photoImage.image!
+            //item.category = segment
             item.user = user
             do {
                 //falta foto
@@ -188,8 +173,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             
         }
     }
-    
-    // MARK:- Edit Item Carnet
     
     func editItemCarnet() {
         item?.word = wordTextField.text!
@@ -234,6 +217,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         navigationItem.title = wordTextField.text
     }
     
+    /*
     @IBAction func segmentTapped(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -245,7 +229,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             break
         }
     }
-    
+    */
     
 
     // MARK: - Navigation
@@ -257,7 +241,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             let word = wordTextField.text ?? ""
             let desc = descTextField.text ?? ""
             let photo = photoImage.image
-            let category = segment
+            //let category = segment
             //falta som
             
             

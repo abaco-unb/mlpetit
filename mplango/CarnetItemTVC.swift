@@ -76,6 +76,11 @@ class CarnetItemTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     
     // MARK: - Table view data source
+    
+    func configureTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 160.0
+    }
 
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -91,11 +96,12 @@ class CarnetItemTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         return 1
     }
     
+    let cellIdentifier = "BasicCarnetCell"
+
     
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellIdentifier = "BasicCarnetCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! BasicCarnetCell
         
         
@@ -107,8 +113,29 @@ class CarnetItemTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         
         return cell
     }
-
+    */
     
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return basicCarnetCellAtIndexPath(indexPath)
+    }
+    
+    func basicCarnetCellAtIndexPath(indexPath:NSIndexPath) -> BasicCarnetCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! BasicCarnetCell
+        setWordForCell(cell, indexPath: indexPath)
+        setDescForCell(cell, indexPath: indexPath)
+        return cell
+    }
+    
+    func setWordForCell(cell:BasicCarnetCell, indexPath:NSIndexPath) {
+        let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
+        cell.itemWordLabel.text = item.word
+    }
+    
+    func setDescForCell(cell:BasicCarnetCell, indexPath:NSIndexPath) {
+        let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
+        cell.itemDescLabel.text = item.desc
+    }
+
     
     
     override func viewDidAppear(animated: Bool) {
