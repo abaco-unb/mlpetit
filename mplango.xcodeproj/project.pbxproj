@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
+		159C11AF1BF576A60018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
+		159C11B01BF586A80018EBE1 /* mplango.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */; };
+		159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B21BF589D70018EBE1 /* RestApiManager.swift */; };
+		159C11B41BF589D70018EBE1 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B21BF589D70018EBE1 /* RestApiManager.swift */; };
+		159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* UserRestService.swift */; };
+		159C11B81BF58B1C0018EBE1 /* UserRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* UserRestService.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
@@ -119,6 +126,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		159C11AD1BF5768A0018EBE1 /* RUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
+		159C11B11BF586D70018EBE1 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
+		159C11B21BF589D70018EBE1 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
+		159C11B61BF58B1C0018EBE1 /* UserRestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRestService.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		54241A0C1B7E1B1E0074D350 /* mplango 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 3.xcdatamodel"; sourceTree = "<group>"; };
 		54241A0D1B7E31BF0074D350 /* mplango 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -225,6 +236,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		159C11B51BF589DF0018EBE1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				159C11B21BF589D70018EBE1 /* RestApiManager.swift */,
+				159C11B61BF58B1C0018EBE1 /* UserRestService.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
 		543A48761BDD422E008E9D71 /* Tutorial screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +283,7 @@
 		8283BE141B0143AF0085F9A6 /* mplango */ = {
 			isa = PBXGroup;
 			children = (
+				159C11B51BF589DF0018EBE1 /* Service */,
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
 				542DEE3F1B8A178800A09A00 /* TabBarController.swift */,
 				828C717D1B83C3E8009FE9B5 /* Entity */,
@@ -344,6 +365,7 @@
 				8283BE3C1B0162F00085F9A6 /* User.swift */,
 				82D73C9B1B8139DB00DFEAB0 /* Post.swift */,
 				54241A101B7E35040074D350 /* Carnet.swift */,
+				159C11AD1BF5768A0018EBE1 /* RUser.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -583,12 +605,14 @@
 				546483991BF11E2A00AA41EB /* CarnetItemTVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
+				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
 				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
 				546483A31BF150E400AA41EB /* CarnetSoundCell.swift in Sources */,
 				545A4AB21BF37268001B3D2C /* BasicCarnetCell.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
+				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,
 				54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */,
@@ -598,6 +622,7 @@
 				542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */,
 				8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */,
 				82D73CA21B81718B00DFEAB0 /* CategoryViewController.swift in Sources */,
+				159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */,
 				823CC0091B46291700F633F8 /* Annotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,10 +635,12 @@
 				54D02AB81BD949FC00B62860 /* UITextViewExt.swift in Sources */,
 				82842E451B61EA7900E7C860 /* InitialViewController.swift in Sources */,
 				82842E391B61E65B00E7C860 /* LoginViewController.swift in Sources */,
+				159C11B41BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				82842E351B61E38700E7C860 /* AppDelegate.swift in Sources */,
 				546483A61BF159F000AA41EB /* CarnetItemTVC.swift in Sources */,
 				828C717C1B83B260009FE9B5 /* CarnetViewController.swift in Sources */,
 				82842E371B61E65200E7C860 /* AccountViewController.swift in Sources */,
+				159C11B01BF586A80018EBE1 /* mplango.xcdatamodeld in Sources */,
 				82842E381B61E65600E7C860 /* ForgotPassViewController.swift in Sources */,
 				54D02ABB1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				82842E3D1B61E66800E7C860 /* VCMapView.swift in Sources */,
@@ -621,11 +648,13 @@
 				82D73CAB1B82479400DFEAB0 /* RecordedAudio.swift in Sources */,
 				828C717A1B83A11D009FE9B5 /* Carnet.swift in Sources */,
 				82288E8E1B51C878006BC80F /* ContactViewController.swift in Sources */,
+				159C11AF1BF576A60018EBE1 /* RUser.swift in Sources */,
 				82842E361B61E62D00E7C860 /* User.swift in Sources */,
 				828C717B1B83A620009FE9B5 /* CarnetTVC.swift in Sources */,
 				82D73CA31B81718B00DFEAB0 /* CategoryViewController.swift in Sources */,
 				545A4AB31BF3769C001B3D2C /* BasicCarnetCell.swift in Sources */,
 				82842E3B1B61E66100E7C860 /* Annotation.swift in Sources */,
+				159C11B81BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE311B0143AF0085F9A6 /* mplangoTests.swift in Sources */,
 				82842E3A1B61E65E00E7C860 /* MapViewController.swift in Sources */,
 				82D73C9D1B8139DB00DFEAB0 /* Post.swift in Sources */,
@@ -844,6 +873,7 @@
 		8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				159C11B11BF586D70018EBE1 /* mplango 8.xcdatamodel */,
 				54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */,
 				54241A0F1B7E34130074D350 /* mplango 6.xcdatamodel */,
 				54241A0E1B7E321E0074D350 /* mplango 5.xcdatamodel */,
@@ -851,7 +881,7 @@
 				54241A0C1B7E1B1E0074D350 /* mplango 3.xcdatamodel */,
 				8283BE1A1B0143AF0085F9A6 /* mplango.xcdatamodel */,
 			);
-			currentVersion = 54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */;
+			currentVersion = 159C11B11BF586D70018EBE1 /* mplango 8.xcdatamodel */;
 			path = mplango.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

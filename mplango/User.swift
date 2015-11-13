@@ -10,6 +10,7 @@ import Foundation
 
 class User: NSManagedObject {
     
+    @NSManaged var id:NSNumber
     @NSManaged var email:String
     @NSManaged var gender:String
     @NSManaged var name:String

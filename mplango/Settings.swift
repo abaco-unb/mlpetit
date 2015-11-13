@@ -11,13 +11,7 @@ import CoreData
 
 
 class Settings: UITableViewController {
-    
-    
-    
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
-
-    
-
 }

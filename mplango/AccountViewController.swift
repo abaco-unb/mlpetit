@@ -305,104 +305,113 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     newUser.gender = gender
                     newUser.nationality = nationality
                     newUser.profile = 1
+                    newUser.id = 1
                     newUser.image = UIImageJPEGRepresentation(imageView.image!, 1)!
                     print(newUser)
                     do {
                         try contxt.save()
-                    } catch _ {
-                    }
-                    
-                    let post:NSString = "name=\(username)&email=\(email)&password=\(password)&gender=\(gender)&nationality=\(nationality)"
-                    
-                    NSLog("PostData: %@",post);
-                    
-                    let url:NSURL = NSURL(string: "http://server.maplango.com.br/user-rest")!
-                    
-                    let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
-                    
-                    let postLength:NSString = String( postData.length )
-                    
-                    let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-                    request.HTTPMethod = "POST"
-                    request.HTTPBody = postData
-                    request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
-                    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-                    request.setValue("application/json", forHTTPHeaderField: "Accept")
-                    
-                    
-                    var reponseError: NSError?
-                    var response: NSURLResponse?
-                    
-                    var urlData: NSData?
-                    do {
-                        urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
-                    } catch let error as NSError {
-                        reponseError = error
-                        urlData = nil
-                    }
-                    
-                    print(urlData);
-                    
-                    if ( urlData != nil ) {
-                        let res = response as! NSHTTPURLResponse!;
-                        
-                        NSLog("Response code: %ld", res.statusCode);
-                        
-                        if (res.statusCode >= 200 && res.statusCode < 300)
-                        {
-                            let responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
-                            
-                            NSLog("Response ==> %@", responseData);
-                            
-                            var error: NSError?
-                            
-                            let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
-                            
-                            let success: String = jsonData.valueForKey("id") as! String
-                            
-                            NSLog("Success: %ld", success);
-                            
-                            if(success != "")
-                            {
-                                NSLog("Cadastro realizado com sucesso");
-                                self.dismissViewControllerAnimated(true, completion: nil)
-                            } else {
-                                var error_msg:NSString
-                                if jsonData["error_message"] as? NSString != nil {
-                                    error_msg = jsonData["error_message"] as! NSString
-                                } else {
-                                    error_msg = "Erro desconhecido"
-                                }
-                                let alertView:UIAlertView = UIAlertView()
-                                alertView.title = "Cadastro falhou!"
-                                alertView.message = error_msg as String
-                                alertView.delegate = self
-                                alertView.addButtonWithTitle("OK")
-                                alertView.show()
-                                
-                            }
-                            
-                        } else {
-                            let alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Cadastro falhou!"
-                            alertView.message = "Não tem Connexão"
-                            alertView.delegate = self
-                            alertView.addButtonWithTitle("OK")
-                            alertView.show()
-                        }
-                    }  else {
                         let alertView:UIAlertView = UIAlertView()
-                        alertView.title = "Cadastro falhou!"
-                        alertView.message = "Não tem conexão"
-                        if let error = reponseError {
-                            alertView.message = (error.localizedDescription)
-                        }
+                        alertView.title = "Registro os Dados!"
+                        alertView.message = "Cadastro Realizado com sucesso!"
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        //self.performSegueWithIdentifier("goto_login", sender: self)
+                    } catch _ {
+                        
                     }
                     
-                    self.performSegueWithIdentifier("goto_login", sender: self)
+                    
+//                    let post:NSString = "name=\(username)&email=\(email)&password=\(password)&gender=\(gender)&nationality=\(nationality)"
+//                    
+//                    NSLog("PostData: %@",post);
+//                    
+//                    let url:NSURL = NSURL(string: "http://server.maplango.com.br/user-rest")!
+//                    
+//                    let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+//                    
+//                    let postLength:NSString = String( postData.length )
+//                    
+//                    let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+//                    request.HTTPMethod = "POST"
+//                    request.HTTPBody = postData
+//                    request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
+//                    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//                    request.setValue("application/json", forHTTPHeaderField: "Accept")
+//                    
+//                    
+//                    var reponseError: NSError?
+//                    var response: NSURLResponse?
+//                    
+//                    var urlData: NSData?
+//                    do {
+//                        urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+//                    } catch let error as NSError {
+//                        reponseError = error
+//                        urlData = nil
+//                    }
+//                    
+//                    print(urlData);
+//                    
+//                    if ( urlData != nil ) {
+//                        let res = response as! NSHTTPURLResponse!;
+//                        
+//                        NSLog("Response code: %ld", res.statusCode);
+//                        
+//                        if (res.statusCode >= 200 && res.statusCode < 300)
+//                        {
+//                            let responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+//                            
+//                            NSLog("Response ==> %@", responseData);
+//                            
+//                            var error: NSError?
+//                            
+//                            let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
+//                            
+//                            let success: String = jsonData.valueForKey("id") as! String
+//                            
+//                            NSLog("Success: %ld", success);
+//                            
+//                            if(success != "")
+//                            {
+//                                NSLog("Cadastro realizado com sucesso");
+//                                self.dismissViewControllerAnimated(true, completion: nil)
+//                            } else {
+//                                var error_msg:NSString
+//                                if jsonData["error_message"] as? NSString != nil {
+//                                    error_msg = jsonData["error_message"] as! NSString
+//                                } else {
+//                                    error_msg = "Erro desconhecido"
+//                                }
+//                                let alertView:UIAlertView = UIAlertView()
+//                                alertView.title = "Cadastro falhou!"
+//                                alertView.message = error_msg as String
+//                                alertView.delegate = self
+//                                alertView.addButtonWithTitle("OK")
+//                                alertView.show()
+//                                
+//                            }
+//                            
+//                        } else {
+//                            let alertView:UIAlertView = UIAlertView()
+//                            alertView.title = "Cadastro falhou!"
+//                            alertView.message = "Não tem Connexão"
+//                            alertView.delegate = self
+//                            alertView.addButtonWithTitle("OK")
+//                            alertView.show()
+//                        }
+//                    }  else {
+//                        let alertView:UIAlertView = UIAlertView()
+//                        alertView.title = "Cadastro falhou!"
+//                        alertView.message = "Não tem conexão"
+//                        if let error = reponseError {
+//                            alertView.message = (error.localizedDescription)
+//                        }
+//                        alertView.delegate = self
+//                        alertView.addButtonWithTitle("OK")
+//                        alertView.show()
+//                    }
                 }
             }
         }
