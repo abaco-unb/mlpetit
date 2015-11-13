@@ -13,7 +13,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
-    
     @IBOutlet weak var profPicture: UIImageView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var confirmEditProf: UIBarButtonItem!
@@ -33,8 +32,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         segmentControl.layer.cornerRadius = 20
         segmentControl.layer.masksToBounds = true
         
-        
-        
     }
 
     //MARK: Actions
@@ -42,8 +39,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
-    
-    
     
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         //Hide the keyboard

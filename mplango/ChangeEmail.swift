@@ -10,37 +10,10 @@ import UIKit
 import CoreData
 
 class ChangeEmail: UIViewController {
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     //MARK: Actions
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
-    
-    
-    
-    
-    
-    
-    
-
 }

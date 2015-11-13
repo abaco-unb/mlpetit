@@ -10,27 +10,10 @@ import UIKit
 import CoreData
 
 class ChangePasswrd: UIViewController {
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     //MARK: Actions
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
-    
-    
-    
-    
-    
-
 }

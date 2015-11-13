@@ -16,6 +16,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     var users = [User]()
+    var restPath = "http://server.maplango.com.br/user-rest"
+    var userCollection = [RUser]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textFieldPassword.attributedPlaceholder =
             NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
-        
     }
     
     //Text field delegate
@@ -48,6 +50,97 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_map", sender: self)
+        
+    }
+    
+//    func getJsonDataUser() {
+//        
+//        var url = NSURL(string: urlPath)
+//        
+//        var session = NSURLSession.sharedSession()
+//        var task = session.dataTaskWithURL(url!,
+//            completionHandler: {
+//                data,
+//                response,
+//                error -> Void in
+//                
+//                print("Task completed")
+//                
+//                if(error != nil) {
+//                    print(error!.localizedDescription)
+//                }
+//                var err: NSError?
+//                
+//                var results = NSJSONSerialization.JSONObjectWithData(data!,
+//                    options: NSJSONReadingOptions.MutableContainers) as NSArray
+//                
+//                if(err != nil) {
+//                    print("JSON Error \(err!.localizedDescription)")
+//                }
+//                
+//                println("\(results.count) JSON rows returned and parsed into an array")
+//                
+//                if (results.count != 0) {
+//                    // For this example just spit out the first item "event" entry
+//                    var rowData: NSDictionary = results[0] as NSDictionary
+//                    var deviceValue = rowData["device"] as String;
+//                    println("Got \(deviceValue) out")
+//                } else {
+//                    println("No rows returned")
+//                }
+//        })
+//        
+//        task.resume()
+//    }
+    func unwrap(any:Any) -> Any {
+        
+        let mi = Mirror(reflecting: any)
+        if mi.displayStyle != .Optional {
+            return any
+        }
+        
+        if mi.children.count == 0 { return NSNull() }
+        let (_, some) = mi.children.first!
+        return some
+        
+    }
+    
+    func loadUser(users:NSArray) {
+        for user in users {
+            let id = Int(user["id"]!!.description)
+            let name = user["name"]!!.description
+            let email = user["email"]!!.description
+            let password = user["password"]!!.description
+            let gender = user["gender"]!!.description
+            let nationality = user["nationality"]!!.description
+            let image = user["image"]!!.description
+            let levelId = Int(user["level"]!!["id"]!!.description)
+            
+            let rUser = RUser(id: id!, email: email, name: name, gender: gender, password: password, nationality: nationality, image: image, level: levelId!)
+            userCollection.append(rUser);
+            print(userCollection)
+        }
+        
+    }
+    func getRemoteUser(callback:(NSDictionary)->()) {
+        request(self.restPath, callback: callback)
+    }
+    
+    func request(url: String, callback:(NSDictionary) -> ()) {
+        let nsUrl = NSURL(string: url)
+        let task = NSURLSession.sharedSession().dataTaskWithURL(nsUrl!) {
+            (data, response, error) in
+            //NSLog("@sucesso %@", (response?.description)!)
+            do {
+                let response = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                callback(response)
+                
+            }
+            catch let error as NSError {
+                print("ERRO NA INTEGRACAO : ", error.localizedDescription, error.debugDescription ,  separator: " ")
+            }
+        }
+        task.resume()
     }
     
     @IBAction func loginTapped(sender: UIButton) {
@@ -66,6 +159,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             
+            let service = UserRestService()
+            service.getList()
+            var u:RUser?
+            print(service.userCollection.count)
+            for user in service.userCollection {
+                if((user.name == username || user.email == username) && user.password == password){
+                    u = user
+                    print("achou os dados do cara")
+                }
+            }
             let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let contxt: NSManagedObjectContext = appDel.managedObjectContext!
             let fetchRequest = NSFetchRequest(entityName: "User")
@@ -76,21 +179,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 if (fetchResults.count > 0) {
                     
-                    let email: String = fetchResults[0].email
-                    let pwd: String   = fetchResults[0].password
+                    NSLog("@Id :  %@",fetchResults[0].id)
+                    //let id = Int(fetchResults[0].id)
                     
-                    NSLog("login autenticado: %ld", email)
-                    NSLog("pwd autenticada: %ld", pwd)
                     
-                    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                    //prefs.setObject(fetchResults[0], forKey: "USER")
-                    //prefs.setObject(fetchResults[0] as MUser, forKey: "USER")
-                    prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
-                    prefs.setObject(fetchResults[0].email, forKey: "USEREMAIL")
-                    prefs.setInteger(1, forKey: "ISLOGGEDIN")
-                    prefs.synchronize()
+                    //let remoteUser:RUser = service.get(String(fetchResults[0].id))
                     
-                    self.performSegueWithIdentifier("goto_map", sender: self)
+                    //print(remoteUser)
+                    
+//                    let email: String = fetchResults[0].email
+//                    let pwd: String   = fetchResults[0].password
+                    
+//                    NSLog("login autenticado: %ld", email)
+//                    NSLog("pwd autenticada: %ld", pwd)
+                    
+//                    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//                    //prefs.setObject(fetchResults[0], forKey: "USER")
+//                    //prefs.setObject(fetchResults[0] as MUser, forKey: "USER")
+//                    prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
+//                    prefs.setObject(fetchResults[0].email, forKey: "USEREMAIL")
+//                    prefs.setInteger(1, forKey: "ISLOGGEDIN")
+//                    prefs.synchronize()
+//                    
+//                    self.performSegueWithIdentifier("goto_map", sender: self)
                 
                 } else {
                     let alertView:UIAlertView = UIAlertView()
