@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
     <entity name="Carnet" representedClassName="mplango.Carnet" syncable="YES">
         <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,6 +31,6 @@
     <elements>
         <element name="Carnet" positionX="-101" positionY="170" width="128" height="118"/>
         <element name="Post" positionX="-540" positionY="140" width="128" height="148"/>
-        <element name="User" positionX="-342" positionY="-72" width="128" height="193"/>
+        <element name="User" positionX="-342" positionY="-72" width="128" height="195"/>
     </elements>
 </model>

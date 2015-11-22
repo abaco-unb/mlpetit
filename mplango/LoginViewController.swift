@@ -187,21 +187,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                     //print(remoteUser)
                     
-//                    let email: String = fetchResults[0].email
-//                    let pwd: String   = fetchResults[0].password
+                    let email: String = fetchResults[0].email
+                    let pwd: String   = fetchResults[0].password
                     
-//                    NSLog("login autenticado: %ld", email)
-//                    NSLog("pwd autenticada: %ld", pwd)
+                    NSLog("login autenticado: %ld", email)
+                    NSLog("pwd autenticada: %ld", pwd)
                     
-//                    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//                    //prefs.setObject(fetchResults[0], forKey: "USER")
-//                    //prefs.setObject(fetchResults[0] as MUser, forKey: "USER")
-//                    prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
-//                    prefs.setObject(fetchResults[0].email, forKey: "USEREMAIL")
-//                    prefs.setInteger(1, forKey: "ISLOGGEDIN")
-//                    prefs.synchronize()
-//                    
-//                    self.performSegueWithIdentifier("goto_map", sender: self)
+                    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                    //prefs.setObject(fetchResults[0], forKey: "USER")
+                    //prefs.setObject(fetchResults[0] as MUser, forKey: "USER")
+                    prefs.setObject(fetchResults[0].name, forKey: "USERNAME")
+                    prefs.setObject(fetchResults[0].email, forKey: "USEREMAIL")
+                    prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                    prefs.synchronize()
+                    
+                    self.performSegueWithIdentifier("goto_map", sender: self)
                 
                 } else {
                     let alertView:UIAlertView = UIAlertView()

@@ -9,20 +9,51 @@
 import UIKit
 import CoreData
 
-class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
+    
+    var user: User!
+    
 
+    @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var profPicture: UIImageView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var confirmEditProf: UIBarButtonItem!
+    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userNation: UITextField!
+    @IBOutlet weak var userBio: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        retrieveLoggedUser()
+    
+        scroll.contentSize.height = 200
+        
+        
+        
+        // Keyboard stuff.
+        let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        
+        
+
+        
+        print(user.name)
+        print(user.nationality)
+
+        userName.attributedPlaceholder =
+            NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+        
+        userNation.attributedPlaceholder =
+            NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
         // Custom the visual identity of Image View
-        profPicture.layer.borderWidth = 3
-        profPicture.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        
         profPicture.layer.cornerRadius = 40
         profPicture.layer.masksToBounds = true
 
@@ -31,6 +62,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         segmentControl.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         segmentControl.layer.cornerRadius = 20
         segmentControl.layer.masksToBounds = true
+        
         
     }
 
@@ -60,6 +92,46 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
     
+    func retrieveLoggedUser() {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let email: String = prefs.objectForKey("USEREMAIL") as! String
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+            user = fetchResults[0];
+            
+        }
+        
+    }
+    
+    
+    //MARK: UIScrollView moves up (textField) when keyboard appears
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func keyboardWillShow(notification:NSNotification){
+        
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+        
+        var contentInset:UIEdgeInsets = self.scroll.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scroll.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification:NSNotification){
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsetsZero
+        self.scroll.contentInset = contentInset
+    }
+    
+    
     //MARK: UIImagePickerControllerDelegate
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -79,6 +151,13 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(scroll, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(scroll, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
 
     /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

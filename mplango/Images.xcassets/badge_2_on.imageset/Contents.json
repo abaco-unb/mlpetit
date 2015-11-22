@@ -6,8 +6,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "badge_barco.png"
+      "filename" : "badge_barco.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

@@ -6,8 +6,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "badge_tesouro_off.png"
+      "filename" : "badge_tesouro_off.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

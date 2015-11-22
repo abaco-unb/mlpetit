@@ -6,8 +6,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "badge_mapa.png"
+      "filename" : "badge_mapa.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

@@ -40,14 +40,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
     */
     
-    //Text field delegate
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        
-        return true
-    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +52,13 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         //_ : CGFloat = 0.7
         //_ : CGFloat = 5.0
         
-        scrollView.contentSize.height = 500
+        scrollView.contentSize.height = 300
+        
+        // Keyboard stuff.
+        let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+
         
         textFieldName.backgroundColor = UIColor.clearColor()
         textFieldName.layer.borderWidth = 3.0
@@ -109,6 +108,11 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        
+
+    }
+    
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         //Hide the keyboard
         textFieldName.resignFirstResponder()
@@ -151,6 +155,34 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    
+    
+    //MARK: UIScrollView moves up (textField) when keyboard appears
+
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func keyboardWillShow(notification:NSNotification){
+        
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification:NSNotification){
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsetsZero
+        self.scrollView.contentInset = contentInset
+    }
+
 
     
     /*

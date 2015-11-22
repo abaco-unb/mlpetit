@@ -37,15 +37,17 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         print(user.gender)
         
         navigationItem.title = user.name
-        profileNumberPosts.text = user.posts.count.description
+        
         profileNationality.text = user.nationality
+        profileNumberPosts.text = user.posts.count.description
+        //profileNumberFollowers.text =
+        //profileNumberFollowing.text =
         
         //profileGender.image = user.gender
         //profilePicture.image = user.image
         
         // Custom the visual identity of Image View
-        profilePicture.layer.borderWidth = 3
-        profilePicture.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
+        
         profilePicture.layer.cornerRadius = 40
         profilePicture.layer.masksToBounds = true
         
