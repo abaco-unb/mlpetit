@@ -27,6 +27,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var recordButton: UIButton!
     
     @IBOutlet weak var addPicture: UIButton!
+    @IBOutlet weak var removeImage: UIButton!
     
     var item: Carnet? = nil
     //var segment = 2
@@ -39,6 +40,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         // Handle the text field’s user input through delegate callbacks.
         wordTextField.delegate = self
         descTextField.delegate = self
+        
+        removeImage.hidden = true
         
         
         if item != nil {
@@ -76,6 +79,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         
     }
+    
 
     
     //MARK: Actions
@@ -142,8 +146,20 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         //Dismiss the picker
         dismissViewControllerAnimated(true, completion: nil)
         
+        addPicture.hidden = true
+        removeImage.hidden = false
+        removeImage.enabled = true
+        
     }
 
+    @IBAction func removeImage(sender: AnyObject) {
+        
+        photoImage.image = nil
+        addPicture.hidden = false
+        addPicture.enabled = true
+        removeImage.hidden = true
+        
+    }
     
     // MARK:- Create and Edit Item Carnet
     
@@ -233,6 +249,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
 
     // MARK: - Navigation
+    
+
+
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -20,7 +20,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var profPicture: UIImageView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var userGender: UISegmentedControl!
     @IBOutlet weak var confirmEditProf: UIBarButtonItem!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userNation: UITextField!
@@ -30,9 +30,26 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
-    
-        scroll.contentSize.height = 200
+        print("user data")
+        print(user.name)
+        print(user.nationality)
+        print(user.gender)
         
+        
+        //import data from user
+        
+        userName.attributedPlaceholder =
+            NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+        
+        userNation.attributedPlaceholder =
+            NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+        
+        //userGender.selectedSegmentIndex = NSAttributedString(string: user.gender)
+        
+
+
+        scroll.contentSize.height = 200
+
         
         
         // Keyboard stuff.
@@ -40,17 +57,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-        
 
-        
-        print(user.name)
-        print(user.nationality)
-
-        userName.attributedPlaceholder =
-            NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
-        
-        userNation.attributedPlaceholder =
-            NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
         // Custom the visual identity of Image View
         
@@ -58,10 +65,10 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         profPicture.layer.masksToBounds = true
 
         
-        segmentControl.layer.borderWidth = 3
-        segmentControl.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        segmentControl.layer.cornerRadius = 20
-        segmentControl.layer.masksToBounds = true
+        userGender.layer.borderWidth = 3
+        userGender.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        userGender.layer.cornerRadius = 20
+        userGender.layer.masksToBounds = true
         
         
     }

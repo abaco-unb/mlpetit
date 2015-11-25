@@ -11,7 +11,7 @@ import CoreData
 import MapKit
 
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate {
 
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -131,6 +131,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     }
     
+    //MARK: Actions
+    
+    
+    @IBAction func popover(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("showNotifications", sender: self)
+        
+    }
+    
+    
+    
+    
     // MARK:- Retrieve Posts
     
     
@@ -214,5 +226,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             print(post)
             
         }
+        
+        // para a segue que mostra o popover de notificações
+        if segue.identifier == "showNotifications" {
+            
+            var notifVC = segue.destinationViewController as UIViewController
+            
+            var controller = notifVC.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
+            
+        }
+        
     }
+    
+    
+    // para que o popover não esconda toda a tela
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    
+    
+    
+    
 }
