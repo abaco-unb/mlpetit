@@ -18,9 +18,11 @@ class TabBarController: UITabBarController, UINavigationControllerDelegate {
         
         var tabBar = self.tabBar
         
-        UITabBar.appearance().barTintColor = UIColor(hex: 0x3399CC)
+        UITabBar.appearance().barTintColor = UIColor(hex: 0x2C98D4)
         
         UITabBar.appearance().tintColor = UIColor.whiteColor()
+        
+
         
 
         
@@ -31,6 +33,8 @@ class TabBarController: UITabBarController, UINavigationControllerDelegate {
             }
             if let selectedImage = item.selectedImage {
                 item.selectedImage = selectedImage.imageWithRenderingMode(.AlwaysOriginal)
+                
+                
             }
             
 
