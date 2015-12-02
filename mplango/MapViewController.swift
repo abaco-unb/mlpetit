@@ -24,12 +24,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var street: String!
     var loggedUser: User!
     
+    //Filtros: background e botões
+    
+    @IBOutlet weak var filtersView: UIView!
+    @IBOutlet weak var recentsBtn: UIButton!
+    @IBOutlet weak var defisBtn: UIButton!
+    @IBOutlet weak var astucesBtn: UIButton!
+    @IBOutlet weak var doutesBtn: UIButton!
+    @IBOutlet weak var activiteBtn: UIButton!
+    
+    @IBOutlet weak var showFiltersBtn: UIButton!
+    @IBOutlet weak var hideFiltersBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         retrieveLoggedUser()
+        
+        
+        filtersView.hidden = true
         
         
         //let barViewController = self.tabBarController?.viewControllers
@@ -140,6 +154,50 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    @IBAction func showFilters(sender: AnyObject) {
+        
+        filtersView.hidden = false
+        showFiltersBtn.hidden = true
+        hideFiltersBtn.hidden = false
+        hideFiltersBtn.enabled = true
+        recentsBtn.enabled = true
+        defisBtn.enabled = true
+        astucesBtn.enabled = true
+        doutesBtn.enabled = true
+        activiteBtn.enabled = true
+        
+    }
+    
+    @IBAction func hideFilters(sender: AnyObject) {
+        
+        showFiltersBtn.hidden = false
+        showFiltersBtn.enabled = true
+        filtersView.hidden = true
+        
+    }
+    
+    @IBAction func showRecentPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showDefisPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showAstucesPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showDoutesPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showActivitesPosts(sender: AnyObject) {
+        
+    }
+    
+    
+    
     
     
     
@@ -230,15 +288,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // para a segue que mostra o popover de notificações
         if segue.identifier == "showNotifications" {
             
-            var notifVC = segue.destinationViewController as UIViewController
+            let notifVC = segue.destinationViewController as UIViewController
             
-            var controller = notifVC.popoverPresentationController
+            let controller = notifVC.popoverPresentationController
             
             if controller != nil {
                 controller?.delegate = self
             }
             
         }
+
         
     }
     
