@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate {
+class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate {
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -22,6 +22,7 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var newEmail: UITextField!
     @IBOutlet weak var confNewEmail: UITextField!
     
+    @IBOutlet weak var confirmBtn: UIBarButtonItem!
     
     
     
@@ -35,9 +36,12 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate {
         currentEmail.attributedPlaceholder =
             NSAttributedString(string: user.email, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
+        confirmBtn.enabled = false
+
+        
     }
     
-    
+ 
     
     
     //MARK: Actions
@@ -47,6 +51,10 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate {
         dismissViewControllerAnimated(false, completion: nil)
     }
     
+    @IBAction func confNewEmail(sender: AnyObject) {
+        dismissViewControllerAnimated(false, completion: nil)
+
+    }
     
     func retrieveLoggedUser() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -60,9 +68,36 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate {
         }
         
     }
+    
+    
 
+    //MARK: enable confirm button
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // Disable the Save button while editing.
+        confirmBtn.enabled = false
+    }
+    
+    func checkValidChange() {
+        // Disable the Save button if the text field is empty.
+        let text = newEmail.text ?? ""
+        let text2 = confNewEmail.text ?? ""
+        
+        confirmBtn.enabled = !text.isEmpty
+        confirmBtn.enabled = !text2.isEmpty
+
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        checkValidChange()
+    }
+
+
     
     
     

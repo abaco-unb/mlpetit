@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate {
+class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate {
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -21,16 +21,18 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var newPasswd: UITextField!
     @IBOutlet weak var confNewPasswd: UITextField!
     
+    @IBOutlet weak var confirmBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
         
-        
+        confirmBtn.enabled = false
+
         
     }
 
-
+   
 
     //MARK: Actions
     
@@ -38,6 +40,10 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate {
         dismissViewControllerAnimated(false, completion: nil)
     }
     
+    @IBAction func confNewPasswd(sender: AnyObject) {
+        dismissViewControllerAnimated(false, completion: nil)
+
+    }
     
     func retrieveLoggedUser() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -52,6 +58,33 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate {
         
     }
     
+    //MARK: enable confirm button
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // Disable the Save button while editing.
+        confirmBtn.enabled = false
+    }
+    
+    func checkValidChange() {
+        // Disable the Save button if the text field is empty.
+        let text = currentPasswd.text ?? ""
+        let text2 = newPasswd.text ?? ""
+        let text3 = confNewPasswd.text ?? ""
+        
+        confirmBtn.enabled = !text.isEmpty
+        confirmBtn.enabled = !text2.isEmpty
+        confirmBtn.enabled = !text3.isEmpty
+        
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        checkValidChange()
+    }
 
     
     

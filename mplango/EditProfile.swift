@@ -49,6 +49,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
 
         scroll.contentSize.height = 200
+        
+        confirmEditProf.enabled = false
 
         
         
@@ -95,8 +97,16 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         presentViewController(imagePickerController, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func confirmEditProf(sender: AnyObject) {
+        
+
+        dismissViewControllerAnimated(false, completion: nil)
+
         
     }
+    
     
     
     func retrieveLoggedUser() {
@@ -157,6 +167,37 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         //Dismiss the picker
         dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    
+    //MARK: enable confirm button
+    
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // Disable the Save button while editing.
+        confirmEditProf.enabled = false
+    }
+    
+    func checkValidChange() {
+        // Disable the Save button if the text field is empty.
+        let text = userName.text ?? ""
+        let text2 = userNation.text ?? ""
+        let text3 = userBio.text ?? ""
+        
+        if (!text.isEmpty) {
+            confirmEditProf.enabled = true
+        
+        } else if (!text2.isEmpty) {
+            confirmEditProf.enabled = true
+
+        } else if (!text3.isEmpty) {
+            confirmEditProf.enabled = true
+            
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        checkValidChange()
     }
     
     

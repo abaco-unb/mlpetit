@@ -282,7 +282,7 @@
         <!--Account View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="Account" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="AccountViewController" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Account" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="AccountViewController" customModule="mplango" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BLw-dv-8Ys"/>
                         <viewControllerLayoutGuide type="bottom" id="U2O-5R-4Fp"/>
@@ -521,7 +521,7 @@
                                                     </mask>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="0Aw-5F-vHQ" kind="presentation" modalTransitionStyle="flipHorizontal" id="QaJ-Op-WQJ"/>
+                                                    <segue destination="0Aw-5F-vHQ" kind="presentation" modalTransitionStyle="coverVertical" id="QaJ-Op-WQJ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -855,7 +855,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="0Aw-5F-vHQ" kind="presentation" modalTransitionStyle="flipHorizontal" id="ezw-hn-Hzp"/>
+                                    <segue destination="0Aw-5F-vHQ" kind="presentation" modalTransitionStyle="coverVertical" id="ezw-hn-Hzp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONNEXION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSQ-mm-zw3">
@@ -984,6 +984,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dUg-a9-XPz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="h2x-gD-2AH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KZl-wP-mjr">
@@ -1403,8 +1404,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="K7o-rR-yyI">
+                                <rect key="frame" x="0.0" y="50" width="0.0" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K7o-rR-yyI" id="LsK-IL-F0k">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -1582,14 +1585,14 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="OhX-BZ-J40"/>
                                                 <exclude reference="J2i-oB-cBc"/>
+                                                <exclude reference="OhX-BZ-J40"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <exclude reference="OhX-BZ-J40"/>
                                                 <include reference="J2i-oB-cBc"/>
+                                                <exclude reference="OhX-BZ-J40"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -1770,32 +1773,32 @@
                                         <exclude reference="GgY-oZ-H5B"/>
                                         <exclude reference="SqD-Zp-TZB"/>
                                         <exclude reference="TO5-JV-jbt"/>
-                                        <exclude reference="ACG-tc-eFK"/>
-                                        <exclude reference="ZIb-Xy-R4i"/>
-                                        <exclude reference="iSh-4s-quG"/>
                                         <exclude reference="0QR-Ch-sCZ"/>
                                         <exclude reference="5fF-7V-l1z"/>
                                         <exclude reference="5rb-DC-Wd3"/>
-                                        <exclude reference="nft-IU-DZb"/>
-                                        <exclude reference="uWU-Be-0Me"/>
-                                        <exclude reference="yrR-GQ-eIv"/>
                                         <exclude reference="A4j-JA-fgg"/>
                                         <exclude reference="Bm9-kk-fbt"/>
                                         <exclude reference="Kuh-3U-Tgy"/>
-                                        <exclude reference="3Kp-6g-eXn"/>
-                                        <exclude reference="gho-0Q-H95"/>
-                                        <exclude reference="kI1-pK-VIn"/>
+                                        <exclude reference="GKR-0A-Irt"/>
+                                        <exclude reference="XjZ-jf-JaS"/>
                                         <exclude reference="a2j-bs-pBl"/>
                                         <exclude reference="jFN-Ne-WCG"/>
                                         <exclude reference="pVi-HM-rRw"/>
-                                        <exclude reference="GKR-0A-Irt"/>
-                                        <exclude reference="XjZ-jf-JaS"/>
-                                        <exclude reference="5cU-Se-10v"/>
-                                        <exclude reference="Ko5-ww-31C"/>
-                                        <exclude reference="wPz-e6-Ejx"/>
                                         <exclude reference="C0g-8t-7Ff"/>
                                         <exclude reference="egq-Oh-L94"/>
                                         <exclude reference="lxS-j3-8g8"/>
+                                        <exclude reference="5cU-Se-10v"/>
+                                        <exclude reference="Ko5-ww-31C"/>
+                                        <exclude reference="wPz-e6-Ejx"/>
+                                        <exclude reference="ACG-tc-eFK"/>
+                                        <exclude reference="ZIb-Xy-R4i"/>
+                                        <exclude reference="iSh-4s-quG"/>
+                                        <exclude reference="nft-IU-DZb"/>
+                                        <exclude reference="uWU-Be-0Me"/>
+                                        <exclude reference="yrR-GQ-eIv"/>
+                                        <exclude reference="3Kp-6g-eXn"/>
+                                        <exclude reference="gho-0Q-H95"/>
+                                        <exclude reference="kI1-pK-VIn"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1816,32 +1819,32 @@
                                         <include reference="GgY-oZ-H5B"/>
                                         <include reference="SqD-Zp-TZB"/>
                                         <include reference="TO5-JV-jbt"/>
-                                        <include reference="ACG-tc-eFK"/>
-                                        <include reference="ZIb-Xy-R4i"/>
-                                        <include reference="iSh-4s-quG"/>
                                         <include reference="0QR-Ch-sCZ"/>
                                         <include reference="5fF-7V-l1z"/>
                                         <include reference="5rb-DC-Wd3"/>
-                                        <include reference="nft-IU-DZb"/>
-                                        <include reference="uWU-Be-0Me"/>
-                                        <include reference="yrR-GQ-eIv"/>
                                         <include reference="A4j-JA-fgg"/>
                                         <include reference="Bm9-kk-fbt"/>
                                         <include reference="Kuh-3U-Tgy"/>
-                                        <include reference="3Kp-6g-eXn"/>
-                                        <include reference="gho-0Q-H95"/>
-                                        <include reference="kI1-pK-VIn"/>
+                                        <include reference="GKR-0A-Irt"/>
+                                        <include reference="XjZ-jf-JaS"/>
                                         <include reference="a2j-bs-pBl"/>
                                         <include reference="jFN-Ne-WCG"/>
                                         <include reference="pVi-HM-rRw"/>
-                                        <include reference="GKR-0A-Irt"/>
-                                        <include reference="XjZ-jf-JaS"/>
-                                        <include reference="5cU-Se-10v"/>
-                                        <include reference="Ko5-ww-31C"/>
-                                        <include reference="wPz-e6-Ejx"/>
                                         <include reference="C0g-8t-7Ff"/>
                                         <include reference="egq-Oh-L94"/>
                                         <include reference="lxS-j3-8g8"/>
+                                        <include reference="5cU-Se-10v"/>
+                                        <include reference="Ko5-ww-31C"/>
+                                        <include reference="wPz-e6-Ejx"/>
+                                        <include reference="ACG-tc-eFK"/>
+                                        <include reference="ZIb-Xy-R4i"/>
+                                        <include reference="iSh-4s-quG"/>
+                                        <include reference="nft-IU-DZb"/>
+                                        <include reference="uWU-Be-0Me"/>
+                                        <include reference="yrR-GQ-eIv"/>
+                                        <include reference="3Kp-6g-eXn"/>
+                                        <include reference="gho-0Q-H95"/>
+                                        <include reference="kI1-pK-VIn"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1903,18 +1906,18 @@
                                 <exclude reference="76z-RQ-41K"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="guW-0o-bDr"/>
+                                <exclude reference="g73-zr-A37"/>
+                                <exclude reference="sDB-R5-xYQ"/>
+                                <exclude reference="6Nl-3i-yez"/>
+                                <exclude reference="Vgs-cy-wdh"/>
+                                <exclude reference="tfm-IQ-yc9"/>
+                                <exclude reference="vzG-p3-Qfm"/>
+                                <exclude reference="yhr-tU-ee5"/>
                                 <exclude reference="Tc1-fT-iCZ"/>
                                 <exclude reference="lsa-Eh-wGa"/>
                                 <exclude reference="pLM-tL-cj2"/>
                                 <exclude reference="r9q-U7-Kp5"/>
-                                <exclude reference="tfm-IQ-yc9"/>
-                                <exclude reference="vzG-p3-Qfm"/>
-                                <exclude reference="yhr-tU-ee5"/>
-                                <exclude reference="g73-zr-A37"/>
-                                <exclude reference="sDB-R5-xYQ"/>
-                                <exclude reference="guW-0o-bDr"/>
-                                <exclude reference="6Nl-3i-yez"/>
-                                <exclude reference="Vgs-cy-wdh"/>
                                 <exclude reference="tBs-iL-07o"/>
                             </mask>
                         </variation>
@@ -1925,18 +1928,18 @@
                                 <include reference="76z-RQ-41K"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="guW-0o-bDr"/>
+                                <include reference="g73-zr-A37"/>
+                                <include reference="sDB-R5-xYQ"/>
+                                <exclude reference="6Nl-3i-yez"/>
+                                <include reference="Vgs-cy-wdh"/>
+                                <include reference="tfm-IQ-yc9"/>
+                                <include reference="vzG-p3-Qfm"/>
+                                <include reference="yhr-tU-ee5"/>
                                 <include reference="Tc1-fT-iCZ"/>
                                 <include reference="lsa-Eh-wGa"/>
                                 <include reference="pLM-tL-cj2"/>
                                 <include reference="r9q-U7-Kp5"/>
-                                <include reference="tfm-IQ-yc9"/>
-                                <include reference="vzG-p3-Qfm"/>
-                                <include reference="yhr-tU-ee5"/>
-                                <include reference="g73-zr-A37"/>
-                                <include reference="sDB-R5-xYQ"/>
-                                <exclude reference="guW-0o-bDr"/>
-                                <exclude reference="6Nl-3i-yez"/>
-                                <include reference="Vgs-cy-wdh"/>
                                 <include reference="tBs-iL-07o"/>
                             </mask>
                         </variation>
@@ -2165,15 +2168,15 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="8HE-zH-i2i"/>
-                                        <exclude reference="m3v-Wu-od5"/>
                                         <exclude reference="J4W-iS-NjS"/>
+                                        <exclude reference="m3v-Wu-od5"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="8HE-zH-i2i"/>
-                                        <include reference="m3v-Wu-od5"/>
                                         <include reference="J4W-iS-NjS"/>
+                                        <include reference="m3v-Wu-od5"/>
                                     </mask>
                                 </variation>
                             </button>
@@ -2194,16 +2197,16 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="bTT-Ca-aa6"/>
-                                        <exclude reference="b8b-Uq-mOS"/>
                                         <exclude reference="6Hd-Uq-ikk"/>
+                                        <exclude reference="b8b-Uq-mOS"/>
+                                        <exclude reference="bTT-Ca-aa6"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="bTT-Ca-aa6"/>
-                                        <include reference="b8b-Uq-mOS"/>
                                         <include reference="6Hd-Uq-ikk"/>
+                                        <include reference="b8b-Uq-mOS"/>
+                                        <exclude reference="bTT-Ca-aa6"/>
                                     </mask>
                                 </variation>
                             </button>
@@ -2224,16 +2227,16 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="gM8-B0-Jpt"/>
-                                        <exclude reference="6G8-Aq-ym5"/>
                                         <exclude reference="3Ty-6p-5P1"/>
+                                        <exclude reference="6G8-Aq-ym5"/>
+                                        <exclude reference="gM8-B0-Jpt"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="gM8-B0-Jpt"/>
-                                        <include reference="6G8-Aq-ym5"/>
                                         <include reference="3Ty-6p-5P1"/>
+                                        <include reference="6G8-Aq-ym5"/>
+                                        <exclude reference="gM8-B0-Jpt"/>
                                     </mask>
                                 </variation>
                             </button>
@@ -2255,15 +2258,15 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="L3D-CE-Tui"/>
-                                        <exclude reference="df4-MR-91F"/>
                                         <exclude reference="S2g-Nn-ZZi"/>
+                                        <exclude reference="df4-MR-91F"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="L3D-CE-Tui"/>
-                                        <include reference="df4-MR-91F"/>
                                         <include reference="S2g-Nn-ZZi"/>
+                                        <include reference="df4-MR-91F"/>
                                     </mask>
                                 </variation>
                             </button>
@@ -2329,6 +2332,16 @@
                                 <exclude reference="Ffv-kX-8dA"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="4bt-8E-x5b"/>
+                                <exclude reference="fr0-g8-0g8"/>
+                                <exclude reference="0vu-Ti-XKh"/>
+                                <exclude reference="bDL-9H-8Is"/>
+                                <exclude reference="IAd-4s-qTW"/>
+                                <exclude reference="SRl-D2-Vne"/>
+                                <exclude reference="4Ee-ce-V08"/>
+                                <exclude reference="t3x-2n-Eo1"/>
+                                <exclude reference="B9b-f5-ISg"/>
+                                <exclude reference="khj-zo-rM2"/>
                                 <exclude reference="4V9-f8-7z8"/>
                                 <exclude reference="AF7-07-V2n"/>
                                 <exclude reference="Ij8-hu-Fij"/>
@@ -2338,20 +2351,10 @@
                                 <exclude reference="Bnq-rK-goO"/>
                                 <exclude reference="HLh-RV-gbi"/>
                                 <exclude reference="X9o-NK-yiI"/>
-                                <exclude reference="4Ee-ce-V08"/>
-                                <exclude reference="t3x-2n-Eo1"/>
-                                <exclude reference="IAd-4s-qTW"/>
-                                <exclude reference="SRl-D2-Vne"/>
-                                <exclude reference="B9b-f5-ISg"/>
-                                <exclude reference="khj-zo-rM2"/>
-                                <exclude reference="0vu-Ti-XKh"/>
-                                <exclude reference="bDL-9H-8Is"/>
-                                <exclude reference="Wb7-d6-qX3"/>
-                                <exclude reference="x6g-10-ye8"/>
-                                <exclude reference="4bt-8E-x5b"/>
-                                <exclude reference="fr0-g8-0g8"/>
                                 <exclude reference="nM9-RX-sZX"/>
                                 <exclude reference="xgV-PB-Gqh"/>
+                                <exclude reference="Wb7-d6-qX3"/>
+                                <exclude reference="x6g-10-ye8"/>
                                 <exclude reference="bFc-fy-wyP"/>
                                 <exclude reference="sQq-wd-m7f"/>
                                 <exclude reference="yaU-2v-PdU"/>
@@ -2370,6 +2373,16 @@
                                 <include reference="Ffv-kX-8dA"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="4bt-8E-x5b"/>
+                                <include reference="fr0-g8-0g8"/>
+                                <include reference="0vu-Ti-XKh"/>
+                                <exclude reference="bDL-9H-8Is"/>
+                                <include reference="IAd-4s-qTW"/>
+                                <include reference="SRl-D2-Vne"/>
+                                <include reference="4Ee-ce-V08"/>
+                                <include reference="t3x-2n-Eo1"/>
+                                <include reference="B9b-f5-ISg"/>
+                                <include reference="khj-zo-rM2"/>
                                 <exclude reference="4V9-f8-7z8"/>
                                 <exclude reference="AF7-07-V2n"/>
                                 <exclude reference="Ij8-hu-Fij"/>
@@ -2379,20 +2392,10 @@
                                 <exclude reference="Bnq-rK-goO"/>
                                 <include reference="HLh-RV-gbi"/>
                                 <include reference="X9o-NK-yiI"/>
-                                <include reference="4Ee-ce-V08"/>
-                                <include reference="t3x-2n-Eo1"/>
-                                <include reference="IAd-4s-qTW"/>
-                                <include reference="SRl-D2-Vne"/>
-                                <include reference="B9b-f5-ISg"/>
-                                <include reference="khj-zo-rM2"/>
-                                <include reference="0vu-Ti-XKh"/>
-                                <exclude reference="bDL-9H-8Is"/>
-                                <include reference="Wb7-d6-qX3"/>
-                                <exclude reference="x6g-10-ye8"/>
-                                <include reference="4bt-8E-x5b"/>
-                                <include reference="fr0-g8-0g8"/>
                                 <exclude reference="nM9-RX-sZX"/>
                                 <include reference="xgV-PB-Gqh"/>
+                                <include reference="Wb7-d6-qX3"/>
+                                <exclude reference="x6g-10-ye8"/>
                                 <include reference="bFc-fy-wyP"/>
                                 <include reference="sQq-wd-m7f"/>
                                 <include reference="yaU-2v-PdU"/>
@@ -4515,7 +4518,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="presentation" id="Ji6-1Z-JZP"/>
+                                    <segue destination="vXZ-lx-hvc" kind="presentation" modalTransitionStyle="coverVertical" id="Ji6-1Z-JZP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIb-jg-e1h">
@@ -18204,7 +18207,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="j6r-LK-u2J"/>
+                                                    <constraint firstAttribute="height" constant="40" id="j6r-LK-u2J">
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="39"/>
+                                                    </constraint>
                                                 </constraints>
                                                 <segments>
                                                     <segment title="" image="icon_masc"/>
@@ -18219,8 +18224,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                                     <rect key="frame" x="120" y="40" width="260" height="29"/>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="120" y="41" width="260" height="41"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="j6r-LK-u2J"/>
                                                     </mask>
@@ -18236,7 +18240,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" red="0.17254901960784313" green="0.59607843137254901" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom actuel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KLK-Zd-O2m">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom actuel" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KLK-Zd-O2m">
                                                 <rect key="frame" x="20" y="158" width="360" height="26"/>
                                                 <animations/>
                                                 <constraints>
@@ -18328,7 +18332,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nationalité actuelle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-D2-0T1">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nationalité actuelle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-D2-0T1">
                                                 <rect key="frame" x="20" y="232" width="360" height="26"/>
                                                 <animations/>
                                                 <constraints>
@@ -18654,7 +18658,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Confirmer" id="pJK-5V-XYe">
                             <connections>
-                                <action selector="saveProfileButton:" destination="dmq-gG-b4Z" id="3kX-oS-pW2"/>
+                                <action selector="confirmEditProf:" destination="dmq-gG-b4Z" id="bmZ-nV-r0V"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -18752,7 +18756,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Indiquer le nouvel email ici" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UB4-Ds-ZSB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Indiquer le nouvel email ici" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UB4-Ds-ZSB">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -18774,6 +18778,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <include reference="jr2-IX-M7m"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="ocy-BJ-Hyw" id="32p-TS-3WG"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation du nouvel email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mx8-nZ-Z8P">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -18795,7 +18802,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmer le nouvel email ici" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EaO-BO-smW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmer le nouvel email ici" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EaO-BO-smW">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -18817,6 +18824,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <include reference="DzS-a5-aBn"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="ocy-BJ-Hyw" id="IYv-PP-AoY"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTF-bJ-kmw">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -19022,10 +19032,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <action selector="cancel:" destination="ocy-BJ-Hyw" id="3l1-f5-vQb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Confirmer" id="a3W-m4-lgD"/>
+                        <barButtonItem key="rightBarButtonItem" title="Confirmer" id="a3W-m4-lgD">
+                            <connections>
+                                <action selector="confNewEmail:" destination="ocy-BJ-Hyw" id="ILF-Ai-nnq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="confNewEmail" destination="EaO-BO-smW" id="Nct-zG-NzJ"/>
+                        <outlet property="confirmBtn" destination="a3W-m4-lgD" id="8Jm-kX-iu3"/>
                         <outlet property="currentEmail" destination="EgC-qv-ZqX" id="41q-lT-g36"/>
                         <outlet property="newEmail" destination="UB4-Ds-ZSB" id="KHF-N3-PCL"/>
                     </connections>
@@ -19147,7 +19162,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="0Aw-5F-vHQ" kind="presentation" modalTransitionStyle="flipHorizontal" id="4hz-bB-RLf"/>
+                                    <segue destination="0Aw-5F-vHQ" kind="presentation" modalTransitionStyle="coverVertical" id="4hz-bB-RLf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -19349,7 +19364,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Indiquer le mot de passe actuel ici" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Imo-Rt-MOo">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Indiquer le mot de passe actuel ici" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Imo-Rt-MOo">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -19371,8 +19386,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="i4S-HI-1fS"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="xg5-vl-n6R" id="8wv-WJ-kug"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Indiquer le nouveau mot de passe ici" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FLC-SZ-GjB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Indiquer le nouveau mot de passe ici" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FLC-SZ-GjB">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -19394,6 +19412,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="j6u-bT-tOP"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="xg5-vl-n6R" id="uep-4i-ApG"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation du nouveau mot de passe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UH9-tc-uOC">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -19438,7 +19459,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmer le nouveau mot de passe ici" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-fd-RJp">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmer le nouveau mot de passe ici" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-fd-RJp">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -19460,6 +19481,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <include reference="m3u-ae-Jm5"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="xg5-vl-n6R" id="dd1-nu-Opp"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQG-Ve-TtX">
                                 <rect key="frame" x="20" y="168" width="380" height="1"/>
@@ -19628,10 +19652,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <action selector="cancel:" destination="xg5-vl-n6R" id="5Zg-6w-hyW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Confirmer" id="bfr-IT-mPW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Confirmer" id="bfr-IT-mPW">
+                            <connections>
+                                <action selector="confNewPasswd:" destination="xg5-vl-n6R" id="vP7-0O-Q1O"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="confNewPasswd" destination="gg0-fd-RJp" id="kaP-zr-gWe"/>
+                        <outlet property="confirmBtn" destination="bfr-IT-mPW" id="MXk-hI-O6l"/>
                         <outlet property="currentPasswd" destination="Imo-Rt-MOo" id="AFH-Zx-B5v"/>
                         <outlet property="newPasswd" destination="FLC-SZ-GjB" id="tyB-AN-TpT"/>
                     </connections>
@@ -21561,7 +21590,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
     <inferredMetricsTieBreakers>
         <segue reference="MnM-Fe-5nH"/>
         <segue reference="QaJ-Op-WQJ"/>
-        <segue reference="Khz-1w-02I"/>
+        <segue reference="E5T-TN-15u"/>
         <segue reference="z92-Qn-3TT"/>
         <segue reference="Zhf-nH-Hkw"/>
     </inferredMetricsTieBreakers>
