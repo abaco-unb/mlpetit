@@ -14,6 +14,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    //MARK: Properties
+    
     var post: Annotation? = nil
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
@@ -22,23 +24,33 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var tags = [String]()
     var points = 0
     
-    @IBOutlet weak var addButton: UIBarButtonItem!
-    @IBOutlet weak var locationLabel: UILabel!
+    //@IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var stopBtn: UIButton!
+    @IBOutlet weak var slowBtn: UIButton!
+    
+    @IBOutlet weak var continueBtn: UIBarButtonItem!
+    
     @IBOutlet weak var audioSlider: UISlider!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var textTextView: UITextView!
     @IBOutlet weak var photoImageView: UIImageView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.contentSize.height = 300
+
+        
         textTextView.delegate = self
         
-        confirmButton.hidden = true
+        //confirmButton.hidden = true
+        continueBtn.enabled = false
+
         textTextView.editable = true
         
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
@@ -48,7 +60,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         if post != nil {
             print("post controller")
             print(post)
-            locationLabel.text = post?.locationName
+            //locationLabel.text = post?.locationName
         }
         
         //let aSelector : Selector = "touchOutsideTextField"
@@ -64,14 +76,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
     }
     
-    func handleLongPress(getstureRecognizer : UIGestureRecognizer){
-        if getstureRecognizer.state == .Began {
+    func handleLongPress(gestureRecognizer : UIGestureRecognizer){
+        if gestureRecognizer.state == .Began {
             print("iniciar a gravação")
             recording()
             recordButton.enabled = false
         }
         
-        if getstureRecognizer.state == .Ended {
+        if gestureRecognizer.state == .Ended {
             print("parar a gravação")
             
             audioRecorder.stop()
@@ -82,6 +94,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             playButton.enabled = false
             
         }
+    }
+    
+    
+    
+    //MARK: Actions
+    
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
@@ -95,6 +115,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
+    
+    
+    
     //MARK: UIImagePickerControllerDelegate
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -136,6 +159,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         // Dispose of any resources that can be recreated.
     }
     
+    
     @IBAction func playAudio(sender: UIButton) {
         audioPlayer.prepareToPlay()
         audioPlayer.enableRate = false
@@ -143,6 +167,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
     }
+    
     @IBAction func changeAudioTime(sender: UISlider) {
         audioPlayer.stop()
         audioPlayer.currentTime = NSTimeInterval(audioSlider.value)

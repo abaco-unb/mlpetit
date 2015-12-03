@@ -31,6 +31,7 @@ extension MapViewController {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.pinColor = annotation.pinColor()
                 
+                
                 //MARK - group image
                 
                 //CGFloat lineWidth = 2;

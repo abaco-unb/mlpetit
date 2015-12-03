@@ -302,6 +302,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+    func displayInFlyoverMode() {
+        mkMapView.mapType = .SatelliteFlyover
+        mkMapView.showsBuildings = true
+        let location = CLLocationCoordinate2D(latitude: 51.50722, longitude: -0.12750)
+        let altitude: CLLocationDistance  = 500
+        let heading: CLLocationDirection = 90
+        let pitch = CGFloat(45)
+        let camera = MKMapCamera(lookingAtCenterCoordinate: location, fromDistance: altitude, pitch: pitch, heading: heading)
+        mkMapView.setCamera(camera, animated: true)
+    }
+    
+    
     // para que o popover não esconda toda a tela
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None

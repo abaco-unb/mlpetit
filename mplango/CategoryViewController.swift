@@ -10,18 +10,21 @@ import UIKit
 
 class CategoryViewController: UIViewController {
     
+    
+    
     var post: Annotation? = nil
     var category: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("categoria controller segue ")
@@ -39,4 +42,5 @@ class CategoryViewController: UIViewController {
             }
         }
     }
+    
 }
