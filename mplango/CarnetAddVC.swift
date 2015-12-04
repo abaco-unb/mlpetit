@@ -25,6 +25,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var stopBtn: UIButton!
     
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
@@ -72,6 +73,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         photoImage.layer.cornerRadius = 10
         photoImage.layer.masksToBounds = true
         
+        
+        // Custom the visual identity of audio player's background
+
         backgroundRecord.layer.borderWidth = 1
         backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         backgroundRecord.layer.cornerRadius = 15

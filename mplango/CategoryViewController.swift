@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CategoryViewController: UIViewController {
     
-    
+    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var post: Annotation? = nil
     var category: String? = nil

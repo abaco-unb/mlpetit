@@ -24,27 +24,59 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var tags = [String]()
     var points = 0
     
-    //@IBOutlet weak var locationLabel: UILabel!
+    //@IBOutlet weak var locationLabel: UILabel! (tirei o label, acho que não é necessário nesta tela)
+    
+    @IBOutlet weak var continueBtn: UIBarButtonItem!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
+    //Outlets para os tags e o texto
+    
+    @IBOutlet weak var textTextView: UITextView!
+    @IBOutlet weak var hashtags: UITextField!
+    @IBOutlet weak var textPost: UITextField!
+    
+    @IBOutlet weak var checkTags: UIImageView!
+    @IBOutlet weak var checkTextPost: UIImageView!
+    
+    
+    //Outlets para o som
+
+    @IBOutlet weak var backgroundRecord: UIView!
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var slowBtn: UIButton!
     
-    @IBOutlet weak var continueBtn: UIBarButtonItem!
-    
     @IBOutlet weak var audioSlider: UISlider!
     @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var textTextView: UITextView!
+    
+    @IBOutlet weak var checkAudio: UIImageView!
+    
+    
+    //Outlets para a foto
+    
+    @IBOutlet weak var addPicture: UIButton!
+    @IBOutlet weak var removeImage: UIButton!
+    @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var photoImageView: UIImageView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var checkImage: UIImageView!
+    
+    
+    //Outlets para o vídeo
+    
+    
+    @IBOutlet weak var checkVideo: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.contentSize.height = 300
-
+        
+        removeImage.hidden = true
         
         textTextView.delegate = self
         
@@ -52,6 +84,20 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         continueBtn.enabled = false
 
         textTextView.editable = true
+        
+        // Custom the visual identity of Image View
+        
+        photoImage.layer.cornerRadius = 10
+        photoImage.layer.masksToBounds = true
+        
+        // Custom the visual identity of audio player's background
+        
+        backgroundRecord.layer.borderWidth = 1
+        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        backgroundRecord.layer.cornerRadius = 15
+        backgroundRecord.layer.masksToBounds = true
+        
+        
         
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
         longPressRecogniser.minimumPressDuration = 0.2
@@ -98,13 +144,18 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     
     
-    //MARK: Actions
+    //MARK: Image Actions
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
     
-    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
+        //Hide the keyboard
+        hashtags.resignFirstResponder()
+        textPost.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library
         let imagePickerController = UIImagePickerController ()
         
         // Only allow photos to be picked, not taken.
@@ -114,6 +165,16 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         imagePickerController.delegate = self
         
         presentViewController(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func removeImage(sender: AnyObject) {
+        
+        photoImage.image = nil
+        addPicture.hidden = false
+        addPicture.enabled = true
+        removeImage.hidden = true
+        
     }
     
     
@@ -126,39 +187,23 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-      
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = image
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         //Set photoImageView to display the selected image
-        photoImageView.image = selectedImage
+        photoImage.image = selectedImage
         
         //Dismiss the picker
         dismissViewControllerAnimated(true, completion: nil)
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Set navigation bar background colour
-        self.navigationController!.navigationBar.barTintColor = UIColor(hex: 0x3399CC)
-        
-        // Set navigation bar title text colour
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        recordButton.enabled = true
-        playButton.enabled = false
-        audioSlider.enabled = false
-        
+        addPicture.hidden = true
+        removeImage.hidden = false
+        removeImage.enabled = true
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    //MARK: Audio Actions
     
     @IBAction func playAudio(sender: UIButton) {
         audioPlayer.prepareToPlay()
@@ -179,6 +224,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     func updateSlider() {
         audioSlider.value = Float(audioPlayer.currentTime)
     }
+    
+    
+    //MARK: Post Actions
+    
     @IBAction func savePost(sender: UIButton) {
         do {
             try moContext!.save()
@@ -226,15 +275,15 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         }
     }
     
-    //    @IBAction func playSlowAudio(sender: UIButton) {
-    //        stopButton.hidden = false
-    //        audioPlayer.prepareToPlay()
-    //        audioPlayer.enableRate = true
-    //        audioPlayer.stop()
-    //        audioPlayer.rate = 0.5
-    //        audioPlayer.currentTime = 0.0
-    //        audioPlayer.play()
-    //    }
+    @IBAction func playSlowAudio(sender: UIButton) {
+        stopBtn.hidden = false
+        audioPlayer.prepareToPlay()
+        audioPlayer.enableRate = true
+        audioPlayer.stop()
+        audioPlayer.rate = 0.5
+        audioPlayer.currentTime = 0.0
+        audioPlayer.play()
+    }
     
     func stopAudio(sender: UIButton) {
         audioPlayer.stop()
@@ -386,6 +435,28 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         
         textTextView.attributedText = attrString
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set navigation bar background colour
+        self.navigationController!.navigationBar.barTintColor = UIColor(hex: 0x3399CC)
+        
+        // Set navigation bar title text colour
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        recordButton.enabled = true
+        playButton.enabled = false
+        audioSlider.enabled = false
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     /*
