@@ -23,12 +23,14 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
     
     @IBOutlet weak var confirmBtn: UIBarButtonItem!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
         
-        confirmBtn.enabled = false
-
+        // Enable the Save button only if the screen has a valid change
+        checkValidChange()
         
     }
 

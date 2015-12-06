@@ -15,23 +15,32 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     //MARK: Properties
     
+    var item: Carnet? = nil
+    
+    @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    //Outlets para o texto
+    
     @IBOutlet var wordTextField: UITextField!
     @IBOutlet var descTextField: UITextField!
-    @IBOutlet var photoImage: UIImageView!
-    //@IBOutlet weak var typeSegmentControl: UISegmentedControl!
-    @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    
+    //Outlets para o audio
     
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     
+    //Outlets para a foto
+    
+    @IBOutlet var photoImage: UIImageView!
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     
-    var item: Carnet? = nil
-    //var segment = 2
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +65,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         
         // Custom the visual identity of Text Fields
+        
         wordTextField.backgroundColor = UIColor.clearColor()
         wordTextField.layer.borderWidth = 1
         wordTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
@@ -83,6 +93,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         
     }
+    
+    
     
 
     

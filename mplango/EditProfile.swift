@@ -50,8 +50,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
         scroll.contentSize.height = 200
         
-        confirmEditProf.enabled = false
-
+        // Enable the Save button only if the screen has a valid change
+        checkValidChange()
         
         
         // Keyboard stuff.
@@ -193,6 +193,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         } else if (!text3.isEmpty) {
             confirmEditProf.enabled = true
             
+        } else {
+            confirmEditProf.enabled = false
         }
     }
     

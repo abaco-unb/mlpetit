@@ -29,6 +29,9 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
+        
+        // Enable the Save button only if the screen has a valid change
+        checkValidChange()
 
         
         print(user.email)
@@ -36,8 +39,6 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
         currentEmail.attributedPlaceholder =
             NSAttributedString(string: user.email, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
-        confirmBtn.enabled = false
-
         
     }
     
