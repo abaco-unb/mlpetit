@@ -32,9 +32,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     //Outlets para os tags e o texto
     
-    @IBOutlet weak var textTextView: UITextView!
-    @IBOutlet weak var hashtags: UITextField!
-    @IBOutlet weak var textPost: UITextField!
+    @IBOutlet weak var tagsView: UITextView!
+    @IBOutlet weak var textPostView: UITextView!
+    @IBOutlet weak var maxLenghtLabel: UILabel!
     
     @IBOutlet weak var checkTags: UIImageView!
     @IBOutlet weak var checkTextPost: UIImageView!
@@ -78,12 +78,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         removeImage.hidden = true
         
-        textTextView.delegate = self
+        tagsView.delegate = self
         
         //confirmButton.hidden = true
         continueBtn.enabled = false
 
-        textTextView.editable = true
+        tagsView.editable = true
         
         // Custom the visual identity of Image View
         
@@ -115,10 +115,30 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         //view.addGestureRecognizer(tapGesture)
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        //Para determinar um número máximo de caracteres nos textfields
+        let limitLength = 149
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        
+        //label para contar os caracteres
+        
+        if(newLength>139)
+        {
+            maxLenghtLabel.textColor = UIColor.redColor()
+        }
+        maxLenghtLabel.text = String(newLength)
+        
+        return newLength <= limitLength
+
+        
+    }
+    
     func touchOutsideTextField(){
         NSLog("touchOutsideTextField")
         self.view.endEditing(true)
-        textTextView.resolveHashTags();
+        tagsView.resolveHashTags();
         
     }
     
@@ -152,8 +172,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
         //Hide the keyboard
-        hashtags.resignFirstResponder()
-        textPost.resignFirstResponder()
+        tagsView.resignFirstResponder()
+        textPostView.resignFirstResponder()
         
         // UIImagePickerController is a view controller that lets a user pick media from their photo library
         let imagePickerController = UIImagePickerController ()
@@ -239,7 +259,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         print("action addPost tapped")
         prepareForInsertPost()
         confirmButton.hidden = false
-        textTextView.resolveHashTags()
+        tagsView.resolveHashTags()
     }
     
     @IBAction func cancelPost(sender: UIBarButtonItem) {
@@ -259,7 +279,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 if let fetchResults = try moContext?.executeFetchRequest(fetchRequest) as? [User] {
                     let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
                     let postEntity = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-                    postEntity.text     = textTextView.text
+                    postEntity.text     = tagsView.text
                     postEntity.audio    = filePath
                     postEntity.locationName = post!.locationName
                     postEntity.latitude  = Double(post!.coordinate.latitude)
@@ -374,7 +394,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     func resolveHashTags(){
         // turn string in to NSString
-        let nsText:NSString = textTextView.text
+        let nsText:NSString = tagsView.text
         
         // this needs to be an array of NSString.  String does not work.
         let words = nsText.componentsSeparatedByString(" ")
@@ -434,7 +454,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         // so remember to re-add them in the attrs dictionary above
         
         
-        textTextView.attributedText = attrString
+        tagsView.attributedText = attrString
     }
     
     

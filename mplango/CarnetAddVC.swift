@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -24,7 +24,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     //Outlets para o texto
     
     @IBOutlet var wordTextField: UITextField!
-    @IBOutlet var descTextField: UITextField!
+    @IBOutlet weak var descTextView: UITextView!
+    @IBOutlet weak var maxLenghtLabel: UILabel!
+    
     
     //Outlets para o audio
     
@@ -39,44 +41,34 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.contentSize.height = 300
         
-        // Handle the text field’s user input through delegate callbacks.
-        wordTextField.delegate = self
-        descTextField.delegate = self
-        
         removeImage.hidden = true
-        
-        
-        if item != nil {
-            wordTextField.text = item?.word
-            
-        }
-        
         
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
         
         
+        // Handle the text field’s user input through delegate callbacks.
+        wordTextField.delegate = self
+        descTextView.delegate = self
+        
+        
+        if item != nil {
+            wordTextField.text = item?.word
+        }
+        
+        
         // Custom the visual identity of Text Fields
         
-        wordTextField.backgroundColor = UIColor.clearColor()
-        wordTextField.layer.borderWidth = 1
-        wordTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         wordTextField.attributedPlaceholder =
-            NSAttributedString(string: "Entrer un nom (obligatoire)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
+            NSAttributedString(string: "Entrer un nom (obligatoire)", attributes:[NSForegroundColorAttributeName : UIColor.lightGrayColor()])
         
-        descTextField.backgroundColor = UIColor.clearColor()
-        descTextField.layer.borderWidth = 1
-        descTextField.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
-        descTextField.attributedPlaceholder =
-            NSAttributedString(string: "Intégrer un commentaire (facultatif)", attributes:[NSForegroundColorAttributeName : UIColor.grayColor()])
         
         // Custom the visual identity of Image View
     
@@ -94,7 +86,32 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
     }
     
-    
+  
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        
+        //Para determinar um número máximo de caracteres no textview
+        
+        let limitLength = 149
+        guard let text = descTextView.text else { return true }
+        let newLength = text.characters.count - range.length
+        
+        
+        //label para contar os caracteres e mostrar em vermelho quando fica perto do limite
+        
+        maxLenghtLabel.text = String(newLength)
+        
+        if (newLength > 139)
+        {
+            maxLenghtLabel.textColor = UIColor.redColor()
+        }
+        
+        
+        // para aplicar o limite de caracteres
+        return newLength <= limitLength
+        
+        
+    }
     
 
     
@@ -122,7 +139,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
         //Hide the keyboard
         wordTextField.resignFirstResponder()
-        descTextField.resignFirstResponder()
+        descTextView.resignFirstResponder()
         
         // UIImagePickerController is a view controller that lets a user pick media from their photo library
         let imagePickerController = UIImagePickerController ()
@@ -137,11 +154,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
     }
     
-    /*
-    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
-    
-    }
-    */
     
     
     //MARK: UIImagePickerControllerDelegate
@@ -191,7 +203,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
             let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
             item.word = wordTextField.text!
-            item.desc = descTextField.text!
+            item.desc = descTextView.text!
             //item.photo = photoImage.image!
             //item.category = segment
             item.user = user
@@ -208,7 +220,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     
     func editItemCarnet() {
         item?.word = wordTextField.text!
-        item?.desc = descTextField.text!
+        item?.desc = descTextView.text!
         do {
             //falta foto
             //falta som
@@ -236,7 +248,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     func textFieldDidBeginEditing(textField: UITextField) {
         // Disable the Save button while editing.
         saveWordButton.enabled = false
+        
+
     }
+ 
     
     func checkValidWordName() {
         // Disable the Save button if the text field is empty.
@@ -274,7 +289,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         if saveWordButton === sender {
             let word = wordTextField.text ?? ""
-            let desc = descTextField.text ?? ""
+            let desc = descTextView.text ?? ""
             let photo = photoImage.image
             //let category = segment
             //falta som
