@@ -18,7 +18,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
-    //var segment:NSNumber = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()

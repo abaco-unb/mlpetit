@@ -27,9 +27,12 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     
     @IBOutlet weak var exit: UIBarButtonItem!
     
+    //Outlets do like
     @IBOutlet weak var likeBtn: UIButton!
-    @IBOutlet weak var commentBtn: UIButton!
+    @IBOutlet weak var likeView: UIImageView!
     @IBOutlet weak var likeNberLabel: UILabel!
+    
+    @IBOutlet weak var commentBtn: UIButton!
     
     @IBOutlet weak var mediaView: UIView!
     
@@ -77,6 +80,8 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
+        
+        likeView.hidden = true
 
         
         /*
@@ -210,11 +215,14 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     
     @IBAction func like(sender: AnyObject) {
         
-        // quando o botão like é clicado, não pode ser clicado de novo, é bloqueado, e ele muda de aparência
+        // quando o botão like é clicado, ele é bloqueado e no lugar dele aparece uma image view com a mesma imagem, em vermelho
         
-        likeBtn.enabled = false
-        likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        likeBtn.hidden = true
+        likeView.hidden = false
         
+        //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        
+    
         
         //aqui deve atualizar o label dos números de likes (likeNberLabel)
         

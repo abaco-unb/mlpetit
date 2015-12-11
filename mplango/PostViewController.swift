@@ -24,14 +24,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var tags = [String]()
     var points = 0
     
-    //@IBOutlet weak var locationLabel: UILabel! (tirei o label, acho que não é necessário nesta tela)
-    
+   
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    
     //Outlets para os tags e o texto
-    
     @IBOutlet weak var tagsView: UITextView!
     @IBOutlet weak var textPostView: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
@@ -39,11 +36,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var checkTags: UIImageView!
     @IBOutlet weak var checkTextPost: UIImageView!
     
-    
     //Outlets para o som
-
     @IBOutlet weak var backgroundRecord: UIView!
-    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
@@ -56,7 +50,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     
     //Outlets para a foto
-    
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     @IBOutlet weak var photoImage: UIImageView!
@@ -76,33 +69,37 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         scrollView.contentSize.height = 300
         
-        removeImage.hidden = true
-        
         tagsView.delegate = self
+        textPostView.delegate = self
         
         //confirmButton.hidden = true
         continueBtn.enabled = false
-
+        removeImage.hidden = true
         tagsView.editable = true
         
         // Custom the visual identity of Image View
-        
         photoImage.layer.cornerRadius = 10
         photoImage.layer.masksToBounds = true
         
         // Custom the visual identity of audio player's background
-        
         backgroundRecord.layer.borderWidth = 1
         backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         backgroundRecord.layer.cornerRadius = 15
         backgroundRecord.layer.masksToBounds = true
         
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         
+        
+        //LongPress para a criação de post
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
         longPressRecogniser.minimumPressDuration = 0.2
         recordButton.addGestureRecognizer(longPressRecogniser)
         
+        
+        //
         if post != nil {
             print("post controller")
             print(post)
@@ -115,23 +112,39 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         //view.addGestureRecognizer(tapGesture)
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
-        //Para determinar um número máximo de caracteres nos textfields
         let limitLength = 149
-        guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        guard let text = textPostView.text else { return true }
+        let newLength = text.characters.count - range.length
         
-        //label para contar os caracteres
+        maxLenghtLabel.text = String(newLength)
         
-        if(newLength>139)
+        if (newLength > 139)
         {
             maxLenghtLabel.textColor = UIColor.redColor()
         }
-        maxLenghtLabel.text = String(newLength)
+        
+        else if (newLength < 140)
+        {
+            maxLenghtLabel.textColor = UIColor.darkGrayColor()
+        }
+        
+        //estas linhas foram copiadas do código mais abaixo que chamava a mesma função. Do que eu entendi é para os tags. Copiei tudo menos o "return true", pois aqui já tem um return
+        let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
+        let isBackSpace = strcmp(char, "\\b")
+        if (isBackSpace == -60) {
+            resolveHashTags();
+        }
         
         return newLength <= limitLength
-
         
     }
     
@@ -379,6 +392,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             }
     }
     
+    /* 
+    JA USADO ACIMA PARA O LIMITE DE CARACTERES. COPIEI TUDO ALI MENOS O RETURN TRUE
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
         let isBackSpace = strcmp(char, "\\b")
@@ -387,6 +403,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         }
         return true
     }
+    */
     
     func checkTagRewards(tag: String ){
         

@@ -22,21 +22,17 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet weak var scrollView: UIScrollView!
     
     //Outlets para o texto
-    
     @IBOutlet var wordTextField: UITextField!
     @IBOutlet weak var descTextView: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
     
-    
     //Outlets para o audio
-    
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     
     //Outlets para a foto
-    
     @IBOutlet var photoImage: UIImageView!
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
@@ -53,6 +49,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
         
         // Handle the text field’s user input through delegate callbacks.
         wordTextField.delegate = self
@@ -65,19 +65,16 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
         
         // Custom the visual identity of Text Fields
-        
         wordTextField.attributedPlaceholder =
             NSAttributedString(string: "Entrer un nom (obligatoire)", attributes:[NSForegroundColorAttributeName : UIColor.lightGrayColor()])
         
         
         // Custom the visual identity of Image View
-    
         photoImage.layer.cornerRadius = 10
         photoImage.layer.masksToBounds = true
         
         
         // Custom the visual identity of audio player's background
-
         backgroundRecord.layer.borderWidth = 1
         backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         backgroundRecord.layer.cornerRadius = 15
@@ -86,18 +83,17 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
     }
     
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
   
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        
-        
-        //Para determinar um número máximo de caracteres no textview
         
         let limitLength = 149
         guard let text = descTextView.text else { return true }
         let newLength = text.characters.count - range.length
-        
-        
-        //label para contar os caracteres e mostrar em vermelho quando fica perto do limite
         
         maxLenghtLabel.text = String(newLength)
         
@@ -106,10 +102,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             maxLenghtLabel.textColor = UIColor.redColor()
         }
         
+        else if (newLength < 140)
+        {
+            maxLenghtLabel.textColor = UIColor.darkGrayColor()
+        }
         
-        // para aplicar o limite de caracteres
         return newLength <= limitLength
-        
         
     }
     
@@ -252,7 +250,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
 
     }
  
-    
     func checkValidWordName() {
         // Disable the Save button if the text field is empty.
         let text = wordTextField.text ?? ""
@@ -264,25 +261,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         navigationItem.title = wordTextField.text
     }
     
-    /*
-    @IBAction func segmentTapped(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            segment = 0
-        case 1:
-            segment = 1
-        default:
-            segment = 2
-            break
-        }
-    }
-    */
-    
 
     // MARK: - Navigation
-    
-
-
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -291,7 +271,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
             let word = wordTextField.text ?? ""
             let desc = descTextView.text ?? ""
             let photo = photoImage.image
-            //let category = segment
+          
             //falta som
             
             

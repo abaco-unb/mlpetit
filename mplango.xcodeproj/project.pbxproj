@@ -21,12 +21,8 @@
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DEE3F1B8A178800A09A00 /* TabBarController.swift */; };
 		543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A48721BDD4226008E9D71 /* tuto1VC.swift */; };
-		545A4AB21BF37268001B3D2C /* BasicCarnetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A4AB11BF37268001B3D2C /* BasicCarnetCell.swift */; };
-		545A4AB31BF3769C001B3D2C /* BasicCarnetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A4AB11BF37268001B3D2C /* BasicCarnetCell.swift */; };
-		546483991BF11E2A00AA41EB /* CarnetItemTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546483981BF11E2A00AA41EB /* CarnetItemTVC.swift */; };
-		546483A31BF150E400AA41EB /* CarnetSoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546483A21BF150E400AA41EB /* CarnetSoundCell.swift */; };
-		546483A51BF150FA00AA41EB /* CarnetPictCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546483A41BF150FA00AA41EB /* CarnetPictCell.swift */; };
-		546483A61BF159F000AA41EB /* CarnetItemTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546483981BF11E2A00AA41EB /* CarnetItemTVC.swift */; };
+		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
+		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
 		5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */; };
 		5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */; };
 		54B4A7EA1BEB80E300199613 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7E91BEB80E300199613 /* EditProfile.swift */; };
@@ -144,10 +140,8 @@
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		542DEE3F1B8A178800A09A00 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tuto1VC.swift; path = mplango/tuto1VC.swift; sourceTree = "<group>"; };
-		545A4AB11BF37268001B3D2C /* BasicCarnetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCarnetCell.swift; sourceTree = "<group>"; };
-		546483981BF11E2A00AA41EB /* CarnetItemTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetItemTVC.swift; sourceTree = "<group>"; };
-		546483A21BF150E400AA41EB /* CarnetSoundCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetSoundCell.swift; sourceTree = "<group>"; };
-		546483A41BF150FA00AA41EB /* CarnetPictCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetPictCell.swift; sourceTree = "<group>"; };
+		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
 		5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
 		5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSegue.swift; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
@@ -404,10 +398,6 @@
 				54D750611B763F7200A78824 /* CarnetTVC.swift */,
 				542B4B031B73A06F0099349E /* CarnetAddVC.swift */,
 				542B4B0F1B73F4100099349E /* CarnetViewController.swift */,
-				546483981BF11E2A00AA41EB /* CarnetItemTVC.swift */,
-				545A4AB11BF37268001B3D2C /* BasicCarnetCell.swift */,
-				546483A21BF150E400AA41EB /* CarnetSoundCell.swift */,
-				546483A41BF150FA00AA41EB /* CarnetPictCell.swift */,
 			);
 			name = Carnet;
 			sourceTree = "<group>";
@@ -449,6 +439,8 @@
 				54D02AB61BD949F900B62860 /* UITextViewExt.swift */,
 				54D02AB91BD94C0700B62860 /* RewardViewController.swift */,
 				82D73CA11B81718B00DFEAB0 /* CategoryViewController.swift */,
+				546042141C19B4E300A6A2C4 /* CommentsVC.swift */,
+				546042101C19A62800A6A2C4 /* CommentCell.swift */,
 			);
 			name = Post;
 			sourceTree = "<group>";
@@ -606,22 +598,20 @@
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				82D73CA51B81720E00DFEAB0 /* PostViewController.swift in Sources */,
 				54C26FDF1C0FA08B002B5B5D /* TestsVC.swift in Sources */,
+				546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */,
 				5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */,
 				54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */,
 				54B4A7EA1BEB80E300199613 /* EditProfile.swift in Sources */,
-				546483A51BF150FA00AA41EB /* CarnetPictCell.swift in Sources */,
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
-				546483991BF11E2A00AA41EB /* CarnetItemTVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
 				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
-				546483A31BF150E400AA41EB /* CarnetSoundCell.swift in Sources */,
-				545A4AB21BF37268001B3D2C /* BasicCarnetCell.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
 				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
+				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,
 				54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */,
@@ -646,7 +636,6 @@
 				82842E391B61E65B00E7C860 /* LoginViewController.swift in Sources */,
 				159C11B41BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				82842E351B61E38700E7C860 /* AppDelegate.swift in Sources */,
-				546483A61BF159F000AA41EB /* CarnetItemTVC.swift in Sources */,
 				828C717C1B83B260009FE9B5 /* CarnetViewController.swift in Sources */,
 				82842E371B61E65200E7C860 /* AccountViewController.swift in Sources */,
 				159C11B01BF586A80018EBE1 /* mplango.xcdatamodeld in Sources */,
@@ -661,7 +650,6 @@
 				82842E361B61E62D00E7C860 /* User.swift in Sources */,
 				828C717B1B83A620009FE9B5 /* CarnetTVC.swift in Sources */,
 				82D73CA31B81718B00DFEAB0 /* CategoryViewController.swift in Sources */,
-				545A4AB31BF3769C001B3D2C /* BasicCarnetCell.swift in Sources */,
 				82842E3B1B61E66100E7C860 /* Annotation.swift in Sources */,
 				159C11B81BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE311B0143AF0085F9A6 /* mplangoTests.swift in Sources */,
