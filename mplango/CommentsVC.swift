@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate {
+class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
 
     // MARK: Properties
     
@@ -30,9 +30,13 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     
     @IBOutlet weak var postComBtn: UIButton!
     
+    @IBOutlet weak var comPicture: UIImageView!
     @IBOutlet weak var recordBtn: UIButton!
     @IBOutlet weak var imageBtn: UIButton!
 
+    @IBOutlet weak var removeImage: UIButton!
+    
+    @IBOutlet weak var writeHereImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +50,9 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         } catch _ {
         }
         
-        
         if comment != nil {
             writeTxtView.text = comment?.text
         }
-        
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -64,6 +66,9 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         writeTxtView.delegate = self
         
         postComBtn.hidden = true
+        
+        removeImage.hidden = true
+
         
         comTableView.rowHeight = UITableViewAutomaticDimension
         comTableView.estimatedRowHeight = 160.0
@@ -97,19 +102,23 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         imageBtn.enabled = true
         recordBtn.hidden = false
         recordBtn.enabled = true
-        
+        writeHereImage.hidden = false
+        removeImage.hidden = true
+
     }
     
+    // MARK : UITextView functions
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-    
+        
         let limitLength = 149
         guard let text = writeTxtView.text else { return true }
         let newLength = text.characters.count - range.length
         
         return newLength <= limitLength
-    
+        
     }
+    
     
     func textViewDidChange(textView: UITextView) {
         
@@ -125,23 +134,28 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         }
         
         else if text.characters.count < 1 {
+
             postComBtn.hidden = true
             imageBtn.hidden = false
             imageBtn.enabled = true
             recordBtn.hidden = false
             recordBtn.enabled = true
+        
         }
-
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        writeHereImage.hidden = true
     }
     
     
-    // MARK Actions:
+       // MARK Actions:
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
     
-    @IBAction func postComment(sender: AnyObject) {
+    @IBAction func postingComment(sender: AnyObject) {
         
         postComment()
         
@@ -153,9 +167,124 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         imageBtn.enabled = true
         recordBtn.hidden = false
         recordBtn.enabled = true
+        writeHereImage.hidden = false
+        
+        // Gamification: contar 5 pontos aqui para a ação de postar 1 comentário
         
     }
     
+    
+    // MARK : Image Picker Process
+    
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
+    
+    
+    @IBAction func removeImage(sender: AnyObject) {
+        
+        comPicture.image = nil
+        removeImage.hidden = true
+        
+        postComBtn.hidden = true
+        imageBtn.hidden = false
+        imageBtn.enabled = true
+        recordBtn.hidden = false
+        recordBtn.enabled = true
+        
+    }
+    
+    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
+        //Hide the keyboard
+        
+        writeTxtView.resignFirstResponder()
+        
+        let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cameraAction = UIAlertAction(title: "Caméra", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+            {
+                UIAlertAction in
+        }
+        
+        // Add the actions
+        picker?.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.sourceRect = imageBtn.frame
+            popover?.permittedArrowDirections = .Any
+            
+        }
+        
+    }
+    
+    func openCamera()
+    {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            picker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self .presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+            {
+            openGallary()
+            }
+        }
+    
+        func openGallary()
+        {
+        picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
+            
+            popover?.sourceView = self.view
+            popover?.sourceRect = imageBtn.frame
+            popover?.permittedArrowDirections = .Any
+            
+        }
+    }
+   
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        comPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        removeImage.hidden = false
+        postComBtn.hidden = false
+        postComBtn.enabled = true
+        imageBtn.hidden = true
+        recordBtn.hidden = true
+        writeHereImage.hidden = true
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    {
+        print("picker cancel.")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
     
     // MARK:- Retrieve Tasks
     
@@ -167,15 +296,6 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     
     func itemFetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Post")
-        
-        /*
-        if(segment != 2) {
-        print("fazer filtro")
-        let predicate = NSPredicate(format: "category == %@", segment)
-        fetchRequest.predicate = predicate
-        }
-        */
-        
         let sortDescriptor = NSSortDescriptor(key: "text", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
@@ -183,8 +303,7 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     }
     
     
-    
-    // MARK:- Post Comment
+    // MARK:- Posting Comment
     
     func postComment () {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -199,20 +318,17 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
             let comment = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
             comment.text = writeTxtView.text!
             comment.user = user
-            
+            //falta foto
+            //falta som
             
             do {
-                //falta foto
-                //falta som
                 try moContext?.save()
             } catch _ {
             }
             
-            
         }
     }
 
-    
     
     // Table view
     
@@ -252,12 +368,10 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         
         cell.dateLabel.text = dateFormatter.stringFromDate(date)
         
-        
-        
         return cell
     }
     
-    // MARK: - TableView Delete (ISSO PODE TIRAR DEPOIS, É SÓ PARA OS TESTES DA TELA)
+    // MARK: - TableView Delete (ISSO VAI SER TIRADO DEPOIS, É SÓ PARA OS TESTES DA TELA)
     
      func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let managedObject:NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
@@ -267,8 +381,6 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         } catch _ {
         }
     }
-    
-    
     
     
     // MARK: - TableView Refresh

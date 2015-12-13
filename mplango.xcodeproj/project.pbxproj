@@ -21,6 +21,7 @@
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DEE3F1B8A178800A09A00 /* TabBarController.swift */; };
 		543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A48721BDD4226008E9D71 /* tuto1VC.swift */; };
+		5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448EB001C1B71DB004D771A /* helpSettingsVC.swift */; };
 		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
 		5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */; };
@@ -140,6 +141,7 @@
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		542DEE3F1B8A178800A09A00 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tuto1VC.swift; path = mplango/tuto1VC.swift; sourceTree = "<group>"; };
+		5448EB001C1B71DB004D771A /* helpSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpSettingsVC.swift; sourceTree = "<group>"; };
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
 		5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				54B4A7EB1BEB8E2400199613 /* Settings.swift */,
 				54B4A7EE1BEB9DBE00199613 /* ChangeEmail.swift */,
 				54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */,
+				5448EB001C1B71DB004D771A /* helpSettingsVC.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
+				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
 				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,

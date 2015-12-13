@@ -144,7 +144,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     {
         if recognizer.state == .Began && scrollView.contentOffset.y == 0
         {
-            //// !!!UPDATED
             recognizer.setTranslation(CGPointZero, inView : scrollView)
             
             isTrackingPanLocation = true
@@ -152,7 +151,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         else if recognizer.state != .Ended && recognizer.state != .Cancelled &&
             recognizer.state != .Failed && isTrackingPanLocation
         {
-            //// !!!UPDATED
             let panOffset = recognizer.translationInView(scrollView)
             
             // determine offset of the pan from the start here.
@@ -205,8 +203,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     */
     
     
-    
-    
     //MARK Actions:
     
     @IBAction func cancel(sender: AnyObject) {
@@ -222,7 +218,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         
         //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
         
-    
         
         //aqui deve atualizar o label dos números de likes (likeNberLabel)
         
@@ -231,16 +226,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         //aqui o usuário do post deve ganhar 5 pontos de colaboração
         
         //aqui desativar o botão like quando o usuário é o autor do post
-        
-    }
-    
-    
-    
-    
-   
-    
-    
-    override func viewDidAppear(animated: Bool) {
         
     }
     
@@ -261,7 +246,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.textPost, attribute: .Height, relatedBy: .Equal, toItem: self.textPost, attribute: .Width, multiplier: textPost.bounds.height/textPost.bounds.width, constant: 1)
         self.textPost.addConstraint(aspectRatioTextViewConstraint)
     
-        
         
         //Os 3 ajustes seguintes permitem que a mediaView (que inicialmente tem uma altura = 0) se adapte à altura de uma das 3 subviews usadas. Permite que os botões "like" e "comentário" se situem sempre a 20px abaixo da mediaView, independentemente do tamanho dela.
         

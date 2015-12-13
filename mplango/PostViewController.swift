@@ -10,11 +10,13 @@ import UIKit
 import CoreData
 import AVFoundation
 
-class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate  {
+class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate  {
+    
+    //MARK: Properties
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    //MARK: Properties
+    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
     var post: Annotation? = nil
     var audioPlayer: AVAudioPlayer!
@@ -35,6 +37,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     @IBOutlet weak var checkTags: UIImageView!
     @IBOutlet weak var checkTextPost: UIImageView!
+    @IBOutlet weak var writeHereImage: UIImageView!
     
     //Outlets para o som
     @IBOutlet weak var backgroundRecord: UIView!
@@ -53,7 +56,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     @IBOutlet weak var photoImage: UIImageView!
-    @IBOutlet weak var photoImageView: UIImageView!
     
     @IBOutlet weak var checkImage: UIImageView!
     
@@ -116,6 +118,17 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+        
+        let text = textPostView.text
+        
+        if text.characters.count >= 1 {
+            writeHereImage.hidden = true
+        }
+            
+        else {
+            writeHereImage.hidden = false
+        }
+        
     }
 
     
@@ -148,6 +161,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
     }
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        writeHereImage.hidden = true
+    }
+    
     func touchOutsideTextField(){
         NSLog("touchOutsideTextField")
         self.view.endEditing(true)
@@ -176,30 +193,17 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     }
     
     
-    
-    //MARK: Image Actions
+    //MARK: Actions
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
     
-    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
-        //Hide the keyboard
-        tagsView.resignFirstResponder()
-        textPostView.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
-    }
+    
+    // MARK : Image Picker Process
+    
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
     
     @IBAction func removeImage(sender: AnyObject) {
         
@@ -210,31 +214,96 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
     }
     
-    
-    
-    //MARK: UIImagePickerControllerDelegate
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        //Dismiss the picker if the user canceled
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
+        //Hide the keyboard
+        
+        tagsView.resignFirstResponder()
+        textPostView.resignFirstResponder()
+        
+        let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cameraAction = UIAlertAction(title: "Caméra", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+            {
+                UIAlertAction in
+        }
+
+        // Add the actions
+        picker?.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.sourceRect = addPicture.frame
+            popover?.permittedArrowDirections = .Any
+            
+        }
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        //Set photoImageView to display the selected image
-        photoImage.image = selectedImage
-        
-        //Dismiss the picker
-        dismissViewControllerAnimated(true, completion: nil)
-        
+    func openCamera()
+    {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            picker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self .presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            openGallary()
+        }
+    }
+    
+    func openGallary()
+    {
+        picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
+            
+            popover?.sourceView = self.view
+            popover?.sourceRect = addPicture.frame
+            popover?.permittedArrowDirections = .Any
+            
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        photoImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         addPicture.hidden = true
         removeImage.hidden = false
-        removeImage.enabled = true
         
     }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    {
+        print("picker cancel.")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     
     //MARK: Audio Actions
     

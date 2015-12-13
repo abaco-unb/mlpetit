@@ -35,6 +35,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textFieldPassword.attributedPlaceholder =
             NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
+        
+            }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+        
     }
     
     //Text field delegate
@@ -45,8 +57,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
-    
+        
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_map", sender: self)

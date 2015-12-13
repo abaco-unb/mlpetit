@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -25,6 +25,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     @IBOutlet var wordTextField: UITextField!
     @IBOutlet weak var descTextView: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
+    @IBOutlet weak var writeHereImage: UIImageView!
     
     //Outlets para o audio
     @IBOutlet weak var backgroundRecord: UIView!
@@ -87,6 +88,16 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+        
+        let text = descTextView.text
+        
+        if text.characters.count >= 1 {
+            writeHereImage.hidden = true
+        }
+        
+        else {
+            writeHereImage.hidden = false
+        }
     }
   
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -111,6 +122,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         
     }
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        writeHereImage.hidden = true
+    }
+    
 
     
     //MARK: Actions
@@ -131,53 +146,11 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
     }
     
     
-    //MARK: Actions Image
+    // MARK : Image Picker Process
     
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
     
-    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
-        //Hide the keyboard
-        wordTextField.resignFirstResponder()
-        descTextView.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
-    }
-    
-    
-    
-    //MARK: UIImagePickerControllerDelegate
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        //Dismiss the picker if the user canceled
-        dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        //Set photoImageView to display the selected image
-        photoImage.image = selectedImage
-        
-        //Dismiss the picker
-        dismissViewControllerAnimated(true, completion: nil)
-        
-        addPicture.hidden = true
-        removeImage.hidden = false
-        removeImage.enabled = true
-        
-    }
-
     @IBAction func removeImage(sender: AnyObject) {
         
         photoImage.image = nil
@@ -186,6 +159,98 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate,UIImagePickerController
         removeImage.hidden = true
         
     }
+    
+    @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
+        //Hide the keyboard
+        
+        wordTextField.resignFirstResponder()
+        descTextView.resignFirstResponder()
+        
+        let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cameraAction = UIAlertAction(title: "Caméra", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+            {
+                UIAlertAction in
+        }
+
+        // Add the actions
+        picker?.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.sourceRect = addPicture.frame
+            popover?.permittedArrowDirections = .Any
+            
+        }
+        
+    }
+    
+    func openCamera()
+    {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            picker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self .presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            openGallary()
+        }
+    }
+    
+    func openGallary()
+    {
+        picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
+            
+            popover?.sourceView = self.view
+            popover?.sourceRect = addPicture.frame
+            popover?.permittedArrowDirections = .Any
+            
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        photoImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        addPicture.hidden = true
+        removeImage.hidden = false
+        
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    {
+        print("picker cancel.")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
+
+   
     
     // MARK:- Create and Edit Item Carnet
     

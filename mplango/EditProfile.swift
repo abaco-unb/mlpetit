@@ -80,36 +80,15 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
-    
-    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
-        //Hide the keyboard
-        //wordTextField.resignFirstResponder()
-        //descTextField.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
-    }
+ 
     
     @IBAction func confirmEditProf(sender: AnyObject) {
-        
-
         dismissViewControllerAnimated(false, completion: nil)
-
-        
     }
-    
     
     
     func retrieveLoggedUser() {
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let email: String = prefs.objectForKey("USEREMAIL") as! String
         let fetchRequest = NSFetchRequest(entityName: "User")
@@ -149,24 +128,96 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
     
-    //MARK: UIImagePickerControllerDelegate
+    // MARK : Image Picker Process
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        //Dismiss the picker if the user canceled
-        dismissViewControllerAnimated(true, completion: nil)
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
+    
+    
+    
+    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+        
+        //Hide the keyboard
+        userName.resignFirstResponder()
+        userNation.resignFirstResponder()
+        userBio.resignFirstResponder()
+        
+        let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cameraAction = UIAlertAction(title: "Caméra", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+            {
+                UIAlertAction in
+        }
+        
+        // Add the actions
+        picker?.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
+            popover?.permittedArrowDirections = .Any
+            
+        }
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+    func openCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            picker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self .presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            openGallary()
+        }
+    }
+    
+    func openGallary() {
+        picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
+            
+            popover?.sourceView = self.view
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
+            popover?.permittedArrowDirections = .Any
+            
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        profPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
-        //Set photoImageView to display the selected image
-        profPicture.image = selectedImage
         
-        //Dismiss the picker
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     

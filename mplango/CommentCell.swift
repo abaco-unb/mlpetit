@@ -21,12 +21,24 @@ class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
     
     
     // MARK: Properties
+    
+    // para todas as cells
 
     @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var comTxtView: UITextView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeBtn: UIButton!
+    
+    // para a BasicCell (só texto)
+    
+    @IBOutlet weak var comTxtView: UITextView!
+    
+    // para a AudioCell (só som)
+    
+    //@IBOutlet weak var audioView: UIView!
+    //@IBOutlet weak var playBtn: UIButton!
+    //@IBOutlet weak var stopBtn: UIButton!
+    //@IBOutlet weak var timerLabel: UILabel!
     
     
     override func layoutSubviews() {
@@ -39,6 +51,15 @@ class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
         
         profilePicture.layer.cornerRadius = 15
         profilePicture.layer.masksToBounds = true
+        
+        //Como vai aparecer a AudioView
+        
+        /*
+        audioView.layer.borderWidth = 1
+        audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        audioView.layer.cornerRadius = 10
+        audioView.layer.masksToBounds = true
+        */
         
     }
     
@@ -56,7 +77,6 @@ class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
         
     }
     
-    
     func textViewDidChange(textView: UITextView) {
         
         let contentSize = self.sizeThatFits(self.comTxtView.bounds.size)
@@ -67,6 +87,30 @@ class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
         let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.comTxtView, attribute: .Height, relatedBy: .Equal, toItem: self.comTxtView, attribute: .Width, multiplier: comTxtView.bounds.height/comTxtView.bounds.width, constant: 1)
         self.comTxtView.addConstraint(aspectRatioTextViewConstraint)
     }
+    
+    
+    // MARK: Actions
+    
+    @IBAction func like(sender: AnyObject) {
+        
+        // quando o botão like é clicado, ele é bloqueado e no lugar dele aparece uma image view com a mesma imagem, em vermelho
+        
+        likeBtn.enabled = false
+        
+        likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        
+        
+        
+        //aqui deve atualizar o label dos números de likes (likeNberLabel)
+        
+        //aqui deve tirar 1 ponto de participação do usuário que usa o botão
+        
+        //aqui o usuário do post deve ganhar 5 pontos de colaboração
+        
+        //aqui desativar o botão like quando o usuário é o autor do post
+        
+    }
+    
     
     
     override func awakeFromNib() {

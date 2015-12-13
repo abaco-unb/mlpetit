@@ -28,7 +28,8 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             try fetchedResultController.performFetch()
         } catch _ {
         }
-        navigationItem.leftBarButtonItem = editButtonItem()
+        
+        //navigationItem.leftBarButtonItem = editButtonItem()
         
     }
     
@@ -36,24 +37,22 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     // MARK:- Retrieve Tasks
     
     func getFetchedResultController() -> NSFetchedResultsController {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: moContext!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: self.moContext!, sectionNameKeyPath: "word", cacheName: nil)
+        
+        fetchedResultController.delegate = self
+
         return fetchedResultController
         
     }
     
     func itemFetchRequest() -> NSFetchRequest {
-        let fetchRequest = NSFetchRequest(entityName: "Carnet")
         
-        /*
-        if(segment != 2) {
-            print("fazer filtro")
-            let predicate = NSPredicate(format: "category == %@", segment)
-            fetchRequest.predicate = predicate
-        }
-        */
+        let fetchRequest = NSFetchRequest(entityName: "Carnet")
         
         let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        
         return fetchRequest
         
     }
@@ -69,16 +68,15 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Table view data source
     
-    let sections:Array<AnyObject> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    
+   
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let numberOfSections = fetchedResultController.sections?.count
+        let numberOfSections = self.fetchedResultController.sections?.count
         return numberOfSections!
     }
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRowsInSection = fetchedResultController.sections?[section].numberOfObjects
+        let numberOfRowsInSection = self.fetchedResultController.sections?[section].numberOfObjects
         return numberOfRowsInSection!
     }
     
@@ -86,35 +84,28 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
         
-        /*
-        if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) 
-        } else {
-
-        */
             cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
             let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
             cell.textLabel!.text = item.word
-        //}
         
         return cell
     }
     
-    
-    //Para mostrar o index do alfabeto à direita da tela
-    /*
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]! {
-        return self.sections
-    }
-    */
-    
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return index
+        return self.fetchedResultController.sectionForSectionIndexTitle(title, atIndex: index)
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[section] as? String
+        return self.fetchedResultController.sections![section].name
+    
     }
+    
+    
+    /*
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return self.fetchedResultController.sectionIndexTitles
+    }
+    */
     
     
     
@@ -146,37 +137,12 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
-            //let itemController:UINavigationController = segue.destinationViewController as! UINavigationController
-            //let targetController = itemController.topViewController as! CarnetViewController
             let item:Carnet = fetchedResultController.objectAtIndexPath(indexPath!) as! Carnet
-            //targetController.item = item
             itemController.item = item
             
         }
 
     }
     
-    /*
-    @IBAction func segumentedTapped(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            segment = 0
-        case 1:
-            segment = 1
-        default:
-            segment = 2
-            break
-        }
-        print("sender.selectedSegmentIndex")
-        print(sender.selectedSegmentIndex)
-        fetchedResultController = getFetchedResultController()
-        do {
-            try fetchedResultController.performFetch()
-        } catch _ {
-        }
-        tableView.reloadData()
-    }
-    */
     
-  
 }

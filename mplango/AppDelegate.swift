@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         
         // Set navigation bar tint / background colour
-        UINavigationBar.appearance().barTintColor = UIColor(hex: 0x3399CC)
+        UINavigationBar.appearance().barTintColor = UIColor(hex: 0x2C98D4)
         
         // Set Navigation bar Title colour
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]

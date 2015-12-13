@@ -10,7 +10,7 @@
 import UIKit
 import CoreData
 
-class CarnetViewController: UIViewController {
+class CarnetViewController: UIViewController, UITextViewDelegate {
     
     let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -22,10 +22,15 @@ class CarnetViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var editBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var removeImage: UIButton!
+    
+    @IBOutlet weak var mediaView: UIView!
     
     //Outlets dos textos
     
-    @IBOutlet weak var itemWordLabel: UILabel!
+    @IBOutlet weak var itemWordTxtView: UITextView!
     @IBOutlet weak var itemDescTxtView: UITextView!
     
     
@@ -51,16 +56,16 @@ class CarnetViewController: UIViewController {
         super.viewDidLoad()
         
         scrollView.contentSize.height = 300
-
         
         if item != nil {
-            itemWordLabel.text = item?.word
+            itemWordTxtView.text = item?.word
             itemDescTxtView.text = item?.desc
             navigationItem.title = item!.word
             //itemPhoto.image = item?.photo
         }
         
-        
+        itemDescTxtView.delegate = self
+        itemWordTxtView.delegate = self
         
         photoAudioView.layer.borderWidth = 1
         photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
@@ -70,41 +75,96 @@ class CarnetViewController: UIViewController {
         backgroundRecord.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
         backgroundRecord.layer.masksToBounds = true
         
-        
-        
         AudioView.layer.borderWidth = 1
         AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         AudioView.layer.cornerRadius = 10
         AudioView.layer.masksToBounds = true
         
-        /*
-        
-        //Hides and disables Save Button in reading mode.
-        navigationItem.rightBarButtonItem?.enabled = false
-        navigationItem.rightBarButtonItem?.title = nil
-            
-        }
-        */
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-        
-        }
-
-
-    override func viewDidAppear(animated: Bool) {
+        removeImage.hidden = true
 
     }
     
+    // MARK : Actions
+        
+        
+    @IBAction func edit(sender: AnyObject) {
+        
+        if editBtn.title == "Confirmer" {
+            
+            itemWordTxtView.editable = false
+            itemDescTxtView.editable = false
+            removeImage.hidden = true
+            editBtn.title = "Éditer"
+            itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
+            itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
+            navigationItem.hidesBackButton = false
+            navigationItem.title = "Carnet"
+            
+        } else {
+            
+            editItemCarnet()
+        }
+        
+    }
+    
+    
+    @IBAction func removeMedia(sender: AnyObject) {
+        
+        mediaView.hidden = true
+        removeImage.hidden = true
+        
+    }
+
+    
+    func editItemCarnet() {
+        
+        item?.word = itemWordTxtView.text!
+        item?.desc = itemDescTxtView.text!
+        
+        itemWordTxtView.editable = true
+        itemDescTxtView.editable = true
+        
+        if mediaView.hidden == false {
+            removeImage.hidden = false
+            removeImage.enabled = true
+        }
+        
+        itemWordTxtView.textColor = UIColor.darkGrayColor()
+        itemDescTxtView.textColor = UIColor.darkGrayColor()
+        
+        //falta poder modificar foto
+        //falta poder modificar som
+        
+        editBtn.title = "Confirmer"
+        
+        navigationItem.hidesBackButton = true
+        
+        do {
+            
+            try moContext?.save()
+            
+        } catch _ {
+        }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        editItemCarnet()
+        
+        let limitLength = 149
+        guard let text = textView.text else { return true }
+        let newLength = text.characters.count - range.length
+        
+        return newLength <= limitLength
+        
+    }
 
     
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
         
-        
-        //To adjust the height of TextField to its content
+        //To adjust the height of TextView to its content
         
         let contentSize = self.itemDescTxtView.sizeThatFits(self.itemDescTxtView.bounds.size)
         var frame = self.itemDescTxtView.frame

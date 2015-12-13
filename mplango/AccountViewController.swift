@@ -35,11 +35,6 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     var userName: String = ""
     var imagePicker: UIImagePickerController!
     var gender:String = ""
-    
-    /*var nationality: String = ""
-    let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
-    */
-    
 
 
     override func viewDidLoad() {
@@ -102,18 +97,29 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         segmentControl.layer.masksToBounds = true
         
         
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
         
-
     }
+    
+    
+    // MARK : Image Picker Process
+    
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
+    
+
     
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+        
         //Hide the keyboard
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
@@ -121,43 +127,85 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         textFieldConfPass.resignFirstResponder()
         textFieldNationality.resignFirstResponder()
         
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
+        let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cameraAction = UIAlertAction(title: "Caméra", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+            {
+                UIAlertAction in
+        }
         
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
+        // Add the actions
+        picker?.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
+            popover?.permittedArrowDirections = .Any
+            
+        }
         
     }
     
+    func openCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            picker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self .presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            openGallary()
+        }
+    }
     
-    //MARK: UIImagePickerControllerDelegate
+    func openGallary() {
+        picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
+            
+            popover?.sourceView = self.view
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
+            popover?.permittedArrowDirections = .Any
+            
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+
+        
+    }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        //Dismiss the picker if the user canceled
+        print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        //Set photoImageView to display the selected image
-        imageView.image = selectedImage
-        
-        //Dismiss the picker
-        dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    
-    
+
     //MARK: UIScrollView moves up (textField) when keyboard appears
 
     
@@ -184,41 +232,6 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     }
 
 
-    
-    /*
-    @IBAction func libraryPhoto(sender: UIButton) {
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-        presentViewController(imagePicker, animated: true, completion: nil)
-        
-        
-    }
-    
-    @IBAction func takePhoto(sender: UIButton) {
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .Camera
-        presentViewController(imagePicker, animated: true, completion: nil)
-    }
-
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    */
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
