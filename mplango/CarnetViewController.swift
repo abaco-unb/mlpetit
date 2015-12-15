@@ -42,6 +42,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var listenBtn: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
+    @IBOutlet weak var audioTimerLabel: UILabel!
     
   
     //Outlets da AudioView (quando o item do Carnet inclui apenas um audio)

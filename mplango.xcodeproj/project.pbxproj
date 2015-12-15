@@ -73,6 +73,8 @@
 		54E971B41B6ED25B005F27F1 /* FiraSans-UltraItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971911B6ED1F5005F27F1 /* FiraSans-UltraItalic.ttf */; };
 		54E971B51B6ED25B005F27F1 /* FiraSans-UltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971921B6ED1F5005F27F1 /* FiraSans-UltraLight.ttf */; };
 		54E971B61B6ED25B005F27F1 /* FiraSans-UltraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971931B6ED1F5005F27F1 /* FiraSans-UltraLightItalic.ttf */; };
+		54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */; };
+		54F0896C1C20A05100089687 /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0896B1C20A05100089687 /* FollowingTVC.swift */; };
 		82288E8E1B51C878006BC80F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFD1B40FD730002708C /* ContactViewController.swift */; };
 		823CC0091B46291700F633F8 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* Annotation.swift */; };
 		823CC00D1B4629C000F633F8 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00C1B4629C000F633F8 /* VCMapView.swift */; };
@@ -131,6 +133,7 @@
 		159C11B61BF58B1C0018EBE1 /* UserRestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRestService.swift; sourceTree = "<group>"; };
 		540A4A401C11EF5A00C166D8 /* PostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		5415F8311C1F22DE0036D4E0 /* mplango.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mplango.entitlements; sourceTree = "<group>"; };
 		54241A0C1B7E1B1E0074D350 /* mplango 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 3.xcdatamodel"; sourceTree = "<group>"; };
 		54241A0D1B7E31BF0074D350 /* mplango 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 4.xcdatamodel"; sourceTree = "<group>"; };
 		54241A0E1B7E321E0074D350 /* mplango 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 		54E971911B6ED1F5005F27F1 /* FiraSans-UltraItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-UltraItalic.ttf"; sourceTree = "<group>"; };
 		54E971921B6ED1F5005F27F1 /* FiraSans-UltraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-UltraLight.ttf"; sourceTree = "<group>"; };
 		54E971931B6ED1F5005F27F1 /* FiraSans-UltraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-UltraLightItalic.ttf"; sourceTree = "<group>"; };
+		54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTVC.swift; sourceTree = "<group>"; };
+		54F0896B1C20A05100089687 /* FollowingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
 		823CC0081B46291700F633F8 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		823CC00C1B4629C000F633F8 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		8256CAFD1B40FD730002708C /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +290,7 @@
 		8283BE141B0143AF0085F9A6 /* mplango */ = {
 			isa = PBXGroup;
 			children = (
+				5415F8311C1F22DE0036D4E0 /* mplango.entitlements */,
 				159C11B51BF589DF0018EBE1 /* Service */,
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
 				542DEE3F1B8A178800A09A00 /* TabBarController.swift */,
@@ -428,6 +434,8 @@
 				54B4A7EE1BEB9DBE00199613 /* ChangeEmail.swift */,
 				54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */,
 				5448EB001C1B71DB004D771A /* helpSettingsVC.swift */,
+				54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */,
+				54F0896B1C20A05100089687 /* FollowingTVC.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -500,6 +508,32 @@
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = 2B3UEHLLJ3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+							com.apple.HomeKit = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 					8283BE291B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
@@ -608,6 +642,7 @@
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
+				54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
 				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
@@ -627,6 +662,7 @@
 				82D73CA21B81718B00DFEAB0 /* CategoryViewController.swift in Sources */,
 				159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */,
 				823CC0091B46291700F633F8 /* Annotation.swift in Sources */,
+				54F0896C1C20A05100089687 /* FollowingTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

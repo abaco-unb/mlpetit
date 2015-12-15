@@ -25,7 +25,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var filePath: String!
     var tags = [String]()
     var points = 0
-    
    
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -34,7 +33,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var tagsView: UITextView!
     @IBOutlet weak var textPostView: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
-    
     @IBOutlet weak var checkTags: UIImageView!
     @IBOutlet weak var checkTextPost: UIImageView!
     @IBOutlet weak var writeHereImage: UIImageView!
@@ -45,26 +43,19 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var slowBtn: UIButton!
-    
     @IBOutlet weak var audioSlider: UISlider!
     @IBOutlet weak var confirmButton: UIButton!
-    
     @IBOutlet weak var checkAudio: UIImageView!
-    
     
     //Outlets para a foto
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     @IBOutlet weak var photoImage: UIImageView!
-    
     @IBOutlet weak var checkImage: UIImageView!
     
     
     //Outlets para o vídeo
-    
-    
     @IBOutlet weak var checkVideo: UIImageView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,8 +91,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         longPressRecogniser.minimumPressDuration = 0.2
         recordButton.addGestureRecognizer(longPressRecogniser)
         
-        
-        //
         if post != nil {
             print("post controller")
             print(post)
@@ -128,7 +117,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         else {
             writeHereImage.hidden = false
         }
-        
     }
 
     
@@ -252,9 +240,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             popover?.sourceView = self.view
             popover?.sourceRect = addPicture.frame
             popover?.permittedArrowDirections = .Any
-            
         }
-        
     }
     
     func openCamera()

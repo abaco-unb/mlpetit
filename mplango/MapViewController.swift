@@ -176,6 +176,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    //Aqui já coloquei as ações dos botões do filtro, cada um devendo mostrar no mapa o que lhe corresponde (posts recentes, desafios, etc.)
+    
     @IBAction func showRecentPosts(sender: AnyObject) {
         
     }

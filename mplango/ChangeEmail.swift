@@ -17,14 +17,11 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
     
     var user: User!
     
-    
     @IBOutlet weak var currentEmail: UITextField!
     @IBOutlet weak var newEmail: UITextField!
     @IBOutlet weak var confNewEmail: UITextField!
     
     @IBOutlet weak var confirmBtn: UIBarButtonItem!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,20 +30,13 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
         // Enable the Save button only if the screen has a valid change
         checkValidChange()
 
-        
         print(user.email)
         
         currentEmail.attributedPlaceholder =
             NSAttributedString(string: user.email, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
-        
-        
     }
     
- 
-    
-    
     //MARK: Actions
-    
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
@@ -54,7 +44,6 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
     
     @IBAction func confNewEmail(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
-
     }
     
     func retrieveLoggedUser() {
@@ -65,13 +54,9 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
         
         if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
-            
         }
-        
     }
     
-    
-
     //MARK: enable confirm button
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -91,15 +76,9 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
         
         confirmBtn.enabled = !text.isEmpty
         confirmBtn.enabled = !text2.isEmpty
-
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
         checkValidChange()
     }
-
-
-    
-    
-    
 }

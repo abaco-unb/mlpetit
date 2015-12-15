@@ -26,11 +26,7 @@ class ProfileGameVC: UIViewController, NSFetchedResultsControllerDelegate {
         navigationItem.title = user.name
         
         //navigationItem.setHidesBackButton(true, animated: true)
-        
-        
     }
-    
-    
     
     func retrieveLoggedUser() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -40,20 +36,7 @@ class ProfileGameVC: UIViewController, NSFetchedResultsControllerDelegate {
         
         if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
-            
         }
-        
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    
     
 }

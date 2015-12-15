@@ -42,15 +42,12 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         profileNumberPosts.text = user.posts.count.description
         //profileNumberFollowers.text =
         //profileNumberFollowing.text =
-        
         //profileGender.image = user.gender
         //profilePicture.image = user.image
         
         // Custom the visual identity of Image View
-        
         profilePicture.layer.cornerRadius = 40
         profilePicture.layer.masksToBounds = true
-        
         
         //Para ir à tela da gamificação com gesto (e não botão)
         let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
@@ -63,9 +60,6 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         self.performSegueWithIdentifier("showBadges", sender: self)
     }
     
-
-    
-    
     func retrieveLoggedUser() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let email: String = prefs.objectForKey("USEREMAIL") as! String
@@ -74,20 +68,6 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
         
         if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
-            
         }
-        
     }
-    
-    override func viewDidAppear(animated: Bool) {
-
-        
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    
-    
 }

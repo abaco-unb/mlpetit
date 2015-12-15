@@ -18,7 +18,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,9 +27,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             try fetchedResultController.performFetch()
         } catch _ {
         }
-        
-        //navigationItem.leftBarButtonItem = editButtonItem()
-        
     }
     
     
@@ -42,7 +38,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         fetchedResultController.delegate = self
 
         return fetchedResultController
-        
     }
     
     func itemFetchRequest() -> NSFetchRequest {
@@ -52,34 +47,22 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        
         return fetchRequest
-        
     }
 
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
     // MARK: - Table view data source
     
-   
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let numberOfSections = self.fetchedResultController.sections?.count
         return numberOfSections!
     }
     
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRowsInSection = self.fetchedResultController.sections?[section].numberOfObjects
         return numberOfRowsInSection!
     }
-    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
@@ -100,13 +83,11 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     }
     
-    
     /*
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return self.fetchedResultController.sectionIndexTitles
     }
     */
-    
     
     
     // MARK: - TableView Refresh
@@ -139,10 +120,6 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
             let item:Carnet = fetchedResultController.objectAtIndexPath(indexPath!) as! Carnet
             itemController.item = item
-            
         }
-
     }
-    
-    
 }

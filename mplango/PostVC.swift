@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+//Esta tela será aberta a partir da preview do post no mapa.
+//O pin abre a preview e a preview abre a tela de post.
 
 class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate {
 
@@ -37,7 +39,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     @IBOutlet weak var mediaView: UIView!
     
     //Outlets dos elementos que identificam o post (localização, usuário, data/hora da publicação)
-    
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -45,12 +46,10 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     
     
     //Outlet do texto do post
-    
     @IBOutlet weak var textPost: UITextView!
     
     
     //Outlets da photoAudioView (quando o Post inclui uma foto e eventualmente, ao mesmo tempo, um audio)
-    
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
     
@@ -60,14 +59,12 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     
     
     //Outlets da AudioView (quando o Post inclui apenas um audio)
-    
     @IBOutlet weak var AudioView: UIView!
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
     
     
     //Outlets do Video View (
-    
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var previewVideo: UIImageView!
     @IBOutlet weak var playVideo: UIButton!
@@ -83,7 +80,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         
         likeView.hidden = true
 
-        
         /*
         if item != nil {
             itemWordLabel.text = item?.word
@@ -93,9 +89,7 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         }
         */
         
-        
         //Como vai aparecer a photoAudioView
-        
         photoAudioView.layer.borderWidth = 1
         photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         photoAudioView.layer.cornerRadius = 10
@@ -106,7 +100,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         
         
         //Como vai aparecer a AudioView
-        
         AudioView.layer.borderWidth = 1
         AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         AudioView.layer.cornerRadius = 10
@@ -114,7 +107,6 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         
         
         //Como vai aparecer a videoView
-        
         videoView.layer.borderWidth = 1
         videoView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         videoView.layer.cornerRadius = 10
@@ -133,13 +125,11 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "panRecognized:")
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
-        
-        
+
     }
     
     //MARK: Pan Gesture to dismiss post view
     
-   
     internal func panRecognized(recognizer:UIPanGestureRecognizer)
     {
         if recognizer.state == .Began && scrollView.contentOffset.y == 0
@@ -182,26 +172,7 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
     {
         return true
     }
-    
 
-    /*
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 0.7
-    }
-    
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        transitionContext.containerView()!.addSubview(toViewController.view)
-        toViewController.view.alpha = 0.0
-        UIView.animateWithDuration(0.7, animations: {
-            toViewController.view.alpha = 1.0
-            }, completion: { (finished) in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-        })
-    }
-    */
-    
     
     //MARK Actions:
     
@@ -225,19 +196,15 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
         
         //aqui o usuário do post deve ganhar 5 pontos de colaboração
         
-        //aqui desativar o botão like quando o usuário é o autor do post
+        //aqui desativar o botão like quando o usuário for o autor do post
         
     }
-    
-    
     
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
         
-        
         //To adjust the height of TextField to its content
-        
         let contentSize = self.textPost.sizeThatFits(self.textPost.bounds.size)
         var frame = self.textPost.frame
         frame.size.height = contentSize.height
@@ -289,20 +256,8 @@ class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRec
             
             let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: videoView, attribute: .Width, multiplier: videoView.bounds.height/videoView.bounds.width, constant: 1)
             mediaView.addConstraint(aspectRatioViewConstraint)
-            
         }
-
-        
     }
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     
 }
 

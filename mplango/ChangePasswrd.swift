@@ -20,10 +20,7 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
     @IBOutlet weak var currentPasswd: UITextField!
     @IBOutlet weak var newPasswd: UITextField!
     @IBOutlet weak var confNewPasswd: UITextField!
-    
     @IBOutlet weak var confirmBtn: UIBarButtonItem!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +28,7 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
         
         // Enable the Save button only if the screen has a valid change
         checkValidChange()
-        
     }
-
-   
 
     //MARK: Actions
     
@@ -44,7 +38,6 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
     
     @IBAction func confNewPasswd(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
-
     }
     
     func retrieveLoggedUser() {
@@ -55,9 +48,7 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
         
         if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
-            
         }
-        
     }
     
     //MARK: enable confirm button
@@ -81,17 +72,10 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
         confirmBtn.enabled = !text.isEmpty
         confirmBtn.enabled = !text2.isEmpty
         confirmBtn.enabled = !text3.isEmpty
-        
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
         checkValidChange()
     }
-
-    
-    
-    
-    
-    
     
 }

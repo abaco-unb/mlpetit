@@ -58,7 +58,6 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        
         //Para que a view acompanhe o teclado e poder escrever o comentário
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
@@ -69,11 +68,8 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         
         removeImage.hidden = true
 
-        
         comTableView.rowHeight = UITableViewAutomaticDimension
         comTableView.estimatedRowHeight = 160.0
-
-
     }
 
     
@@ -82,7 +78,6 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             self.view.frame.origin.y -= keyboardSize.height
         }
-        
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -116,25 +111,20 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         let newLength = text.characters.count - range.length
         
         return newLength <= limitLength
-        
     }
-    
     
     func textViewDidChange(textView: UITextView) {
         
         let text = writeTxtView.text
         
         if text.characters.count >= 1 {
-        
             postComBtn.hidden = false
             postComBtn.enabled = true
             imageBtn.hidden = true
             recordBtn.hidden = true
-            
         }
         
         else if text.characters.count < 1 {
-
             postComBtn.hidden = true
             imageBtn.hidden = false
             imageBtn.enabled = true
@@ -149,7 +139,7 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     }
     
     
-       // MARK Actions:
+    // MARK Actions:
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
@@ -184,7 +174,6 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         
         comPicture.image = nil
         removeImage.hidden = true
-        
         postComBtn.hidden = true
         imageBtn.hidden = false
         imageBtn.enabled = true
@@ -220,54 +209,44 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         alert.addAction(gallaryAction)
         alert.addAction(cancelAction)
         // Present the controller
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
-        {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             self.presentViewController(alert, animated: true, completion: nil)
-        }
-        else
-        {
+       
+        } else {
             popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
             popover?.sourceView = self.view
             popover?.sourceRect = imageBtn.frame
             popover?.permittedArrowDirections = .Any
-            
         }
-        
     }
     
-    func openCamera()
-    {
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
-        {
+    func openCamera() {
+        
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            
             picker!.sourceType = UIImagePickerControllerSourceType.Camera
             self .presentViewController(picker!, animated: true, completion: nil)
-        }
-        else
-            {
+            } else {
             openGallary()
             }
         }
     
-        func openGallary()
-        {
+        func openGallary() {
+
         picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
-        {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             self.presentViewController(picker!, animated: true, completion: nil)
-        }
-        else
-        {
+        } else {
             popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
             
             popover?.sourceView = self.view
             popover?.sourceRect = imageBtn.frame
             popover?.permittedArrowDirections = .Any
-            
         }
     }
    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
-    {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
         picker.dismissViewControllerAnimated(true, completion: nil)
         comPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         removeImage.hidden = false
@@ -278,13 +257,10 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         writeHereImage.hidden = true
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController)
-    {
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-
     
     // MARK:- Retrieve Tasks
     
@@ -325,11 +301,9 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
                 try moContext?.save()
             } catch _ {
             }
-            
         }
     }
 
-    
     // Table view
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -348,15 +322,8 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         let comment = fetchedResultController.objectAtIndexPath(indexPath) as! Post
         
         cell.comTxtView.text = comment.text
-        
-        /* Para indicar achar a hora e o dia do comentário
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(NSCalendarUnit.Year.union(NSCalendarUnit.Minute), fromDate: date)
-        let hour = components.hour
-        let minutes = components.minute
-        */
-        
+
+        // Para a data da publicação do comentário (mas não funciona, por enquanto indica a data/hora atual)
         let date = NSDate()
         let dateFormatter = NSDateFormatter()
         

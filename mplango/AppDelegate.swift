@@ -45,11 +45,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         //Set navigation bar Back button tint colour
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
-        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))  // types are UIUserNotificationType members
+
     
         return true
         
     }
+    
+ 
+    func initializeNotificationServices() -> Void {
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        // This is an asynchronous method to retrieve a Device Token
+        // Callbacks are in AppDelegate.swift
+        // Success = didRegisterForRemoteNotificationsWithDeviceToken
+        // Fail = didFailToRegisterForRemoteNotificationsWithError
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+    }
+    
 
     func applicationWillResignActive(application: UIApplication) {
     }

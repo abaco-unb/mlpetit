@@ -16,7 +16,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
     var user: User!
-    
 
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var profPicture: UIImageView!
@@ -26,7 +25,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var userNation: UITextField!
     @IBOutlet weak var userBio: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveLoggedUser()
@@ -35,9 +33,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print(user.nationality)
         print(user.gender)
         
-        
-        //import data from user
-        
         userName.attributedPlaceholder =
             NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
@@ -45,34 +40,24 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
             NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
         //userGender.selectedSegmentIndex = NSAttributedString(string: user.gender)
-        
-
 
         scroll.contentSize.height = 200
         
         // Enable the Save button only if the screen has a valid change
         checkValidChange()
         
-        
         // Keyboard stuff.
         let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
         center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-
-        
-        // Custom the visual identity of Image View
-        
         profPicture.layer.cornerRadius = 40
         profPicture.layer.masksToBounds = true
-
         
         userGender.layer.borderWidth = 3
         userGender.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         userGender.layer.cornerRadius = 20
         userGender.layer.masksToBounds = true
-        
-        
     }
 
     //MARK: Actions
@@ -86,7 +71,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         dismissViewControllerAnimated(false, completion: nil)
     }
     
-    
     func retrieveLoggedUser() {
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -96,14 +80,11 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
             user = fetchResults[0];
-            
         }
-        
     }
     
     
     //MARK: UIScrollView moves up (textField) when keyboard appears
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -132,8 +113,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     var picker:UIImagePickerController? = UIImagePickerController()
     var popover:UIPopoverPresentationController? = nil
-    
-    
+
     
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         
@@ -259,7 +239,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         NSNotificationCenter.defaultCenter().removeObserver(scroll, name: UIKeyboardWillHideNotification, object: nil)
     }
     
-
     /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
