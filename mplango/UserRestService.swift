@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import AlamofireSwiftyJSON
+import Alamofire
 
 class UserRestService: AnyObject {
     
     static let sharedInstance = UserRestService()
     
-    let sufixURL = "/user-rest"
+    let URL:String = "http://server.maplango.com.br/user-rest"
+    
     var userCollection = [RUser]()
     
     func loadUser(users:NSArray) {
@@ -34,17 +37,20 @@ class UserRestService: AnyObject {
         
     }
     
-    func getList() -> [RUser] {
-        let url = RestApiManager.sharedInstance.getBaseURL() + self.sufixURL
-        RestApiManager.sharedInstance.makeHTTPGetRequest(url , callback:{(response) in self.loadUser(response["data"] as! NSArray)})
-        return userCollection;
+    func getList() {
+        
+        Alamofire.request(.GET, self.URL, parameters: ["foo": "bar"])
+            .responseSwiftyJSON({ (request, response, json, error) in
+                print(json)
+                print(error)
+            })
     }
-    
-    func get(id: String) -> RUser {
-        let url = RestApiManager.sharedInstance.getBaseURL() + self.sufixURL + "/" + id
-        RestApiManager.sharedInstance.makeHTTPGetRequest(url , callback:{(response) in self.loadUser(response["data"] as! NSArray)})
-        return userCollection[0];
-    }
+    //
+    //    func get(id: String) {
+    //        let url = RestApiManager.sharedInstance.getBaseURL() + self.sufixURL + "/" + id
+    //        RestApiManager.sharedInstance.makeHTTPGetRequest(url , callback:{(response) in self.loadUser(response["data"] as! NSArray)})
+    //        //NSLog(userCollection[0]);
+    //    }
     
     func create() -> RUser {
         return userCollection[0];
