@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1513D99B1C4D163600D1729C /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1513D99A1C4D163600D1729C /* ImageUtils.swift */; };
+		1513D99C1C4D163600D1729C /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1513D99A1C4D163600D1729C /* ImageUtils.swift */; };
+		1513D9A71C4D182800D1729C /* mplango2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1513D99D1C4D182800D1729C /* mplango2.xcdatamodeld */; };
+		1513D9A81C4D182800D1729C /* mplango2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1513D99D1C4D182800D1729C /* mplango2.xcdatamodeld */; };
+		1513D9AA1C4D1BCC00D1729C /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1513D9A91C4D1BCC00D1729C /* Main2.storyboard */; };
+		1513D9AB1C4D1BCC00D1729C /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1513D9A91C4D1BCC00D1729C /* Main2.storyboard */; };
 		159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
 		159C11AF1BF576A60018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
 		159C11B01BF586A80018EBE1 /* mplango.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */; };
@@ -127,6 +133,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1513D99A1C4D163600D1729C /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
+		1513D99E1C4D182800D1729C /* mplango 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 2.xcdatamodel"; sourceTree = "<group>"; };
+		1513D99F1C4D182800D1729C /* mplango 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 3.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A01C4D182800D1729C /* mplango 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 4.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A11C4D182800D1729C /* mplango 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 5.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A21C4D182800D1729C /* mplango 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 6.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A31C4D182800D1729C /* mplango 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 7.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A41C4D182800D1729C /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A51C4D182800D1729C /* mplango 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 9.xcdatamodel"; sourceTree = "<group>"; };
+		1513D9A61C4D182800D1729C /* mplango.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mplango.xcdatamodel; sourceTree = "<group>"; };
+		1513D9A91C4D1BCC00D1729C /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		159C11AD1BF5768A0018EBE1 /* RUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
 		159C11B11BF586D70018EBE1 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		159C11B21BF589D70018EBE1 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
@@ -290,6 +307,7 @@
 		8283BE141B0143AF0085F9A6 /* mplango */ = {
 			isa = PBXGroup;
 			children = (
+				1513D99A1C4D163600D1729C /* ImageUtils.swift */,
 				5415F8311C1F22DE0036D4E0 /* mplango.entitlements */,
 				159C11B51BF589DF0018EBE1 /* Service */,
 				8283BE171B0143AF0085F9A6 /* AppDelegate.swift */,
@@ -299,9 +317,11 @@
 				828C717F1B83C424009FE9B5 /* Controller */,
 				543A48761BDD422E008E9D71 /* Tutorial screens */,
 				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
+				1513D9A91C4D1BCC00D1729C /* Main2.storyboard */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
+				1513D99D1C4D182800D1729C /* mplango2.xcdatamodeld */,
 				8283BE151B0143AF0085F9A6 /* Supporting Files */,
 			);
 			path = mplango;
@@ -602,6 +622,7 @@
 				54E971B61B6ED25B005F27F1 /* FiraSans-UltraLightItalic.ttf in Resources */,
 				8283BE201B0143AF0085F9A6 /* Main.storyboard in Resources */,
 				8283BE251B0143AF0085F9A6 /* LaunchScreen.xib in Resources */,
+				1513D9AA1C4D1BCC00D1729C /* Main2.storyboard in Resources */,
 				8283BE221B0143AF0085F9A6 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +631,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1513D9AB1C4D1BCC00D1729C /* Main2.storyboard in Resources */,
 				82842E3F1B61E9D200E7C860 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,11 +680,13 @@
 				54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */,
 				54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */,
 				542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */,
+				1513D9A71C4D182800D1729C /* mplango2.xcdatamodeld in Sources */,
 				8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */,
 				82D73CA21B81718B00DFEAB0 /* CategoryViewController.swift in Sources */,
 				159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */,
 				823CC0091B46291700F633F8 /* Annotation.swift in Sources */,
 				54F0896C1C20A05100089687 /* FollowingTVC.swift in Sources */,
+				1513D99B1C4D163600D1729C /* ImageUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,9 +701,11 @@
 				159C11B41BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				82842E351B61E38700E7C860 /* AppDelegate.swift in Sources */,
 				828C717C1B83B260009FE9B5 /* CarnetViewController.swift in Sources */,
+				1513D9A81C4D182800D1729C /* mplango2.xcdatamodeld in Sources */,
 				82842E371B61E65200E7C860 /* AccountViewController.swift in Sources */,
 				159C11B01BF586A80018EBE1 /* mplango.xcdatamodeld in Sources */,
 				82842E381B61E65600E7C860 /* ForgotPassViewController.swift in Sources */,
+				1513D99C1C4D163600D1729C /* ImageUtils.swift in Sources */,
 				54D02ABB1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				82842E3D1B61E66800E7C860 /* VCMapView.swift in Sources */,
 				82D73CA61B81720E00DFEAB0 /* PostViewController.swift in Sources */,
@@ -907,6 +933,24 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		1513D99D1C4D182800D1729C /* mplango2.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1513D99E1C4D182800D1729C /* mplango 2.xcdatamodel */,
+				1513D99F1C4D182800D1729C /* mplango 3.xcdatamodel */,
+				1513D9A01C4D182800D1729C /* mplango 4.xcdatamodel */,
+				1513D9A11C4D182800D1729C /* mplango 5.xcdatamodel */,
+				1513D9A21C4D182800D1729C /* mplango 6.xcdatamodel */,
+				1513D9A31C4D182800D1729C /* mplango 7.xcdatamodel */,
+				1513D9A41C4D182800D1729C /* mplango 8.xcdatamodel */,
+				1513D9A51C4D182800D1729C /* mplango 9.xcdatamodel */,
+				1513D9A61C4D182800D1729C /* mplango.xcdatamodel */,
+			);
+			currentVersion = 1513D9A51C4D182800D1729C /* mplango 9.xcdatamodel */;
+			path = mplango2.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

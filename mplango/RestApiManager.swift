@@ -14,19 +14,17 @@ import Foundation
 class RestApiManager: NSObject {
     static let sharedInstance = RestApiManager()
     
-    let baseURL = "http://server.maplango.com.br"
+    let baseURL:String = "http://server.maplango.com.br"
     
-    func makeHTTPGetRequest(url: String, callback:(NSDictionary) -> ()) {
+    func request(url: String, callback:(NSDictionary) -> ()) {
         let nsUrl = NSURL(string: url)
-        NSLog("@view URL %@", url)
         let task = NSURLSession.sharedSession().dataTaskWithURL(nsUrl!) {
             (data, response, error) in
-            NSLog("@sucesso retorno HTTH %@", (response?.description)!)
-            //NSLog("@sucesso DATA:  %@", (data)!)
-            //print(response)
-            
+            NSLog("@sucesso %@", (data?.description)!)
             do {
                 let response = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                print(response)
+                
                 callback(response)
                 
             }
@@ -36,6 +34,26 @@ class RestApiManager: NSObject {
         }
         task.resume()
     }
+    
+    //    func makeHTTPPostRequest(path: String, body: [String: AnyObject], callback: ServiceResponse) {
+    //        var err: NSError?
+    //        let request = NSMutableURLRequest(URL: NSURL(string: path)!)
+    //
+    //        // Set the method to POST
+    //        request.HTTPMethod = "POST"
+    //
+    //        // Set the POST body for the request
+    //        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: nil, error: &err)
+    //        let session = NSURLSession.sharedSession()
+    //
+    //        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+    //            let json:JSON = JSON(data: data)
+    //            onCompletion(json, err)
+    //        })
+    //        task.resume()
+    //    }
+    
+    
     
     func getBaseURL()->String {
         return self.baseURL
