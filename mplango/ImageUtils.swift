@@ -38,9 +38,9 @@ class ImageUtils {
     
         if image == nil {
         
-            print("missing image at: \(path)")
+            print("missing image at: \(path)", terminator: "")
         }
-        print("Loading image from path: \(path)")
+        print("Loading image from path: \(path)", terminator: "")
         return image
     }
 }

@@ -1,0 +1,12 @@
+[submodule "Alamofire"]
+	path = Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
+[submodule "mplango/Alamofire"]
+	path = mplango/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
+[submodule "mplango/Alamofire-SwiftyJSON"]
+	path = mplango/Alamofire-SwiftyJSON
+	url = https://github.com/SwiftyJSON/Alamofire-SwiftyJSON.git
+[submodule "mplango/SwiftyJSON"]
+	path = mplango/SwiftyJSON
+	url = https://github.com/SwiftyJSON/SwiftyJSON.git
