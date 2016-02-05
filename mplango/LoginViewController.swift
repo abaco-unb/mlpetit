@@ -30,7 +30,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             NSOperationQueue.mainQueue().addOperationWithBlock{
                 let alertView:UIAlertView = UIAlertView()
                 alertView.title = "Registro de conta!"
-                alertView.message = "CAdastro realizado com sucesso!"
+                alertView.message = "Cadastro realizado com sucesso!"
                 alertView.delegate = self
                 alertView.addButtonWithTitle("OK")
                 alertView.show()
@@ -49,7 +49,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textFieldPassword.attributedPlaceholder =
             NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
     }
+    
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+        
+    }
+    
     
     //Text field delegate
     
@@ -59,6 +72,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         //self.performSegueWithIdentifier("goto_map", sender: self)

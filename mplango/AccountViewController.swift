@@ -45,14 +45,6 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
     */
     
-    //Text field delegate
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        
-        return true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,53 +56,79 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         //_ : CGFloat = 0.7
         //_ : CGFloat = 5.0
         
-        scrollView.contentSize.height = 500
+        scrollView.contentSize.height = 300
+        
+        // Keyboard stuff.
+        let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        
         
         textFieldName.backgroundColor = UIColor.clearColor()
         textFieldName.layer.borderWidth = 3.0
-        textFieldName.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        textFieldName.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldName.attributedPlaceholder =
             NSAttributedString(string: "Nom d'utilisateur", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
         textFieldEmail.backgroundColor = UIColor.clearColor()
         textFieldEmail.layer.borderWidth = 3.0
-        textFieldEmail.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        textFieldEmail.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldEmail.attributedPlaceholder =
             NSAttributedString(string: "Email valide", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
         textFieldPassword.backgroundColor = UIColor.clearColor()
         textFieldPassword.layer.borderWidth = 3.0
-        textFieldPassword.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        textFieldPassword.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldPassword.attributedPlaceholder =
             NSAttributedString(string: "Mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
         textFieldConfPass.backgroundColor = UIColor.clearColor()
         textFieldConfPass.layer.borderWidth = 3.0
-        textFieldConfPass.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        textFieldConfPass.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldConfPass.attributedPlaceholder =
             NSAttributedString(string: "Confirmer mot de passe", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
         textFieldNationality.backgroundColor = UIColor.clearColor()
         textFieldNationality.layer.borderWidth = 3.0
-        textFieldNationality.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        textFieldNationality.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldNationality.attributedPlaceholder =
             NSAttributedString(string: "Nationalité", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
         // Custom the visual identity of Image View
         imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        imageView.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         imageView.layer.cornerRadius = 45
         imageView.layer.masksToBounds = true
         
         segmentControl.layer.borderWidth = 3
-        segmentControl.layer.borderColor = UIColor(hex: 0x000000).CGColor
+        segmentControl.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         segmentControl.layer.cornerRadius = 20
         segmentControl.layer.masksToBounds = true
         
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
     }
     
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+        
+    }
+    
+    
+    // MARK : Image Picker Process
+    
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
+    
+    
+    
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+        
         //Hide the keyboard
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
@@ -118,45 +136,107 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         textFieldConfPass.resignFirstResponder()
         textFieldNationality.resignFirstResponder()
         
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library
-        let imagePickerController = UIImagePickerController ()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-        
-        
-    }
-    
-    
-    //MARK: UIImagePickerControllerDelegate
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        //Dismiss the picker if the user canceled
-        dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        if let selectedImage = info[UIImagePickerControllerOriginalImage] {
-            //Set photoImageView to display the selected image
-            imageView.image = selectedImage as? UIImage
-            // save image in directory
-            let imgUtils:ImageUtils = ImageUtils()
-            self.imgPath = imgUtils.fileInDocumentsDirectory(self.myImage)
-            imgUtils.saveImage(imageView.image!, path: self.imgPath);
-        } else {
-            print("Ocorreu um erro ao tentar gerar a imagem")
+        let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cameraAction = UIAlertAction(title: "Caméra", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
+            {
+                UIAlertAction in
+                self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+            {
+                UIAlertAction in
         }
         
-        //Dismiss the picker
-        dismissViewControllerAnimated(true, completion: nil)
+        // Add the actions
+        picker?.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
+            popover?.permittedArrowDirections = .Any
+            
+        }
         
+    }
+    
+    func openCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            picker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self .presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            openGallary()
+        }
+    }
+    
+    func openGallary() {
+        picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(picker!, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
+            
+            popover?.sourceView = self.view
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
+            popover?.permittedArrowDirections = .Any
+            
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        print("picker cancel.")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    //MARK: UIScrollView moves up (textField) when keyboard appears
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func keyboardWillShow(notification:NSNotification){
+        
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification:NSNotification){
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsetsZero
+        self.scrollView.contentInset = contentInset
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
