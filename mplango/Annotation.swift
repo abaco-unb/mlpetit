@@ -16,12 +16,12 @@ class Annotation: NSObject, MKAnnotation {
     let locationName: String
     let category: NSNumber
     let coordinate: CLLocationCoordinate2D
-    let userImage: UIImage
+    let userImage: String
     let entity: Post?
     
     var imageName: String!
     
-    init(title: String, locationName: String, category: NSNumber, coordinate: CLLocationCoordinate2D, userImage: UIImage, entity: Post?) {
+    init(title: String, locationName: String, category: NSNumber, coordinate: CLLocationCoordinate2D, userImage: String, entity: Post?) {
         self.title = title
         self.locationName = locationName
         self.category = category

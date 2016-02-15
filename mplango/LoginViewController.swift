@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
-import UIKit
-import CoreData
+
 import Alamofire
+import SwiftyJSON
+import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -22,6 +23,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var username:String = ""
     var pwd:String      = ""
     var registered: Bool = false
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +67,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     //Text field delegate
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
-        
         return true
     }
     
@@ -95,47 +94,50 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             alertView.show()
             
         } else {
-            
-            Alamofire.request(.GET, self.restPath, parameters: ["foo": "bar"])
+            self.indicator.showActivityIndicator(self.view);
+            Alamofire.request(.GET, self.restPath, parameters: ["email": self.username])
                 .responseSwiftyJSON({ (request, response, json, error) in
-                    if let users = json.array {
+                    self.indicator.hideActivityIndicator();
+                    
+                    if json["data"].array?.count > 0 {
                         
-                        var hasLogin:Bool = false
-                        for user in  users{
-                            if((user["email"].string! == self.username) && user["password"].string! == self.pwd){
-                                hasLogin = true
-                                
-                                print("aqui")
-                                let id = user["id"].int!
-                                //let name = user["name"].string!
-                                print(id)
+                        if let result = json["data"].array {
+                            let user = result.first!
+                            print(user["password"].stringValue)
+                            if(user["password"].stringValue == self.pwd){
                                 let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                                prefs.setInteger(id, forKey: "id")
-                                //prefs.setObject(name, forKey: "name")
-                                prefs.setInteger(1, forKey: "logged")
-                                prefs.synchronize()
                                 
+                                if let id = user["id"].int {
+                                    prefs.setInteger(id, forKey: "id")
+                                    prefs.setInteger(id, forKey: "logged")
+                                }
+                                if let name = user["name"].string {
+                                    prefs.setObject(name, forKey: "name")
+                                }
+                                prefs.synchronize()
                                 //TODO - sincronizar com o coredata
-                                print(user)
-                                break
+                                self.performSegueWithIdentifier("goto_map", sender: self)
+                            } else {
+                                NSLog("@resultado : %@", "FALHOU LOGIN !!!")
+                                NSOperationQueue.mainQueue().addOperationWithBlock {
+                                    let alertView:UIAlertView = UIAlertView()
+                                    alertView.title = "Login falhou!"
+                                    alertView.message = "Usuário ou senha incorretos!"
+                                    alertView.delegate = self
+                                    alertView.addButtonWithTitle("OK")
+                                    alertView.show()
+                                }
                             }
                         }
-                        if(!hasLogin) {
-                            NSLog("@resultado : %@", "FALHOU !!!")
-                            NSOperationQueue.mainQueue().addOperationWithBlock {
-                                let alertView:UIAlertView = UIAlertView()
-                                alertView.title = "Login falhou!"
-                                alertView.message = "Usuário ou senha incorretos!"
-                                alertView.delegate = self
-                                alertView.addButtonWithTitle("OK")
-                                alertView.show()
-                            }
-                            
-                        } else {
-                            NSOperationQueue.mainQueue().addOperationWithBlock {
-                                print("antes de ir")
-                                self.performSegueWithIdentifier("goto_map", sender: self)
-                            }
+                        
+                    } else {
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            let alertView:UIAlertView = UIAlertView()
+                            alertView.title = "Login falhou!"
+                            alertView.message = "Usuário ou senha incorretos!"
+                            alertView.delegate = self
+                            alertView.addButtonWithTitle("OK")
+                            alertView.show()
                         }
                     }
                 })

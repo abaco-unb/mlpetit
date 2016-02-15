@@ -10,6 +10,7 @@
 import UIKit
 import CoreData
 import Alamofire
+import SwiftyJSON
 
 extension String {
     
@@ -19,7 +20,7 @@ extension String {
     }
 }
 
-class AccountViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class AccountViewController: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var textFieldName: UITextField!
@@ -29,28 +30,39 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     @IBOutlet weak var textFieldNationality: UITextField!
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var pickeViewCountries: UIPickerView!
     
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
+    
+    
     var userName: String = ""
     var imagePicker: UIImagePickerController!
     var gender:String = ""
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     var restPath = "http://server.maplango.com.br/user-rest"
     var myImage = "profile.png"
     var imgPath: String = ""
     
-    /*var nationality: String = ""
-    let natData = ["Brésil","France","Belgique","Canadá","Portugal"]
-    */
+    
+    var nationality: String = ""
+    var pickerCountryDataSource = ["Andorre", "Émirats arabes unis", "Afghanistan", "Antigua-et-Barbuda", "Anguilla", "Albanie", "Arménie", "Angola", "Antarctique", "Argentine", "Samoa américaines", "Autriche", "Australie", "Aruba", "Îles Åland", "Azerbaïdjan", "Bosnie-Herzégovine", "Barbade", "Bangladesh", "Belgique", "Burkina Faso", "Bulgarie", "Bahreïn", "Burundi", "Bénin", "Saint-Barthélemy", "Bermudes", "Brunéi Darussalam", "Bolivie", "Pays-Bas caribéens", "Brésil", "Bahamas", "Bhoutan", "Île Bouvet", "Botswana", "Biélorussie", "Belize", "Canada", "Îles Cocos", "Congo-Kinshasa", "République centrafricaine", "Congo-Brazzaville", "Suisse", "Côte d’Ivoire", "Îles Cook", "Chili", "Cameroun", "Chine", "Colombie", "Costa Rica", "Cuba", "Cap-Vert", "Curaçao", "Île Christmas", "Chypre", "République tchèque", "Allemagne", "Djibouti", "Danemark", "Dominique", "République dominicaine", "Algérie", "Équateur", "Estonie", "Égypte", "Sahara occidental", "Érythrée", "Espagne", "Éthiopie", "Finlande", "Fidji", "Îles Malouines", "États fédérés de Micronésie", "Îles Féroé", "France", "Gabon", "Royaume-Uni", "Grenade", "Géorgie", "Guyane française", "Guernesey", "Ghana", "Gibraltar", "Groenland", "Gambie", "Guinée", "Guadeloupe", "Guinée équatoriale", "Grèce", "Géorgie du Sud et îles Sandwich du Sud", "Guatemala", "Guam", "Guinée-Bissau", "Guyana", "R.A.S. chinoise de Hong Kong", "Îles Heard et McDonald", "Honduras", "Croatie", "Haïti", "Hongrie", "Indonésie", "Irlande", "Israël", "Île de Man", "Inde", "Territoire britannique de l’océan Indien", "Irak", "Iran", "Islande", "Italie", "Jersey", "Jamaïque", "Jordanie", "Japon", "Kenya", "Kirghizistan", "Cambodge", "Kiribati", "Comores", "Saint-Christophe-et-Niévès", "Corée du Nord", "Corée du Sud", "Koweït", "Îles Caïmans", "Kazakhstan", "Laos", "Liban", "Sainte-Lucie", "Liechtenstein", "Sri Lanka", "Libéria", "Lesotho", "Lituanie", "Luxembourg", "Lettonie", "Libye", "Maroc", "Monaco", "Moldavie", "Monténégro", "Saint-Martin", "Madagascar", "Îles Marshall", "Macédoine", "Mali", "Myanmar", "Mongolie", "R.A.S. chinoise de Macao", "Îles Mariannes du Nord", "Martinique", "Mauritanie", "Montserrat", "Malte", "Maurice", "Maldives", "Malawi", "Mexique", "Malaisie", "Mozambique", "Namibie", "Nouvelle-Calédonie", "Niger", "Île Norfolk", "Nigéria", "Nicaragua", "Pays-Bas", "Norvège", "Népal", "Nauru", "Niue", "Nouvelle-Zélande", "Oman", "Panama", "Pérou", "Polynésie française", "Papouasie-Nouvelle-Guinée", "Philippines", "Pakistan", "Pologne", "Saint-Pierre-et-Miquelon", "Îles Pitcairn", "Porto Rico", "Territoires palestiniens", "Portugal", "Palaos", "Paraguay", "Qatar", "La Réunion", "Roumanie", "Serbie", "Russie", "Rwanda", "Arabie saoudite", "Îles Salomon", "Seychelles", "Soudan", "Suède", "Singapour", "Sainte-Hélène", "Slovénie", "Svalbard et Jan Mayen", "Slovaquie", "Sierra Leone", "Saint-Marin", "Sénégal", "Somalie", "Suriname", "Soudan du Sud", "Sao Tomé-et-Principe", "El Salvador", "Saint-Martin (partie néerlandaise)", "Syrie", "Swaziland", "Îles Turques-et-Caïques", "Tchad", "Terres australes françaises", "Togo", "Thaïlande", "Tadjikistan", "Tokelau", "Timor oriental", "Turkménistan", "Tunisie", "Tonga", "Turquie", "Trinité-et-Tobago", "Tuvalu", "Taïwan", "Tanzanie", "Ukraine", "Ouganda", "Îles mineures éloignées des É.-U.", "États-Unis", "Uruguay", "Ouzbékistan", "État de la Cité du Vatican", "Saint-Vincent-et-les-Grenadines", "Venezuela", "Îles Vierges britanniques", "Îles Vierges des États-Unis", "Vietnam", "Vanuatu", "Wallis-et-Futuna", "Samoa", "Yémen", "Mayotte", "Afrique du Sud", "Zambie", "Zimbabwe"];
+    
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pickeViewCountries.dataSource = self
+        self.pickeViewCountries.delegate = self
         
-        /*self.pickerView.dataSource = self
-        self.pickerView.delegate = self*/
+        pickeViewCountries.hidden = true;
+        textFieldNationality.text = pickerCountryDataSource[0]
+        
+        //let countryUtils:CountryUtils = CountryUtils()
+        //self.pickerCountryDataSource = countryUtils.getList("fr_FR");
         
         // Do any additional setup after loading the view.
         //_ : CGFloat = 0.7
@@ -119,6 +131,30 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         
     }
     
+    
+    //MARK : Countries Picker View
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerCountryDataSource.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        textFieldNationality.text = pickerCountryDataSource[row]
+        pickeViewCountries.hidden = true;
+        return pickerCountryDataSource[row]
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if textField == textFieldNationality {
+            pickeViewCountries.hidden = false
+            return false
+        }
+        return true
+    }
     
     // MARK : Image Picker Process
     
@@ -205,6 +241,10 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        // save image in directory
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imgPath = imgUtils.fileInDocumentsDirectory(self.myImage)
+        imgUtils.saveImage(imageView.image!, path: self.imgPath);
         
     }
     
@@ -331,23 +371,12 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
             alertView.show()
             
         } else {
-            
+            self.indicator.showActivityIndicator(self.view)
             //Checagem remota
-            Alamofire.request(.GET, self.restPath, parameters: ["foo": "bar"])
+            Alamofire.request(.GET, self.restPath, parameters: ["email": email])
                 .responseSwiftyJSON({ (request, response, json, error) in
-                    var isRegistered: Bool = false
-                    
-                    if let users = json.array {
-                        
-                        for user in  users{
-                            if( user["email"].string! == email ){
-                                isRegistered = true
-                                break
-                            }
-                        }
-                    }
-                    if(isRegistered) {
-                        NSLog("@resultado : %@", "FALHOU !!!")
+                    if json["data"].array?.count > 0 {
+                        NSLog("@resultado : %@", "EMAIL JÁ EXISTENTE NO BANCO DE DADOS!!!")
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             let alertView:UIAlertView = UIAlertView()
                             alertView.title = "Ops"
@@ -356,7 +385,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             alertView.addButtonWithTitle("OK")
                             alertView.show()
                         }
-                    }else {
+                    } else {
                         let params : [String: AnyObject] = [
                             "name" : self.textFieldName.text!,
                             "email" : self.textFieldEmail.text!,
@@ -366,10 +395,10 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             "level" : 7,
                             "image" : self.imgPath
                         ]
-                        
                         Alamofire.request(.POST, self.restPath, parameters: params)
                             .responseSwiftyJSON({ (request, response, json, error) in
                                 if (error == nil) {
+                                    self.indicator.hideActivityIndicator();
                                     NSOperationQueue.mainQueue().addOperationWithBlock {
                                         self.performSegueWithIdentifier("account_to_login", sender: self)
                                     }

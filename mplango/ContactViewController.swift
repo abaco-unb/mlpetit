@@ -79,13 +79,13 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
         } else {
             cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
             let user = fetchedResultController.objectAtIndexPath(indexPath) as! User
-            let image:UIImage = UIImage(data: user.image)!
-            let newImage = resizeImage(image, toTheSize: CGSizeMake(70, 70))
+            //let image:String = " "
+            //let newImage = " "//resizeImage(image, toTheSize: CGSizeMake(70, 70))
             let cellImageLayer: CALayer?  = cell.imageView!.layer
             cellImageLayer!.cornerRadius = 35
             cellImageLayer!.masksToBounds = true
             cell.textLabel!.text = user.name
-            cell.imageView!.image = newImage            
+            //cell.imageView!.image = newImage
         }
         
         return cell

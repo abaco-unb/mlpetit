@@ -16,7 +16,7 @@ class User: NSManagedObject {
     @NSManaged var name:String
     @NSManaged var nationality:String
     @NSManaged var password:String
-    @NSManaged var image:NSData
+    @NSManaged var image:String
     @NSManaged var profile:NSNumber
     @NSManaged var posts:NSSet
     @NSManaged var users:NSSet
