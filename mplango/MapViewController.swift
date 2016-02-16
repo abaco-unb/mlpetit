@@ -7,13 +7,10 @@
 //
 
 import UIKit
-import CoreData
 import MapKit
 
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var mkMapView: MKMapView!
     
@@ -22,30 +19,43 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var posts = [Annotation]()
     var userLocation:CLLocationCoordinate2D!
     var street: String!
-    var user: User!
+    var loggedUser: User!
     
+    //Filtros: background e botões
+    
+    @IBOutlet weak var filtersView: UIView!
+    @IBOutlet weak var recentsBtn: UIButton!
+    @IBOutlet weak var defisBtn: UIButton!
+    @IBOutlet weak var astucesBtn: UIButton!
+    @IBOutlet weak var doutesBtn: UIButton!
+    @IBOutlet weak var activiteBtn: UIButton!
+    
+    @IBOutlet weak var showFiltersBtn: UIButton!
+    @IBOutlet weak var hideFiltersBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        //retrieveLoggedUser()
-        print("depois de partir - chega no Mapa")
-        //
-        //
-        //        //let barViewController = self.tabBarController?.viewControllers
-        //        //println(barViewController)
-        //
-        //        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        //
-        //        let isLoggedIn:Int = prefs.integerForKey("logged") as Int
-        //
-        //        NSLog("status autenticação: %ld", isLoggedIn)
-        //
-        //        if (isLoggedIn < 1) {
-        //            NSLog("status autenticação é nullo - não autorizado!")
-        //            self.performSegueWithIdentifier("gobk_login", sender: self)
-        //        }
+        retrieveLoggedUser()
+        
+        
+        filtersView.hidden = true
+        
+        
+        //let barViewController = self.tabBarController?.viewControllers
+        //println(barViewController)
+        
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        
+//        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+//        
+//        NSLog("status autenticação: %ld", isLoggedIn)
+//        
+//        if (isLoggedIn < 1) {
+//            NSLog("status autenticação é nullo - não autorizado!")
+//            self.performSegueWithIdentifier("gobk_login", sender: self)
+//        }
         
         checkLocationAuthorizationStatus()
         
@@ -94,43 +104,99 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mkMapView.addGestureRecognizer(longPressRecogniser)
         
         
-        //MARK - retrieve all posts of Core Data
-        let request = NSFetchRequest(entityName: "Post")
-        if let posts = (try? moContext?.executeFetchRequest(request)) as? [Post] {
-            
-            if (posts.count > 0) {
-                for post in posts {
-                    //println(post)
-                    var latDelta:CLLocationDegrees = 0.01
-                    var longDelta:CLLocationDegrees = 0.01
-                    
-                    // show post on map
-                    let annotation = Annotation(title: post.text,
-                        locationName: post.locationName,
-                        category: post.category,
-                        coordinate: CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude),
-                        userImage: UIImage(data: (post.user as! User).image)!,
-                        entity: post
-                    )
-                    
-                    mkMapView.addAnnotation(annotation)
-                }
-            }
-        }
+//        //MARK - retrieve all posts of Core Data
+//        let request = NSFetchRequest(entityName: "Post")
+//        if let posts = (try? moContext?.executeFetchRequest(request)) as? [Post] {
+//            
+//            if (posts.count > 0) {
+//                for post in posts {
+//                    //println(post)
+//                    var latDelta:CLLocationDegrees = 0.01
+//                    var longDelta:CLLocationDegrees = 0.01
+//                    
+//                    // show post on map
+//                    let annotation = Annotation(title: post.text,
+//                        locationName: post.locationName,
+//                        category: post.category,
+//                        coordinate: CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude),
+//                        userImage: UIImage(data: (post.user as! User).image)!,
+//                        entity: post
+//                    )
+//                    
+//                    mkMapView.addAnnotation(annotation)
+//                }
+//            }
+//        }
     }
     
     func retrieveLoggedUser() {
-        
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let id: Int = prefs.integerForKey("id") as Int
-        //        let fetchRequest = NSFetchRequest(entityName: "User")
-        //        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-        //        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-        //            user = fetchResults[0];
-        //
-        //        }
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let email: String = prefs.objectForKey("USEREMAIL") as! String
+//        let fetchRequest = NSFetchRequest(entityName: "User")
+//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        
+//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+//            loggedUser = fetchResults[0];
+//            
+//        }
         
     }
+    
+    //MARK: Actions
+    
+    
+    @IBAction func popover(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("showNotifications", sender: self)
+        
+    }
+    
+    @IBAction func showFilters(sender: AnyObject) {
+        
+        filtersView.hidden = false
+        showFiltersBtn.hidden = true
+        hideFiltersBtn.hidden = false
+        hideFiltersBtn.enabled = true
+        recentsBtn.enabled = true
+        defisBtn.enabled = true
+        astucesBtn.enabled = true
+        doutesBtn.enabled = true
+        activiteBtn.enabled = true
+        
+    }
+    
+    @IBAction func hideFilters(sender: AnyObject) {
+        
+        showFiltersBtn.hidden = false
+        showFiltersBtn.enabled = true
+        filtersView.hidden = true
+        
+    }
+    
+    @IBAction func showRecentPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showDefisPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showAstucesPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showDoutesPosts(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func showActivitesPosts(sender: AnyObject) {
+        
+    }
+    
+    
+    
+    
+    
     
     // MARK:- Retrieve Posts
     
@@ -161,7 +227,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationName: "nome de teste agora",
             category: 2,
             coordinate: CLLocationCoordinate2D(latitude: touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude),
-            userImage: UIImage(data: user.image)!,
+            userImage: " ", //UIImage(data: loggedUser.image)!,
             entity: nil
         )
         
@@ -207,7 +273,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 locationName: "Quadra 300 conjunto 14 cs 17",
                 category: 1,
                 coordinate: userLocation,
-                userImage: UIImage(data: user.image)!,
+                userImage: " ",//UIImage(data: loggedUser.image)!,
                 entity: nil
             )
             categoryController.post = post
@@ -215,5 +281,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             print(post)
             
         }
+        
+        // para a segue que mostra o popover de notificações
+        if segue.identifier == "showNotifications" {
+            
+            let notifVC = segue.destinationViewController as UIViewController
+            
+            let controller = notifVC.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
+            
+        }
+        
+        
     }
+    
+    
+    // para que o popover não esconda toda a tela
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    
+    
+    
+    
 }
