@@ -30,12 +30,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if(self.registered) {
             NSOperationQueue.mainQueue().addOperationWithBlock{
-                let alertView:UIAlertView = UIAlertView()
-                alertView.title = "Registro de conta!"
-                alertView.message = "Cadastro realizado com sucesso!"
-                alertView.delegate = self
-                alertView.addButtonWithTitle("OK")
-                alertView.show()
+                
+                //New Alert Ccontroller
+                let alertController = UIAlertController(title: "Registro de conta!", message: "Cadastro realizado com sucesso!", preferredStyle: .Alert)
+                let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                    print("The user is okay.")
+                }
+                alertController.addAction(agreeAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+
             }
         }
         
@@ -86,12 +89,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if ( self.username.isEmpty || self.pwd.isEmpty ) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Login falhou!"
-            alertView.message = "É necessário inserir seu email e senha"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Login falhou!", message: "É necessário inserir seu email e senha", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+
             
         } else {
             self.indicator.showActivityIndicator(self.view);
@@ -120,24 +126,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             } else {
                                 NSLog("@resultado : %@", "FALHOU LOGIN !!!")
                                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                                    let alertView:UIAlertView = UIAlertView()
-                                    alertView.title = "Login falhou!"
-                                    alertView.message = "Usuário ou senha incorretos!"
-                                    alertView.delegate = self
-                                    alertView.addButtonWithTitle("OK")
-                                    alertView.show()
+                                    
+                                    //New Alert Ccontroller
+                                    let alertController = UIAlertController(title: "Login falhou!", message: "Usuário ou senha incorretos!", preferredStyle: .Alert)
+                                    let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                        print("The user is okay.")
+                                    }
+                                    alertController.addAction(agreeAction)
+                                    self.presentViewController(alertController, animated: true, completion: nil)
+                                    
                                 }
                             }
                         }
                         
                     } else {
                         NSOperationQueue.mainQueue().addOperationWithBlock {
-                            let alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Login falhou!"
-                            alertView.message = "Usuário ou senha incorretos!"
-                            alertView.delegate = self
-                            alertView.addButtonWithTitle("OK")
-                            alertView.show()
+                            
+                            //New Alert Ccontroller
+                            let alertController = UIAlertController(title: "Login falhou!", message: "Usuário ou senha incorretos!", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                print("The user is okay.")
+                            }
+                            alertController.addAction(agreeAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+
                         }
                     }
                 })

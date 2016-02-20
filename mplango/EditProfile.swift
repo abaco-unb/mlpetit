@@ -6,16 +6,16 @@
 //  Copyright © 2015 unb.br. All rights reserved.
 //
 
+import Alamofire
+import SwiftyJSON
 import UIKit
-import CoreData
 
-class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
+class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
-    
-    var user: User!
+    var users = [User]()
+    var restPath = "http://server.maplango.com.br/user-rest"
+
 
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var profPicture: UIImageView!
@@ -27,19 +27,21 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         retrieveLoggedUser()
-        print("user data")
-        print(user.name)
-        print(user.nationality)
-        print(user.gender)
         
-        userName.attributedPlaceholder =
-            NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+//        print("user data")
+//        print(user.name)
+//        print(user.nationality)
+//        print(user.gender)
+//        
+//        userName.attributedPlaceholder =
+//            NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+//        
+//        userNation.attributedPlaceholder =
+//            NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
         
-        userNation.attributedPlaceholder =
-            NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
-        
-        //userGender.selectedSegmentIndex = NSAttributedString(string: user.gender)
+//        userGender.selectedSegmentIndex = NSAttributedString(string: user.gender)
 
         scroll.contentSize.height = 200
         
@@ -73,14 +75,15 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     func retrieveLoggedUser() {
         
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let email: String = prefs.objectForKey("USEREMAIL") as! String
+//        let fetchRequest = NSFetchRequest(entityName: "User")
+//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        
+//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+//            user = fetchResults[0];
+//        }
         
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            user = fetchResults[0];
-        }
     }
     
     

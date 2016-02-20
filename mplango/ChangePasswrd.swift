@@ -7,15 +7,10 @@
 //
 
 import UIKit
-import CoreData
 
-class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate {
+class ChangePasswrd: UIViewController, UITextFieldDelegate {
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
-    
-    var user: User!
+//    var user: User!
     
     @IBOutlet weak var currentPasswd: UITextField!
     @IBOutlet weak var newPasswd: UITextField!
@@ -24,6 +19,7 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         retrieveLoggedUser()
         
         // Enable the Save button only if the screen has a valid change
@@ -41,14 +37,16 @@ class ChangePasswrd: UIViewController, NSFetchedResultsControllerDelegate, UITex
     }
     
     func retrieveLoggedUser() {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            user = fetchResults[0];
-        }
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let email: String = prefs.objectForKey("USEREMAIL") as! String
+//        let fetchRequest = NSFetchRequest(entityName: "User")
+//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        
+//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+//            user = fetchResults[0];
+//        }
+        
     }
     
     //MARK: enable confirm button

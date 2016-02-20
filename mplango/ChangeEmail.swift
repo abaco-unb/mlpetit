@@ -7,15 +7,10 @@
 //
 
 import UIKit
-import CoreData
 
-class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate {
+class ChangeEmail: UIViewController, UITextFieldDelegate {
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
-    
-    var user: User!
+//    var user: User!
     
     @IBOutlet weak var currentEmail: UITextField!
     @IBOutlet weak var newEmail: UITextField!
@@ -30,10 +25,10 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
         // Enable the Save button only if the screen has a valid change
         checkValidChange()
 
-        print(user.email)
+//        print(user.email)
         
-        currentEmail.attributedPlaceholder =
-            NSAttributedString(string: user.email, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+//        currentEmail.attributedPlaceholder =
+//            NSAttributedString(string: user.email, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
     }
     
     //MARK: Actions
@@ -47,14 +42,16 @@ class ChangeEmail: UIViewController, NSFetchedResultsControllerDelegate, UITextF
     }
     
     func retrieveLoggedUser() {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            user = fetchResults[0];
-        }
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let email: String = prefs.objectForKey("USEREMAIL") as! String
+//        let fetchRequest = NSFetchRequest(entityName: "User")
+//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        
+//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+//            user = fetchResults[0];
+//        }
+        
     }
     
     //MARK: enable confirm button
