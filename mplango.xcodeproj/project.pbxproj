@@ -85,7 +85,6 @@
 		8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE171B0143AF0085F9A6 /* AppDelegate.swift */; };
 		8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */; };
 		8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */; };
-		8283BE201B0143AF0085F9A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE1E1B0143AF0085F9A6 /* Main.storyboard */; };
 		8283BE221B0143AF0085F9A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE211B0143AF0085F9A6 /* Images.xcassets */; };
 		8283BE251B0143AF0085F9A6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */; };
 		8283BE311B0143AF0085F9A6 /* mplangoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE301B0143AF0085F9A6 /* mplangoTests.swift */; };
@@ -93,7 +92,6 @@
 		8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE421B0233440085F9A6 /* LoginViewController.swift */; };
 		8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */; };
 		8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE461B0236880085F9A6 /* MapViewController.swift */; };
-		82842E3F1B61E9D200E7C860 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8283BE1E1B0143AF0085F9A6 /* Main.storyboard */; };
 		82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82842E431B61EA7900E7C860 /* InitialViewController.swift */; };
 		82D73C9C1B8139DB00DFEAB0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D73C9B1B8139DB00DFEAB0 /* Post.swift */; };
 		82D73CA21B81718B00DFEAB0 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D73CA11B81718B00DFEAB0 /* CategoryViewController.swift */; };
@@ -349,7 +347,6 @@
 		8283BE171B0143AF0085F9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8283BE1A1B0143AF0085F9A6 /* mplango.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mplango.xcdatamodel; sourceTree = "<group>"; };
 		8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		8283BE1F1B0143AF0085F9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8283BE211B0143AF0085F9A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8283BE241B0143AF0085F9A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8283BE2A1B0143AF0085F9A6 /* mplangoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mplangoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -496,7 +493,6 @@
 				828C717E1B83C409009FE9B5 /* Model */,
 				828C717F1B83C424009FE9B5 /* Controller */,
 				543A48761BDD422E008E9D71 /* Tutorial screens */,
-				8283BE1E1B0143AF0085F9A6 /* Main.storyboard */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
@@ -931,7 +927,6 @@
 				54E971B41B6ED25B005F27F1 /* FiraSans-UltraItalic.ttf in Resources */,
 				54E971B51B6ED25B005F27F1 /* FiraSans-UltraLight.ttf in Resources */,
 				54E971B61B6ED25B005F27F1 /* FiraSans-UltraLightItalic.ttf in Resources */,
-				8283BE201B0143AF0085F9A6 /* Main.storyboard in Resources */,
 				8283BE251B0143AF0085F9A6 /* LaunchScreen.xib in Resources */,
 				8283BE221B0143AF0085F9A6 /* Images.xcassets in Resources */,
 			);
@@ -941,7 +936,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82842E3F1B61E9D200E7C860 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,14 +1029,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8283BE1E1B0143AF0085F9A6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8283BE1F1B0143AF0085F9A6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
