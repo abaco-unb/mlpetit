@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
+import Alamofire
+import SwiftyJSON
 import UIKit
-import CoreData
+import MapKit
 
-class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
+
+class ProfileVC: UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileGender: UIImageView!
@@ -20,34 +23,37 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var profileNumberFollowing: UILabel!
     @IBOutlet weak var profileBio: UILabel!
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
+    var users = [User]()
+    var restPath = "http://server.maplango.com.br/user-rest"
     
-    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         retrieveLoggedUser()
-        print("user data")
-        print(user.name)
-        print(user.posts.count)
-        print(user.image)
-        print(user.nationality)
-        print(user.gender)
         
-        navigationItem.title = user.name
+//        print("user data")
+//        print(user.name)
+//        print(user.posts.count)
+//        print(user.image)
+//        print(user.nationality)
+//        print(user.gender)
+//        
+//        navigationItem.title = user.name
+//        
+//        profileNationality.text = user.nationality
+//        profileNumberPosts.text = user.posts.count.description
+//        profileNumberFollowers.text =
+//        profileNumberFollowing.text =
+//        profileGender.image = user.gender
+//        profilePicture.image = user.image
         
-        profileNationality.text = user.nationality
-        profileNumberPosts.text = user.posts.count.description
-        //profileNumberFollowers.text =
-        //profileNumberFollowing.text =
-        //profileGender.image = user.gender
-        //profilePicture.image = user.image
         
         // Custom the visual identity of Image View
         profilePicture.layer.cornerRadius = 40
         profilePicture.layer.masksToBounds = true
+        
         
         //Para ir à tela da gamificação com gesto (e não botão)
         let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
@@ -61,13 +67,15 @@ class ProfileVC: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     func retrieveLoggedUser() {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            user = fetchResults[0];
-        }
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let email: String = prefs.objectForKey("USEREMAIL") as! String
+//        let fetchRequest = NSFetchRequest(entityName: "User")
+//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        
+//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+//            user = fetchResults[0];
+//        }
+        
     }
 }

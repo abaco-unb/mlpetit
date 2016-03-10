@@ -48,7 +48,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     
     
     var nationality: String = ""
-    var pickerCountryDataSource = ["Andorre", "Émirats arabes unis", "Afghanistan", "Antigua-et-Barbuda", "Anguilla", "Albanie", "Arménie", "Angola", "Antarctique", "Argentine", "Samoa américaines", "Autriche", "Australie", "Aruba", "Îles Åland", "Azerbaïdjan", "Bosnie-Herzégovine", "Barbade", "Bangladesh", "Belgique", "Burkina Faso", "Bulgarie", "Bahreïn", "Burundi", "Bénin", "Saint-Barthélemy", "Bermudes", "Brunéi Darussalam", "Bolivie", "Pays-Bas caribéens", "Brésil", "Bahamas", "Bhoutan", "Île Bouvet", "Botswana", "Biélorussie", "Belize", "Canada", "Îles Cocos", "Congo-Kinshasa", "République centrafricaine", "Congo-Brazzaville", "Suisse", "Côte d’Ivoire", "Îles Cook", "Chili", "Cameroun", "Chine", "Colombie", "Costa Rica", "Cuba", "Cap-Vert", "Curaçao", "Île Christmas", "Chypre", "République tchèque", "Allemagne", "Djibouti", "Danemark", "Dominique", "République dominicaine", "Algérie", "Équateur", "Estonie", "Égypte", "Sahara occidental", "Érythrée", "Espagne", "Éthiopie", "Finlande", "Fidji", "Îles Malouines", "États fédérés de Micronésie", "Îles Féroé", "France", "Gabon", "Royaume-Uni", "Grenade", "Géorgie", "Guyane française", "Guernesey", "Ghana", "Gibraltar", "Groenland", "Gambie", "Guinée", "Guadeloupe", "Guinée équatoriale", "Grèce", "Géorgie du Sud et îles Sandwich du Sud", "Guatemala", "Guam", "Guinée-Bissau", "Guyana", "R.A.S. chinoise de Hong Kong", "Îles Heard et McDonald", "Honduras", "Croatie", "Haïti", "Hongrie", "Indonésie", "Irlande", "Israël", "Île de Man", "Inde", "Territoire britannique de l’océan Indien", "Irak", "Iran", "Islande", "Italie", "Jersey", "Jamaïque", "Jordanie", "Japon", "Kenya", "Kirghizistan", "Cambodge", "Kiribati", "Comores", "Saint-Christophe-et-Niévès", "Corée du Nord", "Corée du Sud", "Koweït", "Îles Caïmans", "Kazakhstan", "Laos", "Liban", "Sainte-Lucie", "Liechtenstein", "Sri Lanka", "Libéria", "Lesotho", "Lituanie", "Luxembourg", "Lettonie", "Libye", "Maroc", "Monaco", "Moldavie", "Monténégro", "Saint-Martin", "Madagascar", "Îles Marshall", "Macédoine", "Mali", "Myanmar", "Mongolie", "R.A.S. chinoise de Macao", "Îles Mariannes du Nord", "Martinique", "Mauritanie", "Montserrat", "Malte", "Maurice", "Maldives", "Malawi", "Mexique", "Malaisie", "Mozambique", "Namibie", "Nouvelle-Calédonie", "Niger", "Île Norfolk", "Nigéria", "Nicaragua", "Pays-Bas", "Norvège", "Népal", "Nauru", "Niue", "Nouvelle-Zélande", "Oman", "Panama", "Pérou", "Polynésie française", "Papouasie-Nouvelle-Guinée", "Philippines", "Pakistan", "Pologne", "Saint-Pierre-et-Miquelon", "Îles Pitcairn", "Porto Rico", "Territoires palestiniens", "Portugal", "Palaos", "Paraguay", "Qatar", "La Réunion", "Roumanie", "Serbie", "Russie", "Rwanda", "Arabie saoudite", "Îles Salomon", "Seychelles", "Soudan", "Suède", "Singapour", "Sainte-Hélène", "Slovénie", "Svalbard et Jan Mayen", "Slovaquie", "Sierra Leone", "Saint-Marin", "Sénégal", "Somalie", "Suriname", "Soudan du Sud", "Sao Tomé-et-Principe", "El Salvador", "Saint-Martin (partie néerlandaise)", "Syrie", "Swaziland", "Îles Turques-et-Caïques", "Tchad", "Terres australes françaises", "Togo", "Thaïlande", "Tadjikistan", "Tokelau", "Timor oriental", "Turkménistan", "Tunisie", "Tonga", "Turquie", "Trinité-et-Tobago", "Tuvalu", "Taïwan", "Tanzanie", "Ukraine", "Ouganda", "Îles mineures éloignées des É.-U.", "États-Unis", "Uruguay", "Ouzbékistan", "État de la Cité du Vatican", "Saint-Vincent-et-les-Grenadines", "Venezuela", "Îles Vierges britanniques", "Îles Vierges des États-Unis", "Vietnam", "Vanuatu", "Wallis-et-Futuna", "Samoa", "Yémen", "Mayotte", "Afrique du Sud", "Zambie", "Zimbabwe"];
+    var pickerCountryDataSource = ["Afghanistan", "Afrique du Sud", "Algérie", "Allemagne", "Andorre","Antigua-et-Barbuda", "Anguilla", "Albanie", "Arabie saoudite", "Arménie", "Angola", "Antarctique", "Argentine", "Aruba", "Autriche", "Australie", "Åland (Îles)", "Azerbaïdjan", "Bahamas", "Bahreïn", "Bangladesh", "Barbade", "Belgique", "Belize", "Bénin", "Bermudes", "Bhoutan", "Biélorussie", "Bolivie", "Bosnie-Herzégovine", "Botswana", "Bouvet (Île)", "Brésil", "Brunéi Darussalam", "Bulgarie", "Burkina Faso", "Burundi", "Caïmans (Îles)", "Cambodge", "Cameroun", "Canada", "Cap-Vert", "Chili", "Chine", "Christmas (Île)", "Chypre", "Cocos (Îles)", "Comores", "Congo-Brazzaville", "Congo-Kinshasa", "Cook (Îles)", "Côte d’Ivoire",  "Colombie", "Corée du Nord", "Corée du Sud", "Costa Rica", "Cuba",  "Curaçao", "Croatie", "Danemark", "Djibouti", "Dominique", "Égypte", "El Salvador", "Émirats arabes unis", "Équateur", "Érythrée", "Espagne", "Estonie", "États fédérés de Micronésie", "États-Unis", "Éthiopie", "Féroé (Îles)", "Fidji", "Finlande", "France", "Gabon", "Gambie", "Géorgie", "Géorgie du Sud et îles Sandwich du Sud", "Ghana", "Gibraltar", "Grèce", "Grenade", "Groenland", "Guadeloupe", "Guam", "Guatemala", "Guernesey", "Guinée", "Guinée équatoriale", "Guinée-Bissau", "Guyana", "Guyane française", "Haïti", "Honduras", "Hong Kong", "Heard et McDonald (Îles)", "Hongrie", "Île de Man", "Îles Turques-et-Caïques", "Îles Vierges britanniques", "Îles Vierges des États-Unis", "Inde", "Indonésie", "Irak", "Iran", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Jersey", "Jordanie", "Kazakhstan", "Kenya", "Kirghizistan", "Kiribati", "Koweït", "Laos", "Lesotho", "Lettonie", "Liban", "Libéria", "Libye", "Liechtenstein", "Lituanie", "Luxembourg", "Macao", "Macédoine", "Madagascar", "Malaisie", "Malawi", "Maldives", "Mali", "Malouines (Îles)", "Malte", "Mariannes du Nord (Îles)", "Maroc", "Marshall (Îles)", "Martinique", "Maurice", "Mauritanie", "Mayotte", "Mexique", "Moldavie", "Monaco", "Mongolie", "Monténégro", "Montserrat", "Mozambique", "Myanmar", "Namibie", "Nauru", "Népal", "Nicaragua", "Niger", "Nigéria", "Niue", "Norfolk (Île)", "Norvège", "Nouvelle-Calédonie", "Nouvelle-Zélande", "Oman", "Ouganda", "Ouzbékistan", "Pakistan", "Palaos", "Panama", "Papouasie-Nouvelle-Guinée", "Paraguay", "Pays-Bas", "Pays-Bas caribéens", "Pérou", "Philippines", "Pitcairn (Îles)", "Pologne", "Polynésie française", "Porto Rico", "Portugal", "Qatar", "Réunion (La)", "République centrafricaine", "République Dominicaine", "République Tchèque", "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Sahara occidental", "Saint-Barthélemy", "Saint-Christophe-et-Niévès", "Sainte-Hélène", "Sainte-Lucie", "Saint-Marin", "Saint-Martin", "Saint-Martin (partie néerlandaise)", "Saint-Pierre-et-Miquelon", "Salomon (Îles)", "Samoa", "Samoa américaines", "Sao Tomé-et-Principe", "Sénégal", "Serbie", "Seychelles", "Sierra Leone", "Singapour", "Slovaquie", "Slovénie", "Somalie", "Soudan", "Soudan du Sud", "Sri Lanka", "Suède", "Suisse", "Suriname", "Svalbard et Jan Mayen", "Swaziland", "Syrie", "Tadjikistan", "Taïwan", "Tanzanie", "Tchad", "Terres australes françaises", "Territoire britannique de l’océan Indien", "Territoires palestiniens", "Thaïlande", "Timor oriental", "Togo", "Tokelau", "Tonga", "Trinité-et-Tobago", "Tunisie", "Turkménistan", "Turquie", "Tuvalu", "Ukraine", "Uruguay", "Vanuatu", "Vatican", "Venezuela", "Vietnam",  "Wallis-et-Futuna", "Yémen",  "Zambie", "Zimbabwe"];
     
     
     
@@ -144,8 +144,13 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         textFieldNationality.text = pickerCountryDataSource[row]
-        pickeViewCountries.hidden = true;
         return pickerCountryDataSource[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        textFieldNationality.text = pickerCountryDataSource[row]
+        pickeViewCountries.hidden = true;
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
@@ -155,6 +160,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         }
         return true
     }
+    
     
     // MARK : Image Picker Process
     
@@ -301,74 +307,91 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         
         if ( gender.isEmpty ) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "É necessário escolher o seu gênero"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário escolher o seu gênero", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if ( username.isEmpty ) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "O nome é obrigatório"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "O nome é obrigatório", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if ( email.isEmpty ) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "Campo email obrigatório"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo email obrigatório", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if (!email.isEmail()) {
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "Pr favor, insira um email válido"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Por favor, insira um email válido", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if ( password.isEmpty  ) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "Campo senha é obrigatório"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo senha é obrigatório", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if ( !password.isEmpty  && confirmPassword.isEmpty) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "É necessário confirmar sua senha"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário confirmar sua senha", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if (password != confirmPassword) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "A senha não confere com a confirmação"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "A senha não confere com a confirmação", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else if ( nationality.isEmpty ) {
             
-            let alertView:UIAlertView = UIAlertView()
-            alertView.title = "Erro ao tentar Registrar os Dados!"
-            alertView.message = "É necessário escolher sua nacionalidade"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário escolher sua nacionalidade", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             
         } else {
             self.indicator.showActivityIndicator(self.view)
@@ -378,12 +401,15 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                     if json["data"].array?.count > 0 {
                         NSLog("@resultado : %@", "EMAIL JÁ EXISTENTE NO BANCO DE DADOS!!!")
                         NSOperationQueue.mainQueue().addOperationWithBlock {
-                            let alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Ops"
-                            alertView.message = "E-mail já utilizado, favor utilize outro!"
-                            alertView.delegate = self
-                            alertView.addButtonWithTitle("OK")
-                            alertView.show()
+                            
+                            //New Alert Ccontroller
+                            let alertController = UIAlertController(title: "Oops", message: "E-mail já utilizado, favor utilize outro!", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                print("The user is okay.")
+                            }
+                            alertController.addAction(agreeAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                            
                         }
                     } else {
                         let params : [String: AnyObject] = [
