@@ -276,7 +276,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 userImage: " ",//UIImage(data: loggedUser.image)!,
                 entity: nil
             )
-            categoryController.post = post
             print("prepareSegue MAp")
             print(post)
             

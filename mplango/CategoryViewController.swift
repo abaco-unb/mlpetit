@@ -7,14 +7,10 @@
 //
 
 import UIKit
-import CoreData
 
 class CategoryViewController: UIViewController {
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var post: Annotation? = nil
-    var category: String? = nil
+    var category = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,21 +22,18 @@ class CategoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func chooseCategory(sender: AnyObject) {
+        print(sender.tag);
+        self.performSegueWithIdentifier("category_to_new_post", sender: self)
+        
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("categoria controller segue ")
         print(segue.identifier)
         
-        print(post)
-        
-        if segue.identifier == "NewPost" {
-            
-            if post != nil {
-                let navigationController = segue.destinationViewController as! UINavigationController
-                let postController:PostViewController = navigationController.viewControllers[0] as! PostViewController
-                //post?.category = 2
-                postController.post = post
-            }
-        }
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let postController:PostViewController = navigationController.viewControllers[0] as! PostViewController
+        postController.category = self.category
     }
 }

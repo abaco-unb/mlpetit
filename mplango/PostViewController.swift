@@ -7,16 +7,15 @@
 //
 
 import UIKit
-import CoreData
 import AVFoundation
+import Alamofire
+import SwiftyJSON
+import CoreLocation
 
-class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate  {
+
+class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
-    
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
     
     var post: Annotation? = nil
     var audioPlayer: AVAudioPlayer!
@@ -25,6 +24,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var filePath: String!
     var tags = [String]()
     var points = 0
+    var category = 0
+    var longitude: Double? = nil
+    var latitude: Double? = nil
+    
+    var restPath = "http://server.maplango.com.br/post-rest"
+    var indicator:ActivityIndicator = ActivityIndicator()
    
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -42,9 +47,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet weak var slowBtn: UIButton!
+    //@IBOutlet weak var slowBtn: UIButton!
     @IBOutlet weak var audioSlider: UISlider!
-    @IBOutlet weak var confirmButton: UIButton!
+    //@IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var checkAudio: UIImageView!
     
     //Outlets para a foto
@@ -53,12 +58,22 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var checkImage: UIImageView!
     
-    
     //Outlets para o vídeo
     @IBOutlet weak var checkVideo: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            let locationManager = CLLocationManager()
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+        print("categoria")
+        print(self.category)
         
         scrollView.contentSize.height = 300
         
@@ -91,12 +106,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         longPressRecogniser.minimumPressDuration = 0.2
         recordButton.addGestureRecognizer(longPressRecogniser)
         
-        if post != nil {
-            print("post controller")
-            print(post)
-            //locationLabel.text = post?.locationName
-        }
-        
         //let aSelector : Selector = "touchOutsideTextField"
         //let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         //tapGesture.numberOfTapsRequired = 1
@@ -118,7 +127,18 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             writeHereImage.hidden = false
         }
     }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        
+        let location = locations.last! as CLLocation
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        
+//        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
 
+    }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
@@ -178,13 +198,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             playButton.enabled = false
             
         }
-    }
-    
-    
-    //MARK: Actions
-    
-    @IBAction func cancel(sender: AnyObject) {
-        dismissViewControllerAnimated(false, completion: nil)
     }
     
     
@@ -316,51 +329,36 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     //MARK: Post Actions
     
-    @IBAction func savePost(sender: UIButton) {
-        do {
-            try moContext!.save()
-        } catch {
-            fatalError("Failure to save POST: \(error)")
-        }
-    }
-    @IBAction func addPost(sender: UIButton) {
-        print("action addPost tapped")
-        prepareForInsertPost()
-        confirmButton.hidden = false
+    @IBAction func savePost(sender: AnyObject) {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
+        
         tagsView.resolveHashTags()
-    }
-    
-    @IBAction func cancelPost(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("goto_map", sender: self)
-    }
-    
-    func prepareForInsertPost () {
-        print("post")
-        //println(post)
-        if post != nil {
-            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            let email: String = prefs.objectForKey("USEREMAIL") as! String
-            let fetchRequest = NSFetchRequest(entityName: "User")
-            fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-            do {
-                
-                if let fetchResults = try moContext?.executeFetchRequest(fetchRequest) as? [User] {
-                    let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
-                    let postEntity = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-                    postEntity.text     = tagsView.text
-                    postEntity.audio    = filePath
-                    postEntity.locationName = post!.locationName
-                    postEntity.latitude  = Double(post!.coordinate.latitude)
-                    postEntity.longitude = Double(post!.coordinate.longitude)
-                    postEntity.category  = post!.category
-                    postEntity.user = fetchResults[0]
-                    print("user entity********************")
-                    print(fetchResults)
+        
+        let params : [String: AnyObject] = [
+            "text" : tagsView.text,
+            "audio" : filePath,
+            "location" : "",
+            "latitude" : String(self.latitude),
+            "longitude" : String(self.longitude),
+            "category" : String(self.category),
+            "photo" : "../",//self.imgPath,
+            "user": userId
+        ]
+        
+        Alamofire.request(.POST, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_map", sender: self)
+                    }
                 }
-            } catch {
-                fatalError("Failure to prepare POST: \(error)")
-            }
-        }
+            })
+    }
+    
+    @IBAction func cancelPost(sender: AnyObject) {
+        self.performSegueWithIdentifier("goto_map", sender: self)
     }
     
     @IBAction func playSlowAudio(sender: UIButton) {
