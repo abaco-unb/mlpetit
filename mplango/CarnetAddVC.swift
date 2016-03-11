@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import CoreData
 import AVFoundation
+import Alamofire
+import SwiftyJSON
+
 
 class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
-    
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: Properties
     
@@ -41,6 +41,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     @IBOutlet var photoImage: UIImageView!
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
+    
+    var indicator:ActivityIndicator = ActivityIndicator()
+    var restPath = "http://server.maplango.com.br/note-rest"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +90,25 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         backgroundRecord.layer.cornerRadius = 15
         backgroundRecord.layer.masksToBounds = true
+        
+        self.indicator.showActivityIndicator(self.view)
+        //Checagem remota
+        Alamofire.request(.GET, self.restPath, parameters: ["foo" : "bar"])
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if let result = json["data"].array {
+//                    for(let note in result) {
+//                        //print(note["word"].stringValue)
+//                          if let word = note["word"].string {
+//                                // faz o que vc quer..
+//                          }
+                            //if let id = user["id"].int {
+                                //use o id para atualizar os dados
+                            //}
+                    
+//                    }
+                    
+                }
+            })
     }
     
     //Calls this function when the tap is recognized.
@@ -384,29 +406,25 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     }
     
     func createItemCarnet() {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        ////recupera o id da sessão
+        //let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        //let id: Int = prefs.objectForKey("id") as! Int
         
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            
-            let user: User = fetchResults[0];
-            let entityDescription = NSEntityDescription.entityForName("Carnet", inManagedObjectContext: moContext!)
-            let item = Carnet(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-            item.word = wordTextField.text!
-            item.desc = descTextView.text!
-            //item.photo = photoImage.image!
-            //item.category = segment
-            item.user = user
-            do {
-                //falta foto
-                //falta som
-                try moContext?.save()
-            } catch _ {
-                
-            }
-        }
+        self.indicator.showActivityIndicator(self.view)
+        let params : [String: AnyObject] = [
+            "word" : "",
+            "desc" : "",
+            "photo" : ""
+        ]
+        Alamofire.request(.POST, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("...", sender: self)
+                    }
+                }
+            })
     }
     
     

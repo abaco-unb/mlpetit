@@ -20,6 +20,7 @@
 		159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
 		159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B21BF589D70018EBE1 /* RestApiManager.swift */; };
 		159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* UserRestService.swift */; };
+		15BD25001C9241D600E431FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15BD24FF1C9241D600E431FB /* Main.storyboard */; };
 		540A4A411C11EF5A00C166D8 /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A4A401C11EF5A00C166D8 /* PostVC.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
@@ -272,6 +273,7 @@
 		159C11B11BF586D70018EBE1 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		159C11B21BF589D70018EBE1 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		159C11B61BF58B1C0018EBE1 /* UserRestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRestService.swift; sourceTree = "<group>"; };
+		15BD24FF1C9241D600E431FB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		540A4A401C11EF5A00C166D8 /* PostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		5415F8311C1F22DE0036D4E0 /* mplango.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mplango.entitlements; sourceTree = "<group>"; };
@@ -285,7 +287,7 @@
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		542DEE3F1B8A178800A09A00 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tuto1VC.swift; path = mplango/tuto1VC.swift; sourceTree = "<group>"; };
+		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tuto1VC.swift; sourceTree = "<group>"; };
 		5448EB001C1B71DB004D771A /* helpSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpSettingsVC.swift; sourceTree = "<group>"; };
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
@@ -445,7 +447,6 @@
 		543A48761BDD422E008E9D71 /* Tutorial screens */ = {
 			isa = PBXGroup;
 			children = (
-				543A48721BDD4226008E9D71 /* tuto1VC.swift */,
 			);
 			name = "Tutorial screens";
 			path = ..;
@@ -494,6 +495,8 @@
 				828C717F1B83C424009FE9B5 /* Controller */,
 				543A48761BDD422E008E9D71 /* Tutorial screens */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
+				15BD24FF1C9241D600E431FB /* Main.storyboard */,
+				543A48721BDD4226008E9D71 /* tuto1VC.swift */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
 				8283BE151B0143AF0085F9A6 /* Supporting Files */,
@@ -584,8 +587,8 @@
 		828C717F1B83C424009FE9B5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				828C71811B83C526009FE9B5 /* Carnet */,
 				828C71831B83C573009FE9B5 /* User */,
+				828C71811B83C526009FE9B5 /* Carnet */,
 				828C71841B83C582009FE9B5 /* Post */,
 				82842E431B61EA7900E7C860 /* InitialViewController.swift */,
 				54A32FF31B8A76D100623A61 /* Testes */,
@@ -909,6 +912,7 @@
 				54E971A21B6ED25B005F27F1 /* FiraSans-FourItalic.ttf in Resources */,
 				54E971A31B6ED25B005F27F1 /* FiraSans-Hair.ttf in Resources */,
 				54E971A41B6ED25B005F27F1 /* FiraSans-HairItalic.ttf in Resources */,
+				15BD25001C9241D600E431FB /* Main.storyboard in Resources */,
 				54E971A51B6ED25B005F27F1 /* FiraSans-Heavy.ttf in Resources */,
 				54E971A61B6ED25B005F27F1 /* FiraSans-HeavyItalic.ttf in Resources */,
 				54E971A71B6ED25B005F27F1 /* FiraSans-Italic.ttf in Resources */,

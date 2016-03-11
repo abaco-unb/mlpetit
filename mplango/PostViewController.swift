@@ -13,6 +13,7 @@ import SwiftyJSON
 import CoreLocation
 
 
+
 class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
@@ -27,6 +28,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var category = 0
     var longitude: Double? = nil
     var latitude: Double? = nil
+    var location: String? = nil
     
     var restPath = "http://server.maplango.com.br/post-rest"
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -71,9 +73,15 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
+            
+            print("categoria")
+            print(self.category)
+            print(self.location)
+            print(self.latitude)
+            print(self.longitude)
         }
-        print("categoria")
-        print(self.category)
+       
+
         
         scrollView.contentSize.height = 300
         
@@ -81,7 +89,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         textPostView.delegate = self
         
         //confirmButton.hidden = true
-        continueBtn.enabled = false
+        continueBtn.enabled = true
         removeImage.hidden = true
         tagsView.editable = true
         
@@ -95,6 +103,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         backgroundRecord.layer.cornerRadius = 15
         backgroundRecord.layer.masksToBounds = true
         
+        //checkValidChange()
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -130,47 +139,95 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        
+        print("iniciou");
         let location = locations.last! as CLLocation
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) {
+            (placemarks, error) -> Void in
+            //if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
+            //var placemark = placemarks[0]
+            
+            if let validPlacemark = placemarks?[0]{
+                let placemark = validPlacemark as? CLPlacemark;
+                self.location = String(placemark?.name)
+                print(location)
+                //println("placemark")
+                //println(placemark)
+                // Street addres
+                //println("street")
+                //println(placemark)
+                //self.street = st
+                //println("self.street")
+                //println(self.street)
+            }
+        }
         
-//        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
+        //        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
     }
+    
+//    func checkValidChange() {
+//        // Disable the Save button if the text field is empty.
+//        let text = userName.text ?? ""
+//        let text2 = userNation.text ?? ""
+//        let text3 = userBio.text ?? ""
+//        
+//        if (!text.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else if (!text2.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else if (!text3.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else {
+//            confirmEditProf.enabled = false
+//        }
+//    }
+    
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         let limitLength = 149
-        guard let text = textPostView.text else { return true }
-        let newLength = text.characters.count - range.length
         
+        let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
+        
+        if (textView == tagsView) {
+            let isBackSpace = strcmp(char, "\\b")
+            if (isBackSpace == -60) {
+                resolveHashTags();
+                checkTags.tintColor = UIColor.greenColor()
+            }
+            
+            return true;
+        }
+        
+        let text : String = textPostView.text
+        
+        let newLength = text.characters.count - range.length
+        maxLenghtLabel.textColor = UIColor.darkGrayColor()
         maxLenghtLabel.text = String(newLength)
         
-        if (newLength > 139)
-        {
+        if (newLength > 139 && newLength <= 149) {
             maxLenghtLabel.textColor = UIColor.redColor()
         }
-        
-        else if (newLength < 140)
-        {
-            maxLenghtLabel.textColor = UIColor.darkGrayColor()
-        }
-        
-        //estas linhas foram copiadas do código mais abaixo que chamava a mesma função. Do que eu entendi é para os tags. Copiei tudo menos o "return true", pois aqui já tem um return
-        let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
-        let isBackSpace = strcmp(char, "\\b")
-        if (isBackSpace == -60) {
-            resolveHashTags();
+        if(newLength == 10) {
+            checkTextPost.tintColor = UIColor.greenColor()
         }
         
         return newLength <= limitLength
-        
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        writeHereImage.hidden = true
+        if (textView == tagsView) {
+            tagsView.text = ""
+        } else if(textView == textPostView) {
+            writeHereImage.hidden = true
+        }
     }
     
     func touchOutsideTextField(){
@@ -332,33 +389,34 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBAction func savePost(sender: AnyObject) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
+        print(self.latitude, self.longitude, self.location, self.category, self.filePath, userId)
         
-        tagsView.resolveHashTags()
-        
-        let params : [String: AnyObject] = [
-            "text" : tagsView.text,
-            "audio" : filePath,
-            "location" : "",
-            "latitude" : String(self.latitude),
-            "longitude" : String(self.longitude),
-            "category" : String(self.category),
-            "photo" : "../",//self.imgPath,
-            "user": userId
-        ]
-        
-        Alamofire.request(.POST, self.restPath, parameters: params)
-            .responseSwiftyJSON({ (request, response, json, error) in
-                if (error == nil) {
-                    self.indicator.hideActivityIndicator();
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("go_to_map", sender: self)
-                    }
-                }
-            })
+//        tagsView.resolveHashTags()
+//        self.indicator.showActivityIndicator(self.view)
+//        let params : [String: AnyObject] = [
+//            "text" : tagsView.text,
+//            "audio" : filePath,
+//            "location" : self.location!,
+//            "latitude" : String(self.latitude),
+//            "longitude" : String(self.longitude),
+//            "category" : String(self.category),
+//            "photo" : "../",//self.imgPath,
+//            "user": userId
+//        ]
+//        
+//        Alamofire.request(.POST, self.restPath, parameters: params)
+//            .responseSwiftyJSON({ (request, response, json, error) in
+//                if (error == nil) {
+//                    self.indicator.hideActivityIndicator();
+//                    NSOperationQueue.mainQueue().addOperationWithBlock {
+//                        self.performSegueWithIdentifier("go_to_map", sender: self)
+//                    }
+//                }
+//            })
     }
     
     @IBAction func cancelPost(sender: AnyObject) {
-        self.performSegueWithIdentifier("goto_map", sender: self)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func playSlowAudio(sender: UIButton) {
@@ -479,7 +537,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         // tag each word if it has a hashtag
         for word in words {
-            
+            print(word);
             // found a word that is prepended by a hashtag!
             // homework for you: implement @mentions here too.
             if word.hasPrefix("#") {
