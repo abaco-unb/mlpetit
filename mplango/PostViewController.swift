@@ -17,11 +17,13 @@ import CoreLocation
 class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
-    
     var post: Annotation? = nil
+    
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
-    var audioRecorder:AVAudioRecorder!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
+    
     var filePath: String!
     var tags = [String]()
     var points = 0
@@ -66,6 +68,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //get geo location data
         if (CLLocationManager.locationServicesEnabled())
         {
             let locationManager = CLLocationManager()
@@ -80,9 +83,27 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             print(self.latitude)
             print(self.longitude)
         }
-       
-
         
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        //required init to recording
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if allowed {
+                        self.loadRecordingUI()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            // failed to record!
+        }
+        
+        //ui configurations
         scrollView.contentSize.height = 300
         
         tagsView.delegate = self
@@ -97,29 +118,18 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         photoImage.layer.cornerRadius = 10
         photoImage.layer.masksToBounds = true
         
-        // Custom the visual identity of audio player's background
-        backgroundRecord.layer.borderWidth = 1
-        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        backgroundRecord.layer.cornerRadius = 15
-        backgroundRecord.layer.masksToBounds = true
-        
-        //checkValidChange()
-        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
         
-        //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
-        longPressRecogniser.minimumPressDuration = 0.2
-        recordButton.addGestureRecognizer(longPressRecogniser)
-        
         //let aSelector : Selector = "touchOutsideTextField"
         //let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         //tapGesture.numberOfTapsRequired = 1
         //view.addGestureRecognizer(tapGesture)
+        
     }
+    
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
@@ -168,6 +178,21 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
     }
+    
+    func loadRecordingUI(){
+        
+        // Custom the visual identity of audio player's background
+        backgroundRecord.layer.borderWidth = 1
+        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        backgroundRecord.layer.cornerRadius = 15
+        backgroundRecord.layer.masksToBounds = true
+        
+        //LongPress para a criação de post
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        longPressRecogniser.minimumPressDuration = 0.2
+        recordButton.addGestureRecognizer(longPressRecogniser)
+    }
+    
     
 //    func checkValidChange() {
 //        // Disable the Save button if the text field is empty.
@@ -433,48 +458,51 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         audioPlayer.stop()
     }
     
+    func finishRecording(success success: Bool) {
+        audioRecorder.stop()
+        audioRecorder = nil
+    }
+
+    
     func recording() {
        do {
-        print("recording")
-        //recordingInProgress.hidden = false
-        recordButton.enabled = false
+            print("recording")
         
-        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 12000.0,
+                AVNumberOfChannelsKey: 1 as NSNumber,
+                AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+            ]
+        
+            let audioURL = self.getAudioURL()
+        
+            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+            
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+        
+    func getDocumentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+        
+    func getAudioURL() -> NSURL {
         
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
-        // Modify the line that sets the name of the recording
-        //let recordingName = "record_audio.wav"
+        let recordingName = formatter.stringFromDate(currentDateTime)+".m4a"
+        let audioFilename = getDocumentsDirectory().stringByAppendingString(recordingName)
         
-        let pathArray = [dirPath, recordingName]
-        _ = NSURL.fileURLWithPathComponents(pathArray)
-        
-        //filePath = path?.fileURL.description
-        //var filePathUrl = NSURL.fileURLWithPath(filePath)
-        
-        
-        //if let filePath = NSBundle.mainBundle().pathForResource("record_audio", ofType: "wav") {
-        //var filePathUrl = NSURL.fileURLWithPath(filePath)
-        //audioPlayer = AVAudioPlayer(contentsOfURL: filePathUrl, error: nil)
-        //} else {
-        //println("O endereço está vazio")
-        //}
-        
-        
-            let session = AVAudioSession.sharedInstance
-            try session().setCategory(AVAudioSessionCategoryPlayAndRecord)
-            //audioRecorder = AVAudioRecorder(URL: path!, settings: [nil])
-            audioRecorder.delegate = self
-            audioRecorder.meteringEnabled = true
-            audioRecorder.prepareToRecord()
-            audioRecorder.record()
-        } catch {
-            fatalError("Failure to ...: \(error)")
-        }
+        return NSURL(fileURLWithPath: audioFilename)
     }
-    
+        
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
         successfully flag: Bool) {
             if(flag) {
@@ -490,7 +518,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 filePath = recorder.url.description
                 audioSlider.maximumValue = Float(audioPlayer.duration)
                 
-                _ =  NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
+                NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
                 //println(points)
                 points += 10
                 //println(" depois points")
@@ -498,23 +526,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                     fatalError("Failure to ...: \(error)")
                 }
             } else {
+                finishRecording(success: false)
                 print("Ocorreu algum erro na gravação ")
                 //recordButton.enabled = true
             }
     }
-    
-    /* 
-    JA USADO ACIMA PARA O LIMITE DE CARACTERES. COPIEI TUDO ALI MENOS O RETURN TRUE
-    
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
-        let isBackSpace = strcmp(char, "\\b")
-        if (isBackSpace == -60) {
-            resolveHashTags();
-        }
-        return true
-    }
-    */
     
     func checkTagRewards(tag: String ){
         
