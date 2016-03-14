@@ -80,7 +80,7 @@ extension MapViewController {
             let location = view.annotation as! Annotation
             //let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
             //location.mapItem().openInMapsWithLaunchOptions(launchOptions)
-            print(location.entity, terminator: "")
+//            print(location.entity, terminator: "")
             
     }
     

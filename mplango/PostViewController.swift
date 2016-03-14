@@ -7,24 +7,36 @@
 //
 
 import UIKit
-import CoreData
 import AVFoundation
+import Alamofire
+import SwiftyJSON
+import CoreLocation
 
-class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate  {
+
+
+class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
-    
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
-    
     var post: Annotation? = nil
+    
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
-    var audioRecorder:AVAudioRecorder!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
+    
+    var locationManager = CLLocationManager()
+    var location:CLLocation!
+    var address:String = ""
+    var latitude:String = ""
+    var longitude:String = ""
+    
     var filePath: String!
     var tags = [String]()
     var points = 0
+    var category = 0
+    
+    var restPath = "http://server.maplango.com.br/post-rest"
+    var indicator:ActivityIndicator = ActivityIndicator()
    
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -42,9 +54,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet weak var slowBtn: UIButton!
+    //@IBOutlet weak var slowBtn: UIButton!
     @IBOutlet weak var audioSlider: UISlider!
-    @IBOutlet weak var confirmButton: UIButton!
+    //@IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var checkAudio: UIImageView!
     
     //Outlets para a foto
@@ -53,20 +65,52 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var checkImage: UIImageView!
     
-    
     //Outlets para o vídeo
     @IBOutlet weak var checkVideo: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.requestAlwaysAuthorization()
+        //get geo location data
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+            
+        } else {
+            NSLog("Serviço de localização indisponível")
+        }
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        //required init to recording
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if allowed {
+                        self.loadRecordingUI()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            // failed to record!
+        }
+        
+        //ui configurations
         scrollView.contentSize.height = 300
         
         tagsView.delegate = self
         textPostView.delegate = self
         
         //confirmButton.hidden = true
-        continueBtn.enabled = false
+        continueBtn.enabled = true
         removeImage.hidden = true
         tagsView.editable = true
         
@@ -74,34 +118,18 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         photoImage.layer.cornerRadius = 10
         photoImage.layer.masksToBounds = true
         
-        // Custom the visual identity of audio player's background
-        backgroundRecord.layer.borderWidth = 1
-        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        backgroundRecord.layer.cornerRadius = 15
-        backgroundRecord.layer.masksToBounds = true
-        
-        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
         
-        //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
-        longPressRecogniser.minimumPressDuration = 0.2
-        recordButton.addGestureRecognizer(longPressRecogniser)
-        
-        if post != nil {
-            print("post controller")
-            print(post)
-            //locationLabel.text = post?.locationName
-        }
-        
         //let aSelector : Selector = "touchOutsideTextField"
         //let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         //tapGesture.numberOfTapsRequired = 1
         //view.addGestureRecognizer(tapGesture)
+        
     }
+    
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
@@ -118,39 +146,118 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             writeHereImage.hidden = false
         }
     }
-
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        locationManager.stopUpdatingLocation();
+        //print("entrou no load MAnager")
+        let userLocation:CLLocationCoordinate2D = locations.last!.coordinate
+        self.location = manager.location!
+        
+        self.latitude = String(userLocation.latitude);
+        self.longitude = String(userLocation.longitude);
+        
+        print("locations = \(self.latitude) \(self.longitude)")
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(manager.location!) {
+            (placemarks, error) -> Void in
+            //if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
+            //var placemark = placemarks[0]
+            
+            if let validPlacemark = placemarks?[0]{
+                let placemark = validPlacemark as CLPlacemark;
+                //self.location = String(placemark?.name)
+                //print(location)
+//                print("placemark")
+//                print(String(placemark.name))
+                self.address = String(placemark.name!)
+                
+                // Street addres
+                //print("street")
+                //print(placemark)
+                //self.street = st
+                //print("self.street")
+                //print(self.street)
+            }
+        }
+        
+        
+    }
+    
+    func loadRecordingUI(){
+        
+        // Custom the visual identity of audio player's background
+        backgroundRecord.layer.borderWidth = 1
+        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        backgroundRecord.layer.cornerRadius = 15
+        backgroundRecord.layer.masksToBounds = true
+        
+        //LongPress para a criação de post
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        longPressRecogniser.minimumPressDuration = 0.2
+        recordButton.addGestureRecognizer(longPressRecogniser)
+    }
+    
+    
+//    func checkValidChange() {
+//        // Disable the Save button if the text field is empty.
+//        let text = userName.text ?? ""
+//        let text2 = userNation.text ?? ""
+//        let text3 = userBio.text ?? ""
+//        
+//        if (!text.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else if (!text2.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else if (!text3.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else {
+//            confirmEditProf.enabled = false
+//        }
+//    }
+    
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         let limitLength = 149
-        guard let text = textPostView.text else { return true }
-        let newLength = text.characters.count - range.length
         
+        let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
+        
+        if (textView == tagsView) {
+            let isBackSpace = strcmp(char, "\\b")
+            if (isBackSpace == -60) {
+                resolveHashTags();
+            }
+            
+            return true;
+        }
+        
+        let text : String = textPostView.text
+        
+        let newLength = text.characters.count - range.length
+        maxLenghtLabel.textColor = UIColor.darkGrayColor()
         maxLenghtLabel.text = String(newLength)
         
-        if (newLength > 139)
-        {
+        if (newLength > 139 && newLength <= 149) {
             maxLenghtLabel.textColor = UIColor.redColor()
         }
-        
-        else if (newLength < 140)
-        {
-            maxLenghtLabel.textColor = UIColor.darkGrayColor()
-        }
-        
-        //estas linhas foram copiadas do código mais abaixo que chamava a mesma função. Do que eu entendi é para os tags. Copiei tudo menos o "return true", pois aqui já tem um return
-        let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
-        let isBackSpace = strcmp(char, "\\b")
-        if (isBackSpace == -60) {
-            resolveHashTags();
+        if(newLength == 10) {
+            checkTextPost.tintColor = UIColor.greenColor()
         }
         
         return newLength <= limitLength
-        
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        writeHereImage.hidden = true
+        if (textView == tagsView) {
+            tagsView.text = ""
+        } else if(textView == textPostView) {
+            writeHereImage.hidden = true
+        }
     }
     
     func touchOutsideTextField(){
@@ -158,6 +265,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         self.view.endEditing(true)
         tagsView.resolveHashTags();
         
+    }
+    
+    func checkOn(imageCheck : UIImageView) {
+        let checkOn = UIImage(named: "images/atividade_aprovada.png");
+        imageCheck.image = checkOn
     }
     
     func handleLongPress(gestureRecognizer : UIGestureRecognizer){
@@ -171,20 +283,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             print("parar a gravação")
             
             audioRecorder.stop()
-            _ = AVAudioSession.sharedInstance()
-            //audioSession.setActive(false)
-            
+            AVAudioSession.sharedInstance()
+
             recordButton.enabled = true
             playButton.enabled = false
             
         }
-    }
-    
-    
-    //MARK: Actions
-    
-    @IBAction func cancel(sender: AnyObject) {
-        dismissViewControllerAnimated(false, completion: nil)
     }
     
     
@@ -316,51 +420,43 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     //MARK: Post Actions
     
-    @IBAction func savePost(sender: UIButton) {
-        do {
-            try moContext!.save()
-        } catch {
-            fatalError("Failure to save POST: \(error)")
-        }
-    }
-    @IBAction func addPost(sender: UIButton) {
-        print("action addPost tapped")
-        prepareForInsertPost()
-        confirmButton.hidden = false
-        tagsView.resolveHashTags()
-    }
-    
-    @IBAction func cancelPost(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("goto_map", sender: self)
-    }
-    
-    func prepareForInsertPost () {
-        print("post")
-        //println(post)
-        if post != nil {
-            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            let email: String = prefs.objectForKey("USEREMAIL") as! String
-            let fetchRequest = NSFetchRequest(entityName: "User")
-            fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-            do {
-                
-                if let fetchResults = try moContext?.executeFetchRequest(fetchRequest) as? [User] {
-                    let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
-                    let postEntity = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-                    postEntity.text     = tagsView.text
-                    postEntity.audio    = filePath
-                    postEntity.locationName = post!.locationName
-                    postEntity.latitude  = Double(post!.coordinate.latitude)
-                    postEntity.longitude = Double(post!.coordinate.longitude)
-                    postEntity.category  = post!.category
-                    postEntity.user = fetchResults[0]
-                    print("user entity********************")
-                    print(fetchResults)
+    @IBAction func savePost(sender: AnyObject) {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
+        print("enviando esse post...")
+        print(self.latitude)
+        print(self.longitude)
+        print(self.address)
+        print(self.category)
+        //print(self.filePath)
+        print(userId)
+        
+//        tagsView.resolveHashTags()
+        let params : [String: AnyObject] = [
+            "text" : tagsView.text,
+            "audio" : " ",
+            "location" : self.address,
+            "latitude" : String(self.latitude),
+            "longitude" : String(self.longitude),
+            "category" : String(self.category),
+            "photo" : "../",
+            "user": userId
+        ]
+
+        self.indicator.showActivityIndicator(self.view)
+        Alamofire.request(.POST, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_map", sender: self)
+                    }
                 }
-            } catch {
-                fatalError("Failure to prepare POST: \(error)")
-            }
-        }
+            })
+    }
+    
+    @IBAction func cancelPost(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func playSlowAudio(sender: UIButton) {
@@ -377,48 +473,51 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         audioPlayer.stop()
     }
     
+    func finishRecording(success success: Bool) {
+        audioRecorder.stop()
+        audioRecorder = nil
+    }
+
+    
     func recording() {
        do {
-        print("recording")
-        //recordingInProgress.hidden = false
-        recordButton.enabled = false
+            print("recording")
         
-        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 12000.0,
+                AVNumberOfChannelsKey: 1 as NSNumber,
+                AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+            ]
+        
+            let audioURL = self.getAudioURL()
+        
+            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+            
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+        
+    func getDocumentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+        
+    func getAudioURL() -> NSURL {
         
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
-        // Modify the line that sets the name of the recording
-        //let recordingName = "record_audio.wav"
+        let recordingName = formatter.stringFromDate(currentDateTime)+".m4a"
+        let audioFilename = getDocumentsDirectory().stringByAppendingString(recordingName)
         
-        let pathArray = [dirPath, recordingName]
-        _ = NSURL.fileURLWithPathComponents(pathArray)
-        
-        //filePath = path?.fileURL.description
-        //var filePathUrl = NSURL.fileURLWithPath(filePath)
-        
-        
-        //if let filePath = NSBundle.mainBundle().pathForResource("record_audio", ofType: "wav") {
-        //var filePathUrl = NSURL.fileURLWithPath(filePath)
-        //audioPlayer = AVAudioPlayer(contentsOfURL: filePathUrl, error: nil)
-        //} else {
-        //println("O endereço está vazio")
-        //}
-        
-        
-            let session = AVAudioSession.sharedInstance
-            try session().setCategory(AVAudioSessionCategoryPlayAndRecord)
-            //audioRecorder = AVAudioRecorder(URL: path!, settings: [nil])
-            audioRecorder.delegate = self
-            audioRecorder.meteringEnabled = true
-            audioRecorder.prepareToRecord()
-            audioRecorder.record()
-        } catch {
-            fatalError("Failure to ...: \(error)")
-        }
+        return NSURL(fileURLWithPath: audioFilename)
     }
-    
+        
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
         successfully flag: Bool) {
             if(flag) {
@@ -434,7 +533,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 filePath = recorder.url.description
                 audioSlider.maximumValue = Float(audioPlayer.duration)
                 
-                _ =  NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
+                NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
                 //println(points)
                 points += 10
                 //println(" depois points")
@@ -442,23 +541,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                     fatalError("Failure to ...: \(error)")
                 }
             } else {
+                finishRecording(success: false)
                 print("Ocorreu algum erro na gravação ")
                 //recordButton.enabled = true
             }
     }
-    
-    /* 
-    JA USADO ACIMA PARA O LIMITE DE CARACTERES. COPIEI TUDO ALI MENOS O RETURN TRUE
-    
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
-        let isBackSpace = strcmp(char, "\\b")
-        if (isBackSpace == -60) {
-            resolveHashTags();
-        }
-        return true
-    }
-    */
     
     func checkTagRewards(tag: String ){
         
@@ -481,7 +568,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         // tag each word if it has a hashtag
         for word in words {
-            
+            print(word);
             // found a word that is prepended by a hashtag!
             // homework for you: implement @mentions here too.
             if word.hasPrefix("#") {
@@ -501,6 +588,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 if (stringifiedWord.rangeOfCharacterFromSet(digits) != nil) {
                     // hashtag contains a number, like "#1"
                     // so don't make it clickable
+                    
+                    
+                    //set as checked
+                    self.checkOn(checkTags)
+                    
                 } else {
                     if let _ = tags.indexOf(stringifiedWord) {
                         print("já adicionado")

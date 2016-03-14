@@ -1,0 +1,1551 @@
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "0AJ-nE-HOS"; */
+"0AJ-nE-HOS.title" = "Test";
+
+/* Class = "UIViewController"; title = "test2act2"; ObjectID = "0UI-sv-AWY"; */
+"0UI-sv-AWY.title" = "test2act2";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "0rV-RJ-1sk"; */
+"0rV-RJ-1sk.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Bienvenue dans la communauté MapLango !"; ObjectID = "14N-AD-I2r"; */
+"14N-AD-I2r.text" = "Bienvenue dans la communauté MapLango !";
+
+/* Class = "UIButton"; normalTitle = "Posts récents"; ObjectID = "19A-VB-gw9"; */
+"19A-VB-gw9.normalTitle" = "Posts récents";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "1LZ-Gf-itk"; */
+"1LZ-Gf-itk.title" = "Test";
+
+/* Class = "UILabel"; text = "suivis"; ObjectID = "1bn-ss-sm3"; */
+"1bn-ss-sm3.text" = "suivis";
+
+/* Class = "UILabel"; text = "Obtenu !"; ObjectID = "1gn-zU-715"; */
+"1gn-zU-715.text" = "Obtenu !";
+
+/* Class = "UILabel"; text = "Tu adores manger"; ObjectID = "1hU-bg-33l"; */
+"1hU-bg-33l.text" = "Tu adores manger";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 4"; ObjectID = "1hz-2V-13g"; */
+"1hz-2V-13g.text" = "ACTIVITÉ 4";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "1k7-Um-Wx0"; */
+"1k7-Um-Wx0.text" = "ACTIVITÉ 1";
+
+/* Class = "UIBarButtonItem"; title = "catég."; ObjectID = "1s6-bs-Fdz"; */
+"1s6-bs-Fdz.title" = "catég.";
+
+/* Class = "UIBarButtonItem"; title = "Annuler"; ObjectID = "1ym-08-3XT"; */
+"1ym-08-3XT.title" = "Annuler";
+
+/* Class = "UILabel"; text = "Illustre une situation où il est interdit de faire quelque chose. Ensuite, dis si tu es d'accord ou non."; ObjectID = "202-pP-Zg3"; */
+"202-pP-Zg3.text" = "Illustre une situation où il est interdit de faire quelque chose. Ensuite, dis si tu es d'accord ou non.";
+
+/* Class = "UILabel"; text = "Envoyée !"; ObjectID = "2FZ-Mn-aLl"; */
+"2FZ-Mn-aLl.text" = "Envoyée !";
+
+/* Class = "UILabel"; text = "Localisation du post"; ObjectID = "2KK-UF-7Ka"; */
+"2KK-UF-7Ka.text" = "Localisation du post";
+
+/* Class = "UITextField"; placeholder = "Poste ton commentaire ici..."; ObjectID = "2Sa-Uh-qdl"; */
+"2Sa-Uh-qdl.placeholder" = "Poste ton commentaire ici...";
+
+/* Class = "UIBarButtonItem"; title = "tests"; ObjectID = "2YE-sL-Boc"; */
+"2YE-sL-Boc.title" = "tests";
+
+/* Class = "UILabel"; text = "Explique comment aller de A à B"; ObjectID = "2Yl-aL-Uv0"; */
+"2Yl-aL-Uv0.text" = "Explique comment aller de A à B";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "2ex-LJ-TMI"; */
+"2ex-LJ-TMI.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Tu adores manger"; ObjectID = "2fx-Px-kqF"; */
+"2fx-Px-kqF.text" = "Tu adores manger";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "2lQ-bt-BBr"; */
+"2lQ-bt-BBr.text" = "ACTIVITÉ 1";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "3Ua-fu-nfD"; */
+"3Ua-fu-nfD.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Une activité"; ObjectID = "3jt-d0-wnE"; */
+"3jt-d0-wnE.text" = "Une activité";
+
+/* Class = "UIViewController"; title = "test4act7"; ObjectID = "3kr-np-P28"; */
+"3kr-np-P28.title" = "test4act7";
+
+/* Class = "UILabel"; text = "Tous les posts non lus"; ObjectID = "44q-8D-P42"; */
+"44q-8D-P42.text" = "Tous les posts non lus";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "45I-1P-ahQ"; */
+"45I-1P-ahQ.title" = "retour";
+
+/* Class = "UILabel"; text = "Poste la photo d'un de tes paysages préférés et décris-le en expliquant ton choix."; ObjectID = "46B-XP-l5j"; */
+"46B-XP-l5j.text" = "Poste la photo d'un de tes paysages préférés et décris-le en expliquant ton choix.";
+
+/* Class = "UILabel"; text = "Fais une petite présentation de ta ville en répondant aux questions"; ObjectID = "48S-Qu-ngd"; */
+"48S-Qu-ngd.text" = "Fais une petite présentation de ta ville en répondant aux questions";
+
+/* Class = "UIViewController"; title = "test2act6"; ObjectID = "4Dd-L3-f4R"; */
+"4Dd-L3-f4R.title" = "test2act6";
+
+/* Class = "UIBarButtonItem"; title = "Annuler"; ObjectID = "4T1-SE-pwR"; */
+"4T1-SE-pwR.title" = "Annuler";
+
+/* Class = "UIViewController"; title = "test3act1"; ObjectID = "4T6-ft-LiB"; */
+"4T6-ft-LiB.title" = "test3act1";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "4Tj-n2-EaA"; */
+"4Tj-n2-EaA.title" = "Envoyer";
+
+/* Class = "UIBarButtonItem"; title = "carte"; ObjectID = "4dO-mO-Xsw"; */
+"4dO-mO-Xsw.title" = "carte";
+
+/* Class = "UILabel"; text = "Chaque fois que quelqu'un donne un coup de coeur à tes publications ou tes commentaires"; ObjectID = "4iV-7x-YJy"; */
+"4iV-7x-YJy.text" = "Chaque fois que quelqu'un donne un coup de coeur à tes publications ou tes commentaires";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "4oY-4f-BgR"; */
+"4oY-4f-BgR.title" = "Test";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 5"; ObjectID = "4sW-Bs-XgR"; */
+"4sW-Bs-XgR.text" = "ACTIVITÉ 5";
+
+/* Class = "UILabel"; text = "Validée"; ObjectID = "4tU-XN-39C"; */
+"4tU-XN-39C.text" = "Validée";
+
+/* Class = "UIViewController"; title = "test3act7"; ObjectID = "4wp-vd-vNT"; */
+"4wp-vd-vNT.title" = "test3act7";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "5WZ-W7-VLQ"; */
+"5WZ-W7-VLQ.title" = "Envoyer";
+
+/* Class = "UIButton"; normalTitle = "CONNEXION AVEC FACEBOOK"; ObjectID = "5cs-dh-lH5"; */
+"5cs-dh-lH5.normalTitle" = "CONNEXION AVEC FACEBOOK";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "5py-JM-Vig"; */
+"5py-JM-Vig.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Tu es à la pharmacie pour acheter des médicaments. Explique ta situation au pharmacien."; ObjectID = "5u3-9S-rCx"; */
+"5u3-9S-rCx.text" = "Tu es à la pharmacie pour acheter des médicaments. Explique ta situation au pharmacien.";
+
+/* Class = "UIButton"; normalTitle = "ANNULER"; ObjectID = "60J-Fm-gYU"; */
+"60J-Fm-gYU.normalTitle" = "ANNULER";
+
+/* Class = "UILabel"; text = "Nouveau mot de passe"; ObjectID = "6Ah-cV-aI4"; */
+"6Ah-cV-aI4.text" = "Nouveau mot de passe";
+
+/* Class = "UILabel"; text = "Un des tes amis hésite à acheter une voiture. Si tu étais lui, que ferais-tu ?"; ObjectID = "6Fm-6m-Da8"; */
+"6Fm-6m-Da8.text" = "Un des tes amis hésite à acheter une voiture. Si tu étais lui, que ferais-tu ?";
+
+/* Class = "UIBarButtonItem"; title = "Enregistrer"; ObjectID = "6Mp-Fi-7Jd"; */
+"6Mp-Fi-7Jd.title" = "Enregistrer";
+
+/* Class = "UILabel"; text = "participation"; ObjectID = "6XT-Gf-waY"; */
+"6XT-Gf-waY.text" = "participation";
+
+/* Class = "UITextField"; placeholder = "  Email"; ObjectID = "6bG-pN-fVV"; */
+"6bG-pN-fVV.placeholder" = "  Email";
+
+/* Class = "UILabel"; text = "Enregistre tes réponses ici"; ObjectID = "6bc-Yj-bdu"; */
+"6bc-Yj-bdu.text" = "Enregistre tes réponses ici";
+
+/* Class = "UILabel"; text = "Poste l'image ici"; ObjectID = "6cX-Hd-cf5"; */
+"6cX-Hd-cf5.text" = "Poste l'image ici";
+
+/* Class = "UINavigationItem"; title = "MapLango"; ObjectID = "6iX-vc-lPH"; */
+"6iX-vc-lPH.title" = "MapLango";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "6o8-Aq-0kM"; */
+"6o8-Aq-0kM.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Défi"; ObjectID = "6r4-qH-yEg"; */
+"6r4-qH-yEg.title" = "Défi";
+
+/* Class = "UINavigationItem"; title = "Aide"; ObjectID = "76I-xG-qs5"; */
+"76I-xG-qs5.title" = "Aide";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "77G-yB-CDs"; */
+"77G-yB-CDs.text" = "ACTIVITÉ 1";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "788-RQ-VHB"; */
+"788-RQ-VHB.title" = "Test";
+
+/* Class = "UIButton"; normalTitle = "Rendez-vous sur le site de MapLango"; ObjectID = "7Du-Ql-q1B"; */
+"7Du-Ql-q1B.normalTitle" = "Rendez-vous sur le site de MapLango";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "7L6-ll-B8r"; */
+"7L6-ll-B8r.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Activité 5"; ObjectID = "7PA-0W-n5t"; */
+"7PA-0W-n5t.text" = "Activité 5";
+
+/* Class = "UIButton"; normalTitle = "COMMENCER"; ObjectID = "7fp-c8-7xl"; */
+"7fp-c8-7xl.normalTitle" = "COMMENCER";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "7oT-3Y-DGi"; */
+"7oT-3Y-DGi.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "7qY-8i-aYl"; */
+"7qY-8i-aYl.title" = "Test";
+
+/* Class = "UIViewController"; title = "Profile Main"; ObjectID = "7wt-gc-8Ft"; */
+"7wt-gc-8Ft.title" = "Profile Main";
+
+/* Class = "UILabel"; text = "Nome usuário"; ObjectID = "8SX-5t-MKt"; */
+"8SX-5t-MKt.text" = "Nome usuário";
+
+/* Class = "UIViewController"; title = "testes_lista"; ObjectID = "8Wg-CO-F9k"; */
+"8Wg-CO-F9k.title" = "testes_lista";
+
+/* Class = "UIViewController"; title = "test3act2"; ObjectID = "8Yl-x6-kL2"; */
+"8Yl-x6-kL2.title" = "test3act2";
+
+/* Class = "UIViewController"; title = "test4act1"; ObjectID = "8hn-2w-LLm"; */
+"8hn-2w-LLm.title" = "test4act1";
+
+/* Class = "UITextField"; placeholder = "Écrire le sms ici..."; ObjectID = "901-of-XE2"; */
+"901-of-XE2.placeholder" = "Écrire le sms ici...";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 3"; ObjectID = "90Q-bH-TO9"; */
+"90Q-bH-TO9.text" = "ACTIVITÉ 3";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "9Az-hO-Wgo"; */
+"9Az-hO-Wgo.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Modifier l'email"; ObjectID = "9CH-3r-UlK"; */
+"9CH-3r-UlK.text" = "Modifier l'email";
+
+/* Class = "UILabel"; text = "Posts non lus de ta communauté"; ObjectID = "9Jq-0R-XDV"; */
+"9Jq-0R-XDV.text" = "Posts non lus de ta communauté";
+
+/* Class = "UIButton"; normalTitle = "REFAIRE L'ACTIVITÉ"; ObjectID = "9QT-ld-xyh"; */
+"9QT-ld-xyh.normalTitle" = "REFAIRE L'ACTIVITÉ";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "9T6-bW-xgs"; */
+"9T6-bW-xgs.title" = "Envoyer";
+
+/* Class = "UIButton"; normalTitle = "Défis"; ObjectID = "9V8-TJ-zDS"; */
+"9V8-TJ-zDS.normalTitle" = "Défis";
+
+/* Class = "UIViewController"; title = "categorias_post"; ObjectID = "9VO-0B-Pfw"; */
+"9VO-0B-Pfw.title" = "categorias_post";
+
+/* Class = "UILabel"; text = "Partager :"; ObjectID = "9eX-YM-IaI"; */
+"9eX-YM-IaI.text" = "Partager :";
+
+/* Class = "UILabel"; text = "Obtenu !"; ObjectID = "A1W-YA-PXd"; */
+"A1W-YA-PXd.text" = "Obtenu !";
+
+/* Class = "UIButton"; normalTitle = "JE M'INSCRIS"; ObjectID = "AEi-S6-aD7"; */
+"AEi-S6-aD7.normalTitle" = "JE M'INSCRIS";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "AXJ-k2-qQT"; */
+"AXJ-k2-qQT.title" = "Envoyer";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "AYp-NK-in4"; */
+"AYp-NK-in4.title" = "Test";
+
+/* Class = "UIViewController"; title = "test3act1redo"; ObjectID = "AZ3-kp-rry"; */
+"AZ3-kp-rry.title" = "test3act1redo";
+
+/* Class = "UIViewController"; title = "test4act1sent"; ObjectID = "Ae1-5e-lJT"; */
+"Ae1-5e-lJT.title" = "test4act1sent";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "Ayx-TS-3GW"; */
+"Ayx-TS-3GW.title" = "Envoyer";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "BCN-nB-yAr"; */
+"BCN-nB-yAr.title" = "Envoyer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BDH-08-fFk"; */
+"BDH-08-fFk.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Ajouter une vidéo ?"; ObjectID = "BSw-xL-iHL"; */
+"BSw-xL-iHL.text" = "Ajouter une vidéo ?";
+
+/* Class = "UINavigationItem"; title = "Confirmer post"; ObjectID = "BgY-Mu-HGr"; */
+"BgY-Mu-HGr.title" = "Confirmer post";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Bkc-9k-hTL"; */
+"Bkc-9k-hTL.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Que signifie, pour toi, être médiateur sur MapLango ?"; ObjectID = "BuL-uV-LID"; */
+"BuL-uV-LID.text" = "Que signifie, pour toi, être médiateur sur MapLango ?";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "C0w-hx-yLR"; */
+"C0w-hx-yLR.text" = "ACTIVITÉ 1";
+
+/* Class = "UILabel"; text = "Illustre une situation de non respect de l'environnement et propose une solution préférable."; ObjectID = "CN6-Zx-f0V"; */
+"CN6-Zx-f0V.text" = "Illustre une situation de non respect de l'environnement et propose une solution préférable.";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "CNK-E9-lQ5"; */
+"CNK-E9-lQ5.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Enregistre ton explication ici"; ObjectID = "CUC-7P-qNj"; */
+"CUC-7P-qNj.text" = "Enregistre ton explication ici";
+
+/* Class = "UILabel"; text = "Poste l'image ici"; ObjectID = "CWd-F2-j4t"; */
+"CWd-F2-j4t.text" = "Poste l'image ici";
+
+/* Class = "UIViewController"; title = "test2act1OK"; ObjectID = "CdL-U1-wRC"; */
+"CdL-U1-wRC.title" = "test2act1OK";
+
+/* Class = "UILabel"; text = "Ajouter l'image ici"; ObjectID = "Cer-e0-AeG"; */
+"Cer-e0-AeG.text" = "Ajouter l'image ici";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "CgO-ex-tbP"; */
+"CgO-ex-tbP.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Email ou compte du MapLango"; ObjectID = "Cmi-sl-czS"; */
+"Cmi-sl-czS.placeholder" = "Email ou compte du MapLango";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "Cn5-nk-nL7"; */
+"Cn5-nk-nL7.text" = "ACTIVITÉ 1";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DNq-Lb-zuH"; */
+"DNq-Lb-zuH.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Astuces"; ObjectID = "DQC-Hr-Xcm"; */
+"DQC-Hr-Xcm.normalTitle" = "Astuces";
+
+/* Class = "UIButton"; normalTitle = "REFAIRE L'ACTIVITÉ"; ObjectID = "DUv-kC-Q4U"; */
+"DUv-kC-Q4U.normalTitle" = "REFAIRE L'ACTIVITÉ";
+
+/* Class = "UIButton"; normalTitle = "PASSER LE TEST"; ObjectID = "DhH-2z-4Eo"; */
+"DhH-2z-4Eo.normalTitle" = "PASSER LE TEST";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "DkZ-UI-Gqr"; */
+"DkZ-UI-Gqr.title" = "Test";
+
+/* Class = "UINavigationItem"; title = "Nome usuário"; ObjectID = "Dr1-Vh-qQ9"; */
+"Dr1-Vh-qQ9.title" = "Nome usuário";
+
+/* Class = "UIViewController"; title = "Post"; ObjectID = "Dwb-NK-OOf"; */
+"Dwb-NK-OOf.title" = "Post";
+
+/* Class = "UINavigationItem"; title = "Suivis"; ObjectID = "E5m-DW-d1T"; */
+"E5m-DW-d1T.title" = "Suivis";
+
+/* Class = "UIViewController"; title = "testMact1redo"; ObjectID = "E7o-ek-xqi"; */
+"E7o-ek-xqi.title" = "testMact1redo";
+
+/* Class = "UILabel"; text = "10/12/2015"; ObjectID = "EG2-ti-4Kp"; */
+"EG2-ti-4Kp.text" = "10/12/2015";
+
+/* Class = "UILabel"; text = "J'intéragis plutôt bien"; ObjectID = "EId-3i-ylx"; */
+"EId-3i-ylx.text" = "J'intéragis plutôt bien";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 4"; ObjectID = "ELg-J5-lpO"; */
+"ELg-J5-lpO.text" = "ACTIVITÉ 4";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "ENH-g5-wt3"; */
+"ENH-g5-wt3.text" = "Enregistre-toi ici";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "EVm-Ao-vwG"; */
+"EVm-Ao-vwG.text" = "Enregistre-toi ici";
+
+/* Class = "UITextField"; placeholder = "Confirmer le nouvel email ici"; ObjectID = "EaO-BO-smW"; */
+"EaO-BO-smW.placeholder" = "Confirmer le nouvel email ici";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "EfM-m7-owb"; */
+"EfM-m7-owb.title" = "Envoyer";
+
+/* Class = "UITextField"; placeholder = "Email actuel"; ObjectID = "EgC-qv-ZqX"; */
+"EgC-qv-ZqX.placeholder" = "Email actuel";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "Elm-MG-O6P"; */
+"Elm-MG-O6P.title" = "Test";
+
+/* Class = "UILabel"; text = "00:23"; ObjectID = "F6h-tH-dDd"; */
+"F6h-tH-dDd.text" = "00:23";
+
+/* Class = "UILabel"; text = "Non validée"; ObjectID = "FFO-2o-dmm"; */
+"FFO-2o-dmm.text" = "Non validée";
+
+/* Class = "UITextField"; placeholder = "Indiquer le nouveau mot de passe ici"; ObjectID = "FLC-SZ-GjB"; */
+"FLC-SZ-GjB.placeholder" = "Indiquer le nouveau mot de passe ici";
+
+/* Class = "UIViewController"; title = "test3act4"; ObjectID = "FRj-gO-GkP"; */
+"FRj-gO-GkP.title" = "test3act4";
+
+/* Class = "UIViewController"; title = "test2act7"; ObjectID = "FWP-el-9Fm"; */
+"FWP-el-9Fm.title" = "test2act7";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "Fa1-NO-xeV"; */
+"Fa1-NO-xeV.title" = "Test";
+
+/* Class = "UILabel"; text = "Enregistre ton opinion ici"; ObjectID = "Fis-oB-0xS"; */
+"Fis-oB-0xS.text" = "Enregistre ton opinion ici";
+
+/* Class = "UINavigationItem"; title = "Édition du profil"; ObjectID = "Ft2-aO-KOF"; */
+"Ft2-aO-KOF.title" = "Édition du profil";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 2"; ObjectID = "FwJ-mL-TSk"; */
+"FwJ-mL-TSk.text" = "ACTIVITÉ 2";
+
+/* Class = "UINavigationItem"; title = "Niveau 1"; ObjectID = "GB6-kb-1fT"; */
+"GB6-kb-1fT.title" = "Niveau 1";
+
+/* Class = "UIViewController"; title = "test2act1redo"; ObjectID = "GDE-lq-V3u"; */
+"GDE-lq-V3u.title" = "test2act1redo";
+
+/* Class = "UILabel"; text = "Quand un ou une de tes contacts publie un post dans MapLango, peu importe sa localisation"; ObjectID = "GKe-0b-VAC"; */
+"GKe-0b-VAC.text" = "Quand un ou une de tes contacts publie un post dans MapLango, peu importe sa localisation";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "GRL-kn-LKy"; */
+"GRL-kn-LKy.text" = "Enregistre-toi ici";
+
+/* Class = "UILabel"; text = "Commentaires"; ObjectID = "GT7-fw-VN8"; */
+"GT7-fw-VN8.text" = "Commentaires";
+
+/* Class = "UILabel"; text = "Je maitrise bien"; ObjectID = "GVw-Hq-fKI"; */
+"GVw-Hq-fKI.text" = "Je maitrise bien";
+
+/* Class = "UIViewController"; title = "tutorial_1"; ObjectID = "GYF-TG-ryA"; */
+"GYF-TG-ryA.title" = "tutorial_1";
+
+/* Class = "UIViewController"; title = "test2act5"; ObjectID = "GZ9-h5-vDi"; */
+"GZ9-h5-vDi.title" = "test2act5";
+
+/* Class = "UILabel"; text = "Poste l'image ici"; ObjectID = "Gak-fm-JUU"; */
+"Gak-fm-JUU.text" = "Poste l'image ici";
+
+/* Class = "UILabel"; text = "Date - heure"; ObjectID = "Gml-o6-Nkl"; */
+"Gml-o6-Nkl.text" = "Date - heure";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Guh-yD-Xr5"; */
+"Guh-yD-Xr5.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "  Nationalité"; ObjectID = "HKH-tx-rYZ"; */
+"HKH-tx-rYZ.placeholder" = "  Nationalité";
+
+/* Class = "UINavigationItem"; title = "Mot de passe"; ObjectID = "HPE-oq-ocW"; */
+"HPE-oq-ocW.title" = "Mot de passe";
+
+/* Class = "UIViewController"; title = "criacao_post"; ObjectID = "HPR-tg-hFr"; */
+"HPR-tg-hFr.title" = "criacao_post";
+
+/* Class = "UIButton"; normalTitle = "REFAIRE L'ACTIVITÉ"; ObjectID = "HUZ-7i-PoQ"; */
+"HUZ-7i-PoQ.normalTitle" = "REFAIRE L'ACTIVITÉ";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "Hh5-Ws-M0E"; */
+"Hh5-Ws-M0E.title" = "Test";
+
+/* Class = "UILabel"; text = "Félicitations !"; ObjectID = "Hj2-sB-pBG"; */
+"Hj2-sB-pBG.text" = "Félicitations !";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "Hjf-O0-0IS"; */
+"Hjf-O0-0IS.title" = "Envoyer";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "Hkb-fc-cZM"; */
+"Hkb-fc-cZM.title" = "Test";
+
+/* Class = "UIButton"; normalTitle = "Événements"; ObjectID = "Hkw-Cz-GFo"; */
+"Hkw-Cz-GFo.normalTitle" = "Événements";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "I6u-95-nV3"; */
+"I6u-95-nV3.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "I8z-tR-TFm"; */
+"I8z-tR-TFm.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "IUY-ff-bpJ"; */
+"IUY-ff-bpJ.title" = "retour";
+
+/* Class = "UILabel"; text = "Nível limiar para aprendentes que começam a ser independentes em francês: contar experiências passadas e futuras, dar uma opinião ou um conselho, estar à vontade\nem conversações relativas a interesses pessoais... Este nível corresponde ao B1 do QECR."; ObjectID = "Il1-iO-Bnv"; */
+"Il1-iO-Bnv.text" = "Nível limiar para aprendentes que começam a ser independentes em francês: contar experiências passadas e futuras, dar uma opinião ou um conselho, estar à vontade\nem conversações relativas a interesses pessoais... Este nível corresponde ao B1 do QECR.";
+
+/* Class = "UITextField"; placeholder = "Indiquer le mot de passe actuel ici"; ObjectID = "Imo-Rt-MOo"; */
+"Imo-Rt-MOo.placeholder" = "Indiquer le mot de passe actuel ici";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "J2X-6V-5Yf"; */
+"J2X-6V-5Yf.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Je maitrise bien"; ObjectID = "J3O-MH-c5R"; */
+"J3O-MH-c5R.text" = "Je maitrise bien";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "JSK-I5-7Xt"; */
+"JSK-I5-7Xt.title" = "Test";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "JY2-oC-5og"; */
+"JY2-oC-5og.text" = "ACTIVITÉ 1";
+
+/* Class = "UINavigationItem"; title = "Niveau 4"; ObjectID = "JaF-ld-FyY"; */
+"JaF-ld-FyY.title" = "Niveau 4";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "JfB-eD-K0r"; */
+"JfB-eD-K0r.title" = "Test";
+
+/* Class = "UILabel"; text = "Nouveaux badges"; ObjectID = "Jg6-W2-aWc"; */
+"Jg6-W2-aWc.text" = "Nouveaux badges";
+
+/* Class = "UINavigationItem"; title = "Niveau 4"; ObjectID = "JyO-sf-0KS"; */
+"JyO-sf-0KS.title" = "Niveau 4";
+
+/* Class = "UITextField"; placeholder = "Nom actuel"; ObjectID = "KLK-Zd-O2m"; */
+"KLK-Zd-O2m.placeholder" = "Nom actuel";
+
+/* Class = "UILabel"; text = "dimanche"; ObjectID = "KRV-D2-tUq"; */
+"KRV-D2-tUq.text" = "dimanche";
+
+/* Class = "UILabel"; text = "CONNEXION"; ObjectID = "KSQ-mm-zw3"; */
+"KSQ-mm-zw3.text" = "CONNEXION";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 5"; ObjectID = "Kd8-gC-O0R"; */
+"Kd8-gC-O0R.text" = "ACTIVITÉ 5";
+
+/* Class = "UILabel"; text = "Non validée"; ObjectID = "Key-Qe-tEd"; */
+"Key-Qe-tEd.text" = "Non validée";
+
+/* Class = "UILabel"; text = "Un peu de patience :)"; ObjectID = "L8H-Av-AMI"; */
+"L8H-Av-AMI.text" = "Un peu de patience :)";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "L9G-Rb-GwJ"; */
+"L9G-Rb-GwJ.text" = "Enregistre-toi ici";
+
+/* Class = "UILabel"; text = "00:23"; ObjectID = "LGW-9i-i7s"; */
+"LGW-9i-i7s.text" = "00:23";
+
+/* Class = "UILabel"; text = "Coup de coeur"; ObjectID = "LIG-xG-ioa"; */
+"LIG-xG-ioa.text" = "Coup de coeur";
+
+/* Class = "UILabel"; text = "Tu rencontres une amie dans un café. Une chaise est libre à la table d'à côté. Demander si tu peux la prendre."; ObjectID = "LJj-YN-1qD"; */
+"LJj-YN-1qD.text" = "Tu rencontres une amie dans un café. Une chaise est libre à la table d'à côté. Demander si tu peux la prendre.";
+
+/* Class = "UILabel"; text = "- Ça va bien, merci."; ObjectID = "LKr-0q-bsl"; */
+"LKr-0q-bsl.text" = "- Ça va bien, merci.";
+
+/* Class = "UIBarButtonItem"; title = "Éditer"; ObjectID = "LOf-gJ-H53"; */
+"LOf-gJ-H53.title" = "Éditer";
+
+/* Class = "UILabel"; text = "MapLango"; ObjectID = "LSh-Uf-dVp"; */
+"LSh-Uf-dVp.text" = "MapLango";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "LeO-FD-EgH"; */
+"LeO-FD-EgH.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "PASSER LE TEST"; ObjectID = "Lea-ho-Rgo"; */
+"Lea-ho-Rgo.normalTitle" = "PASSER LE TEST";
+
+/* Class = "UIViewController"; title = "test_4_ok"; ObjectID = "Lk3-CW-qVG"; */
+"Lk3-CW-qVG.title" = "test_4_ok";
+
+/* Class = "UILabel"; text = "/150"; ObjectID = "LlV-O5-LQj"; */
+"LlV-O5-LQj.text" = "/150";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 4"; ObjectID = "MGn-Nz-RJt"; */
+"MGn-Nz-RJt.text" = "ACTIVITÉ 4";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "MWE-MZ-SQv"; */
+"MWE-MZ-SQv.title" = "Test";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "MuE-Cy-9mP"; */
+"MuE-Cy-9mP.title" = "Test";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "MuP-Ie-Xrf"; */
+"MuP-Ie-Xrf.text" = "Enregistre-toi ici";
+
+/* Class = "UILabel"; text = "Confirmation du nouvel email"; ObjectID = "Mx8-nZ-Z8P"; */
+"Mx8-nZ-Z8P.text" = "Confirmation du nouvel email";
+
+/* Class = "UITextField"; placeholder = "  Nom d'utilisateur"; ObjectID = "N6P-Dj-aJ8"; */
+"N6P-Dj-aJ8.placeholder" = "  Nom d'utilisateur";
+
+/* Class = "UINavigationItem"; title = "Email"; ObjectID = "NDV-JY-1VV"; */
+"NDV-JY-1VV.title" = "Email";
+
+/* Class = "UIBarButtonItem"; title = "Config."; ObjectID = "NDn-2M-boG"; */
+"NDn-2M-boG.title" = "Config.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "NQy-QP-Bft"; */
+"NQy-QP-Bft.normalTitle" = "Button";
+
+/* Class = "UIViewController"; title = "testMact1OK"; ObjectID = "Nak-Ei-YYu"; */
+"Nak-Ei-YYu.title" = "testMact1OK";
+
+/* Class = "UILabel"; text = "Nome usuário"; ObjectID = "Neh-1I-7rB"; */
+"Neh-1I-7rB.text" = "Nome usuário";
+
+/* Class = "UILabel"; text = "Un peu de patience :)"; ObjectID = "O0P-XZ-moi"; */
+"O0P-XZ-moi.text" = "Un peu de patience :)";
+
+/* Class = "UITextField"; placeholder = "  Confirmer mot de passe"; ObjectID = "O4z-5C-uIt"; */
+"O4z-5C-uIt.placeholder" = "  Confirmer mot de passe";
+
+/* Class = "UILabel"; text = "Je me débrouille"; ObjectID = "OHd-Jf-sPj"; */
+"OHd-Jf-sPj.text" = "Je me débrouille";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ObU-0X-WWU"; */
+"ObU-0X-WWU.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Je me débrouille"; ObjectID = "Ojm-rB-TxJ"; */
+"Ojm-rB-TxJ.text" = "Je me débrouille";
+
+/* Class = "UIButton"; normalTitle = "ANNULER"; ObjectID = "OqF-dm-84C"; */
+"OqF-dm-84C.normalTitle" = "ANNULER";
+
+/* Class = "UITextField"; placeholder = "  Mot de passe"; ObjectID = "OwO-do-8JO"; */
+"OwO-do-8JO.placeholder" = "  Mot de passe";
+
+/* Class = "UIButton"; normalTitle = "PASSER LE TEST"; ObjectID = "PBN-bE-OU1"; */
+"PBN-bE-OU1.normalTitle" = "PASSER LE TEST";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "PG4-ro-5j9"; */
+"PG4-ro-5j9.text" = "Enregistre-toi ici";
+
+/* Class = "UIViewController"; title = "Profile Gamification"; ObjectID = "PSG-Ij-Dgh"; */
+"PSG-Ij-Dgh.title" = "Profile Gamification";
+
+/* Class = "UILabel"; text = "Obtenu !"; ObjectID = "PUe-qf-qPa"; */
+"PUe-qf-qPa.text" = "Obtenu !";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 2"; ObjectID = "PWm-dJ-lZZ"; */
+"PWm-dJ-lZZ.text" = "ACTIVITÉ 2";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "Pw3-AH-MEW"; */
+"Pw3-AH-MEW.title" = "Test";
+
+/* Class = "UILabel"; text = "Comment penses-tu pouvoir utiliser ton environnement quotidien (social, naturel, virtuel, culturel, etc.) pour proposer des interactions et des activités originales avec un smartphone ?"; ObjectID = "Q2X-5p-4WH"; */
+"Q2X-5p-4WH.text" = "Comment penses-tu pouvoir utiliser ton environnement quotidien (social, naturel, virtuel, culturel, etc.) pour proposer des interactions et des activités originales avec un smartphone ?";
+
+/* Class = "UILabel"; text = "Envoyée !"; ObjectID = "QEH-WD-hFn"; */
+"QEH-WD-hFn.text" = "Envoyée !";
+
+/* Class = "UIBarButtonItem"; title = "modifier"; ObjectID = "QGx-fN-U1J"; */
+"QGx-fN-U1J.title" = "modifier";
+
+/* Class = "UITextView"; text = "nome do item"; ObjectID = "QUc-Zj-bSB"; */
+"QUc-Zj-bSB.text" = "nome do item";
+
+/* Class = "UIButton"; normalTitle = "Suivre"; ObjectID = "Qnk-xl-iYN"; */
+"Qnk-xl-iYN.normalTitle" = "Suivre";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "QoI-gy-pZt"; */
+"QoI-gy-pZt.title" = "Envoyer";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "Qpk-FB-qFb"; */
+"Qpk-FB-qFb.title" = "Envoyer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Qu0-AO-Its"; */
+"Qu0-AO-Its.normalTitle" = "Button";
+
+/* Class = "UIViewController"; title = "test3act1OK"; ObjectID = "RNw-mg-wpJ"; */
+"RNw-mg-wpJ.title" = "test3act1OK";
+
+/* Class = "UINavigationItem"; title = "Mot"; ObjectID = "ReM-HE-eJV"; */
+"ReM-HE-eJV.title" = "Mot";
+
+/* Class = "UILabel"; text = "Nível de iniciação para aprendentes que têm noções básicas em francês: apresentar-se, fazer perguntas e dar respostas simples, descrever brevemente pessoas, lugares, coisas, dominar o vocabulário básico (cores, alguns números)... Este nível corresponde ao A1 do QECR."; ObjectID = "Rmm-AD-GMr"; */
+"Rmm-AD-GMr.text" = "Nível de iniciação para aprendentes que têm noções básicas em francês: apresentar-se, fazer perguntas e dar respostas simples, descrever brevemente pessoas, lugares, coisas, dominar o vocabulário básico (cores, alguns números)... Este nível corresponde ao A1 do QECR.";
+
+/* Class = "UILabel"; text = "Un touriste veut trouver un bon restaurant avec un prix raisonnable. Conseille-lui le meilleur de la ville !"; ObjectID = "RuW-CC-wp4"; */
+"RuW-CC-wp4.text" = "Un touriste veut trouver un bon restaurant avec un prix raisonnable. Conseille-lui le meilleur de la ville !";
+
+/* Class = "UILabel"; text = "Le badge navire de pirate a été obtenu ! Prochaine étape : le gouvernail !"; ObjectID = "S6W-oU-Pul"; */
+"S6W-oU-Pul.text" = "Le badge navire de pirate a été obtenu ! Prochaine étape : le gouvernail !";
+
+/* Class = "UIBarButtonItem"; title = "tests"; ObjectID = "SOc-Op-986"; */
+"SOc-Op-986.title" = "tests";
+
+/* Class = "UIViewController"; title = "testMact3"; ObjectID = "SSI-zn-Syy"; */
+"SSI-zn-Syy.title" = "testMact3";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 2"; ObjectID = "SSK-Eg-Jwp"; */
+"SSK-Eg-Jwp.text" = "ACTIVITÉ 2";
+
+/* Class = "UILabel"; text = "Désactivées"; ObjectID = "Se5-fM-Pt2"; */
+"Se5-fM-Pt2.text" = "Désactivées";
+
+/* Class = "UIButton"; normalTitle = "PASSER LE TEST"; ObjectID = "T0X-h8-r2f"; */
+"T0X-h8-r2f.normalTitle" = "PASSER LE TEST";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 3"; ObjectID = "TC4-U0-CHw"; */
+"TC4-U0-CHw.text" = "ACTIVITÉ 3";
+
+/* Class = "UINavigationItem"; title = "Niveaux"; ObjectID = "TEo-Lh-TuR"; */
+"TEo-Lh-TuR.title" = "Niveaux";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "TMC-jy-MWi"; */
+"TMC-jy-MWi.title" = "retour";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "TaK-ex-N4K"; */
+"TaK-ex-N4K.text" = "ACTIVITÉ 1";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "Typ-4Q-9th"; */
+"Typ-4Q-9th.title" = "Test";
+
+/* Class = "UILabel"; text = "Quand tu obtiens un nouveau badge et que tu débloques une fonctionnalíté"; ObjectID = "U4k-nk-Twq"; */
+"U4k-nk-Twq.text" = "Quand tu obtiens un nouveau badge et que tu débloques une fonctionnalíté";
+
+/* Class = "UITextField"; placeholder = "Indiquer le nouvel email ici"; ObjectID = "UB4-Ds-ZSB"; */
+"UB4-Ds-ZSB.placeholder" = "Indiquer le nouvel email ici";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "UCs-1f-KMZ"; */
+"UCs-1f-KMZ.normalTitle" = "Clear";
+
+/* Class = "UIViewController"; title = "test4act2"; ObjectID = "UFD-U1-ICa"; */
+"UFD-U1-ICa.title" = "test4act2";
+
+/* Class = "UITextField"; placeholder = "Insérer un titre"; ObjectID = "UGh-wp-xma"; */
+"UGh-wp-xma.placeholder" = "Insérer un titre";
+
+/* Class = "UILabel"; text = "Confirmation du nouveau mot de passe"; ObjectID = "UH9-tc-uOC"; */
+"UH9-tc-uOC.text" = "Confirmation du nouveau mot de passe";
+
+/* Class = "UILabel"; text = "Chaque fois que quelqu'un commente un de tes posts ou un post de tes contacts auquel tu participes"; ObjectID = "UKH-ow-eHU"; */
+"UKH-ow-eHU.text" = "Chaque fois que quelqu'un commente un de tes posts ou un post de tes contacts auquel tu participes";
+
+/* Class = "UINavigationController"; title = "menu_testes"; ObjectID = "Ubn-Gv-HlG"; */
+"Ubn-Gv-HlG.title" = "menu_testes";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 5"; ObjectID = "UoZ-0v-qap"; */
+"UoZ-0v-qap.text" = "ACTIVITÉ 5";
+
+/* Class = "UILabel"; text = "28"; ObjectID = "Usq-W9-MwO"; */
+"Usq-W9-MwO.text" = "28";
+
+/* Class = "UILabel"; text = "Nationalité"; ObjectID = "VIF-GK-qWb"; */
+"VIF-GK-qWb.text" = "Nationalité";
+
+/* Class = "UILabel"; text = "Activité 7"; ObjectID = "VXo-S9-K4j"; */
+"VXo-S9-K4j.text" = "Activité 7";
+
+/* Class = "UILabel"; text = "Tu es en train de visiter un appartement. Quelles informations tu demandes au propriétaire ?"; ObjectID = "Vdh-Lh-1MD"; */
+"Vdh-Lh-1MD.text" = "Tu es en train de visiter un appartement. Quelles informations tu demandes au propriétaire ?";
+
+/* Class = "UIViewController"; title = "testMact2"; ObjectID = "Vf0-QK-4Lh"; */
+"Vf0-QK-4Lh.title" = "testMact2";
+
+/* Class = "UILabel"; text = "00:23"; ObjectID = "Vg5-Si-KxD"; */
+"Vg5-Si-KxD.text" = "00:23";
+
+/* Class = "UIViewController"; title = "test2act1"; ObjectID = "VqU-oS-K8c"; */
+"VqU-oS-K8c.title" = "test2act1";
+
+/* Class = "UILabel"; text = "caractères"; ObjectID = "W40-3b-fhg"; */
+"W40-3b-fhg.text" = "caractères";
+
+/* Class = "UILabel"; text = "Validée"; ObjectID = "WQv-M6-qtX"; */
+"WQv-M6-qtX.text" = "Validée";
+
+/* Class = "UILabel"; text = "Sollicitations de suivi"; ObjectID = "WaX-rC-Yqy"; */
+"WaX-rC-Yqy.text" = "Sollicitations de suivi";
+
+/* Class = "UILabel"; text = "Tu aimes faire"; ObjectID = "WbH-MJ-o87"; */
+"WbH-MJ-o87.text" = "Tu aimes faire";
+
+/* Class = "UINavigationItem"; title = "Niveau M"; ObjectID = "WeW-Ch-hhZ"; */
+"WeW-Ch-hhZ.title" = "Niveau M";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wfp-kg-K1y"; */
+"Wfp-kg-K1y.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Fermer"; ObjectID = "X8p-QG-V29"; */
+"X8p-QG-V29.title" = "Fermer";
+
+/* Class = "UILabel"; text = "Tags"; ObjectID = "XOH-gv-7Gj"; */
+"XOH-gv-7Gj.text" = "Tags";
+
+/* Class = "UIViewController"; title = "test_1_inicial"; ObjectID = "XZi-Et-4kD"; */
+"XZi-Et-4kD.title" = "test_1_inicial";
+
+/* Class = "UILabel"; text = "Je veux être médiateur"; ObjectID = "XbB-kb-Hjb"; */
+"XbB-kb-Hjb.text" = "Je veux être médiateur";
+
+/* Class = "UIViewController"; title = "test3act3"; ObjectID = "Xbc-3T-8S5"; */
+"Xbc-3T-8S5.title" = "test3act3";
+
+/* Class = "UILabel"; text = "Je veux être médiateur"; ObjectID = "Xbe-sR-nU3"; */
+"Xbe-sR-nU3.text" = "Je veux être médiateur";
+
+/* Class = "UILabel"; text = "Fais la description simple d'un(e) ami(e) ou de quelqu'un de ta famille."; ObjectID = "XcB-dX-CIf"; */
+"XcB-dX-CIf.text" = "Fais la description simple d'un(e) ami(e) ou de quelqu'un de ta famille.";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "Xnl-pp-zrw"; */
+"Xnl-pp-zrw.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Commentaire(s)"; ObjectID = "Y46-t9-jCa"; */
+"Y46-t9-jCa.text" = "Commentaire(s)";
+
+/* Class = "UIViewController"; title = "avaliacoes_mediador"; ObjectID = "YCa-uo-yqo"; */
+"YCa-uo-yqo.title" = "avaliacoes_mediador";
+
+/* Class = "UITextView"; text = "#tags"; ObjectID = "YIT-bN-XFQ"; */
+"YIT-bN-XFQ.text" = "#tags";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "YPR-lu-gd7"; */
+"YPR-lu-gd7.title" = "Test";
+
+/* Class = "UIViewController"; title = "test2act4"; ObjectID = "YUT-TO-Clw"; */
+"YUT-TO-Clw.title" = "test2act4";
+
+/* Class = "UILabel"; text = "Fonction XXXXXXX débloquée."; ObjectID = "YUm-Ky-mQ7"; */
+"YUm-Ky-mQ7.text" = "Fonction XXXXXXX débloquée.";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "YYp-iX-9tm"; */
+"YYp-iX-9tm.text" = "Enregistre-toi ici";
+
+/* Class = "UITextView"; text = "Comentários"; ObjectID = "YaG-hU-ehu"; */
+"YaG-hU-ehu.text" = "Comentários";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 7"; ObjectID = "Ye5-qb-ndi"; */
+"Ye5-qb-ndi.text" = "ACTIVITÉ 7";
+
+/* Class = "UILabel"; text = "Para aprendentes que têm boas bases em francês: falar brevemente de assuntos familiares, passados ou futuros, pedir informações em contextos cotidianos ou turísticos... Este nível corresponde ao A2 do QECR."; ObjectID = "YeK-eG-RSr"; */
+"YeK-eG-RSr.text" = "Para aprendentes que têm boas bases em francês: falar brevemente de assuntos familiares, passados ou futuros, pedir informações em contextos cotidianos ou turísticos... Este nível corresponde ao A2 do QECR.";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "YhL-r7-OKt"; */
+"YhL-r7-OKt.title" = "Envoyer";
+
+/* Class = "UIBarButtonItem"; title = "Annuler"; ObjectID = "Yvo-6i-uQs"; */
+"Yvo-6i-uQs.title" = "Annuler";
+
+/* Class = "UILabel"; text = "Nível elementar para aprendentes que têm boas bases em francês: falar brevemente de assuntos familiares, passados ou futuros, pedir informações em contextos cotidianos ou turísticos... Este nível corresponde ao A2 do QECR."; ObjectID = "Yz3-Wd-DUo"; */
+"Yz3-Wd-DUo.text" = "Nível elementar para aprendentes que têm boas bases em francês: falar brevemente de assuntos familiares, passados ou futuros, pedir informações em contextos cotidianos ou turísticos... Este nível corresponde ao A2 do QECR.";
+
+/* Class = "UIButton"; normalTitle = "REFAIRE L'ACTIVITÉ"; ObjectID = "Z1x-yK-iE6"; */
+"Z1x-yK-iE6.normalTitle" = "REFAIRE L'ACTIVITÉ";
+
+/* Class = "UIViewController"; title = "test2act8"; ObjectID = "Z6J-2F-gVW"; */
+"Z6J-2F-gVW.title" = "test2act8";
+
+/* Class = "UIBarButtonItem"; title = "Annuler"; ObjectID = "ZSr-z1-xcY"; */
+"ZSr-z1-xcY.title" = "Annuler";
+
+/* Class = "UIViewController"; title = "test2act1sent"; ObjectID = "Zc2-Ad-e0V"; */
+"Zc2-Ad-e0V.title" = "test2act1sent";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "ZhR-Ei-iAV"; */
+"ZhR-Ei-iAV.title" = "Test";
+
+/* Class = "UILabel"; text = "Nível de alta proficiência em francês, para locutores que podem ser nativos ou não, professores ou não, e que têm interesse em \"mediar\" as interações que acontecem no MapLango: dar um apoio linguístico e cultural aos aprendentes. Este nível corresponde ao C1 e ao C2 do QECR."; ObjectID = "ZvY-iQ-N3E"; */
+"ZvY-iQ-N3E.text" = "Nível de alta proficiência em francês, para locutores que podem ser nativos ou não, professores ou não, e que têm interesse em \"mediar\" as interações que acontecem no MapLango: dar um apoio linguístico e cultural aos aprendentes. Este nível corresponde ao C1 e ao C2 do QECR.";
+
+/* Class = "UIBarButtonItem"; title = "Confirmer"; ObjectID = "a3W-m4-lgD"; */
+"a3W-m4-lgD.title" = "Confirmer";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 6"; ObjectID = "aAu-Gf-Yz9"; */
+"aAu-Gf-Yz9.text" = "ACTIVITÉ 6";
+
+/* Class = "UILabel"; text = "Ajoute l'image ici"; ObjectID = "aAy-tn-neU"; */
+"aAy-tn-neU.text" = "Ajoute l'image ici";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "abd-OZ-YSE"; */
+"abd-OZ-YSE.text" = "1";
+
+/* Class = "UIBarButtonItem"; title = "Annuler"; ObjectID = "acU-pL-iFf"; */
+"acU-pL-iFf.title" = "Annuler";
+
+/* Class = "UILabel"; text = "\"Je va visité un appartement avec une ami. Quelles informations sont importantes pour demandé ?"; ObjectID = "aif-a8-bAb"; */
+"aif-a8-bAb.text" = "\"Je va visité un appartement avec une ami. Quelles informations sont importantes pour demandé ?";
+
+/* Class = "UINavigationItem"; title = "Nome usuário"; ObjectID = "av4-Sk-yAc"; */
+"av4-Sk-yAc.title" = "Nome usuário";
+
+/* Class = "UILabel"; text = "16"; ObjectID = "axQ-bs-cYd"; */
+"axQ-bs-cYd.text" = "16";
+
+/* Class = "UILabel"; text = "Félicitations !"; ObjectID = "az3-SP-Id5"; */
+"az3-SP-Id5.text" = "Félicitations !";
+
+/* Class = "UILabel"; text = "Texte"; ObjectID = "b0H-XL-BXg"; */
+"b0H-XL-BXg.text" = "Texte";
+
+/* Class = "UILabel"; text = "10/12/2015"; ObjectID = "b40-rr-UZ4"; */
+"b40-rr-UZ4.text" = "10/12/2015";
+
+/* Class = "UILabel"; text = "Poste la photo de ton monument préféré et décris-le."; ObjectID = "bA0-RZ-zMg"; */
+"bA0-RZ-zMg.text" = "Poste la photo de ton monument préféré et décris-le.";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "bBd-Hx-5qR"; */
+"bBd-Hx-5qR.title" = "Test";
+
+/* Class = "UILabel"; text = "/150"; ObjectID = "bCO-8M-E0F"; */
+"bCO-8M-E0F.text" = "/150";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "bJ1-zn-J0R"; */
+"bJ1-zn-J0R.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "BRÉSIL"; ObjectID = "bKn-od-7XU"; */
+"bKn-od-7XU.text" = "BRÉSIL";
+
+/* Class = "UIButton"; normalTitle = "Retour à la carte"; ObjectID = "bKw-K0-RZZ"; */
+"bKw-K0-RZZ.normalTitle" = "Retour à la carte";
+
+/* Class = "UILabel"; text = "Où se trouve-t-elle ?"; ObjectID = "bO8-mP-mMT"; */
+"bO8-mP-mMT.text" = "Où se trouve-t-elle ?";
+
+/* Class = "UILabel"; text = "Nom d'utilisateur"; ObjectID = "baD-xk-rGs"; */
+"baD-xk-rGs.text" = "Nom d'utilisateur";
+
+/* Class = "UIBarButtonItem"; title = "Confirmer"; ObjectID = "bfr-IT-mPW"; */
+"bfr-IT-mPW.title" = "Confirmer";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 7"; ObjectID = "bky-B5-UBb"; */
+"bky-B5-UBb.text" = "ACTIVITÉ 7";
+
+/* Class = "UINavigationItem"; title = "Niveau 2"; ObjectID = "bma-JL-qJZ"; */
+"bma-JL-qJZ.title" = "Niveau 2";
+
+/* Class = "UILabel"; text = "Déconnexion"; ObjectID = "bpP-99-cNP"; */
+"bpP-99-cNP.text" = "Déconnexion";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "bsu-Fm-BDH"; */
+"bsu-Fm-BDH.normalTitle" = "Clear";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "bvm-4z-Lbo"; */
+"bvm-4z-Lbo.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Félicitations !"; ObjectID = "c2G-uA-nTy"; */
+"c2G-uA-nTy.text" = "Félicitations !";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "cBK-yP-hbu"; */
+"cBK-yP-hbu.title" = "Envoyer";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "cBy-ih-gQ5"; */
+"cBy-ih-gQ5.title" = "Test";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "cOX-Rk-sKB"; */
+"cOX-Rk-sKB.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Publier"; ObjectID = "cRH-HS-tEx"; */
+"cRH-HS-tEx.normalTitle" = "Publier";
+
+/* Class = "UILabel"; text = "Que vas-tu faire ce weekend ? (attention aux prévisions de la météo)"; ObjectID = "cSl-9k-ifV"; */
+"cSl-9k-ifV.text" = "Que vas-tu faire ce weekend ? (attention aux prévisions de la météo)";
+
+/* Class = "UILabel"; text = "Notifications (push)"; ObjectID = "cnB-9q-IQg"; */
+"cnB-9q-IQg.text" = "Notifications (push)";
+
+/* Class = "UINavigationItem"; title = "Niveau 3"; ObjectID = "d1V-sm-set"; */
+"d1V-sm-set.title" = "Niveau 3";
+
+/* Class = "UILabel"; text = "Non validée"; ObjectID = "d7y-tE-Su0"; */
+"d7y-tE-Su0.text" = "Non validée";
+
+/* Class = "UILabel"; text = "suiveurs"; ObjectID = "dCB-bO-4bP"; */
+"dCB-bO-4bP.text" = "suiveurs";
+
+/* Class = "UILabel"; text = "Activité 8"; ObjectID = "dEn-UW-vJP"; */
+"dEn-UW-vJP.text" = "Activité 8";
+
+/* Class = "UILabel"; text = "Chaque fois qu'un utilisateur ou une utilisatrice de MapLango demande à te suivre"; ObjectID = "dMt-E6-ctE"; */
+"dMt-E6-ctE.text" = "Chaque fois qu'un utilisateur ou une utilisatrice de MapLango demande à te suivre";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dar-Kt-SyT"; */
+"dar-Kt-SyT.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Insère la description ici..."; ObjectID = "drO-Nj-YAP"; */
+"drO-Nj-YAP.placeholder" = "Insère la description ici...";
+
+/* Class = "UIBarButtonItem"; title = "tests"; ObjectID = "e2H-Wd-sMK"; */
+"e2H-Wd-sMK.title" = "tests";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "e4m-rU-kPy"; */
+"e4m-rU-kPy.text" = "ACTIVITÉ 1";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "e8Y-Jm-dhs"; */
+"e8Y-Jm-dhs.title" = "Test";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 7"; ObjectID = "eEJ-3l-xVb"; */
+"eEJ-3l-xVb.text" = "ACTIVITÉ 7";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eNX-c1-EaC"; */
+"eNX-c1-EaC.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "ecc-Sm-sRp"; */
+"ecc-Sm-sRp.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Validée"; ObjectID = "ehI-uF-Rfy"; */
+"ehI-uF-Rfy.text" = "Validée";
+
+/* Class = "UILabel"; text = "Aide"; ObjectID = "eol-qi-cRQ"; */
+"eol-qi-cRQ.text" = "Aide";
+
+/* Class = "UILabel"; text = "caractères"; ObjectID = "f4A-Zy-fPP"; */
+"f4A-Zy-fPP.text" = "caractères";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "f53-FH-tSe"; */
+"f53-FH-tSe.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "Email actuel"; ObjectID = "fBW-6S-Rd1"; */
+"fBW-6S-Rd1.text" = "Email actuel";
+
+/* Class = "UINavigationItem"; title = "Configurations"; ObjectID = "fD9-7Q-daQ"; */
+"fD9-7Q-daQ.title" = "Configurations";
+
+/* Class = "UILabel"; text = "posts"; ObjectID = "fG1-nk-HLM"; */
+"fG1-nk-HLM.text" = "posts";
+
+/* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "fJr-pH-rhw"; */
+"fJr-pH-rhw.title" = "Notifications";
+
+/* Class = "UILabel"; text = "Nível limiar para aprendentes que começam a ser independentes em francês: contar experiências passadas e futuras, dar uma opinião ou um conselho, estar à vontade\nem conversações relativas a interesses pessoais... Este nível corresponde ao B1 do QECR."; ObjectID = "fKI-85-jtc"; */
+"fKI-85-jtc.text" = "Nível limiar para aprendentes que começam a ser independentes em francês: contar experiências passadas e futuras, dar uma opinião ou um conselho, estar à vontade\nem conversações relativas a interesses pessoais... Este nível corresponde ao B1 do QECR.";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "fSc-a8-pmT"; */
+"fSc-a8-pmT.title" = "Envoyer";
+
+/* Class = "UIBarButtonItem"; title = "Continuer"; ObjectID = "fYr-ez-FLK"; */
+"fYr-ez-FLK.title" = "Continuer";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "fYx-Ko-Mav"; */
+"fYx-Ko-Mav.text" = "ACTIVITÉ 1";
+
+/* Class = "UITextField"; placeholder = "Insérer un petit texte de présentation"; ObjectID = "fp7-jZ-ckw"; */
+"fp7-jZ-ckw.placeholder" = "Insérer un petit texte de présentation";
+
+/* Class = "UILabel"; text = "Ajouter de l'audio ?"; ObjectID = "g6l-8G-3NC"; */
+"g6l-8G-3NC.text" = "Ajouter de l'audio ?";
+
+/* Class = "UINavigationItem"; title = "Contacts"; ObjectID = "g73-6B-Rpp"; */
+"g73-6B-Rpp.title" = "Contacts";
+
+/* Class = "UIButton"; normalTitle = "Activités"; ObjectID = "gDX-8n-cxA"; */
+"gDX-8n-cxA.normalTitle" = "Activités";
+
+/* Class = "UINavigationItem"; title = "Niveau 2"; ObjectID = "gEU-6B-Hoq"; */
+"gEU-6B-Hoq.title" = "Niveau 2";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "gfL-ad-hpO"; */
+"gfL-ad-hpO.text" = "ACTIVITÉ 1";
+
+/* Class = "UITextField"; placeholder = "Confirmer le nouveau mot de passe ici"; ObjectID = "gg0-fd-RJp"; */
+"gg0-fd-RJp.placeholder" = "Confirmer le nouveau mot de passe ici";
+
+/* Class = "UILabel"; text = "Biographie"; ObjectID = "gqI-bU-qaX"; */
+"gqI-bU-qaX.text" = "Biographie";
+
+/* Class = "UIButton"; normalTitle = "JE ME CONNECTE"; ObjectID = "gwM-1Z-tDq"; */
+"gwM-1Z-tDq.normalTitle" = "JE ME CONNECTE";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "h1e-rb-Id8"; */
+"h1e-rb-Id8.normalTitle" = "Clear";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "hHG-x7-rfU"; */
+"hHG-x7-rfU.title" = "Test";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "hLX-HT-Utn"; */
+"hLX-HT-Utn.text" = "ACTIVITÉ 1";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "ha1-pQ-HIL"; */
+"ha1-pQ-HIL.title" = "Test";
+
+/* Class = "UILabel"; text = "Un locuteur du niveau 3 a publié le post suivant :"; ObjectID = "heo-Mv-4zF"; */
+"heo-Mv-4zF.text" = "Un locuteur du niveau 3 a publié le post suivant :";
+
+/* Class = "UITextField"; placeholder = "Écris ton texte ici..."; ObjectID = "hlp-2c-Kl8"; */
+"hlp-2c-Kl8.placeholder" = "Écris ton texte ici...";
+
+/* Class = "UILabel"; text = "Quelle catégorie de post veux-tu publier ?"; ObjectID = "hnT-cQ-R9i"; */
+"hnT-cQ-R9i.text" = "Quelle catégorie de post veux-tu publier ?";
+
+/* Class = "UILabel"; text = "Publications de ta communauté"; ObjectID = "hwJ-15-Naq"; */
+"hwJ-15-Naq.text" = "Publications de ta communauté";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "i18-mt-3xV"; */
+"i18-mt-3xV.title" = "Test";
+
+/* Class = "UILabel"; text = "Activité 4"; ObjectID = "i72-1f-1GX"; */
+"i72-1f-1GX.text" = "Activité 4";
+
+/* Class = "UIViewController"; title = "test3act5"; ObjectID = "iGS-jb-2Q4"; */
+"iGS-jb-2Q4.title" = "test3act5";
+
+/* Class = "UILabel"; text = "Nível elementar para aprendentes que têm boas bases em francês: falar brevemente de assuntos familiares, passados ou futuros, pedir informações em contextos cotidianos ou turísticos... Este nível corresponde ao A2 do QECR."; ObjectID = "iLc-nM-RkB"; */
+"iLc-nM-RkB.text" = "Nível elementar para aprendentes que têm boas bases em francês: falar brevemente de assuntos familiares, passados ou futuros, pedir informações em contextos cotidianos ou turísticos... Este nível corresponde ao A2 do QECR.";
+
+/* Class = "UILabel"; text = "Obtenu !"; ObjectID = "iUH-C9-RCm"; */
+"iUH-C9-RCm.text" = "Obtenu !";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "ia7-8l-blZ"; */
+"ia7-8l-blZ.title" = "Test";
+
+/* Class = "UILabel"; text = "Vous avez gagné"; ObjectID = "ics-WH-hIJ"; */
+"ics-WH-hIJ.text" = "Vous avez gagné";
+
+/* Class = "UINavigationItem"; title = "Nouvelle publication"; ObjectID = "iql-Gf-wCD"; */
+"iql-Gf-wCD.title" = "Nouvelle publication";
+
+/* Class = "UILabel"; text = "Mentions \"coup de coeur\""; ObjectID = "jFG-Gt-lh6"; */
+"jFG-Gt-lh6.text" = "Mentions \"coup de coeur\"";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 3"; ObjectID = "jFX-EX-zoC"; */
+"jFX-EX-zoC.text" = "ACTIVITÉ 3";
+
+/* Class = "UILabel"; text = "Un peu de patience :)"; ObjectID = "jVX-jW-pt0"; */
+"jVX-jW-pt0.text" = "Un peu de patience :)";
+
+/* Class = "UILabel"; text = "Mot de passe actuel"; ObjectID = "jjX-Rj-GAQ"; */
+"jjX-Rj-GAQ.text" = "Mot de passe actuel";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "jjX-Wf-ukR"; */
+"jjX-Wf-ukR.title" = "Test";
+
+/* Class = "UINavigationItem"; title = "Niveau 3"; ObjectID = "jvy-NH-juV"; */
+"jvy-NH-juV.title" = "Niveau 3";
+
+/* Class = "UILabel"; text = "Enregistre ton avis ici"; ObjectID = "jzT-Ry-LAZ"; */
+"jzT-Ry-LAZ.text" = "Enregistre ton avis ici";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "k40-Jy-Pwy"; */
+"k40-Jy-Pwy.title" = "retour";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "k9M-IP-OJW"; */
+"k9M-IP-OJW.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "kAb-o9-yua"; */
+"kAb-o9-yua.title" = "Test";
+
+/* Class = "UILabel"; text = "Je suis sur MapLango pour pratiquer le français et partager avec vous des éléments culturels de ma ville au Brésil, Brasília."; ObjectID = "kIR-o5-dA0"; */
+"kIR-o5-dA0.text" = "Je suis sur MapLango pour pratiquer le français et partager avec vous des éléments culturels de ma ville au Brésil, Brasília.";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "kJo-Eu-2yM"; */
+"kJo-Eu-2yM.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "kNq-Q0-ICC"; */
+"kNq-Q0-ICC.title" = "Test";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "kTN-nO-kkE"; */
+"kTN-nO-kkE.title" = "Test";
+
+/* Class = "UINavigationItem"; title = "Confirmer post"; ObjectID = "kW4-kX-yKq"; */
+"kW4-kX-yKq.title" = "Confirmer post";
+
+/* Class = "UIViewController"; title = "testMact4"; ObjectID = "kWM-6d-GdH"; */
+"kWM-6d-GdH.title" = "testMact4";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 8"; ObjectID = "kdi-5w-sQU"; */
+"kdi-5w-sQU.text" = "ACTIVITÉ 8";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 8"; ObjectID = "l5E-m7-LT7"; */
+"l5E-m7-LT7.text" = "ACTIVITÉ 8";
+
+/* Class = "UIViewController"; title = "test_mediador_inicial"; ObjectID = "l5u-le-qA6"; */
+"l5u-le-qA6.title" = "test_mediador_inicial";
+
+/* Class = "UILabel"; text = "Envoyée !"; ObjectID = "l6Y-Tm-cng"; */
+"l6Y-Tm-cng.text" = "Envoyée !";
+
+/* Class = "UIViewController"; title = "test3act6"; ObjectID = "lAV-qw-Pv5"; */
+"lAV-qw-Pv5.title" = "test3act6";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "lBM-wl-kEr"; */
+"lBM-wl-kEr.title" = "Test";
+
+/* Class = "UIViewController"; title = "test_4_inicial"; ObjectID = "lKh-t8-mMu"; */
+"lKh-t8-mMu.title" = "test_4_inicial";
+
+/* Class = "UILabel"; text = "- Salut ça va ?"; ObjectID = "lL3-tg-RU4"; */
+"lL3-tg-RU4.text" = "- Salut ça va ?";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "lQe-g4-kTJ"; */
+"lQe-g4-kTJ.text" = "ACTIVITÉ 1";
+
+/* Class = "UITextField"; placeholder = "Insère la description ici..."; ObjectID = "lQu-1b-8t4"; */
+"lQu-1b-8t4.placeholder" = "Insère la description ici...";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "lW7-Ib-QNS"; */
+"lW7-Ib-QNS.text" = "Enregistre-toi ici";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, "; ObjectID = "lWP-Fg-OOg"; */
+"lWP-Fg-OOg.text" = "Lorem ipsum dolor sit er elit lamet, ";
+
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "lar-Gy-ATu"; */
+"lar-Gy-ATu.normalTitle" = "Ok";
+
+/* Class = "UILabel"; text = "Activité 6"; ObjectID = "ld5-qz-XfD"; */
+"ld5-qz-XfD.text" = "Activité 6";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "lgO-wZ-8sJ"; */
+"lgO-wZ-8sJ.title" = "Test";
+
+/* Class = "UILabel"; text = "Envoyée !"; ObjectID = "lj2-ze-gwY"; */
+"lj2-ze-gwY.text" = "Envoyée !";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "lo1-CK-e6s"; */
+"lo1-CK-e6s.text" = "ACTIVITÉ 1";
+
+/* Class = "UIViewController"; title = "test4act5"; ObjectID = "lzS-X1-g9e"; */
+"lzS-X1-g9e.title" = "test4act5";
+
+/* Class = "UILabel"; text = "Poste la photo d'un transport moins cher que le taxi."; ObjectID = "lzl-Sg-g2c"; */
+"lzl-Sg-g2c.text" = "Poste la photo d'un transport moins cher que le taxi.";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "m8x-ck-j74"; */
+"m8x-ck-j74.title" = "Envoyer";
+
+/* Class = "UIBarButtonItem"; title = "Éditer"; ObjectID = "mFb-Cq-JpF"; */
+"mFb-Cq-JpF.title" = "Éditer";
+
+/* Class = "UINavigationItem"; title = "Nouveau"; ObjectID = "mO8-od-Jbw"; */
+"mO8-od-Jbw.title" = "Nouveau";
+
+/* Class = "UIViewController"; title = "confirmar_post"; ObjectID = "msY-w9-DsD"; */
+"msY-w9-DsD.title" = "confirmar_post";
+
+/* Class = "UILabel"; text = "samedi"; ObjectID = "mtB-nm-qEN"; */
+"mtB-nm-qEN.text" = "samedi";
+
+/* Class = "UILabel"; text = "28"; ObjectID = "nH8-lu-AyW"; */
+"nH8-lu-AyW.text" = "28";
+
+/* Class = "UINavigationItem"; title = "Post publié !"; ObjectID = "nN4-Wt-SyT"; */
+"nN4-Wt-SyT.title" = "Post publié !";
+
+/* Class = "UILabel"; text = "Ajouter de l'audio ?"; ObjectID = "not-FG-2tv"; */
+"not-FG-2tv.text" = "Ajouter de l'audio ?";
+
+/* Class = "UILabel"; text = "Tu sors du supermarché. Imagine 3 choses que tu viens d'acheter."; ObjectID = "nwg-MX-34m"; */
+"nwg-MX-34m.text" = "Tu sors du supermarché. Imagine 3 choses que tu viens d'acheter.";
+
+/* Class = "UILabel"; text = "30°C"; ObjectID = "o67-yd-1gL"; */
+"o67-yd-1gL.text" = "30°C";
+
+/* Class = "UILabel"; text = "Félicitations !"; ObjectID = "o6m-gd-Rk8"; */
+"o6m-gd-Rk8.text" = "Félicitations !";
+
+/* Class = "UILabel"; text = "Tu t'abonnes à la bibliothèque par téléphone. Écoute et réponds à chaque question."; ObjectID = "oZD-sK-mXK"; */
+"oZD-sK-mXK.text" = "Tu t'abonnes à la bibliothèque par téléphone. Écoute et réponds à chaque question.";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "od1-jS-h34"; */
+"od1-jS-h34.normalTitle" = "Clear";
+
+/* Class = "UISegmentedControl"; ogy-Lz-33H.segmentTitles[0] = "Apprenants"; ObjectID = "ogy-Lz-33H"; */
+"ogy-Lz-33H.segmentTitles[0]" = "Apprenants";
+
+/* Class = "UISegmentedControl"; ogy-Lz-33H.segmentTitles[1] = "Médiateurs"; ObjectID = "ogy-Lz-33H"; */
+"ogy-Lz-33H.segmentTitles[1]" = "Médiateurs";
+
+/* Class = "UIButton"; normalTitle = "INSCRIPTION"; ObjectID = "oiY-pH-B7H"; */
+"oiY-pH-B7H.normalTitle" = "INSCRIPTION";
+
+/* Class = "UITextField"; placeholder = "Mot de passe"; ObjectID = "oih-xf-PCV"; */
+"oih-xf-PCV.placeholder" = "Mot de passe";
+
+/* Class = "UIViewController"; title = "test3act8"; ObjectID = "oog-vW-82p"; */
+"oog-vW-82p.title" = "test3act8";
+
+/* Class = "UITableViewController"; title = "configuracoes"; ObjectID = "osb-fK-4fv"; */
+"osb-fK-4fv.title" = "configuracoes";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 6"; ObjectID = "ovp-RA-WIw"; */
+"ovp-RA-WIw.text" = "ACTIVITÉ 6";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 2"; ObjectID = "p3o-4B-vSh"; */
+"p3o-4B-vSh.text" = "ACTIVITÉ 2";
+
+/* Class = "UILabel"; text = "Poste l'image ici"; ObjectID = "p86-Ub-7ET"; */
+"p86-Ub-7ET.text" = "Poste l'image ici";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "p8a-dA-hJY"; */
+"p8a-dA-hJY.title" = "Test";
+
+/* Class = "UILabel"; text = "Je me débrouille"; ObjectID = "pBl-lj-Mdk"; */
+"pBl-lj-Mdk.text" = "Je me débrouille";
+
+/* Class = "UIViewController"; title = "test4act6"; ObjectID = "pEW-Qg-w3E"; */
+"pEW-Qg-w3E.title" = "test4act6";
+
+/* Class = "UIButton"; normalTitle = "CONNEXION"; ObjectID = "pIb-jg-e1h"; */
+"pIb-jg-e1h.normalTitle" = "CONNEXION";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "pIw-5p-H0V"; */
+"pIw-5p-H0V.title" = "Test";
+
+/* Class = "UIBarButtonItem"; title = "Confirmer"; ObjectID = "pJK-5V-XYe"; */
+"pJK-5V-XYe.title" = "Confirmer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "pSQ-uW-Uc3"; */
+"pSQ-uW-Uc3.normalTitle" = "Button";
+
+/* Class = "UIViewController"; title = "testMact1"; ObjectID = "pUn-o2-3Pm"; */
+"pUn-o2-3Pm.title" = "testMact1";
+
+/* Class = "UIViewController"; title = "test3act1sent"; ObjectID = "pxs-z4-TzY"; */
+"pxs-z4-TzY.title" = "test3act1sent";
+
+/* Class = "UILabel"; text = "Validée"; ObjectID = "pyZ-IS-iid"; */
+"pyZ-IS-iid.text" = "Validée";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "qHA-if-Izp"; */
+"qHA-if-Izp.title" = "Envoyer";
+
+/* Class = "UIViewController"; title = "test_mediador_inicial"; ObjectID = "qN3-qC-Dd1"; */
+"qN3-qC-Dd1.title" = "test_mediador_inicial";
+
+/* Class = "UIViewController"; title = "test4act1OK"; ObjectID = "qPe-ca-bUB"; */
+"qPe-ca-bUB.title" = "test4act1OK";
+
+/* Class = "UILabel"; text = "Quand quelqu'un a posté une activité, un défi, un doute ou une astuce près d'où tu te trouves"; ObjectID = "qQH-iy-JmK"; */
+"qQH-iy-JmK.text" = "Quand quelqu'un a posté une activité, un défi, un doute ou une astuce près d'où tu te trouves";
+
+/* Class = "UIViewController"; title = "test_3_ok"; ObjectID = "qRv-xr-QZY"; */
+"qRv-xr-QZY.title" = "test_3_ok";
+
+/* Class = "UILabel"; text = "Demande des nouvelles à un ami par sms."; ObjectID = "r5y-Qe-Ib7"; */
+"r5y-Qe-Ib7.text" = "Demande des nouvelles à un ami par sms.";
+
+/* Class = "UILabel"; text = "7°C"; ObjectID = "r7k-W2-og2"; */
+"r7k-W2-og2.text" = "7°C";
+
+/* Class = "UILabel"; text = "Editer le profil"; ObjectID = "rOu-rN-u5C"; */
+"rOu-rN-u5C.text" = "Editer le profil";
+
+/* Class = "UILabel"; text = "J'intéragis plutôt bien"; ObjectID = "rP4-go-vHx"; */
+"rP4-go-vHx.text" = "J'intéragis plutôt bien";
+
+/* Class = "UILabel"; text = "00:23"; ObjectID = "rUL-VN-Cje"; */
+"rUL-VN-Cje.text" = "00:23";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 4"; ObjectID = "rdx-t3-GmM"; */
+"rdx-t3-GmM.text" = "ACTIVITÉ 4";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "rgH-1K-E4G"; */
+"rgH-1K-E4G.title" = "Test";
+
+/* Class = "UILabel"; text = "points de"; ObjectID = "rhZ-YT-5fJ"; */
+"rhZ-YT-5fJ.text" = "points de";
+
+/* Class = "UILabel"; text = "Nível de alta proficiência em francês, para locutores que podem ser nativos ou não, professores ou não, e que têm interesse em \"mediar\" as interações que acontecem no MapLango: dar um apoio linguístico e cultural aos aprendentes. Este nível corresponde ao C1 e ao C2 do QECR."; ObjectID = "rwR-VP-lO3"; */
+"rwR-VP-lO3.text" = "Nível de alta proficiência em francês, para locutores que podem ser nativos ou não, professores ou não, e que têm interesse em \"mediar\" as interações que acontecem no MapLango: dar um apoio linguístico e cultural aos aprendentes. Este nível corresponde ao C1 e ao C2 do QECR.";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "rzj-2X-ooL"; */
+"rzj-2X-ooL.title" = "Test";
+
+/* Class = "UILabel"; text = "Ajouter une image ?"; ObjectID = "s79-0R-YPo"; */
+"s79-0R-YPo.text" = "Ajouter une image ?";
+
+/* Class = "UIViewController"; title = "testMact1sent"; ObjectID = "sBU-ai-EZp"; */
+"sBU-ai-EZp.title" = "testMact1sent";
+
+/* Class = "UILabel"; text = "Non validée"; ObjectID = "sC8-QY-lzY"; */
+"sC8-QY-lzY.text" = "Non validée";
+
+/* Class = "UIViewController"; title = "test_3_inicial"; ObjectID = "sEh-YO-tRy"; */
+"sEh-YO-tRy.title" = "test_3_inicial";
+
+/* Class = "UILabel"; text = "Commente sa publication :"; ObjectID = "sHw-kO-SgQ"; */
+"sHw-kO-SgQ.text" = "Commente sa publication :";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "sMH-5e-zZP"; */
+"sMH-5e-zZP.title" = "Test";
+
+/* Class = "UILabel"; text = "Un événement"; ObjectID = "sN0-id-elu"; */
+"sN0-id-elu.text" = "Un événement";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "sOO-OJ-oTl"; */
+"sOO-OJ-oTl.title" = "Envoyer";
+
+/* Class = "UITextView"; text = "Ce texte a une taille maximale de 150 caractères. C’est exactement la taille que fera le texte d’une publication lorsqu’elle atteindra les 150 caract."; ObjectID = "sQb-q1-sbn"; */
+"sQb-q1-sbn.text" = "Ce texte a une taille maximale de 150 caractères. C’est exactement la taille que fera le texte d’une publication lorsqu’elle atteindra les 150 caract.";
+
+/* Class = "UILabel"; text = "Je parle un petit peu"; ObjectID = "sSg-n5-Bnf"; */
+"sSg-n5-Bnf.text" = "Je parle un petit peu";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "scA-Jz-wTG"; */
+"scA-Jz-wTG.title" = "retour";
+
+/* Class = "UILabel"; text = "Tu viens d'acheter un vêtement. En rentrant chez toi, tu t'aperçois qu'il a un défaut. Tu retournes à la boutique et tu expliques la situation à la vendeuse ou au vendeur pour faire l'echange."; ObjectID = "skm-JL-Gbv"; */
+"skm-JL-Gbv.text" = "Tu viens d'acheter un vêtement. En rentrant chez toi, tu t'aperçois qu'il a un défaut. Tu retournes à la boutique et tu expliques la situation à la vendeuse ou au vendeur pour faire l'echange.";
+
+/* Class = "UILabel"; text = "Tu as rendez-vous avec quelqu'un. Il y a une grève des transports, donc tu vas avoir du retard. Laisse un message sur le répondeur de cette personne pour lui expliquer."; ObjectID = "smW-WU-Htm"; */
+"smW-WU-Htm.text" = "Tu as rendez-vous avec quelqu'un. Il y a une grève des transports, donc tu vas avoir du retard. Laisse un message sur le répondeur de cette personne pour lui expliquer.";
+
+/* Class = "UILabel"; text = "Nom d'utilisateur"; ObjectID = "tDr-NX-9rp"; */
+"tDr-NX-9rp.text" = "Nom d'utilisateur";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 6"; ObjectID = "tIo-1k-cs8"; */
+"tIo-1k-cs8.text" = "ACTIVITÉ 6";
+
+/* Class = "UINavigationItem"; title = "Commentaires"; ObjectID = "tdW-aY-ugj"; */
+"tdW-aY-ugj.title" = "Commentaires";
+
+/* Class = "UILabel"; text = "00:23"; ObjectID = "tdp-vl-ylf"; */
+"tdp-vl-ylf.text" = "00:23";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "tfA-al-aDo"; */
+"tfA-al-aDo.title" = "Test";
+
+/* Class = "UILabel"; text = "25"; ObjectID = "tgg-83-M5a"; */
+"tgg-83-M5a.text" = "25";
+
+/* Class = "UILabel"; text = "Quand un ou une de tes contacts a posté une activité, un défi, un doute ou une astuce près d'où tu te trouves"; ObjectID = "txf-oF-PJL"; */
+"txf-oF-PJL.text" = "Quand un ou une de tes contacts a posté une activité, un défi, un doute ou une astuce près d'où tu te trouves";
+
+/* Class = "UIViewController"; title = "test2act3"; ObjectID = "u95-cU-US6"; */
+"u95-cU-US6.title" = "test2act3";
+
+/* Class = "UILabel"; text = "Nível \"vantagem\" para aprendentes que são bem independentes em francês: interagir espontâneamente com locutores proficientes sobre uma grande variedade de temas, defender um ponto de vista, negociar... Este nível corresponde ao B2 do QECR."; ObjectID = "uHm-fF-qiT"; */
+"uHm-fF-qiT.text" = "Nível \"vantagem\" para aprendentes que são bem independentes em francês: interagir espontâneamente com locutores proficientes sobre uma grande variedade de temas, defender um ponto de vista, negociar... Este nível corresponde ao B2 do QECR.";
+
+/* Class = "UILabel"; text = "Enregistre-toi ici"; ObjectID = "uJf-Jr-Dv2"; */
+"uJf-Jr-Dv2.text" = "Enregistre-toi ici";
+
+/* Class = "UILabel"; text = "Activité 2"; ObjectID = "uRa-Tb-33o"; */
+"uRa-Tb-33o.text" = "Activité 2";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "uYs-3x-5CL"; */
+"uYs-3x-5CL.text" = "Title";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "uib-JJ-0Wp"; */
+"uib-JJ-0Wp.title" = "Back";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "ujZ-Cx-pQK"; */
+"ujZ-Cx-pQK.title" = "retour";
+
+/* Class = "UILabel"; text = "Poste l'image ici"; ObjectID = "usr-Tr-GDo"; */
+"usr-Tr-GDo.text" = "Poste l'image ici";
+
+/* Class = "UIBarButtonItem"; title = "Annuler"; ObjectID = "uyz-T6-Hwo"; */
+"uyz-T6-Hwo.title" = "Annuler";
+
+/* Class = "UITextField"; placeholder = "Insère la description ici..."; ObjectID = "v4O-Dz-Vaz"; */
+"v4O-Dz-Vaz.placeholder" = "Insère la description ici...";
+
+/* Class = "UILabel"; text = "Modifier le mot de passe"; ObjectID = "v9B-yo-7eR"; */
+"v9B-yo-7eR.text" = "Modifier le mot de passe";
+
+/* Class = "UITableViewSection"; headerTitle = "Dans l'application"; ObjectID = "vCn-0I-Wgf"; */
+"vCn-0I-Wgf.headerTitle" = "Dans l'application";
+
+/* Class = "UINavigationItem"; title = "Niveau M"; ObjectID = "vNu-4z-KbU"; */
+"vNu-4z-KbU.title" = "Niveau M";
+
+/* Class = "UILabel"; text = "Ajouter une image ?"; ObjectID = "vQS-i5-vVa"; */
+"vQS-i5-vVa.text" = "Ajouter une image ?";
+
+/* Class = "UILabel"; text = "Complète le dialogue"; ObjectID = "vYC-Bp-5ak"; */
+"vYC-Bp-5ak.text" = "Complète le dialogue";
+
+/* Class = "UIViewController"; title = "test4act3"; ObjectID = "vrR-qe-Odt"; */
+"vrR-qe-Odt.title" = "test4act3";
+
+/* Class = "UILabel"; text = "Cite quelque chose que :"; ObjectID = "vsr-ep-aiD"; */
+"vsr-ep-aiD.text" = "Cite quelque chose que :";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "vxE-ak-fNN"; */
+"vxE-ak-fNN.title" = "Test";
+
+/* Class = "UILabel"; text = "Nível \"vantagem\" para aprendentes que são bem independentes em francês: interagir espontâneamente com locutores proficientes sobre uma grande variedade de temas, defender um ponto de vista, negociar... Este nível corresponde ao B2 do QECR."; ObjectID = "wD6-AN-dEG"; */
+"wD6-AN-dEG.text" = "Nível \"vantagem\" para aprendentes que são bem independentes em francês: interagir espontâneamente com locutores proficientes sobre uma grande variedade de temas, defender um ponto de vista, negociar... Este nível corresponde ao B2 do QECR.";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "wHh-B0-347"; */
+"wHh-B0-347.text" = "ACTIVITÉ 1";
+
+/* Class = "UILabel"; text = "00:23"; ObjectID = "wL0-mX-wxb"; */
+"wL0-mX-wxb.text" = "00:23";
+
+/* Class = "UIButton"; normalTitle = "Je confirme !"; ObjectID = "wRK-ru-PXl"; */
+"wRK-ru-PXl.normalTitle" = "Je confirme !";
+
+/* Class = "UINavigationItem"; title = "Carnet"; ObjectID = "wSh-1S-EMc"; */
+"wSh-1S-EMc.title" = "Carnet";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wVd-oP-mGV"; */
+"wVd-oP-mGV.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Nationalité actuelle"; ObjectID = "wZC-D2-0T1"; */
+"wZC-D2-0T1.placeholder" = "Nationalité actuelle";
+
+/* Class = "UILabel"; text = "Nouvel email"; ObjectID = "whC-UW-v7e"; */
+"whC-UW-v7e.text" = "Nouvel email";
+
+/* Class = "UILabel"; text = "Écoute puis réponds à ces deux questions sur des événements passés."; ObjectID = "wuW-fm-vpo"; */
+"wuW-fm-vpo.text" = "Écoute puis réponds à ces deux questions sur des événements passés.";
+
+/* Class = "UILabel"; text = "Qu'est-ce qu'on peut y faire ?"; ObjectID = "x7O-oN-jR9"; */
+"x7O-oN-jR9.text" = "Qu'est-ce qu'on peut y faire ?";
+
+/* Class = "UILabel"; text = "Un défi"; ObjectID = "xHW-yT-bJW"; */
+"xHW-yT-bJW.text" = "Un défi";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "xPT-Cl-Uan"; */
+"xPT-Cl-Uan.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "xld-1G-uf1"; */
+"xld-1G-uf1.text" = "ACTIVITÉ 1";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 8"; ObjectID = "y4w-RG-rNg"; */
+"y4w-RG-rNg.text" = "ACTIVITÉ 8";
+
+/* Class = "UIBarButtonItem"; title = "retour"; ObjectID = "y6W-0u-FcD"; */
+"y6W-0u-FcD.title" = "retour";
+
+/* Class = "UILabel"; text = "Poste l'image d'un lieu où on achète de la nourriture."; ObjectID = "y7K-6A-1bt"; */
+"y7K-6A-1bt.text" = "Poste l'image d'un lieu où on achète de la nourriture.";
+
+/* Class = "UILabel"; text = "Post publié !"; ObjectID = "y9j-yD-cfP"; */
+"y9j-yD-cfP.text" = "Post publié !";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yFE-VB-Tdj"; */
+"yFE-VB-Tdj.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 1"; ObjectID = "yHS-Yn-vm9"; */
+"yHS-Yn-vm9.text" = "ACTIVITÉ 1";
+
+/* Class = "UILabel"; text = "Activité 1"; ObjectID = "yPK-Lu-HXm"; */
+"yPK-Lu-HXm.text" = "Activité 1";
+
+/* Class = "UITableViewSection"; headerTitle = "Notifications push (dans ta localisation)"; ObjectID = "ySI-UF-hQV"; */
+"ySI-UF-hQV.headerTitle" = "Notifications push (dans ta localisation)";
+
+/* Class = "UINavigationItem"; title = "Test"; ObjectID = "yTE-zk-ilW"; */
+"yTE-zk-ilW.title" = "Test";
+
+/* Class = "UIViewController"; title = "test4act4"; ObjectID = "yTk-Dc-qs4"; */
+"yTk-Dc-qs4.title" = "test4act4";
+
+/* Class = "UIViewController"; title = "test4act1redo"; ObjectID = "yUQ-iF-rgX"; */
+"yUQ-iF-rgX.title" = "test4act1redo";
+
+/* Class = "UILabel"; text = "Poste l'image d'une petite voiture rouge."; ObjectID = "yax-Ms-rtG"; */
+"yax-Ms-rtG.text" = "Poste l'image d'une petite voiture rouge.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yeD-UG-9vn"; */
+"yeD-UG-9vn.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Suiveurs"; ObjectID = "yv6-bd-xzO"; */
+"yv6-bd-xzO.title" = "Suiveurs";
+
+/* Class = "UIViewController"; title = "test_2_ok"; ObjectID = "z0N-bq-gU6"; */
+"z0N-bq-gU6.title" = "test_2_ok";
+
+/* Class = "UILabel"; text = "Obtenu !"; ObjectID = "z5I-n9-Xqe"; */
+"z5I-n9-Xqe.text" = "Obtenu !";
+
+/* Class = "UINavigationItem"; title = "Nouveau post"; ObjectID = "z8F-0L-hOF"; */
+"z8F-0L-hOF.title" = "Nouveau post";
+
+/* Class = "UILabel"; text = "Enregistre tes réponses ici"; ObjectID = "zFg-iC-pvF"; */
+"zFg-iC-pvF.text" = "Enregistre tes réponses ici";
+
+/* Class = "UILabel"; text = "ACTIVITÉ 3"; ObjectID = "zIE-Yh-nYJ"; */
+"zIE-Yh-nYJ.text" = "ACTIVITÉ 3";
+
+/* Class = "UIViewController"; title = "test4act8"; ObjectID = "zNK-QM-C4N"; */
+"zNK-QM-C4N.title" = "test4act8";
+
+/* Class = "UIViewController"; title = "test_2_inicial"; ObjectID = "zQV-OL-vQz"; */
+"zQV-OL-vQz.title" = "test_2_inicial";
+
+/* Class = "UILabel"; text = "Activité 3"; ObjectID = "zRp-Ot-VzI"; */
+"zRp-Ot-VzI.text" = "Activité 3";
+
+/* Class = "UILabel"; text = "Félicitations !"; ObjectID = "za7-3A-W0u"; */
+"za7-3A-W0u.text" = "Félicitations !";
+
+/* Class = "UILabel"; text = "Un peu de patience :)"; ObjectID = "zeL-8v-yB2"; */
+"zeL-8v-yB2.text" = "Un peu de patience :)";
+
+/* Class = "UIBarButtonItem"; title = "Envoyer"; ObjectID = "zeS-Gm-U3y"; */
+"zeS-Gm-U3y.title" = "Envoyer";
+
+/* Class = "UILabel"; text = "Imagine un post qui serait une activité proposée à tes apprenants (niveau de ton choix) sur MapLango :"; ObjectID = "zoq-2x-8Wt"; */
+"zoq-2x-8Wt.text" = "Imagine un post qui serait une activité proposée à tes apprenants (niveau de ton choix) sur MapLango :";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "zqp-YH-LYH"; */
+"zqp-YH-LYH.text" = "0";
+
+/* Class = "UILabel"; text = "Une astuce"; ObjectID = "zwW-W6-Cpq"; */
+"zwW-W6-Cpq.text" = "Une astuce";

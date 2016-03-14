@@ -17,18 +17,17 @@ class Annotation: NSObject, MKAnnotation {
     let category: NSNumber
     let coordinate: CLLocationCoordinate2D
     let userImage: String
-    let entity: Post?
+    let audio: String
     
     var imageName: String!
     
-    init(title: String, locationName: String, category: NSNumber, coordinate: CLLocationCoordinate2D, userImage: String, entity: Post?) {
+    init(title: String, locationName: String, audio: String, category: NSNumber, coordinate: CLLocationCoordinate2D, userImage: String) {
         self.title = title
         self.locationName = locationName
         self.category = category
         self.coordinate = coordinate
         self.userImage = userImage
-        self.entity = entity
-        
+        self.audio = audio
         super.init()
     }
     
