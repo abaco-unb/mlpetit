@@ -24,13 +24,16 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
+    var locationManager = CLLocationManager()
+    var location:CLLocation!
+    var address:String = ""
+    var latitude:String = ""
+    var longitude:String = ""
+    
     var filePath: String!
     var tags = [String]()
     var points = 0
     var category = 0
-    var longitude: Double? = nil
-    var latitude: Double? = nil
-    var location: String? = nil
     
     var restPath = "http://server.maplango.com.br/post-rest"
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -68,20 +71,17 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.requestAlwaysAuthorization()
         //get geo location data
         if (CLLocationManager.locationServicesEnabled())
         {
-            let locationManager = CLLocationManager()
             locationManager.delegate = self;
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
             
-            print("categoria")
-            print(self.category)
-            print(self.location)
-            print(self.latitude)
-            print(self.longitude)
+        } else {
+            NSLog("Serviço de localização indisponível")
         }
         
         recordingSession = AVAudioSession.sharedInstance()
@@ -147,35 +147,41 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
-        print("iniciou");
-        let location = locations.last! as CLLocation
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        locationManager.stopUpdatingLocation();
+        //print("entrou no load MAnager")
+        let userLocation:CLLocationCoordinate2D = locations.last!.coordinate
+        self.location = manager.location!
+        
+        self.latitude = String(userLocation.latitude);
+        self.longitude = String(userLocation.longitude);
+        
+        print("locations = \(self.latitude) \(self.longitude)")
+        
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) {
+        geocoder.reverseGeocodeLocation(manager.location!) {
             (placemarks, error) -> Void in
             //if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
             //var placemark = placemarks[0]
             
             if let validPlacemark = placemarks?[0]{
-                let placemark = validPlacemark as? CLPlacemark;
-                self.location = String(placemark?.name)
-                print(location)
-                //println("placemark")
-                //println(placemark)
+                let placemark = validPlacemark as CLPlacemark;
+                //self.location = String(placemark?.name)
+                //print(location)
+//                print("placemark")
+//                print(String(placemark.name))
+                self.address = String(placemark.name!)
+                
                 // Street addres
-                //println("street")
-                //println(placemark)
+                //print("street")
+                //print(placemark)
                 //self.street = st
-                //println("self.street")
-                //println(self.street)
+                //print("self.street")
+                //print(self.street)
             }
         }
         
-        //        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
     }
     
@@ -225,7 +231,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             let isBackSpace = strcmp(char, "\\b")
             if (isBackSpace == -60) {
                 resolveHashTags();
-                checkTags.tintColor = UIColor.greenColor()
             }
             
             return true;
@@ -262,6 +267,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
     }
     
+    func checkOn(imageCheck : UIImageView) {
+        let checkOn = UIImage(named: "images/atividade_aprovada.png");
+        imageCheck.image = checkOn
+    }
+    
     func handleLongPress(gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state == .Began {
             print("iniciar a gravação")
@@ -273,9 +283,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             print("parar a gravação")
             
             audioRecorder.stop()
-            _ = AVAudioSession.sharedInstance()
-            //audioSession.setActive(false)
-            
+            AVAudioSession.sharedInstance()
+
             recordButton.enabled = true
             playButton.enabled = false
             
@@ -414,30 +423,36 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBAction func savePost(sender: AnyObject) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
-        print(self.latitude, self.longitude, self.location, self.category, self.filePath, userId)
+        print("enviando esse post...")
+        print(self.latitude)
+        print(self.longitude)
+        print(self.address)
+        print(self.category)
+        //print(self.filePath)
+        print(userId)
         
 //        tagsView.resolveHashTags()
-//        self.indicator.showActivityIndicator(self.view)
-//        let params : [String: AnyObject] = [
-//            "text" : tagsView.text,
-//            "audio" : filePath,
-//            "location" : self.location!,
-//            "latitude" : String(self.latitude),
-//            "longitude" : String(self.longitude),
-//            "category" : String(self.category),
-//            "photo" : "../",//self.imgPath,
-//            "user": userId
-//        ]
-//        
-//        Alamofire.request(.POST, self.restPath, parameters: params)
-//            .responseSwiftyJSON({ (request, response, json, error) in
-//                if (error == nil) {
-//                    self.indicator.hideActivityIndicator();
-//                    NSOperationQueue.mainQueue().addOperationWithBlock {
-//                        self.performSegueWithIdentifier("go_to_map", sender: self)
-//                    }
-//                }
-//            })
+        let params : [String: AnyObject] = [
+            "text" : tagsView.text,
+            "audio" : " ",
+            "location" : self.address,
+            "latitude" : String(self.latitude),
+            "longitude" : String(self.longitude),
+            "category" : String(self.category),
+            "photo" : "../",
+            "user": userId
+        ]
+
+        self.indicator.showActivityIndicator(self.view)
+        Alamofire.request(.POST, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_map", sender: self)
+                    }
+                }
+            })
     }
     
     @IBAction func cancelPost(sender: AnyObject) {
@@ -573,6 +588,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 if (stringifiedWord.rangeOfCharacterFromSet(digits) != nil) {
                     // hashtag contains a number, like "#1"
                     // so don't make it clickable
+                    
+                    
+                    //set as checked
+                    self.checkOn(checkTags)
+                    
                 } else {
                     if let _ = tags.indexOf(stringifiedWord) {
                         print("já adicionado")
