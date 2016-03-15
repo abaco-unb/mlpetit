@@ -7,23 +7,25 @@
 //
 
 import UIKit
-import CoreData
+import AVFoundation
+import Alamofire
+import SwiftyJSON
+
 
 //Esta tela será aberta a partir da preview do post no mapa.
 //O pin abre a preview e a preview abre a tela de post.
 
-class PostVC: UIViewController, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate {
+class PostVC: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate {
 
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
     //MARK: Properties
+    var post: Annotation? = nil
     
     var isTrackingPanLocation = false
     var panGestureRecognizer: UIPanGestureRecognizer!
     
-    var post: Annotation? = nil
-    
+    var restPath = "http://server.maplango.com.br/post-rest"
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     @IBOutlet weak var scrollView: UIScrollView!
     

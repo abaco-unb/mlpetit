@@ -12,11 +12,20 @@ import Alamofire
 import SwiftyJSON
 
 
-class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, AVAudioRecorderDelegate {
     
     //MARK: Properties
     
     var item: Carnet? = nil
+    
+    var audioPlayer: AVAudioPlayer!
+    var recordedAudio:RecordedAudio!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
+    var filePath: String!
+    
+    var restPath = "http://server.maplango.com.br/note-rest"
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
     
@@ -34,7 +43,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var audioSlider: UISlider!
-    @IBOutlet weak var listeningIcon: UIImageView!
     @IBOutlet weak var audioTimerLabel: UILabel!
     
     //Outlets para a foto
@@ -42,8 +50,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     
-    var indicator:ActivityIndicator = ActivityIndicator()
-    var restPath = "http://server.maplango.com.br/note-rest"
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +62,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         // botões do audio recorder
         playButton.hidden = true
         audioTimerLabel.hidden = true
-        listeningIcon.hidden = true
         stopBtn.hidden = true
         
         // Enable the Save button only if the text field has a valid Word name
@@ -77,6 +83,26 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             wordTextField.text = item?.word
         }
         
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        //required init to recording
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if allowed {
+                        self.loadRecordingUI()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            // failed to record!
+        }
+
+        
         // Custom the visual identity of Text Fields
         wordTextField.attributedPlaceholder =
             NSAttributedString(string: "Entrer un nom (obligatoire)", attributes:[NSForegroundColorAttributeName : UIColor.lightGrayColor()])
@@ -91,25 +117,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         backgroundRecord.layer.cornerRadius = 15
         backgroundRecord.layer.masksToBounds = true
         
-        self.indicator.showActivityIndicator(self.view)
-        //Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: ["foo" : "bar"])
-            .responseSwiftyJSON({ (request, response, json, error) in
-                if let result = json["data"].array {
-//                    for(let note in result) {
-//                        //print(note["word"].stringValue)
-//                          if let word = note["word"].string {
-//                                // faz o que vc quer..
-//                          }
-                            //if let id = user["id"].int {
-                                //use o id para atualizar os dados
-                            //}
-                    
-//                    }
-                    
-                }
-            })
     }
+    
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
@@ -145,6 +154,24 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     func textViewDidBeginEditing(textView: UITextView) {
         writeHereImage.hidden = true
     }
+    
+    func loadRecordingUI(){
+        
+        // Custom the visual identity of audio player's background
+        backgroundRecord.layer.borderWidth = 1
+        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        backgroundRecord.layer.cornerRadius = 15
+        backgroundRecord.layer.masksToBounds = true
+        
+        //LongPress para a criação de post
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        longPressRecogniser.minimumPressDuration = 0.2
+        recordButton.addGestureRecognizer(longPressRecogniser)
+    }
+
+    
+    
+    
 
     //MARK: Actions
     
@@ -258,12 +285,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
 
     // MARK: Audio Process
     
-    var audioPlayer: AVAudioPlayer!
-    var audioRecorder:AVAudioRecorder!
-    var recordedAudio:RecordedAudio!
-    var filePath: String!
-
-    
     @IBAction func playAudio(sender: UIButton) {
         audioPlayer.prepareToPlay()
         audioPlayer.enableRate = false
@@ -280,66 +301,66 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         audioPlayer.play()
     }
     
-    @IBAction func playSlowAudio(sender: UIButton) {
-        stopBtn.hidden = false
-        audioPlayer.prepareToPlay()
-        audioPlayer.enableRate = true
-        audioPlayer.stop()
-        audioPlayer.rate = 0.5
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
+    func updateSlider() {
+        audioSlider.value = Float(audioPlayer.currentTime)
     }
+    
+//    @IBAction func playSlowAudio(sender: UIButton) {
+//        stopBtn.hidden = false
+//        audioPlayer.prepareToPlay()
+//        audioPlayer.enableRate = true
+//        audioPlayer.stop()
+//        audioPlayer.rate = 0.5
+//        audioPlayer.currentTime = 0.0
+//        audioPlayer.play()
+//    }
     
     func stopAudio(sender: UIButton) {
         audioPlayer.stop()
     }
     
+    func finishRecording(success success: Bool) {
+        audioRecorder.stop()
+        audioRecorder = nil
+    }
+    
     func recording() {
         do {
             print("recording")
-            //recordingInProgress.hidden = false
-            recordButton.enabled = false
             
-            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 12000.0,
+                AVNumberOfChannelsKey: 1 as NSNumber,
+                AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+            ]
             
-            let currentDateTime = NSDate()
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "ddMMyyyy-HHmmss"
-            let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
-            // Modify the line that sets the name of the recording
-            //let recordingName = "record_audio.wav"
+            let audioURL = self.getAudioURL()
             
-            let pathArray = [dirPath, recordingName]
-           _ = NSURL.fileURLWithPathComponents(pathArray)
-
-            
-            let filePathUrl = NSURL.fileURLWithPath(filePath)
-
-            filePath = filePathUrl.description
-            
-            
-            if let filePath = NSBundle.mainBundle().pathForResource("record_audio", ofType: "wav") {
-            let filePathUrl = NSURL.fileURLWithPath(filePath)
-            try audioPlayer = AVAudioPlayer(contentsOfURL: filePathUrl, fileTypeHint: nil)
-            } else {
-            print("O endereço está vazio")
-            }
-            
-            
-            
-            let session = AVAudioSession.sharedInstance
-            try session().setCategory(AVAudioSessionCategoryPlayAndRecord)
-            //audioRecorder = AVAudioRecorder(URL: path!, settings: [nil])
+            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
             audioRecorder.delegate = self
-            audioRecorder.meteringEnabled = true
-            audioRecorder.prepareToRecord()
             audioRecorder.record()
             
         } catch {
-            
-            fatalError("Failure to ...: \(error)")
-            
+            finishRecording(success: false)
         }
+    }
+    
+    func getDocumentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func getAudioURL() -> NSURL {
+        
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        let recordingName = formatter.stringFromDate(currentDateTime)+".m4a"
+        let audioFilename = getDocumentsDirectory().stringByAppendingString(recordingName)
+        
+        return NSURL(fileURLWithPath: audioFilename)
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
@@ -347,7 +368,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             if(flag) {
                 do {
                     playButton.enabled = true
-                    playButton.hidden = false
                     audioSlider.enabled = true
                     
                     recordedAudio = RecordedAudio()
@@ -358,22 +378,18 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                     filePath = recorder.url.description
                     audioSlider.maximumValue = Float(audioPlayer.duration)
                     
-                    _ =  NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
+                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
                     
-                    } catch {
-                        
+                } catch {
                     fatalError("Failure to ...: \(error)")
                 }
             } else {
+                finishRecording(success: false)
                 print("Ocorreu algum erro na gravação ")
-                recordButton.enabled = true
+                //recordButton.enabled = true
             }
     }
 
-    
-    func updateSlider() {
-        audioSlider.value = Float(audioPlayer.currentTime)
-    }
 
     func handleLongPress(gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state == .Began {
@@ -407,8 +423,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     func createItemCarnet() {
         ////recupera o id da sessão
-        //let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        //let id: Int = prefs.objectForKey("id") as! Int
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let id: Int = prefs.objectForKey("id") as! Int
         
         self.indicator.showActivityIndicator(self.view)
         let params : [String: AnyObject] = [
@@ -421,7 +437,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("...", sender: self)
+                        self.performSegueWithIdentifier("...", sender: self.saveWordButton)
                     }
                 }
             })

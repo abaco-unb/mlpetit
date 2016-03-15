@@ -40,6 +40,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
    
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     
     //Outlets para os tags e o texto
     @IBOutlet weak var tagsView: UITextView!
@@ -66,7 +67,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var checkImage: UIImageView!
     
     //Outlets para o vídeo
+    @IBOutlet weak var addVideo: UIButton!
+    @IBOutlet weak var removeVideo: UIButton!
+    @IBOutlet weak var videoView: UIImageView!
     @IBOutlet weak var checkVideo: UIImageView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,8 +109,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             // failed to record!
         }
         
-        //ui configurations
-        scrollView.contentSize.height = 300
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         tagsView.delegate = self
         textPostView.delegate = self
@@ -112,6 +118,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         //confirmButton.hidden = true
         continueBtn.enabled = true
         removeImage.hidden = true
+        removeVideo.hidden = true
         tagsView.editable = true
         
         // Custom the visual identity of Image View
@@ -128,6 +135,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         //tapGesture.numberOfTapsRequired = 1
         //view.addGestureRecognizer(tapGesture)
         
+    }
+    
+    override func viewWillLayoutSubviews()
+    {
+        super.viewWillLayoutSubviews();
+        self.scrollView.contentSize.height = 1000;
     }
     
     
@@ -292,12 +305,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     }
     
     
-    // MARK : Image Picker Process
+    // MARK: Actions
     
-    var picker:UIImagePickerController? = UIImagePickerController()
-    var popover:UIPopoverPresentationController? = nil
-    
-    @IBAction func removeImage(sender: AnyObject) {
+        @IBAction func removeImage(sender: AnyObject) {
         
         photoImage.image = nil
         addPicture.hidden = false
@@ -305,6 +315,22 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         removeImage.hidden = true
         
     }
+    
+    @IBAction func removeVideo(sender: AnyObject) {
+        
+        videoView.image = nil
+        addVideo.hidden = false
+        addVideo.enabled = true
+        removeVideo.hidden = true
+        
+    }
+    
+    
+    
+    // MARK : Image Picker Process
+    
+    var picker:UIImagePickerController? = UIImagePickerController()
+    var popover:UIPopoverPresentationController? = nil
     
     @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
         //Hide the keyboard

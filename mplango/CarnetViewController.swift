@@ -6,30 +6,29 @@
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
 
-
 import UIKit
-import CoreData
+import AVFoundation
+import Alamofire
+import SwiftyJSON
 
 class CarnetViewController: UIViewController, UITextViewDelegate {
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //MARK: Properties
     
     
     var item: Carnet? = nil
     
+    var restPath = "http://server.maplango.com.br/note-rest"
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var editBtn: UIBarButtonItem!
-    
     @IBOutlet weak var removeImage: UIButton!
-    
     @IBOutlet weak var mediaView: UIView!
     
-    //Outlets dos textos
     
+    //Outlets dos textos
     @IBOutlet weak var itemWordTxtView: UITextView!
     @IBOutlet weak var itemDescTxtView: UITextView!
     
@@ -82,6 +81,22 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         AudioView.layer.masksToBounds = true
         
         removeImage.hidden = true
+        
+        self.indicator.showActivityIndicator(self.view)
+        let params : [String: AnyObject] = [
+            "word" : "",
+            "desc" : "",
+            "photo" : ""
+        ]
+        Alamofire.request(.GET, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("seeItem", sender: self)
+                    }
+                }
+            })
 
     }
     
@@ -140,12 +155,12 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         navigationItem.hidesBackButton = true
         
-        do {
-            
-            try moContext?.save()
-            
-        } catch _ {
-        }
+//        do {
+//            
+//            try moContext?.save()
+//            
+//        } catch _ {
+//        }
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
