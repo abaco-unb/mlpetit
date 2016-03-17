@@ -16,7 +16,7 @@ import CoreLocation
 
 class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
-    var restPath = "http://localhost:10088/maplango/public/post-rest" //"http://server.maplango.com.br/post-rest"
+    var restPath = "http://server.maplango.com.br/post-rest"
     
     var indicator:ActivityIndicator = ActivityIndicator()
     

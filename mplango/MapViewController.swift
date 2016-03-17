@@ -25,7 +25,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var street: String!
     var loggedUser: User!
     
-    var restPath = "http://localhost:10088/maplango/public/post-rest" //"http://server.maplango.com.br/post-rest"
+    var restPath = "http://server.maplango.com.br/post-rest"
     var indicator:ActivityIndicator = ActivityIndicator()
     
     //Filtros: background e botões
