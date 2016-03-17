@@ -199,13 +199,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         Alamofire.request(.GET, self.restPath)
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
-                print("count ", json["data"].array?.count)
-                //if json["data"].array?.count > 0 {
                    if let posts = json["data"].array {
                         for post in posts {
                             var latitude:Double  = 0
                             var longitude:Double = 0
                             var category:Int = 0;
+                            
                             if let lat = post["latitude"].string {
                                 latitude = Double(lat)!
                             }
@@ -214,8 +213,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                 longitude = Double(long)!
                             }
                             
-                            if let cat = post["category"].string {
-                                category = Int(cat)!
+                            if let cat = post["category_id"].int {
+                                category = cat
                             }
                             
                             print(latitude, longitude)
@@ -226,12 +225,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                 audio: post["audio"].stringValue,
                                 category: category,
                                 coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                userImage: "../" //UIImage(data: (post.user as! User).image)!
+                                userImage: post["photo"].stringValue
                              )
                              self.mkMapView.addAnnotation(annotation)
                         }
                    }
-                //}
 //                    //print(json["data"].array?.count)
 //                   //print(json["data"].array?.count)
 //                    
@@ -332,6 +330,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.stopUpdatingLocation();
         
         centerMapOnLocation(userLocation)
+        self.mkMapView.showAnnotations(self.mkMapView.annotations, animated: true)
         
     }
     

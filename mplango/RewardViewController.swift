@@ -19,7 +19,7 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate{
         
         print("points")
         print(points)
-        pointsLabel.text = points.description
+        //pointsLabel.text = points.description
     }
     
     override func didReceiveMemoryWarning() {

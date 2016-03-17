@@ -20,43 +20,46 @@ extension MapViewController {
         }
 
         if let annotation = annotation as? Annotation {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-                as? MKPinAnnotationView { // 2
+            
+            let identifier = "myPin"
+            
+            var annotationView: MKAnnotationView
+            
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) {
                     dequeuedView.annotation = annotation
-                    view = dequeuedView
+                    annotationView = dequeuedView
             } else {
-                // 3
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.pinColor = annotation.pinColor()
-                
-                
-                //MARK - group image
-                
-                //CGFloat lineWidth = 2;
-                //CGRect borderRect = CGRectInset(rect, lineWidth * 0.5, lineWidth * 0.5);
-                let imgv = UIImageView(frame: CGRectMake(0, 0, 40, 40))
-                imgv.layer.cornerRadius = 20
-                imgv.backgroundColor = UIColor.blueColor();
-                
-                let image:UIImage = UIImage(named: annotation.getCategoryImageName())!
-                view.image = image
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-                
-                let rightButton: AnyObject = UIButton(type: UIButtonType.InfoLight)
-                rightButton.addTarget(self, action: nil, forControlEvents: UIControlEvents.TouchUpInside)
-                
-                view.rightCalloutAccessoryView = rightButton as! UIView
-                
-                let imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
-                //imageview.image = annotation.userImage
-                view.leftCalloutAccessoryView = imageview
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
                 
             }
-            return view
+            
+            let postButton: UIButton = UIButton(type: UIButtonType.Custom)
+                postButton.addTarget(self, action: nil, forControlEvents: UIControlEvents.TouchUpInside)
+            
+            //MARK - group image
+            //CGFloat lineWidth = 2;
+            //CGRect borderRect = CGRectInset(rect, lineWidth * 0.5, lineWidth * 0.5);
+            //let imgv = UIImageView(frame: CGRectMake(0, 0, 40, 40))
+            //imgv.layer.cornerRadius = 20
+            //imgv.backgroundColor = UIColor.blueColor();
+            
+            print("Image Pin Name : ", annotation.getCategoryImageName(), UIImage(named: annotation.getCategoryImageName()))
+            
+            annotationView.image = UIImage(named: String(annotation.getCategoryImageName()))
+            annotationView.backgroundColor = UIColor.clearColor()
+            annotationView.canShowCallout = true
+            annotationView.calloutOffset = CGPoint(x: -5, y: 5)
+            annotationView.rightCalloutAccessoryView = postButton
+            
+            let imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+            //let imgUtils:ImageUtils = ImageUtils()
+            //let image: UIImage = imgUtils.loadImageFromPath(annotation.userImage)!
+            //imageview.image = image//resizeImage(image, toTheSize: CGSize(width: 5, height: 5))
+            annotationView.leftCalloutAccessoryView = imageview
+            
+            return annotationView
         }
+        
         return nil
     }
     

@@ -16,6 +16,10 @@ import CoreLocation
 
 class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
+    var restPath = "http://server.maplango.com.br/post-rest"
+    
+    var indicator:ActivityIndicator = ActivityIndicator()
+    
     //MARK: Properties
     var post: Annotation? = nil
     
@@ -24,19 +28,22 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
+    // Dados da coordenada do usuário
     var locationManager = CLLocationManager()
     var location:CLLocation!
     var address:String = ""
     var latitude:String = ""
     var longitude:String = ""
     
-    var filePath: String!
+    
+    var videoPath: String = ""
+    var audioPath: String = ""
+    var imagePath: String = ""
     var tags = [String]()
     var points = 0
     var category = 0
     
-    var restPath = "http://server.maplango.com.br/post-rest"
-    var indicator:ActivityIndicator = ActivityIndicator()
+    
    
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -65,6 +72,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var removeImage: UIButton!
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var checkImage: UIImageView!
+    
     
     //Outlets para o vídeo
     @IBOutlet weak var addVideo: UIButton!
@@ -259,7 +267,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             maxLenghtLabel.textColor = UIColor.redColor()
         }
         if(newLength == 10) {
-            checkTextPost.tintColor = UIColor.greenColor()
+            //set text as checked
+            checkOn(checkTextPost)
         }
         
         return newLength <= limitLength
@@ -281,8 +290,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     }
     
     func checkOn(imageCheck : UIImageView) {
-        let checkOn = UIImage(named: "images/atividade_aprovada.png");
+        let checkOn = UIImage(named: "check_on.png");
         imageCheck.image = checkOn
+        print("passou aqui", imageCheck.image)
+        
     }
     
     func handleLongPress(gestureRecognizer : UIGestureRecognizer){
@@ -408,9 +419,15 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     {
         picker.dismissViewControllerAnimated(true, completion: nil)
         photoImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        // save image in directory
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
+        imgUtils.saveImage(photoImage.image!, path: self.imagePath);
         addPicture.hidden = true
         removeImage.hidden = false
         
+        //set image as checked
+        checkOn(checkImage)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
@@ -454,28 +471,53 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         print(self.longitude)
         print(self.address)
         print(self.category)
-        //print(self.filePath)
+        print(self.imagePath)
+        print(self.audioPath)
+        print(self.textPostView.text)
         print(userId)
         
 //        tagsView.resolveHashTags()
-        let params : [String: AnyObject] = [
-            "text" : tagsView.text,
-            "audio" : " ",
+        let params : [String: String] = [
+            "text" : textPostView.text,
+            "audio" : self.audioPath,
             "location" : self.address,
             "latitude" : String(self.latitude),
             "longitude" : String(self.longitude),
             "category" : String(self.category),
-            "photo" : "../",
-            "user": userId
+            "photo" : self.imagePath,
+            "user": String(userId)
         ]
 
         self.indicator.showActivityIndicator(self.view)
         Alamofire.request(.POST, self.restPath, parameters: params)
-            .responseSwiftyJSON({ (request, response, json, error) in
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("------------------------------------------------------------------")
+                print(request)
+                print("------------------------------------------------------------------")
+                print(response)
+                print("------------------------------------------------------------------")
+                print(json)
+                print("------------------------------------------------------------------")
+                print(error)
+                print("------------------------------------------------------------------")
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("go_to_map", sender: self)
+                        self.performSegueWithIdentifier("go_to_confirm", sender: self)
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The posr is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             })
@@ -534,14 +576,17 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     }
         
     func getAudioURL() -> NSURL {
-        
-        let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".m4a"
+        let recordingName = self.generateIndexName("audio", ext: "m4a")
         let audioFilename = getDocumentsDirectory().stringByAppendingString(recordingName)
         
         return NSURL(fileURLWithPath: audioFilename)
+    }
+    
+    func generateIndexName(text:String, ext:String) ->String {
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        return text + "_" + formatter.stringFromDate(currentDateTime) + "." + ext
     }
         
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
@@ -556,13 +601,17 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 recordedAudio.title = recorder.url.lastPathComponent
                 
                 try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
-                filePath = recorder.url.description
-                audioSlider.maximumValue = Float(audioPlayer.duration)
+                    audioPath = recorder.url.description
+                    audioSlider.maximumValue = Float(audioPlayer.duration)
                 
-                NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
-                //println(points)
-                points += 10
-                //println(" depois points")
+                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
+                    //println(points)
+                    points += 10
+                    //println(" depois points")
+                
+                    //set audio as checked
+                    self.checkOn(checkAudio)
+                    
                 } catch {
                     fatalError("Failure to ...: \(error)")
                 }
@@ -614,19 +663,16 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 if (stringifiedWord.rangeOfCharacterFromSet(digits) != nil) {
                     // hashtag contains a number, like "#1"
                     // so don't make it clickable
-                    
-                    
-                    //set as checked
-                    self.checkOn(checkTags)
-                    
                 } else {
+                    
                     if let _ = tags.indexOf(stringifiedWord) {
                         print("já adicionado")
-                        
                     } else {
                         if stringifiedWord != "" {
                             tags.append(stringifiedWord)
                         }
+                        //set tags as checked
+                        self.checkOn(checkTags)
                     }
                     
                     // set a link for when the user clicks on this word.
