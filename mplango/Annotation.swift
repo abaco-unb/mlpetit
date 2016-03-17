@@ -21,7 +21,7 @@ class Annotation: NSObject, MKAnnotation {
     
     var imageName: String!
     
-    init(title: String, locationName: String, audio: String, category: NSNumber, coordinate: CLLocationCoordinate2D, userImage: String) {
+    init(title: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, userImage: String) {
         self.title = title
         self.locationName = locationName
         self.category = category
@@ -54,24 +54,20 @@ class Annotation: NSObject, MKAnnotation {
     }
     
     func getCategoryImageName() -> String {
-        switch category {
-        case 1:
-            return "cat1.png"
-        case 2:
-            return "cat2.png"
-        default:
-            return "cat3.png"
+        var name:String!
+        
+        switch self.category {
+            case 1:
+                name =  "cat_desafio.png"
+            case 2:
+                name = "cat_atividade.png"
+            case 3:
+                name = "cat_dica.png"
+            case 4:
+                name = "cat_ajuda.png"
+            default:
+                name = "cat_ajuda.png"
         }
-    }
-    
-    func pinColor() -> MKPinAnnotationColor  {
-        switch category {
-        case 1:
-            return .Red
-        case 2:
-            return .Purple
-        default:
-            return .Green
-        }
+        return name
     }
 }
