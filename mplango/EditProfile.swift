@@ -15,7 +15,11 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     var users = [User]()
     var restPath = "http://server.maplango.com.br/user-rest"
-
+    var userId:Int!
+    
+    var imagePath: String = ""
+    
+    var indicator:ActivityIndicator = ActivityIndicator()
 
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var profPicture: UIImageView!
@@ -29,6 +33,9 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         super.viewDidLoad()
         
         retrieveLoggedUser()
+        print("self.userId : ", self.userId)
+        self.upServerUser()
+
         
 //        print("user data")
 //        print(user.name)
@@ -70,19 +77,38 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
  
     
     @IBAction func confirmEditProf(sender: AnyObject) {
-        dismissViewControllerAnimated(false, completion: nil)
+//        dismissViewControllerAnimated(false, completion: nil)
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
+        
+        let params : [String: String] = [
+            "photo" : self.imagePath,
+            "name" : self.userName.text!,
+            "nationality" : self.userNation.text!,
+            "bio" : self.userBio.text!,
+            "user": String(userId)
+//            "gender" : userGender.selectedSegmentIndex,
+        ]
+        
+        Alamofire.request(.POST, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_profile", sender: self)
+                    }
+                }
+            })
+        
     }
     
     func retrieveLoggedUser() {
         
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let email: String = prefs.objectForKey("USEREMAIL") as! String
-//        let fetchRequest = NSFetchRequest(entityName: "User")
-//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-//        
-//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-//            user = fetchResults[0];
-//        }
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
+        NSLog("usuário logado: %ld", userId)
         
     }
     
@@ -110,6 +136,53 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let contentInset:UIEdgeInsets = UIEdgeInsetsZero
         self.scroll.contentInset = contentInset
     }
+    
+    func upServerUser() {
+        self.indicator.showActivityIndicator(self.view)
+        
+        let params : [String: Int] = [
+            "id": self.userId,
+            "name": self.userId,
+            "gender": self.userId,
+            "nationality": self.userId
+        ]
+        
+        //Checagem remota
+        Alamofire.request(.GET, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                self.indicator.hideActivityIndicator();
+                let user = json["data"]
+                print(user);
+                //                if let photo = user["image"].string {
+                //                    print("photo de perfil : ", photo)
+                //                    let imgUtils:ImageUtils = ImageUtils()
+                //                    self.profilePicture.image = imgUtils.loadImageFromPath(photo)!
+                //                }
+                
+                if let username = user["name"].string {
+                    print("show name : ", username)
+                    self.userName.attributedPlaceholder = NSAttributedString(string: username)
+                }
+                
+                if let nat = user["nationality"].string {
+                    print("show nationality : ", nat)
+                    self.userNation.attributedPlaceholder = NSAttributedString(string: nat)
+                }
+                
+                if let gen = user["gender"].string {
+                    print("show gender : ", gen)
+                    if gen == "Homme" {
+                        self.userGender.selectedSegmentIndex = 0
+                    }
+                    else if gen == "Femme" {
+                        self.userGender.selectedSegmentIndex = 1
+                    }
+                }
+                
+            });
+        
+    }
+
     
     
     // MARK : Image Picker Process

@@ -36,17 +36,8 @@ class ProfileVC: UIViewController {
         retrieveLoggedUser()
         print("self.userId : ", self.userId)
         self.upServerUser()
-//        print("user data")
-//        print(user.name)
-//        print(user.posts.count)
-//        print(user.image)
-//        print(user.nationality)
-//        print(user.gender)
-//        
-//        navigationItem.title = user.name
-//        
-//        profileNationality.text = user.nationality
-//        profileNumberPosts.text = user.posts.count.description
+        
+
 //        profileNumberFollowers.text =
 //        profileNumberFollowing.text =
 //        profileGender.image = user.gender
@@ -71,7 +62,7 @@ class ProfileVC: UIViewController {
     
     func retrieveLoggedUser() {
         
-        //        //recupera os dados do usuário logado no app
+        // recupera os dados do usuário logado no app
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         self.userId = prefs.integerForKey("id") as Int
         NSLog("usuário logado: %ld", userId)
@@ -83,6 +74,7 @@ class ProfileVC: UIViewController {
 
         let params : [String: Int] = [
             "id": self.userId
+            
         ]
 
         //Checagem remota
@@ -91,11 +83,65 @@ class ProfileVC: UIViewController {
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]
                 print(user);
-                if let photo = user["image"].string {
-                    print("photo de perfil : ", photo)
+                
+                    if let photo = user["image"].string {
+                    print("show photo : ", photo)
                     let imgUtils:ImageUtils = ImageUtils()
-                    self.profilePicture.image = imgUtils.loadImageFromPath(photo)!
-                }
+                    self.profilePicture.image = imgUtils.loadImageFromPath(photo)
+                    }
+                
+                    if let username = user["name"].string {
+                    print("show name : ", username)
+                    self.navigationItem.title = (username)
+                    }
+                
+                    if let nat = user["nationality"].string {
+                    print("show nationality : ", nat)
+                    self.profileNationality.text = (nat)
+                    }
+                
+
+                    if let gen = user["gender"].string {
+                    print("show gender : ", gen)
+                        if gen == "Homme" {
+                            self.profileGender.image = UIImage(named: "icon_masc_profile")
+                        }
+                        else if gen == "Femme" {
+                            self.profileGender.image = UIImage(named: "icon_fem_profile")
+                        }
+                    }
+                
+                    if let lev = user["gender"].int {
+                    print("show level : ", lev)
+                        if lev == 0 {
+                            self.profileLangLevel.image = UIImage(named: "profile_niv1")
+                        }
+                        else if lev == 1 {
+                            self.profileLangLevel.image = UIImage(named: "profile_niv2")
+                        }
+                        else if lev == 2 {
+                            self.profileLangLevel.image = UIImage(named: "profile_niv3")
+                        }
+                        else if lev == 3 {
+                            self.profileLangLevel.image = UIImage(named: "profile_niv4")
+                        }
+                        else if lev == 4 {
+                            self.profileLangLevel.image = UIImage(named: "profile_nivM")
+                        }
+                    }
+                
+                    if let bio = user["bio"].string {
+                    print("show bio : ", bio)
+                    self.profileBio.text = (bio)
+                    }
+
+                
+
+//        profileNumberPosts.text = user.posts.count.description
+                
+                
+
+                
         });
         
     }
