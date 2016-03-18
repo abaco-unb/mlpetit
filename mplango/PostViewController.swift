@@ -50,10 +50,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBOutlet weak var contentView: UIView!
     
     //Outlets para os tags e o texto
-    @IBOutlet weak var tagsView: UITextView!
     @IBOutlet weak var textPostView: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
-    @IBOutlet weak var checkTags: UIImageView!
     @IBOutlet weak var checkTextPost: UIImageView!
     @IBOutlet weak var writeHereImage: UIImageView!
     
@@ -120,14 +118,13 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        tagsView.delegate = self
+        //tagsView.delegate = self
         textPostView.delegate = self
         
         //confirmButton.hidden = true
         continueBtn.enabled = true
         removeImage.hidden = true
         removeVideo.hidden = true
-        tagsView.editable = true
         
         // Custom the visual identity of Image View
         photoImage.layer.cornerRadius = 10
@@ -248,14 +245,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
         
-        if (textView == tagsView) {
+        //if (textView == tagsView) {
             let isBackSpace = strcmp(char, "\\b")
             if (isBackSpace == -60) {
                 resolveHashTags();
             }
             
-            return true;
-        }
+            //return true;
+        //}
         
         let text : String = textPostView.text
         
@@ -275,17 +272,13 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        if (textView == tagsView) {
-            tagsView.text = ""
-        } else if(textView == textPostView) {
-            writeHereImage.hidden = true
-        }
+        writeHereImage.hidden = true
     }
     
     func touchOutsideTextField(){
         NSLog("touchOutsideTextField")
         self.view.endEditing(true)
-        tagsView.resolveHashTags();
+        textPostView.resolveHashTags();
         
     }
     
@@ -346,7 +339,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBAction func selectImageFromPhotoLibrary(sender: UIButton) {
         //Hide the keyboard
         
-        tagsView.resignFirstResponder()
         textPostView.resignFirstResponder()
         
         let alert:UIAlertController=UIAlertController(title: "Choisir une image", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -494,15 +486,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
-                print("------------------------------------------------------------------")
-                print(request)
-                print("------------------------------------------------------------------")
-                print(response)
-                print("------------------------------------------------------------------")
-                print(json)
-                print("------------------------------------------------------------------")
-                print(error)
-                print("------------------------------------------------------------------")
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -563,6 +546,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
             audioRecorder.delegate = self
             audioRecorder.record()
+            
             
         } catch {
             finishRecording(success: false)
@@ -628,7 +612,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     func resolveHashTags(){
         // turn string in to NSString
-        let nsText:NSString = tagsView.text
+        let nsText:NSString = textPostView.text
         
         // this needs to be an array of NSString.  String does not work.
         let words = nsText.componentsSeparatedByString(" ")
@@ -672,7 +656,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                             tags.append(stringifiedWord)
                         }
                         //set tags as checked
-                        self.checkOn(checkTags)
+                        self.checkOn(checkTextPost)
                     }
                     
                     // set a link for when the user clicks on this word.
@@ -690,7 +674,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         // so remember to re-add them in the attrs dictionary above
         
         
-        tagsView.attributedText = attrString
+        textPostView.attributedText = attrString
     }
     
     

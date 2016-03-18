@@ -26,13 +26,16 @@ class ProfileVC: UIViewController {
     
     var users = [User]()
     var restPath = "http://server.maplango.com.br/user-rest"
+    var userId:Int!
     
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         retrieveLoggedUser()
-        
+        print("self.userId : ", self.userId)
+        self.upServerUser()
 //        print("user data")
 //        print(user.name)
 //        print(user.posts.count)
@@ -68,14 +71,32 @@ class ProfileVC: UIViewController {
     
     func retrieveLoggedUser() {
         
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let email: String = prefs.objectForKey("USEREMAIL") as! String
-//        let fetchRequest = NSFetchRequest(entityName: "User")
-//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-//        
-//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-//            user = fetchResults[0];
-//        }
+        //        //recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
+        NSLog("usuário logado: %ld", userId)
+        
+    }
+    
+    func upServerUser() {
+        self.indicator.showActivityIndicator(self.view)
+
+        let params : [String: Int] = [
+            "id": self.userId
+        ]
+
+        //Checagem remota
+        Alamofire.request(.GET, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                self.indicator.hideActivityIndicator();
+                let user = json["data"]
+                print(user);
+                if let photo = user["image"].string {
+                    print("photo de perfil : ", photo)
+                    let imgUtils:ImageUtils = ImageUtils()
+                    self.profilePicture.image = imgUtils.loadImageFromPath(photo)!
+                }
+        });
         
     }
 }
