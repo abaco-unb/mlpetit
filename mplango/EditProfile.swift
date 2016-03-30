@@ -77,10 +77,14 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
  
     
     @IBAction func confirmEditProf(sender: AnyObject) {
-//        dismissViewControllerAnimated(false, completion: nil)
-        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
+        print("atualizando o perfil...")
+        print(self.imagePath)
+        print(self.userName.text)
+        print(self.userNation.text)
+        print(self.userBio.text)
+        print(userId)
         
         let params : [String: String] = [
             "photo" : self.imagePath,
@@ -91,14 +95,29 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
 //            "gender" : userGender.selectedSegmentIndex,
         ]
         
-        Alamofire.request(.POST, self.restPath, parameters: params)
-            .responseSwiftyJSON({ (request, response, json, error) in
+        Alamofire.request(.PUT, "http://server.maplango.com.br/user-rest/id=userId", parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         self.performSegueWithIdentifier("go_to_profile", sender: self)
                     }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu perfil. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The profile update is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
                 }
+
             })
         
     }
@@ -315,23 +334,18 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         NSNotificationCenter.defaultCenter().removeObserver(scroll, name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if confirmEditProf === sender {
-            //let word = wordTextField.text ?? ""
-            //let desc = descTextField.text ?? ""
-            let photo = profPicture.image
-            //let category = segment
-            //falta som
-            
-            
-        }
-        
-        
-    }
-    */
+
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        if segue.identifier == "go_to_profile" {//
+            
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let profilVC = destinationNavigationController.topViewController as! ProfileVC
+            profilVC.navigationItem.title = userName.text
+//            profilVC.profileNationality = userNation.text
+//            profilVC.profilePicture = profPicture
+        }
+    }
     
     
     
