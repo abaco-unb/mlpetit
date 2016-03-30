@@ -21,7 +21,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var indicator:ActivityIndicator = ActivityIndicator()
     
     //MARK: Properties
-    var post: Annotation? = nil
+    var post: PostAnnotation? = nil
     
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!

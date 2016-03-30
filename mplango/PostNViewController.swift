@@ -18,7 +18,7 @@ class PostNViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var textTextField: UITextField!
     
-    var post: Annotation? = nil
+    var post: PostAnnotation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

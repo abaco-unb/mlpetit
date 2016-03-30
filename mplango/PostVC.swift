@@ -19,7 +19,7 @@ class PostVC: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTra
 
     
     //MARK: Properties
-    var post: Annotation? = nil
+    var post: PostAnnotation? = nil
     
     var isTrackingPanLocation = false
     var panGestureRecognizer: UIPanGestureRecognizer!

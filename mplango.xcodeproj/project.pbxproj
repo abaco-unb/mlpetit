@@ -21,6 +21,13 @@
 		159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B21BF589D70018EBE1 /* RestApiManager.swift */; };
 		159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* UserRestService.swift */; };
 		15BD25001C9241D600E431FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15BD24FF1C9241D600E431FB /* Main.storyboard */; };
+		15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */; };
+		15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */; };
+		15FE53C31CA6F6B0002A28CC /* FBAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BC1CA6F6B0002A28CC /* FBAnnotationClusterView.swift */; };
+		15FE53C41CA6F6B0002A28CC /* FBBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BD1CA6F6B0002A28CC /* FBBoundingBox.swift */; };
+		15FE53C51CA6F6B0002A28CC /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BE1CA6F6B0002A28CC /* FBClusteringManager.swift */; };
+		15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */; };
+		15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */; };
 		540A4A411C11EF5A00C166D8 /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A4A401C11EF5A00C166D8 /* PostVC.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
@@ -80,7 +87,7 @@
 		54E971B61B6ED25B005F27F1 /* FiraSans-UltraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971931B6ED1F5005F27F1 /* FiraSans-UltraLightItalic.ttf */; };
 		54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */; };
 		54F0896C1C20A05100089687 /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0896B1C20A05100089687 /* FollowingTVC.swift */; };
-		823CC0091B46291700F633F8 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* Annotation.swift */; };
+		823CC0091B46291700F633F8 /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* PostAnnotation.swift */; };
 		823CC00D1B4629C000F633F8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00C1B4629C000F633F8 /* MapView.swift */; };
 		8256CAFE1B40FD730002708C /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFD1B40FD730002708C /* ContactViewController.swift */; };
 		8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283BE171B0143AF0085F9A6 /* AppDelegate.swift */; };
@@ -274,6 +281,13 @@
 		159C11B21BF589D70018EBE1 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		159C11B61BF58B1C0018EBE1 /* UserRestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRestService.swift; sourceTree = "<group>"; };
 		15BD24FF1C9241D600E431FB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotation.swift; sourceTree = "<group>"; };
+		15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationCluster.swift; sourceTree = "<group>"; };
+		15FE53BC1CA6F6B0002A28CC /* FBAnnotationClusterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterView.swift; sourceTree = "<group>"; };
+		15FE53BD1CA6F6B0002A28CC /* FBBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBoundingBox.swift; sourceTree = "<group>"; };
+		15FE53BE1CA6F6B0002A28CC /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
+		15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
+		15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
 		540A4A401C11EF5A00C166D8 /* PostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		5415F8311C1F22DE0036D4E0 /* mplango.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mplango.entitlements; sourceTree = "<group>"; };
@@ -341,7 +355,7 @@
 		54E971931B6ED1F5005F27F1 /* FiraSans-UltraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-UltraLightItalic.ttf"; sourceTree = "<group>"; };
 		54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTVC.swift; sourceTree = "<group>"; };
 		54F0896B1C20A05100089687 /* FollowingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
-		823CC0081B46291700F633F8 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
+		823CC0081B46291700F633F8 /* PostAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAnnotation.swift; sourceTree = "<group>"; };
 		823CC00C1B4629C000F633F8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8256CAFD1B40FD730002708C /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		8283BE121B0143AF0085F9A6 /* mplango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mplango.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -432,6 +446,20 @@
 				159C11B61BF58B1C0018EBE1 /* UserRestService.swift */,
 			);
 			name = Service;
+			sourceTree = "<group>";
+		};
+		15FE53AC1CA6F67F002A28CC /* Cluster */ = {
+			isa = PBXGroup;
+			children = (
+				15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */,
+				15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */,
+				15FE53BC1CA6F6B0002A28CC /* FBAnnotationClusterView.swift */,
+				15FE53BD1CA6F6B0002A28CC /* FBBoundingBox.swift */,
+				15FE53BE1CA6F6B0002A28CC /* FBClusteringManager.swift */,
+				15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */,
+				15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */,
+			);
+			name = Cluster;
 			sourceTree = "<group>";
 		};
 		542BABD21C62B131000D618D /* Utils */ = {
@@ -579,7 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				82D73CA91B82479400DFEAB0 /* RecordedAudio.swift */,
-				823CC0081B46291700F633F8 /* Annotation.swift */,
+				823CC0081B46291700F633F8 /* PostAnnotation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -610,6 +638,7 @@
 		828C71821B83C54C009FE9B5 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				15FE53AC1CA6F67F002A28CC /* Cluster */,
 				8283BE461B0236880085F9A6 /* MapViewController.swift */,
 				823CC00C1B4629C000F633F8 /* MapView.swift */,
 			);
@@ -950,6 +979,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15FE53C31CA6F6B0002A28CC /* FBAnnotationClusterView.swift in Sources */,
 				82D73CAA1B82479400DFEAB0 /* RecordedAudio.swift in Sources */,
 				54241A111B7E35040074D350 /* Carnet.swift in Sources */,
 				823CC00D1B4629C000F633F8 /* MapView.swift in Sources */,
@@ -972,7 +1002,9 @@
 				54B4A7EA1BEB80E300199613 /* EditProfile.swift in Sources */,
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
+				15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
+				15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */,
 				54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
@@ -980,21 +1012,25 @@
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
+				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
 				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
+				15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,
 				54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */,
 				8256CAFE1B40FD730002708C /* ContactViewController.swift in Sources */,
 				54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */,
 				54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */,
+				15FE53C41CA6F6B0002A28CC /* FBBoundingBox.swift in Sources */,
 				542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */,
 				8283BE181B0143AF0085F9A6 /* AppDelegate.swift in Sources */,
 				82D73CA21B81718B00DFEAB0 /* CategoryViewController.swift in Sources */,
 				159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */,
-				823CC0091B46291700F633F8 /* Annotation.swift in Sources */,
+				823CC0091B46291700F633F8 /* PostAnnotation.swift in Sources */,
 				54F0896C1C20A05100089687 /* FollowingTVC.swift in Sources */,
 				1513D99B1C4D163600D1729C /* ImageUtils.swift in Sources */,
+				15FE53C51CA6F6B0002A28CC /* FBClusteringManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
