@@ -72,6 +72,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             locationManager.delegate = self;
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
+            print("passou aqui e habilitou o serviço de localização")
+            print(locationManager)
+            
         } else {
             NSLog("Serviço de localização indisponível")
         }
@@ -80,10 +83,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         self.upServerPosts()
 //        let numberOfLocations = 1000
 //        let array:[MKAnnotation] = randomLocationsWithCount(numberOfLocations)
-        
-        
-        
-        
+   
         
         //self.mkMapView.userTrackingMode = MKUserTrackingModeFollow;
         
@@ -150,10 +150,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     }
     
     @IBAction func refreshLocation(sender: AnyObject) {
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-        self.mkMapView.setRegion(region, animated: true)
+        let userLocation = self.location.coordinate;
+        //print(userLocation)
+        print(self.location)
+        
+        self.centerMapOnLocation(userLocation)
     }
     
     @IBAction func hideFilters(sender: AnyObject) {
@@ -225,26 +227,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             //self.mkMapView.addAnnotation(annotation)
                         }
                    }
-                print( "total de posts : ",self.mkMapView.annotations.count)
+                   print( "total de posts : ",self.posts.count)
                    self.clusteringManager.addAnnotations(self.posts)
                    self.clusteringManager.delegate = self;
                 
-//                    //print(json["data"].array?.count)
-//                   //print(json["data"].array?.count)
-//                    
-////                   if let posts = json["data"].array{
-////                    for post in posts {
-////                        print("post encontrado : ")
-////                        print(post);
-////                    
-////                    }
-//                    
-////                        var latDelta:CLLocationDegrees = 0.01
-////                        var longDelta:CLLocationDegrees = 0.01
-////                        
-////
-//                    //}
-//               }
             });
         
     }
@@ -301,10 +287,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        
+        print("passou aqui no método")
         self.location = manager.location!
-        
-        var userLocation = self.location.coordinate;
+        print(self.location)
+        print("-------------------------------")
+        let userLocation = self.location.coordinate;
         
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(manager.location!) {
@@ -314,76 +301,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             
             if let validPlacemark = placemarks?[0]{
                 let placemark = validPlacemark as CLPlacemark;
-                //self.location = String(placemark?.name)
-                //print(location)
                 print("placemark")
                 print(String(placemark.name))
-                // Street addres
-                //print("street")
-                //print(placemark)
-                //self.street = st
-                //print("self.street")
-                //print(self.street)
+
             }
+            print(userLocation)
         }
-        
-        
-//        let loadlocation = CLLocationCoordinate2D(
-//            latitude: lat, longitude: long
-//            
-//        )
         
         locationManager.stopUpdatingLocation();
         
         let regionToZone = MKCoordinateRegionMake(manager.location!.coordinate, MKCoordinateSpanMake(1,10))
         mkMapView.setRegion(regionToZone, animated: true)
         
+        print("userLocation")
+        print(userLocation)
+        
         centerMapOnLocation(userLocation)
         
-        
         self.mkMapView.showAnnotations(self.mkMapView.annotations, animated: true)
-        
-        
-        //mkMapView.setVisibleMapRect(<#T##mapRect: MKMapRect##MKMapRect#>, edgePadding: <#T##UIEdgeInsets#>, animated: <#T##Bool#>)
-        
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    func addRadiusCircle(location: CLLocation){
-        let circle = MKCircle(centerCoordinate: location.coordinate, radius: 100 as CLLocationDistance)
-        mkMapView.addOverlay(circle)
-    }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         print("map controller")
         print(segue.identifier)
         print("*************************************")
-        
-//        if segue.identifier == "post" {
-//            
-//            
-//            print(street)
-//            print(self.location.coordinate.latitude)
-//            print(self.location.coordinate.longitude)
-//            
-//            let categoryController:CategoryViewController = segue.destinationViewController as! CategoryViewController
-//            
-//            let post = Annotation(title: "TESTE",
-//                locationName: "Quadra 300 conjunto 14 cs 17",
-//                audio: "",
-//                category: 1,
-//                coordinate: self.location.coordinate,
-//                userImage: " "
-//            )
-//            print("prepareSegue MAp")
-//            print(post)
-//            
-//        }
         
         // para a segue que mostra o popover de notificações
         if segue.identifier == "showNotifications" {
@@ -397,10 +344,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             }
             
         }
-        
-        
     }
-    
     
     // para que o popover não esconda toda a tela
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

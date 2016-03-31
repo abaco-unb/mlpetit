@@ -87,15 +87,16 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print(userId)
         
         let params : [String: String] = [
-            "photo" : self.imagePath,
+            "image" : self.imagePath,
             "name" : self.userName.text!,
             "nationality" : self.userNation.text!,
             "bio" : self.userBio.text!,
-            "user": String(userId)
-//            "gender" : userGender.selectedSegmentIndex,
+            "gender" : String(userGender.selectedSegmentIndex.description)
         ]
         
-        Alamofire.request(.PUT, "http://server.maplango.com.br/user-rest/id=userId", parameters: params)
+        let urlEdit :String = restPath + "?id=" + String(userId)
+        
+        Alamofire.request(.PUT, urlEdit , parameters: params)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
@@ -160,10 +161,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         self.indicator.showActivityIndicator(self.view)
         
         let params : [String: Int] = [
-            "id": self.userId,
-            "name": self.userId,
-            "gender": self.userId,
-            "nationality": self.userId
+            "id": self.userId
         ]
         
         //Checagem remota
@@ -172,11 +170,12 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]
                 print(user);
-                //                if let photo = user["image"].string {
-                //                    print("photo de perfil : ", photo)
-                //                    let imgUtils:ImageUtils = ImageUtils()
-                //                    self.profilePicture.image = imgUtils.loadImageFromPath(photo)!
-                //                }
+                 if let photo = user["image"].string {
+                    print("photo de perfil : ", photo)
+                    
+                    let imgUtils:ImageUtils = ImageUtils()
+                    self.profPicture.image = imgUtils.loadImageFromPath(photo)
+                 }
                 
                 if let username = user["name"].string {
                     print("show name : ", username)
@@ -287,6 +286,10 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         picker.dismissViewControllerAnimated(true, completion: nil)
         profPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
+        // save image in directory
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imagePath = imgUtils.fileInDocumentsDirectory("profile.png")
+        imgUtils.saveImage(profPicture.image!, path: self.imagePath);
         
     }
     
@@ -346,26 +349,5 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
 //            profilVC.profilePicture = profPicture
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 
