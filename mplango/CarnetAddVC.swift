@@ -68,10 +68,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         checkValidWordName()
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CarnetAddVC.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(CarnetAddVC.handleLongPress(_:)))
         
         longPressRecogniser.minimumPressDuration = 1.0
         recordButton.addGestureRecognizer(longPressRecogniser)
@@ -164,7 +164,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         backgroundRecord.layer.masksToBounds = true
         
         //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(CarnetAddVC.handleLongPress(_:)))
         longPressRecogniser.minimumPressDuration = 0.2
         recordButton.addGestureRecognizer(longPressRecogniser)
     }
@@ -378,7 +378,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                     filePath = recorder.url.description
                     audioSlider.maximumValue = Float(audioPlayer.duration)
                     
-                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
+                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(CarnetAddVC.updateSlider), userInfo: nil, repeats: true)
                     
                 } catch {
                     fatalError("Failure to ...: \(error)")

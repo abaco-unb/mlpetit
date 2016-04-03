@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 import UIKit
 
-class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
+class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate {
     
     
     var users = [User]()
@@ -27,7 +27,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var confirmEditProf: UIBarButtonItem!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userNation: UITextField!
-    @IBOutlet weak var userBio: UITextField!
+    @IBOutlet weak var userBio: UITextView!
+    @IBOutlet weak var maxLenghtLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,20 +37,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print("self.userId : ", self.userId)
         self.upServerUser()
 
-        
-//        print("user data")
-//        print(user.name)
-//        print(user.nationality)
-//        print(user.gender)
-//        
-//        userName.attributedPlaceholder =
-//            NSAttributedString(string: user.name, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
-//        
-//        userNation.attributedPlaceholder =
-//            NSAttributedString(string: user.nationality, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
-        
-//        userGender.selectedSegmentIndex = NSAttributedString(string: user.gender)
-
         scroll.contentSize.height = 200
         
         // Enable the Save button only if the screen has a valid change
@@ -57,8 +44,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         // Keyboard stuff.
         let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        center.addObserver(self, selector: #selector(EditProfile.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(EditProfile.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
         profPicture.layer.cornerRadius = 40
         profPicture.layer.masksToBounds = true
@@ -67,7 +54,44 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         userGender.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         userGender.layer.cornerRadius = 20
         userGender.layer.masksToBounds = true
+        
+        userBio.delegate = self
+        
     }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n"  // Recognizes enter key in keyboard
+        {
+            userBio.resignFirstResponder()
+            return false
+        }
+        
+        let limitLength = 149
+        guard let text = userBio.text else { return true }
+        let newLength = text.characters.count - range.length
+        
+        maxLenghtLabel.text = String(newLength)
+        
+        if (newLength > 139) {
+            maxLenghtLabel.textColor = UIColor.redColor()
+        }
+            
+        else if (newLength < 140) {
+            maxLenghtLabel.textColor = UIColor.darkGrayColor()
+        }
+        
+        return newLength <= limitLength
+    }
+    
+    
 
     //MARK: Actions
     
@@ -104,7 +128,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("go_to_profile", sender: self)
+                        self.performSegueWithIdentifier("edit_profile", sender: self)
                     }
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -161,7 +185,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         self.indicator.showActivityIndicator(self.view)
         
         let params : [String: Int] = [
-            "id": self.userId
+            "id": self.userId,
         ]
         
         //Checagem remota
@@ -185,6 +209,12 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 if let nat = user["nationality"].string {
                     print("show nationality : ", nat)
                     self.userNation.attributedPlaceholder = NSAttributedString(string: nat)
+                }
+                
+                if let userBio = user["bio"].string {
+                    print("show bio : ", userBio)
+                    self.userBio.text = (userBio)
+                    
                 }
                 
                 if let gen = user["gender"].string {
@@ -301,6 +331,10 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     //MARK: enable confirm button
     
+    func textViewDidBeginEditing(textView: UITextView) {
+        // Disable the Save button while editing.
+        confirmEditProf.enabled = false
+    }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         // Disable the Save button while editing.
@@ -331,23 +365,15 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         checkValidChange()
     }
     
+    func textViewDidEndEditing(textView: UITextView) {
+        checkValidChange()
+    }
+    
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(scroll, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(scroll, name: UIKeyboardWillHideNotification, object: nil)
     }
     
-
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        if segue.identifier == "go_to_profile" {//
-            
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let profilVC = destinationNavigationController.topViewController as! ProfileVC
-            profilVC.navigationItem.title = userName.text
-//            profilVC.profileNationality = userNation.text
-//            profilVC.profilePicture = profPicture
-        }
-    }
 }
 

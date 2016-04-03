@@ -72,8 +72,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         
         // Keyboard stuff.
         let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        center.addObserver(self, selector: #selector(AccountViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(AccountViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
         
         textFieldName.backgroundColor = UIColor.clearColor()
@@ -119,7 +119,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AccountViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
     }

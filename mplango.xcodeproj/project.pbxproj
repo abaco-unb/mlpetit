@@ -656,10 +656,10 @@
 				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
 				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
 				54B4A7E91BEB80E300199613 /* EditProfile.swift */,
-				54B4A7EB1BEB8E2400199613 /* Settings.swift */,
 				54B4A7EE1BEB9DBE00199613 /* ChangeEmail.swift */,
 				54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */,
 				5448EB001C1B71DB004D771A /* helpSettingsVC.swift */,
+				54B4A7EB1BEB8E2400199613 /* Settings.swift */,
 				54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */,
 				54F0896B1C20A05100089687 /* FollowingTVC.swift */,
 			);
@@ -737,7 +737,7 @@
 				TargetAttributes = {
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 3MS9SHWCHS;
+						DevelopmentTeam = 2B3UEHLLJ3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1171,7 +1171,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = mplango/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1186,7 +1186,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = mplango/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

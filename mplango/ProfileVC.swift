@@ -50,11 +50,13 @@ class ProfileVC: UIViewController {
         
         
         //Para ir à tela da gamificação com gesto (e não botão)
-        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showProfileGameVC")
+        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ProfileVC.showProfileGameVC))
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeGestureRecognizer)
         
     }
+
+    
     
     func showProfileGameVC() {
         self.performSegueWithIdentifier("showBadges", sender: self)
@@ -145,4 +147,13 @@ class ProfileVC: UIViewController {
         });
         
     }
+    
+    @IBAction func unwindSecondView(segue: UIStoryboardSegue) {
+        print ("unwindSecondView fired in first view")
+        print("self.userId : ", self.userId)
+        self.upServerUser()
+
+        
+    }
+    
 }

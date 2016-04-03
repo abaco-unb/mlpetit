@@ -33,11 +33,9 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
         
         // Enable the Save button only if the screen has a valid change
         checkValidChange()
-
-//        print(user.email)
         
-//        currentEmail.attributedPlaceholder =
-//            NSAttributedString(string: user.email, attributes: [NSForegroundColorAttributeName : UIColor(hex: 0x9E9E9E)])
+        
+
     }
     
     //MARK: Actions
@@ -47,7 +45,106 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func confNewEmail(sender: AnyObject) {
-        dismissViewControllerAnimated(false, completion: nil)
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
+        print("atualizando o email...")
+        print(userId)
+        
+        let email: String = newEmail.text! as String
+        let confEmail: String = confNewEmail.text! as String
+        
+        
+        if ( email.isEmpty ) {
+            
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo email obrigatório", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            
+        } else if (!email.isEmail()) {
+            
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Por favor, insira um email válido", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            
+            
+        } else if ( !email.isEmpty  && confEmail.isEmpty) {
+            
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário confirmar sua senha", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            
+        } else if (email != confEmail) {
+            
+            //New Alert Ccontroller
+            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "O e-mail não confere com a confirmação", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                print("The user is okay.")
+            }
+            alertController.addAction(agreeAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        } else {
+
+        
+        let params : [String: String] = [
+            "email" : self.confNewEmail.text!,
+        ]
+        
+        let urlEdit :String = restPath + "?id=" + String(userId)
+        
+        Alamofire.request(.PUT, urlEdit , parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Félicitations", message: "Email changé avec succès", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The user is okay.")
+                            self.indicator.hideActivityIndicator();
+                            self.performSegueWithIdentifier("change_email", sender: self)
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                    }
+                
+                    
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu e-mail. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The email update is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+                
+            })
+            
+        }
+        
     }
     
     func retrieveLoggedUser() {
@@ -108,4 +205,6 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         checkValidChange()
     }
+    
+    
 }

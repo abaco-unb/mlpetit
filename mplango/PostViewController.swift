@@ -131,7 +131,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         photoImage.layer.masksToBounds = true
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PostViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         
@@ -212,7 +212,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         backgroundRecord.layer.masksToBounds = true
         
         //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(PostViewController.handleLongPress(_:)))
         longPressRecogniser.minimumPressDuration = 0.2
         recordButton.addGestureRecognizer(longPressRecogniser)
     }
@@ -496,7 +496,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                         //New Alert Ccontroller
                         let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
                         let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                            print("The posr is not okay.")
+                            print("The post is not okay.")
                             self.indicator.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
@@ -588,7 +588,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                     audioPath = recorder.url.description
                     audioSlider.maximumValue = Float(audioPlayer.duration)
                 
-                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateSlider"), userInfo: nil, repeats: true)
+                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(PostViewController.updateSlider), userInfo: nil, repeats: true)
                     //println(points)
                     points += 10
                     //println(" depois points")
