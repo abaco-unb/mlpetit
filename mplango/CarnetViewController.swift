@@ -57,13 +57,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         scrollView.contentSize.height = 300
         
-        if item != nil {
-            itemWordTxtView.text = item?.word
-            itemDescTxtView.text = item?.desc
-            navigationItem.title = item!.word
-            //itemPhoto.image = item?.photo
-        }
-        
         itemDescTxtView.delegate = self
         itemWordTxtView.delegate = self
         
@@ -93,7 +86,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("seeItem", sender: self)
+                        self.performSegueWithIdentifier("show_item", sender: self)
                     }
                 }
             })
@@ -155,12 +148,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         navigationItem.hidesBackButton = true
         
-//        do {
-//            
-//            try moContext?.save()
-//            
-//        } catch _ {
-//        }
+
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {

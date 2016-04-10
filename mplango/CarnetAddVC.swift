@@ -17,15 +17,22 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     //MARK: Properties
     
     var item: Carnet? = nil
+    var restPath = "http://server.maplango.com.br/note-rest"
+    var userId:Int!
     
+    var indicator:ActivityIndicator = ActivityIndicator()
+
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
-    var filePath: String!
     
-    var restPath = "http://server.maplango.com.br/note-rest"
-    var indicator:ActivityIndicator = ActivityIndicator()
+    var audioPath: String = ""
+    var imagePath: String = ""
+    
+    var word: String = ""
+    var text: String = ""
+    var photo: String = ""
     
     @IBOutlet weak var saveWordButton: UIBarButtonItem!
     
@@ -50,10 +57,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        retrieveLoggedUser()
+        print("self.userId : ", self.userId)
         
         scrollView.contentSize.height = 300
 
@@ -79,9 +88,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         wordTextField.delegate = self
         descTextView.delegate = self
         
-        if item != nil {
-            wordTextField.text = item?.word
-        }
+//        if item != nil {
+//            wordTextField.text = item.word
+//        }
         
         recordingSession = AVAudioSession.sharedInstance()
         
@@ -170,9 +179,16 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     }
 
     
+    func retrieveLoggedUser() {
+        
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
+        NSLog("usuário logado: %ld", userId)
+        
+    }
     
     
-
     //MARK: Actions
     
     @IBAction func cancel(sender: AnyObject) {
@@ -304,16 +320,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     func updateSlider() {
         audioSlider.value = Float(audioPlayer.currentTime)
     }
-    
-//    @IBAction func playSlowAudio(sender: UIButton) {
-//        stopBtn.hidden = false
-//        audioPlayer.prepareToPlay()
-//        audioPlayer.enableRate = true
-//        audioPlayer.stop()
-//        audioPlayer.rate = 0.5
-//        audioPlayer.currentTime = 0.0
-//        audioPlayer.play()
-//    }
+
     
     func stopAudio(sender: UIButton) {
         audioPlayer.stop()
@@ -375,7 +382,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                     recordedAudio.title = recorder.url.lastPathComponent
                     
                     try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
-                    filePath = recorder.url.description
+                    audioPath = recorder.url.description
                     audioSlider.maximumValue = Float(audioPlayer.duration)
                     
                     NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(CarnetAddVC.updateSlider), userInfo: nil, repeats: true)
@@ -417,33 +424,50 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     
     @IBAction func saveWordButton(sender: AnyObject) {
-        createItemCarnet()
-        dismissViewControllerAnimated(false, completion: nil)
-    }
-    
-    func createItemCarnet() {
         ////recupera o id da sessão
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let id: Int = prefs.objectForKey("id") as! Int
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
+        print("salvando item")
+        print(self.wordTextField.text)
+        print(self.descTextView.text)
+        print(self.imagePath)
+        print(self.audioPath)
+        print(userId)
         
-        self.indicator.showActivityIndicator(self.view)
-        let params : [String: AnyObject] = [
-            "word" : "",
-            "desc" : "",
-            "photo" : ""
+        
+        let params : [String: String] = [
+            "word": self.wordTextField.text!,
+            "text": self.descTextView.text,
+            "photo": self.imagePath,
+            "user": String(userId)
         ]
+            
+        self.indicator.showActivityIndicator(self.view)
         Alamofire.request(.POST, self.restPath, parameters: params)
-            .responseSwiftyJSON({ (request, response, json, error) in
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("...", sender: self.saveWordButton)
+                        self.performSegueWithIdentifier("go_to_carnet", sender: self)
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The item is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             })
     }
-    
-    
+
     
     //MARK: UITextFieldDelegate
     
@@ -471,14 +495,17 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
 
     // MARK: - Navigation
-
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if saveWordButton === sender {
-            let word = wordTextField.text ?? ""
-            let desc = descTextView.text ?? ""
-            let photo = photoImage.image
+        if segue.identifier! == "go_to_carnet" {
+            let carnetTableView:CarnetTVC = segue.destinationViewController as! CarnetTVC
+            
+                word = wordTextField.text ?? ""
+                text = descTextView.text ?? ""
+                let imgUtils:ImageUtils = ImageUtils()
+                self.photoImage.image = imgUtils.loadImageFromPath(photo)
+            
+            carnetTableView.item = item
           
             //falta som
         }

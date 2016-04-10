@@ -312,14 +312,22 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
     }
     
+    
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         profPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
+//        var angle = 0.0;
+//
+//        if profPicture.image?.imageOrientation == UIImageOrientation.Up {
+//            angle = 90.0
+//        }
+        
         // save image in directory
         let imgUtils:ImageUtils = ImageUtils()
         self.imagePath = imgUtils.fileInDocumentsDirectory("profile.png")
-        imgUtils.saveImage(profPicture.image!, path: self.imagePath);
+        imgUtils.saveImage(profPicture.image!, path: self.imagePath)
         
     }
     
@@ -327,6 +335,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
     
     
     //MARK: enable confirm button
@@ -346,6 +356,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let text = userName.text ?? ""
         let text2 = userNation.text ?? ""
         let text3 = userBio.text ?? ""
+        let photo = profPicture.image ?? ""
         
         if (!text.isEmpty) {
             confirmEditProf.enabled = true
@@ -354,6 +365,11 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
             confirmEditProf.enabled = true
 
         } else if (!text3.isEmpty) {
+            confirmEditProf.enabled = true
+            
+            
+        //VER ISSO: fazer com que o btn confirmar seja operativo qdo for trocada a foto de perfil
+        } else if (((photo?.didChangeValueForKey("image")) == nil)) {
             confirmEditProf.enabled = true
             
         } else {

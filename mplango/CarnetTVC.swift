@@ -7,81 +7,100 @@
 //
 
 import UIKit
-import CoreData
+import MapKit
+import Alamofire
+import SwiftyJSON
 
-class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
+class CarnetTVC: UITableViewController {
        
-    
+        
     //MARK: Properties
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var item: Carnet? = nil
+    var restPath = "http://server.maplango.com.br/note-rest"
+    var userId:Int!
     
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
+    var indicator:ActivityIndicator = ActivityIndicator()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchedResultController = getFetchedResultController()
-        fetchedResultController.delegate = self
-        do {
-            try fetchedResultController.performFetch()
-        } catch _ {
-        }
+        retrieveLoggedUser()
+        print("self.userId : ", self.userId)
+        self.upServerUser()
+        
+//        //recupera os dados do usuário logado no TableView
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let user:Int = prefs.integerForKey("id") as Int
+//        NSLog("usuário logado: %ld", user)
+        
+        
     }
     
-    
-    // MARK:- Retrieve Tasks
-    
-    func getFetchedResultController() -> NSFetchedResultsController {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: self.moContext!, sectionNameKeyPath: "word", cacheName: nil)
-        
-        fetchedResultController.delegate = self
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
 
-        return fetchedResultController
+    
+    func retrieveLoggedUser() {
+        
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
+        NSLog("usuário logado: %ld", userId)
+        
     }
     
-    func itemFetchRequest() -> NSFetchRequest {
+    func upServerUser() {
+        self.indicator.showActivityIndicator(self.view)
         
-        let fetchRequest = NSFetchRequest(entityName: "Carnet")
+        let params : [String: Int] = [
+            "id": self.userId,
+
+        ]
         
-        let sortDescriptor = NSSortDescriptor(key: "word", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        //Checagem remota
+        Alamofire.request(.GET, self.restPath, parameters: params)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                self.indicator.hideActivityIndicator();
+                let user = json["data"]
+                print(user);
+                
+                if let item = user["word"].string {
+                    print("show item : ", item)
+                    self.tableView.reloadData()
+
+                }
+                
+            });
         
-        return fetchRequest
     }
 
     
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let numberOfSections = self.fetchedResultController.sections?.count
-        return numberOfSections!
-    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRowsInSection = self.fetchedResultController.sections?[section].numberOfObjects
-        return numberOfRowsInSection!
+        return self.item.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell!
-        
-            cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
-            let item = fetchedResultController.objectAtIndexPath(indexPath) as! Carnet
-            cell.textLabel!.text = item.word
+            let cell = self.tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel?.text = self.item[indexPath.row].string
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return self.fetchedResultController.sectionForSectionIndexTitle(title, atIndex: index)
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.fetchedResultController.sections![section].name
-    
-    }
+//    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+//        return self.fetchedResultController.sectionForSectionIndexTitle(title, atIndex: index)
+//    }
+//    
+//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return self.fetchedResultController.sections![section].name
+//    
+//    }
     
     /*
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
@@ -92,34 +111,34 @@ class CarnetTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - TableView Refresh
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        print("data changed")
-        tableView.reloadData()
-    }
+//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+//        print("data changed")
+//        tableView.reloadData()
+//    }
     
     
     // MARK: - TableView Delete
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let managedObject:NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
-        moContext?.deleteObject(managedObject)
-        do {
-            try moContext?.save()
-        } catch _ {
-        }
-    }
+//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        let managedObject:NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
+//        moContext?.deleteObject(managedObject)
+//        do {
+//            try moContext?.save()
+//        } catch _ {
+//        }
+//    }
     
     
     //MARK: PrepareForSegue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        
-        if segue.identifier == "seeItem" {
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
-            let item:Carnet = fetchedResultController.objectAtIndexPath(indexPath!) as! Carnet
-            itemController.item = item
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+//        
+//        if segue.identifier == "show_item" {
+//            let cell = sender as! UITableViewCell
+//            let indexPath = tableView.indexPathForCell(cell)
+//            let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
+//            let item:JSON = self.item.objectAtIndexPath(indexPath!) as! JSON
+//            itemController.item = item.
+//        }
+//    }
 }

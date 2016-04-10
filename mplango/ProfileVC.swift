@@ -14,6 +14,12 @@ import MapKit
 
 class ProfileVC: UIViewController {
     
+    var users = [User]()
+    var restPath = "http://server.maplango.com.br/user-rest"
+    var userId:Int!
+    
+    var indicator:ActivityIndicator = ActivityIndicator()
+    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileGender: UIImageView!
     @IBOutlet weak var profileLangLevel: UIImageView!
@@ -23,12 +29,6 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var profileNumberFollowing: UILabel!
     @IBOutlet weak var profileBio: UILabel!
     
-    
-    var users = [User]()
-    var restPath = "http://server.maplango.com.br/user-rest"
-    var userId:Int!
-    
-    var indicator:ActivityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
