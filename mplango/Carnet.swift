@@ -8,18 +8,17 @@
 
 import Foundation
 
-class Carnet {
+class Carnet: NSObject {
+    let id : Int!
     let word : String
     let text : String
     let image : String
-    let audio : String
-    let user : Int!
+    //let audio : String
     
-        init(dictionary : [String : AnyObject]) {
-            word = dictionary["word"] as? String ?? ""
-            text = dictionary["text"] as? String ?? ""
-            image = dictionary["image"] as? String ?? ""
-            audio = dictionary["audio"] as? String ?? ""
-            user = dictionary["id"] as? Int
+    init(id:Int, word:String, text:String, image:String) {
+            self.id = id
+            self.word = word
+            self.text = text
+            self.image = image
     }
 }

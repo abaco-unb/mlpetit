@@ -17,9 +17,11 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     //MARK: Properties
     
     
-    var item: [String] = []
+    var item:Carnet!
     
     var restPath = "http://server.maplango.com.br/note-rest"
+    var userId:Int!
+    
     var indicator:ActivityIndicator = ActivityIndicator()
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -73,24 +75,12 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         AudioView.layer.cornerRadius = 10
         AudioView.layer.masksToBounds = true
         
+        itemWordTxtView.text = item.word
+        itemDescTxtView.text = item.text
+        
+        
         removeImage.hidden = true
         
-        self.indicator.showActivityIndicator(self.view)
-        let params : [String: String] = [
-            "word" : "",
-            "desc" : "",
-            "photo" : ""
-        ]
-        Alamofire.request(.GET, self.restPath, parameters: params)
-            .responseSwiftyJSON({ (request, response, json, error) in
-                if (error == nil) {
-                    self.indicator.hideActivityIndicator();
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("show_item", sender: self)
-                    }
-                }
-            })
-
     }
     
     // MARK : Actions
@@ -116,6 +106,15 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
 //        
 //    }
 //    
+    
+    func retrieveLoggedUser() {
+        
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
+        NSLog("usuário logado: %ld", userId)
+        
+    }
     
     @IBAction func removeMedia(sender: AnyObject) {
         
