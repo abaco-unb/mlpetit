@@ -13,14 +13,13 @@ import SwiftyJSON
 import CoreLocation
 
 
-
 class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
-    var restPath = "http://server.maplango.com.br/post-rest"
-    
-    var indicator:ActivityIndicator = ActivityIndicator()
     
     //MARK: Properties
+    
+    var restPath = "http://server.maplango.com.br/post-rest"
+    var indicator:ActivityIndicator = ActivityIndicator()
     var post: PostAnnotation? = nil
     
     var audioPlayer: AVAudioPlayer!
@@ -311,7 +310,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     // MARK: Actions
     
-        @IBAction func removeImage(sender: AnyObject) {
+    @IBAction func removeImage(sender: AnyObject) {
         
         photoImage.image = nil
         addPicture.hidden = false

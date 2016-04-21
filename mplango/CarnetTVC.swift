@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MapKit
 import Alamofire
 import SwiftyJSON
 
@@ -16,30 +15,26 @@ class CarnetTVC: UITableViewController {
         
     //MARK: Properties
     
-    var item: Carnet? = nil
     var restPath = "http://server.maplango.com.br/note-rest"
     var userId:Int!
     
-    var indicator:ActivityIndicator = ActivityIndicator()
+    var itens = [String]()
+    
 
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         retrieveLoggedUser()
         print("self.userId : ", self.userId)
-        self.upServerUser()
-        
-//        //recupera os dados do usuário logado no TableView
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let user:Int = prefs.integerForKey("id") as Int
-//        NSLog("usuário logado: %ld", user)
-        
+        self.upServerNote()
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.tableView.reloadData()
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     
@@ -52,47 +47,120 @@ class CarnetTVC: UITableViewController {
         
     }
     
-    func upServerUser() {
+    func upServerNote() {
+        
         self.indicator.showActivityIndicator(self.view)
-        
-        let params : [String: Int] = [
-            "id": self.userId,
 
-        ]
+//        let urlString = restPath
+//        let urlEncodedString = urlString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
-        //Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: params)
-            .responseSwiftyJSON({ (request, response, json, error) in
-                self.indicator.hideActivityIndicator();
-                let user = json["data"]
-                print(user);
+//        let url = NSURL( string: restPath)
+//        
+//        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, innerError) in
+//            let json = JSON(data: data!)
+//            let carnet = json.arrayValue
+//            
+//            dispatch_async(dispatch_get_main_queue(), {
+//                
+//                for list in carnet
+//                    
+//                {
+//                    let word = list["word"].stringValue
+//                    print( "word: \(word)" )
+//                    self.itens.append(word)
+//                }
+//                
+//                dispatch_async(dispatch_get_main_queue(),{
+//                    self.tableView.reloadData()
+//                })
+//            })
+//        }
+//        task.resume()
+//    }
+
+        
+//        self.indicator.showActivityIndicator(self.view)
+        
+    
+//        Checagem remota
+        Alamofire.request(.GET, self.restPath)
+            .responseJSON
+            { response in switch response.result {
                 
-                if let item = user["word"].string {
-                    print("show item : ", item)
-                    self.tableView.reloadData()
-
+            case .Success(let JSON):
+                
+                if let carnet = JSON as? NSArray {
+                    
+//                    for list in carnet { // loop through data items
+//                        let obj = item as! NSDictionary
+//                        let list = String(obj["word"])
+//                        self.itens.append(list)
+//                    }
+//                
+//                }
+//                
+//                self.tableView.reloadData()
+                    
+                    for list in carnet {
+                    
+                        let word = list["word"]!!.stringValue
+                        print( "word: \(word)" )
+                        self.itens.append(word)
+                    }
+                    
                 }
                 
-            });
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.tableView.reloadData()
+                })
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                
+            }
+        }
         
     }
+    
+    
+    
 
-    
-    
+
     // MARK: - Table view data source
     
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.item.count
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
-    
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.itens.count
+    }
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = self.item[indexPath.row].string
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as! CarnetTableViewCell
+        
+        cell.wordLabel.text = self.itens[indexPath.row]
+    
+//        print(self.itens[indexPath.row])
         
         return cell
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 //    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
 //        return self.fetchedResultController.sectionForSectionIndexTitle(title, atIndex: index)
 //    }
@@ -108,13 +176,6 @@ class CarnetTVC: UITableViewController {
     }
     */
     
-    
-    // MARK: - TableView Refresh
-    
-//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-//        print("data changed")
-//        tableView.reloadData()
-//    }
     
     
     // MARK: - TableView Delete
@@ -141,4 +202,6 @@ class CarnetTVC: UITableViewController {
 //            itemController.item = item.
 //        }
 //    }
+    
+    
 }

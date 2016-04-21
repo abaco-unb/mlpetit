@@ -16,11 +16,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     //MARK: Properties
     
-    var item: Carnet? = nil
     var restPath = "http://server.maplango.com.br/note-rest"
-    var userId:Int!
-    
     var indicator:ActivityIndicator = ActivityIndicator()
+    var item : String? = nil
 
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
@@ -29,12 +27,11 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     var audioPath: String = ""
     var imagePath: String = ""
-    
     var word: String = ""
     var text: String = ""
     var photo: String = ""
     
-    @IBOutlet weak var saveWordButton: UIBarButtonItem!
+    @IBOutlet weak var saveBtn: UIBarButtonItem!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -50,7 +47,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var audioSlider: UISlider!
-    @IBOutlet weak var audioTimerLabel: UILabel!
     
     //Outlets para a foto
     @IBOutlet var photoImage: UIImageView!
@@ -61,8 +57,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        retrieveLoggedUser()
-        print("self.userId : ", self.userId)
         
         scrollView.contentSize.height = 300
 
@@ -70,7 +64,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         
         // botões do audio recorder
         playButton.hidden = true
-        audioTimerLabel.hidden = true
         stopBtn.hidden = true
         
         // Enable the Save button only if the text field has a valid Word name
@@ -178,16 +171,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         recordButton.addGestureRecognizer(longPressRecogniser)
     }
 
-    
-    func retrieveLoggedUser() {
-        
-        // recupera os dados do usuário logado no app
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        self.userId = prefs.integerForKey("id") as Int
-        NSLog("usuário logado: %ld", userId)
-        
-    }
-    
     
     //MARK: Actions
     
@@ -423,7 +406,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     // MARK: Item Carnet Process
     
     
-    @IBAction func saveWordButton(sender: AnyObject) {
+    @IBAction func saveItem(sender: AnyObject) {
         ////recupera o id da sessão
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
@@ -438,7 +421,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let params : [String: String] = [
             "word": self.wordTextField.text!,
             "text": self.descTextView.text,
-            "photo": self.imagePath,
+            "image": self.imagePath,
             "user": String(userId)
         ]
             
@@ -447,7 +430,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
-            }.responseSwiftyJSON({ (request, response, json, error) in
+            }
+            .responseSwiftyJSON({ (request, response, json, error) in
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -466,6 +450,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                     }
                 }
             })
+       
     }
 
     
@@ -479,13 +464,13 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     func textFieldDidBeginEditing(textField: UITextField) {
         // Disable the Save button while editing.
-        saveWordButton.enabled = false
+        saveBtn.enabled = false
     }
  
     func checkValidWordName() {
         // Disable the Save button if the text field is empty.
         let text = wordTextField.text ?? ""
-        saveWordButton.enabled = !text.isEmpty
+        saveBtn.enabled = !text.isEmpty
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
@@ -496,18 +481,18 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
 
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier! == "go_to_carnet" {
-            let carnetTableView:CarnetTVC = segue.destinationViewController as! CarnetTVC
-            
-                word = wordTextField.text ?? ""
-                text = descTextView.text ?? ""
-                let imgUtils:ImageUtils = ImageUtils()
-                self.photoImage.image = imgUtils.loadImageFromPath(photo)
-            
-            carnetTableView.item = item
-          
-            //falta som
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier! == "go_to_carnet" {
+//            let carnetTableView:CarnetTVC = segue.destinationViewController as! CarnetTVC
+//            
+//                word = wordTextField.text ?? ""
+//                text = descTextView.text ?? ""
+//                let imgUtils:ImageUtils = ImageUtils()
+//                self.photoImage.image = imgUtils.loadImageFromPath(photo)
+//    
+//            carnetTableView.registered = true
+//          
+////            falta som
+//        }
+//    }
 }

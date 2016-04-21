@@ -7,12 +7,19 @@
 //
 
 import Foundation
-import CoreData
 
-class Carnet: NSManagedObject {
-    @NSManaged var word:String
-    @NSManaged var desc:String
-    @NSManaged var photo:String
-    @NSManaged var category:NSNumber
-    @NSManaged var user:NSManagedObject
+class Carnet {
+    let word : String
+    let text : String
+    let image : String
+    let audio : String
+    let user : Int!
+    
+        init(dictionary : [String : AnyObject]) {
+            word = dictionary["word"] as? String ?? ""
+            text = dictionary["text"] as? String ?? ""
+            image = dictionary["image"] as? String ?? ""
+            audio = dictionary["audio"] as? String ?? ""
+            user = dictionary["id"] as? Int
+    }
 }

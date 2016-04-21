@@ -17,7 +17,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     //MARK: Properties
     
     
-    var item: Carnet? = nil
+    var item: [String] = []
     
     var restPath = "http://server.maplango.com.br/note-rest"
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -76,7 +76,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         removeImage.hidden = true
         
         self.indicator.showActivityIndicator(self.view)
-        let params : [String: AnyObject] = [
+        let params : [String: String] = [
             "word" : "",
             "desc" : "",
             "photo" : ""
@@ -96,26 +96,26 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     // MARK : Actions
         
         
-    @IBAction func edit(sender: AnyObject) {
-        
-        if editBtn.title == "Confirmer" {
-            
-            itemWordTxtView.editable = false
-            itemDescTxtView.editable = false
-            removeImage.hidden = true
-            editBtn.title = "Éditer"
-            itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
-            itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
-            navigationItem.hidesBackButton = false
-            navigationItem.title = "Carnet"
-            
-        } else {
-            
-            editItemCarnet()
-        }
-        
-    }
-    
+//    @IBAction func edit(sender: AnyObject) {
+//        
+//        if editBtn.title == "Confirmer" {
+//            
+//            itemWordTxtView.editable = false
+//            itemDescTxtView.editable = false
+//            removeImage.hidden = true
+//            editBtn.title = "Éditer"
+//            itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
+//            itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
+//            navigationItem.hidesBackButton = false
+//            navigationItem.title = "Carnet"
+//            
+//        } else {
+//            
+//            editItemCarnet()
+//        }
+//        
+//    }
+//    
     
     @IBAction func removeMedia(sender: AnyObject) {
         
@@ -125,43 +125,43 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     }
 
     
-    func editItemCarnet() {
-        
-        item?.word = itemWordTxtView.text!
-        item?.desc = itemDescTxtView.text!
-        
-        itemWordTxtView.editable = true
-        itemDescTxtView.editable = true
-        
-        if mediaView.hidden == false {
-            removeImage.hidden = false
-            removeImage.enabled = true
-        }
-        
-        itemWordTxtView.textColor = UIColor.darkGrayColor()
-        itemDescTxtView.textColor = UIColor.darkGrayColor()
-        
-        //falta poder modificar foto
-        //falta poder modificar som
-        
-        editBtn.title = "Confirmer"
-        
-        navigationItem.hidesBackButton = true
-        
-
-    }
+//    func editItemCarnet() {
+//        
+//        item?.word = itemWordTxtView.text!
+//        item?.desc = itemDescTxtView.text!
+//        
+//        itemWordTxtView.editable = true
+//        itemDescTxtView.editable = true
+//        
+//        if mediaView.hidden == false {
+//            removeImage.hidden = false
+//            removeImage.enabled = true
+//        }
+//        
+//        itemWordTxtView.textColor = UIColor.darkGrayColor()
+//        itemDescTxtView.textColor = UIColor.darkGrayColor()
+//        
+//        //falta poder modificar foto
+//        //falta poder modificar som
+//        
+//        editBtn.title = "Confirmer"
+//        
+//        navigationItem.hidesBackButton = true
+//        
+//
+//    }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        
-        editItemCarnet()
-        
-        let limitLength = 149
-        guard let text = textView.text else { return true }
-        let newLength = text.characters.count - range.length
-        
-        return newLength <= limitLength
-        
-    }
+//    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+//        
+//        editItemCarnet()
+//        
+//        let limitLength = 149
+//        guard let text = textView.text else { return true }
+//        let newLength = text.characters.count - range.length
+//        
+//        return newLength <= limitLength
+//        
+//    }
 
     
     override func viewDidLayoutSubviews() {
