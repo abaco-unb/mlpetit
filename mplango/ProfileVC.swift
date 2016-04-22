@@ -14,7 +14,7 @@ import MapKit
 
 class ProfileVC: UIViewController {
     
-    var users = [User]()
+    var user: RUser!
     var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
@@ -152,8 +152,17 @@ class ProfileVC: UIViewController {
         print ("unwindSecondView fired in first view")
         print("self.userId : ", self.userId)
         self.upServerUser()
-
-        
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        print(sender)
+//        if segue.identifier == "show_badges" {
+//            let gamificationController:ProfileGameVC = segue.destinationViewController as! ProfileGameVC
+//            let gameProfile:RUser = self.user
+//            gamificationController.gameProfile = gameProfile
+//            
+//        }
+    }
+
     
 }

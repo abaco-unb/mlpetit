@@ -59,6 +59,7 @@ class CarnetTVC: UITableViewController {
                         var word:String  = ""
                         var text:String = ""
                         var image:String = "";
+                        
                         if let noteId = note["id"].int {
                             id = noteId
                         }
@@ -67,15 +68,18 @@ class CarnetTVC: UITableViewController {
                            word = noteWord
                             
                         }
+                        
                         if let noteText = note["text"].string {
                             text = noteText
                             
                         }
                         
                         if let noteImage = note["image"].string {
+//                            let imgUtils:ImageUtils = ImageUtils()
                             image = noteImage
                             
                         }
+                        
                         self.itens.append(Carnet(id: id, word: word, text: text, image: image))
                     }
                     self.indicator.hideActivityIndicator();
@@ -97,27 +101,13 @@ class CarnetTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as! CarnetTableViewCell
-        
         cell.wordLabel.text = self.itens[indexPath.row].word
-    
-//        print(self.itens[indexPath.row])
-        
         return cell
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
 
@@ -136,18 +126,19 @@ class CarnetTVC: UITableViewController {
     }
     */
     
-    
+
     
     // MARK: - TableView Delete
     
-//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        let managedObject:NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
-//        moContext?.deleteObject(managedObject)
-//        do {
-//            try moContext?.save()
-//        } catch _ {
-//        }
-//    }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            print("item is \(self.itens[indexPath.row])")
+            
+            let urlEdit :String = restPath + "?id=" + String(itens)
+            Alamofire.request(.DELETE, urlEdit)
+            self.upServerNote()
+        }
+    }
     
     
     //MARK: PrepareForSegue
@@ -160,6 +151,7 @@ class CarnetTVC: UITableViewController {
             let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
             let item:Carnet = self.itens[indexPath!.row]
             itemController.item = item
+            
         }
     }
     

@@ -38,8 +38,8 @@
 		5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448EB001C1B71DB004D771A /* helpSettingsVC.swift */; };
 		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
+		5462F92C1CCA9F8500F44410 /* ProfileContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462F92B1CCA9F8500F44410 /* ProfileContact.swift */; };
 		5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */; };
-		5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */; };
 		5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */; };
 		54B4A7EA1BEB80E300199613 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7E91BEB80E300199613 /* EditProfile.swift */; };
 		54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EB1BEB8E2400199613 /* Settings.swift */; };
@@ -306,8 +306,8 @@
 		5448EB001C1B71DB004D771A /* helpSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpSettingsVC.swift; sourceTree = "<group>"; };
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
+		5462F92B1CCA9F8500F44410 /* ProfileContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileContact.swift; sourceTree = "<group>"; };
 		5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
-		5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSegue.swift; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTableViewCell.swift; sourceTree = "<group>"; };
 		54B4A7E91BEB80E300199613 /* EditProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
@@ -653,7 +653,7 @@
 			children = (
 				541546141B7D1548008E182C /* ProfileVC.swift */,
 				5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */,
-				5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */,
+				5462F92B1CCA9F8500F44410 /* ProfileContact.swift */,
 				8256CAFD1B40FD730002708C /* ContactViewController.swift */,
 				8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */,
 				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
@@ -986,6 +986,7 @@
 				82D73CAA1B82479400DFEAB0 /* RecordedAudio.swift in Sources */,
 				54241A111B7E35040074D350 /* Carnet.swift in Sources */,
 				823CC00D1B4629C000F633F8 /* MapView.swift in Sources */,
+				5462F92C1CCA9F8500F44410 /* ProfileContact.swift in Sources */,
 				1536E30B1C6FBE1000471E86 /* CountryUtils.swift in Sources */,
 				542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */,
 				54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */,
@@ -1012,7 +1013,6 @@
 				54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
-				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,

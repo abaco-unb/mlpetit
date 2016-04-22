@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RUser {
+class RUser: NSObject {
     
     var id:Int
     var email:String
@@ -18,8 +18,9 @@ class RUser {
     var password:String
     var image:String
     var level:Int
+    var bio:String
     
-    init(id:Int, email: String, name: String, gender: String, password: String, nationality: String, image: String, level: Int) {
+    init(id:Int, email: String, name: String, gender: String, password: String, nationality: String, image: String, level: Int, bio: String) {
         self.id = id
         self.name = name
         self.email = email
@@ -28,6 +29,7 @@ class RUser {
         self.nationality = nationality
         self.image = image
         self.level = level
+        self.bio = bio
         
     }
     
