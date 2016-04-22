@@ -18,7 +18,7 @@ class CarnetTVC: UITableViewController {
     var restPath = "http://server.maplango.com.br/note-rest"
     var userId:Int!
     
-    var itens = [String]()
+    var itens = [Carnet]()
     
 
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -50,82 +50,42 @@ class CarnetTVC: UITableViewController {
     func upServerNote() {
         
         self.indicator.showActivityIndicator(self.view)
-
-//        let urlString = restPath
-//        let urlEncodedString = urlString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        
-//        let url = NSURL( string: restPath)
-//        
-//        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, innerError) in
-//            let json = JSON(data: data!)
-//            let carnet = json.arrayValue
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
-//                
-//                for list in carnet
-//                    
-//                {
-//                    let word = list["word"].stringValue
-//                    print( "word: \(word)" )
-//                    self.itens.append(word)
-//                }
-//                
-//                dispatch_async(dispatch_get_main_queue(),{
-//                    self.tableView.reloadData()
-//                })
-//            })
-//        }
-//        task.resume()
-//    }
-
-        
-//        self.indicator.showActivityIndicator(self.view)
-        
-    
 //        Checagem remota
         Alamofire.request(.GET, self.restPath)
-            .responseJSON
-            { response in switch response.result {
-                
-            case .Success(let JSON):
-                
-                if let carnet = JSON as? NSArray {
-                    
-//                    for list in carnet { // loop through data items
-//                        let obj = item as! NSDictionary
-//                        let list = String(obj["word"])
-//                        self.itens.append(list)
-//                    }
-//                
-//                }
-//                
-//                self.tableView.reloadData()
-                    
-                    for list in carnet {
-                    
-                        let word = list["word"]!!.stringValue
-                        print( "word: \(word)" )
-                        self.itens.append(word)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if let notes = json["data"].array {
+                    for note in notes {
+                        var id:Int = 0
+                        var word:String  = ""
+                        var text:String = ""
+                        var image:String = "";
+                        if let noteId = note["id"].int {
+                            id = noteId
+                        }
+                        
+                        if let noteWord = note["word"].string {
+                           word = noteWord
+                            
+                        }
+                        if let noteText = note["text"].string {
+                            text = noteText
+                            
+                        }
+                        
+                        if let noteImage = note["image"].string {
+                            image = noteImage
+                            
+                        }
+                        self.itens.append(Carnet(id: id, word: word, text: text, image: image))
                     }
+                    self.indicator.hideActivityIndicator();
+                    self.tableView.reloadData()
                     
                 }
-                
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.tableView.reloadData()
-                })
-                
-            case .Failure(let error):
-                print("Request failed with error: \(error)")
-                
-            }
-        }
+            });
         
     }
     
-    
-    
-
-
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -140,7 +100,7 @@ class CarnetTVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as! CarnetTableViewCell
         
-        cell.wordLabel.text = self.itens[indexPath.row]
+        cell.wordLabel.text = self.itens[indexPath.row].word
     
 //        print(self.itens[indexPath.row])
         
@@ -192,16 +152,16 @@ class CarnetTVC: UITableViewController {
     
     //MARK: PrepareForSegue
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-//        
-//        if segue.identifier == "show_item" {
-//            let cell = sender as! UITableViewCell
-//            let indexPath = tableView.indexPathForCell(cell)
-//            let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
-//            let item:JSON = self.item.objectAtIndexPath(indexPath!) as! JSON
-//            itemController.item = item.
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        print(sender)
+        if segue.identifier == "show_item" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
+            let item:Carnet = self.itens[indexPath!.row]
+            itemController.item = item
+        }
+    }
     
     
 }
