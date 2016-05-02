@@ -5,22 +5,19 @@
 //  Created by Thomas Petit on 08/08/2015.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
-
 import UIKit
 import Alamofire
 import SwiftyJSON
 
 class CarnetTVC: UITableViewController {
-       
         
     //MARK: Properties
+    
+    var itens = [Carnet]()
     
     var restPath = "http://server.maplango.com.br/note-rest"
     var userId:Int!
     
-    var itens = [Carnet]()
-    
-
     var indicator:ActivityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
@@ -32,11 +29,6 @@ class CarnetTVC: UITableViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     
     func retrieveLoggedUser() {
         
@@ -75,7 +67,6 @@ class CarnetTVC: UITableViewController {
                         }
                         
                         if let noteImage = note["image"].string {
-//                            let imgUtils:ImageUtils = ImageUtils()
                             image = noteImage
                             
                         }
@@ -91,6 +82,11 @@ class CarnetTVC: UITableViewController {
     }
     
     // MARK: - Table view data source
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

@@ -13,8 +13,6 @@ class ContactViewController: UITableViewController {
     
     //MARK: Properties
     
-
-    
     var list = [RUser]()
     
     var profileFilter:NSNumber = 2
@@ -74,6 +72,7 @@ class ContactViewController: UITableViewController {
                         
                         if let userGender = user["gender"].string {
                             gender = userGender
+
                         }
                         
                         if let userName = user["name"].string {
@@ -92,8 +91,6 @@ class ContactViewController: UITableViewController {
                         }
                         
                         if let userImage = user["image"].string {
-//                            let imgUtils:ImageUtils = ImageUtils()
-//                            image = imgUtils.loadImageFromPath(im)
                             image = userImage
 
                         }
@@ -148,19 +145,17 @@ class ContactViewController: UITableViewController {
         
         } else {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-            cell.textLabel!.text = self.list[indexPath.row].name
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
+            cell.contactName.text = self.list[indexPath.row].name
 
-            let imgUtils:ImageUtils = ImageUtils()
-            cell.imageView?.image  = imgUtils.loadImageFromPath(self.list[indexPath.row].image)
+//            let imgUtils:ImageUtils = ImageUtils()
+//            cell.contactPicture.image  = imgUtils.loadImageFromPath(self.list[indexPath.row].image)
             
             
-            //let newImage = " "//resizeImage(image, toTheSize: CGSizeMake(70, 70))
-            //cell.imageView!.image = newImage
-            
-            cell.imageView?.layer.masksToBounds = true
-            cell.imageView?.layer.cornerRadius = 35
-            cell.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+//            cell.contactPicture.image  = self.list[indexPath.row].image
+            cell.contactPicture.image  = UIImage(named: self.list[indexPath.row].image)
+            cell.contactPicture.layer.masksToBounds = true
+            cell.contactPicture.layer.cornerRadius = 35
 
             return cell
 
@@ -186,21 +181,6 @@ class ContactViewController: UITableViewController {
     
     func controllerDidChangeContent(controller: RUser) {
         tableView.reloadData()
-    }
-    
-    func resizeImage(image:UIImage, toTheSize size:CGSize)->UIImage{
-        let scale = CGFloat(max(size.width/image.size.width,
-            size.height/image.size.height))
-        let width:CGFloat  = image.size.width * scale
-        let height:CGFloat = image.size.height * scale;
-        
-        let rr:CGRect = CGRectMake( 0, 0, width, height);
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0);
-        image.drawInRect(rr)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        return newImage
     }
     
     /*

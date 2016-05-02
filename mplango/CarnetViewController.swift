@@ -60,6 +60,9 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        retrieveLoggedUser()
+        print("self.userId : ", self.userId)
+        
         scrollView.contentSize.height = 300
         
         itemDescTxtView.delegate = self
@@ -84,8 +87,10 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         itemWordTxtView.text = item.word
         itemDescTxtView.text = item.text
         let imgUtils:ImageUtils = ImageUtils()
-        itemPhoto.image = imgUtils.loadImageFromPath(item.image)
+        self.itemPhoto.image = imgUtils.loadImageFromPath(item.image)
+        
         //falta o audio (criar no servidor)
+        
         
         //Mostrar ou não as Media View em função do conteúdo no servidor (se tem imagem e/ou som)
         if (itemPhoto.image == nil) {

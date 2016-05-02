@@ -39,15 +39,43 @@ class ProfileContact: UIViewController {
         
         self.navigationItem.title = contact.name
         self.profileNationality.text = contact.nationality
-        self.profileGender.image = UIImage(named: "")
         self.profileBio.text = contact.bio
-        self.profileLangLevel.image = UIImage(named: "")
+        
+        if contact.gender == "Homme" {
+            self.profileGender.image = UIImage(named:"icon_masc_profile")
+        }
+        else if contact.gender == "Femme" {
+            self.profileGender.image = UIImage(named:"icon_fem_profile")
+        }
+        
+        let imgUtils:ImageUtils = ImageUtils()
+        self.profilePicture.image = imgUtils.loadImageFromPath(contact.image)
+        
+        
+        if contact.level == 1 {
+            self.profileLangLevel.image = UIImage(named: "profile_niv2")
+        }
+        else if contact.level == 2 {
+            self.profileLangLevel.image = UIImage(named: "profile_niv3")
+        }
+        else if contact.level == 3 {
+                self.profileLangLevel.image = UIImage(named: "profile_niv4")
+        }
+        else if contact.level == 4 {
+            self.profileLangLevel.image = UIImage(named: "profile_nivM")
+        }
+        
+        else {
+            self.profileLangLevel.image = UIImage(named: "profile_niv1")
+
+        }
+        
         
 //        self.profileNumberPosts.text =
 //        self.profileNumberFollowers.text =
 //        self.profileNumberFollowing.text =
         
-            
+        
         // Custom the visual identity of Image View
         profilePicture.layer.cornerRadius = 40
         profilePicture.layer.masksToBounds = true
@@ -59,12 +87,7 @@ class ProfileContact: UIViewController {
         self.view.addGestureRecognizer(swipeGestureRecognizer)
         
     }
-    
-    
-    
-    func showProfileGameVC() {
-        self.performSegueWithIdentifier("showBadges", sender: self)
-    }
+
     
     func retrieveLoggedUser() {
         
