@@ -18,8 +18,8 @@ class ForgotPassViewController: UIViewController {
     }
 
     @IBAction func verify(sender: AnyObject) {
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let contxt: NSManagedObjectContext = appDel.managedObjectContext!
+//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let contxt: NSManagedObjectContext = appDel.managedObjectContext!
         
     }
     override func didReceiveMemoryWarning() {

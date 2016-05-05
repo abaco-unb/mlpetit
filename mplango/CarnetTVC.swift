@@ -42,8 +42,14 @@ class CarnetTVC: UITableViewController {
     func upServerNote() {
         
         self.indicator.showActivityIndicator(self.view)
+
+        let params : [String: Int] = [
+            "user": self.userId
+            
+        ]
+
 //        Checagem remota
-        Alamofire.request(.GET, self.restPath)
+        Alamofire.request(.GET, self.restPath, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 if let notes = json["data"].array {
                     for note in notes {

@@ -16,7 +16,7 @@ class TabBarController: UITabBarController, UINavigationControllerDelegate {
         super.viewDidLoad()
 
         
-        var tabBar = self.tabBar
+//        var tabBar = self.tabBar
         
         UITabBar.appearance().barTintColor = UIColor(hex: 0x2C98D4)
         

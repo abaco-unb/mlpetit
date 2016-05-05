@@ -5,6 +5,7 @@
 //  Created by Carlos Wagner Pereira de Morais on 28/06/15.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
+
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -251,7 +252,7 @@ class ContactViewController: UITableViewController {
         if segue.identifier == "show_profile" {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contactViewController:ProfileContact = segue.destinationViewController as! ProfileContact
+            let contactViewController:ProfileVC = segue.destinationViewController as! ProfileVC
             let contact:RUser = self.list[indexPath!.row]
             contactViewController.contact = contact
             
