@@ -10,13 +10,14 @@ import Alamofire
 import SwiftyJSON
 import UIKit
 
-class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate {
+class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     
-    var users = [User]()
+    var user: RUser!
     var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
+    var gender:String = ""
     var imagePath: String = ""
     
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -30,12 +31,22 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var userBio: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
     
+    @IBOutlet weak var pickeViewCountries: UIPickerView!
+    var nationality: String = ""
+    var pickerCountryDataSource = ["Afghanistan", "Afrique du Sud", "Algérie", "Allemagne", "Andorre","Antigua-et-Barbuda", "Anguilla", "Albanie", "Arabie saoudite", "Arménie", "Angola", "Antarctique", "Argentine", "Aruba", "Autriche", "Australie", "Åland (Îles)", "Azerbaïdjan", "Bahamas", "Bahreïn", "Bangladesh", "Barbade", "Belgique", "Belize", "Bénin", "Bermudes", "Bhoutan", "Biélorussie", "Bolivie", "Bosnie-Herzégovine", "Botswana", "Bouvet (Île)", "Brésil", "Brunéi Darussalam", "Bulgarie", "Burkina Faso", "Burundi", "Caïmans (Îles)", "Cambodge", "Cameroun", "Canada", "Cap-Vert", "Chili", "Chine", "Christmas (Île)", "Chypre", "Cocos (Îles)", "Comores", "Congo-Brazzaville", "Congo-Kinshasa", "Cook (Îles)", "Côte d’Ivoire",  "Colombie", "Corée du Nord", "Corée du Sud", "Costa Rica", "Cuba",  "Curaçao", "Croatie", "Danemark", "Djibouti", "Dominique", "Égypte", "El Salvador", "Émirats arabes unis", "Équateur", "Érythrée", "Espagne", "Estonie", "États fédérés de Micronésie", "États-Unis", "Éthiopie", "Féroé (Îles)", "Fidji", "Finlande", "France", "Gabon", "Gambie", "Géorgie", "Géorgie du Sud et îles Sandwich du Sud", "Ghana", "Gibraltar", "Grèce", "Grenade", "Groenland", "Guadeloupe", "Guam", "Guatemala", "Guernesey", "Guinée", "Guinée équatoriale", "Guinée-Bissau", "Guyana", "Guyane française", "Haïti", "Honduras", "Hong Kong", "Heard et McDonald (Îles)", "Hongrie", "Île de Man", "Îles Turques-et-Caïques", "Îles Vierges britanniques", "Îles Vierges des États-Unis", "Inde", "Indonésie", "Irak", "Iran", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Jersey", "Jordanie", "Kazakhstan", "Kenya", "Kirghizistan", "Kiribati", "Koweït", "Laos", "Lesotho", "Lettonie", "Liban", "Libéria", "Libye", "Liechtenstein", "Lituanie", "Luxembourg", "Macao", "Macédoine", "Madagascar", "Malaisie", "Malawi", "Maldives", "Mali", "Malouines (Îles)", "Malte", "Mariannes du Nord (Îles)", "Maroc", "Marshall (Îles)", "Martinique", "Maurice", "Mauritanie", "Mayotte", "Mexique", "Moldavie", "Monaco", "Mongolie", "Monténégro", "Montserrat", "Mozambique", "Myanmar", "Namibie", "Nauru", "Népal", "Nicaragua", "Niger", "Nigéria", "Niue", "Norfolk (Île)", "Norvège", "Nouvelle-Calédonie", "Nouvelle-Zélande", "Oman", "Ouganda", "Ouzbékistan", "Pakistan", "Palaos", "Panama", "Papouasie-Nouvelle-Guinée", "Paraguay", "Pays-Bas", "Pays-Bas caribéens", "Pérou", "Philippines", "Pitcairn (Îles)", "Pologne", "Polynésie française", "Porto Rico", "Portugal", "Qatar", "Réunion (La)", "République centrafricaine", "République Dominicaine", "République Tchèque", "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Sahara occidental", "Saint-Barthélemy", "Saint-Christophe-et-Niévès", "Sainte-Hélène", "Sainte-Lucie", "Saint-Marin", "Saint-Martin", "Saint-Martin (partie néerlandaise)", "Saint-Pierre-et-Miquelon", "Salomon (Îles)", "Samoa", "Samoa américaines", "Sao Tomé-et-Principe", "Sénégal", "Serbie", "Seychelles", "Sierra Leone", "Singapour", "Slovaquie", "Slovénie", "Somalie", "Soudan", "Soudan du Sud", "Sri Lanka", "Suède", "Suisse", "Suriname", "Svalbard et Jan Mayen", "Swaziland", "Syrie", "Tadjikistan", "Taïwan", "Tanzanie", "Tchad", "Terres australes françaises", "Territoire britannique de l’océan Indien", "Territoires palestiniens", "Thaïlande", "Timor oriental", "Togo", "Tokelau", "Tonga", "Trinité-et-Tobago", "Tunisie", "Turkménistan", "Turquie", "Tuvalu", "Ukraine", "Uruguay", "Vanuatu", "Vatican", "Venezuela", "Vietnam",  "Wallis-et-Futuna", "Yémen",  "Zambie", "Zimbabwe"];
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         retrieveLoggedUser()
         print("self.userId : ", self.userId)
         self.upServerUser()
+        
+        self.pickeViewCountries.dataSource = self
+        self.pickeViewCountries.delegate = self
+        
+        pickeViewCountries.hidden = true;
 
         scroll.contentSize.height = 200
         
@@ -56,13 +67,18 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         userGender.layer.masksToBounds = true
         
         userBio.delegate = self
-        
+
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EditProfile.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    
     }
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+        pickeViewCountries.hidden = true
 
     }
     
@@ -91,14 +107,59 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         return newLength <= limitLength
     }
     
+    //MARK : Countries Picker View
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerCountryDataSource.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerCountryDataSource[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        userNation.text = pickerCountryDataSource[row]
+        confirmEditProf.enabled = true
+
+        pickeViewCountries.hidden = true;
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if textField == userNation {
+            userName.resignFirstResponder()
+            userBio.resignFirstResponder()
+            pickeViewCountries.hidden = false
+            return false
+        }
+        
+        return true
+    }
+
     
 
     //MARK: Actions
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
+        
     }
  
+    @IBAction func indexChanged(sender: UISegmentedControl) {
+        switch userGender.selectedSegmentIndex {
+        case 0:
+            gender = "Homme"
+        case 1:
+            gender = "Femme"
+        default:
+            break
+        }
+        confirmEditProf.enabled = true
+    }
     
     @IBAction func confirmEditProf(sender: AnyObject) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -110,12 +171,12 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print(self.userBio.text)
         print(userId)
         
-        let params : [String: String] = [
+        let params : [String: AnyObject] = [
             "image" : self.imagePath,
             "name" : self.userName.text!,
             "nationality" : self.userNation.text!,
             "bio" : self.userBio.text!,
-            "gender" : String(userGender.selectedSegmentIndex.description)
+            "gender" : self.gender,
         ]
         
         let urlEdit :String = restPath + "?id=" + String(userId)
@@ -316,18 +377,18 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        profPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
-//        var angle = 0.0;
-//
-//        if profPicture.image?.imageOrientation == UIImageOrientation.Up {
-//            angle = 90.0
-//        }
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let fixOrientationImage = chosenImage!.fixOrientation()
+        profPicture.image = fixOrientationImage
+
         
         // save image in directory
         let imgUtils:ImageUtils = ImageUtils()
         self.imagePath = imgUtils.fileInDocumentsDirectory("profile.png")
         imgUtils.saveImage(profPicture.image!, path: self.imagePath)
+        
+        confirmEditProf.enabled = true
         
     }
     
@@ -335,7 +396,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
     
     
     
@@ -354,9 +414,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     func checkValidChange() {
         // Disable the Save button if the text field is empty.
         let text = userName.text ?? ""
-        let text2 = userNation.text ?? ""
-        let text3 = userBio.text ?? ""
-        let photo = profPicture.image ?? ""
+        let text2 = userBio.text ?? ""
         
         if (!text.isEmpty) {
             confirmEditProf.enabled = true
@@ -364,13 +422,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         } else if (!text2.isEmpty) {
             confirmEditProf.enabled = true
 
-        } else if (!text3.isEmpty) {
-            confirmEditProf.enabled = true
-            
-            
-        //VER ISSO: fazer com que o btn confirmar seja operativo qdo for trocada a foto de perfil
-        } else if (((photo?.didChangeValueForKey("image")) == nil)) {
-            confirmEditProf.enabled = true
             
         } else {
             confirmEditProf.enabled = false
@@ -392,4 +443,3 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
 }
-

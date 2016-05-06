@@ -29,6 +29,7 @@
 		15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */; };
 		15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */; };
 		540A4A411C11EF5A00C166D8 /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A4A401C11EF5A00C166D8 /* PostVC.swift */; };
+		540B2C331CD27B10005ED5D6 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540B2C321CD27B10005ED5D6 /* ContactCell.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
@@ -39,13 +40,13 @@
 		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
 		5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */; };
-		5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */; };
 		5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */; };
 		54B4A7EA1BEB80E300199613 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7E91BEB80E300199613 /* EditProfile.swift */; };
 		54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EB1BEB8E2400199613 /* Settings.swift */; };
 		54B4A7EF1BEB9DBE00199613 /* ChangeEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EE1BEB9DBE00199613 /* ChangeEmail.swift */; };
 		54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */; };
 		54C26FDF1C0FA08B002B5B5D /* TestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */; };
+		54C3621B1CDBCDDC00396754 /* fixedOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */; };
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
 		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
@@ -290,6 +291,7 @@
 		15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
 		15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
 		540A4A401C11EF5A00C166D8 /* PostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
+		540B2C321CD27B10005ED5D6 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		5415F8311C1F22DE0036D4E0 /* mplango.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mplango.entitlements; sourceTree = "<group>"; };
 		54241A0C1B7E1B1E0074D350 /* mplango 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -307,7 +309,6 @@
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
 		5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
-		5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSegue.swift; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTableViewCell.swift; sourceTree = "<group>"; };
 		54B4A7E91BEB80E300199613 /* EditProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
@@ -315,6 +316,7 @@
 		54B4A7EE1BEB9DBE00199613 /* ChangeEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmail.swift; sourceTree = "<group>"; };
 		54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswrd.swift; sourceTree = "<group>"; };
 		54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsVC.swift; sourceTree = "<group>"; };
+		54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fixedOrientation.swift; sourceTree = "<group>"; };
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 		542BABD21C62B131000D618D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */,
 				1513D99A1C4D163600D1729C /* ImageUtils.swift */,
 				1536E2F91C6F711900471E86 /* ActivityIndicator.swift */,
 				1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */,
@@ -651,20 +654,20 @@
 		828C71831B83C573009FE9B5 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				541546141B7D1548008E182C /* ProfileVC.swift */,
-				5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */,
-				5470F0A21B8DFD4100E3BA64 /* ProfileSegue.swift */,
-				8256CAFD1B40FD730002708C /* ContactViewController.swift */,
 				8283BE1C1B0143AF0085F9A6 /* AccountViewController.swift */,
 				8283BE421B0233440085F9A6 /* LoginViewController.swift */,
 				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
+				541546141B7D1548008E182C /* ProfileVC.swift */,
+				5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */,
+				8256CAFD1B40FD730002708C /* ContactViewController.swift */,
+				540B2C321CD27B10005ED5D6 /* ContactCell.swift */,
+				54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */,
+				54F0896B1C20A05100089687 /* FollowingTVC.swift */,
 				54B4A7E91BEB80E300199613 /* EditProfile.swift */,
 				54B4A7EE1BEB9DBE00199613 /* ChangeEmail.swift */,
 				54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */,
 				5448EB001C1B71DB004D771A /* helpSettingsVC.swift */,
 				54B4A7EB1BEB8E2400199613 /* Settings.swift */,
-				54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */,
-				54F0896B1C20A05100089687 /* FollowingTVC.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15FE53C31CA6F6B0002A28CC /* FBAnnotationClusterView.swift in Sources */,
+				54C3621B1CDBCDDC00396754 /* fixedOrientation.swift in Sources */,
 				82D73CAA1B82479400DFEAB0 /* RecordedAudio.swift in Sources */,
 				54241A111B7E35040074D350 /* Carnet.swift in Sources */,
 				823CC00D1B4629C000F633F8 /* MapView.swift in Sources */,
@@ -1012,12 +1016,12 @@
 				54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
-				5470F0A31B8DFD4100E3BA64 /* ProfileSegue.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
 				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
+				540B2C331CD27B10005ED5D6 /* ContactCell.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
 				15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,

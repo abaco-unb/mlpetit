@@ -26,11 +26,10 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     var audioRecorder: AVAudioRecorder!
     
     var audioPath: String = ""
-    var imagePath: String = ""
-    var word: String = ""
-    var text: String = ""
-    var photo: String = ""
     
+    var myImage = "profile.png"
+    var imagePath: String = ""
+        
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -272,6 +271,11 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         photoImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         addPicture.hidden = true
         removeImage.hidden = false
+        
+        // save image in directory
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imagePath = imgUtils.fileInDocumentsDirectory(self.myImage)
+        imgUtils.saveImage(photoImage.image!, path: self.imagePath);
         
     }
     

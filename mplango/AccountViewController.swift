@@ -128,7 +128,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
-        
+        pickeViewCountries.hidden = true
+
     }
     
     
@@ -155,6 +156,10 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == textFieldNationality {
+            textFieldName.resignFirstResponder()
+            textFieldEmail.resignFirstResponder()
+            textFieldPassword.resignFirstResponder()
+            textFieldConfPass.resignFirstResponder()
             pickeViewCountries.hidden = false
             return false
         }
@@ -246,7 +251,11 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let fixOrientationImage = chosenImage!.fixOrientation()
+        imageView.image = fixOrientationImage
+
         // save image in directory
         let imgUtils:ImageUtils = ImageUtils()
         self.imgPath = imgUtils.fileInDocumentsDirectory(self.myImage)

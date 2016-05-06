@@ -14,7 +14,7 @@ import MapKit
 
 class ProfileVC: UIViewController {
     
-    var users = [User]()
+    var contact: RUser!
     var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
@@ -33,16 +33,59 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        retrieveLoggedUser()
-        print("self.userId : ", self.userId)
-        self.upServerUser()
+        if (contact != self.userId) {
+            
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.backBarButtonItem!.enabled = true
+            self.navigationItem.backBarButtonItem!.title = "liste"
+    
+            self.navigationItem.title = contact.name
+            self.profileNationality.text = contact.nationality
+            self.profileBio.text = contact.bio
+            
+            if contact.gender == "Homme" {
+                self.profileGender.image = UIImage(named:"icon_masc_profile")
+            }
+            else if contact.gender == "Femme" {
+                self.profileGender.image = UIImage(named:"icon_fem_profile")
+            }
+            
+            let imgUtils:ImageUtils = ImageUtils()
+            self.profilePicture.image = imgUtils.loadImageFromPath(contact.image)
+            
+            
+            if (contact.level == 1) {
+                self.profileLangLevel.image = UIImage(named: "profile_niv2")
+            }
+            else if (contact.level == 2) {
+                self.profileLangLevel.image = UIImage(named: "profile_niv3")
+            }
+            else if (contact.level == 3) {
+                self.profileLangLevel.image = UIImage(named: "profile_niv4")
+            }
+            else if (contact.level == 4) {
+                self.profileLangLevel.image = UIImage(named: "profile_nivM")
+            }
+                
+            else {
+                self.profileLangLevel.image = UIImage(named: "profile_niv1")
+                
+            }
+            
+            
+            //        self.profileNumberPosts.text =
+            //        self.profileNumberFollowers.text =
+            //        self.profileNumberFollowing.text =
+            
+        } else {
+            
+            retrieveLoggedUser()
+            print("self.userId : ", self.userId)
+            self.upServerUser()
+            
+        }
         
 
-//        profileNumberFollowers.text =
-//        profileNumberFollowing.text =
-//        profileGender.image = user.gender
-//        profilePicture.image = user.image
-        
         
         // Custom the visual identity of Image View
         profilePicture.layer.cornerRadius = 40
@@ -138,6 +181,7 @@ class ProfileVC: UIViewController {
                     }
 
                 
+                
 
 //        profileNumberPosts.text = user.posts.count.description
                 
@@ -152,8 +196,17 @@ class ProfileVC: UIViewController {
         print ("unwindSecondView fired in first view")
         print("self.userId : ", self.userId)
         self.upServerUser()
-
-        
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        print(sender)
+//        if segue.identifier == "show_badges" {
+//            let gamificationController:ProfileGameVC = segue.destinationViewController as! ProfileGameVC
+//            let gameProfile:RUser = self.user
+//            gamificationController.gameProfile = gameProfile
+//            
+//        }
+    }
+
     
 }

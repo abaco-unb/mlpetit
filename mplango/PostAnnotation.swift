@@ -9,7 +9,7 @@
 import Foundation
 
 import MapKit
-import AddressBook
+import Contacts
 
 class PostAnnotation: FBAnnotation{
     let locationName: String
@@ -43,7 +43,7 @@ class PostAnnotation: FBAnnotation{
     
     // annotation callout info button opens this mapItem in Maps app
     func mapItem() -> MKMapItem {
-        let addressDictionary = [String(kABPersonAddressStreetKey): subtitle!]
+        let addressDictionary = [String(CNPostalAddressStreetKey): self.subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDictionary)
         
         let mapItem = MKMapItem(placemark: placemark)

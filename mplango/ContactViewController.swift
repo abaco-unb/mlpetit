@@ -5,55 +5,123 @@
 //  Created by Carlos Wagner Pereira de Morais on 28/06/15.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
+
 import UIKit
-import CoreData
+import Alamofire
+import SwiftyJSON
 
-
-class ContactViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class ContactViewController: UITableViewController {
     
     //MARK: Properties
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-
+    var list = [RUser]()
     
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
-    var users = [User]()
     var profileFilter:NSNumber = 2
+    
+    var restPath = "http://server.maplango.com.br/user-rest"
+    var userId:Int!
+    
+    var imagePath: String = ""
+
+    var indicator:ActivityIndicator = ActivityIndicator()
+    
     
     override func viewDidLoad() {
     super.viewDidLoad()
-    
-        fetchedResultController = getFetchedResultController()
-        fetchedResultController.delegate = self
-        do {
-            try fetchedResultController.performFetch()
-        } catch _ {
-        }
+        
+        retrieveLoggedUser()
+        print("self.userId : ", self.userId)
+        self.upServerListUsers()
+       
     }
     
+    func retrieveLoggedUser() {
+        
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
+        NSLog("usuário logado: %ld", userId)
+        
+    }
+    
+    func upServerListUsers() {
+        
+        self.indicator.showActivityIndicator(self.view)
+        //        Checagem remota
+        Alamofire.request(.GET, self.restPath)
+            .responseSwiftyJSON({ (request, response, json, error) in
+                if let users = json["data"].array {
+                    for user in users {
+                        var id:Int = 0
+                        var email:String = ""
+                        var gender:String = ""
+                        var name:String  = ""
+                        var nationality:String = ""
+                        var password:String = ""
+                        var image:String = ""
+                        var level:Int = 0
+                        var bio:String = "";
+                        
+                        if let userId = user["id"].int {
+                            id = userId
+                        }
+                        
+                        if let userEmail = user["email"].string {
+                            email = userEmail
+                            
+                        }
+                        
+                        if let userGender = user["gender"].string {
+                            gender = userGender
+
+                        }
+                        
+                        if let userName = user["name"].string {
+                            name = userName
+                            
+                        }
+                        
+                        if let userNationality = user["nationality"].string {
+                            nationality = userNationality
+                            
+                        }
+                        
+                        if let userPwd = user["password"].string {
+                            password = userPwd
+                            
+                        }
+                        
+                        if let userImage = user["image"].string {
+                            image = userImage
+
+                        }
+              
+                        
+                        if let userLevel = user["level"].int {
+                            level = userLevel
+                            
+                        }
+                        
+                        if let userBio = user["bio"].string {
+                            bio = userBio
+                            
+                        }
+                        
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: image, level: level, bio: bio))
+                        
+                    }
+                    self.indicator.hideActivityIndicator();
+                    self.tableView.reloadData()
+                    
+                }
+            });
+        
+    }
+    
+
     let sections:Array<AnyObject> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     
     // MARK:- Retrieve Users
-    
-    func getFetchedResultController() -> NSFetchedResultsController {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: moContext!, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultController
-        
-    }
-    
-    func itemFetchRequest() -> NSFetchRequest {
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        if(profileFilter != 2) {
-            print("fazer filtro")
-            let predicate = NSPredicate(format: "profile == %@", profileFilter)
-            fetchRequest.predicate = predicate
-        }
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-        
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -61,31 +129,37 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let numberOfSections = fetchedResultController.sections?.count
-        return numberOfSections!
+        return 1
     }
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRowsInSection = fetchedResultController.sections?[section].numberOfObjects
-        return numberOfRowsInSection!
+        return self.list.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell!
+        
         if indexPath.row == 0 {
             cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) 
+        
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
-            let user = fetchedResultController.objectAtIndexPath(indexPath) as! User
-            //let image:String = " "
-            //let newImage = " "//resizeImage(image, toTheSize: CGSizeMake(70, 70))
-            let cellImageLayer: CALayer?  = cell.imageView!.layer
-            cellImageLayer!.cornerRadius = 35
-            cellImageLayer!.masksToBounds = true
-            cell.textLabel!.text = user.name
-            //cell.imageView!.image = newImage
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
+            cell.contactName.text = self.list[indexPath.row].name
+
+//            let imgUtils:ImageUtils = ImageUtils()
+//            cell.contactPicture.image  = imgUtils.loadImageFromPath(self.list[indexPath.row].image)
+            
+            
+//            cell.contactPicture.image  = self.list[indexPath.row].image
+            cell.contactPicture.image  = UIImage(named: self.list[indexPath.row].image)
+            cell.contactPicture.layer.masksToBounds = true
+            cell.contactPicture.layer.cornerRadius = 35
+
+            return cell
+
         }
         
         return cell
@@ -106,23 +180,8 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
     
     // MARK: - TableView Refresh
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(controller: RUser) {
         tableView.reloadData()
-    }
-    
-    func resizeImage(image:UIImage, toTheSize size:CGSize)->UIImage{
-        let scale = CGFloat(max(size.width/image.size.width,
-            size.height/image.size.height))
-        let width:CGFloat  = image.size.width * scale
-        let height:CGFloat = image.size.height * scale;
-        
-        let rr:CGRect = CGRectMake( 0, 0, width, height);
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0);
-        image.drawInRect(rr)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        return newImage
     }
     
     /*
@@ -163,74 +222,42 @@ class ContactViewController: UITableViewController, NSFetchedResultsControllerDe
         }
     }
     
-    @IBAction func segmentedTapped(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            profileFilter = 0
-        case 1:
-            profileFilter = 1
-        default:
-            profileFilter = 2
-            break
-        }
-        print("sender.selectedSegmentIndex")
-        print(sender.selectedSegmentIndex)
-        fetchedResultController = getFetchedResultController()
-        do {
-            try fetchedResultController.performFetch()
-        } catch _ {
-        }
-        tableView.reloadData()
-    }
+//    @IBAction func segmentedTapped(sender: UISegmentedControl) {
+//        switch sender.selectedSegmentIndex {
+//        case 0:
+//            profileFilter = 0
+//        case 1:
+//            profileFilter = 1
+//        default:
+//            profileFilter = 2
+//            break
+//        }
+//        print("sender.selectedSegmentIndex")
+//        print(sender.selectedSegmentIndex)
+//        fetchedResultController = getFetchedResultController()
+//        do {
+//            try fetchedResultController.performFetch()
+//        } catch _ {
+//        }
+//        tableView.reloadData()
+//    }
     
     @IBAction func followUserTapped(sender: UIButton) {
         print("add user to this")
         
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        print(sender)
+        if segue.identifier == "show_profile" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let contactViewController:ProfileVC = segue.destinationViewController as! ProfileVC
+            let contact:RUser = self.list[indexPath!.row]
+            contactViewController.contact = contact
+            
+        }
     }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
-    
+   
 }
 

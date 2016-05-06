@@ -7,36 +7,24 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+
 
 class ProfileGameVC: UIViewController {
     
-    
-    
-//    var user: User!
+    var gameProfile: RUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         retrieveLoggedUser()
+
+//        navigationItem.title = gameProfile.name
         
-//        print("user data ")
-//        print(user.name)
-//        navigationItem.title = user.name
-        
-        //navigationItem.setHidesBackButton(true, animated: true)
     }
     
     func retrieveLoggedUser() {
-//        
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let email: String = prefs.objectForKey("USEREMAIL") as! String
-//        let fetchRequest = NSFetchRequest(entityName: "User")
-//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-//        
-//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-//            user = fetchResults[0];
-//        }
-        
     }
     
 }

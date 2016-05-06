@@ -22,8 +22,8 @@ class InitialViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
-        let borderAlpha : CGFloat = 0.7
-        let cornerRadius : CGFloat = 5.0
+//        let borderAlpha : CGFloat = 0.7
+//        let cornerRadius : CGFloat = 5.0
         
         btnConnection.backgroundColor = UIColor.clearColor()
         btnConnection.layer.borderWidth = 3.0

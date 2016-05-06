@@ -265,8 +265,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     func handleLongPress(getstureRecognizer : UIGestureRecognizer){
         if getstureRecognizer.state != .Began { return }
         
-        let touchPoint = getstureRecognizer.locationInView(self.mkMapView)
-        let touchMapCoordinate = mkMapView.convertPoint(touchPoint, toCoordinateFromView: mkMapView )
+//        let touchPoint = getstureRecognizer.locationInView(self.mkMapView)
+//        let touchMapCoordinate = mkMapView.convertPoint(touchPoint, toCoordinateFromView: mkMapView )
         
 //        //MARK -
 //        let post = Annotation(title: "Exemplo para o thomas",

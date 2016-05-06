@@ -124,7 +124,7 @@ class PostVC: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTra
         */
         
         scrollView.bounces = false
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "panRecognized:")
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostVC.panRecognized(_:)))
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
 
