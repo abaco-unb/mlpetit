@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Alamofire
 import SwiftyJSON
+import AlamofireSwiftyJSON
 import CoreLocation
 
 
@@ -25,7 +26,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     var street: String!
     var loggedUser: User!
     
-    var restPath = "http://server.maplango.com.br/post-rest"
     var indicator:ActivityIndicator = ActivityIndicator()
     
     
@@ -189,15 +189,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     func upServerPosts() {
         self.indicator.showActivityIndicator(self.view)
         //Checagem remota
-        Alamofire.request(.GET, self.restPath)
+        Alamofire.request(.GET, EndpointUtils.POST)
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                    if let posts = json["data"].array {
                     
                         for post in posts {
+                            print(post)
+                            var postId:Int = 0
                             var latitude:Double  = 0
                             var longitude:Double = 0
-                            var category:Int = 0;
+                            var category:Int = 0
+                            var likes:Int = 0
+                            
+                            
+                            if let id = post["id"].int {
+                                postId = id
+                                
+                            }
+                            
+                            if let tLikes = post["likes"].array {
+                                likes = tLikes.count
+                                
+                            }
                             
                             if let lat = post["latitude"].string {
                                 latitude = Double(lat)!
@@ -215,12 +229,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             print(latitude, longitude)
                              //show post on map
                              let annotation = PostAnnotation(
+                                id: postId,
                                 title: post["text"].stringValue,
                                 locationName: post["location"].stringValue,
                                 audio: post["audio"].stringValue,
                                 category: category,
                                 coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                userImage: post["photo"].stringValue
+                                timestamp:  post["created"].stringValue,
+                                userImage: EndpointUtils.USER + "?id=" + post["user"]["id"].stringValue +  "&avatar=true",
+                                userName:  post["user"]["name"].stringValue,
+                                likes: likes
+                                
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
                             self.posts.append(annotation);
@@ -310,9 +329,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
         locationManager.stopUpdatingLocation();
         
-        let regionToZone = MKCoordinateRegionMake(manager.location!.coordinate, MKCoordinateSpanMake(1,10))
-        mkMapView.setRegion(regionToZone, animated: true)
-        
+        if manager.location != nil {
+            let regionToZone = MKCoordinateRegionMake(manager.location!.coordinate, MKCoordinateSpanMake(1,10))
+            mkMapView.setRegion(regionToZone, animated: true)
+        }
         print("userLocation")
         print(userLocation)
         
@@ -328,17 +348,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        print("map controller")
-        print(segue.identifier)
-        print("*************************************")
-        
-        // para a segue que mostra o popover de notificações
-        if segue.identifier == "showNotifications" {
+        //print("map controller")
+        //print(segue.identifier)
+        if segue.identifier == "to_post_detail" {
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            print(navigationController.viewControllers)
+            let postDetailsController:PostDetailViewController = navigationController.viewControllers[0] as! PostDetailViewController
+            postDetailsController.post = (sender as! PostAnnotation)
+            print("*************************************")
+            print((sender as! PostAnnotation))
+            print("*************************************")
+        } else if segue.identifier == "showNotifications" {
             
             let notifVC = segue.destinationViewController as UIViewController
-            
             let controller = notifVC.popoverPresentationController
-            
             if controller != nil {
                 controller?.delegate = self
             }
@@ -350,6 +374,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
+    
     
 //    
 //    func getLatitudeLongitudeLimitsFromMap(mapView: MKMapView) -> [String: Double] {
@@ -556,21 +581,25 @@ extension MapViewController : MKMapViewDelegate {
         if annotation.isKindOfClass(PostAnnotation) {
             
             print( "titulo : ", annotation.title)
+            let postAnnotation = annotation as! PostAnnotation
             
             reuseId = "Post"
-            var postView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-            postView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            postView!.canShowCallout = true
-            postView!.image = UIImage(named: String((annotation as! PostAnnotation).getCategoryImageName()))
-            postView!.backgroundColor = UIColor.clearColor()
             
-            postView!.calloutOffset = CGPoint(x: -5, y: 5)
+            var postView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+                postView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                postView!.canShowCallout = true
+                postView!.image = UIImage(named: String((annotation as! PostAnnotation).getCategoryImageName()))
+                postView!.backgroundColor = UIColor.clearColor()
+                postView!.calloutOffset = CGPoint(x: -5, y: 5)
             //              postView.rightCalloutAccessoryView = postButton
             
             let imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
-//            let imgUtils:ImageUtils = ImageUtils()
-//            let image: UIImage = imgUtils.loadImageFromPath((annotation as! PostAnnotation).userImage)!
-//            imageview.image = image
+                imageview.layer.cornerRadius = 22
+                imageview.layer.masksToBounds = true
+                imageview.layer.borderWidth = 1
+                imageview.layer.borderColor = UIColor.greenColor().CGColor
+            let image: UIImage = ImageUtils.instance.loadImageFromPath(postAnnotation.userImage)!
+            imageview.image = image
             
             postView!.leftCalloutAccessoryView = imageview
             
@@ -578,6 +607,31 @@ extension MapViewController : MKMapViewDelegate {
         }
         
         return nil
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        NSLog("selecionou")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MapViewController.calloutTap(_:)))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func calloutTap(sender: UITapGestureRecognizer) {
+        
+        print(sender)
+        print("dentro calloutTap antes isKind")
+        if sender.view!.isKindOfClass(MKAnnotationView) {
+            print("dentro calloutTap depois isKind")
+            let postView : MKAnnotationView = sender.view as! MKAnnotationView
+            let post: PostAnnotation = postView.annotation as! PostAnnotation
+            //NSLog(post.getCategoryImageName())
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+            print("antes");
+            self.performSegueWithIdentifier("to_post_detail", sender: post)
+            }
+            
+        }
+        print("teste fora")
+        
     }
     
 }

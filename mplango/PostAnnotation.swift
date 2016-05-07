@@ -12,22 +12,27 @@ import MapKit
 import Contacts
 
 class PostAnnotation: FBAnnotation{
+    let id: Int
     let locationName: String
     let category: NSNumber
     let userImage: String
+    let userName: String
     let audio: String
+    let timestamp: String
+    let likes: Int
     
-    var imageName: String!
-    
-    init(title: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, userImage: String) {
+    init(id: Int, title: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, timestamp: String, userImage: String, userName: String, likes: Int) {
+        self.id = id
         self.locationName = locationName
         self.category = category
         self.userImage = userImage
+        self.userName = userName
+        self.timestamp = timestamp
         self.audio = audio
+        self.likes = likes
         super.init()
         super.coordinate = coordinate
         super.title = title
-        
     }
     
     /**

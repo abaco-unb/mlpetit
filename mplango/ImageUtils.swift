@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 class ImageUtils {
-
+    
+    static let instance = ImageUtils()
+    
     func getDocumentsURL() -> NSURL {
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         return documentsURL
@@ -31,16 +33,17 @@ class ImageUtils {
     
         return result
     }
-
-    func loadImageFromPath(path: String) -> UIImage? {
-        
-        let image = UIImage(contentsOfFile: path)
     
-        if image == nil {
+    func loadImageFromPath(remotePath: String) -> UIImage? {
         
-            print("missing image at: \(path)", terminator: "")
+        if let url = NSURL(string: remotePath) {
+            if let data = NSData(contentsOfURL: url) {
+                print("Loading image from url path: \(remotePath)", terminator: "")
+                return UIImage(data: data)
+            }        
+        } else {
+            print("missing image at: \(remotePath)", terminator: "")
         }
-        print("Loading image from path: \(path)", terminator: "")
-        return image
+        return nil
     }
 }

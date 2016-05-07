@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Alamofire
 import SwiftyJSON
+import AlamofireSwiftyJSON
 import CoreLocation
 
 
@@ -18,7 +19,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     //MARK: Properties
     
-    var restPath = "http://server.maplango.com.br/post-rest"
     var indicator:ActivityIndicator = ActivityIndicator()
     var post: PostAnnotation? = nil
     
@@ -41,6 +41,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var tags = [String]()
     var points = 0
     var category = 0
+    
+    var image:UIImage!
     
     
    
@@ -414,6 +416,9 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         let imgUtils:ImageUtils = ImageUtils()
         self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
         imgUtils.saveImage(photoImage.image!, path: self.imagePath);
+        
+        self.image = photoImage.image!
+        
         addPicture.hidden = true
         removeImage.hidden = false
         
@@ -478,9 +483,22 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             "photo" : self.imagePath,
             "user": String(userId)
         ]
-
+        
+        // example image data
+        let image = self.image
+        let imageData = UIImagePNGRepresentation(image)
+        
+        
         self.indicator.showActivityIndicator(self.view)
-        Alamofire.request(.POST, self.restPath, parameters: params)
+        
+        // CREATE AND SEND REQUEST ----------
+        
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.POST, parameters: params, imageData: imageData!)
+        
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
@@ -492,17 +510,50 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                     }
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                            print("The post is not okay.")
-                            self.indicator.hideActivityIndicator();
-                        }
-                        alertController.addAction(agreeAction)
-                        self.presentViewController(alertController, animated: true, completion: nil)
+                    //New Alert Ccontroller
+                    let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                    let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        print("The post is not okay.")
+                        self.indicator.hideActivityIndicator();
                     }
+                    alertController.addAction(agreeAction)
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
-            })
+            }
+        })
+    }
+    
+    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, imageData:NSData) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        let boundaryConstant = "myRandomBoundary12345";
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        // add image
+        uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData(imageData)
+        
+        // add parameters
+        for (key, value) in parameters {
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
     @IBAction func cancelPost(sender: AnyObject) {
