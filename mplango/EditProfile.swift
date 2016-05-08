@@ -14,11 +14,11 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     
     var user: RUser!
-    var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
     var gender:String = ""
     var imagePath: String = ""
+    var avatar:UIImage!
     
     var indicator:ActivityIndicator = ActivityIndicator()
 
@@ -179,7 +179,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
             "gender" : self.gender,
         ]
         
-        let urlEdit :String = restPath + "?id=" + String(userId)
+        let urlEdit :String = EndpointUtils.USER + "?id=" + String(userId)
         
         Alamofire.request(.PUT, urlEdit , parameters: params)
             .responseString { response in
@@ -250,16 +250,15 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         ]
         
         //Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: params)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]
-                print(user);
+
                  if let photo = user["image"].string {
                     print("photo de perfil : ", photo)
                     
-                    let imgUtils:ImageUtils = ImageUtils()
-                    self.profPicture.image = imgUtils.loadImageFromPath(photo)
+                    self.profPicture.image = ImageUtils.instance.loadImageFromPath(photo)
                  }
                 
                 if let username = user["name"].string {
@@ -384,9 +383,10 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
         
         // save image in directory
-        let imgUtils:ImageUtils = ImageUtils()
-        self.imagePath = imgUtils.fileInDocumentsDirectory("profile.png")
-        imgUtils.saveImage(profPicture.image!, path: self.imagePath)
+        self.imagePath = ImageUtils.instance.fileInDocumentsDirectory("profile.png")
+        ImageUtils.instance.saveImage(profPicture.image!, path: self.imagePath)
+        
+        self.avatar = profPicture.image!
         
         confirmEditProf.enabled = true
         

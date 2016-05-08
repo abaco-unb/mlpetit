@@ -15,7 +15,6 @@ import MapKit
 class ProfileVC: UIViewController {
     
     var contact: RUser!
-    var restPath = "http://localhost:10088/maplango/public/user-rest" //"http://server.maplango.com.br/user-rest"
     var userId:Int!
     
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -123,7 +122,7 @@ class ProfileVC: UIViewController {
         ]
 
         //Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: params)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]
@@ -131,8 +130,7 @@ class ProfileVC: UIViewController {
                 
                     if let photo = user["image"].string {
                     print("show photo : ", photo)
-                    let imgUtils:ImageUtils = ImageUtils()
-                    self.profilePicture.image = imgUtils.loadImageFromPath(self.restPath + "?id=" + String( self.userId ) + "&avatar=true")
+                        self.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String( self.userId ) + "&avatar=true")
                     }
                 
                     if let username = user["name"].string {
