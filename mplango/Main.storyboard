@@ -5050,8 +5050,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="56" y="28" width="324" height="17"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
@@ -5138,8 +5137,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="xZE-kv-zfx"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="360" y="24" width="20" height="24"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="6Ib-Zh-UOG"/>
                                                         <exclude reference="7lL-Us-jHo"/>
@@ -19353,7 +19351,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                 </constraint>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="013F72EA-E213-47EF-9020-71D0BE6CCEF6"/>
+                                                            <state key="normal" title="Button" image="12D04D7A-A2EC-46CD-8814-1165ABD0F6AA"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="doM-S7-B8a"/>
@@ -19377,7 +19375,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                 </constraint>
                                                             </constraints>
-                                                            <state key="normal" image="2E5B398A-4715-4746-AF23-C1FD9E1D0474"/>
+                                                            <state key="normal" image="FC3192A0-3AA3-4283-BF5F-BD8DBE39A5DC"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="MJt-Hz-UuQ"/>
@@ -25765,7 +25763,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         </scene>
     </scenes>
     <resources>
-        <image name="013F72EA-E213-47EF-9020-71D0BE6CCEF6" width="44" height="45">
+        <image name="12D04D7A-A2EC-46CD-8814-1165ABD0F6AA" width="44" height="45">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -25948,7 +25946,7 @@ AMIA2QDbAN0obyh0KH8oiCibKJ8oqiizKLgowCjDKMgo1yjbKOIo6ij3KPwo/ikAKQUpDSkQKRUpHSkg
 KTIpNSk6AAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAKTw
 </mutableData>
         </image>
-        <image name="2E5B398A-4715-4746-AF23-C1FD9E1D0474" width="135" height="135">
+        <image name="FC3192A0-3AA3-4283-BF5F-BD8DBE39A5DC" width="135" height="135">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
