@@ -274,8 +274,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
             self.indicator.showActivityIndicator(self.view)
             let params : [String: String] = [
-                "user" : "1",//String(self.userId),
-                "post" : "1"//String(self.post!.id),
+                "user" : String(self.userId),
+                "post" : String(self.post!.id),
             ]
             Alamofire.request(.POST, EndpointUtils.LIKE, parameters: params)
                 .responseString { response in
