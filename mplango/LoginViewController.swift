@@ -9,6 +9,7 @@
 
 import Alamofire
 import SwiftyJSON
+import AlamofireSwiftyJSON
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
@@ -18,7 +19,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     var users = [User]()
-    var restPath = "http://server.maplango.com.br/user-rest"
     
     var username:String = ""
     var pwd:String      = ""
@@ -101,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             self.indicator.showActivityIndicator(self.view);
-            Alamofire.request(.GET, self.restPath, parameters: ["email": self.username])
+            Alamofire.request(.GET, EndpointUtils.USER, parameters: ["email": self.username])
                 .responseSwiftyJSON({ (request, response, json, error) in
                     self.indicator.hideActivityIndicator();
                     

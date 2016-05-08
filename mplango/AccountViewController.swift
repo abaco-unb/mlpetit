@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 import Alamofire
 import SwiftyJSON
+import AlamofireSwiftyJSON
 
 extension String {
     
@@ -42,9 +43,9 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     var gender:String = ""
     var indicator:ActivityIndicator = ActivityIndicator()
     
-    var restPath = "http://server.maplango.com.br/user-rest"
     var myImage = "profile.png"
     var imgPath: String = ""
+    var avatar:UIImage!
     
     
     var nationality: String = ""
@@ -256,10 +257,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         let fixOrientationImage = chosenImage!.fixOrientation()
         imageView.image = fixOrientationImage
 
-        // save image in directory
-        let imgUtils:ImageUtils = ImageUtils()
-        self.imgPath = imgUtils.fileInDocumentsDirectory(self.myImage)
-        imgUtils.saveImage(imageView.image!, path: self.imgPath);
+        // save image in memory
+        self.avatar = imageView.image!
         
     }
     
@@ -405,12 +404,12 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else {
             self.indicator.showActivityIndicator(self.view)
             //Checagem remota
-            Alamofire.request(.GET, self.restPath, parameters: ["email": email])
+            Alamofire.request(.GET, EndpointUtils.USER, parameters: ["email": email])
                 .responseSwiftyJSON({ (request, response, json, error) in
                     if json["data"].array?.count > 0 {
                         NSLog("@resultado : %@", "EMAIL JÁ EXISTENTE NO BANCO DE DADOS!!!")
                         NSOperationQueue.mainQueue().addOperationWithBlock {
-                            
+                            self.indicator.hideActivityIndicator();
                             //New Alert Ccontroller
                             let alertController = UIAlertController(title: "Oops", message: "E-mail já utilizado, favor utilize outro!", preferredStyle: .Alert)
                             let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
@@ -421,26 +420,38 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             
                         }
                     } else {
-                        let params : [String: AnyObject] = [
+                        let params : [String: String] = [
                             "name" : self.textFieldName.text!,
                             "email" : self.textFieldEmail.text!,
                             "password" : self.textFieldPassword.text!,
                             "gender" : self.gender,
-                            "nationality" : nationality,
-                            "level" : 7,
-                            "image" : self.imgPath
+                            "nationality" : String(nationality),
+                            "level" : String(7)
                         ]
-                        Alamofire.request(.POST, self.restPath, parameters: params)
-                            .responseSwiftyJSON({ (request, response, json, error) in
+                        
+                        // example image data
+                        let image = self.avatar
+                        let imageData = UIImagePNGRepresentation(image)
+                        
+                        
+                        // CREATE AND SEND REQUEST ----------
+                        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.USER, parameters: params, imageData: imageData!)
+                        
+                        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+                            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                            }
+                            .responseString { response in
+                                print("Success: \(response.result.isSuccess)")
+                                print("Response String: \(response.result.value)")
+                            }.responseSwiftyJSON({ (request, response, json, error) in
                                 if (error == nil) {
                                     self.indicator.hideActivityIndicator();
                                     NSOperationQueue.mainQueue().addOperationWithBlock {
                                         self.performSegueWithIdentifier("account_to_login", sender: self)
                                     }
                                 }
-                            })
-                        
-                        //TODO - sincronizar com o coredata
+                        })
                     }
                 })
         }

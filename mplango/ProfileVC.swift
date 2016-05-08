@@ -15,7 +15,7 @@ import MapKit
 class ProfileVC: UIViewController {
     
     var contact: RUser!
-    var restPath = "http://server.maplango.com.br/user-rest"
+    var restPath = "http://localhost:10088/maplango/public/user-rest" //"http://server.maplango.com.br/user-rest"
     var userId:Int!
     
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -132,7 +132,7 @@ class ProfileVC: UIViewController {
                     if let photo = user["image"].string {
                     print("show photo : ", photo)
                     let imgUtils:ImageUtils = ImageUtils()
-                    self.profilePicture.image = imgUtils.loadImageFromPath(photo)
+                    self.profilePicture.image = imgUtils.loadImageFromPath(self.restPath + "?id=" + String( self.userId ) + "&avatar=true")
                     }
                 
                     if let username = user["name"].string {
