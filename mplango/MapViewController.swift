@@ -238,7 +238,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 timestamp:  post["created"].stringValue,
                                 userImage: EndpointUtils.USER + "?id=" + post["user"]["id"].stringValue +  "&avatar=true",
                                 userName:  post["user"]["name"].stringValue,
-                                likes: likes
+                                likes: likes,
+                                postImage: EndpointUtils.IMAGE + "/" + post["image"][0]["id"].stringValue
                                 
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])

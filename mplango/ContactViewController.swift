@@ -149,6 +149,8 @@ class ContactViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
             cell.contactName.text = self.list[indexPath.row].name
 
+            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String( self.userId ) + "&avatar=true")
+            
 //            let imgUtils:ImageUtils = ImageUtils()
 //            cell.contactPicture.image  = imgUtils.loadImageFromPath(self.list[indexPath.row].image)
             
