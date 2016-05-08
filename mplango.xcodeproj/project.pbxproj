@@ -35,6 +35,9 @@
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DEE3F1B8A178800A09A00 /* TabBarController.swift */; };
+		5433854B1CDF6CC10061D5FD /* EndpointUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543385481CDF6CC10061D5FD /* EndpointUtils.swift */; };
+		5433854C1CDF6CC10061D5FD /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543385491CDF6CC10061D5FD /* PostDetailViewController.swift */; };
+		5433854D1CDF6CC10061D5FD /* UrlRequestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5433854A1CDF6CC10061D5FD /* UrlRequestUtils.swift */; };
 		543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A48721BDD4226008E9D71 /* tuto1VC.swift */; };
 		5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448EB001C1B71DB004D771A /* helpSettingsVC.swift */; };
 		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
@@ -304,6 +307,9 @@
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		542DEE3F1B8A178800A09A00 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		543385481CDF6CC10061D5FD /* EndpointUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointUtils.swift; sourceTree = "<group>"; };
+		543385491CDF6CC10061D5FD /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		5433854A1CDF6CC10061D5FD /* UrlRequestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestUtils.swift; sourceTree = "<group>"; };
 		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tuto1VC.swift; sourceTree = "<group>"; };
 		5448EB001C1B71DB004D771A /* helpSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpSettingsVC.swift; sourceTree = "<group>"; };
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -473,6 +479,8 @@
 				1513D99A1C4D163600D1729C /* ImageUtils.swift */,
 				1536E2F91C6F711900471E86 /* ActivityIndicator.swift */,
 				1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */,
+				543385481CDF6CC10061D5FD /* EndpointUtils.swift */,
+				5433854A1CDF6CC10061D5FD /* UrlRequestUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -676,6 +684,7 @@
 			isa = PBXGroup;
 			children = (
 				540A4A401C11EF5A00C166D8 /* PostVC.swift */,
+				543385491CDF6CC10061D5FD /* PostDetailViewController.swift */,
 				54D48D401B6D7ED90087F6BB /* PostNViewController.swift */,
 				54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */,
 				82D73CA41B81720E00DFEAB0 /* PostViewController.swift */,
@@ -986,6 +995,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15FE53C31CA6F6B0002A28CC /* FBAnnotationClusterView.swift in Sources */,
+				5433854C1CDF6CC10061D5FD /* PostDetailViewController.swift in Sources */,
 				54C3621B1CDBCDDC00396754 /* fixedOrientation.swift in Sources */,
 				82D73CAA1B82479400DFEAB0 /* RecordedAudio.swift in Sources */,
 				54241A111B7E35040074D350 /* Carnet.swift in Sources */,
@@ -997,6 +1007,7 @@
 				540A4A411C11EF5A00C166D8 /* PostVC.swift in Sources */,
 				543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */,
 				82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */,
+				5433854B1CDF6CC10061D5FD /* EndpointUtils.swift in Sources */,
 				54B4A7EF1BEB9DBE00199613 /* ChangeEmail.swift in Sources */,
 				82D73C9C1B8139DB00DFEAB0 /* Post.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
@@ -1013,6 +1024,7 @@
 				15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
 				15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */,
+				5433854D1CDF6CC10061D5FD /* UrlRequestUtils.swift in Sources */,
 				54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* UserRestService.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,

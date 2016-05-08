@@ -84,6 +84,18 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         likeView.hidden = false
         likeBtn.hidden = false
         
+        if (photoAudioView.hidden == true || AudioView.hidden == true || videoView.hidden == true) {
+            mediaView.hidden = true
+        }
+        
+        else {
+            mediaView.hidden = false
+        }
+
+        photoAudioView.hidden = true
+        AudioView.hidden = true
+        videoView.hidden = true
+        
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
         print("+++++++++++++++++++++++++")
@@ -95,7 +107,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             //print("post")
             //print(post)
             userPicture.layer.borderWidth = 1
-            userPicture.layer.borderColor = UIColor.greenColor().CGColor
+            userPicture.layer.borderColor = UIColor.darkGrayColor().CGColor
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
             textPost.text = post!.title
@@ -103,6 +115,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             userName.text = post!.userName
             timeOfPost.text = post!.timestamp
             likeNberLabel.text = String(post!.likes)
+            
+            let image2: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
+            itemPhoto.image = image2
+            if itemPhoto != nil {
+                photoAudioView.hidden = false
+            }
             
             self.indicator.showActivityIndicator(self.view)
             
