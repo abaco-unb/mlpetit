@@ -37,6 +37,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     //Outlets do like
     @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var dislikeBtn: UIButton!
     @IBOutlet weak var likeView: UIImageView!
     @IBOutlet weak var likeNberLabel: UILabel!
     
@@ -83,7 +84,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         likeView.hidden = false
         likeBtn.hidden = false
-        
+
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
         print("+++++++++++++++++++++++++")
@@ -95,7 +96,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             //print("post")
             //print(post)
             userPicture.layer.borderWidth = 1
-            userPicture.layer.borderColor = UIColor.greenColor().CGColor
+            userPicture.layer.borderColor = UIColor.darkGrayColor().CGColor
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
             textPost.text = post!.title
@@ -104,37 +105,32 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             timeOfPost.text = post!.timestamp
             likeNberLabel.text = String(post!.likes)
             
-            self.indicator.showActivityIndicator(self.view)
+            // quando não houver nenhuma mídia (foto, áudio ou vídeo), a mediaView geral fica HIDDEN. Caso contrário ela aparece para mostrar a mídia integrada ao post.
+            if (photoAudioView.hidden == true || AudioView.hidden == true || videoView.hidden == true) {
+                mediaView.hidden = true
+            }
+            else {
+                mediaView.hidden = false
+            }
             
-            let params : [String: String] = ["post": String(post!.id), "user": String(self.userId)]
-            //Checagem remota
-            Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
-                .responseString { response in
-                    print("Success: \(response.result.isSuccess)")
-                    print("Response String: \(response.result.value)")
-                }.responseSwiftyJSON({ (request, response, json, error) in
-                    print("Request: \(request)")
-                    print("request: \(error)")
-                    
-                    self.indicator.hideActivityIndicator();
-                    if json["data"].array?.count > 0 {
-                        
-                        if let id = json["data"]["id"].int {
-                                self.likedId = id
-                        }
-                        
-                        self.likeBtn.hidden = true;
-                        print("já laicou esse post")
-                        self.liked = true
-                    } else {
-                        
-                        self.likeBtn.hidden = false;
-                        print("pode laicar!")
-                    }
-                })
+            // aqui chama a imagem do post a partir do que é importado no mapViewController
             
+//            let image2: UIImage = ImageUtils.instance.loadImageFromPath(post!.postImage)!
+//            itemPhoto.image = image2
+//            if itemPhoto != nil {
+//                photoAudioView.hidden = false
+//            }
+//            else {
+//                photoAudioView.hidden = true
+//            }
+            
+            // REPETIR o código acima com 1. o áudio, 2. o áudio+foto e 3. o vídeo. Por enquanto fica o seguinte cógido (hidden = true, por padrão):
+            AudioView.hidden = true
+            videoView.hidden = true
             
         }
+        
+//        showLikes()
         
         //Como vai aparecer a photoAudioView
         photoAudioView.layer.borderWidth = 1
@@ -182,6 +178,47 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
     }
     
+    func showLikes() {
+        
+        self.indicator.showActivityIndicator(self.view)
+        
+        let params : [String: String] = [
+            "post": String(post!.id),
+            "user": String(self.userId)
+        ]
+        
+        //Checagem remota
+        Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                
+                self.indicator.hideActivityIndicator();
+                if json["data"].array?.count > 0 {
+                    
+                    if let id = json["data"]["id"].int {
+                        self.likedId = id
+                    }
+                    
+                    self.likeNberLabel.textColor = UIColor.whiteColor()
+                    self.dislikeBtn.hidden = false
+                    self.likeBtn.hidden = true;
+                    print("já laicou esse post")
+                    self.liked = true
+                } else {
+                    
+                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
+                    self.dislikeBtn.hidden = true
+                    self.likeBtn.hidden = false;
+                    print("pode laicar!")
+                }
+            })
+        
+    }
+    
     //MARK: Pan Gesture to dismiss post view
     
     internal func panRecognized(recognizer:UIPanGestureRecognizer)
@@ -197,18 +234,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         {
             let panOffset = recognizer.translationInView(scrollView)
             
-            // determine offset of the pan from the start here.
-            // When offset is far enough from table view top edge -
-            // dismiss your view controller. Additionally you can
-            // determine if pan goes in the wrong direction and
-            // then reset flag isTrackingPanLocation to false
-            
             let eligiblePanOffset = panOffset.y > 100
             if eligiblePanOffset
             {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            //// !!!UPDATED
             if panOffset.y < 0
             {
                 isTrackingPanLocation = false
@@ -236,91 +266,103 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     @IBAction func like(sender: AnyObject) {
         
+        // quando o botão like é clicado, ele é bloqueado e no lugar dele aparece uma image view com a mesma imagem, em vermelho
         
-        if self.liked {
-            Alamofire.request(.DELETE, EndpointUtils.LIKE, parameters: ["id": String(self.likedId)])
-                .responseString { response in
-                    print("Success: \(response.result.isSuccess)")
-                    print("Response String: \(response.result.value)")
-                }.responseSwiftyJSON({ (request, response, json, error) in
-                    print("Request: \(request)")
-                    print("request: \(error)")
-                    self.indicator.hideActivityIndicator();
-                    if (error == nil) {
-                        self.liked = false
-                        self.likeView.hidden = true
-                        let total:Int = Int(self.post!.likes) - 1;
-                        self.likeNberLabel.text = String(total)
-                    } else {
-                        NSLog("@resultado : %@", "UNLIKE LOGIN !!!")
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            
-                            //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Oops!", message: "Tivemos um problema para retirar seu like!", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                                print("The user is okay about it.")
-                            }
-                            alertController.addAction(agreeAction)
-                            self.presentViewController(alertController, animated: true, completion: nil)
-                            
-                        }
-                    }
-                })
-            
-        
-        } else {
-            // quando o botão like é clicado, ele é bloqueado e no lugar dele aparece uma image view com a mesma imagem, em vermelho
-            
-            //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
-            self.indicator.showActivityIndicator(self.view)
-            let params : [String: String] = [
-                "user" : String(self.userId),
-                "post" : String(self.post!.id),
+        //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        self.indicator.showActivityIndicator(self.view)
+        let params : [String: String] = [
+            "user" : String(self.userId),
+            "post" : String(self.post!.id),
             ]
-            Alamofire.request(.POST, EndpointUtils.LIKE, parameters: params)
-                .responseString { response in
-                    print("Success: \(response.result.isSuccess)")
-                    print("Response String: \(response.result.value)")
-                }.responseSwiftyJSON({ (request, response, json, error) in
-                    print("Request: \(request)")
-                    print("request: \(error)")
-                    self.indicator.hideActivityIndicator();
-                    if (error == nil) {
-                        self.liked = true
-                        if let insertedId: Int = json["data"].int {
-                            self.likedId = insertedId
-                        }
-                        self.likeView.hidden = false
-                        let total:Int = Int(self.post!.likes) + 1;
-                        self.likeNberLabel.text = String(total)
-                    } else {
-                        NSLog("@resultado : %@", "LIKE LOGIN !!!")
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            
-                            //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Oops!", message: "Tivemos um problema para registrar seu like!", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                                print("The user is okay about it.")
-                            }
-                            alertController.addAction(agreeAction)
-                            self.presentViewController(alertController, animated: true, completion: nil)
-                            
-                        }
+        Alamofire.request(.POST, EndpointUtils.LIKE, parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                self.indicator.hideActivityIndicator();
+                if (error == nil) {
+                    self.liked = true
+                    if let insertedId: Int = json["data"].int {
+                        self.likedId = insertedId
                     }
-                })
-            
-            
+                    
+                    self.likeNberLabel.textColor = UIColor.whiteColor()
+                    self.dislikeBtn.hidden = false
+                    self.dislikeBtn.enabled = true
+                    self.likeBtn.hidden = true
+                    self.likeBtn.enabled = false
+                    
+                    let total:Int = Int(self.post!.likes) + 1;
+                    self.likeNberLabel.text = String(total)
+                } else {
+                    NSLog("@resultado : %@", "LIKE LOGIN !!!")
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops!", message: "Tivemos um problema para registrar seu like!", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The user is okay about it.")
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                    }
+                }
+            })
+
+        
+        
             //aqui deve atualizar o label dos números de likes (likeNberLabel)
-            
+        
             //aqui deve tirar 1 ponto de participação do usuário que usa o botão
             
             //aqui o usuário do post deve ganhar 5 pontos de colaboração
             
             //aqui desativar o botão like quando o usuário for o autor do post
         
-        }
-        
     }
+    
+    @IBAction func dislike(sender: AnyObject) {
+        
+        Alamofire.request(.DELETE, EndpointUtils.LIKE, parameters: ["id": String(self.likedId)])
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                self.indicator.hideActivityIndicator();
+                if (error == nil) {
+                    self.liked = false
+                    
+                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
+                    self.dislikeBtn.hidden = true
+                    self.dislikeBtn.enabled = false
+                    self.likeBtn.hidden = false
+                    self.likeBtn.enabled = true
+                    
+                    let total:Int = Int(self.post!.likes) - 1;
+                    self.likeNberLabel.text = String(total)
+                } else {
+                    NSLog("@resultado : %@", "UNLIKE LOGIN !!!")
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops!", message: "Tivemos um problema para retirar seu like!", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The user is okay about it.")
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                    }
+                }
+            })
+    }
+    
+    
     
     override func viewDidLayoutSubviews() {
         
@@ -334,7 +376,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.textPost, attribute: .Height, relatedBy: .Equal, toItem: self.textPost, attribute: .Width, multiplier: textPost.bounds.height/textPost.bounds.width, constant: 1)
         self.textPost.addConstraint(aspectRatioTextViewConstraint)
-    
+        
         
         //Os 3 ajustes seguintes permitem que a mediaView (que inicialmente tem uma altura = 0) se adapte à altura de uma das 3 subviews usadas. Permite que os botões "like" e "comentário" se situem sempre a 20px abaixo da mediaView, independentemente do tamanho dela.
         
@@ -366,7 +408,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             mediaView.addConstraint(aspectRatioViewConstraint)
             
         }
-
+        
         //To adjust the height of mediaView to videoView
         
         if videoView.hidden == false {
@@ -380,6 +422,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             mediaView.addConstraint(aspectRatioViewConstraint)
         }
     }
+    
+    
+    
     
 }
 

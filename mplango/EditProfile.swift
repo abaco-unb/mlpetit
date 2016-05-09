@@ -181,7 +181,18 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         let urlEdit :String = EndpointUtils.USER + "?id=" + String(userId)
         
-        Alamofire.request(.PUT, urlEdit , parameters: params)
+        // example image data
+        let image = self.avatar
+        let imageData = image.lowestQualityJPEGNSData
+        
+        
+        // CREATE AND SEND REQUEST ----------
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(urlEdit, parameters: params, imageData: imageData)
+        
+        Alamofire.upload(.PUT, urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
@@ -203,9 +214,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                         self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
-
+                
             })
-        
     }
     
     func retrieveLoggedUser() {

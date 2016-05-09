@@ -45,7 +45,6 @@ class CarnetTVC: UITableViewController {
 
         let params : [String: Int] = [
             "user": self.userId
-            
         ]
 
 //        Checagem remota
@@ -108,10 +107,6 @@ class CarnetTVC: UITableViewController {
         return cell
     }
     
-    
-
-    
-    
 
 //    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
 //        return self.fetchedResultController.sectionForSectionIndexTitle(title, atIndex: index)
@@ -134,11 +129,31 @@ class CarnetTVC: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            
             print("item is \(self.itens[indexPath.row])")
             
+            let params : [String: AnyObject] = [
+                "user": self.userId
+            ]
+            
+            //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
             let urlEdit :String = restPath + "?id=" + String(itens)
-            Alamofire.request(.DELETE, urlEdit)
-            self.upServerNote()
+            
+            Alamofire.request(.DELETE, urlEdit , parameters: params)
+                .responseString { response in
+                    print("Success: \(response.result.isSuccess)")
+                    print("Response String: \(response.result.value)")
+                }.responseSwiftyJSON({ (request, response, json, error) in
+                    if (error == nil) {
+                        self.indicator.hideActivityIndicator();
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.tableView.reloadData()
+                        }
+                        
+                    }
+                    
+                })
+            
         }
     }
     

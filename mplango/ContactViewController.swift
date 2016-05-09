@@ -149,12 +149,7 @@ class ContactViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
             cell.contactName.text = self.list[indexPath.row].name
 
-//            let imgUtils:ImageUtils = ImageUtils()
-//            cell.contactPicture.image  = imgUtils.loadImageFromPath(self.list[indexPath.row].image)
-            
-            
-//            cell.contactPicture.image  = self.list[indexPath.row].image
-            cell.contactPicture.image  = UIImage(named: self.list[indexPath.row].image)
+            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + self.list[indexPath.row].id + "&avatar=true")
             cell.contactPicture.layer.masksToBounds = true
             cell.contactPicture.layer.cornerRadius = 35
 
