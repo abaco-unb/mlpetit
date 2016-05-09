@@ -486,14 +486,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         // example image data
         let image = self.image
-        let imageData = UIImagePNGRepresentation(image)
+        let imageData = image.lowestQualityJPEGNSData
         
         
         self.indicator.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
         
-        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.POST, parameters: params, imageData: imageData!)
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.POST, parameters: params, imageData: imageData)
         
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in

@@ -431,11 +431,11 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                         
                         // example image data
                         let image = self.avatar
-                        let imageData = UIImagePNGRepresentation(image)
+                        let imageData = image.lowestQualityJPEGNSData
                         
                         
                         // CREATE AND SEND REQUEST ----------
-                        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.USER, parameters: params, imageData: imageData!)
+                        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.USER, parameters: params, imageData: imageData)
                         
                         Alamofire.upload(urlRequest.0, data: urlRequest.1)
                             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
