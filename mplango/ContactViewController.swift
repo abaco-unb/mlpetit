@@ -89,7 +89,7 @@ class ContactViewController: UITableViewController {
                             
                         }
                         
-                        image = EndpointUtils.USER + "?id=" + String(userId) + "$avatar=true"
+                        image = EndpointUtils.USER + "?id=" + String(self.userId) + "$avatar=true"
 
                         
                         if let userLevel = user["level"].int {
