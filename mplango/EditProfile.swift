@@ -8,6 +8,7 @@
 
 import Alamofire
 import SwiftyJSON
+import AlamofireSwiftyJSON
 import UIKit
 
 class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -162,41 +163,80 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
     @IBAction func confirmEditProf(sender: AnyObject) {
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
-        print("atualizando o perfil...")
-        print(self.imagePath)
-        print(self.userName.text)
-        print(self.userNation.text)
-        print(self.userBio.text)
-        print(userId)
         
-        let params : [String: AnyObject] = [
-            "image" : self.imagePath,
+        let params : [String: String] = [
+            "id" : String(userId),
             "name" : self.userName.text!,
             "nationality" : self.userNation.text!,
             "bio" : self.userBio.text!,
             "gender" : self.gender,
         ]
         
-        let urlEdit :String = EndpointUtils.USER + "?id=" + String(userId)
+        self.indicator.showActivityIndicator(self.view)
         
+        if self.avatar != nil {
+            self.saveProfile(self.avatar, params: params);
+        } else {
+            self.saveProfile(params);
+        }
+        
+        
+    }
+    
+    func saveProfile(params: Dictionary<String, String>) {
+        Alamofire.request(.POST, EndpointUtils.USER, parameters: params)
+            .responseString { response in
+                print("Success POST: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }
+            .responseSwiftyJSON({ (request, response, json, error) in
+                print("Request POST: \(request)")
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Ok!", message: "Seu perfil foi atualizado com sucesso.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The profile update is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.performSegueWithIdentifier("edit_profile", sender: self)
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu perfil. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The profile update is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
+    
+    func saveProfile(avatar: UIImage, params: Dictionary<String, String>) {
         // example image data
-        let image = self.avatar
-        let imageData = image.lowestQualityJPEGNSData
-        
+        let imageData = avatar.lowestQualityJPEGNSData
         
         // CREATE AND SEND REQUEST ----------
-        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(urlEdit, parameters: params, imageData: imageData)
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.USER, parameters: params, imageData: imageData)
         
-        Alamofire.upload(.PUT, urlRequest.0, data: urlRequest.1)
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
             }
             .responseString { response in
-                print("Success: \(response.result.isSuccess)")
+                print("Success UPLOAD: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request UPLOAD: \(request)")
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -264,12 +304,11 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]
-
-                 if let photo = user["image"].string {
-                    print("photo de perfil : ", photo)
-                    
+                if let id = user["id"].int {
+                    let photo = EndpointUtils.USER + "?id=" + String(id) + "&avatar=true"
+                    print(photo)
                     self.profPicture.image = ImageUtils.instance.loadImageFromPath(photo)
-                 }
+                }
                 
                 if let username = user["name"].string {
                     print("show name : ", username)

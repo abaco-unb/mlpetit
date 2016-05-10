@@ -227,8 +227,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 category = cat
                             }
                             
-                            if let images = post["image"].array {
+                            if let images = post["images"].array {
+                                print("IMAGE ARRAY")
+                                print(images)
+                                
                                 if let imageId = images[0]["id"].int {
+                                    print("aqui dentro da imagem")
                                     imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
                                 }
                             }
@@ -246,7 +250,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 userImage: EndpointUtils.USER + "?id=" + post["user"]["id"].stringValue +  "&avatar=true",
                                 userName:  post["user"]["name"].stringValue,
                                 likes: likes,
-                                postImage: imageUrl
+                                postImageUrl: imageUrl
                                 
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])

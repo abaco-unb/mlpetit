@@ -17,8 +17,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     //MARK: Properties
     
     var item: Carnet!
-    
-    var restPath = "http://server.maplango.com.br/note-rest"
     var userId:Int!
     var noteId:Int!
     
@@ -208,7 +206,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         ]
         
         //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
-        let urlEdit :String = restPath + "?id=" + String(userId)
+        let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(userId)
         
         Alamofire.request(.PUT, urlEdit , parameters: params)
             .responseString { response in
