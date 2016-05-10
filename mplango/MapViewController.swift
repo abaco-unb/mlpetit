@@ -201,6 +201,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             var longitude:Double = 0
                             var category:Int = 0
                             var likes:Int = 0
+                            var imageUrl:String = ""
                             
                             
                             if let id = post["id"].int {
@@ -226,6 +227,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 category = cat
                             }
                             
+                            if let images = post["images"].array {
+                                print("IMAGE ARRAY")
+                                print(images)
+                                
+                                if let imageId = images[0]["id"].int {
+                                    print("aqui dentro da imagem")
+                                    imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
+                                }
+                            }
+                            
                             print(latitude, longitude)
                              //show post on map
                              let annotation = PostAnnotation(
@@ -239,7 +250,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 userImage: EndpointUtils.USER + "?id=" + post["user"]["id"].stringValue +  "&avatar=true",
                                 userName:  post["user"]["name"].stringValue,
                                 likes: likes,
-                                postImage: EndpointUtils.IMAGE + "/" + post["image"][0]["id"].stringValue
+                                postImageUrl: imageUrl
                                 
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])

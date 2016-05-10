@@ -16,7 +16,6 @@ class ContactCell: UITableViewCell {
     @IBOutlet weak var contactName: UILabel!
     
     var contact: RUser!
-    var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
 

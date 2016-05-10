@@ -14,8 +14,6 @@ class CarnetTVC: UITableViewController {
     //MARK: Properties
     
     var itens = [Carnet]()
-    
-    var restPath = "http://server.maplango.com.br/note-rest"
     var userId:Int!
     
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -48,7 +46,7 @@ class CarnetTVC: UITableViewController {
         ]
 
 //        Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: params)
+        Alamofire.request(.GET, EndpointUtils.CARNET, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 if let notes = json["data"].array {
                     for note in notes {
@@ -137,7 +135,7 @@ class CarnetTVC: UITableViewController {
             ]
             
             //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
-            let urlEdit :String = restPath + "?id=" + String(itens)
+            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(itens)
             
             Alamofire.request(.DELETE, urlEdit , parameters: params)
                 .responseString { response in

@@ -87,8 +87,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
-        print("+++++++++++++++++++++++++")
-        print(post!.userImage)
         
         self.retrieveLoggedUser()
         
@@ -97,36 +95,31 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             //print(post)
             userPicture.layer.borderWidth = 1
             userPicture.layer.borderColor = UIColor.darkGrayColor().CGColor
+            
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
+            
             textPost.text = post!.title
             locationLabel.text = post!.locationName
             userName.text = post!.userName
             timeOfPost.text = post!.timestamp
             likeNberLabel.text = String(post!.likes)
             
+            mediaView.hidden = false
+            
+//            let postVideo = false
+//            let postAudio = false
+            
+            let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
+            itemPhoto.image = postImage
+            
+            print("----***-----");
+            print(post!.image);
+            
             // quando não houver nenhuma mídia (foto, áudio ou vídeo), a mediaView geral fica HIDDEN. Caso contrário ela aparece para mostrar a mídia integrada ao post.
-            if (photoAudioView.hidden == true || AudioView.hidden == true || videoView.hidden == true) {
-                mediaView.hidden = true
-            }
-            else {
-                mediaView.hidden = false
-            }
-            
-            // aqui chama a imagem do post a partir do que é importado no mapViewController
-            
-//            let image2: UIImage = ImageUtils.instance.loadImageFromPath(post!.postImage)!
-//            itemPhoto.image = image2
-//            if itemPhoto != nil {
-//                photoAudioView.hidden = false
+//            if (post!.image != "" || postVideo  || postAudio) {
+//                mediaView.hidden = false
 //            }
-//            else {
-//                photoAudioView.hidden = true
-//            }
-            
-            // REPETIR o código acima com 1. o áudio, 2. o áudio+foto e 3. o vídeo. Por enquanto fica o seguinte cógido (hidden = true, por padrão):
-            AudioView.hidden = true
-            videoView.hidden = true
             
         }
         
@@ -190,11 +183,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         //Checagem remota
         Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
             .responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
+                //print("Success: \(response.result.isSuccess)")
+                //print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
-                print("Request: \(request)")
-                print("request: \(error)")
+                //print("Request: \(request)")
+                //print("request: \(error)")
                 
                 self.indicator.hideActivityIndicator();
                 if json["data"].array?.count > 0 {
@@ -206,14 +199,14 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     self.likeNberLabel.textColor = UIColor.whiteColor()
                     self.dislikeBtn.hidden = false
                     self.likeBtn.hidden = true;
-                    print("já laicou esse post")
+                    //print("já laicou esse post")
                     self.liked = true
                 } else {
                     
                     self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
                     self.dislikeBtn.hidden = true
                     self.likeBtn.hidden = false;
-                    print("pode laicar!")
+                    //print("pode laicar!")
                 }
             })
         
@@ -362,8 +355,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             })
     }
     
-    
-    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
@@ -422,10 +413,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             mediaView.addConstraint(aspectRatioViewConstraint)
         }
     }
-    
-    
-    
-    
+
 }
 
 

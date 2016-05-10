@@ -17,8 +17,6 @@ class ContactViewController: UITableViewController {
     var list = [RUser]()
     
     var profileFilter:NSNumber = 2
-    
-    var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
     var imagePath: String = ""
@@ -48,7 +46,7 @@ class ContactViewController: UITableViewController {
         
         self.indicator.showActivityIndicator(self.view)
         //        Checagem remota
-        Alamofire.request(.GET, self.restPath)
+        Alamofire.request(.GET, EndpointUtils.USER)
             .responseSwiftyJSON({ (request, response, json, error) in
                 if let users = json["data"].array {
                     for user in users {
@@ -91,11 +89,8 @@ class ContactViewController: UITableViewController {
                             
                         }
                         
-                        if let userImage = user["image"].string {
-                            image = userImage
+                        image = EndpointUtils.USER + "?id=" + String(self.userId) + "$avatar=true"
 
-                        }
-              
                         
                         if let userLevel = user["level"].int {
                             level = userLevel
@@ -149,14 +144,7 @@ class ContactViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
             cell.contactName.text = self.list[indexPath.row].name
 
-            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String( self.userId ) + "&avatar=true")
-            
-//            let imgUtils:ImageUtils = ImageUtils()
-//            cell.contactPicture.image  = imgUtils.loadImageFromPath(self.list[indexPath.row].image)
-            
-            
-//            cell.contactPicture.image  = self.list[indexPath.row].image
-            cell.contactPicture.image  = UIImage(named: self.list[indexPath.row].image)
+            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(self.list[indexPath.row].id) + "&avatar=true")
             cell.contactPicture.layer.masksToBounds = true
             cell.contactPicture.layer.cornerRadius = 35
 
