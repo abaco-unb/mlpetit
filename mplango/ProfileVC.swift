@@ -49,27 +49,26 @@ class ProfileVC: UIViewController {
                 self.profileGender.image = UIImage(named:"icon_fem_profile")
             }
             
-            let imgUtils:ImageUtils = ImageUtils()
-            self.profilePicture.image = imgUtils.loadImageFromPath(contact.image)
+            let image: UIImage = ImageUtils.instance.loadImageFromPath(contact!.image)!
+            profilePicture.image = image
             
             
-            if (contact.level == 1) {
+            if contact.level == String("level", "2") {
+                self.profileLangLevel.image = UIImage(named: "profile_niv1")
+            }
+            else if contact.level == String("2") {
                 self.profileLangLevel.image = UIImage(named: "profile_niv2")
             }
-            else if (contact.level == 2) {
+            else if contact.level == String("2") {
                 self.profileLangLevel.image = UIImage(named: "profile_niv3")
             }
-            else if (contact.level == 3) {
+            else if contact.level == String("2") {
                 self.profileLangLevel.image = UIImage(named: "profile_niv4")
             }
-            else if (contact.level == 4) {
+            else if contact.level == String("2") {
                 self.profileLangLevel.image = UIImage(named: "profile_nivM")
             }
-                
-            else {
-                self.profileLangLevel.image = UIImage(named: "profile_niv1")
-                
-            }
+           
             
             
             //        self.profileNumberPosts.text =
@@ -154,21 +153,21 @@ class ProfileVC: UIViewController {
                         }
                     }
                 
-                    if let lev = user["gender"].int {
+                    if let lev = user["level"]["id"].string {
                     print("show level : ", lev)
-                        if lev == 0 {
+                        if lev == String("1") {
                             self.profileLangLevel.image = UIImage(named: "profile_niv1")
                         }
-                        else if lev == 1 {
+                        else if lev == String("5") {
                             self.profileLangLevel.image = UIImage(named: "profile_niv2")
                         }
-                        else if lev == 2 {
+                        else if lev == String("3") {
                             self.profileLangLevel.image = UIImage(named: "profile_niv3")
                         }
-                        else if lev == 3 {
+                        else if lev == String("4") {
                             self.profileLangLevel.image = UIImage(named: "profile_niv4")
                         }
-                        else if lev == 4 {
+                        else if lev == String("2") {
                             self.profileLangLevel.image = UIImage(named: "profile_nivM")
                         }
                     }

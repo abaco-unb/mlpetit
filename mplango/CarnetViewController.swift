@@ -83,35 +83,46 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         self.navigationItem.title = item.word
 
         //para mostrar os dados do item já carregados pela tableview
+        
+        
+        print(item.word)
+        print(item.text)
         itemWordTxtView.text = item.word
         itemDescTxtView.text = item.text
-        let imgUtils:ImageUtils = ImageUtils()
-        self.itemPhoto.image = imgUtils.loadImageFromPath(item.image)
         
+        print("----***-----");
+        print(item!.image);
+        print("----***-----");
+
+
+//        let carnetImage: UIImage = ImageUtils.instance.loadImageFromPath(item!.image)!
+//        itemPhoto.image = carnetImage
         //falta o audio (criar no servidor)
         
         
         //Mostrar ou não as Media View em função do conteúdo no servidor (se tem imagem e/ou som)
-        if (itemPhoto.image == nil) {
-            photoAudioView.hidden = true
-        } else {
+        if (itemPhoto.image != nil) {
             photoAudioView.hidden = false
+            audioInPhotoView.hidden = true
+        } else {
+            photoAudioView.hidden = true
         }
         
-        if (itemPhoto.image != nil /* || audio != nil */) {
-            photoAudioView.hidden = false
-            audioInPhotoView.hidden = false
-        }else {
-            photoAudioView.hidden = true
-            audioInPhotoView.hidden = true
-        }
+        
+//        if (itemPhoto.image != nil /* || audio != nil */) {
+//            photoAudioView.hidden = false
+//            audioInPhotoView.hidden = false
+//        }else {
+//            photoAudioView.hidden = true
+//            audioInPhotoView.hidden = true
+//        }
         
         //Com o audio na verdade tem que fazer a mesma coisa que com a imagem: se não tem audio no arquivo, a view não aparece
         AudioView.hidden = true
         
-        if (AudioView.hidden == true || photoAudioView.hidden == true) {
-            mediaView.hidden = true
-        }
+//        if (AudioView.hidden == true || photoAudioView.hidden == true) {
+//            mediaView.hidden = true
+//        }
         
         removeImage.hidden = true
         self.navigationItem.leftBarButtonItem = nil

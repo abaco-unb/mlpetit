@@ -53,7 +53,7 @@ class CarnetTVC: UITableViewController {
                         var id:Int = 0
                         var word:String  = ""
                         var text:String = ""
-                        var image:String = "";
+                        var imageUrl:String = ""
                         
                         if let noteId = note["id"].int {
                             id = noteId
@@ -69,12 +69,18 @@ class CarnetTVC: UITableViewController {
                             
                         }
                         
-                        if let noteImage = note["image"].string {
-                            image = noteImage
+                        if let noteImage = note["image"].array {
+                            print("IMAGE ARRAY")
+                            print(noteImage)
+                            
+                            if let imageId = noteImage[0]["id"].int {
+                                print("aqui dentro da imagem")
+                                imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
+                            }
                             
                         }
                         
-                        self.itens.append(Carnet(id: id, word: word, text: text, image: image))
+                        self.itens.append(Carnet(id: id, word: word, text: text, image: imageUrl))
                     }
                     self.indicator.hideActivityIndicator();
                     self.tableView.reloadData()
@@ -154,6 +160,12 @@ class CarnetTVC: UITableViewController {
             
         }
     }
+    
+//    @IBAction func unwindSecondView(segue: UIStoryboardSegue) {
+//        print ("unwindSecondView fired in first view")
+//        print("self.userId : ", self.userId)
+//        self.upServerNote()
+//    }
     
     
     //MARK: PrepareForSegue

@@ -63,7 +63,7 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
                 
             } else {
                 self.indicator.showActivityIndicator(self.view);
-                Alamofire.request(.GET, self.restPath, parameters: ["password": self.pwd])
+                Alamofire.request(.GET, EndpointUtils.USER, parameters: ["password": self.pwd])
                     .responseSwiftyJSON({ (request, response, json, error) in
                         self.indicator.hideActivityIndicator();
                         
@@ -249,23 +249,15 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
         
         let params : [String: Int] = [
             "id": self.userId,
-            
             ]
         
-        //Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: params)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]
                 print(user);
                 
-//                if let confNewPasswd = user["password"].string {
-//                    print("show password : ", confNewPasswd)
-//                    self.currentPasswd.attributedPlaceholder = NSAttributedString(string: confNewPasswd)
-//                }
-                
             });
-        
     }
 
     

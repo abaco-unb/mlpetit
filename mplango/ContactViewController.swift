@@ -50,17 +50,18 @@ class ContactViewController: UITableViewController {
             .responseSwiftyJSON({ (request, response, json, error) in
                 if let users = json["data"].array {
                     for user in users {
-                        var id:Int = 0
+                        var id: Int = 0
                         var email:String = ""
                         var gender:String = ""
                         var name:String  = ""
                         var nationality:String = ""
                         var password:String = ""
                         var image:String = ""
-                        var level:Int = 0
+                        var level:String = ""
                         var bio:String = "";
                         
                         if let userId = user["id"].int {
+                            print("show id : ", userId)
                             id = userId
                         }
                         
@@ -89,10 +90,15 @@ class ContactViewController: UITableViewController {
                             
                         }
                         
-                        image = EndpointUtils.USER + "?id=" + String(self.userId) + "$avatar=true"
+                        if let userImage = user["image"].string {
+                            print("show photo : ",userImage)
+                            image = EndpointUtils.USER + "?id=" + String(self.userId) + "&avatar=true"
+                        }
+                        
 
                         
-                        if let userLevel = user["level"].int {
+                        if let userLevel = user["level"]["id"].string {
+                            print("show level : ",userLevel)
                             level = userLevel
                             
                         }
@@ -113,8 +119,6 @@ class ContactViewController: UITableViewController {
         
     }
     
-
-    let sections:Array<AnyObject> = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     
     // MARK:- Retrieve Users
     
@@ -155,18 +159,11 @@ class ContactViewController: UITableViewController {
         return cell
     }
     
-    //Para mostrar o index do alfabeto à direita da tela
-    //override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-    //    return self.sections
-    //}
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[section] as? String
-    }
     
     // MARK: - TableView Refresh
     

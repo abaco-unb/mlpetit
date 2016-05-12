@@ -17,10 +17,10 @@ class RUser: NSObject {
     var nationality:String
     var password:String
     var image:String
-    var level:Int
+    var level:String
     var bio:String
     
-    init(id:Int, email: String, name: String, gender: String, password: String, nationality: String, image: String, level: Int, bio: String) {
+    init(id:Int, email: String, name: String, gender: String, password: String, nationality: String, image: String, level: String, bio: String) {
         self.id = id
         self.name = name
         self.email = email
