@@ -17,10 +17,11 @@ import AlamofireSwiftyJSON
 //O pin abre a preview e a preview abre a tela de post.
 
 class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate {
-
-    var userId:Int!
     
     //MARK: Properties
+
+    var contact: RUser!
+    var userId:Int!
     var post: PostAnnotation? = nil
     
     var isTrackingPanLocation = false
@@ -81,20 +82,36 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.view.addSubview(scrollView)
-//        scrollView.addSubview(contentView)
-        self.scrollView.contentSize.height = 500;
-        
         self.navigationItem.title = String(post?.category)
         
-        if (post?.category) != Optional(1) {
-            self.navigationItem.title = String("Événement")
-        } else if (post?.category) != Optional(2) {
-            self.navigationItem.title = String("Défi")
-        } else if (post?.category) != Optional(3) {
-            self.navigationItem.title = String("Activité")
-        } else if (post?.category) != Optional(4) {
-            self.navigationItem.title = String("Astuce")
+        if (contact != self.userId) {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        
+        if (post?.category) == Optional(1) {
+            let defi = UIImage(named: "cat_defi_bar")
+            let imageView = UIImageView(image:defi)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0x9C27B0)
+
+        } else if (post?.category) == Optional(2) {
+            let question = UIImage(named: "cat_question_bar")
+            let imageView = UIImageView(image:question)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0x41A047)
+
+        } else if (post?.category) == Optional(3) {
+            let astuce = UIImage(named: "cat_astuce_bar")
+            let imageView = UIImageView(image:astuce)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0x2DB4E4)
+
+        } else if (post?.category) == Optional(4) {
+            let evenement = UIImage(named: "cat_evenement_bar")
+            let imageView = UIImageView(image:evenement)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0xEF5555)
+            
         }
         
         userPicture.layer.cornerRadius = 25
@@ -163,27 +180,15 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         videoView.layer.cornerRadius = 10
         videoView.layer.masksToBounds = true
         
-        /*
         
-        //Hides and disables Save Button in reading mode.
-        navigationItem.rightBarButtonItem?.enabled = false
-        navigationItem.rightBarButtonItem?.title = nil
-        
-        }
-        */
-        
-        scrollView.bounces = false
+        scrollView.bounces = true
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostDetailViewController.panRecognized(_:)))
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
 
+        
     }
     
-//    override func viewWillLayoutSubviews()
-//    {
-//        super.viewWillLayoutSubviews();
-//        self.scrollView.contentSize.height = 500;
-//    }
     
     func retrieveLoggedUser() {
         // recupera os dados do usuário logado no app
@@ -384,6 +389,10 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         super.viewDidLayoutSubviews()
         
+        scrollView.frame = view.bounds
+        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 800)
+
+
         //To adjust the height of TextField to its content
         let contentSize = self.textPost.sizeThatFits(self.textPost.bounds.size)
         var frame = self.textPost.frame

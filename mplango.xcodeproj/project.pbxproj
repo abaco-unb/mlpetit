@@ -52,6 +52,7 @@
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
+		54DCB19B1CE6520400EB0DE2 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
 		54E971951B6ED25B005F27F1 /* FiraMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */; };
 		54E971961B6ED25B005F27F1 /* FiraMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */; };
@@ -321,6 +322,7 @@
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
+		54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
 		54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 		8283BE151B0143AF0085F9A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */,
 				54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */,
 				54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */,
 				54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */,
@@ -953,6 +956,7 @@
 				54E971A91B6ED25B005F27F1 /* FiraSans-LightItalic.ttf in Resources */,
 				54E971AA1B6ED25B005F27F1 /* FiraSans-Medium.ttf in Resources */,
 				54E971AB1B6ED25B005F27F1 /* FiraSans-MediumItalic.ttf in Resources */,
+				54DCB19B1CE6520400EB0DE2 /* MyriadProRegular.ttf in Resources */,
 				54E971AC1B6ED25B005F27F1 /* FiraSans-Regular.ttf in Resources */,
 				54E971AD1B6ED25B005F27F1 /* FiraSans-SemiBold.ttf in Resources */,
 				54E971AE1B6ED25B005F27F1 /* FiraSans-SemiBoldItalic.ttf in Resources */,

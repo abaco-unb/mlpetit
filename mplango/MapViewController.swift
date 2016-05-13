@@ -241,7 +241,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                              //show post on map
                              let annotation = PostAnnotation(
                                 id: postId,
-                                title: post["text"].stringValue,
+                                title: post["user"]["name"].stringValue,
+                                text: post["text"].stringValue,
                                 locationName: post["location"].stringValue,
                                 audio: post["audio"].stringValue,
                                 category: category,

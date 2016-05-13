@@ -137,6 +137,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
   
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
+        if text == "\n"  // Recognizes enter key in keyboard
+        {
+            descTextView.resignFirstResponder()
+            return false
+        }
+        
         let limitLength = 149
         guard let text = descTextView.text else { return true }
         let newLength = text.characters.count - range.length

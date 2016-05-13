@@ -33,6 +33,7 @@
 	<string>To show you cool things nearby</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MyriadProRegular.ttf</string>
 		<string>FiraMono-Bold.ttf</string>
 		<string>FiraMono-Medium.ttf</string>
 		<string>FiraMono-Regular.ttf</string>

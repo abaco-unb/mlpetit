@@ -84,6 +84,28 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if category == Optional(1) {
+            let defi = UIImage(named: "cat_defi_bar")
+            let imageView = UIImageView(image:defi)
+            self.navigationItem.titleView = imageView
+            
+        } else if category == Optional(2) {
+            let question = UIImage(named: "cat_question_bar")
+            let imageView = UIImageView(image:question)
+            self.navigationItem.titleView = imageView
+            
+        } else if category == Optional(3) {
+            let astuce = UIImage(named: "cat_astuce_bar")
+            let imageView = UIImageView(image:astuce)
+            self.navigationItem.titleView = imageView
+        
+        } else if category == Optional(4) {
+            let evenement = UIImage(named: "cat_evenement_bar")
+            let imageView = UIImageView(image:evenement)
+            self.navigationItem.titleView = imageView
+            
+        }
+        
         locationManager.requestAlwaysAuthorization()
         //get geo location data
         if (CLLocationManager.locationServicesEnabled())
@@ -241,6 +263,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n"  // Recognizes enter key in keyboard
+        {
+            textPostView.resignFirstResponder()
+            return false
+        }
         
         let limitLength = 149
         
