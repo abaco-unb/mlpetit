@@ -11,14 +11,14 @@
             <rect key="frame" x="0.0" y="0.0" width="435" height="656"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57t-hQ-gn3">
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="57t-hQ-gn3">
                     <rect key="frame" x="-36" y="-20" width="507" height="696"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_3" translatesAutoresizingMaskIntoConstraints="NO" id="eJH-10-wP7">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="fundo_3" translatesAutoresizingMaskIntoConstraints="NO" id="eJH-10-wP7">
                             <rect key="frame" x="36" y="20" width="435" height="656"/>
                             <gestureRecognizers/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marca" translatesAutoresizingMaskIntoConstraints="NO" id="uvc-9H-FMU">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="marca" translatesAutoresizingMaskIntoConstraints="NO" id="uvc-9H-FMU">
                             <rect key="frame" x="211" y="233" width="85" height="93"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="uvc-9H-FMU" secondAttribute="height" multiplier="78:85" id="pfh-pq-ww5"/>
@@ -40,7 +40,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nome_marca_bis" translatesAutoresizingMaskIntoConstraints="NO" id="xpd-tn-kgG">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="nome_marca_bis" translatesAutoresizingMaskIntoConstraints="NO" id="xpd-tn-kgG">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="eep-8G-eFn"/>
@@ -78,17 +78,17 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="DCy-3O-ol9"/>
+                            <exclude reference="PKR-Xp-LeJ"/>
+                            <exclude reference="R29-N2-qj4"/>
+                            <exclude reference="ctm-Cd-srv"/>
+                            <exclude reference="tjq-oC-eFB"/>
                             <exclude reference="Fg2-rF-JpB"/>
                             <exclude reference="GP5-cO-q2T"/>
                             <exclude reference="hoe-eQ-1Gj"/>
                             <exclude reference="u8H-gD-zmX"/>
                             <exclude reference="9t4-lA-PN0"/>
                             <exclude reference="NaK-do-Ftk"/>
-                            <exclude reference="DCy-3O-ol9"/>
-                            <exclude reference="PKR-Xp-LeJ"/>
-                            <exclude reference="R29-N2-qj4"/>
-                            <exclude reference="ctm-Cd-srv"/>
-                            <exclude reference="tjq-oC-eFB"/>
                             <exclude reference="6Nm-ij-psS"/>
                             <exclude reference="Orn-SW-MGn"/>
                             <exclude reference="oS3-nN-ufm"/>
@@ -96,17 +96,17 @@
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
+                            <include reference="DCy-3O-ol9"/>
+                            <include reference="PKR-Xp-LeJ"/>
+                            <include reference="R29-N2-qj4"/>
+                            <include reference="ctm-Cd-srv"/>
+                            <include reference="tjq-oC-eFB"/>
                             <include reference="Fg2-rF-JpB"/>
                             <include reference="GP5-cO-q2T"/>
                             <include reference="hoe-eQ-1Gj"/>
                             <include reference="u8H-gD-zmX"/>
                             <include reference="9t4-lA-PN0"/>
                             <include reference="NaK-do-Ftk"/>
-                            <include reference="DCy-3O-ol9"/>
-                            <include reference="PKR-Xp-LeJ"/>
-                            <include reference="R29-N2-qj4"/>
-                            <include reference="ctm-Cd-srv"/>
-                            <include reference="tjq-oC-eFB"/>
                             <include reference="6Nm-ij-psS"/>
                             <include reference="Orn-SW-MGn"/>
                             <include reference="oS3-nN-ufm"/>

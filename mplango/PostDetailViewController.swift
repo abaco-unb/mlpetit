@@ -131,7 +131,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
             
-            textPost.text = post!.title
+            textPost.text = post!.text
             locationLabel.text = post!.locationName
             userName.text = post!.userName
             timeOfPost.text = post!.timestamp
@@ -390,7 +390,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         super.viewDidLayoutSubviews()
         
         scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 800)
+        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 666)
 
 
         //To adjust the height of TextField to its content
