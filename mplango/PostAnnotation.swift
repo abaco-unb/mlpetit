@@ -22,8 +22,9 @@ class PostAnnotation: FBAnnotation{
     let timestamp: String
     let likes: Int
     var image: String = ""
+    var comments: Array<Comment>
     
-    init(id: Int, title: String, text: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, timestamp: String, userImage: String, userName: String, likes: Int, postImageUrl: String) {
+    init(id: Int, title: String, text: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, timestamp: String, userImage: String, userName: String, likes: Int, postImageUrl: String, comments: Array<Comment>) {
         self.id = id
         self.locationName = locationName
         self.category = category
@@ -34,6 +35,7 @@ class PostAnnotation: FBAnnotation{
         self.audio = audio
         self.likes = likes
         self.image = postImageUrl
+        self.comments = comments
         super.init()
         super.coordinate = coordinate
         super.title = title
