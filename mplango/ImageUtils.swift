@@ -37,6 +37,7 @@ class ImageUtils {
     func loadImageFromPath(remotePath: String) -> UIImage? {
         
         if let url = NSURL(string: remotePath) {
+            print("url:", url )
             if let data = NSData(contentsOfURL: url) {
                 print("Loading image from url path: \(remotePath)", terminator: "")
                 return UIImage(data: data)

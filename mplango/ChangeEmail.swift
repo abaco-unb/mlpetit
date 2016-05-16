@@ -64,7 +64,6 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
             alertController.addAction(agreeAction)
             self.presentViewController(alertController, animated: true, completion: nil)
             
-            
         } else if (!email.isEmail()) {
             
             //New Alert Ccontroller
@@ -77,7 +76,7 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
             
             
             
-        } else if ( !email.isEmpty  && confEmail.isEmpty) {
+        } else if (!email.isEmpty  && confEmail.isEmpty) {
             
             //New Alert Ccontroller
             let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário confirmar sua senha", preferredStyle: .Alert)
@@ -105,16 +104,13 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
             "id" : String(userId),
             "email" : self.confNewEmail.text!,
         ]
-        
-//        let urlEdit :String = restPath + "?id=" + String(userId)
-//        
-//        Alamofire.request(.PUT, urlEdit , parameters: params)
             
         Alamofire.request(.POST, EndpointUtils.USER, parameters: params)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Retorno: \(json)")
                 if (error == nil) {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         
