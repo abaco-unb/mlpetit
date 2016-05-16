@@ -538,8 +538,47 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
         // example image data
         let image = self.image
-        let imageData = image.lowestQualityJPEGNSData
+    
+        if(image != nil) {
+            self.save(image, params: params)
+        } else {
+            self.save(params)
+        }
         
+    }
+    
+    func save(params: Dictionary<String, String>) {
+        Alamofire.request(.POST, EndpointUtils.POST, parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_points_notification", sender: self)
+                    }
+                } else {
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Controller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The post is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
+    
+    func save(image: UIImage, params: Dictionary<String, String>) {
+        
+        let imageData = image.lowestQualityJPEGNSData
         
         self.indicator.showActivityIndicator(self.view)
         
@@ -563,18 +602,19 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 } else {
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                    //New Alert Controller
-                    let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                    let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                        print("The post is not okay.")
-                        self.indicator.hideActivityIndicator();
+                        //New Alert Controller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The post is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
-                    alertController.addAction(agreeAction)
-                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
-            }
-        })
+            })
     }
+    
     
     func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, imageData:NSData) -> (URLRequestConvertible, NSData) {
         

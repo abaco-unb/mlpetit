@@ -15,6 +15,7 @@
 		1536E2F11C6ECD0800471E86 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1536E2E31C6ECCF600471E86 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1536E2FA1C6F711900471E86 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1536E2F91C6F711900471E86 /* ActivityIndicator.swift */; };
 		1536E30B1C6FBE1000471E86 /* CountryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */; };
+		153C20ED1CEA71B700C3FB8F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C20EC1CEA71B700C3FB8F /* Comment.swift */; };
 		157970FF1CDD7E2D00C512F6 /* UrlRequestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */; };
 		157971181CDE395C00C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157971151CDE394000C512F6 /* AlamofireSwiftyJSON.framework */; };
 		157971191CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157971151CDE394000C512F6 /* AlamofireSwiftyJSON.framework */; };
@@ -278,6 +279,7 @@
 		1536E30C1C71F6A500471E86 /* mplango 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 10.xcdatamodel"; sourceTree = "<group>"; };
 		1536E30D1C71FCC900471E86 /* mplango 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 11.xcdatamodel"; sourceTree = "<group>"; };
 		153C20DE1CE9FE5E00C3FB8F /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
+		153C20EC1CEA71B700C3FB8F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestUtils.swift; sourceTree = "<group>"; };
 		1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Alamofire-SwiftyJSON.xcodeproj"; path = "Alamofire-SwiftyJSON-master/Alamofire-SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		159C11AD1BF5768A0018EBE1 /* RUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				82D73C9B1B8139DB00DFEAB0 /* Post.swift */,
 				54241A101B7E35040074D350 /* Carnet.swift */,
 				159C11AD1BF5768A0018EBE1 /* RUser.swift */,
+				153C20EC1CEA71B700C3FB8F /* Comment.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -1012,6 +1015,7 @@
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
+				153C20ED1CEA71B700C3FB8F /* Comment.swift in Sources */,
 				15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */,
 				54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */,
 				159C11B71BF58B1C0018EBE1 /* EndpointUtils.swift in Sources */,

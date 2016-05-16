@@ -203,6 +203,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             var likes:Int = 0
                             var imageUrl:String = ""
                             
+                            var comments: Array<Comment> = [Comment]();
+                            
                             
                             if let id = post["id"].int {
                                 postId = id
@@ -237,7 +239,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 }
                             }
                             
-                            print(latitude, longitude)
+                            if let postComments = post["comments"].array {
+                                for comment in postComments {
+                                    var comId = 0;
+                                    
+                                    if let commentId = comment["id"].int {
+                                        comId = commentId
+                                    }
+                                    comments.append(Comment(id: comId, audio: comment["text"].stringValue, text: comment["audio"].stringValue, image: comment["image"].stringValue, postId: postId))
+                                }
+                            }
+                            
+                            print("Comentários do Post", comments)
                              //show post on map
                              let annotation = PostAnnotation(
                                 id: postId,
@@ -251,8 +264,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 userImage: EndpointUtils.USER + "?id=" + post["user"]["id"].stringValue +  "&avatar=true",
                                 userName:  post["user"]["name"].stringValue,
                                 likes: likes,
-                                postImageUrl: imageUrl
-                                
+                                postImageUrl: imageUrl,
+                                comments: comments
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
                             self.posts.append(annotation);
