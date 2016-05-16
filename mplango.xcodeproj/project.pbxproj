@@ -54,7 +54,6 @@
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
 		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
-		54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D401B6D7ED90087F6BB /* PostNViewController.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
 		54E971951B6ED25B005F27F1 /* FiraMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */; };
@@ -327,7 +326,6 @@
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
-		54D48D401B6D7ED90087F6BB /* PostNViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNViewController.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
@@ -687,7 +685,6 @@
 			isa = PBXGroup;
 			children = (
 				540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */,
-				54D48D401B6D7ED90087F6BB /* PostNViewController.swift */,
 				54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */,
 				82D73CA41B81720E00DFEAB0 /* PostViewController.swift */,
 				54D02AB61BD949F900B62860 /* UITextViewExt.swift */,
@@ -1030,7 +1027,6 @@
 				159C11B71BF58B1C0018EBE1 /* EndpointUtils.swift in Sources */,
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
-				54D48D411B6D7ED90087F6BB /* PostNViewController.swift in Sources */,
 				157970FF1CDD7E2D00C512F6 /* UrlRequestUtils.swift in Sources */,
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
