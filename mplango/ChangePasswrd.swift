@@ -13,7 +13,6 @@ import UIKit
 class ChangePasswrd: UIViewController, UITextFieldDelegate {
     
     var users = [User]()
-    var restPath = "http://server.maplango.com.br/user-rest"
     var userId:Int!
     
     var username:String = ""
@@ -188,14 +187,12 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
             
         } else {
             
-            
             let params : [String: String] = [
+                "id" : String(userId),
                 "password" : self.confNewPasswd.text!,
                 ]
             
-            let urlEdit :String = restPath + "?id=" + String(userId)
-            
-            Alamofire.request(.PUT, urlEdit , parameters: params)
+            Alamofire.request(.POST, EndpointUtils.USER , parameters: params)
                 .responseString { response in
                     print("Success: \(response.result.isSuccess)")
                     print("Response String: \(response.result.value)")

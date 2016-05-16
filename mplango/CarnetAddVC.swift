@@ -432,7 +432,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         ////recupera o id da sessão
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
-        print("salvando item")
+        print("salvando uma nota")
         print(self.wordTextField.text)
         print(self.descTextView.text)
         print(self.imagePath)
@@ -442,50 +442,83 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let params : [String: String] = [
             "word": self.wordTextField.text!,
             "text": self.descTextView.text,
-            "image": self.imagePath,
             "user": String(userId)
         ]
         
         if self.image != nil {
-            // example image data
-            let image = self.image
-            let imageData = image.lowestQualityJPEGNSData
-            
-            self.indicator.showActivityIndicator(self.view)
-            
-            
-            // CREATE AND SEND REQUEST ----------
-            let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.CARNET, parameters: params, imageData: imageData)
-            
-            Alamofire.upload(urlRequest.0, data: urlRequest.1)
-                .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                    print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-                }
-                .responseString { response in
-                    print("Success: \(response.result.isSuccess)")
-                    print("Response String: \(response.result.value)")
-                }.responseSwiftyJSON({ (request, response, json, error) in
-                    if (error == nil) {
-                        self.indicator.hideActivityIndicator();
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.performSegueWithIdentifier("go_to_carnet", sender: self)
-                        }
-                    } else {
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                                print("The item is not okay.")
-                                self.indicator.hideActivityIndicator();
-                            }
-                            alertController.addAction(agreeAction)
-                            self.presentViewController(alertController, animated: true, completion: nil)
-                        }
-                    }
-                })
+            self.saveNote(self.image, params: params)
+        } else {
+            self.saveNote(params)
         }
     }
 
+    func saveNote(params: Dictionary<String, String>) {
+        
+        self.indicator.showActivityIndicator(self.view)
+        
+        Alamofire.request(.POST, EndpointUtils.CARNET, parameters: params)
+            .responseString { response in
+                print("Success POST: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }
+            .responseSwiftyJSON({ (request, response, json, error) in
+                print("Request POST: \(request)")
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_carnet", sender: self)
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The item is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+        })
+    }
+    
+    func saveNote(image: UIImage, params: Dictionary<String, String>) {
+        // example image data
+        let imageData = image.lowestQualityJPEGNSData
+        
+        self.indicator.showActivityIndicator(self.view)
+        
+        // CREATE AND SEND REQUEST ----------
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.CARNET, parameters: params, imageData: imageData)
+        
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_carnet", sender: self)
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The item is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
     
     //MARK: UITextFieldDelegate
     

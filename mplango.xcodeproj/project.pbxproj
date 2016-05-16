@@ -51,7 +51,6 @@
 		54C3621B1CDBCDDC00396754 /* fixedOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */; };
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
-		54D48D3F1B6D7C500087F6BB /* PostConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
 		54DCB19B1CE6520400EB0DE2 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
@@ -279,6 +278,7 @@
 		1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryUtils.swift; sourceTree = "<group>"; };
 		1536E30C1C71F6A500471E86 /* mplango 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 10.xcdatamodel"; sourceTree = "<group>"; };
 		1536E30D1C71FCC900471E86 /* mplango 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 11.xcdatamodel"; sourceTree = "<group>"; };
+		153C20DE1CE9FE5E00C3FB8F /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestUtils.swift; sourceTree = "<group>"; };
 		1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Alamofire-SwiftyJSON.xcodeproj"; path = "Alamofire-SwiftyJSON-master/Alamofire-SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		159C11AD1BF5768A0018EBE1 /* RUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
@@ -545,6 +545,7 @@
 		8283BE151B0143AF0085F9A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				153C20DE1CE9FE5E00C3FB8F /* MyriadProRegular.ttf */,
 				54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */,
 				54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */,
 				54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */,

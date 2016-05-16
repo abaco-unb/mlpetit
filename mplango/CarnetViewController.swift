@@ -23,6 +23,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     var indicator:ActivityIndicator = ActivityIndicator()
     
     var imagePath: String = ""
+    var image: UIImage!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var editBtn: UIBarButtonItem!
@@ -87,26 +88,31 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         print(item.word)
         print(item.text)
+        print(item.image)
+        
         itemWordTxtView.text = item.word
         itemDescTxtView.text = item.text
         
         print("----***-----");
-        print(item!.image);
+            print(ImageUtils.instance.loadImageFromPath(item.image));
         print("----***-----");
-
-
-//        let carnetImage: UIImage = ImageUtils.instance.loadImageFromPath(item!.image)!
-//        itemPhoto.image = carnetImage
-        //falta o audio (criar no servidor)
         
+        let image = ImageUtils.instance.loadImageFromPath(item.image)
         
-        //Mostrar ou não as Media View em função do conteúdo no servidor (se tem imagem e/ou som)
-        if (itemPhoto.image != nil) {
+        if !item.image.isEmpty && image != nil{
+            print("image inneer")
+            print(image)
+            
+            itemPhoto.image = image
             photoAudioView.hidden = false
             audioInPhotoView.hidden = true
-        } else {
-            photoAudioView.hidden = true
         }
+        
+        //Mostrar ou não as Media View em função do conteúdo no servidor (se tem imagem e/ou som)
+//        if !item.audio.isEmpty {
+            //falta o audio (criar no servidor)
+//            photoAudioView.hidden = true
+//        }
         
         
 //        if (itemPhoto.image != nil /* || audio != nil */) {
@@ -209,27 +215,37 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         print(self.imagePath)
         print(userId)
         
-        let params : [String: AnyObject] = [
+        let params : [String: String] = [
+            "id" : String(item.id),
             "word" : self.itemWordTxtView.text!,
             "text" : self.itemDescTxtView.text!,
-            "image" : self.imagePath,
-            "user": self.userId
+            "user": String(self.userId)
         ]
         
-        //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
-        let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(userId)
+        if self.image != nil {
+            self.saveNote(self.image, params: params)
+        } else {
+            self.saveNote(params)
+        }
         
-        Alamofire.request(.PUT, urlEdit , parameters: params)
+    }
+    
+    func saveNote(params: Dictionary<String, String>) {
+        
+        self.indicator.showActivityIndicator(self.view)
+        
+        Alamofire.request(.POST, EndpointUtils.CARNET, parameters: params)
             .responseString { response in
-                print("Success: \(response.result.isSuccess)")
+                print("Success POST: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
-            }.responseSwiftyJSON({ (request, response, json, error) in
+            }
+            .responseSwiftyJSON({ (request, response, json, error) in
+                print("Request POST: \(request)")
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         self.checkValidChange()
                     }
-                    
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
@@ -239,7 +255,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                             self.indicator.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
-
+                        
                         //Coisas de interface
                         
                         self.itemWordTxtView.editable = false
@@ -252,9 +268,54 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                         self.navigationItem.title = self.item.word
                     }
                 }
-                
             })
-
+    }
+    
+    func saveNote(image: UIImage, params: Dictionary<String, String>) {
+        // example image data
+        let imageData = image.lowestQualityJPEGNSData
+        
+        self.indicator.showActivityIndicator(self.view)
+        
+        // CREATE AND SEND REQUEST ----------
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.CARNET, parameters: params, imageData: imageData)
+        
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.checkValidChange()
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu item. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The carnet update is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        
+                        //Coisas de interface
+                        
+                        self.itemWordTxtView.editable = false
+                        self.itemDescTxtView.editable = false
+                        self.removeImage.hidden = true
+                        self.editBtn.title = "Éditer"
+                        self.itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
+                        self.itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
+                        self.navigationItem.hidesBackButton = false
+                        self.navigationItem.title = self.item.word
+                    }
+                }
+            })
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -265,7 +326,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
             itemDescTxtView.resignFirstResponder()
             return false
         }
-
         
         let limitLength = 149
         guard let text = textView.text else { return true }
@@ -300,8 +360,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     func textViewDidEndEditing(textView: UITextView) {
         checkValidChange()
     }
-
-
     
     override func viewDidLayoutSubviews() {
         
@@ -319,14 +377,9 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
 }
 

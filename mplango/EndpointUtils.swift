@@ -11,8 +11,8 @@ import Foundation
 class EndpointUtils: AnyObject {
     
     static let instance = EndpointUtils()
-    static let SERVER_BASE = "http://server.maplango.com.br"
-    
+    static let ENV = "dev"
+    static let SERVER_BASE    = EndpointUtils.ENV == "prod" ? "http://server.maplango.com.br" : "http://localhost:10088/maplango/public"
     static let USER:String    = EndpointUtils.SERVER_BASE + "/user-rest"
     static let POST:String    = EndpointUtils.SERVER_BASE + "/post-rest"
     static let CARNET:String  = EndpointUtils.SERVER_BASE + "/note-rest"
