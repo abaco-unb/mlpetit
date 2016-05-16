@@ -33,6 +33,7 @@
 	<string>To show you cool things nearby</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MyriadProRegular.ttf</string>
 		<string>FiraMono-Bold.ttf</string>
 		<string>FiraMono-Medium.ttf</string>
 		<string>FiraMono-Regular.ttf</string>
@@ -76,7 +77,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main_1</string>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

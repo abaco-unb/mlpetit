@@ -17,10 +17,11 @@ import AlamofireSwiftyJSON
 //O pin abre a preview e a preview abre a tela de post.
 
 class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate {
-
-    var userId:Int!
     
     //MARK: Properties
+
+    var contact: RUser!
+    var userId:Int!
     var post: PostAnnotation? = nil
     
     var isTrackingPanLocation = false
@@ -38,11 +39,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     //Outlets do like
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var dislikeBtn: UIButton!
-    @IBOutlet weak var likeView: UIImageView!
     @IBOutlet weak var likeNberLabel: UILabel!
     
     @IBOutlet weak var commentBtn: UIButton!
     
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var mediaView: UIView!
     
     //Outlets dos elementos que identificam o post (localização, usuário, data/hora da publicação)
@@ -59,6 +60,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     //Outlets da photoAudioView (quando o Post inclui uma foto e eventualmente, ao mesmo tempo, um audio)
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
+    @IBOutlet weak var audioInPhoto: UIView!
     
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var listenBtn: UIButton!
@@ -80,13 +82,43 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.contentSize.height = 300
+        self.navigationItem.title = String(post?.category)
         
-        likeView.hidden = false
-        likeBtn.hidden = false
+        if (contact != self.userId) {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        
+        if (post?.category) == Optional(1) {
+            let defi = UIImage(named: "cat_defi_bar")
+            let imageView = UIImageView(image:defi)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0x9C27B0)
 
+        } else if (post?.category) == Optional(2) {
+            let question = UIImage(named: "cat_question_bar")
+            let imageView = UIImageView(image:question)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0x41A047)
+
+        } else if (post?.category) == Optional(3) {
+            let astuce = UIImage(named: "cat_astuce_bar")
+            let imageView = UIImageView(image:astuce)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0x2DB4E4)
+
+        } else if (post?.category) == Optional(4) {
+            let evenement = UIImage(named: "cat_evenement_bar")
+            let imageView = UIImageView(image:evenement)
+            self.navigationItem.titleView = imageView
+            self.locationLabel.textColor = UIColor(hex: 0xEF5555)
+            
+        }
+        
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
+        
+        AudioView.hidden = true
+        videoView.hidden = true
         
         self.retrieveLoggedUser()
         
@@ -94,18 +126,16 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             //print("post")
             //print(post)
             userPicture.layer.borderWidth = 1
-            userPicture.layer.borderColor = UIColor.darkGrayColor().CGColor
-            
+            userPicture.layer.borderColor = UIColor.greenColor().CGColor
+
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
             
-            textPost.text = post!.title
+            textPost.text = post!.text
             locationLabel.text = post!.locationName
             userName.text = post!.userName
             timeOfPost.text = post!.timestamp
             likeNberLabel.text = String(post!.likes)
-            
-            mediaView.hidden = false
             
 //            let postVideo = false
 //            let postAudio = false
@@ -116,14 +146,16 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             print("----***-----");
             print(post!.image);
             
-            // quando não houver nenhuma mídia (foto, áudio ou vídeo), a mediaView geral fica HIDDEN. Caso contrário ela aparece para mostrar a mídia integrada ao post.
-//            if (post!.image != "" || postVideo  || postAudio) {
-//                mediaView.hidden = false
-//            }
+            if itemPhoto != nil {
+                photoAudioView.hidden = false
+                audioInPhoto.hidden = true
+            } else {
+                photoAudioView.hidden = true
+                audioInPhoto.hidden = true
+            }
             
+            showLikes()
         }
-        
-//        showLikes()
         
         //Como vai aparecer a photoAudioView
         photoAudioView.layer.borderWidth = 1
@@ -148,21 +180,15 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         videoView.layer.cornerRadius = 10
         videoView.layer.masksToBounds = true
         
-        /*
         
-        //Hides and disables Save Button in reading mode.
-        navigationItem.rightBarButtonItem?.enabled = false
-        navigationItem.rightBarButtonItem?.title = nil
-        
-        }
-        */
-        
-        scrollView.bounces = false
+        scrollView.bounces = true
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostDetailViewController.panRecognized(_:)))
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
 
+        
     }
+    
     
     func retrieveLoggedUser() {
         // recupera os dados do usuário logado no app
@@ -173,7 +199,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     func showLikes() {
         
-        self.indicator.showActivityIndicator(self.view)
+//        self.indicator.showActivityIndicator(self.view)
         
         let params : [String: String] = [
             "post": String(post!.id),
@@ -183,13 +209,13 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         //Checagem remota
         Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
             .responseString { response in
-                //print("Success: \(response.result.isSuccess)")
-                //print("Response String: \(response.result.value)")
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
-                //print("Request: \(request)")
-                //print("request: \(error)")
+                print("Request: \(request)")
+                print("request: \(error)")
                 
-                self.indicator.hideActivityIndicator();
+//                self.indicator.hideActivityIndicator();
                 if json["data"].array?.count > 0 {
                     
                     if let id = json["data"]["id"].int {
@@ -201,15 +227,16 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     self.likeBtn.hidden = true;
                     //print("já laicou esse post")
                     self.liked = true
+                    
                 } else {
                     
                     self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
                     self.dislikeBtn.hidden = true
                     self.likeBtn.hidden = false;
+                    self.liked = false
                     //print("pode laicar!")
                 }
             })
-        
     }
     
     //MARK: Pan Gesture to dismiss post view
@@ -259,9 +286,10 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     @IBAction func like(sender: AnyObject) {
         
-        // quando o botão like é clicado, ele é bloqueado e no lugar dele aparece uma image view com a mesma imagem, em vermelho
-        
         //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        
+        if self.liked == false {
+        
         self.indicator.showActivityIndicator(self.view)
         let params : [String: String] = [
             "user" : String(self.userId),
@@ -280,7 +308,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     if let insertedId: Int = json["data"].int {
                         self.likedId = insertedId
                     }
-                    
                     self.likeNberLabel.textColor = UIColor.whiteColor()
                     self.dislikeBtn.hidden = false
                     self.dislikeBtn.enabled = true
@@ -304,22 +331,25 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     }
                 }
             })
-
-        
-        
+        }
             //aqui deve atualizar o label dos números de likes (likeNberLabel)
-        
             //aqui deve tirar 1 ponto de participação do usuário que usa o botão
-            
             //aqui o usuário do post deve ganhar 5 pontos de colaboração
-            
             //aqui desativar o botão like quando o usuário for o autor do post
-        
     }
     
     @IBAction func dislike(sender: AnyObject) {
         
-        Alamofire.request(.DELETE, EndpointUtils.LIKE, parameters: ["id": String(self.likedId)])
+        if self.liked == true {
+            
+        self.indicator.showActivityIndicator(self.view)
+        let params : [String: String] = [
+            "user" : String(self.userId),
+            "post" : String(self.post!.id),
+            "id": String(self.likedId)
+            ]
+        
+        Alamofire.request(.DELETE, EndpointUtils.LIKE, parameters: params)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
@@ -329,7 +359,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 self.indicator.hideActivityIndicator();
                 if (error == nil) {
                     self.liked = false
-                    
                     self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
                     self.dislikeBtn.hidden = true
                     self.dislikeBtn.enabled = false
@@ -353,12 +382,17 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     }
                 }
             })
+        }
     }
     
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
         
+        scrollView.frame = view.bounds
+        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 666)
+
+
         //To adjust the height of TextField to its content
         let contentSize = self.textPost.sizeThatFits(self.textPost.bounds.size)
         var frame = self.textPost.frame

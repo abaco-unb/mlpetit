@@ -41,10 +41,10 @@ public class FBAnnotationClusterView : MKAnnotationView {
             else {
                 imageName = "clusterSmall"
             }
-            borderWidth = 3
+            borderWidth = 0
             
         case 6...15:
-            fontSize = 13
+            fontSize = 15
             if (options != nil) {
                 loadExternalImage=true;
                 imageName = (options?.mediumClusterImage)!
@@ -52,10 +52,11 @@ public class FBAnnotationClusterView : MKAnnotationView {
             else {
                 imageName = "clusterMedium"
             }
-            borderWidth = 4
+            borderWidth = 0
             
         default:
-            fontSize = 14
+            fontSize = 18
+            
             if (options != nil) {
                 loadExternalImage=true;
                 imageName = (options?.largeClusterImage)!
@@ -63,7 +64,7 @@ public class FBAnnotationClusterView : MKAnnotationView {
             else {
                 imageName = "clusterLarge"
             }
-            borderWidth = 5
+            borderWidth = 0
             
         }
         

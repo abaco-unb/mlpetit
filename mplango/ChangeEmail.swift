@@ -102,12 +102,15 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
 
         
         let params : [String: String] = [
+            "id" : String(userId),
             "email" : self.confNewEmail.text!,
         ]
         
-        let urlEdit :String = restPath + "?id=" + String(userId)
-        
-        Alamofire.request(.PUT, urlEdit , parameters: params)
+//        let urlEdit :String = restPath + "?id=" + String(userId)
+//        
+//        Alamofire.request(.PUT, urlEdit , parameters: params)
+            
+        Alamofire.request(.POST, EndpointUtils.USER, parameters: params)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
@@ -161,11 +164,10 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
         
         let params : [String: Int] = [
             "id": self.userId,
-            
-        ]
+            ]
         
         //Checagem remota
-        Alamofire.request(.GET, self.restPath, parameters: params)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                 let user = json["data"]

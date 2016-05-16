@@ -137,6 +137,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
   
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
+        if text == "\n"  // Recognizes enter key in keyboard
+        {
+            descTextView.resignFirstResponder()
+            return false
+        }
+        
         let limitLength = 149
         guard let text = descTextView.text else { return true }
         let newLength = text.characters.count - range.length
@@ -268,12 +274,17 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        photoImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         addPicture.hidden = true
         removeImage.hidden = false
         
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let fixOrientationImage = chosenImage!.fixOrientation()
+        photoImage.image = fixOrientationImage
+        
         // save image in directory
-        self.imagePath = ImageUtils.instance.fileInDocumentsDirectory(self.myImage)
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("note_image", ext: "png"))
+//        self.imagePath = ImageUtils.instance.fileInDocumentsDirectory(self.myImage)
         ImageUtils.instance.saveImage(photoImage.image!, path: self.imagePath);
         
         self.image = photoImage.image!
@@ -286,6 +297,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+    func generateIndexName(text:String, ext:String) ->String {
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        return text + "_" + formatter.stringFromDate(currentDateTime) + "." + ext
+    }
 
     // MARK: Audio Process
     
@@ -466,31 +483,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                         }
                     }
                 })
-        } else {
-            Alamofire.request(.POST, EndpointUtils.CARNET, parameters: params)
-                .responseString { response in
-                    print("Success: \(response.result.isSuccess)")
-                    print("Response String: \(response.result.value)")
-                }
-                .responseSwiftyJSON({ (request, response, json, error) in
-                    if (error == nil) {
-                        self.indicator.hideActivityIndicator();
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.performSegueWithIdentifier("go_to_carnet", sender: self)
-                        }
-                    } else {
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                                print("The item is not okay.")
-                                self.indicator.hideActivityIndicator();
-                            }
-                            alertController.addAction(agreeAction)
-                            self.presentViewController(alertController, animated: true, completion: nil)
-                        }
-                    }
-                })
         }
     }
 
@@ -521,19 +513,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
 
     // MARK: - Navigation
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier! == "go_to_carnet" {
-//            let carnetTableView:CarnetTVC = segue.destinationViewController as! CarnetTVC
-//            
-//                word = wordTextField.text ?? ""
-//                text = descTextView.text ?? ""
-//                let imgUtils:ImageUtils = ImageUtils()
-//                self.photoImage.image = imgUtils.loadImageFromPath(photo)
 //    
-//            carnetTableView.registered = true
-//          
-////            falta som
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if(segue.identifier == "go_to_carnet"){
+            let tabVC = segue.destinationViewController as! UITabBarController
+            tabVC.selectedIndex = 3
+        }
+    }
 }

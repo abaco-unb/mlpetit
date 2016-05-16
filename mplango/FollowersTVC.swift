@@ -56,7 +56,7 @@ class FollowersTVC: UITableViewController {
                         var nationality:String = ""
                         var password:String = ""
                         var image:String = ""
-                        var level:Int = 0
+                        var level:String = ""
                         var bio:String = "";
                         
                         if let userId = user["id"].int {
@@ -94,7 +94,7 @@ class FollowersTVC: UITableViewController {
                         }
                         
                         
-                        if let userLevel = user["level"].int {
+                        if let userLevel = user["level"].string {
                             level = userLevel
                             
                         }

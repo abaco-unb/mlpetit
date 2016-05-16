@@ -84,6 +84,28 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if category == Optional(1) {
+            let defi = UIImage(named: "cat_defi_bar")
+            let imageView = UIImageView(image:defi)
+            self.navigationItem.titleView = imageView
+            
+        } else if category == Optional(2) {
+            let question = UIImage(named: "cat_question_bar")
+            let imageView = UIImageView(image:question)
+            self.navigationItem.titleView = imageView
+            
+        } else if category == Optional(3) {
+            let astuce = UIImage(named: "cat_astuce_bar")
+            let imageView = UIImageView(image:astuce)
+            self.navigationItem.titleView = imageView
+        
+        } else if category == Optional(4) {
+            let evenement = UIImage(named: "cat_evenement_bar")
+            let imageView = UIImageView(image:evenement)
+            self.navigationItem.titleView = imageView
+            
+        }
+        
         locationManager.requestAlwaysAuthorization()
         //get geo location data
         if (CLLocationManager.locationServicesEnabled())
@@ -146,7 +168,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews();
-        self.scrollView.contentSize.height = 1000;
+        self.scrollView.contentSize.height = 800;
     }
     
     
@@ -241,6 +263,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n"  // Recognizes enter key in keyboard
+        {
+            textPostView.resignFirstResponder()
+            return false
+        }
         
         let limitLength = 149
         
@@ -411,7 +439,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        photoImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let fixOrientationImage = chosenImage!.fixOrientation()
+        photoImage.image = fixOrientationImage
+        
         // save image in directory
         let imgUtils:ImageUtils = ImageUtils()
         self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
@@ -460,6 +491,27 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     //MARK: Post Actions
     
     @IBAction func savePost(sender: AnyObject) {
+        
+        //New Alert Controller for post confirmation
+        let alertController = UIAlertController(title: "Confirmer ?", message: "Tu confirmes la publication de ton post ?", preferredStyle: .Alert)
+        
+        let agreeAction = UIAlertAction(title: "Oui, je confirme", style: .Default) { (action) -> Void in
+            print("Post was sent")
+            self.confirmSavePost()
+        }
+        
+        let disagreeAction = UIAlertAction(title: "Non, pas encore", style: .Default) { (action) -> Void in
+            print("Post is not confirmed")
+        }
+        
+        alertController.addAction(agreeAction)
+        alertController.addAction(disagreeAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    func confirmSavePost (){
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
         print("enviando esse post...")
@@ -506,11 +558,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("go_to_confirm", sender: self)
+                        self.performSegueWithIdentifier("go_to_points_notification", sender: self)
                     }
                 } else {
+                    
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                    //New Alert Ccontroller
+                    //New Alert Controller
                     let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
                     let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
                         print("The post is not okay.")

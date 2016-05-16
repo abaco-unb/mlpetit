@@ -46,7 +46,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         self.pickeViewCountries.dataSource = self
         self.pickeViewCountries.delegate = self
-        
+        self.userBio.delegate = self
+
         pickeViewCountries.hidden = true;
 
         scroll.contentSize.height = 200
@@ -67,7 +68,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         userGender.layer.cornerRadius = 20
         userGender.layer.masksToBounds = true
         
-        userBio.delegate = self
 
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EditProfile.dismissKeyboard))
@@ -197,13 +197,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Ok!", message: "Seu perfil foi atualizado com sucesso.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                            print("The profile update is not okay.")
-                            self.indicator.hideActivityIndicator();
-                        }
-                        alertController.addAction(agreeAction)
                         self.performSegueWithIdentifier("edit_profile", sender: self)
                     }
                 } else {
@@ -306,7 +299,7 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 let user = json["data"]
                 if let id = user["id"].int {
                     let photo = EndpointUtils.USER + "?id=" + String(id) + "&avatar=true"
-                    print(photo)
+                    print("show photo : ",photo)
                     self.profPicture.image = ImageUtils.instance.loadImageFromPath(photo)
                 }
                 

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "circle_01b36a_30.png",
+      "filename" : "cluster_small.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "circle_01b36a_60.png",
+      "filename" : "cluster_small-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "circle_01b36a_90.png",
+      "filename" : "cluster_small-2.png",
       "scale" : "3x"
     }
   ],

@@ -18,17 +18,19 @@ class PostAnnotation: FBAnnotation{
     let userImage: String
     let userName: String
     let audio: String
+    let text: String
     let timestamp: String
     let likes: Int
     var image: String = ""
     
-    init(id: Int, title: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, timestamp: String, userImage: String, userName: String, likes: Int, postImageUrl: String) {
+    init(id: Int, title: String, text: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, timestamp: String, userImage: String, userName: String, likes: Int, postImageUrl: String) {
         self.id = id
         self.locationName = locationName
         self.category = category
         self.userImage = userImage
         self.userName = userName
         self.timestamp = timestamp
+        self.text = text
         self.audio = audio
         self.likes = likes
         self.image = postImageUrl
@@ -46,8 +48,10 @@ class PostAnnotation: FBAnnotation{
     }
     
     var subtitle: String? {
-        return locationName
+//        return locationName
+        return text
     }
+    
     
     // annotation callout info button opens this mapItem in Maps app
     func mapItem() -> MKMapItem {
@@ -65,15 +69,15 @@ class PostAnnotation: FBAnnotation{
         
         switch self.category {
         case 1:
-            name =  "cat_desafio.png"
+            name =  "cat_defi.png"
         case 2:
-            name = "cat_atividade.png"
+            name = "cat_question.png"
         case 3:
-            name = "cat_dica.png"
+            name = "cat_astuce.png"
         case 4:
-            name = "cat_ajuda.png"
+            name = "cat_evenement.png"
         default:
-            name = "cat_ajuda.png"
+            name = "clusterSmall.png"
         }
         return name
     }
