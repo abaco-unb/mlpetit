@@ -50,8 +50,7 @@ class ProfileVC: UIViewController {
             }
             
             let image: UIImage = ImageUtils.instance.loadImageFromPath(contact!.image)!
-            profilePicture.image = image
-            
+            self.profilePicture.image = image
             
             if contact.level == String("level", "2") {
                 self.profileLangLevel.image = UIImage(named: "profile_niv1")
