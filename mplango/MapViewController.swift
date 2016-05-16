@@ -190,6 +190,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         self.indicator.showActivityIndicator(self.view)
         //Checagem remota
         Alamofire.request(.GET, EndpointUtils.POST)
+            .responseString { response in
+            print("Success: \(response.result.isSuccess)")
+            print("Response String: \(response.result.value)")
+            }
             .responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                    if let posts = json["data"].array {

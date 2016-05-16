@@ -278,7 +278,6 @@
 		1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryUtils.swift; sourceTree = "<group>"; };
 		1536E30C1C71F6A500471E86 /* mplango 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 10.xcdatamodel"; sourceTree = "<group>"; };
 		1536E30D1C71FCC900471E86 /* mplango 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 11.xcdatamodel"; sourceTree = "<group>"; };
-		153C20DE1CE9FE5E00C3FB8F /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		153C20EC1CEA71B700C3FB8F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestUtils.swift; sourceTree = "<group>"; };
 		1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Alamofire-SwiftyJSON.xcodeproj"; path = "Alamofire-SwiftyJSON-master/Alamofire-SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
@@ -323,7 +322,6 @@
 		54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fixedOrientation.swift; sourceTree = "<group>"; };
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
-		54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostConfirm.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
@@ -682,7 +680,6 @@
 			isa = PBXGroup;
 			children = (
 				540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */,
-				54D48D3E1B6D7C500087F6BB /* PostConfirm.swift */,
 				82D73CA41B81720E00DFEAB0 /* PostViewController.swift */,
 				54D02AB61BD949F900B62860 /* UITextViewExt.swift */,
 				54D02AB91BD94C0700B62860 /* RewardViewController.swift */,

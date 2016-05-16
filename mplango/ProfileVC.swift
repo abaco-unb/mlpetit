@@ -152,21 +152,21 @@ class ProfileVC: UIViewController {
                         }
                     }
                 
-                    if let lev = user["level"]["id"].string {
+                    if let lev = user["level"]["id"].int {
                     print("show level : ", lev)
-                        if lev == String("1") {
+                        if lev == User.BEGINNER {
                             self.profileLangLevel.image = UIImage(named: "profile_niv1")
                         }
-                        else if lev == String("5") {
+                        else if lev == User.HIGH_BEGINNER {
                             self.profileLangLevel.image = UIImage(named: "profile_niv2")
                         }
-                        else if lev == String("3") {
+                        else if lev == User.INTERMEDIATE {
                             self.profileLangLevel.image = UIImage(named: "profile_niv3")
                         }
-                        else if lev == String("4") {
+                        else if lev == User.ADVANCED {
                             self.profileLangLevel.image = UIImage(named: "profile_niv4")
                         }
-                        else if lev == String("2") {
+                        else if lev == User.MEDIATOR {
                             self.profileLangLevel.image = UIImage(named: "profile_nivM")
                         }
                     }
