@@ -16,11 +16,11 @@ import AlamofireSwiftyJSON
 //Esta tela será aberta a partir da preview do post no mapa.
 //O pin abre a preview e a preview abre a tela de post.
 
-class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate {
+class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, UIAlertViewDelegate {
     
     //MARK: Properties
 
-    var contact: RUser!
+    var user: RUser!
     var userId:Int!
     var post: PostAnnotation? = nil
     
@@ -83,10 +83,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         super.viewDidLoad()
         
         self.navigationItem.title = String(post?.category)
-        
-        if (contact != self.userId) {
-            self.navigationItem.rightBarButtonItem = nil
-        }
         
         if (post?.category) == Optional(1) {
             let defi = UIImage(named: "cat_defi_bar")
@@ -283,6 +279,61 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
     }
+    
+    @IBAction func options(sender: AnyObject) {
+        
+        var popover:UIPopoverPresentationController? = nil
+        
+        let alert:UIAlertController=UIAlertController(title: "Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let modifyAction = UIAlertAction(title: "Modifier", style: UIAlertActionStyle.Default)
+        {
+            UIAlertAction in
+//            self.openCamera()
+        }
+        let deleteAction = UIAlertAction(title: "Supprimer", style: UIAlertActionStyle.Default)
+        {
+            UIAlertAction in
+//            self.openGallary()
+        }
+        
+        let reportAction = UIAlertAction(title: "Signaler", style: UIAlertActionStyle.Default)
+        {
+            UIAlertAction in
+        }
+        
+        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+        {
+            UIAlertAction in
+        }
+        
+        // Add the actions
+        
+        if self.userId != post!.ownerId {
+            alert.addAction(reportAction)
+            alert.addAction(cancelAction)
+        }
+        else {
+            alert.addAction(modifyAction)
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+        }
+        
+        // Present the controller
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+            popover?.sourceView = self.view
+            popover?.sourceRect = likeBtn.frame
+            popover?.permittedArrowDirections = .Any
+        }
+        
+    }
+    
     
     @IBAction func like(sender: AnyObject) {
         

@@ -228,6 +228,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             var category:Int = 0
                             var likes:Int = 0
                             var imageUrl:String = ""
+                            var ownerId: Int = 0
                             
                             var comments: Array<Comment> = [Comment]();
                             
@@ -265,6 +266,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 }
                             }
                             
+                            if let owner = post["user"]["id"].int {
+                                print("+++++++++++++++++++")
+                                print(owner)
+                                print("+++++++++++++++++++")
+                                ownerId = owner
+                            }
+                            
                             if let postComments = post["comments"].array {
                                 for comment in postComments {
                                     var comId  = 0;
@@ -297,7 +305,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 userName:  post["user"]["name"].stringValue,
                                 likes: likes,
                                 postImageUrl: imageUrl,
-                                comments: comments
+                                comments: comments,
+                                ownerId: ownerId
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
                             self.posts.append(annotation);

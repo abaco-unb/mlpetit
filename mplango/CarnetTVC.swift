@@ -70,12 +70,7 @@ class CarnetTVC: UITableViewController {
                         }
                         
                         if (note["photo"].string != nil) {
-                            imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "image=true"
-                            
-//                            if let imageId = noteImage[0]["id"].int {
-//                                print("aqui dentro da imagem")
-//                                imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
-//                            }
+                            imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "&image=true"
                             
                         }
                         
@@ -135,27 +130,36 @@ class CarnetTVC: UITableViewController {
             
             print("item is \(self.itens[indexPath.row])")
             
-            let params : [String: AnyObject] = [
-                "user": self.userId
-            ]
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.tableView.reloadData()
             
-            //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
-            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(itens)
-            
-            Alamofire.request(.DELETE, urlEdit , parameters: params)
-                .responseString { response in
-                    print("Success: \(response.result.isSuccess)")
-                    print("Response String: \(response.result.value)")
-                }.responseSwiftyJSON({ (request, response, json, error) in
-                    if (error == nil) {
-                        self.indicator.hideActivityIndicator();
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.tableView.reloadData()
-                        }
-                        
-                    }
-                    
-                })
+//            let params : [String: AnyObject] = [
+//                "user": self.userId
+//            ]
+//            
+//            //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
+//            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(itens)
+//            
+//            Alamofire.request(.DELETE, urlEdit , parameters: params)
+//                .responseString { response in
+//                    print("Success: \(response.result.isSuccess)")
+//                    print("Response String: \(response.result.value)")
+//                }.responseSwiftyJSON({ (request, response, json, error) in
+//                    if (error == nil) {
+//                        self.indicator.hideActivityIndicator();
+//                        NSOperationQueue.mainQueue().addOperationWithBlock {
+//                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//                            self.tableView.reloadData()
+//
+//                        }
+//                        
+//                    }
+//                    
+//                })
+//            
+        }
+        
+        else if editingStyle == .Insert {
             
         }
     }
