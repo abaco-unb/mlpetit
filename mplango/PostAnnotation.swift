@@ -70,13 +70,13 @@ class PostAnnotation: FBAnnotation{
         var name:String!
         
         switch self.category {
-        case 1:
+        case Post.DEFIS:
             name =  "cat_defi.png"
-        case 2:
+        case Post.CURIOSITE:
             name = "cat_question.png"
-        case 3:
+        case Post.ASTUCES:
             name = "cat_astuce.png"
-        case 4:
+        case Post.EVENEMENTS:
             name = "cat_evenement.png"
         default:
             name = "clusterSmall.png"

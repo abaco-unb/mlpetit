@@ -70,7 +70,7 @@ class CarnetTVC: UITableViewController {
                         }
                         
                         if (note["photo"].string != nil) {
-                            imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "&image=true"
+                            imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "image=true"
                             
 //                            if let imageId = noteImage[0]["id"].int {
 //                                print("aqui dentro da imagem")

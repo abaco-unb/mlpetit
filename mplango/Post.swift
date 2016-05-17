@@ -5,17 +5,16 @@
 //  Created by Bruno Ferreira on 11/05/15.
 //  Copyright (c) 2015 unb.br. All rights reserved.
 //
-import CoreData
 import Foundation
 
-class Post: NSManagedObject {
-    @NSManaged var text:String
-    @NSManaged var audio:String
-    @NSManaged var video:String
-    @NSManaged var latitude:Double
-    @NSManaged var longitude:Double
-    @NSManaged var category:NSNumber
-    @NSManaged var locationName:String
-    @NSManaged var user:NSManagedObject
+class Post: NSObject {
+    
+    static let DEFIS      = 1
+    static let CURIOSITE  = 2
+    static let ASTUCES    = 3
+    static let EVENEMENTS = 4
+    
+    static let IMG_CATEGORIES = ["", "cat_defi.png", "cat_question.png", "cat_astuce.png", "cat_evenement.png"]
+    
     
 }

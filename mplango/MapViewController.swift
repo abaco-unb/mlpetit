@@ -166,23 +166,46 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
     }
     
-    @IBAction func showRecentPosts(sender: AnyObject) {
+    @IBAction func filterPosts(sender: UIButton) {
+        print("nome do botao:",sender.tag)
+        var showCategory:Int!
+        switch sender {
+        case recentsBtn:
+            showCategory = 0
+        case defisBtn:
+            showCategory = Post.DEFIS
+        case astucesBtn:
+            showCategory = Post.ASTUCES
+        case doutesBtn:
+            showCategory = Post.CURIOSITE
+        case activiteBtn:
+            showCategory = Post.EVENEMENTS
+        default:
+            showCategory = 5
+        }
         
-    }
-    
-    @IBAction func showDefisPosts(sender: AnyObject) {
+        showFiltersBtn.imageView?.image = UIImage(named: Post.IMG_CATEGORIES[showCategory])
+        self.hideFilters(sender);
         
-    }
-    
-    @IBAction func showAstucesPosts(sender: AnyObject) {
+        for annotation in self.clusteringManager.allAnnotations() {
+            self.mkMapView.viewForAnnotation(annotation)?.hidden = true
+            print("iniciou o loop de cluster annotation")
+//            if showCategory == 5 {
+//                self.mkMapView.viewForAnnotation(annotation)?.hidden = false
+//                continue
+//            }
+            
+            if annotation.isKindOfClass(PostAnnotation) {
+                print("é classe de Post")
+                let post: PostAnnotation = annotation as! PostAnnotation
+                
+                if post.category.integerValue == showCategory {
+                    print("coloca como visivel")
+                    self.mkMapView.viewForAnnotation(post)?.hidden = false
+                }
+            }
+        }
         
-    }
-    
-    @IBAction func showDoutesPosts(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func showActivitesPosts(sender: AnyObject) {
         
     }
     
@@ -191,10 +214,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         //Checagem remota
         Alamofire.request(.GET, EndpointUtils.POST)
             .responseString { response in
-            print("Success: \(response.result.isSuccess)")
-            print("Response String: \(response.result.value)")
-            }
-            .responseSwiftyJSON({ (request, response, json, error) in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
                 self.indicator.hideActivityIndicator();
                    if let posts = json["data"].array {
                     
@@ -245,12 +267,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             
                             if let postComments = post["comments"].array {
                                 for comment in postComments {
-                                    var comId = 0;
+                                    var comId  = 0;
+                                    var userId = 0;
                                     
                                     if let commentId = comment["id"].int {
                                         comId = commentId
                                     }
-                                    comments.append(Comment(id: comId, audio: comment["text"].stringValue, text: comment["audio"].stringValue, image: comment["image"].stringValue, postId: postId))
+                                    
+                                    if let uId = comment["user"]["id"].int {
+                                        userId = uId
+                                    }
+                                    
+                                    comments.append(Comment(id: comId, audio: comment["audio"].stringValue, text: comment["text"].stringValue, image: comment["image"].stringValue, postId: postId, created: comment["created"].stringValue, userId: userId))
                                 }
                             }
                             
