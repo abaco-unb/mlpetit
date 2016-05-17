@@ -56,8 +56,8 @@ class ContactViewController: UITableViewController {
                         var name:String  = ""
                         var nationality:String = ""
                         var password:String = ""
-                        var image:String = ""
-                        var level:String = ""
+                        var imageUrl:String = ""
+                        var level:Int = 0
                         var bio:String = "";
                         
                         if let userId = user["id"].int {
@@ -92,12 +92,14 @@ class ContactViewController: UITableViewController {
                         
                         if let userImage = user["image"].string {
                             print("show photo : ",userImage)
-                            image = EndpointUtils.USER + "?id=" + String(self.userId) + "&avatar=true"
+                            
+                            if (user["image"].string != nil){
+                                imageUrl = EndpointUtils.USER + "?id=" + String(id) + "&avatar=true"
+                            }
+                            
                         }
                         
-
-                        
-                        if let userLevel = user["level"]["id"].string {
+                        if let userLevel = user["level"]["id"].int {
                             print("show level : ",userLevel)
                             level = userLevel
                             
@@ -108,7 +110,7 @@ class ContactViewController: UITableViewController {
                             
                         }
                         
-                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: image, level: level, bio: bio))
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio))
                         
                     }
                     self.indicator.hideActivityIndicator();

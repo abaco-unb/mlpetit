@@ -32,7 +32,7 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (contact != self.userId) {
+        if contact != self.userId {
             
             self.navigationItem.leftBarButtonItem = nil
             self.navigationItem.backBarButtonItem!.enabled = true
@@ -42,34 +42,39 @@ class ProfileVC: UIViewController {
             self.profileNationality.text = contact.nationality
             self.profileBio.text = contact.bio
             
+            let image = ImageUtils.instance.loadImageFromPath(contact.image)
+            if (!contact.image.isEmpty && image != nil){
+                print("image inneer")
+                print(image)
+                profilePicture.image = image
+            }
+            else {
+                profilePicture.image = UIImage(named: "empty_profile")
+            }
+            
             if contact.gender == "Homme" {
                 self.profileGender.image = UIImage(named:"icon_masc_profile")
             }
             else if contact.gender == "Femme" {
                 self.profileGender.image = UIImage(named:"icon_fem_profile")
             }
-            
-            let image: UIImage = ImageUtils.instance.loadImageFromPath(contact!.image)!
-            self.profilePicture.image = image
-            
-            if contact.level == String("level", "2") {
+
+            if contact.level == User.BEGINNER {
                 self.profileLangLevel.image = UIImage(named: "profile_niv1")
             }
-            else if contact.level == String("2") {
+            else if contact.level == User.HIGH_BEGINNER {
                 self.profileLangLevel.image = UIImage(named: "profile_niv2")
             }
-            else if contact.level == String("2") {
+            else if contact.level == User.INTERMEDIATE {
                 self.profileLangLevel.image = UIImage(named: "profile_niv3")
             }
-            else if contact.level == String("2") {
+            else if contact.level == User.ADVANCED {
                 self.profileLangLevel.image = UIImage(named: "profile_niv4")
             }
-            else if contact.level == String("2") {
+            else if contact.level == User.MEDIATOR {
                 self.profileLangLevel.image = UIImage(named: "profile_nivM")
             }
-           
-            
-            
+                       
             //        self.profileNumberPosts.text =
             //        self.profileNumberFollowers.text =
             //        self.profileNumberFollowing.text =
@@ -82,17 +87,8 @@ class ProfileVC: UIViewController {
             
         }
         
-
-        
-        // Custom the visual identity of Image View
         profilePicture.layer.cornerRadius = 40
         profilePicture.layer.masksToBounds = true
-        
-        
-        //Para ir à tela da gamificação com gesto (e não botão)
-        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ProfileVC.showProfileGameVC))
-        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
         
     }
 

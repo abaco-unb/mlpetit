@@ -38,23 +38,18 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     
     
     //Outlets da photoAudioView (quando o item do Carnet inclui uma foto e eventualmente, ao mesmo tempo, um audio)
-
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
-    
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var listenBtn: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var audioTimerLabel: UILabel!
-    
     @IBOutlet weak var audioInPhotoView: UIView!
   
     //Outlets da AudioView (quando o item do Carnet inclui apenas uma mídia audio (sem imagem))
-    
     @IBOutlet weak var AudioView: UIView!
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
-    
     
     
     override func viewDidLoad() {
@@ -82,9 +77,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         AudioView.layer.masksToBounds = true
         
         self.navigationItem.title = item.word
-
-        //para mostrar os dados do item já carregados pela tableview
-        
+        removeImage.hidden = true
         
         print(item.word)
         print(item.text)
@@ -98,47 +91,46 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         print("----***-----");
         
         let image = ImageUtils.instance.loadImageFromPath(item.image)
+//        let audio = 
         
-        if !item.image.isEmpty && image != nil{
+        // FOTO SEM ÁUDIO:
+        if (!item.image.isEmpty && image != nil /*|| audio == nil*/){
             print("image inneer")
             print(image)
             
             itemPhoto.image = image
             photoAudioView.hidden = false
             audioInPhotoView.hidden = true
+            AudioView.hidden = true
         }
         
-        //Mostrar ou não as Media View em função do conteúdo no servidor (se tem imagem e/ou som)
-//        if !item.audio.isEmpty {
-            //falta o audio (criar no servidor)
-//            photoAudioView.hidden = true
-//        }
-        
-        
-//        if (itemPhoto.image != nil /* || audio != nil */) {
+        // FOTO + ÁUDIO:
+//        else if (!item.image.isEmpty && image != nil /*|| !item.audio.isEmpty && audio != nil*/) {
 //            photoAudioView.hidden = false
 //            audioInPhotoView.hidden = false
-//        }else {
+//            AudioView.hidden = true
+//        }
+        
+        // ÁUDIO SEM FOTO:
+//        else if (!item.audio.isEmpty && audio != nil || image == nil) {
 //            photoAudioView.hidden = true
 //            audioInPhotoView.hidden = true
+//            AudioView.hidden = false
 //        }
-        
-        //Com o audio na verdade tem que fazer a mesma coisa que com a imagem: se não tem audio no arquivo, a view não aparece
-        AudioView.hidden = true
-        
-//        if (AudioView.hidden == true || photoAudioView.hidden == true) {
-//            mediaView.hidden = true
-//        }
-        
-        removeImage.hidden = true
-        self.navigationItem.leftBarButtonItem = nil
+            
+        // NEM FOTO NEM ÁUDIO:
+        else if (image == nil /*|| audio == nil*/) {
+            photoAudioView.hidden = true
+            audioInPhotoView.hidden = true
+            AudioView.hidden = true
+            mediaView.hidden = true
+        }
         
         checkValidChange()
         
     }
     
     func retrieveLoggedUser() {
-        
         // recupera os dados do usuário logado no app
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         self.userId = prefs.integerForKey("id") as Int
@@ -146,62 +138,56 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
     }
     
+    
     // MARK : Actions
-        
         
     @IBAction func edit(sender: AnyObject) {
         
         if editBtn.title == "Confirmer" {
+            editItemCarnet()
             
-            itemWordTxtView.editable = false
-            itemDescTxtView.editable = false
-            removeImage.hidden = true
-            editBtn.title = "Éditer"
-            itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
-            itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
-            navigationItem.hidesBackButton = false
-            navigationItem.title = item.word
-            
-        } else {
+        } else if editBtn.title == "Éditer" {
             
             itemWordTxtView.editable = true
             itemDescTxtView.editable = true
+            itemWordTxtView.textColor = UIColor.darkGrayColor()
+            itemDescTxtView.textColor = UIColor.darkGrayColor()
             
             if mediaView.hidden == false {
                 removeImage.hidden = false
                 removeImage.enabled = true
             }
-            
-            itemWordTxtView.textColor = UIColor.darkGrayColor()
-            itemDescTxtView.textColor = UIColor.darkGrayColor()
-            
+
             editBtn.title = "Confirmer"
             editBtn.enabled = false
-            
             navigationItem.hidesBackButton = true
-//            navigationItem.leftBarButtonItem = cancelBtn
-//            cancelBtn.enabled = true
-
-            
-//            editItemCarnet()
+            let cancelBtn = UIBarButtonItem(title: "Annuler", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancelEdit))
+            navigationItem.leftBarButtonItem = cancelBtn
         }
-        
     }
     
-    @IBAction func cancelEdit(sender: AnyObject) {
+    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+        
         self.itemWordTxtView.editable = false
         self.itemDescTxtView.editable = false
-        self.removeImage.hidden = true
-        self.editBtn.title = "Éditer"
         self.itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
         self.itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
+        
+        self.removeImage.hidden = true
+        
+        self.editBtn.title = "Éditer"
+        self.editBtn.enabled = true
         self.navigationItem.hidesBackButton = false
-        self.navigationItem.title = self.item.word
+        self.navigationItem.leftBarButtonItem = nil
+        
+        itemWordTxtView.text = item.word
+        itemDescTxtView.text = item.text
     }
     
     @IBAction func removeMedia(sender: AnyObject) {
         mediaView.hidden = true
         removeImage.hidden = true
+        itemPhoto = nil
     }
 
     
@@ -244,7 +230,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.checkValidChange()
+                        self.performSegueWithIdentifier("edit_carnet", sender: self)
+
                     }
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -255,17 +242,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                             self.indicator.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
-                        
-                        //Coisas de interface
-                        
-                        self.itemWordTxtView.editable = false
-                        self.itemDescTxtView.editable = false
-                        self.removeImage.hidden = true
-                        self.editBtn.title = "Éditer"
-                        self.itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
-                        self.itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
-                        self.navigationItem.hidesBackButton = false
-                        self.navigationItem.title = self.item.word
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             })
@@ -291,7 +268,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.checkValidChange()
+//                        self.checkValidChange()
+                        self.performSegueWithIdentifier("edit_carnet", sender: self)
                     }
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -302,21 +280,13 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                             self.indicator.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
-                        
-                        //Coisas de interface
-                        
-                        self.itemWordTxtView.editable = false
-                        self.itemDescTxtView.editable = false
-                        self.removeImage.hidden = true
-                        self.editBtn.title = "Éditer"
-                        self.itemDescTxtView.textColor = UIColor(hex: 0x9E9E9E)
-                        self.itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
-                        self.navigationItem.hidesBackButton = false
-                        self.navigationItem.title = self.item.word
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             })
     }
+    
+    // MARK: TextView properties
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
@@ -361,6 +331,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         checkValidChange()
     }
     
+    // MARK: layout subviews
+    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
@@ -381,5 +353,21 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "edit_carnet"){
+            let tabVC = segue.destinationViewController as! UITabBarController
+            tabVC.selectedIndex = 3
+        }
+    }
+
+
+
+
+
+
 }
 

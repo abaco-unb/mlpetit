@@ -1074,9 +1074,6 @@
                                 <variation key="widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="Vif-Yb-aqT" id="32Y-tT-7MO"/>
                                 </connections>
@@ -8178,11 +8175,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Mot" id="ReM-HE-eJV">
-                        <barButtonItem key="leftBarButtonItem" title="Annuler" id="2wi-gz-N0Q">
-                            <connections>
-                                <action selector="cancelEdit:" destination="6Oc-Mm-3p6" id="UI2-Ac-Adm"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Éditer" id="mFb-Cq-JpF">
                             <connections>
                                 <action selector="edit:" destination="6Oc-Mm-3p6" id="27C-47-3LN"/>
@@ -8196,7 +8188,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="audioInPhotoView" destination="fUz-Vd-53N" id="l6N-sy-iKL"/>
                         <outlet property="audioTimerLabel" destination="Vg5-Si-KxD" id="iZI-Td-GjF"/>
                         <outlet property="backgroundRecord" destination="XHm-nP-heQ" id="lh6-Wt-84d"/>
-                        <outlet property="cancelBtn" destination="2wi-gz-N0Q" id="4I2-WD-Czm"/>
                         <outlet property="editBtn" destination="mFb-Cq-JpF" id="kns-vg-OhR"/>
                         <outlet property="itemDescTxtView" destination="lWP-Fg-OOg" id="epG-Iv-KVN"/>
                         <outlet property="itemPhoto" destination="LHt-2n-g9D" id="5GI-PD-Qva"/>
@@ -8209,6 +8200,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="scrollView" destination="1kH-3u-Dew" id="x72-Ln-ceC"/>
                         <outlet property="stopBtn" destination="MVy-tJ-RyV" id="Lga-67-ON9"/>
                         <outlet property="stopBtn2" destination="4ZP-7l-IIv" id="Wwm-fA-Ieo"/>
+                        <segue destination="O4F-Fi-N69" kind="show" identifier="edit_carnet" id="Qil-8c-pdq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlF-OF-xCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25427,7 +25419,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <action selector="cancel:" destination="Dwb-NK-OOf" id="AL7-qA-NLW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="options_btn" id="8ix-r0-8hE"/>
+                        <barButtonItem key="rightBarButtonItem" image="options_btn" id="8ix-r0-8hE">
+                            <connections>
+                                <action selector="options:" destination="Dwb-NK-OOf" id="y5T-z9-dvk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -27079,10 +27075,10 @@ AAEm9QABJvgAAScKAAEnDQABJxIAAAAAAAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAAAEnFA
         <image name="write_here_indicator" width="106" height="95"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yhB-Xg-v2R"/>
-        <segue reference="gLP-V6-6JN"/>
+        <segue reference="Qil-8c-pdq"/>
         <segue reference="L2S-SH-vTS"/>
-        <segue reference="XLQ-dk-fw7"/>
+        <segue reference="gvL-cc-QUb"/>
         <segue reference="zQd-mS-QGF"/>
+        <segue reference="XLQ-dk-fw7"/>
     </inferredMetricsTieBreakers>
 </document>
