@@ -183,7 +183,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
 //            cancelBtn.enabled = true
 
             
-//            editItemCarnet()
+            editItemCarnet()
         }
         
     }

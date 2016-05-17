@@ -282,26 +282,26 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     // MARK:- Posting Comment
     
     func postComment () {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-        
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            
-            let user: User = fetchResults[0];
-            let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
-            let comment = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-            comment.text = writeTxtView.text!
-            comment.user = user
-            //falta foto
-            //falta som
-            
-            do {
-                try moContext?.save()
-            } catch _ {
-            }
-        }
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let email: String = prefs.objectForKey("USEREMAIL") as! String
+//        let fetchRequest = NSFetchRequest(entityName: "User")
+//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+//        
+//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
+//            
+//            let user: User = fetchResults[0];
+//            let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
+//            let comment = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
+//            comment.text = writeTxtView.text!
+//            comment.user = user
+//            //falta foto
+//            //falta som
+//            
+//            do {
+//                try moContext?.save()
+//            } catch _ {
+//            }
+//        }
     }
 
     // Table view
