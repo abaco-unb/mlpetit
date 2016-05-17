@@ -53,7 +53,6 @@
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
-		54DCB19B1CE6520400EB0DE2 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
 		54E971951B6ED25B005F27F1 /* FiraMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */; };
 		54E971961B6ED25B005F27F1 /* FiraMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */; };
@@ -279,7 +278,6 @@
 		1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryUtils.swift; sourceTree = "<group>"; };
 		1536E30C1C71F6A500471E86 /* mplango 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 10.xcdatamodel"; sourceTree = "<group>"; };
 		1536E30D1C71FCC900471E86 /* mplango 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 11.xcdatamodel"; sourceTree = "<group>"; };
-		153C20DE1CE9FE5E00C3FB8F /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		153C20EC1CEA71B700C3FB8F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlRequestUtils.swift; sourceTree = "<group>"; };
 		1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Alamofire-SwiftyJSON.xcodeproj"; path = "Alamofire-SwiftyJSON-master/Alamofire-SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
-		54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
 		54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -546,8 +543,6 @@
 		8283BE151B0143AF0085F9A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				153C20DE1CE9FE5E00C3FB8F /* MyriadProRegular.ttf */,
-				54DCB19A1CE6520400EB0DE2 /* MyriadProRegular.ttf */,
 				54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */,
 				54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */,
 				54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */,
@@ -961,7 +956,6 @@
 				54E971A91B6ED25B005F27F1 /* FiraSans-LightItalic.ttf in Resources */,
 				54E971AA1B6ED25B005F27F1 /* FiraSans-Medium.ttf in Resources */,
 				54E971AB1B6ED25B005F27F1 /* FiraSans-MediumItalic.ttf in Resources */,
-				54DCB19B1CE6520400EB0DE2 /* MyriadProRegular.ttf in Resources */,
 				54E971AC1B6ED25B005F27F1 /* FiraSans-Regular.ttf in Resources */,
 				54E971AD1B6ED25B005F27F1 /* FiraSans-SemiBold.ttf in Resources */,
 				54E971AE1B6ED25B005F27F1 /* FiraSans-SemiBoldItalic.ttf in Resources */,

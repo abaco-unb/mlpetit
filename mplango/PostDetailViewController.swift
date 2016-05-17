@@ -181,7 +181,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         videoView.layer.masksToBounds = true
         
         
-        scrollView.bounces = true
+        scrollView.bounces = false
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostDetailViewController.panRecognized(_:)))
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
