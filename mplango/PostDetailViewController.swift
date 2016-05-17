@@ -447,6 +447,14 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             mediaView.addConstraint(aspectRatioViewConstraint)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "post_to_comments" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let commentController:CommentsVC = navigationController.viewControllers[0] as! CommentsVC
+            commentController.comments = self.post?.comments
+        }
+    }
 
 }
 

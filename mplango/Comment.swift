@@ -14,12 +14,16 @@ class Comment: NSObject {
     let text : String
     let image : String
     let postId : Int
+    let created: String
+    let userId: Int
     
-    init(id:Int, audio:String, text:String, image:String, postId: Int) {
+    init(id:Int, audio:String, text:String, image:String, postId: Int, created: String, userId: Int) {
         self.id = id
         self.audio = audio
         self.text = text
         self.image = image
         self.postId = postId
+        self.created = created
+        self.userId = userId
     }
 }

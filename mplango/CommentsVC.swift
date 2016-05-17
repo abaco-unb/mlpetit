@@ -7,19 +7,16 @@
 //
 
 import UIKit
-import CoreData
+import AVFoundation
+import Alamofire
+import SwiftyJSON
+import AlamofireSwiftyJSON
 
-class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
+class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
 
     // MARK: Properties
     
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
-    
-    var comment: Post? = nil
-    
-    var user: User!
+    var comments: Array<Comment>!
 
     let basicCellIdentifier = "BasicCell"
     
@@ -41,18 +38,16 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.comTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
         self.writeTxtView.delegate = self
         
-        fetchedResultController = getFetchedResultController()
-        fetchedResultController.delegate = self
-        do {
-            try fetchedResultController.performFetch()
-        } catch _ {
-        }
+        print("numero de comentarios: ", self.comments.count)
         
-        if comment != nil {
-            writeTxtView.text = comment?.text
-        }
+//
+//        if comment != nil {
+//            writeTxtView.text = comment?.text
+//        }
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsVC.dismissKeyboard))
@@ -103,7 +98,6 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
     }
     
     // MARK : UITextView functions
-    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         let limitLength = 149
@@ -249,6 +243,9 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         
         picker.dismissViewControllerAnimated(true, completion: nil)
         comPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        
+        
         removeImage.hidden = false
         postComBtn.hidden = false
         postComBtn.enabled = true
@@ -262,101 +259,32 @@ class CommentsVC: UIViewController, NSFetchedResultsControllerDelegate, UITextVi
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK:- Retrieve Tasks
-    
-    func getFetchedResultController() -> NSFetchedResultsController {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: moContext!, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultController
-        
-    }
-    
-    func itemFetchRequest() -> NSFetchRequest {
-        let fetchRequest = NSFetchRequest(entityName: "Post")
-        let sortDescriptor = NSSortDescriptor(key: "text", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-        
-    }
-    
-    
     // MARK:- Posting Comment
     
     func postComment () {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-        
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            
-            let user: User = fetchResults[0];
-            let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
-            let comment = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-            comment.text = writeTxtView.text!
-            comment.user = user
-            //falta foto
-            //falta som
-            
-            do {
-                try moContext?.save()
-            } catch _ {
-            }
-        }
+    
     }
 
     // Table view
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let numberOfSections = fetchedResultController.sections?.count
-        return numberOfSections!
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRowsInSection = fetchedResultController.sections?[section].numberOfObjects
-        return numberOfRowsInSection!
+        return self.comments.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
-        let comment = fetchedResultController.objectAtIndexPath(indexPath) as! Post
-        
-        cell.comTxtView.text = comment.text
-
-        // Para a data da publicação do comentário (mas não funciona, por enquanto indica a data/hora atual)
-        let date = NSDate()
-        let dateFormatter = NSDateFormatter()
-        
-        let theDateFormat = NSDateFormatterStyle.ShortStyle
-        let theTimeFormat = NSDateFormatterStyle.ShortStyle
-        
-        dateFormatter.dateStyle = theDateFormat
-        dateFormatter.timeStyle = theTimeFormat
-        
-        cell.dateLabel.text = dateFormatter.stringFromDate(date)
-        
+        cell.comTxtView.text = comments[indexPath.row].text
+        cell.dateLabel.text = comments[indexPath.row].created
+        cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
         return cell
     }
     
-    // MARK: - TableView Delete (ISSO VAI SER TIRADO DEPOIS, É SÓ PARA OS TESTES DA TELA)
-    
-     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let managedObject:NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
-        moContext?.deleteObject(managedObject)
-        do {
-            try moContext?.save()
-        } catch _ {
-        }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("You selected cell #\(indexPath.row)!")
     }
-    
-    
-    // MARK: - TableView Refresh
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        print("data changed")
-        comTableView.reloadData()
-    }
-
-    
     
 }

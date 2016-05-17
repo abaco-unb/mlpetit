@@ -7,16 +7,10 @@
 //
 
 import UIKit
-import CoreData
 
-class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
-    
-    let moContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
+class CommentCell: UITableViewCell {
     
     var comment: Post? = nil
-    
     var user: User!
     
     
@@ -42,12 +36,8 @@ class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
     
     
     override func layoutSubviews() {
-        
-        retrieveLoggedUser()
-        print("user data")
-        print(user.name)
 
-        userName.text = user.name
+        //userName.text = user.name
         
         profilePicture.layer.cornerRadius = 15
         profilePicture.layer.masksToBounds = true
@@ -60,20 +50,6 @@ class CommentCell: UITableViewCell, NSFetchedResultsControllerDelegate {
         audioView.layer.cornerRadius = 10
         audioView.layer.masksToBounds = true
         */
-        
-    }
-    
-    
-    func retrieveLoggedUser() {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String = prefs.objectForKey("USEREMAIL") as! String
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-        
-        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-            user = fetchResults[0];
-            
-        }
         
     }
     
