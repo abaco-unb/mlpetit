@@ -16,6 +16,10 @@ class CarnetTVC: UITableViewController {
     var itens = [Carnet]()
     var userId:Int!
     
+    var word:String  = ""
+    var text:String = ""
+    var image:String = ""
+    
     var indicator:ActivityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
@@ -83,7 +87,7 @@ class CarnetTVC: UITableViewController {
             });
         
     }
-    
+
     // MARK: - Table view data source
     
     override func didReceiveMemoryWarning() {
@@ -105,6 +109,59 @@ class CarnetTVC: UITableViewController {
         return cell
     }
     
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == .Delete {
+            
+            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            let userId:Int = prefs.integerForKey("id") as Int
+
+            print("item is \(self.itens[indexPath.row].id)")
+            print("deletando o item")
+            print("userId is:",userId)
+            
+            let params : [String: AnyObject] = [
+                "user": self.userId,
+                "id": self.itens,
+                "word": self.word,
+                "text": self.text,
+                "photo": self.image
+            ]
+            
+            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(self.itens[indexPath.row].id)
+            print("urlEdit is:",urlEdit)
+            
+            self.indicator.showActivityIndicator(self.view)
+            
+            Alamofire.request(.DELETE, urlEdit , parameters: params)
+                .responseString { response in
+                    print("Success: \(response.result.isSuccess)")
+                    print("Response String: \(response.result.value)")
+                }.responseSwiftyJSON({ (request, response, json, error) in
+                    if (error == nil) {
+                        self.indicator.hideActivityIndicator();
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.tableView.reloadData()
+                            self.itens.removeAtIndex(indexPath.row)
+                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                        }
+                    } else {
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            //New Alert Ccontroller
+                            let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao deletar seu item. Favor tente novamente.", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                print("Delete is not okay.")
+                                self.indicator.hideActivityIndicator();
+                            }
+                            alertController.addAction(agreeAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        }
+                    }
+                })
+        }
+    }
+    
 
 //    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
 //        return self.fetchedResultController.sectionForSectionIndexTitle(title, atIndex: index)
@@ -120,49 +177,7 @@ class CarnetTVC: UITableViewController {
         return self.fetchedResultController.sectionIndexTitles
     }
     */
-    
 
-    
-    // MARK: - TableView Delete
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            
-            print("item is \(self.itens[indexPath.row])")
-            
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            self.tableView.reloadData()
-            
-//            let params : [String: AnyObject] = [
-//                "user": self.userId
-//            ]
-//            
-//            //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
-//            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(itens)
-//            
-//            Alamofire.request(.DELETE, urlEdit , parameters: params)
-//                .responseString { response in
-//                    print("Success: \(response.result.isSuccess)")
-//                    print("Response String: \(response.result.value)")
-//                }.responseSwiftyJSON({ (request, response, json, error) in
-//                    if (error == nil) {
-//                        self.indicator.hideActivityIndicator();
-//                        NSOperationQueue.mainQueue().addOperationWithBlock {
-//                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-//                            self.tableView.reloadData()
-//
-//                        }
-//                        
-//                    }
-//                    
-//                })
-//            
-        }
-        
-        else if editingStyle == .Insert {
-            
-        }
-    }
     
 //    @IBAction func unwindSecondView(segue: UIStoryboardSegue) {
 //        print ("unwindSecondView fired in first view")
