@@ -14,6 +14,8 @@ class CarnetTVC: UITableViewController {
     //MARK: Properties
     
     var itens = [Carnet]()
+    var filteredItens = [Carnet]()
+    
     var userId:Int!
     
     var word:String  = ""
@@ -22,12 +24,20 @@ class CarnetTVC: UITableViewController {
     
     var indicator:ActivityIndicator = ActivityIndicator()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         retrieveLoggedUser()
         print("self.userId : ", self.userId)
         self.upServerNote()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchBar.placeholder = "Rechercher"
         
     }
     
@@ -87,25 +97,44 @@ class CarnetTVC: UITableViewController {
             });
         
     }
+    
+    // MARK: Search bar
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredItens = itens.filter { itens in
+            return itens.word.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
+
 
     // MARK: - Table view data source
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredItens.count
+        }
         return self.itens.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as! CarnetTableViewCell
-        cell.wordLabel.text = self.itens[indexPath.row].word
+        
+        let item: Carnet
+        
+        if searchController.active && searchController.searchBar.text != "" {
+            item = self.filteredItens[indexPath.row]
+        } else {
+            item = self.itens[indexPath.row]
+        }
+        
+        cell.wordLabel.text = item.word
         return cell
     }
     
@@ -194,11 +223,23 @@ class CarnetTVC: UITableViewController {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
-            let item:Carnet = self.itens[indexPath!.row]
+            
+            let item: Carnet
+            if searchController.active && searchController.searchBar.text != "" {
+                item = self.filteredItens[indexPath!.row]
+            } else {
+                item = self.itens[indexPath!.row]
+            }
+            
             itemController.item = item
             
         }
     }
     
-    
+}
+
+extension CarnetTVC: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }

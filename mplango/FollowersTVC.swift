@@ -57,7 +57,8 @@ class FollowersTVC: UITableViewController {
                         var password:String = ""
                         var image:String = ""
                         var level:Int = 0
-                        var bio:String = "";
+                        var bio:String = ""
+                        var category: String = "";
                         
                         if let userId = user["id"].int {
                             id = userId
@@ -104,7 +105,12 @@ class FollowersTVC: UITableViewController {
                             
                         }
                         
-                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: image, level: level, bio: bio))
+                        //AQUI MUDAR PELA CATEGORIA (MEDIADOR OU APRENDENTE)
+                        if let userCat = user["name"].string {
+                            category = userCat
+                        }
+                        
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: image, level: level, bio: bio, category: category))
                         
                     }
                     self.indicator.hideActivityIndicator();
