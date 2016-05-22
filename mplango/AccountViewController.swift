@@ -37,6 +37,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     
+    var fbUserData = []
     
     var userName: String = ""
     var imagePicker: UIImagePickerController!
@@ -122,6 +123,36 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AccountViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        if fbUserData.count > 0  {
+            if let picture : String = (fbUserData[2] as! String) {
+                let image: UIImage = ImageUtils.instance.loadImageFromPath(picture)!
+                self.avatar = image
+                imageView.image = image
+            }
+            
+            if let name : String = (fbUserData[1] as! String) {
+                textFieldName.text = name
+            }
+            
+            if let email : String = (fbUserData[0] as! String) {
+                textFieldEmail.text =  email
+            }
+            
+            if let gender : String = (fbUserData[3] as! String) {
+                if gender == "male" {
+                    self.segmentControl.selectedSegmentIndex = 0
+                    self.gender = "Homme"
+                } else if gender == "female" {
+                    self.segmentControl.selectedSegmentIndex = 1
+                    self.gender = "Femme"
+                }
+            }
+            
+
+            
+            print(fbUserData)
+        }
         
     }
     
@@ -447,8 +478,15 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             }.responseSwiftyJSON({ (request, response, json, error) in
                                 if (error == nil) {
                                     self.indicator.hideActivityIndicator();
-                                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                                        self.performSegueWithIdentifier("account_to_login", sender: self)
+                                    
+                                    if self.fbUserData.count > 0 {
+                                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                                            self.performSegueWithIdentifier("account_to_map", sender: self)
+                                        }
+                                    } else {
+                                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                                            self.performSegueWithIdentifier("account_to_login", sender: self)
+                                        }
                                     }
                                 }
                         })
