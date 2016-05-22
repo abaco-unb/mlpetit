@@ -19,6 +19,7 @@ class ContactViewController: UITableViewController {
 
     var profileFilter:NSNumber = 2
     var userId:Int!
+    var userFollowing = [Int]()
     
     var imagePath: String = ""
 
@@ -69,7 +70,10 @@ class ContactViewController: UITableViewController {
                         if let userId = user["id"].int {
                             print("show id : ", userId)
                             id = userId
+                            
                         }
+                        
+                        
                         
                         if let userEmail = user["email"].string {
                             email = userEmail
@@ -121,14 +125,89 @@ class ContactViewController: UITableViewController {
                             category = userCat
                         }
                         
+                        
+                        /*
+                         retira o usuário logado da lista e adiciona os seguidores
+                         dele para marcar os botões "suivre/suivi"
+                         */
+                        if self.userId == id {
+                            if let arFollowing = user["following"].array {
+                                for fUser in arFollowing {
+                                    if let fUserId = fUser["id"].int {
+                                        self.userFollowing.append(fUserId)
+                                    }
+                                }
+                                
+                            }
+                            
+                            print("following.count logged user")
+                            print(self.userFollowing.count)
+                            
+                            continue
+                        }
+                        
                         self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category))
                         
                     }
                     self.indicator.hideActivityIndicator();
                     self.tableView.reloadData()
+                    //pega os contatos do facebook caso ele tenha logado pela rede
                     
+                    if let token = FBSDKAccessToken.currentAccessToken() {
+                        print("token : ", token)
+                        self.friendsList()
+                    }
                 }
             });
+        
+    }
+    
+    func friendsList() {
+        self.indicator.showActivityIndicator(self.view)
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
+        graphRequest.startWithCompletionHandler( { (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                print("Error: \(error)")
+                return
+            }
+            
+            print(result)
+            
+            let summary = result.valueForKey("summary") as! NSDictionary
+            let counts = summary.valueForKey("total_count") as! NSNumber
+            
+            let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/taggable_friends", parameters: ["fields": "id,name, email, picture.type(large)", "limit": "\(counts)"])
+            graphRequest.startWithCompletionHandler( { (connection, result, error) -> Void in
+                
+                if ((error) != nil)
+                {
+                    // Process error
+                    print("Error: \(error)")
+                    return
+                }
+                else
+                {
+                    let friends = result.valueForKey("data") as! NSArray
+                    var count = 1
+                    if let array = friends as? [NSDictionary] {
+                        for friend : NSDictionary in array {
+                            let fName = friend.valueForKey("name") as! String
+                            let fPicture = friend.valueForKey("picture")?.valueForKey("data")?.valueForKey("url") as? String
+                            
+                            print("\(count) \(fName)")
+                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName))
+                            count += 1                        }
+                        self.indicator.hideActivityIndicator();
+                        self.tableView.reloadData()
+                    }
+                    
+                }
+                
+            })
+        })
         
     }
     
@@ -185,12 +264,16 @@ class ContactViewController: UITableViewController {
             
 
             cell.contactName.text = contact.name
-//            cell.contactCategory.text = contact.category
-
-            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(contact.id) + "&avatar=true")
+            cell.followBtn.tag = contact.id
+        
+            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(String(contact.image))
             cell.contactPicture.layer.masksToBounds = true
             cell.contactPicture.layer.cornerRadius = 30
 
+            if (self.userFollowing.indexOf(contact.id) != nil) {
+                self.toggleFollowBtnView((cell.followBtn as! UIButton), state: true)
+            }
+        
             return cell
 
     }
@@ -266,10 +349,51 @@ class ContactViewController: UITableViewController {
 //    }
     
     @IBAction func followUserTapped(sender: UIButton) {
-        print("add user to this")
         
+        let params : [String: Int] = [
+            "following" : sender.tag,
+        ]
+        print(EndpointUtils.USER + "?id=" + String(userId))
+        Alamofire.request(.PUT, EndpointUtils.USER + "?id=" + String(userId), parameters: params)
+            .responseString { response in
+                print("Success PUT: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request PUT: \(request)")
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    self.toggleFollowBtnView(sender, state: true)
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar seguir esse usuário. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
     }
     
+    func toggleFollowBtnView(button: UIButton, state:Bool) {
+        
+        if state {
+            button.backgroundColor = UIColor.clearColor()
+            button.layer.borderWidth = 1.0
+            button.layer.borderColor = UIColor(hex: 0x3B84B2).CGColor
+            button.setTitle("Abonné(e)", forState: UIControlState.Normal)
+            button.setTitleColor(UIColor(hex: 0x3B84B2), forState: UIControlState.Normal)
+            return
+        }
+        
+        button.backgroundColor = UIColor(hex: 0x3B84B2)
+        button.layer.borderWidth = 0
+        button.setTitle("Suivre", forState: UIControlState.Normal)
+        button.setTitleColor(UIColor(hex: 0xFFF), forState: UIControlState.Normal)
+        
+    }
     
     //MARK: PrepareForSegue
     
