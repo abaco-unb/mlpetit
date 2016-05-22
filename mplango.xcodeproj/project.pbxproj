@@ -37,7 +37,6 @@
 		15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */; };
 		15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */; };
 		540A4A411C11EF5A00C166D8 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */; };
-		540B2C331CD27B10005ED5D6 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540B2C321CD27B10005ED5D6 /* ContactCell.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
@@ -52,6 +51,7 @@
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
 		5470F0A11B8DE6EA00E3BA64 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */; };
 		5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */; };
+		54B130A01CEE00A400199245 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1309F1CEE00A400199245 /* ContactCell.swift */; };
 		54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EB1BEB8E2400199613 /* Settings.swift */; };
 		54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */; };
 		54C26FDF1C0FA08B002B5B5D /* TestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */; };
@@ -306,7 +306,6 @@
 		15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
 		15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
 		540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
-		540B2C321CD27B10005ED5D6 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		5415F8311C1F22DE0036D4E0 /* mplango.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mplango.entitlements; sourceTree = "<group>"; };
 		54241A0C1B7E1B1E0074D350 /* mplango 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -329,6 +328,7 @@
 		5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTableViewCell.swift; sourceTree = "<group>"; };
+		54B1309F1CEE00A400199245 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		54B4A7EB1BEB8E2400199613 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswrd.swift; sourceTree = "<group>"; };
 		54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsVC.swift; sourceTree = "<group>"; };
@@ -684,7 +684,7 @@
 				541546141B7D1548008E182C /* ProfileVC.swift */,
 				5470F0A01B8DE6EA00E3BA64 /* ProfileGameVC.swift */,
 				8256CAFD1B40FD730002708C /* ContactViewController.swift */,
-				540B2C321CD27B10005ED5D6 /* ContactCell.swift */,
+				54B1309F1CEE00A400199245 /* ContactCell.swift */,
 				54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */,
 				54F0896B1C20A05100089687 /* FollowingTVC.swift */,
 				544F17AE1CE2627F00B45683 /* EditProfile.swift */,
@@ -1043,7 +1043,7 @@
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
 				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				544F17AF1CE2627F00B45683 /* EditProfile.swift in Sources */,
-				540B2C331CD27B10005ED5D6 /* ContactCell.swift in Sources */,
+				54B130A01CEE00A400199245 /* ContactCell.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
 				15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,

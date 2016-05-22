@@ -12,8 +12,9 @@ class ContactCell: UITableViewCell {
     
     
     @IBOutlet weak var contactPicture: UIImageView!
-    
     @IBOutlet weak var contactName: UILabel!
+    @IBOutlet weak var contactCategory: UILabel!
+    @IBOutlet weak var followBtn: UIView!
     
     var contact: RUser!
     var userId:Int!
@@ -22,6 +23,15 @@ class ContactCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        followBtn.layer.cornerRadius = 5
+        followBtn.layer.masksToBounds = true
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

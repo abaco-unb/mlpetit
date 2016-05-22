@@ -14,9 +14,17 @@ class CarnetTVC: UITableViewController {
     //MARK: Properties
     
     var itens = [Carnet]()
+    var filteredItens = [Carnet]()
+    
     var userId:Int!
     
+    var word:String  = ""
+    var text:String = ""
+    var image:String = ""
+    
     var indicator:ActivityIndicator = ActivityIndicator()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +32,12 @@ class CarnetTVC: UITableViewController {
         retrieveLoggedUser()
         print("self.userId : ", self.userId)
         self.upServerNote()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchBar.placeholder = "Rechercher"
         
     }
     
@@ -84,25 +98,97 @@ class CarnetTVC: UITableViewController {
         
     }
     
-    // MARK: - Table view data source
+    // MARK: Search bar
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredItens = itens.filter { itens in
+            return itens.word.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
     }
+
+
+    // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredItens.count
+        }
         return self.itens.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("CarnetCell", forIndexPath: indexPath) as! CarnetTableViewCell
-        cell.wordLabel.text = self.itens[indexPath.row].word
+        
+        let item: Carnet
+        
+        if searchController.active && searchController.searchBar.text != "" {
+            item = self.filteredItens[indexPath.row]
+        } else {
+            item = self.itens[indexPath.row]
+        }
+        
+        cell.wordLabel.text = item.word
         return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == .Delete {
+            
+            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            let userId:Int = prefs.integerForKey("id") as Int
+
+            print("item is \(self.itens[indexPath.row].id)")
+            print("deletando o item")
+            print("userId is:",userId)
+            
+            let params : [String: AnyObject] = [
+                "user": self.userId,
+                "id": self.itens,
+                "word": self.word,
+                "text": self.text,
+                "photo": self.image
+            ]
+            
+            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(self.itens[indexPath.row].id)
+            print("urlEdit is:",urlEdit)
+            
+            self.indicator.showActivityIndicator(self.view)
+            
+            Alamofire.request(.DELETE, urlEdit , parameters: params)
+                .responseString { response in
+                    print("Success: \(response.result.isSuccess)")
+                    print("Response String: \(response.result.value)")
+                }.responseSwiftyJSON({ (request, response, json, error) in
+                    if (error == nil) {
+                        self.indicator.hideActivityIndicator();
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.tableView.reloadData()
+                            self.itens.removeAtIndex(indexPath.row)
+                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                        }
+                    } else {
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            //New Alert Ccontroller
+                            let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao deletar seu item. Favor tente novamente.", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                print("Delete is not okay.")
+                                self.indicator.hideActivityIndicator();
+                            }
+                            alertController.addAction(agreeAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        }
+                    }
+                })
+        }
     }
     
 
@@ -120,49 +206,7 @@ class CarnetTVC: UITableViewController {
         return self.fetchedResultController.sectionIndexTitles
     }
     */
-    
 
-    
-    // MARK: - TableView Delete
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            
-            print("item is \(self.itens[indexPath.row])")
-            
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            self.tableView.reloadData()
-            
-//            let params : [String: AnyObject] = [
-//                "user": self.userId
-//            ]
-//            
-//            //AQUI TEM QUE TROCAR O USER ID PELO ID DO NOTE??
-//            let urlEdit :String = EndpointUtils.CARNET + "?id=" + String(itens)
-//            
-//            Alamofire.request(.DELETE, urlEdit , parameters: params)
-//                .responseString { response in
-//                    print("Success: \(response.result.isSuccess)")
-//                    print("Response String: \(response.result.value)")
-//                }.responseSwiftyJSON({ (request, response, json, error) in
-//                    if (error == nil) {
-//                        self.indicator.hideActivityIndicator();
-//                        NSOperationQueue.mainQueue().addOperationWithBlock {
-//                            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-//                            self.tableView.reloadData()
-//
-//                        }
-//                        
-//                    }
-//                    
-//                })
-//            
-        }
-        
-        else if editingStyle == .Insert {
-            
-        }
-    }
     
 //    @IBAction func unwindSecondView(segue: UIStoryboardSegue) {
 //        print ("unwindSecondView fired in first view")
@@ -179,11 +223,23 @@ class CarnetTVC: UITableViewController {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let itemController:CarnetViewController = segue.destinationViewController as! CarnetViewController
-            let item:Carnet = self.itens[indexPath!.row]
+            
+            let item: Carnet
+            if searchController.active && searchController.searchBar.text != "" {
+                item = self.filteredItens[indexPath!.row]
+            } else {
+                item = self.itens[indexPath!.row]
+            }
+            
             itemController.item = item
             
         }
     }
     
-    
+}
+
+extension CarnetTVC: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }

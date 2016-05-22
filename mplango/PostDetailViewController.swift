@@ -341,7 +341,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         if self.liked == false {
         
-        self.indicator.showActivityIndicator(self.view)
+//        self.indicator.showActivityIndicator(self.view)
         let params : [String: String] = [
             "user" : String(self.userId),
             "post" : String(self.post!.id),
@@ -353,7 +353,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }.responseSwiftyJSON({ (request, response, json, error) in
                 print("Request: \(request)")
                 print("request: \(error)")
-                self.indicator.hideActivityIndicator();
+//                self.indicator.hideActivityIndicator();
                 if (error == nil) {
                     self.liked = true
                     if let insertedId: Int = json["data"].int {

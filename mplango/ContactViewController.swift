@@ -15,7 +15,8 @@ class ContactViewController: UITableViewController {
     //MARK: Properties
     
     var list = [RUser]()
-    
+    var filteredList = [RUser]()
+
     var profileFilter:NSNumber = 2
     var userId:Int!
     
@@ -23,14 +24,18 @@ class ContactViewController: UITableViewController {
 
     var indicator:ActivityIndicator = ActivityIndicator()
     
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
-    super.viewDidLoad()
+        super.viewDidLoad()
         
         retrieveLoggedUser()
         print("self.userId : ", self.userId)
         self.upServerListUsers()
-       
+        
+        searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        
     }
     
     func retrieveLoggedUser() {
@@ -58,7 +63,8 @@ class ContactViewController: UITableViewController {
                         var password:String = ""
                         var imageUrl:String = ""
                         var level:Int = 0
-                        var bio:String = "";
+                        var bio:String = ""
+                        var category: String = "";
                         
                         if let userId = user["id"].int {
                             print("show id : ", userId)
@@ -110,7 +116,12 @@ class ContactViewController: UITableViewController {
                             
                         }
                         
-                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio))
+                        //AQUI MUDAR PELA CATEGORIA (MEDIADOR OU APRENDENTE)
+                        if let userCat = user["name"].string {
+                            category = userCat
+                        }
+                        
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category))
                         
                     }
                     self.indicator.hideActivityIndicator();
@@ -121,13 +132,32 @@ class ContactViewController: UITableViewController {
         
     }
     
+    // MARK: Search bar
     
-    // MARK:- Retrieve Users
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+    func filterContentForSearchText(searchText: String, scope: String = "Tous") {
+    filteredList = list.filter { contact in
+        let categoryMatch = (scope == "Tous") || (contact.category == scope)
+        return categoryMatch && contact.name.lowercaseString.containsString(searchText.lowercaseString)
     }
+    
+    tableView.reloadData()
+    }
+    
+    
+    @IBAction func showSearchBar(sender: AnyObject) {
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
+        searchController.searchBar.placeholder = "Rechercher"
+        searchController.searchBar.scopeButtonTitles = ["Tous", "Apprenants", "Médiateurs"]
+
+    }
+    
+
+    // MARK:- Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -135,30 +165,34 @@ class ContactViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredList.count
+        }
         return self.list.count
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell!
         
-        if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("SegmentCell", forIndexPath: indexPath) 
-        
-        } else {
-            
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
-            cell.contactName.text = self.list[indexPath.row].name
+        
+            let contact: RUser
+            if searchController.active && searchController.searchBar.text != "" {
+                contact = self.filteredList[indexPath.row]
+            } else {
+                contact = self.list[indexPath.row]
+            }
+            
 
-            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(self.list[indexPath.row].id) + "&avatar=true")
+            cell.contactName.text = contact.name
+//            cell.contactCategory.text = contact.category
+
+            cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(contact.id) + "&avatar=true")
             cell.contactPicture.layer.masksToBounds = true
-            cell.contactPicture.layer.cornerRadius = 35
+            cell.contactPicture.layer.cornerRadius = 30
 
             return cell
 
-        }
-        
-        return cell
     }
     
     
@@ -236,17 +270,41 @@ class ContactViewController: UITableViewController {
         
     }
     
+    
+    //MARK: PrepareForSegue
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         print(sender)
         if segue.identifier == "show_profile" {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let contactViewController:ProfileVC = segue.destinationViewController as! ProfileVC
-            let contact:RUser = self.list[indexPath!.row]
+            
+            let contact: RUser
+            if searchController.active && searchController.searchBar.text != "" {
+                contact = self.filteredList[indexPath!.row]
+            } else {
+                contact = self.list[indexPath!.row]
+            }
+            
             contactViewController.contact = contact
             
         }
     }
    
+}
+
+extension ContactViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+}
+
+extension ContactViewController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
 }
 
