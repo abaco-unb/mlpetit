@@ -190,6 +190,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     @IBAction func removeImage(sender: AnyObject) {
         
+        self.image = nil
         photoImage.image = nil
         addPicture.hidden = false
         addPicture.enabled = true
@@ -281,14 +282,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         let fixOrientationImage = chosenImage!.fixOrientation()
         photoImage.image = fixOrientationImage
         
-        // save image in directory
-        let imgUtils:ImageUtils = ImageUtils()
-        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("note_image", ext: "png"))
-//        self.imagePath = ImageUtils.instance.fileInDocumentsDirectory(self.myImage)
-        ImageUtils.instance.saveImage(photoImage.image!, path: self.imagePath);
-        
         self.image = photoImage.image!
-        
+
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
@@ -487,6 +482,11 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         // example image data
         let imageData = image.lowestQualityJPEGNSData
         
+        // save image in directory
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("note_image", ext: "png"))
+        ImageUtils.instance.saveImage(self.photoImage.image!, path: self.imagePath);
+        
         self.indicator.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
@@ -503,6 +503,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 if (error == nil) {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
+                        
                         self.performSegueWithIdentifier("go_to_carnet", sender: self)
                     }
                 } else {

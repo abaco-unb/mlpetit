@@ -342,6 +342,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     
     @IBAction func removeImage(sender: AnyObject) {
         
+        self.image = nil
         photoImage.image = nil
         addPicture.hidden = false
         addPicture.enabled = true
@@ -357,8 +358,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         removeVideo.hidden = true
         
     }
-    
-    
     
     // MARK : Image Picker Process
     
@@ -439,19 +438,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         picker.dismissViewControllerAnimated(true, completion: nil)
+        addPicture.hidden = true
+        removeImage.hidden = false
+        
         let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         let fixOrientationImage = chosenImage!.fixOrientation()
         photoImage.image = fixOrientationImage
         
-        // save image in directory
-        let imgUtils:ImageUtils = ImageUtils()
-        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
-        imgUtils.saveImage(photoImage.image!, path: self.imagePath);
-        
         self.image = photoImage.image!
-        
-        addPicture.hidden = true
-        removeImage.hidden = false
         
         //set image as checked
         checkOn(checkImage)
@@ -579,6 +573,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     func save(image: UIImage, params: Dictionary<String, String>) {
         
         let imageData = image.lowestQualityJPEGNSData
+        
+        // save image in directory
+        let imgUtils:ImageUtils = ImageUtils()
+        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
+        imgUtils.saveImage(photoImage.image!, path: self.imagePath);
         
         self.indicator.showActivityIndicator(self.view)
         

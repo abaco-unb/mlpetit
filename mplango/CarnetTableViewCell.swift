@@ -13,6 +13,7 @@ class CarnetTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var picturePreview: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
