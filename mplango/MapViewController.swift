@@ -64,7 +64,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         self.mkMapView.showsUserLocation = true
         self.mkMapView.delegate = self
         self.mkMapView.mapType = MKMapType.Standard
-        self.mkMapView.backgroundColor = UIColor.blueColor()
+        
+        let worldRect = MKMapRectWorld
+        let point1 = MKMapRectWorld.origin
+        let point2 = MKMapPointMake(point1.x + worldRect.size.width, point1.y)
+        let point3 = MKMapPointMake(point2.x, point2.y + worldRect.size.height)
+        let point4 = MKMapPointMake(point1.x, point3.y)
+        var points = [point1, point2, point3, point4]
+        let polygon = MKPolygon(points: &points, count: points.count)
+        self.mkMapView.addOverlay(polygon)
         
         //inicializa : get geo location data
         locationManager.requestAlwaysAuthorization()

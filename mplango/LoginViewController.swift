@@ -42,6 +42,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         self.btnFacebook.delegate = self
         
         if let token = FBSDKAccessToken.currentAccessToken() {
+            btnFacebook.hidden = true
             print("token : ", token)
             self.fetchFBProfile(token.tokenString)
             //self.mplLogin(strEmail)
@@ -98,6 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         //self.performSegueWithIdentifier("goto_map", sender: self)
         
     }
+    
     func fetchFBProfile(token : String) {
         print("fetchFBProfile")
         let params = ["fields":"email, id, gender, age_range, name, picture.type(large)"]
@@ -133,6 +135,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
             
         }
     }
+    
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!)
     {
         print("login face completo")
