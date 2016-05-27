@@ -15,9 +15,12 @@ import AlamofireSwiftyJSON
 class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
 
     // MARK: Properties
+    var indicator:ActivityIndicator = ActivityIndicator()
     
     var comments: Array<Comment>!
 
+    var postId:Int!
+    
     let basicCellIdentifier = "BasicCell"
     
     @IBOutlet weak var creatingContentView: UIView!
@@ -34,6 +37,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var removeImage: UIButton!
     
     @IBOutlet weak var writeHereImage: UIImageView!
+    
+    var image: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,19 +144,25 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         dismissViewControllerAnimated(false, completion: nil)
     }
     
+    // MARK:- Posting Comment
     @IBAction func postingComment(sender: AnyObject) {
         
-        postComment()
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
         
-        writeTxtView.resignFirstResponder()
+        let params : [String: String] = [
+            "text" : writeTxtView.text,
+            "post" : String(self.postId),
+            "user": String(userId)
+        ]
         
-        writeTxtView.text = nil
-        postComBtn.hidden = true
-        imageBtn.hidden = false
-        imageBtn.enabled = true
-        recordBtn.hidden = false
-        recordBtn.enabled = true
-        writeHereImage.hidden = false
+        print("post", String(self.postId), "user", String(userId))
+        
+        if(comPicture.image != nil) {
+            self.postComment(comPicture.image!, params: params)
+        } else {
+            self.postComment(params)
+        }
         
         // Gamification: contar 5 pontos aqui para a ação de postar 1 comentário
         
@@ -244,8 +255,6 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         picker.dismissViewControllerAnimated(true, completion: nil)
         comPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
-        
-        
         removeImage.hidden = false
         postComBtn.hidden = false
         postComBtn.enabled = true
@@ -259,29 +268,138 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK:- Posting Comment
+    func afterPosting(json: JSON) {
+        writeTxtView.resignFirstResponder()
+        writeTxtView.text = nil
+        postComBtn.hidden = true
+        imageBtn.hidden = false
+        imageBtn.enabled = true
+        recordBtn.hidden = false
+        recordBtn.enabled = true
+        writeHereImage.hidden = false
+        if self.comPicture != nil {
+            self.removeImage(self)
+        }
+        
+        var id: Int = 0
+        var uId: Int = 0
+        
+        if let commentId = json["data"]["id"].int {
+            id = commentId
+        }
+        
+        if let commentUser = json["data"]["user"]["id"].int {
+            uId = commentUser
+        }
+        
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId)
+        
+        comments.append(comment)
+        comTableView.reloadData()
+        
+    }
+
+
+    func postComment(params: Dictionary<String, String>) {
+        Alamofire.request(.POST, EndpointUtils.COMMENT, parameters: params)
+            .responseString { response in
+                print("Request: \(EndpointUtils.COMMENT)")
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    self.afterPosting(json)
+                    
+                    
+                } else {
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Controller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The post is not okay.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
     
-    func postComment () {
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let email: String = prefs.objectForKey("USEREMAIL") as! String
-//        let fetchRequest = NSFetchRequest(entityName: "User")
-//        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-//        
-//        if let fetchResults = (try? moContext?.executeFetchRequest(fetchRequest)) as? [User] {
-//            
-//            let user: User = fetchResults[0];
-//            let entityDescription = NSEntityDescription.entityForName("Post", inManagedObjectContext: moContext!)
-//            let comment = Post(entity: entityDescription!, insertIntoManagedObjectContext: moContext)
-//            comment.text = writeTxtView.text!
-//            comment.user = user
-//            //falta foto
-//            //falta som
-//            
-//            do {
-//                try moContext?.save()
-//            } catch _ {
-//            }
-//        }
+    func postComment(image: UIImage, params: Dictionary<String, String>) {
+        
+        let imageData = image.lowestQualityJPEGNSData
+        
+        self.indicator.showActivityIndicator(self.view)
+        
+        // CREATE AND SEND REQUEST ----------
+        
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.COMMENT, parameters: params, imageData: imageData)
+        
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseString { response in
+                print("Request: \(EndpointUtils.COMMENT)")
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                if (error == nil) {
+                    self.indicator.hideActivityIndicator();
+                    self.afterPosting(json)
+                } else {
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Controller
+                        let alertController = UIAlertController(title: "Ops!", message: "Tivemos um problema ao tentar criar seu comentário. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The comment is fail.")
+                            self.indicator.hideActivityIndicator();
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
+    
+    
+    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, imageData:NSData) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        let boundaryConstant = "myRandomBoundary12345";
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        // add image
+        uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        uploadData.appendData(imageData)
+        
+        // add parameters
+        for (key, value) in parameters {
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
 
     // Table view

@@ -167,18 +167,23 @@ class ProfileVC: UIViewController {
                         }
                     }
                 
-                    if let bio = user["bio"].string {
+                if let following = user["following"].array {
+                    self.profileNumberFollowing.text = String(following.count)
+                }
+                
+                if let followers = user["followers"].array {
+                    self.profileNumberFollowers.text = String(followers.count)
+                }
+                
+                if let bio = user["bio"].string {
                     print("show bio : ", bio)
                     self.profileBio.text = (bio)
-                    }
-
+                }
                 
-                
-
-//        profileNumberPosts.text = user.posts.count.description
-                
-                
-
+                if let posts = user["posts"].string {
+                    print("show total posts : ", posts)
+                    self.profileNumberPosts.text = posts
+                }
                 
         });
         

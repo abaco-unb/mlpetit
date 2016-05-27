@@ -46,13 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))  // types are UIUserNotificationType members
-
-    
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         return true
         
     }
     
- 
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
     func initializeNotificationServices() -> Void {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
@@ -79,6 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func applicationWillTerminate(application: UIApplication) {
         self.saveContext()
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
     }
 
     lazy var applicationDocumentsDirectory: NSURL = {

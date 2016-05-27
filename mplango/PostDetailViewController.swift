@@ -526,6 +526,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             let navigationController = segue.destinationViewController as! UINavigationController
             let commentController:CommentsVC = navigationController.viewControllers[0] as! CommentsVC
             commentController.comments = self.post?.comments
+            commentController.postId = self.post?.id
+            
         }
 //        if segue.identifier == "copy_to_carnet" {
 //            let navigationController = segue.destinationViewController as! UINavigationController
