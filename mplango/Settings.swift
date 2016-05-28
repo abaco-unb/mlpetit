@@ -22,6 +22,11 @@ class Settings: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
         
    }
+    @IBAction func logoutTapped(sender: UIButton) {
+        
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
+    }
     
     
 //    @IBAction func editPassword(segue : UIStoryboardSegue){
