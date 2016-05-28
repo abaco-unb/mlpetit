@@ -41,7 +41,10 @@ class InitialViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){
+        
+    }
+    
     /*
     // MARK: - Navigation
 

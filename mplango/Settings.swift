@@ -22,6 +22,16 @@ class Settings: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
         
    }
+    @IBAction func logoutTapped(sender: UIButton) {
+        
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        
+        self.performSegueWithIdentifier("unwindToStart", sender: self)
+    }
     
     
 //    @IBAction func editPassword(segue : UIStoryboardSegue){
