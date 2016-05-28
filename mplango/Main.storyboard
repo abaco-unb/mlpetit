@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Aw-5F-vHQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Aw-5F-vHQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -326,6 +326,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRs-AO-qxA" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_4" translatesAutoresizingMaskIntoConstraints="NO" id="D9s-hO-T17">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                                </variation>
+                                            </imageView>
                                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_profile" translatesAutoresizingMaskIntoConstraints="NO" id="T0g-MB-qLn">
                                                 <rect key="frame" x="114" y="42" width="62" height="70"/>
                                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -344,7 +350,8 @@
                                                         <exclude reference="zZT-bt-QAz"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="180" width="90" height="90"/>
                                                     <mask key="constraints">
                                                         <include reference="MeZ-hy-DhA"/>
                                                         <include reference="zZT-bt-QAz"/>
@@ -370,7 +377,8 @@
                                                         <exclude reference="IML-wh-XB2"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="130" y="205" width="250" height="41"/>
                                                     <mask key="constraints">
                                                         <include reference="IML-wh-XB2"/>
                                                     </mask>
@@ -392,7 +400,8 @@
                                                         <exclude reference="wpo-rw-9IF"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="280" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="wpo-rw-9IF"/>
                                                     </mask>
@@ -414,7 +423,8 @@
                                                         <exclude reference="aeA-OP-WZh"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="330" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="aeA-OP-WZh"/>
                                                     </mask>
@@ -436,7 +446,8 @@
                                                         <exclude reference="sQA-Lb-GVs"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="380" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="sQA-Lb-GVs"/>
                                                     </mask>
@@ -458,7 +469,8 @@
                                                         <exclude reference="CX0-5f-L7G"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="430" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="CX0-5f-L7G"/>
                                                     </mask>
@@ -480,7 +492,8 @@
                                                         <exclude reference="0iM-Qq-fu1"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="480" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="0iM-Qq-fu1"/>
                                                     </mask>
@@ -505,7 +518,8 @@
                                                         <exclude reference="2fK-xb-KWL"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="540" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="2fK-xb-KWL"/>
                                                     </mask>
@@ -530,7 +544,8 @@
                                                         <exclude reference="mln-uV-iFL"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="20" y="590" width="360" height="40"/>
                                                     <mask key="constraints">
                                                         <include reference="mln-uV-iFL"/>
                                                     </mask>
@@ -555,15 +570,13 @@
                                                 <variation key="widthClass=compact" fixedFrame="YES">
                                                     <rect key="frame" x="25" y="404" width="271" height="167"/>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="535" width="400" height="270"/>
                                                     <mask key="constraints">
                                                         <exclude reference="f1B-vA-7Za"/>
                                                     </mask>
                                                 </variation>
                                             </pickerView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo_4" translatesAutoresizingMaskIntoConstraints="NO" id="D9s-hO-T17">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -606,6 +619,7 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
+                                                <exclude reference="D9s-hO-T17"/>
                                                 <exclude reference="T0g-MB-qLn"/>
                                                 <exclude reference="kZ5-On-w8I"/>
                                                 <exclude reference="N6P-Dj-aJ8"/>
@@ -616,7 +630,6 @@
                                                 <exclude reference="AEi-S6-aD7"/>
                                                 <exclude reference="60J-Fm-gYU"/>
                                                 <exclude reference="Nli-Kd-sbh"/>
-                                                <exclude reference="D9s-hO-T17"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="D1D-cg-VkU"/>
@@ -657,6 +670,7 @@
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
+                                                <include reference="D9s-hO-T17"/>
                                                 <include reference="T0g-MB-qLn"/>
                                                 <include reference="kZ5-On-w8I"/>
                                                 <include reference="N6P-Dj-aJ8"/>
@@ -667,7 +681,6 @@
                                                 <include reference="AEi-S6-aD7"/>
                                                 <include reference="60J-Fm-gYU"/>
                                                 <include reference="Nli-Kd-sbh"/>
-                                                <include reference="D9s-hO-T17"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="D1D-cg-VkU"/>
@@ -1099,6 +1112,9 @@
                                 <rect key="frame" x="0.0" y="-64" width="0.0" height="0.0"/>
                                 <variation key="widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="Vif-Yb-aqT" id="32Y-tT-7MO"/>
@@ -5045,8 +5061,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="56" y="28" width="324" height="17"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
@@ -5133,8 +5148,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="xZE-kv-zfx"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="360" y="24" width="20" height="24"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="6Ib-Zh-UOG"/>
                                                         <exclude reference="7lL-Us-jHo"/>
@@ -8290,7 +8304,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <exclude reference="zn3-Cv-vEA"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                             <mask key="subviews">
                                                 <include reference="LES-dt-2YJ"/>
                                             </mask>
@@ -8320,7 +8335,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="okH-lP-iHw"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     <mask key="constraints">
                                         <include reference="5ZV-LQ-3Dc"/>
                                         <include reference="fin-wM-nCU"/>
@@ -14084,7 +14100,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="189" width="524" height="18"/>
+                                    <rect key="frame" x="56" y="188" width="524" height="18"/>
                                     <mask key="constraints">
                                         <exclude reference="F6s-1U-In1"/>
                                     </mask>
@@ -15374,7 +15390,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="188" width="111" height="18"/>
+                                    <rect key="frame" x="56" y="187" width="111" height="18"/>
                                     <mask key="constraints">
                                         <exclude reference="S26-l7-ydJ"/>
                                     </mask>
@@ -19068,8 +19084,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="cGt-W9-uNY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="43" y="15" width="67" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="cGt-W9-uNY"/>
                                                         </mask>
@@ -19094,8 +19109,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="y2s-rM-boH"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="120" y="15" width="112" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="5Rx-uX-HOf"/>
                                                             <include reference="mi7-gz-MEa"/>
@@ -19148,8 +19162,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xvR-4s-Gzb"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="131" y="37" width="21" height="18"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="BAZ-5P-oEA"/>
                                                             <exclude reference="aWp-E0-Icm"/>
@@ -19181,8 +19194,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="unL-gK-SsY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="38" y="38" width="85" height="15"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="5DG-YH-ysf"/>
                                                             <exclude reference="fCz-GG-54l"/>
@@ -19353,7 +19365,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                 </constraint>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="1D96D0A0-1D87-4B9E-84DC-420B2E0B964F"/>
+                                                            <state key="normal" title="Button" image="80BE26D1-1AAB-45D7-B4CA-BAF83E677740"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="doM-S7-B8a"/>
@@ -19377,7 +19389,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                 </constraint>
                                                             </constraints>
-                                                            <state key="normal" image="513D0599-69F5-4C69-9BFA-275D48035C25"/>
+                                                            <state key="normal" image="AC21583B-A3D0-4985-AEA6-88BD4E8FCC4B"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="MJt-Hz-UuQ"/>
@@ -25755,7 +25767,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         </scene>
     </scenes>
     <resources>
-        <image name="1D96D0A0-1D87-4B9E-84DC-420B2E0B964F" width="44" height="45">
+        <image name="80BE26D1-1AAB-45D7-B4CA-BAF83E677740" width="44" height="45">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -25938,7 +25950,7 @@ AMIA2QDbAN0obyh0KH8oiCibKJ8oqiizKLgowCjDKMgo1yjbKOIo6ij3KPwo/ikAKQUpDSkQKRUpHSkg
 KTIpNSk6AAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAKTw
 </mutableData>
         </image>
-        <image name="513D0599-69F5-4C69-9BFA-275D48035C25" width="135" height="135">
+        <image name="AC21583B-A3D0-4985-AEA6-88BD4E8FCC4B" width="135" height="135">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -27279,11 +27291,12 @@ AAEm9QABJvgAAScKAAEnDQABJxIAAAAAAAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAAAEnFA
         <image name="write_here_indicator" width="106" height="95"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qil-8c-pdq"/>
-        <segue reference="BsH-Ml-pNM"/>
+        <segue reference="c5T-v7-kQL"/>
+        <segue reference="eKJ-D4-EQX"/>
+        <segue reference="UED-MT-Gjd"/>
         <segue reference="L2S-SH-vTS"/>
+        <segue reference="BsH-Ml-pNM"/>
         <segue reference="yhB-Xg-v2R"/>
-        <segue reference="zQd-mS-QGF"/>
         <segue reference="XLQ-dk-fw7"/>
     </inferredMetricsTieBreakers>
 </document>
