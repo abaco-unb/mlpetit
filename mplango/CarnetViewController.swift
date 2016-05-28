@@ -221,7 +221,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         print(self.imagePath)
         print(userId)
         
-        let params : [String: String] = [
+        var params : [String: String] = [
             "id" : String(item.id),
             "word" : self.itemWordTxtView.text!,
             "text" : self.itemDescTxtView.text!,
@@ -231,7 +231,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         if self.image != nil {
             self.saveNote(self.image, params: params)
         } else {
-            self.saveNote(params)
+            params["photo"] = ""
+            self.saveNote(params)   
         }
         
     }
