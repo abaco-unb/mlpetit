@@ -74,10 +74,12 @@ class ProfileVC: UIViewController {
             else if contact.level == User.MEDIATOR {
                 self.profileLangLevel.image = UIImage(named: "profile_nivM")
             }
-                       
-            //        self.profileNumberPosts.text =
-            //        self.profileNumberFollowers.text =
-            //        self.profileNumberFollowing.text =
+
+            
+            self.profileNumberFollowers.text = String([contact.followers].count)
+            self.profileNumberFollowing.text = String([contact.following].count)
+            
+//            self.profileNumberPosts.text =
             
         } else {
             
@@ -195,15 +197,15 @@ class ProfileVC: UIViewController {
         self.upServerUser()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        print(sender)
-//        if segue.identifier == "show_badges" {
-//            let gamificationController:ProfileGameVC = segue.destinationViewController as! ProfileGameVC
-//            let gameProfile:RUser = self.user
-//            gamificationController.gameProfile = gameProfile
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+//        print(sender)
+//        if segue.identifier == "show_followers" {
+//            let navigationController = segue.destinationViewController as! UINavigationController
+//            let followersController:FollowersTVC = navigationController.viewControllers[0] as! FollowersTVC
+//            
 //            
 //        }
-    }
+//    }
 
     
 }
