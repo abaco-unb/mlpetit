@@ -20,8 +20,11 @@ class RUser: NSObject {
     var level:Int
     var bio:String
     var category: String
+    var followers: Int
+    var following: Int
+
     
-    init(id:Int, email: String, name: String, gender: String, password: String, nationality: String, image: String, level: Int, bio: String, category: String) {
+    init(id:Int, email: String, name: String, gender: String, password: String, nationality: String, image: String, level: Int, bio: String, category: String, followers: Int, following: Int) {
         self.id = id
         self.name = name
         self.email = email
@@ -32,6 +35,8 @@ class RUser: NSObject {
         self.level = level
         self.bio = bio
         self.category = category
+        self.followers = followers
+        self.following = following
     }
     
 //    func toJSON() {

@@ -17,7 +17,7 @@ class ContactViewController: UITableViewController {
     var list = [RUser]()
     var filteredList = [RUser]()
 
-    var profileFilter:NSNumber = 2
+//    var profileFilter:NSNumber = 2
     var userId:Int!
     var userFollowing = [Int]()
     
@@ -65,15 +65,15 @@ class ContactViewController: UITableViewController {
                         var imageUrl:String = ""
                         var level:Int = 0
                         var bio:String = ""
-                        var category: String = "";
+                        var category: String = ""
+                        var followers: Int = 0
+                        var following: Int = 0;
                         
                         if let userId = user["id"].int {
                             print("show id : ", userId)
                             id = userId
                             
                         }
-                        
-                        
                         
                         if let userEmail = user["email"].string {
                             email = userEmail
@@ -82,7 +82,7 @@ class ContactViewController: UITableViewController {
                         
                         if let userGender = user["gender"].string {
                             gender = userGender
-
+                            
                         }
                         
                         if let userName = user["name"].string {
@@ -135,10 +135,23 @@ class ContactViewController: UITableViewController {
                                 for fUser in arFollowing {
                                     if let fUserId = fUser["id"].int {
                                         self.userFollowing.append(fUserId)
+                                        following = fUserId
+                                        print("show following : ",fUserId)
                                     }
                                 }
                                 
                             }
+                            
+                            if let arFollowers = user["followers"].array {
+                                for fUser in arFollowers {
+                                    if let fUserId = fUser["id"].int {
+                                        followers = fUserId
+                                        print("show followers : ",fUserId)
+
+                                    }
+                                }
+                            }
+                            
                             
                             print("following.count logged user")
                             print(self.userFollowing.count)
@@ -146,7 +159,7 @@ class ContactViewController: UITableViewController {
                             continue
                         }
                         
-                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category))
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following))
                         
                     }
                     self.indicator.hideActivityIndicator();
@@ -197,7 +210,7 @@ class ContactViewController: UITableViewController {
                             let fPicture = friend.valueForKey("picture")?.valueForKey("data")?.valueForKey("url") as? String
                             
                             print("\(count) \(fName)")
-                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName))
+                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName, followers: 0, following: 0))
                             count += 1                        }
                         self.indicator.hideActivityIndicator();
                         self.tableView.reloadData()
@@ -209,7 +222,6 @@ class ContactViewController: UITableViewController {
         })
         
     }
-    
     // MARK: Search bar
     
     func filterContentForSearchText(searchText: String, scope: String = "Tous") {
@@ -381,16 +393,16 @@ class ContactViewController: UITableViewController {
         if state {
             button.backgroundColor = UIColor.clearColor()
             button.layer.borderWidth = 1.0
-            button.layer.borderColor = UIColor(hex: 0x3B84B2).CGColor
+            button.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
             button.setTitle("Abonné(e)", forState: UIControlState.Normal)
-            button.setTitleColor(UIColor(hex: 0x3B84B2), forState: UIControlState.Normal)
+            button.setTitleColor(UIColor(hex: 0x2C98D4), forState: UIControlState.Normal)
             return
         }
         
-        button.backgroundColor = UIColor(hex: 0x3B84B2)
+        button.backgroundColor = UIColor(hex: 0x2C98D4)
         button.layer.borderWidth = 0
         button.setTitle("Suivre", forState: UIControlState.Normal)
-        button.setTitleColor(UIColor(hex: 0xFFF), forState: UIControlState.Normal)
+        button.setTitleColor(UIColor(hex: 0xFFFFFF), forState: UIControlState.Normal)
         
     }
     
@@ -417,7 +429,7 @@ class ContactViewController: UITableViewController {
    
 }
 
-extension ContactViewController: UISearchResultsUpdating {
+extension FollowersTVC: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
@@ -425,7 +437,7 @@ extension ContactViewController: UISearchResultsUpdating {
     }
 }
 
-extension ContactViewController: UISearchBarDelegate {
+extension FollowersTVC: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
