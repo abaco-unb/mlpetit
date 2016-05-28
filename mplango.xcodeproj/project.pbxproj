@@ -21,7 +21,6 @@
 		157971191CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157971151CDE394000C512F6 /* AlamofireSwiftyJSON.framework */; };
 		1579711A1CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 157971151CDE394000C512F6 /* AlamofireSwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
-		159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B21BF589D70018EBE1 /* RestApiManager.swift */; };
 		159C11B71BF58B1C0018EBE1 /* EndpointUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */; };
 		15A1DBD91CED2A9500D5BA8A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */; };
 		15A1DBDA1CED2A9500D5BA8A /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -292,7 +291,6 @@
 		1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Alamofire-SwiftyJSON.xcodeproj"; path = "Alamofire-SwiftyJSON-master/Alamofire-SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		159C11AD1BF5768A0018EBE1 /* RUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
 		159C11B11BF586D70018EBE1 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
-		159C11B21BF589D70018EBE1 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointUtils.swift; sourceTree = "<group>"; };
 		15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -464,7 +462,6 @@
 		159C11B51BF589DF0018EBE1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				159C11B21BF589D70018EBE1 /* RestApiManager.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -1041,7 +1038,6 @@
 				157970FF1CDD7E2D00C512F6 /* UrlRequestUtils.swift in Sources */,
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
-				159C11B31BF589D70018EBE1 /* RestApiManager.swift in Sources */,
 				544F17AF1CE2627F00B45683 /* EditProfile.swift in Sources */,
 				54B130A01CEE00A400199245 /* ContactCell.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,

@@ -26,6 +26,11 @@ class Settings: UITableViewController {
         
         let loginManager: FBSDKLoginManager = FBSDKLoginManager()
         loginManager.logOut()
+        
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        
+        self.performSegueWithIdentifier("unwindToStart", sender: self)
     }
     
     
