@@ -29,6 +29,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     var liked:Bool = false
     var likedId:Int!
+    @IBOutlet weak var likeView: UIView!
     
     var indicator:ActivityIndicator = ActivityIndicator()
     
@@ -182,9 +183,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
 
+        enableCustomMenu()
         
     }
-    
     
     func retrieveLoggedUser() {
         // recupera os dados do usuário logado no app
@@ -193,46 +194,22 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
     }
     
-    func showLikes() {
-        
-//        self.indicator.showActivityIndicator(self.view)
-        
-        let params : [String: String] = [
-            "post": String(post!.id),
-            "user": String(self.userId)
-        ]
-        
-        //Checagem remota
-        Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
-            .responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
-            }.responseSwiftyJSON({ (request, response, json, error) in
-                print("Request: \(request)")
-                print("request: \(error)")
-                
-//                self.indicator.hideActivityIndicator();
-                if json["data"].array?.count > 0 {
-                    
-                    if let id = json["data"]["id"].int {
-                        self.likedId = id
-                    }
-                    
-                    self.likeNberLabel.textColor = UIColor.whiteColor()
-                    self.dislikeBtn.hidden = false
-                    self.likeBtn.hidden = true;
-                    //print("já laicou esse post")
-                    self.liked = true
-                    
-                } else {
-                    
-                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
-                    self.dislikeBtn.hidden = true
-                    self.likeBtn.hidden = false;
-                    self.liked = false
-                    //print("pode laicar!")
-                }
-            })
+    // MARK: UiMenuItem
+    
+    func enableCustomMenu() {
+        let lookup = UIMenuItem(title: "Copier dans le Carnet", action: #selector(copyToCarnet))
+        UIMenuController.sharedMenuController().menuItems = [lookup]
+    }
+
+    func disableCustomMenu() {
+        UIMenuController.sharedMenuController().menuItems = nil
+    }
+    
+    func copyToCarnet() {
+        self.performSegueWithIdentifier("copy_to_carnet", sender: self)
+        let copyString = textPost.text
+        let pasteBoard = UIPasteboard.generalPasteboard()
+        pasteBoard.string = copyString
     }
     
     //MARK: Pan Gesture to dismiss post view
@@ -334,6 +311,49 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
     }
     
+    // MARK : like
+    
+    func showLikes() {
+        
+        //        self.indicator.showActivityIndicator(self.view)
+        
+        let params : [String: String] = [
+            "post": String(post!.id),
+            "user": String(self.userId)
+        ]
+        
+        //Checagem remota
+        Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                
+                //                self.indicator.hideActivityIndicator();
+                if json["data"].array?.count > 0 {
+                    
+                    if let id = json["data"]["id"].int {
+                        self.likedId = id
+                    }
+                    
+                    self.likeNberLabel.textColor = UIColor.whiteColor()
+                    self.dislikeBtn.hidden = false
+                    self.likeBtn.hidden = true;
+                    //print("já laicou esse post")
+                    self.liked = true
+                    
+                } else {
+                    
+                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
+                    self.dislikeBtn.hidden = true
+                    self.likeBtn.hidden = false;
+                    self.liked = false
+                    //print("pode laicar!")
+                }
+            })
+    }
     
     @IBAction func like(sender: AnyObject) {
         
@@ -441,7 +461,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         super.viewDidLayoutSubviews()
         
         scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 666)
+        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 600)
 
 
         //To adjust the height of TextField to its content
@@ -453,51 +473,53 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.textPost, attribute: .Height, relatedBy: .Equal, toItem: self.textPost, attribute: .Width, multiplier: textPost.bounds.height/textPost.bounds.width, constant: 1)
         self.textPost.addConstraint(aspectRatioTextViewConstraint)
         
-        
-        //Os 3 ajustes seguintes permitem que a mediaView (que inicialmente tem uma altura = 0) se adapte à altura de uma das 3 subviews usadas. Permite que os botões "like" e "comentário" se situem sempre a 20px abaixo da mediaView, independentemente do tamanho dela.
-        
-        
-        //To adjust the height of mediaView to photoAudioView
-        
-        if photoAudioView.hidden == false {
-            
-            let contentSize = mediaView.sizeThatFits(mediaView.bounds.size)
-            var frame = photoAudioView.frame
-            frame.size.height = contentSize.height
-            mediaView.frame = frame
-            
-            let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: photoAudioView, attribute: .Width, multiplier: photoAudioView.bounds.height/photoAudioView.bounds.width, constant: 1)
-            mediaView.addConstraint(aspectRatioViewConstraint)
-            
-        }
-        
-        //To adjust the height of mediaView to AudioView
-        
-        if AudioView.hidden == false {
-            
-            let contentSize = mediaView.sizeThatFits(mediaView.bounds.size)
-            var frame = AudioView.frame
-            frame.size.height = contentSize.height
-            mediaView.frame = frame
-            
-            let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: AudioView, attribute: .Width, multiplier: AudioView.bounds.height/AudioView.bounds.width, constant: 1)
-            mediaView.addConstraint(aspectRatioViewConstraint)
-            
-        }
-        
-        //To adjust the height of mediaView to videoView
-        
-        if videoView.hidden == false {
-            
-            let contentSize = mediaView.sizeThatFits(mediaView.bounds.size)
-            var frame = videoView.frame
-            frame.size.height = contentSize.height
-            mediaView.frame = frame
-            
-            let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: videoView, attribute: .Width, multiplier: videoView.bounds.height/videoView.bounds.width, constant: 1)
-            mediaView.addConstraint(aspectRatioViewConstraint)
-        }
     }
+        
+//        //Os 3 ajustes seguintes permitem que a mediaView (que inicialmente tem uma altura = 0) se adapte à altura de uma das 3 subviews usadas. Permite que os botões "like" e "comentário" se situem sempre a 20px abaixo da mediaView, independentemente do tamanho dela.
+//        
+//        
+//        //To adjust the height of mediaView to photoAudioView
+//        
+//        if photoAudioView.hidden == false {
+//            
+//            let contentSize = mediaView.sizeThatFits(mediaView.bounds.size)
+//            var frame = photoAudioView.frame
+//            frame.size.height = contentSize.height
+//            mediaView.frame = frame
+//            
+//            let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: photoAudioView, attribute: .Width, multiplier: photoAudioView.bounds.height/photoAudioView.bounds.width, constant: 1)
+//            mediaView.addConstraint(aspectRatioViewConstraint)
+//            
+//        }
+//        
+//        //To adjust the height of mediaView to AudioView
+//        
+//        if AudioView.hidden == false {
+//            
+//            let contentSize = mediaView.sizeThatFits(mediaView.bounds.size)
+//            var frame = AudioView.frame
+//            frame.size.height = contentSize.height
+//            mediaView.frame = frame
+//            
+//            let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: AudioView, attribute: .Width, multiplier: AudioView.bounds.height/AudioView.bounds.width, constant: 1)
+//            mediaView.addConstraint(aspectRatioViewConstraint)
+//            
+//        }
+//        
+//        //To adjust the height of mediaView to videoView
+//        
+//        if videoView.hidden == false {
+//            
+//            let contentSize = mediaView.sizeThatFits(mediaView.bounds.size)
+//            var frame = videoView.frame
+//            frame.size.height = contentSize.height
+//            mediaView.frame = frame
+//            
+//            let aspectRatioViewConstraint = NSLayoutConstraint(item: mediaView, attribute: .Height, relatedBy: .Equal, toItem: videoView, attribute: .Width, multiplier: videoView.bounds.height/videoView.bounds.width, constant: 1)
+//            mediaView.addConstraint(aspectRatioViewConstraint)
+//        }
+//    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "post_to_comments" {
@@ -507,6 +529,14 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             commentController.postId = self.post?.id
             
         }
+//        if segue.identifier == "copy_to_carnet" {
+//            let navigationController = segue.destinationViewController as! UINavigationController
+//            let carnetController:CarnetAddVC = navigationController.viewControllers[0] as! CarnetAddVC
+//            let copyString = textPost.copy()
+//            let pasteBoard = UIPasteboard.generalPasteboard()
+//            pasteBoard.string = copyString as? String
+//            carnetController.wordTextField.text = copyString as? String
+//        }
     }
 
 }

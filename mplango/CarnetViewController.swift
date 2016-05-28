@@ -27,7 +27,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var editBtn: UIBarButtonItem!
-    @IBOutlet weak var cancelBtn: UIBarButtonItem!
     @IBOutlet weak var removeImage: UIButton!
     @IBOutlet weak var mediaView: UIView!
     
@@ -35,6 +34,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     //Outlets dos textos
     @IBOutlet weak var itemWordTxtView: UITextView!
     @IBOutlet weak var itemDescTxtView: UITextView!
+    @IBOutlet weak var writeHereIndicator: UIImageView!
     
     
     //Outlets da photoAudioView (quando o item do Carnet inclui uma foto e eventualmente, ao mesmo tempo, um audio)
@@ -62,6 +62,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         itemDescTxtView.delegate = self
         itemWordTxtView.delegate = self
+        
+        writeHereIndicator.hidden = true
         
         photoAudioView.layer.borderWidth = 1
         photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
@@ -126,6 +128,10 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
             mediaView.hidden = true
         }
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CarnetViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         checkValidChange()
         
     }
@@ -143,15 +149,20 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
     @IBAction func edit(sender: AnyObject) {
         
-        if editBtn.title == "Confirmer" {
-            editItemCarnet()
-            
-        } else if editBtn.title == "Éditer" {
+        if editBtn.title == "Éditer" {
             
             itemWordTxtView.editable = true
             itemDescTxtView.editable = true
             itemWordTxtView.textColor = UIColor.darkGrayColor()
             itemDescTxtView.textColor = UIColor.darkGrayColor()
+            
+            let text = itemDescTxtView.text
+            
+            if text.characters.count >= 1 {
+                writeHereIndicator.hidden = true
+            } else {
+                writeHereIndicator.hidden = false
+            }
             
             if mediaView.hidden == false {
                 removeImage.hidden = false
@@ -164,9 +175,13 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
             let cancelBtn = UIBarButtonItem(title: "Annuler", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancelEdit))
             navigationItem.leftBarButtonItem = cancelBtn
         }
+        
+        else if editBtn.title == "Confirmer" {
+            editItemCarnet()
+        }
     }
     
-    @IBAction func cancelEdit(sender: UIBarButtonItem) {
+    func cancelEdit(sender: UIBarButtonItem) {
         
         self.itemWordTxtView.editable = false
         self.itemDescTxtView.editable = false
@@ -174,6 +189,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         self.itemWordTxtView.textColor = UIColor(hex: 0x9E9E9E)
         
         self.removeImage.hidden = true
+        self.writeHereIndicator.hidden = true
         
         self.editBtn.title = "Éditer"
         self.editBtn.enabled = true
@@ -185,9 +201,13 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func removeMedia(sender: AnyObject) {
+
+        //AQUI tem que implementar um DELETE da imagem
+        self.image = nil
+
         mediaView.hidden = true
         removeImage.hidden = true
-        itemPhoto = nil
+        editBtn.enabled = true
     }
 
     
@@ -231,8 +251,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                     self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         self.performSegueWithIdentifier("edit_carnet", sender: self)
-
                     }
+                    
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
@@ -288,6 +308,21 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     
     // MARK: TextView properties
     
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+        
+        let text = itemDescTxtView.text
+        
+        if text.characters.count >= 1 {
+            writeHereIndicator.hidden = true
+        } else {
+            writeHereIndicator.hidden = false
+        }
+    }
+
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         if text == "\n"  // Recognizes enter key in keyboard
@@ -308,6 +343,9 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     func textViewDidBeginEditing(textView: UITextView) {
         // Disable the Save button while editing.
         editBtn.enabled = false
+        if textView == itemDescTxtView {
+            writeHereIndicator.hidden = true
+        }
     }
     
     func checkValidChange() {
@@ -363,9 +401,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
             tabVC.selectedIndex = 3
         }
     }
-
-
-
 
 
 

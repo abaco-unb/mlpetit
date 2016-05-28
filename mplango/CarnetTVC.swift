@@ -85,7 +85,8 @@ class CarnetTVC: UITableViewController {
                         
                         if (note["photo"].string != nil) {
                             imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "&image=true"
-                            
+//                            ImageUtils.instance.loadImageFromPath(EndpointUtils.CARNET + "?id=" + String(id) + "&image=true")
+
                         }
                         
                         self.itens.append(Carnet(id: id, word: word, text: text, image: imageUrl))
@@ -135,6 +136,9 @@ class CarnetTVC: UITableViewController {
         }
         
         cell.wordLabel.text = item.word
+        cell.picturePreview.image = UIImage(contentsOfFile: item.image)
+//            ImageUtils.instance.loadImageFromPath(item.image)
+
         return cell
     }
     

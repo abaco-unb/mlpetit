@@ -22,12 +22,6 @@
 		1579711A1CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 157971151CDE394000C512F6 /* AlamofireSwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
 		159C11B71BF58B1C0018EBE1 /* EndpointUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */; };
-		15A1DBD91CED2A9500D5BA8A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */; };
-		15A1DBDA1CED2A9500D5BA8A /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		15A1DBDB1CED2A9500D5BA8A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */; };
-		15A1DBDC1CED2A9500D5BA8A /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		15A1DBDD1CED2A9500D5BA8A /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */; };
-		15A1DBDE1CED2A9500D5BA8A /* FBSDKShareKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */; };
 		15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */; };
 		15FE53C31CA6F6B0002A28CC /* FBAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BC1CA6F6B0002A28CC /* FBAnnotationClusterView.swift */; };
@@ -35,6 +29,9 @@
 		15FE53C51CA6F6B0002A28CC /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BE1CA6F6B0002A28CC /* FBClusteringManager.swift */; };
 		15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */; };
 		15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */; };
+		5408F3381CF915A9004B6A76 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */; };
+		5408F3391CF915A9004B6A76 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */; };
+		5408F33A1CF915A9004B6A76 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */; };
 		540A4A411C11EF5A00C166D8 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
@@ -267,9 +264,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1536E2AD1C6E805700471E86 /* Alamofire.framework in Embed Frameworks */,
-				15A1DBDA1CED2A9500D5BA8A /* FBSDKCoreKit.framework in Embed Frameworks */,
-				15A1DBDE1CED2A9500D5BA8A /* FBSDKShareKit.framework in Embed Frameworks */,
-				15A1DBDC1CED2A9500D5BA8A /* FBSDKLoginKit.framework in Embed Frameworks */,
 				1579711A1CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Embed Frameworks */,
 				1536E2F11C6ECD0800471E86 /* SwiftyJSON.framework in Embed Frameworks */,
 			);
@@ -401,12 +395,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15A1DBDD1CED2A9500D5BA8A /* FBSDKShareKit.framework in Frameworks */,
+				5408F3381CF915A9004B6A76 /* FBSDKCoreKit.framework in Frameworks */,
+				5408F3391CF915A9004B6A76 /* FBSDKLoginKit.framework in Frameworks */,
+				5408F33A1CF915A9004B6A76 /* FBSDKShareKit.framework in Frameworks */,
 				157971181CDE395C00C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */,
-				15A1DBD91CED2A9500D5BA8A /* FBSDKCoreKit.framework in Frameworks */,
 				1536E2F01C6ECD0800471E86 /* SwiftyJSON.framework in Frameworks */,
 				82D73CA81B82419700DFEAB0 /* AVFoundation.framework in Frameworks */,
-				15A1DBDB1CED2A9500D5BA8A /* FBSDKLoginKit.framework in Frameworks */,
 				1536E2AC1C6E805700471E86 /* Alamofire.framework in Frameworks */,
 				157971191CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */,
 			);
@@ -762,7 +756,7 @@
 				TargetAttributes = {
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 3MS9SHWCHS;
+						DevelopmentTeam = 2B3UEHLLJ3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;

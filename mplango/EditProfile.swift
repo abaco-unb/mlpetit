@@ -218,6 +218,10 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         // example image data
         let imageData = avatar.lowestQualityJPEGNSData
         
+        // save image in directory
+        self.imagePath = ImageUtils.instance.fileInDocumentsDirectory("profile.png")
+        ImageUtils.instance.saveImage(profPicture.image!, path: self.imagePath)
+        
         // CREATE AND SEND REQUEST ----------
         let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.USER, parameters: params, imageData: imageData)
         
@@ -422,11 +426,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         let fixOrientationImage = chosenImage!.fixOrientation()
         profPicture.image = fixOrientationImage
-
-        
-        // save image in directory
-        self.imagePath = ImageUtils.instance.fileInDocumentsDirectory("profile.png")
-        ImageUtils.instance.saveImage(profPicture.image!, path: self.imagePath)
         
         self.avatar = profPicture.image!
         
