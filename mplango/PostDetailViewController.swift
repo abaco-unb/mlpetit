@@ -257,6 +257,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         dismissViewControllerAnimated(false, completion: nil)
     }
     
+
+    
     @IBAction func options(sender: AnyObject) {
         
         var popover:UIPopoverPresentationController? = nil

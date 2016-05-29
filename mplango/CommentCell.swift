@@ -24,16 +24,18 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var likeBtn: UIButton!
     
     // para a BasicCell (só texto)
-    
     @IBOutlet weak var comTxtView: UITextView!
     
+    // para a PhotoCell (foto com ou sem texto)
+    @IBOutlet weak var comPicture: UIImageView!
+    
     // para a AudioCell (só som)
-    
-    //@IBOutlet weak var audioView: UIView!
-    //@IBOutlet weak var playBtn: UIButton!
-    //@IBOutlet weak var stopBtn: UIButton!
-    //@IBOutlet weak var timerLabel: UILabel!
-    
+    @IBOutlet weak var audioView: UIView!
+    @IBOutlet weak var playBtn: UIButton!
+    @IBOutlet weak var stopBtn: UIButton!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var audioSlider: UISlider!
+
     
     override func layoutSubviews() {
 
