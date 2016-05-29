@@ -272,7 +272,51 @@ class ContactViewController: UITableViewController {
             } else {
                 contact = self.list[indexPath.row]
             }
-            
+        
+            if contact.level == User.BEGINNER {
+                if contact.gender == "Homme" {
+                    cell.contactCategory.text = "apprenant"
+                }
+                else if contact.gender == "Femme" {
+                    cell.contactCategory.text = "apprenante"
+                }
+            }
+            else if contact.level == User.HIGH_BEGINNER {
+                if contact.gender == "Homme" {
+                    cell.contactCategory.text = "apprenant"
+                }
+                else if contact.gender == "Femme" {
+                    cell.contactCategory.text = "apprenante"
+                }
+            }
+            else if contact.level == User.INTERMEDIATE {
+                if contact.gender == "Homme" {
+                    cell.contactCategory.text = "apprenant"
+                }
+                else if contact.gender == "Femme" {
+                    cell.contactCategory.text = "apprenante"
+                }
+            }
+            else if contact.level == User.ADVANCED {
+                if contact.gender == "Homme" {
+                    cell.contactCategory.text = "apprenant"
+                }
+                else if contact.gender == "Femme" {
+                    cell.contactCategory.text = "apprenante"
+                }
+            }
+            else if contact.level == User.MEDIATOR {
+                
+                if contact.gender == "Homme" {
+                    cell.contactCategory.text = "médiateur"
+                }
+                else if contact.gender == "Femme" {
+                    cell.contactCategory.text = "médiatrice"
+                }
+
+            }
+        
+
 
             cell.contactName.text = contact.name
             cell.followBtn.tag = contact.id
