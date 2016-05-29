@@ -92,7 +92,21 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
         
-        textViewDidChange(writeTxtView)
+        let text = writeTxtView.text
+        
+        if text.characters.count >= 1 {
+            postComBtn.hidden = false
+            postComBtn.enabled = true
+            recordBtn.hidden = true
+        }
+        
+        else if text.characters.count < 1 {
+            writeHereImage.hidden = false
+            recordBtn.hidden = false
+            recordBtn.enabled = true
+            postComBtn.hidden = true
+            postComBtn.enabled = false
+        }
         
 //        comPicture.image = nil
 //        writeTxtView.text = nil
@@ -188,10 +202,22 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         comPicture.image = nil
         removeImage.hidden = true
         picBtn.hidden = false
-        recordBtn.hidden = false
-        recordBtn.enabled = true
         
-        textViewDidChange(writeTxtView)
+        let text = writeTxtView.text
+        
+        if text.characters.count >= 1 {
+            postComBtn.hidden = false
+            postComBtn.enabled = true
+            recordBtn.hidden = true
+            recordBtn.enabled = false
+        }
+            
+        else if text.characters.count < 1 {
+            postComBtn.hidden = true
+            postComBtn.enabled = false
+            recordBtn.hidden = false
+            recordBtn.enabled = true
+        }
 
         
     }
