@@ -11,6 +11,7 @@ import UIKit
 
 class ActivityIndicator {
     
+    static let instance = ActivityIndicator()
     var spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     var loadingView: UIView!
     
