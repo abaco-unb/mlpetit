@@ -316,8 +316,6 @@ class ContactViewController: UITableViewController {
 
             }
         
-
-
             cell.contactName.text = contact.name
             cell.followBtn.tag = contact.id
         
