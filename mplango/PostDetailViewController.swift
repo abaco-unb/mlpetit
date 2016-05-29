@@ -257,6 +257,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         dismissViewControllerAnimated(false, completion: nil)
     }
     
+
+    
     @IBAction func options(sender: AnyObject) {
         
         var popover:UIPopoverPresentationController? = nil
@@ -279,6 +281,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             UIAlertAction in
         }
         
+        let followAction = UIAlertAction(title: String("Suivre " + String(post!.userName)), style: UIAlertActionStyle.Default)
+        {
+            UIAlertAction in
+        }
+        
         let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
         {
             UIAlertAction in
@@ -288,6 +295,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         if self.userId != post!.ownerId {
             alert.addAction(reportAction)
+            alert.addAction(followAction)
             alert.addAction(cancelAction)
         }
         else {

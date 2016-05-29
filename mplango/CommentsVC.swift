@@ -18,7 +18,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     var indicator:ActivityIndicator = ActivityIndicator()
     
     var comments: Array<Comment>!
-
+    
     var postId:Int!
     
     let basicCellIdentifier = "BasicCell"
@@ -27,16 +27,17 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var comTableView: UITableView!
 
     @IBOutlet weak var writeTxtView: UITextView!
-    
-    @IBOutlet weak var postComBtn: UIButton!
+    @IBOutlet weak var writeHereImage: UIImageView!
     
     @IBOutlet weak var comPicture: UIImageView!
-    @IBOutlet weak var recordBtn: UIButton!
-    @IBOutlet weak var imageBtn: UIButton!
-
+    @IBOutlet weak var picBtn: UIButton!
+    
     @IBOutlet weak var removeImage: UIButton!
     
-    @IBOutlet weak var writeHereImage: UIImageView!
+    @IBOutlet weak var recordBtn: UIButton!
+    
+    @IBOutlet weak var postComBtn: UIButton!
+
     
     var image: UIImage!
     
@@ -65,14 +66,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         writeTxtView.delegate = self
         
         postComBtn.hidden = true
-        
         removeImage.hidden = true
 
         comTableView.rowHeight = UITableViewAutomaticDimension
-        comTableView.estimatedRowHeight = 160.0
-    }
+        comTableView.estimatedRowHeight = 200.0
 
+    }
     
+
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
@@ -91,14 +92,30 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
         
-        writeTxtView.text = nil
-        postComBtn.hidden = true
-        imageBtn.hidden = false
-        imageBtn.enabled = true
-        recordBtn.hidden = false
-        recordBtn.enabled = true
-        writeHereImage.hidden = false
-        removeImage.hidden = true
+        let text = writeTxtView.text
+        
+        if text.characters.count >= 1 {
+            postComBtn.hidden = false
+            postComBtn.enabled = true
+            recordBtn.hidden = true
+        }
+        
+        else if text.characters.count < 1 {
+            writeHereImage.hidden = false
+            recordBtn.hidden = false
+            recordBtn.enabled = true
+            postComBtn.hidden = true
+            postComBtn.enabled = false
+        }
+        
+//        comPicture.image = nil
+//        writeTxtView.text = nil
+//        postComBtn.hidden = true
+//        recordBtn.hidden = false
+//        recordBtn.enabled = true
+//        writeHereImage.hidden = false
+//        removeImage.hidden = true
+//        picBtn.hidden = false
 
     }
     
@@ -119,17 +136,22 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if text.characters.count >= 1 {
             postComBtn.hidden = false
             postComBtn.enabled = true
-            imageBtn.hidden = true
             recordBtn.hidden = true
         }
         
         else if text.characters.count < 1 {
-            postComBtn.hidden = true
-            imageBtn.hidden = false
-            imageBtn.enabled = true
-            recordBtn.hidden = false
-            recordBtn.enabled = true
-        
+            
+            if comPicture != nil {
+                postComBtn.hidden = false
+                recordBtn.hidden = true
+                recordBtn.enabled = false
+            }
+            
+            else {
+                postComBtn.hidden = true
+                recordBtn.hidden = false
+                recordBtn.enabled = true
+            }
         }
     }
     
@@ -179,11 +201,24 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         comPicture.image = nil
         removeImage.hidden = true
-        postComBtn.hidden = true
-        imageBtn.hidden = false
-        imageBtn.enabled = true
-        recordBtn.hidden = false
-        recordBtn.enabled = true
+        picBtn.hidden = false
+        
+        let text = writeTxtView.text
+        
+        if text.characters.count >= 1 {
+            postComBtn.hidden = false
+            postComBtn.enabled = true
+            recordBtn.hidden = true
+            recordBtn.enabled = false
+        }
+            
+        else if text.characters.count < 1 {
+            postComBtn.hidden = true
+            postComBtn.enabled = false
+            recordBtn.hidden = false
+            recordBtn.enabled = true
+        }
+
         
     }
     
@@ -220,7 +255,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         } else {
             popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
             popover?.sourceView = self.view
-            popover?.sourceRect = imageBtn.frame
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
             popover?.permittedArrowDirections = .Any
         }
     }
@@ -245,22 +280,27 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
             
             popover?.sourceView = self.view
-            popover?.sourceRect = imageBtn.frame
+            popover?.barButtonItem = navigationItem.rightBarButtonItem
             popover?.permittedArrowDirections = .Any
         }
     }
    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
         picker.dismissViewControllerAnimated(true, completion: nil)
-        comPicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let fixOrientationImage = chosenImage!.fixOrientation()
+        comPicture.image = fixOrientationImage
         
+        // save image in memory
+        self.image = comPicture.image!
+        
+        picBtn.hidden = true
         removeImage.hidden = false
         postComBtn.hidden = false
         postComBtn.enabled = true
-        imageBtn.hidden = true
         recordBtn.hidden = true
-        writeHereImage.hidden = true
+        
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -272,8 +312,6 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         writeTxtView.resignFirstResponder()
         writeTxtView.text = nil
         postComBtn.hidden = true
-        imageBtn.hidden = false
-        imageBtn.enabled = true
         recordBtn.hidden = false
         recordBtn.enabled = true
         writeHereImage.hidden = false
@@ -334,6 +372,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func postComment(image: UIImage, params: Dictionary<String, String>) {
         
         let imageData = image.lowestQualityJPEGNSData
+        
+        // save image in directory
+//        let imgUtils:ImageUtils = ImageUtils()
+//        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
+//        imgUtils.saveImage(comPicture.image!, path: self.imagePath);
+
         
         self.indicator.showActivityIndicator(self.view)
         
