@@ -117,7 +117,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                     if let result = json["data"].array {
                         let user = result.first!
-                        print(user["password"].stringValue)
                         
                         if(user["password"].stringValue == self.pwd){
                             
