@@ -52,8 +52,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     //Outlets para os tags e o texto
     @IBOutlet weak var textPostView: UITextView!
     @IBOutlet weak var maxLenghtLabel: UILabel!
-    @IBOutlet weak var checkTextPost: UIImageView!
+    @IBOutlet weak var checkTextPost: UILabel!
     @IBOutlet weak var writeHereImage: UIImageView!
+    @IBOutlet weak var checkTag1: UILabel!
+    @IBOutlet weak var checkTag2: UILabel!
+    @IBOutlet weak var checkTag3: UILabel!
+    
     
     @IBOutlet weak var iconAudio: UIImageView!
     @IBOutlet weak var labelRecording: UILabel!
@@ -65,20 +69,20 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     //@IBOutlet weak var slowBtn: UIButton!
     @IBOutlet weak var audioSlider: UISlider!
     //@IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var checkAudio: UIImageView!
+    @IBOutlet weak var checkAudio: UILabel!
     
     //Outlets para a foto
     @IBOutlet weak var addPicture: UIButton!
     @IBOutlet weak var removeImage: UIButton!
     @IBOutlet weak var photoImage: UIImageView!
-    @IBOutlet weak var checkImage: UIImageView!
+    @IBOutlet weak var checkImage: UILabel!
     
     
     //Outlets para o vídeo
     @IBOutlet weak var addVideo: UIButton!
     @IBOutlet weak var removeVideo: UIButton!
     @IBOutlet weak var videoView: UIImageView!
-    @IBOutlet weak var checkVideo: UIImageView!
+    @IBOutlet weak var checkVideo: UILabel!
     
     
     
@@ -304,7 +308,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         }
         if(newLength == 10) {
             //set text as checked
-            checkOn(checkTextPost)
+//            checkOn(checkTextPost)
+            checkTextPost.textColor = UIColor(hex: 0x43A047)
+            checkTextPost.font = UIFont.boldSystemFontOfSize(15)
+
         }
         
         return newLength <= limitLength
@@ -321,10 +328,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         
     }
     
-    func checkOn(imageCheck : UIImageView) {
-        let checkOn = UIImage(named: "check_on.png");
-        imageCheck.image = checkOn
-        print("passou aqui", imageCheck.image)
+    func checkOn() {
+//        let checkOn = UIImage(named: "check_on.png");
+//        imageCheck.image = checkOn
+//        print("passou aqui", imageCheck.image)
         
     }
     
@@ -458,7 +465,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         self.image = photoImage.image!
         
         //set image as checked
-        checkOn(checkImage)
+//        checkOn(checkImage)
+        checkImage.textColor = UIColor(hex: 0x43A047)
+        checkImage.font = UIFont.boldSystemFontOfSize(15)
+
+
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
@@ -784,7 +795,10 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                     print(" depois points")
                 
                     //set audio as checked
-                    self.checkOn(checkAudio)
+//                    self.checkOn(checkAudio)
+                    checkAudio.textColor = UIColor(hex: 0x43A047)
+                    checkAudio.font = UIFont.boldSystemFontOfSize(15)
+
                     
                 } catch {
                     fatalError("Failure to ...: \(error)")
@@ -849,7 +863,11 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
                             tags.append(stringifiedWord)
                         }
                         //set tags as checked
-                        self.checkOn(checkTextPost)
+//                        self.checkOn(checkTextPost)
+                        checkTag1.textColor = UIColor(hex: 0x43A047)
+                        checkTag1.font = UIFont.boldSystemFontOfSize(12)
+
+
                     }
                     
                     // set a link for when the user clicks on this word.

@@ -13,9 +13,27 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate{
     var points = 0
     
     @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var goToMapBTN: UIButton!
+    @IBOutlet weak var goToPointsBTN: UIButton!
     
+    @IBOutlet weak var shareFbBTN: UIButton!
+    
+    @IBOutlet weak var shareTwBTN: UIButton!
+    
+    @IBOutlet weak var shareInstBTN: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        goToMapBTN.layer.borderWidth = 2
+        goToMapBTN.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        goToMapBTN.layer.cornerRadius = 10
+        goToMapBTN.layer.masksToBounds = true
+        
+        
+        goToPointsBTN.layer.borderWidth = 2
+        goToPointsBTN.layer.borderColor = UIColor(hex: 0xFFCC66).CGColor
+        goToPointsBTN.layer.cornerRadius = 10
+        goToPointsBTN.layer.masksToBounds = true
         
         print("points")
         print(points)
