@@ -127,7 +127,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
-            
+            print(1)
             textPost.text = post!.text
             locationLabel.text = post!.locationName
             userName.text = post!.userName
@@ -136,13 +136,15 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             
 //            let postVideo = false
 //            let postAudio = false
-            
-            let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
-            itemPhoto.image = postImage
-            
+            print(2)
+            if post!.image != "" {
+                let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
+                itemPhoto.image = postImage
+            }
+            print(3)
             print("----***-----");
             print(post!.image);
-            
+            print(4)
             if itemPhoto != nil {
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = true
@@ -150,7 +152,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 photoAudioView.hidden = true
                 audioInPhoto.hidden = true
             }
-            
+            print(5)
             showLikes()
         }
         

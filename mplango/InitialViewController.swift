@@ -29,6 +29,7 @@ class InitialViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.btnFacebook.readPermissions = ["public_profile", "email", "user_friends"]
         self.btnFacebook.delegate = self
         
+        
         if let token = FBSDKAccessToken.currentAccessToken() {
             btnFacebook.hidden = true
             print("token : ", token)
@@ -43,7 +44,7 @@ class InitialViewController: UIViewController, FBSDKLoginButtonDelegate {
         btnInscription.backgroundColor = UIColor.clearColor()
         btnInscription.layer.borderWidth = 3.0
         btnInscription.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
-
+        btnFacebook.hidden = false    
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,11 +58,34 @@ class InitialViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         ActivityIndicator.instance.showActivityIndicator(self.view);
         Alamofire.request(.GET, EndpointUtils.USER, parameters: ["email": email])
-            .responseSwiftyJSON({ (request, response, json, error) in
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
                 ActivityIndicator.instance.hideActivityIndicator();
+                print(request)
+                print(error)
+                print(json)
                 if json["data"].array?.count > 0 {
-                    print("entrou pelo face")
-                    self.performSegueWithIdentifier("initial_to_map", sender: self)
+                    if let result = json["data"].array {
+                        let user = result.first!
+                        print("entrou pelo face")
+                        
+                        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                        
+                        if let id = user["id"].int {
+                            prefs.setInteger(id, forKey: "id")
+                            prefs.setInteger(id, forKey: "logged")
+                        }
+                        if let name = user["name"].string {
+                            prefs.setObject(name, forKey: "name")
+                        }
+                        prefs.synchronize()
+                        
+                        self.performSegueWithIdentifier("initial_to_map", sender: self)
+                        
+                    }
+                    
                 } else {
                     print("não tem conta face")
                     self.performSegueWithIdentifier("initial_to_account", sender: self)
@@ -115,7 +139,7 @@ class InitialViewController: UIViewController, FBSDKLoginButtonDelegate {
     {}
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        if segue.identifier == "login_to_account" {//
+        if segue.identifier == "initial_to_account" {//
             let accountVireController:AccountViewController = segue.destinationViewController as! AccountViewController
             accountVireController.fbUserData = [self.email, self.name, self.fbPicture, self.gender]
         }

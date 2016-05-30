@@ -22,10 +22,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var username:String = ""
     var pwd:String      = ""
-    var registered: Bool = false
-    
-    @IBOutlet var btnFacebook: FBSDKLoginButton!
-    
+    var registered: Bool = false 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +107,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         ActivityIndicator.instance.showActivityIndicator(self.view);
         Alamofire.request(.GET, EndpointUtils.USER, parameters: ["email": self.username])
-            .responseSwiftyJSON({ (request, response, json, error) in
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
                 ActivityIndicator.instance.hideActivityIndicator();
                 print("bruno")
                 if json["data"].array?.count > 0 {
@@ -138,13 +138,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             NSLog("@resultado : %@", "FALHOU LOGIN !!!")
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                     
-                            //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Login falhou!", message: "Usuário ou senha incorretos!", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                            print("The user not is okay.")
-                            }
-                            alertController.addAction(agreeAction)
-                            self.presentViewController(alertController, animated: true, completion: nil)
+                                //New Alert Ccontroller
+                                let alertController = UIAlertController(title: "Login falhou!", message: "Usuário ou senha incorretos!", preferredStyle: .Alert)
+                                let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                    print("The user not is okay.")
+                                }
+                                alertController.addAction(agreeAction)
+                                self.presentViewController(alertController, animated: true, completion: nil)
                             }
                         }
                     }
