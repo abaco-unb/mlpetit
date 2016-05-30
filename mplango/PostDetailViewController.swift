@@ -162,6 +162,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 //            photoAudioView.hidden = false
 //            audioInPhoto.hidden = false
 //            AudioView.hidden = true
+//            photoAudioView.layer.borderWidth = 1
+//            photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+
 //        }
                 
             // ÁUDIO SEM FOTO:
@@ -185,8 +188,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         }
         
         //Como vai aparecer a photoAudioView
-        photoAudioView.layer.borderWidth = 1
-        photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         
