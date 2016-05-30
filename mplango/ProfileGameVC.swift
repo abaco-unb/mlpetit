@@ -21,7 +21,6 @@ class ProfileGameVC: UIViewController {
         retrieveLoggedUser()
 
 //        navigationItem.title = gameProfile.name
-        navigationItem.backBarButtonItem?.enabled = true
         
     }
     
