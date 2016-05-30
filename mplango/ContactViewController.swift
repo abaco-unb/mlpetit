@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import AlamofireSwiftyJSON
 
 class ContactViewController: UITableViewController {
     
@@ -165,10 +166,10 @@ class ContactViewController: UITableViewController {
                     self.indicator.hideActivityIndicator();
                     self.tableView.reloadData()
                     //pega os contatos do facebook caso ele tenha logado pela rede
-                    //                    if let token = FBSDKAccessToken.currentAccessToken() {
-                    //                        print("token : ", token)
-                    //                        self.friendsList()
-                    //                    }
+                    if let token = FBSDKAccessToken.currentAccessToken() {
+                        print("token : ", token)
+                        self.friendsList()
+                    }
                 }
             });
         

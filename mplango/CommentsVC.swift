@@ -339,6 +339,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 
 
     func postComment(params: Dictionary<String, String>) {
+        self.indicator.showActivityIndicator(self.view)
         Alamofire.request(.POST, EndpointUtils.COMMENT, parameters: params)
             .responseString { response in
                 print("Request: \(EndpointUtils.COMMENT)")

@@ -22,6 +22,7 @@
 		1579711A1CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 157971151CDE394000C512F6 /* AlamofireSwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		159C11AE1BF5768A0018EBE1 /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11AD1BF5768A0018EBE1 /* RUser.swift */; };
 		159C11B71BF58B1C0018EBE1 /* EndpointUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */; };
+		15FB25D41CFBBEC8000417A3 /* beep-recorded.wav in Resources */ = {isa = PBXBuildFile; fileRef = 15FB25D31CFBBEC8000417A3 /* beep-recorded.wav */; };
 		15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */; };
 		15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */; };
 		15FE53C31CA6F6B0002A28CC /* FBAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BC1CA6F6B0002A28CC /* FBAnnotationClusterView.swift */; };
@@ -290,6 +291,7 @@
 		15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		15A1DBE11CED3F9500D5BA8A /* mplango-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mplango-Bridging-Header.h"; sourceTree = "<group>"; };
+		15FB25D31CFBBEC8000417A3 /* beep-recorded.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-recorded.wav"; sourceTree = "<group>"; };
 		15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotation.swift; sourceTree = "<group>"; };
 		15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationCluster.swift; sourceTree = "<group>"; };
 		15FE53BC1CA6F6B0002A28CC /* FBAnnotationClusterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterView.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 		8283BE151B0143AF0085F9A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15FB25D31CFBBEC8000417A3 /* beep-recorded.wav */,
 				54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */,
 				54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */,
 				54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */,
@@ -756,7 +759,7 @@
 				TargetAttributes = {
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 2B3UEHLLJ3;
+						DevelopmentTeam = 3MS9SHWCHS;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -967,6 +970,7 @@
 				54E971A91B6ED25B005F27F1 /* FiraSans-LightItalic.ttf in Resources */,
 				54E971AA1B6ED25B005F27F1 /* FiraSans-Medium.ttf in Resources */,
 				54E971AB1B6ED25B005F27F1 /* FiraSans-MediumItalic.ttf in Resources */,
+				15FB25D41CFBBEC8000417A3 /* beep-recorded.wav in Resources */,
 				54E971AC1B6ED25B005F27F1 /* FiraSans-Regular.ttf in Resources */,
 				54E971AD1B6ED25B005F27F1 /* FiraSans-SemiBold.ttf in Resources */,
 				54E971AE1B6ED25B005F27F1 /* FiraSans-SemiBoldItalic.ttf in Resources */,

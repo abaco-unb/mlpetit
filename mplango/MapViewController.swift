@@ -237,6 +237,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             var likes:Int = 0
                             var imageUrl:String = ""
                             var ownerId: Int = 0
+                            var audioUrl: String = ""
                             
                             var comments: Array<Comment> = [Comment]();
                             
@@ -267,10 +268,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             if let images = post["images"].array {
                                 print("IMAGE ARRAY")
                                 print(images)
-                                
-                                if let imageId = images[0]["id"].int {
-                                    print("aqui dentro da imagem")
-                                    imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
+                                if ((post["images"].array?.count) > 0) {
+                                    if let imageId = images[0]["id"].int {
+                                        print("aqui dentro da imagem")
+                                        imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
+                                    }
                                 }
                             }
                             
@@ -296,6 +298,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                     
                                     comments.append(Comment(id: comId, audio: comment["audio"].stringValue, text: comment["text"].stringValue, image: comment["image"].stringValue, postId: postId, created: comment["created"].stringValue, userId: userId))
                                 }
+                            }
+                            
+                            if post["audio"].stringValue != "" {
+                                audioUrl = EndpointUtils.POST + "?id=" + post["id"].stringValue +  "&audio=true"
                             }
                             
                             print("Comentários do Post", comments)
