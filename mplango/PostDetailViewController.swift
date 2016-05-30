@@ -114,9 +114,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
         
-        AudioView.hidden = true
-        videoView.hidden = true
-        
         self.retrieveLoggedUser()
         
         if post != nil {
@@ -137,6 +134,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 //            let postVideo = false
 //            let postAudio = false
             print(2)
+            
             if post!.image != "" {
                 let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
                 itemPhoto.image = postImage
@@ -145,13 +143,43 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             print("----***-----");
             print(post!.image);
             print(4)
-            if itemPhoto != nil {
+            
+            
+            // FOTO SEM ÁUDIO:
+            if (itemPhoto != nil /*|| audio == nil*/){
+                print("image inneer")
+                print(post!.image)
+                
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = true
-            } else {
+                AudioView.hidden = true
+                videoView.hidden = true
+
+            }
+                
+            // FOTO + ÁUDIO:
+//        else if (itemPhoto != nil /*|| audio != nil*/) {
+//            photoAudioView.hidden = false
+//            audioInPhoto.hidden = false
+//            AudioView.hidden = true
+//        }
+                
+            // ÁUDIO SEM FOTO:
+//        else if (audio != nil || itemPhoto == nil) {
+//            photoAudioView.hidden = true
+//            audioInPhoto.hidden = true
+//            AudioView.hidden = false
+//        }
+                
+            // TEXTO SEM MÍDIA:
+            else if (itemPhoto == nil /*|| audio != nil*/){
                 photoAudioView.hidden = true
                 audioInPhoto.hidden = true
+                AudioView.hidden = true
+                videoView.hidden = true
+                mediaView.hidden = true
             }
+
             print(5)
             showLikes()
         }
