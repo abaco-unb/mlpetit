@@ -28,7 +28,7 @@ class InitialViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         self.btnFacebook.readPermissions = ["public_profile", "email", "user_friends"]
         self.btnFacebook.delegate = self
-        
+        btnFacebook.hidden = false
         
         if let token = FBSDKAccessToken.currentAccessToken() {
             btnFacebook.hidden = true
@@ -44,7 +44,7 @@ class InitialViewController: UIViewController, FBSDKLoginButtonDelegate {
         btnInscription.backgroundColor = UIColor.clearColor()
         btnInscription.layer.borderWidth = 3.0
         btnInscription.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
-        btnFacebook.hidden = false    
+        //btnFacebook.hidden = false
     }
 
     override func didReceiveMemoryWarning() {
