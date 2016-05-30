@@ -846,8 +846,7 @@
                                 <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="20" y="182" width="272" height="30"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="230" width="560" height="40"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="JDj-47-Cxh"/>
                                     </mask>
@@ -872,8 +871,7 @@
                                 <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="20" y="220" width="272" height="30"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="280" width="560" height="40"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="eUK-IV-Q0V"/>
                                     </mask>
@@ -898,8 +896,7 @@
                                         <exclude reference="MAh-GP-z57"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="370" width="560" height="40"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="MAh-GP-z57"/>
                                     </mask>
@@ -924,8 +921,7 @@
                                         <exclude reference="pSp-o3-tYh"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="420" width="560" height="40"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="pSp-o3-tYh"/>
                                     </mask>
@@ -3473,6 +3469,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         </constraint>
                                         <constraint firstAttribute="trailing" secondItem="6sg-3a-XSi" secondAttribute="trailing" constant="8" id="OLI-sX-bUG"/>
                                         <constraint firstItem="14A-wa-20Y" firstAttribute="leading" secondItem="oyW-0S-jve" secondAttribute="leading" id="Pec-CV-kwJ"/>
+                                        <constraint firstItem="6sg-3a-XSi" firstAttribute="leading" secondItem="vzn-As-MR8" secondAttribute="trailing" constant="180" id="SB2-yP-tqh">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                        </constraint>
                                         <constraint firstItem="vzn-As-MR8" firstAttribute="leading" secondItem="ysv-CO-ENC" secondAttribute="trailing" constant="8" id="Xcj-bW-Pxg">
                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                                         </constraint>
@@ -3505,18 +3504,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <exclude reference="XtU-AO-WaA"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="6nZ-JB-57C"/>
-                                            <exclude reference="GK8-I8-y0k"/>
-                                            <exclude reference="OLI-sX-bUG"/>
-                                            <exclude reference="ibE-RN-X0S"/>
-                                            <exclude reference="vQx-P4-ME0"/>
-                                            <exclude reference="8k4-lt-FVP"/>
-                                            <exclude reference="LEU-0F-IRY"/>
-                                            <exclude reference="OJp-di-NmV"/>
-                                            <exclude reference="ges-yf-f0S"/>
-                                            <exclude reference="wyT-kh-1bK"/>
-                                            <exclude reference="0C1-Il-L8a"/>
-                                            <exclude reference="Xcj-bW-Pxg"/>
                                             <exclude reference="32J-lN-7sd"/>
                                             <exclude reference="J60-85-iMY"/>
                                             <exclude reference="fOF-Li-QZg"/>
@@ -3525,6 +3512,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <exclude reference="IGg-2e-6mT"/>
                                             <exclude reference="Pec-CV-kwJ"/>
                                             <exclude reference="zlb-Wz-fZj"/>
+                                            <exclude reference="0C1-Il-L8a"/>
+                                            <exclude reference="Xcj-bW-Pxg"/>
+                                            <exclude reference="8k4-lt-FVP"/>
+                                            <exclude reference="LEU-0F-IRY"/>
+                                            <exclude reference="OJp-di-NmV"/>
+                                            <exclude reference="ges-yf-f0S"/>
+                                            <exclude reference="wyT-kh-1bK"/>
+                                            <exclude reference="6nZ-JB-57C"/>
+                                            <exclude reference="GK8-I8-y0k"/>
+                                            <exclude reference="OLI-sX-bUG"/>
+                                            <exclude reference="SB2-yP-tqh"/>
+                                            <exclude reference="ibE-RN-X0S"/>
+                                            <exclude reference="vQx-P4-ME0"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -3536,18 +3536,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <include reference="XtU-AO-WaA"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="6nZ-JB-57C"/>
-                                            <include reference="GK8-I8-y0k"/>
-                                            <include reference="OLI-sX-bUG"/>
-                                            <exclude reference="ibE-RN-X0S"/>
-                                            <exclude reference="vQx-P4-ME0"/>
-                                            <include reference="8k4-lt-FVP"/>
-                                            <exclude reference="LEU-0F-IRY"/>
-                                            <include reference="OJp-di-NmV"/>
-                                            <exclude reference="ges-yf-f0S"/>
-                                            <exclude reference="wyT-kh-1bK"/>
-                                            <exclude reference="0C1-Il-L8a"/>
-                                            <include reference="Xcj-bW-Pxg"/>
                                             <exclude reference="32J-lN-7sd"/>
                                             <include reference="J60-85-iMY"/>
                                             <include reference="fOF-Li-QZg"/>
@@ -3556,6 +3544,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <include reference="IGg-2e-6mT"/>
                                             <include reference="Pec-CV-kwJ"/>
                                             <include reference="zlb-Wz-fZj"/>
+                                            <exclude reference="0C1-Il-L8a"/>
+                                            <include reference="Xcj-bW-Pxg"/>
+                                            <include reference="8k4-lt-FVP"/>
+                                            <exclude reference="LEU-0F-IRY"/>
+                                            <include reference="OJp-di-NmV"/>
+                                            <exclude reference="ges-yf-f0S"/>
+                                            <exclude reference="wyT-kh-1bK"/>
+                                            <exclude reference="6nZ-JB-57C"/>
+                                            <include reference="GK8-I8-y0k"/>
+                                            <include reference="OLI-sX-bUG"/>
+                                            <include reference="SB2-yP-tqh"/>
+                                            <exclude reference="ibE-RN-X0S"/>
+                                            <exclude reference="vQx-P4-ME0"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -3628,7 +3629,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="OT2-74-E6Q"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="228" y="102" width="30" height="15"/>
                                     <mask key="constraints">
                                         <exclude reference="OT2-74-E6Q"/>
                                     </mask>
@@ -3671,9 +3673,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="12"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="240" y="84" width="7" height="15"/>
+                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkX-KG-egn">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="277" y="84" width="46" height="33"/>
+                                </variation>
                                 <connections>
                                     <segue destination="PaN-uT-b20" kind="presentation" identifier="show_followers" id="XXQ-Rc-i6j"/>
                                 </connections>
@@ -3683,6 +3691,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="12"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="297" y="84" width="7" height="15"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="suiveurs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCB-bO-4bP">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3699,7 +3710,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="8Iv-lw-MUI"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="277" y="102" width="46" height="15"/>
                                     <mask key="constraints">
                                         <exclude reference="8Iv-lw-MUI"/>
                                     </mask>
@@ -3716,6 +3728,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="12"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="354" y="84" width="7" height="15"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="suivis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bn-ss-sm3">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3772,7 +3787,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="zDl-4o-c13"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="231" y="129" width="25" height="35"/>
                                     <mask key="constraints">
                                         <exclude reference="1I0-Vh-jWu"/>
                                         <exclude reference="A8q-mn-L7Q"/>
@@ -3808,7 +3824,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="sxg-at-XLj"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="288" y="129" width="25" height="35"/>
                                     <mask key="constraints">
                                         <exclude reference="MVm-Fr-pR6"/>
                                         <include reference="UFm-2U-FWW"/>
@@ -5741,16 +5758,54 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <exclude reference="RKC-1t-O7M"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="6cb-Uf-E98"/>
-                                                <exclude reference="lCj-lj-8aS"/>
-                                                <exclude reference="btw-93-kYJ"/>
-                                                <exclude reference="eqy-Dn-k6m"/>
-                                                <exclude reference="jjT-b9-dub"/>
+                                                <exclude reference="Nla-Pt-8UI"/>
+                                                <exclude reference="jOY-sb-ssL"/>
+                                                <exclude reference="siC-5q-ph2"/>
+                                                <exclude reference="xZq-ls-Oub"/>
+                                                <exclude reference="f1c-3p-UAp"/>
+                                                <exclude reference="oXi-dV-v4d"/>
+                                                <exclude reference="2sm-eT-OIa"/>
+                                                <exclude reference="3qA-96-6Dm"/>
+                                                <exclude reference="0U8-4y-kx8"/>
+                                                <exclude reference="fv8-pm-yrW"/>
+                                                <exclude reference="KhA-XQ-vBD"/>
+                                                <exclude reference="LuZ-Bf-5SQ"/>
+                                                <exclude reference="25n-QH-UWh"/>
+                                                <exclude reference="UtY-3F-RRp"/>
+                                                <exclude reference="Y6e-eE-Wfo"/>
+                                                <exclude reference="4Yc-33-CDe"/>
+                                                <exclude reference="jay-Kx-34z"/>
+                                                <exclude reference="UGp-r7-4fn"/>
+                                                <exclude reference="hn7-aS-VSX"/>
+                                                <exclude reference="6Qp-QZ-ju6"/>
+                                                <exclude reference="Loc-Sx-Ega"/>
+                                                <exclude reference="OUd-Vr-4ki"/>
+                                                <exclude reference="OmE-zY-Tzv"/>
+                                                <exclude reference="RnX-bo-vsk"/>
+                                                <exclude reference="bio-is-Ljn"/>
                                                 <exclude reference="QDt-aR-JTg"/>
                                                 <exclude reference="WWB-wU-P73"/>
                                                 <exclude reference="WhZ-Zl-lvD"/>
                                                 <exclude reference="9Ge-6I-7tT"/>
                                                 <exclude reference="hvE-Vx-hqy"/>
+                                                <exclude reference="btw-93-kYJ"/>
+                                                <exclude reference="eqy-Dn-k6m"/>
+                                                <exclude reference="jjT-b9-dub"/>
+                                                <exclude reference="6cb-Uf-E98"/>
+                                                <exclude reference="lCj-lj-8aS"/>
+                                                <exclude reference="rEf-u5-sh8"/>
+                                                <exclude reference="shp-L5-whK"/>
+                                                <exclude reference="YKj-S4-Ise"/>
+                                                <exclude reference="dJS-Dm-TDn"/>
+                                                <exclude reference="qcm-f0-aAa"/>
+                                                <exclude reference="Yoi-MA-Dl6"/>
+                                                <exclude reference="bJs-3S-OYd"/>
+                                                <exclude reference="iSO-4t-2gK"/>
+                                                <exclude reference="ntc-Ng-enX"/>
+                                                <exclude reference="4hJ-Yl-rmv"/>
+                                                <exclude reference="Hvk-ce-jFx"/>
+                                                <exclude reference="33A-2Q-P0j"/>
+                                                <exclude reference="drR-1v-Eua"/>
                                                 <exclude reference="1xN-oD-KRA"/>
                                                 <exclude reference="LHs-yI-Nbj"/>
                                                 <exclude reference="ZxH-U6-FWo"/>
@@ -5764,63 +5819,25 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <exclude reference="vuh-gJ-hbD"/>
                                                 <exclude reference="TyS-IA-I1i"/>
                                                 <exclude reference="dI7-yn-DCC"/>
-                                                <exclude reference="rEf-u5-sh8"/>
-                                                <exclude reference="shp-L5-whK"/>
-                                                <exclude reference="Nla-Pt-8UI"/>
-                                                <exclude reference="jOY-sb-ssL"/>
-                                                <exclude reference="siC-5q-ph2"/>
-                                                <exclude reference="xZq-ls-Oub"/>
                                                 <exclude reference="Iv3-mU-dgS"/>
                                                 <exclude reference="ber-BU-ufg"/>
                                                 <exclude reference="cor-vT-cOw"/>
-                                                <exclude reference="bio-is-Ljn"/>
                                                 <exclude reference="Swd-8l-fEP"/>
                                                 <exclude reference="yNN-jF-auu"/>
-                                                <exclude reference="4Yc-33-CDe"/>
-                                                <exclude reference="jay-Kx-34z"/>
                                                 <exclude reference="1xv-HV-6S3"/>
                                                 <exclude reference="4zm-8P-SsB"/>
                                                 <exclude reference="O7V-TX-scg"/>
-                                                <exclude reference="2sm-eT-OIa"/>
-                                                <exclude reference="3qA-96-6Dm"/>
-                                                <exclude reference="UGp-r7-4fn"/>
-                                                <exclude reference="hn7-aS-VSX"/>
-                                                <exclude reference="OUd-Vr-4ki"/>
-                                                <exclude reference="OmE-zY-Tzv"/>
-                                                <exclude reference="RnX-bo-vsk"/>
-                                                <exclude reference="25n-QH-UWh"/>
-                                                <exclude reference="UtY-3F-RRp"/>
-                                                <exclude reference="Y6e-eE-Wfo"/>
-                                                <exclude reference="6Qp-QZ-ju6"/>
-                                                <exclude reference="Loc-Sx-Ega"/>
                                                 <exclude reference="QXV-OP-whp"/>
                                                 <exclude reference="fdI-6b-NnF"/>
                                                 <exclude reference="MH1-vw-rjH"/>
                                                 <exclude reference="h5j-tt-KPc"/>
                                                 <exclude reference="4cw-6R-eNl"/>
                                                 <exclude reference="oCT-CN-E6y"/>
-                                                <exclude reference="f1c-3p-UAp"/>
-                                                <exclude reference="oXi-dV-v4d"/>
+                                                <exclude reference="IOs-Ru-cVQ"/>
+                                                <exclude reference="rAb-LO-pv9"/>
                                                 <exclude reference="KLs-aR-Pf9"/>
                                                 <exclude reference="jhC-69-7fO"/>
                                                 <exclude reference="yDM-aM-Unt"/>
-                                                <exclude reference="0U8-4y-kx8"/>
-                                                <exclude reference="fv8-pm-yrW"/>
-                                                <exclude reference="YKj-S4-Ise"/>
-                                                <exclude reference="dJS-Dm-TDn"/>
-                                                <exclude reference="qcm-f0-aAa"/>
-                                                <exclude reference="Yoi-MA-Dl6"/>
-                                                <exclude reference="bJs-3S-OYd"/>
-                                                <exclude reference="iSO-4t-2gK"/>
-                                                <exclude reference="ntc-Ng-enX"/>
-                                                <exclude reference="4hJ-Yl-rmv"/>
-                                                <exclude reference="Hvk-ce-jFx"/>
-                                                <exclude reference="IOs-Ru-cVQ"/>
-                                                <exclude reference="rAb-LO-pv9"/>
-                                                <exclude reference="33A-2Q-P0j"/>
-                                                <exclude reference="drR-1v-Eua"/>
-                                                <exclude reference="KhA-XQ-vBD"/>
-                                                <exclude reference="LuZ-Bf-5SQ"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -5848,16 +5865,54 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <include reference="RKC-1t-O7M"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="6cb-Uf-E98"/>
-                                                <include reference="lCj-lj-8aS"/>
-                                                <include reference="btw-93-kYJ"/>
-                                                <include reference="eqy-Dn-k6m"/>
-                                                <include reference="jjT-b9-dub"/>
+                                                <include reference="Nla-Pt-8UI"/>
+                                                <exclude reference="jOY-sb-ssL"/>
+                                                <exclude reference="siC-5q-ph2"/>
+                                                <include reference="xZq-ls-Oub"/>
+                                                <include reference="f1c-3p-UAp"/>
+                                                <include reference="oXi-dV-v4d"/>
+                                                <include reference="2sm-eT-OIa"/>
+                                                <include reference="3qA-96-6Dm"/>
+                                                <include reference="0U8-4y-kx8"/>
+                                                <include reference="fv8-pm-yrW"/>
+                                                <include reference="KhA-XQ-vBD"/>
+                                                <include reference="LuZ-Bf-5SQ"/>
+                                                <include reference="25n-QH-UWh"/>
+                                                <include reference="UtY-3F-RRp"/>
+                                                <include reference="Y6e-eE-Wfo"/>
+                                                <include reference="4Yc-33-CDe"/>
+                                                <include reference="jay-Kx-34z"/>
+                                                <include reference="UGp-r7-4fn"/>
+                                                <include reference="hn7-aS-VSX"/>
+                                                <include reference="6Qp-QZ-ju6"/>
+                                                <include reference="Loc-Sx-Ega"/>
+                                                <include reference="OUd-Vr-4ki"/>
+                                                <include reference="OmE-zY-Tzv"/>
+                                                <include reference="RnX-bo-vsk"/>
+                                                <include reference="bio-is-Ljn"/>
                                                 <include reference="QDt-aR-JTg"/>
                                                 <exclude reference="WWB-wU-P73"/>
                                                 <include reference="WhZ-Zl-lvD"/>
                                                 <include reference="9Ge-6I-7tT"/>
                                                 <include reference="hvE-Vx-hqy"/>
+                                                <include reference="btw-93-kYJ"/>
+                                                <include reference="eqy-Dn-k6m"/>
+                                                <include reference="jjT-b9-dub"/>
+                                                <include reference="6cb-Uf-E98"/>
+                                                <include reference="lCj-lj-8aS"/>
+                                                <include reference="rEf-u5-sh8"/>
+                                                <include reference="shp-L5-whK"/>
+                                                <include reference="YKj-S4-Ise"/>
+                                                <include reference="dJS-Dm-TDn"/>
+                                                <include reference="qcm-f0-aAa"/>
+                                                <include reference="Yoi-MA-Dl6"/>
+                                                <include reference="bJs-3S-OYd"/>
+                                                <include reference="iSO-4t-2gK"/>
+                                                <include reference="ntc-Ng-enX"/>
+                                                <include reference="4hJ-Yl-rmv"/>
+                                                <include reference="Hvk-ce-jFx"/>
+                                                <include reference="33A-2Q-P0j"/>
+                                                <include reference="drR-1v-Eua"/>
                                                 <include reference="1xN-oD-KRA"/>
                                                 <include reference="LHs-yI-Nbj"/>
                                                 <include reference="ZxH-U6-FWo"/>
@@ -5871,63 +5926,25 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <include reference="vuh-gJ-hbD"/>
                                                 <include reference="TyS-IA-I1i"/>
                                                 <include reference="dI7-yn-DCC"/>
-                                                <include reference="rEf-u5-sh8"/>
-                                                <include reference="shp-L5-whK"/>
-                                                <include reference="Nla-Pt-8UI"/>
-                                                <exclude reference="jOY-sb-ssL"/>
-                                                <exclude reference="siC-5q-ph2"/>
-                                                <include reference="xZq-ls-Oub"/>
                                                 <include reference="Iv3-mU-dgS"/>
                                                 <include reference="ber-BU-ufg"/>
                                                 <include reference="cor-vT-cOw"/>
-                                                <include reference="bio-is-Ljn"/>
                                                 <include reference="Swd-8l-fEP"/>
                                                 <include reference="yNN-jF-auu"/>
-                                                <include reference="4Yc-33-CDe"/>
-                                                <include reference="jay-Kx-34z"/>
                                                 <include reference="1xv-HV-6S3"/>
                                                 <include reference="4zm-8P-SsB"/>
                                                 <include reference="O7V-TX-scg"/>
-                                                <include reference="2sm-eT-OIa"/>
-                                                <include reference="3qA-96-6Dm"/>
-                                                <include reference="UGp-r7-4fn"/>
-                                                <include reference="hn7-aS-VSX"/>
-                                                <include reference="OUd-Vr-4ki"/>
-                                                <include reference="OmE-zY-Tzv"/>
-                                                <include reference="RnX-bo-vsk"/>
-                                                <include reference="25n-QH-UWh"/>
-                                                <include reference="UtY-3F-RRp"/>
-                                                <include reference="Y6e-eE-Wfo"/>
-                                                <include reference="6Qp-QZ-ju6"/>
-                                                <include reference="Loc-Sx-Ega"/>
                                                 <include reference="QXV-OP-whp"/>
                                                 <include reference="fdI-6b-NnF"/>
                                                 <include reference="MH1-vw-rjH"/>
                                                 <include reference="h5j-tt-KPc"/>
                                                 <include reference="4cw-6R-eNl"/>
                                                 <include reference="oCT-CN-E6y"/>
-                                                <include reference="f1c-3p-UAp"/>
-                                                <include reference="oXi-dV-v4d"/>
+                                                <include reference="IOs-Ru-cVQ"/>
+                                                <include reference="rAb-LO-pv9"/>
                                                 <include reference="KLs-aR-Pf9"/>
                                                 <include reference="jhC-69-7fO"/>
                                                 <include reference="yDM-aM-Unt"/>
-                                                <include reference="0U8-4y-kx8"/>
-                                                <include reference="fv8-pm-yrW"/>
-                                                <include reference="YKj-S4-Ise"/>
-                                                <include reference="dJS-Dm-TDn"/>
-                                                <include reference="qcm-f0-aAa"/>
-                                                <include reference="Yoi-MA-Dl6"/>
-                                                <include reference="bJs-3S-OYd"/>
-                                                <include reference="iSO-4t-2gK"/>
-                                                <include reference="ntc-Ng-enX"/>
-                                                <include reference="4hJ-Yl-rmv"/>
-                                                <include reference="Hvk-ce-jFx"/>
-                                                <include reference="IOs-Ru-cVQ"/>
-                                                <include reference="rAb-LO-pv9"/>
-                                                <include reference="33A-2Q-P0j"/>
-                                                <include reference="drR-1v-Eua"/>
-                                                <include reference="KhA-XQ-vBD"/>
-                                                <include reference="LuZ-Bf-5SQ"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -6102,7 +6119,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="z8h-aF-Vy8" kind="showDetail" id="pJe-KY-nze"/>
+                                    <segue destination="z8h-aF-Vy8" kind="show" action="showDetailViewController:sender:" id="pJe-KY-nze"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQ4-RZ-AVa">
@@ -6369,23 +6386,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="i9q-zE-jV6"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8Yt-Xa-R7K"/>
-                                <exclude reference="PlL-21-Yr7"/>
-                                <exclude reference="gG9-Pa-18f"/>
-                                <exclude reference="4jP-Ot-ax4"/>
-                                <exclude reference="D1d-oy-wEi"/>
-                                <exclude reference="Mnb-G9-c2l"/>
-                                <exclude reference="c8a-s2-NbL"/>
-                                <exclude reference="kGC-FP-20Y"/>
-                                <exclude reference="33p-Kg-gGa"/>
-                                <exclude reference="6mn-ne-lBt"/>
-                                <exclude reference="C7k-gU-vNz"/>
-                                <exclude reference="MIH-NZ-XNT"/>
-                                <exclude reference="b1h-cB-aNB"/>
-                                <exclude reference="5lv-iq-HOL"/>
-                                <exclude reference="FFx-sy-Nfh"/>
-                                <exclude reference="enB-wv-sMX"/>
-                                <exclude reference="nOk-MK-J6n"/>
+                                <exclude reference="3qJ-2e-ZEO"/>
+                                <exclude reference="Fgi-FI-0mJ"/>
+                                <exclude reference="OLH-ES-Ijr"/>
                                 <exclude reference="8UT-Ho-LUh"/>
                                 <exclude reference="Bul-7w-QeW"/>
                                 <exclude reference="Nni-FY-1Hs"/>
@@ -6394,22 +6397,36 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="U9c-fc-2nN"/>
                                 <exclude reference="tDJ-GA-RBG"/>
                                 <exclude reference="xZg-QK-6xm"/>
+                                <exclude reference="4jP-Ot-ax4"/>
+                                <exclude reference="D1d-oy-wEi"/>
+                                <exclude reference="Mnb-G9-c2l"/>
+                                <exclude reference="c8a-s2-NbL"/>
+                                <exclude reference="kGC-FP-20Y"/>
+                                <exclude reference="33p-Kg-gGa"/>
+                                <exclude reference="6mn-ne-lBt"/>
+                                <exclude reference="C7k-gU-vNz"/>
+                                <exclude reference="5lv-iq-HOL"/>
+                                <exclude reference="FFx-sy-Nfh"/>
+                                <exclude reference="enB-wv-sMX"/>
+                                <exclude reference="nOk-MK-J6n"/>
+                                <exclude reference="MIH-NZ-XNT"/>
+                                <exclude reference="b1h-cB-aNB"/>
                                 <exclude reference="MFi-AI-d73"/>
+                                <exclude reference="AJ2-qK-gYS"/>
+                                <exclude reference="EBe-LZ-sAO"/>
+                                <exclude reference="dbd-Oe-0F4"/>
                                 <exclude reference="6Ru-0y-FCO"/>
                                 <exclude reference="6jL-ay-6mg"/>
                                 <exclude reference="EnQ-Bn-lN5"/>
-                                <exclude reference="hfe-JH-vEy"/>
-                                <exclude reference="jK3-tw-U1j"/>
                                 <exclude reference="JJZ-g0-fDh"/>
                                 <exclude reference="Ytm-gq-voN"/>
                                 <exclude reference="hDg-X0-eXv"/>
                                 <exclude reference="kuI-cH-kU2"/>
-                                <exclude reference="AJ2-qK-gYS"/>
-                                <exclude reference="EBe-LZ-sAO"/>
-                                <exclude reference="dbd-Oe-0F4"/>
-                                <exclude reference="3qJ-2e-ZEO"/>
-                                <exclude reference="Fgi-FI-0mJ"/>
-                                <exclude reference="OLH-ES-Ijr"/>
+                                <exclude reference="hfe-JH-vEy"/>
+                                <exclude reference="jK3-tw-U1j"/>
+                                <exclude reference="8Yt-Xa-R7K"/>
+                                <exclude reference="PlL-21-Yr7"/>
+                                <exclude reference="gG9-Pa-18f"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6429,23 +6446,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="i9q-zE-jV6"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="8Yt-Xa-R7K"/>
-                                <include reference="PlL-21-Yr7"/>
-                                <include reference="gG9-Pa-18f"/>
-                                <include reference="4jP-Ot-ax4"/>
-                                <exclude reference="D1d-oy-wEi"/>
-                                <include reference="Mnb-G9-c2l"/>
-                                <include reference="c8a-s2-NbL"/>
-                                <include reference="kGC-FP-20Y"/>
-                                <include reference="33p-Kg-gGa"/>
-                                <include reference="6mn-ne-lBt"/>
-                                <include reference="C7k-gU-vNz"/>
-                                <include reference="MIH-NZ-XNT"/>
-                                <include reference="b1h-cB-aNB"/>
-                                <include reference="5lv-iq-HOL"/>
-                                <include reference="FFx-sy-Nfh"/>
-                                <include reference="enB-wv-sMX"/>
-                                <include reference="nOk-MK-J6n"/>
+                                <include reference="3qJ-2e-ZEO"/>
+                                <include reference="Fgi-FI-0mJ"/>
+                                <exclude reference="OLH-ES-Ijr"/>
                                 <include reference="8UT-Ho-LUh"/>
                                 <include reference="Bul-7w-QeW"/>
                                 <include reference="Nni-FY-1Hs"/>
@@ -6454,22 +6457,36 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="U9c-fc-2nN"/>
                                 <include reference="tDJ-GA-RBG"/>
                                 <include reference="xZg-QK-6xm"/>
+                                <include reference="4jP-Ot-ax4"/>
+                                <exclude reference="D1d-oy-wEi"/>
+                                <include reference="Mnb-G9-c2l"/>
+                                <include reference="c8a-s2-NbL"/>
+                                <include reference="kGC-FP-20Y"/>
+                                <include reference="33p-Kg-gGa"/>
+                                <include reference="6mn-ne-lBt"/>
+                                <include reference="C7k-gU-vNz"/>
+                                <include reference="5lv-iq-HOL"/>
+                                <include reference="FFx-sy-Nfh"/>
+                                <include reference="enB-wv-sMX"/>
+                                <include reference="nOk-MK-J6n"/>
+                                <include reference="MIH-NZ-XNT"/>
+                                <include reference="b1h-cB-aNB"/>
                                 <include reference="MFi-AI-d73"/>
+                                <include reference="AJ2-qK-gYS"/>
+                                <include reference="EBe-LZ-sAO"/>
+                                <include reference="dbd-Oe-0F4"/>
                                 <include reference="6Ru-0y-FCO"/>
                                 <include reference="6jL-ay-6mg"/>
                                 <include reference="EnQ-Bn-lN5"/>
-                                <include reference="hfe-JH-vEy"/>
-                                <include reference="jK3-tw-U1j"/>
                                 <exclude reference="JJZ-g0-fDh"/>
                                 <exclude reference="Ytm-gq-voN"/>
                                 <include reference="hDg-X0-eXv"/>
                                 <exclude reference="kuI-cH-kU2"/>
-                                <include reference="AJ2-qK-gYS"/>
-                                <include reference="EBe-LZ-sAO"/>
-                                <include reference="dbd-Oe-0F4"/>
-                                <include reference="3qJ-2e-ZEO"/>
-                                <include reference="Fgi-FI-0mJ"/>
-                                <exclude reference="OLH-ES-Ijr"/>
+                                <include reference="hfe-JH-vEy"/>
+                                <include reference="jK3-tw-U1j"/>
+                                <include reference="8Yt-Xa-R7K"/>
+                                <include reference="PlL-21-Yr7"/>
+                                <include reference="gG9-Pa-18f"/>
                             </mask>
                         </variation>
                     </view>
@@ -18488,33 +18505,33 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="eHb-J5-jgz"/>
-                                        <exclude reference="Sjy-Tm-hGt"/>
-                                        <exclude reference="dya-Vc-xZp"/>
-                                        <exclude reference="txd-EW-S6N"/>
+                                        <exclude reference="M0l-RA-roy"/>
+                                        <exclude reference="MNd-oa-I0Y"/>
+                                        <exclude reference="uGy-7F-MaL"/>
+                                        <exclude reference="MAJ-Cg-6lp"/>
+                                        <exclude reference="YBw-wM-Hab"/>
                                         <exclude reference="5u0-0k-GzD"/>
                                         <exclude reference="6JJ-uy-ap5"/>
                                         <exclude reference="Glt-p5-W56"/>
                                         <exclude reference="aL5-wi-kaU"/>
                                         <exclude reference="bOa-8f-jGr"/>
                                         <exclude reference="usZ-83-wmh"/>
-                                        <exclude reference="4uM-YP-8Om"/>
-                                        <exclude reference="fNJ-bv-N9c"/>
-                                        <exclude reference="MAJ-Cg-6lp"/>
-                                        <exclude reference="YBw-wM-Hab"/>
+                                        <exclude reference="3CX-9E-qRe"/>
+                                        <exclude reference="gZA-lC-rQ7"/>
+                                        <exclude reference="hRW-VU-Wus"/>
                                         <exclude reference="1ed-N9-mn2"/>
                                         <exclude reference="Mu6-kp-4gr"/>
                                         <exclude reference="gR7-AP-Gvh"/>
                                         <exclude reference="pv2-Sm-tqe"/>
                                         <exclude reference="qk5-qv-fcm"/>
                                         <exclude reference="qkQ-LT-CfX"/>
-                                        <exclude reference="3CX-9E-qRe"/>
-                                        <exclude reference="gZA-lC-rQ7"/>
-                                        <exclude reference="hRW-VU-Wus"/>
-                                        <exclude reference="M0l-RA-roy"/>
-                                        <exclude reference="MNd-oa-I0Y"/>
-                                        <exclude reference="uGy-7F-MaL"/>
+                                        <exclude reference="Sjy-Tm-hGt"/>
+                                        <exclude reference="dya-Vc-xZp"/>
+                                        <exclude reference="txd-EW-S6N"/>
                                         <exclude reference="5GF-AG-qPs"/>
                                         <exclude reference="wQE-kS-P94"/>
+                                        <exclude reference="4uM-YP-8Om"/>
+                                        <exclude reference="fNJ-bv-N9c"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -18530,33 +18547,33 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="eHb-J5-jgz"/>
-                                        <include reference="Sjy-Tm-hGt"/>
-                                        <include reference="dya-Vc-xZp"/>
-                                        <include reference="txd-EW-S6N"/>
+                                        <include reference="M0l-RA-roy"/>
+                                        <include reference="MNd-oa-I0Y"/>
+                                        <include reference="uGy-7F-MaL"/>
+                                        <include reference="MAJ-Cg-6lp"/>
+                                        <include reference="YBw-wM-Hab"/>
                                         <exclude reference="5u0-0k-GzD"/>
                                         <exclude reference="6JJ-uy-ap5"/>
                                         <exclude reference="Glt-p5-W56"/>
                                         <include reference="aL5-wi-kaU"/>
                                         <include reference="bOa-8f-jGr"/>
                                         <include reference="usZ-83-wmh"/>
-                                        <include reference="4uM-YP-8Om"/>
-                                        <include reference="fNJ-bv-N9c"/>
-                                        <include reference="MAJ-Cg-6lp"/>
-                                        <include reference="YBw-wM-Hab"/>
+                                        <include reference="3CX-9E-qRe"/>
+                                        <include reference="gZA-lC-rQ7"/>
+                                        <exclude reference="hRW-VU-Wus"/>
                                         <include reference="1ed-N9-mn2"/>
                                         <include reference="Mu6-kp-4gr"/>
                                         <include reference="gR7-AP-Gvh"/>
                                         <exclude reference="pv2-Sm-tqe"/>
                                         <exclude reference="qk5-qv-fcm"/>
                                         <exclude reference="qkQ-LT-CfX"/>
-                                        <include reference="3CX-9E-qRe"/>
-                                        <include reference="gZA-lC-rQ7"/>
-                                        <exclude reference="hRW-VU-Wus"/>
-                                        <include reference="M0l-RA-roy"/>
-                                        <include reference="MNd-oa-I0Y"/>
-                                        <include reference="uGy-7F-MaL"/>
+                                        <include reference="Sjy-Tm-hGt"/>
+                                        <include reference="dya-Vc-xZp"/>
+                                        <include reference="txd-EW-S6N"/>
                                         <include reference="5GF-AG-qPs"/>
                                         <include reference="wQE-kS-P94"/>
+                                        <include reference="4uM-YP-8Om"/>
+                                        <include reference="fNJ-bv-N9c"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -18782,7 +18799,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="200" id="kxv-cn-VKA" customClass="CommentCell" customModule="mplango" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kxv-cn-VKA" id="FIr-vD-Qm6">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Nome usuário" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLo-w8-vm8">
@@ -18817,18 +18834,18 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="w3X-jA-WiW"/>
-                                                            <exclude reference="sRT-JA-oyQ"/>
-                                                            <exclude reference="mhJ-MQ-c9d"/>
                                                             <exclude reference="1G8-aA-Q6U"/>
+                                                            <exclude reference="mhJ-MQ-c9d"/>
+                                                            <exclude reference="sRT-JA-oyQ"/>
+                                                            <exclude reference="w3X-jA-WiW"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <exclude reference="w3X-jA-WiW"/>
-                                                            <include reference="sRT-JA-oyQ"/>
-                                                            <include reference="mhJ-MQ-c9d"/>
                                                             <exclude reference="1G8-aA-Q6U"/>
+                                                            <include reference="mhJ-MQ-c9d"/>
+                                                            <include reference="sRT-JA-oyQ"/>
+                                                            <exclude reference="w3X-jA-WiW"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -18868,22 +18885,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     <state key="normal" image="like_btn"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="uWU-gH-Aa3"/>
-                                                            <exclude reference="TT6-yr-SjN"/>
-                                                            <exclude reference="wdH-Qi-fcX"/>
-                                                            <exclude reference="MWH-vC-9rU"/>
                                                             <exclude reference="MJM-jp-Gbo"/>
+                                                            <exclude reference="MWH-vC-9rU"/>
+                                                            <exclude reference="TT6-yr-SjN"/>
                                                             <exclude reference="TYO-0c-jIR"/>
+                                                            <exclude reference="uWU-gH-Aa3"/>
+                                                            <exclude reference="wdH-Qi-fcX"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <exclude reference="uWU-gH-Aa3"/>
-                                                            <exclude reference="TT6-yr-SjN"/>
-                                                            <include reference="wdH-Qi-fcX"/>
-                                                            <include reference="MWH-vC-9rU"/>
                                                             <exclude reference="MJM-jp-Gbo"/>
+                                                            <include reference="MWH-vC-9rU"/>
+                                                            <exclude reference="TT6-yr-SjN"/>
                                                             <exclude reference="TYO-0c-jIR"/>
+                                                            <exclude reference="uWU-gH-Aa3"/>
+                                                            <include reference="wdH-Qi-fcX"/>
                                                         </mask>
                                                     </variation>
                                                     <connections>
@@ -18969,22 +18986,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     <exclude reference="Nlk-UM-pV4"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="2zl-dE-QE6"/>
-                                                    <exclude reference="rQ7-ve-ldl"/>
-                                                    <exclude reference="7yX-JB-SGW"/>
-                                                    <exclude reference="x8G-Ip-Lb5"/>
-                                                    <exclude reference="Chh-dx-LXH"/>
-                                                    <exclude reference="Vb7-4N-lrF"/>
-                                                    <exclude reference="gmF-Fj-5Zh"/>
-                                                    <exclude reference="9MR-ou-tXX"/>
-                                                    <exclude reference="Vcb-Ul-dyI"/>
-                                                    <exclude reference="b9s-Jw-nhR"/>
-                                                    <exclude reference="FOt-md-3dr"/>
-                                                    <exclude reference="IuD-bf-0iw"/>
-                                                    <exclude reference="WMP-kR-DJg"/>
                                                     <exclude reference="MLZ-BO-4HL"/>
                                                     <exclude reference="QxW-4I-cw6"/>
                                                     <exclude reference="gSe-wH-scd"/>
+                                                    <exclude reference="FOt-md-3dr"/>
+                                                    <exclude reference="IuD-bf-0iw"/>
+                                                    <exclude reference="WMP-kR-DJg"/>
+                                                    <exclude reference="7yX-JB-SGW"/>
+                                                    <exclude reference="x8G-Ip-Lb5"/>
+                                                    <exclude reference="9MR-ou-tXX"/>
+                                                    <exclude reference="Vcb-Ul-dyI"/>
+                                                    <exclude reference="b9s-Jw-nhR"/>
+                                                    <exclude reference="Chh-dx-LXH"/>
+                                                    <exclude reference="Vb7-4N-lrF"/>
+                                                    <exclude reference="gmF-Fj-5Zh"/>
+                                                    <exclude reference="2zl-dE-QE6"/>
+                                                    <exclude reference="rQ7-ve-ldl"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -18997,22 +19014,22 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     <include reference="Nlk-UM-pV4"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="2zl-dE-QE6"/>
-                                                    <include reference="rQ7-ve-ldl"/>
-                                                    <include reference="7yX-JB-SGW"/>
-                                                    <include reference="x8G-Ip-Lb5"/>
-                                                    <include reference="Chh-dx-LXH"/>
-                                                    <include reference="Vb7-4N-lrF"/>
-                                                    <include reference="gmF-Fj-5Zh"/>
-                                                    <include reference="9MR-ou-tXX"/>
-                                                    <include reference="Vcb-Ul-dyI"/>
-                                                    <include reference="b9s-Jw-nhR"/>
-                                                    <include reference="FOt-md-3dr"/>
-                                                    <include reference="IuD-bf-0iw"/>
-                                                    <include reference="WMP-kR-DJg"/>
                                                     <include reference="MLZ-BO-4HL"/>
                                                     <include reference="QxW-4I-cw6"/>
                                                     <include reference="gSe-wH-scd"/>
+                                                    <include reference="FOt-md-3dr"/>
+                                                    <include reference="IuD-bf-0iw"/>
+                                                    <include reference="WMP-kR-DJg"/>
+                                                    <include reference="7yX-JB-SGW"/>
+                                                    <include reference="x8G-Ip-Lb5"/>
+                                                    <include reference="9MR-ou-tXX"/>
+                                                    <include reference="Vcb-Ul-dyI"/>
+                                                    <include reference="b9s-Jw-nhR"/>
+                                                    <include reference="Chh-dx-LXH"/>
+                                                    <include reference="Vb7-4N-lrF"/>
+                                                    <include reference="gmF-Fj-5Zh"/>
+                                                    <include reference="2zl-dE-QE6"/>
+                                                    <include reference="rQ7-ve-ldl"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -19111,7 +19128,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                 </constraint>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="E93A3373-EE03-4173-BE1D-89C22611A20A"/>
+                                                            <state key="normal" title="Button" image="E5C00B4F-7A8A-4911-8AA6-537CB2C789DD"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="doM-S7-B8a"/>
@@ -19135,7 +19152,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                                                                 </constraint>
                                                             </constraints>
-                                                            <state key="normal" image="84674A3E-19A2-4DA6-9EB3-C7DA663499F0"/>
+                                                            <state key="normal" image="056C0C07-492C-4630-A755-F5F20B39C865"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="MJt-Hz-UuQ"/>
@@ -19287,23 +19304,23 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     <exclude reference="gmt-9P-UUq"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="YH4-8g-sgr"/>
-                                                    <exclude reference="sPg-0g-enq"/>
-                                                    <exclude reference="Pl7-Rh-BQc"/>
-                                                    <exclude reference="cdA-oo-HZD"/>
-                                                    <exclude reference="ZDZ-lF-hTV"/>
-                                                    <exclude reference="ZUj-XA-dS6"/>
-                                                    <exclude reference="utc-Fy-Zpo"/>
                                                     <exclude reference="IeO-aB-RXI"/>
                                                     <exclude reference="KdI-JT-2fl"/>
-                                                    <exclude reference="9pA-pb-UZ6"/>
-                                                    <exclude reference="pga-sA-CGd"/>
-                                                    <exclude reference="pgs-97-v9Z"/>
-                                                    <exclude reference="CK1-eJ-6ch"/>
                                                     <exclude reference="PBR-1p-rAf"/>
                                                     <exclude reference="lqj-eG-rX6"/>
                                                     <exclude reference="qu8-PE-OW1"/>
                                                     <exclude reference="rDf-dq-Cim"/>
+                                                    <exclude reference="Pl7-Rh-BQc"/>
+                                                    <exclude reference="cdA-oo-HZD"/>
+                                                    <exclude reference="9pA-pb-UZ6"/>
+                                                    <exclude reference="pga-sA-CGd"/>
+                                                    <exclude reference="pgs-97-v9Z"/>
+                                                    <exclude reference="CK1-eJ-6ch"/>
+                                                    <exclude reference="ZDZ-lF-hTV"/>
+                                                    <exclude reference="ZUj-XA-dS6"/>
+                                                    <exclude reference="YH4-8g-sgr"/>
+                                                    <exclude reference="sPg-0g-enq"/>
+                                                    <exclude reference="utc-Fy-Zpo"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -19316,23 +19333,23 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     <include reference="gmt-9P-UUq"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="YH4-8g-sgr"/>
-                                                    <include reference="sPg-0g-enq"/>
-                                                    <include reference="Pl7-Rh-BQc"/>
-                                                    <include reference="cdA-oo-HZD"/>
-                                                    <include reference="ZDZ-lF-hTV"/>
-                                                    <include reference="ZUj-XA-dS6"/>
-                                                    <include reference="utc-Fy-Zpo"/>
                                                     <include reference="IeO-aB-RXI"/>
                                                     <include reference="KdI-JT-2fl"/>
-                                                    <include reference="9pA-pb-UZ6"/>
-                                                    <include reference="pga-sA-CGd"/>
-                                                    <include reference="pgs-97-v9Z"/>
-                                                    <include reference="CK1-eJ-6ch"/>
                                                     <include reference="PBR-1p-rAf"/>
                                                     <include reference="lqj-eG-rX6"/>
                                                     <include reference="qu8-PE-OW1"/>
                                                     <include reference="rDf-dq-Cim"/>
+                                                    <include reference="Pl7-Rh-BQc"/>
+                                                    <include reference="cdA-oo-HZD"/>
+                                                    <include reference="9pA-pb-UZ6"/>
+                                                    <include reference="pga-sA-CGd"/>
+                                                    <include reference="pgs-97-v9Z"/>
+                                                    <include reference="CK1-eJ-6ch"/>
+                                                    <include reference="ZDZ-lF-hTV"/>
+                                                    <include reference="ZUj-XA-dS6"/>
+                                                    <include reference="YH4-8g-sgr"/>
+                                                    <include reference="sPg-0g-enq"/>
+                                                    <include reference="utc-Fy-Zpo"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -20029,7 +20046,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PI8-BY-yuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AMX-38-5PD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7695" y="-105"/>
+            <point key="canvasLocation" x="7731" y="-105"/>
         </scene>
         <!--configuracoes-->
         <scene sceneID="pQw-zv-F4U">
@@ -20429,8 +20446,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="riV-W3-1tb"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="335" y="290" width="57" height="15"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="3fm-Pv-prb"/>
                                                         <include reference="riV-W3-1tb"/>
@@ -20454,8 +20470,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="Ahb-5C-Hbw"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="305" y="290" width="25" height="15"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="734-k2-VYN"/>
                                                         <include reference="Ahb-5C-Hbw"/>
@@ -20477,8 +20492,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="esP-QK-E6f"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="286" y="290" width="19" height="15"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="Pk4-gF-NEk"/>
                                                         <include reference="esP-QK-E6f"/>
@@ -24240,7 +24254,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                 <exclude reference="caj-7f-FNL"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="10" y="0.0" width="380" height="47"/>
                                                             <mask key="subviews">
                                                                 <include reference="pSQ-uW-Uc3"/>
                                                                 <include reference="seR-2e-YK0"/>
@@ -24760,16 +24775,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="OTU-WH-SA3"/>
-                                        <exclude reference="80A-xZ-hbn"/>
-                                        <exclude reference="JbX-xO-s0v"/>
-                                        <exclude reference="dUb-g1-Ic0"/>
-                                        <exclude reference="zg4-o9-nda"/>
                                         <exclude reference="2Pn-xd-Qxt"/>
                                         <exclude reference="84b-gg-15C"/>
                                         <exclude reference="Cze-S1-P6b"/>
                                         <exclude reference="NgJ-wv-Twc"/>
                                         <exclude reference="m3x-Gk-fMy"/>
                                         <exclude reference="rC9-yj-ip6"/>
+                                        <exclude reference="80A-xZ-hbn"/>
+                                        <exclude reference="JbX-xO-s0v"/>
+                                        <exclude reference="dUb-g1-Ic0"/>
+                                        <exclude reference="zg4-o9-nda"/>
                                         <exclude reference="FLU-Hl-s2B"/>
                                         <exclude reference="NN5-BK-sea"/>
                                         <exclude reference="W92-m4-oSH"/>
@@ -24787,16 +24802,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="OTU-WH-SA3"/>
-                                        <include reference="80A-xZ-hbn"/>
-                                        <include reference="JbX-xO-s0v"/>
-                                        <include reference="dUb-g1-Ic0"/>
-                                        <include reference="zg4-o9-nda"/>
                                         <include reference="2Pn-xd-Qxt"/>
                                         <include reference="84b-gg-15C"/>
                                         <include reference="Cze-S1-P6b"/>
                                         <include reference="NgJ-wv-Twc"/>
                                         <include reference="m3x-Gk-fMy"/>
                                         <include reference="rC9-yj-ip6"/>
+                                        <include reference="80A-xZ-hbn"/>
+                                        <include reference="JbX-xO-s0v"/>
+                                        <include reference="dUb-g1-Ic0"/>
+                                        <include reference="zg4-o9-nda"/>
                                         <include reference="FLU-Hl-s2B"/>
                                         <include reference="NN5-BK-sea"/>
                                         <include reference="W92-m4-oSH"/>
@@ -24828,17 +24843,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <exclude reference="8ja-Z6-DBx"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="5bE-1r-ShF"/>
-                                <exclude reference="RdK-z0-7ZS"/>
-                                <exclude reference="SMz-Lb-Hb3"/>
-                                <exclude reference="cr3-gb-9Kw"/>
-                                <exclude reference="mCU-kv-Xdi"/>
+                                <exclude reference="1Jr-6h-VPR"/>
+                                <exclude reference="6y4-H2-CjU"/>
                                 <exclude reference="4oN-qc-Vq3"/>
                                 <exclude reference="5Na-Kj-mrq"/>
                                 <exclude reference="UwK-np-NvT"/>
+                                <exclude reference="cr3-gb-9Kw"/>
+                                <exclude reference="mCU-kv-Xdi"/>
                                 <exclude reference="a6D-57-wY8"/>
-                                <exclude reference="1Jr-6h-VPR"/>
-                                <exclude reference="6y4-H2-CjU"/>
+                                <exclude reference="5bE-1r-ShF"/>
+                                <exclude reference="RdK-z0-7ZS"/>
+                                <exclude reference="SMz-Lb-Hb3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -24848,17 +24863,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <include reference="8ja-Z6-DBx"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="5bE-1r-ShF"/>
-                                <include reference="RdK-z0-7ZS"/>
-                                <include reference="SMz-Lb-Hb3"/>
-                                <include reference="cr3-gb-9Kw"/>
-                                <include reference="mCU-kv-Xdi"/>
+                                <exclude reference="1Jr-6h-VPR"/>
+                                <include reference="6y4-H2-CjU"/>
                                 <include reference="4oN-qc-Vq3"/>
                                 <include reference="5Na-Kj-mrq"/>
                                 <include reference="UwK-np-NvT"/>
+                                <include reference="cr3-gb-9Kw"/>
+                                <include reference="mCU-kv-Xdi"/>
                                 <include reference="a6D-57-wY8"/>
-                                <exclude reference="1Jr-6h-VPR"/>
-                                <include reference="6y4-H2-CjU"/>
+                                <include reference="5bE-1r-ShF"/>
+                                <include reference="RdK-z0-7ZS"/>
+                                <include reference="SMz-Lb-Hb3"/>
                             </mask>
                         </variation>
                     </view>
@@ -25149,6 +25164,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                         </constraint>
                                         <constraint firstItem="cba-5a-JlS" firstAttribute="centerY" secondItem="h2R-YM-8qR" secondAttribute="centerY" id="tUY-QV-TkK"/>
+                                        <constraint firstItem="cba-5a-JlS" firstAttribute="leading" secondItem="Erg-So-lGC" secondAttribute="trailing" constant="180" id="w3m-Fk-PFw">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                        </constraint>
                                         <constraint firstItem="h2R-YM-8qR" firstAttribute="centerY" secondItem="Erg-So-lGC" secondAttribute="centerY" id="xLc-Bf-BZ2"/>
                                         <constraint firstItem="MmF-hj-qiP" firstAttribute="top" secondItem="Erg-So-lGC" secondAttribute="bottom" constant="3" id="zwa-v6-RPh">
                                             <variation key="heightClass=regular-widthClass=compact" constant="5"/>
@@ -25164,18 +25182,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <exclude reference="MmF-hj-qiP"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="S3i-Ty-zNV"/>
-                                            <exclude reference="X4q-Sh-VFH"/>
-                                            <exclude reference="ejY-bo-zG5"/>
-                                            <exclude reference="pnd-aC-6Mn"/>
-                                            <exclude reference="tUY-QV-TkK"/>
-                                            <exclude reference="Mcu-ly-eJV"/>
-                                            <exclude reference="qFO-iO-DVg"/>
-                                            <exclude reference="3dv-S3-yKb"/>
-                                            <exclude reference="HES-vO-NU5"/>
-                                            <exclude reference="Zyu-2z-VQw"/>
-                                            <exclude reference="phZ-Fq-9tu"/>
-                                            <exclude reference="zwa-v6-RPh"/>
                                             <exclude reference="8OE-Go-c9j"/>
                                             <exclude reference="9cq-GV-4Gn"/>
                                             <exclude reference="EmV-rN-iin"/>
@@ -25184,6 +25190,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <exclude reference="9a8-wD-N9a"/>
                                             <exclude reference="9sn-fU-t3e"/>
                                             <exclude reference="elu-Xr-X3j"/>
+                                            <exclude reference="Mcu-ly-eJV"/>
+                                            <exclude reference="qFO-iO-DVg"/>
+                                            <exclude reference="3dv-S3-yKb"/>
+                                            <exclude reference="HES-vO-NU5"/>
+                                            <exclude reference="Zyu-2z-VQw"/>
+                                            <exclude reference="phZ-Fq-9tu"/>
+                                            <exclude reference="zwa-v6-RPh"/>
+                                            <exclude reference="S3i-Ty-zNV"/>
+                                            <exclude reference="X4q-Sh-VFH"/>
+                                            <exclude reference="ejY-bo-zG5"/>
+                                            <exclude reference="pnd-aC-6Mn"/>
+                                            <exclude reference="tUY-QV-TkK"/>
+                                            <exclude reference="w3m-Fk-PFw"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -25195,18 +25214,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <include reference="MmF-hj-qiP"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="S3i-Ty-zNV"/>
-                                            <exclude reference="X4q-Sh-VFH"/>
-                                            <exclude reference="ejY-bo-zG5"/>
-                                            <exclude reference="pnd-aC-6Mn"/>
-                                            <include reference="tUY-QV-TkK"/>
-                                            <include reference="Mcu-ly-eJV"/>
-                                            <exclude reference="qFO-iO-DVg"/>
-                                            <exclude reference="3dv-S3-yKb"/>
-                                            <include reference="HES-vO-NU5"/>
-                                            <include reference="Zyu-2z-VQw"/>
-                                            <exclude reference="phZ-Fq-9tu"/>
-                                            <exclude reference="zwa-v6-RPh"/>
                                             <include reference="8OE-Go-c9j"/>
                                             <include reference="9cq-GV-4Gn"/>
                                             <include reference="EmV-rN-iin"/>
@@ -25215,6 +25222,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <include reference="9a8-wD-N9a"/>
                                             <include reference="9sn-fU-t3e"/>
                                             <include reference="elu-Xr-X3j"/>
+                                            <include reference="Mcu-ly-eJV"/>
+                                            <exclude reference="qFO-iO-DVg"/>
+                                            <exclude reference="3dv-S3-yKb"/>
+                                            <include reference="HES-vO-NU5"/>
+                                            <include reference="Zyu-2z-VQw"/>
+                                            <exclude reference="phZ-Fq-9tu"/>
+                                            <exclude reference="zwa-v6-RPh"/>
+                                            <include reference="S3i-Ty-zNV"/>
+                                            <exclude reference="X4q-Sh-VFH"/>
+                                            <exclude reference="ejY-bo-zG5"/>
+                                            <exclude reference="pnd-aC-6Mn"/>
+                                            <include reference="tUY-QV-TkK"/>
+                                            <include reference="w3m-Fk-PFw"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -25399,6 +25419,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         </constraint>
                                         <constraint firstItem="gT8-iF-ctn" firstAttribute="centerY" secondItem="k4U-rQ-1DM" secondAttribute="centerY" id="eV2-xH-wjV"/>
                                         <constraint firstItem="WEq-Ew-9Ue" firstAttribute="centerY" secondItem="k4U-rQ-1DM" secondAttribute="centerY" id="ebE-Qs-Wn5"/>
+                                        <constraint firstItem="WEq-Ew-9Ue" firstAttribute="leading" secondItem="k4U-rQ-1DM" secondAttribute="trailing" constant="180" id="f9P-NC-bgo">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                        </constraint>
                                         <constraint firstItem="gT8-iF-ctn" firstAttribute="top" secondItem="LA3-Iz-IZX" secondAttribute="top" constant="4" id="iiY-WJ-DCl">
                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                                         </constraint>
@@ -25423,18 +25446,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <exclude reference="o1J-Sh-oEn"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="N7N-Kq-OhS"/>
-                                            <exclude reference="VyU-rs-aLP"/>
-                                            <exclude reference="ebE-Qs-Wn5"/>
-                                            <exclude reference="mRN-m1-E3S"/>
-                                            <exclude reference="tbc-jc-014"/>
-                                            <exclude reference="d7r-7B-pfV"/>
-                                            <exclude reference="xSl-iq-ZdK"/>
-                                            <exclude reference="Tr7-sd-ubo"/>
-                                            <exclude reference="UXm-9W-bIS"/>
-                                            <exclude reference="WR0-Qx-e8L"/>
-                                            <exclude reference="aKI-tL-cl8"/>
-                                            <exclude reference="uTn-gg-akk"/>
                                             <exclude reference="2oU-Ro-mQ3"/>
                                             <exclude reference="dQV-w0-hm3"/>
                                             <exclude reference="eV2-xH-wjV"/>
@@ -25443,6 +25454,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <exclude reference="5HE-d7-qgO"/>
                                             <exclude reference="7ki-0d-1Fv"/>
                                             <exclude reference="vkr-nV-Nvd"/>
+                                            <exclude reference="d7r-7B-pfV"/>
+                                            <exclude reference="xSl-iq-ZdK"/>
+                                            <exclude reference="Tr7-sd-ubo"/>
+                                            <exclude reference="UXm-9W-bIS"/>
+                                            <exclude reference="WR0-Qx-e8L"/>
+                                            <exclude reference="aKI-tL-cl8"/>
+                                            <exclude reference="uTn-gg-akk"/>
+                                            <exclude reference="N7N-Kq-OhS"/>
+                                            <exclude reference="VyU-rs-aLP"/>
+                                            <exclude reference="ebE-Qs-Wn5"/>
+                                            <exclude reference="f9P-NC-bgo"/>
+                                            <exclude reference="mRN-m1-E3S"/>
+                                            <exclude reference="tbc-jc-014"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -25454,18 +25478,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <include reference="o1J-Sh-oEn"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="N7N-Kq-OhS"/>
-                                            <exclude reference="VyU-rs-aLP"/>
-                                            <exclude reference="ebE-Qs-Wn5"/>
-                                            <include reference="mRN-m1-E3S"/>
-                                            <include reference="tbc-jc-014"/>
-                                            <include reference="d7r-7B-pfV"/>
-                                            <exclude reference="xSl-iq-ZdK"/>
-                                            <include reference="Tr7-sd-ubo"/>
-                                            <exclude reference="UXm-9W-bIS"/>
-                                            <exclude reference="WR0-Qx-e8L"/>
-                                            <exclude reference="aKI-tL-cl8"/>
-                                            <include reference="uTn-gg-akk"/>
                                             <include reference="2oU-Ro-mQ3"/>
                                             <include reference="dQV-w0-hm3"/>
                                             <exclude reference="eV2-xH-wjV"/>
@@ -25474,6 +25486,19 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <include reference="5HE-d7-qgO"/>
                                             <include reference="7ki-0d-1Fv"/>
                                             <include reference="vkr-nV-Nvd"/>
+                                            <include reference="d7r-7B-pfV"/>
+                                            <exclude reference="xSl-iq-ZdK"/>
+                                            <include reference="Tr7-sd-ubo"/>
+                                            <exclude reference="UXm-9W-bIS"/>
+                                            <exclude reference="WR0-Qx-e8L"/>
+                                            <exclude reference="aKI-tL-cl8"/>
+                                            <include reference="uTn-gg-akk"/>
+                                            <exclude reference="N7N-Kq-OhS"/>
+                                            <exclude reference="VyU-rs-aLP"/>
+                                            <exclude reference="ebE-Qs-Wn5"/>
+                                            <include reference="f9P-NC-bgo"/>
+                                            <include reference="mRN-m1-E3S"/>
+                                            <include reference="tbc-jc-014"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -25540,11 +25565,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehI-f5-nAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6777" y="-105"/>
+            <point key="canvasLocation" x="6765" y="-105"/>
         </scene>
     </scenes>
     <resources>
-        <image name="84674A3E-19A2-4DA6-9EB3-C7DA663499F0" width="135" height="135">
+        <image name="056C0C07-492C-4630-A755-F5F20B39C865" width="135" height="135">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -26812,7 +26837,7 @@ AAEmmAABJpsAASagAAEmrwABJrMAASa6AAEmwgABJs8AASbUAAEm1gABJtgAASbdAAEm5QABJugAASbt
 AAEm9QABJvgAAScKAAEnDQABJxIAAAAAAAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAAAEnFA
 </mutableData>
         </image>
-        <image name="E93A3373-EE03-4173-BE1D-89C22611A20A" width="44" height="45">
+        <image name="E5C00B4F-7A8A-4911-8AA6-537CB2C789DD" width="44" height="45">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -27070,13 +27095,13 @@ KTIpNSk6AAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAKTw
         <image name="write_here_indicator" width="106" height="95"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CD6-Ba-jH8"/>
-        <segue reference="a6P-Zw-OEm"/>
-        <segue reference="z3I-wG-8dE"/>
         <segue reference="gvL-cc-QUb"/>
+        <segue reference="GC1-UV-19e"/>
         <segue reference="yEh-YI-h0W"/>
         <segue reference="UED-MT-Gjd"/>
         <segue reference="eKJ-D4-EQX"/>
+        <segue reference="CD6-Ba-jH8"/>
+        <segue reference="a6P-Zw-OEm"/>
         <segue reference="XLQ-dk-fw7"/>
     </inferredMetricsTieBreakers>
 </document>
