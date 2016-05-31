@@ -311,7 +311,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 title: post["user"]["name"].stringValue,
                                 text: post["text"].stringValue,
                                 locationName: post["location"].stringValue,
-                                audio: post["audio"].stringValue,
+                                audio: audioUrl,
                                 category: category,
                                 coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
                                 timestamp:  post["created"].stringValue,

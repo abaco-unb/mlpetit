@@ -29,6 +29,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     var liked:Bool = false
     var likedId:Int!
+    
+    var audioPlayer: AVAudioPlayer!
+    
     @IBOutlet weak var likeView: UIView!
     
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -53,6 +56,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeOfPost: UILabel!
     
+    @IBOutlet weak var audioDuration: UILabel!
     
     //Outlet do texto do post
     @IBOutlet weak var textPost: UITextView!
@@ -73,6 +77,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
     
+    @IBOutlet weak var audioDuration2: UILabel!
     
     //Outlets do Video View (
     @IBOutlet weak var videoView: UIView!
@@ -84,6 +89,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         super.viewDidLoad()
         
         self.navigationItem.title = String(post?.category)
+        
+        photoAudioView.hidden = true
+        audioInPhoto.hidden = true
+        AudioView.hidden = true
+        videoView.hidden = true
+        
         
         if (post?.category) == Optional(1) {
             let defi = UIImage(named: "cat_defi_bar")
@@ -124,7 +135,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
-            print(1)
+//            print(1)
             textPost.text = post!.text
             locationLabel.text = post!.locationName
             userName.text = post!.userName
@@ -133,23 +144,74 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             
 //            let postVideo = false
 //            let postAudio = false
-            print(2)
+//            print(2)
             
             if post!.image != "" {
                 let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
                 itemPhoto.image = postImage
             }
-            print(3)
-            print("----***-----");
-            print(post!.image);
-            print(4)
+//            print(3)
+//            print("----***-----");
+//            print(post!.image);
+//            print(4)
             
+            
+            if post!.audio != "" {
+                
+                listenBtn.enabled = true
+                listenBtn2.enabled = true
+                
+                stopBtn.enabled = true
+                stopBtn2.enabled = true
+                
+                
+                //required init to play
+                do {
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+                } catch _ {
+                    NSLog("Error: viewDidLoad -> set Category failed")
+                }
+                do {
+                    try AVAudioSession.sharedInstance().setActive(true)
+                } catch _ {
+                    NSLog("Error: viewDidLoad -> set Active failed")
+                }
+                do {
+                    try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+                } catch _ {
+                    NSLog("Error: viewDidLoad -> set override output Audio port     failed")
+                }
+                
+                do {
+                    
+                    print(" inicializando o audio do post")
+                    print(post!.audio)
+                    
+                    let audioURL = NSURL(string: post!.audio)
+                    
+                    print(audioURL)
+                    
+                    if let soundData = NSData(contentsOfURL: audioURL!) {
+                        print("Loading audio from url path: \(audioURL)", terminator: "")
+                        try audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
+                        audioDuration.text = audioPlayer.duration.description
+                        audioDuration2.text = audioPlayer.duration.description
+                        
+                        print("audioPlayer.duration.description")
+                        print(audioPlayer.duration.description)
+                        self.playAudio()
+                    } else {
+                        print("missing audio at: \(audioURL)", terminator: "")
+                    }
+                
+                } catch {
+                    fatalError("Failure to ...: \(error)")
+                }
+            }
             
             // FOTO SEM ÁUDIO:
-            if (itemPhoto != nil /*|| audio == nil*/){
-                print("image inneer")
-                print(post!.image)
-                
+            if (post!.image != "" && post!.audio == ""){
+                print("FOTO SEM ÁUDIO")
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = true
                 AudioView.hidden = true
@@ -158,32 +220,30 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }
                 
             // FOTO + ÁUDIO:
-//        else if (itemPhoto != nil /*|| audio != nil*/) {
-//            photoAudioView.hidden = false
-//            audioInPhoto.hidden = false
-//            AudioView.hidden = true
-//            photoAudioView.layer.borderWidth = 1
-//            photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-
-//        }
+            if (post!.image != "" && post!.audio != "") {
+                print("FOTO COM ÁUDIO")
+                photoAudioView.hidden = false
+                audioInPhoto.hidden = false
+                AudioView.hidden = true
+            }
                 
             // ÁUDIO SEM FOTO:
-//        else if (audio != nil || itemPhoto == nil) {
-//            photoAudioView.hidden = true
-//            audioInPhoto.hidden = true
-//            AudioView.hidden = false
-//        }
-                
+            if (post!.image == "" && post!.audio != "") {
+                print("AUDIO SEM FOTO")
+                photoAudioView.hidden = true
+                audioInPhoto.hidden = true
+                AudioView.hidden = false
+            }
+            
             // TEXTO SEM MÍDIA:
-            else if (itemPhoto == nil /*|| audio != nil*/){
+            if (post!.image == "" && post!.audio == ""){
+                print("SOMENTE TEXTO")
                 photoAudioView.hidden = true
                 audioInPhoto.hidden = true
                 AudioView.hidden = true
                 videoView.hidden = true
                 mediaView.hidden = true
             }
-
-            print(5)
             showLikes()
         }
         
@@ -288,7 +348,54 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         dismissViewControllerAnimated(false, completion: nil)
     }
     
-
+    
+    @IBAction func btnStopTapped(sender: UIButton) {
+        self.stopAudio()
+    }
+    
+    @IBAction func btnStop2Tapped(sender: UIButton) {
+        self.stopAudio()
+    }
+    
+    @IBAction func btnPlayTapped(sender: UIButton) {
+        self.playAudio()
+    }
+    
+    @IBAction func btnPlay2Tapped(sender: UIButton) {
+        self.playAudio()
+    }
+    
+    func stopAudio() {
+        
+        print("stop audio...")
+        
+        listenBtn2.hidden = true
+        stopBtn2.hidden = false
+        
+        listenBtn.hidden = true
+        stopBtn.hidden = false
+        
+        audioPlayer.stop()
+    }
+    
+    
+    
+    func playAudio() {
+        
+        print("play audio...")
+        stopBtn.hidden = true
+        listenBtn.hidden = false
+        
+        stopBtn2.hidden = true
+        listenBtn2.hidden = false
+        
+        audioPlayer.prepareToPlay()
+        audioPlayer.enableRate = false
+        audioPlayer.stop()
+        audioPlayer.currentTime = 0.0
+        audioPlayer.play()
+        
+    }
     
     @IBAction func options(sender: AnyObject) {
         
