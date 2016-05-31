@@ -163,6 +163,7 @@ class ContactViewController: UITableViewController {
                         self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following))
                         
                     }
+                    
                     self.indicator.hideActivityIndicator();
                     self.tableView.reloadData()
                     //pega os contatos do facebook caso ele tenha logado pela rede
@@ -199,6 +200,7 @@ class ContactViewController: UITableViewController {
                 {
                     // Process error
                     print("Error: \(error)")
+                    self.indicator.hideActivityIndicator();
                     return
                 }
                 else

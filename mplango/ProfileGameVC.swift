@@ -19,12 +19,17 @@ class ProfileGameVC: UIViewController {
         super.viewDidLoad()
         
         retrieveLoggedUser()
-
+        
 //        navigationItem.title = gameProfile.name
+        
+        self.navigationItem.leftBarButtonItem = nil
+
         
     }
     
+    
     func retrieveLoggedUser() {
+        
     }
     
 }

@@ -65,8 +65,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         writeHereIndicator.hidden = true
         
-        photoAudioView.layer.borderWidth = 1
-        photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         
@@ -111,6 +109,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
 //            photoAudioView.hidden = false
 //            audioInPhotoView.hidden = false
 //            AudioView.hidden = true
+//            photoAudioView.layer.borderWidth = 1
+//            photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
 //        }
         
         // ÁUDIO SEM FOTO:
