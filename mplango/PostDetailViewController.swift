@@ -56,6 +56,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeOfPost: UILabel!
     
+    @IBOutlet weak var audioDuration: UILabel!
     
     //Outlet do texto do post
     @IBOutlet weak var textPost: UITextView!
@@ -76,6 +77,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
     
+    @IBOutlet weak var audioDuration2: UILabel!
     
     //Outlets do Video View (
     @IBOutlet weak var videoView: UIView!
@@ -155,6 +157,31 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             
             
             if post!.audio != "" {
+                
+                listenBtn.enabled = true
+                listenBtn2.enabled = true
+                
+                stopBtn.enabled = true
+                stopBtn2.enabled = true
+                
+                
+                //required init to play
+                do {
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+                } catch _ {
+                    NSLog("Error: viewDidLoad -> set Category failed")
+                }
+                do {
+                    try AVAudioSession.sharedInstance().setActive(true)
+                } catch _ {
+                    NSLog("Error: viewDidLoad -> set Active failed")
+                }
+                do {
+                    try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+                } catch _ {
+                    NSLog("Error: viewDidLoad -> set override output Audio port     failed")
+                }
+                
                 do {
                     
                     print(" inicializando o audio do post")
@@ -167,6 +194,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     if let soundData = NSData(contentsOfURL: audioURL!) {
                         print("Loading audio from url path: \(audioURL)", terminator: "")
                         try audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
+                        audioDuration.text = audioPlayer.duration.description
+                        audioDuration2.text = audioPlayer.duration.description
+                        
+                        print("audioPlayer.duration.description")
+                        print(audioPlayer.duration.description)
+                        self.playAudio()
                     } else {
                         print("missing audio at: \(audioURL)", terminator: "")
                     }
@@ -177,7 +210,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }
             
             // FOTO SEM ÁUDIO:
-            if (itemPhoto != nil && audioPlayer == nil){
+            if (post!.image != "" && post!.audio == ""){
                 print("FOTO SEM ÁUDIO")
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = true
@@ -187,7 +220,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }
                 
             // FOTO + ÁUDIO:
-            if (itemPhoto != nil && audioPlayer != nil) {
+            if (post!.image != "" && post!.audio != "") {
                 print("FOTO COM ÁUDIO")
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = false
@@ -195,7 +228,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }
                 
             // ÁUDIO SEM FOTO:
-            if (audioPlayer != nil && itemPhoto == nil) {
+            if (post!.image == "" && post!.audio != "") {
                 print("AUDIO SEM FOTO")
                 photoAudioView.hidden = true
                 audioInPhoto.hidden = true
@@ -203,7 +236,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }
             
             // TEXTO SEM MÍDIA:
-            if (itemPhoto == nil && (audioPlayer == nil && itemPhoto == nil)){
+            if (post!.image == "" && post!.audio == ""){
                 print("SOMENTE TEXTO")
                 photoAudioView.hidden = true
                 audioInPhoto.hidden = true
@@ -315,7 +348,54 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         dismissViewControllerAnimated(false, completion: nil)
     }
     
-
+    
+    @IBAction func btnStopTapped(sender: UIButton) {
+        self.stopAudio()
+    }
+    
+    @IBAction func btnStop2Tapped(sender: UIButton) {
+        self.stopAudio()
+    }
+    
+    @IBAction func btnPlayTapped(sender: UIButton) {
+        self.playAudio()
+    }
+    
+    @IBAction func btnPlay2Tapped(sender: UIButton) {
+        self.playAudio()
+    }
+    
+    func stopAudio() {
+        
+        print("stop audio...")
+        
+        listenBtn2.hidden = true
+        stopBtn2.hidden = false
+        
+        listenBtn.hidden = true
+        stopBtn.hidden = false
+        
+        audioPlayer.stop()
+    }
+    
+    
+    
+    func playAudio() {
+        
+        print("play audio...")
+        stopBtn.hidden = true
+        listenBtn.hidden = false
+        
+        stopBtn2.hidden = true
+        listenBtn2.hidden = false
+        
+        audioPlayer.prepareToPlay()
+        audioPlayer.enableRate = false
+        audioPlayer.stop()
+        audioPlayer.currentTime = 0.0
+        audioPlayer.play()
+        
+    }
     
     @IBAction func options(sender: AnyObject) {
         
