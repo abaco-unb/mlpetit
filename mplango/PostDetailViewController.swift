@@ -215,8 +215,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         }
         
         //Como vai aparecer a photoAudioView
-        photoAudioView.layer.borderWidth = 1
-        photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         

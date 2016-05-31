@@ -6150,7 +6150,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     <segue destination="O4F-Fi-N69" kind="showDetail" id="CD6-Ba-jH8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxc-mQ-DaQ">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxc-mQ-DaQ">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="5Zn-zI-r3j"/>
@@ -6280,7 +6280,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgg-83-M5a">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="50"/>
+                                <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="45"/>
                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -6403,7 +6403,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             </constraint>
                             <constraint firstItem="az3-SP-Id5" firstAttribute="top" secondItem="SDo-W1-XRW" secondAttribute="bottom" constant="50" id="D1d-oy-wEi"/>
                             <constraint firstItem="Hxc-mQ-DaQ" firstAttribute="leading" secondItem="bKw-K0-RZZ" secondAttribute="trailing" constant="80" id="EBe-LZ-sAO">
-                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
                             <constraint firstItem="RTr-mT-7tJ" firstAttribute="centerX" secondItem="9eX-YM-IaI" secondAttribute="centerX" id="EnQ-Bn-lN5"/>
                             <constraint firstAttribute="centerX" secondItem="rhZ-YT-5fJ" secondAttribute="centerX" id="FFx-sy-Nfh"/>
@@ -6444,7 +6444,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
                             <constraint firstItem="9eX-YM-IaI" firstAttribute="top" secondItem="6XT-Gf-waY" secondAttribute="bottom" constant="310" id="tDJ-GA-RBG">
-                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="35"/>
                             </constraint>
                             <constraint firstItem="9eX-YM-IaI" firstAttribute="leading" secondItem="xbX-KR-esZ" secondAttribute="leading" constant="20" id="xZg-QK-6xm"/>
                         </constraints>
@@ -27708,12 +27708,12 @@ AAEm9QABJvgAAScKAAEnDQABJxIAAAAAAAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAAAEnFA
         <image name="write_here_indicator" width="106" height="95"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qil-8c-pdq"/>
+        <segue reference="CD6-Ba-jH8"/>
+        <segue reference="pJe-KY-nze"/>
         <segue reference="6tl-iS-U7p"/>
         <segue reference="XLQ-dk-fw7"/>
         <segue reference="zQd-mS-QGF"/>
         <segue reference="GC1-UV-19e"/>
-        <segue reference="yEh-YI-h0W"/>
         <segue reference="gvL-cc-QUb"/>
     </inferredMetricsTieBreakers>
 </document>
