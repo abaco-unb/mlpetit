@@ -29,6 +29,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     var liked:Bool = false
     var likedId:Int!
+    
+    var audioPlayer: AVAudioPlayer!
+    
     @IBOutlet weak var likeView: UIView!
     
     var indicator:ActivityIndicator = ActivityIndicator()
@@ -124,7 +127,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 
             let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
             userPicture.image = image
-            print(1)
+//            print(1)
             textPost.text = post!.text
             locationLabel.text = post!.locationName
             userName.text = post!.userName
@@ -133,23 +136,43 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             
 //            let postVideo = false
 //            let postAudio = false
-            print(2)
+//            print(2)
             
             if post!.image != "" {
                 let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
                 itemPhoto.image = postImage
             }
-            print(3)
-            print("----***-----");
-            print(post!.image);
-            print(4)
+//            print(3)
+//            print("----***-----");
+//            print(post!.image);
+//            print(4)
             
+            
+            if post!.audio != "" {
+                do {
+                    
+                    print(" inicializando o audio do post")
+                    print(post!.audio)
+                    
+                    let audioURL = NSURL(string: post!.audio)
+                    
+                    print(audioURL)
+                    
+                    if let soundData = NSData(contentsOfURL: audioURL!) {
+                        print("Loading audio from url path: \(audioURL)", terminator: "")
+                        try audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
+                    } else {
+                        print("missing audio at: \(audioURL)", terminator: "")
+                    }
+                
+                } catch {
+                    fatalError("Failure to ...: \(error)")
+                }
+            }
             
             // FOTO SEM ÁUDIO:
-            if (itemPhoto != nil /*|| audio == nil*/){
-                print("image inneer")
-                print(post!.image)
-                
+            if (itemPhoto != nil && audioPlayer == nil){
+                print("FOTO SEM ÁUDIO")
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = true
                 AudioView.hidden = true
@@ -158,29 +181,30 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }
                 
             // FOTO + ÁUDIO:
-//        else if (itemPhoto != nil /*|| audio != nil*/) {
-//            photoAudioView.hidden = false
-//            audioInPhoto.hidden = false
-//            AudioView.hidden = true
-//        }
+            if (itemPhoto != nil && audioPlayer != nil) {
+                print("FOTO COM ÁUDIO")
+                photoAudioView.hidden = false
+                audioInPhoto.hidden = false
+                AudioView.hidden = true
+            }
                 
             // ÁUDIO SEM FOTO:
-//        else if (audio != nil || itemPhoto == nil) {
-//            photoAudioView.hidden = true
-//            audioInPhoto.hidden = true
-//            AudioView.hidden = false
-//        }
-                
+            if (audioPlayer != nil && itemPhoto == nil) {
+                print("AUDIO SEM FOTO")
+                photoAudioView.hidden = true
+                audioInPhoto.hidden = true
+                AudioView.hidden = false
+            }
+            
             // TEXTO SEM MÍDIA:
-            else if (itemPhoto == nil /*|| audio != nil*/){
+            if (itemPhoto == nil && (audioPlayer == nil && itemPhoto == nil)){
+                print("SOMENTE TEXTO")
                 photoAudioView.hidden = true
                 audioInPhoto.hidden = true
                 AudioView.hidden = true
                 videoView.hidden = true
                 mediaView.hidden = true
             }
-
-            print(5)
             showLikes()
         }
         

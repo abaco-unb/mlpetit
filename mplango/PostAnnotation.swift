@@ -17,7 +17,7 @@ class PostAnnotation: FBAnnotation{
     let category: NSNumber
     let userImage: String
     let userName: String
-    let audio: String
+    var audio: String = ""
     let text: String
     let timestamp: String
     let likes: Int
