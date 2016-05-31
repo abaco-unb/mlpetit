@@ -88,6 +88,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         self.navigationItem.title = String(post?.category)
         
+        photoAudioView.hidden = true
+        audioInPhoto.hidden = true
+        AudioView.hidden = true
+        videoView.hidden = true
+        
+        
         if (post?.category) == Optional(1) {
             let defi = UIImage(named: "cat_defi_bar")
             let imageView = UIImageView(image:defi)
