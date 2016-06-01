@@ -45,11 +45,13 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var audioTimerLabel: UILabel!
     @IBOutlet weak var audioInPhotoView: UIView!
+    @IBOutlet weak var audioSlider: UISlider!
   
     //Outlets da AudioView (quando o item do Carnet inclui apenas uma mídia audio (sem imagem))
     @IBOutlet weak var AudioView: UIView!
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
+    @IBOutlet weak var audioSlider2: UISlider!
     
     
     override func viewDidLoad() {

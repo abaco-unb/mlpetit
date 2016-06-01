@@ -55,7 +55,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeOfPost: UILabel!
-    
     @IBOutlet weak var audioDuration: UILabel!
     
     //Outlet do texto do post
@@ -66,6 +65,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
     @IBOutlet weak var audioInPhoto: UIView!
+    @IBOutlet weak var audioSlider: UISlider!
     
     @IBOutlet weak var backgroundRecord: UIView!
     @IBOutlet weak var listenBtn: UIButton!
@@ -76,7 +76,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var AudioView: UIView!
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
-    
+    @IBOutlet weak var audioSlider2: UISlider!
     @IBOutlet weak var audioDuration2: UILabel!
     
     //Outlets do Video View (
@@ -89,11 +89,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         super.viewDidLoad()
         
         self.navigationItem.title = String(post?.category)
-        
-        photoAudioView.hidden = true
-        audioInPhoto.hidden = true
-        AudioView.hidden = true
-        videoView.hidden = true
         
         
         if (post?.category) == Optional(1) {
@@ -225,6 +220,10 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 photoAudioView.hidden = false
                 audioInPhoto.hidden = false
                 AudioView.hidden = true
+                
+                //questão de interface (para a borda azul aparecer)
+                photoAudioView.layer.borderWidth = 1
+                photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
             }
                 
             // ÁUDIO SEM FOTO:

@@ -34,10 +34,15 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     @IBOutlet weak var removeImage: UIButton!
     
-    @IBOutlet weak var recordBtn: UIButton!
     
     @IBOutlet weak var postComBtn: UIButton!
 
+    //Outlet de áudio do RECORD
+    @IBOutlet weak var recordView: UIView!
+    @IBOutlet weak var recordBtn: UIButton!
+    @IBOutlet weak var playRecBtn: UIButton!
+    @IBOutlet weak var stopRecBtn: UIButton!
+    @IBOutlet weak var audioSliderRec: UISlider!
     
     var image: UIImage!
     
