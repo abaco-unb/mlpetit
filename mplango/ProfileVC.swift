@@ -201,16 +201,16 @@ class ProfileVC: UIViewController {
 //            
 //        }
         
-        if segue.identifier == "show_points" {
-            let pointsController: ProfileGameVC = segue.destinationViewController as! ProfileGameVC
-            
-                if contact != self.userId {
-                    pointsController.navigationItem.title = "Points de " + contact.name
-                    pointsController.navigationItem.backBarButtonItem?.title = " "
-                    
-                }
-            
-        }
+//        if segue.identifier == "show_points" {
+//            let pointsController: ProfileGameVC = segue.destinationViewController as! ProfileGameVC
+//            
+//                if contact != self.userId {
+//                    pointsController.navigationItem.title = "Points de " + contact.name
+//                    pointsController.navigationItem.backBarButtonItem?.title = " "
+//                    
+//                }
+//            
+//        }
         
     }
 
