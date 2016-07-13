@@ -45,11 +45,13 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var audioTimerLabel: UILabel!
     @IBOutlet weak var audioInPhotoView: UIView!
+    @IBOutlet weak var audioSlider: UISlider!
   
     //Outlets da AudioView (quando o item do Carnet inclui apenas uma mídia audio (sem imagem))
     @IBOutlet weak var AudioView: UIView!
     @IBOutlet weak var listenBtn2: UIButton!
     @IBOutlet weak var stopBtn2: UIButton!
+    @IBOutlet weak var audioSlider2: UISlider!
     
     
     override func viewDidLoad() {
@@ -65,8 +67,6 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         
         writeHereIndicator.hidden = true
         
-        photoAudioView.layer.borderWidth = 1
-        photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         
@@ -111,6 +111,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
 //            photoAudioView.hidden = false
 //            audioInPhotoView.hidden = false
 //            AudioView.hidden = true
+//            photoAudioView.layer.borderWidth = 1
+//            photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
 //        }
         
         // ÁUDIO SEM FOTO:

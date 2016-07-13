@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RewardViewController: UIViewController, UINavigationControllerDelegate{
+class RewardViewController: UIViewController, UINavigationControllerDelegate {
     
     var points = 0
     
@@ -29,7 +29,6 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate{
         goToMapBTN.layer.cornerRadius = 10
         goToMapBTN.layer.masksToBounds = true
         
-        
         goToPointsBTN.layer.borderWidth = 2
         goToPointsBTN.layer.borderColor = UIColor(hex: 0xFFCC66).CGColor
         goToPointsBTN.layer.cornerRadius = 10
@@ -38,22 +37,37 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate{
         print("points")
         print(points)
         //pointsLabel.text = points.description
+        
+        
     }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
+
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        
+   
+        if segue.identifier == "go_to_points" {
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let pointsController:ProfileGameVC = navigationController.viewControllers[0] as! ProfileGameVC
+            pointsController.navigationItem.hidesBackButton = true
+            let closeBtn = UIBarButtonItem(title: "Fermer", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(goToMap))
+            pointsController.navigationItem.leftBarButtonItem = closeBtn
+            
+        }
     }
-    */
+    
+    func goToMap(sender: AnyObject) {
+        
+    }
     
 }

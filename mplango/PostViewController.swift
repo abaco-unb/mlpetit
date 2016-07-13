@@ -16,9 +16,8 @@ import CoreLocation
 
 class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
-    
     //MARK: Properties
-    
+
     var post: PostAnnotation? = nil
     
     // Dados da coordenada do usuário
@@ -28,7 +27,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var latitude:String = ""
     var longitude:String = ""
     
-    
     var videoPath: String = ""
     var imagePath: String = ""
     var tags = [String]()
@@ -37,8 +35,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var image:UIImage!
     
-    
-   
     @IBOutlet weak var continueBtn: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -71,13 +67,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var checkImage: UILabel!
     
-    
     //Outlets para o vídeo
     @IBOutlet weak var addVideo: UIButton!
     @IBOutlet weak var removeVideo: UIButton!
     @IBOutlet weak var videoView: UIImageView!
     @IBOutlet weak var checkVideo: UILabel!
-    
     
     
     override func viewDidLoad() {
@@ -102,7 +96,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             let evenement = UIImage(named: "cat_evenement_bar")
             let imageView = UIImageView(image:evenement)
             self.navigationItem.titleView = imageView
-            
         }
         
         locationManager.requestAlwaysAuthorization()
@@ -137,6 +130,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         continueBtn.enabled = true
         removeImage.hidden = true
         removeVideo.hidden = true
+        
+        // esconder os botões do áudio para não confundir o usuário e deixar visível apenas o botão para gravar
+        playButton.hidden = true
+        stopBtn.hidden = true
+        audioSlider.hidden = true
         
         // Custom the visual identity of Image View
         photoImage.layer.cornerRadius = 10
@@ -259,28 +257,23 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 //        let checkOn = UIImage(named: "check_on.png");
 //        imageCheck.image = checkOn
 //        print("passou aqui", imageCheck.image)
-        
     }
     
     // MARK: Actions
     
     @IBAction func removeImage(sender: AnyObject) {
-        
         self.image = nil
         photoImage.image = nil
         addPicture.hidden = false
         addPicture.enabled = true
         removeImage.hidden = true
-        
     }
     
     @IBAction func removeVideo(sender: AnyObject) {
-        
         videoView.image = nil
         addVideo.hidden = false
         addVideo.enabled = true
         removeVideo.hidden = true
-        
     }
     
     // MARK : Image Picker Process
@@ -318,9 +311,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone
         {
             self.presentViewController(alert, animated: true, completion: nil)
-        }
-        else
-        {
+        } else {
             popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
             popover?.sourceView = self.view
             popover?.sourceRect = addPicture.frame
@@ -347,15 +338,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone
         {
             self.presentViewController(picker!, animated: true, completion: nil)
-        }
-        else
-        {
+        } else {
             popover = UIPopoverPresentationController(presentedViewController: picker!, presentingViewController: picker!)
-            
             popover?.sourceView = self.view
             popover?.sourceRect = addPicture.frame
             popover?.permittedArrowDirections = .Any
-            
         }
     }
     
@@ -375,8 +362,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 //        checkOn(checkImage)
         checkImage.textColor = UIColor(hex: 0x43A047)
         checkImage.font = UIFont.boldSystemFontOfSize(15)
-
-
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
@@ -386,8 +371,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     
-    
-    //MARK: Audio Actions
+    //MARK: Audio Process
     
     @IBAction func playAudio(sender: UIButton) {
         AudioHelper.instance.play()
@@ -417,8 +401,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         alertController.addAction(agreeAction)
         alertController.addAction(disagreeAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        
-        
     }
     
     func confirmSavePost (){
@@ -451,7 +433,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             print("sem imagem")
             self.save(params)
         }
-        
     }
     
     func save(params: Dictionary<String, String>) {
@@ -492,7 +473,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         ActivityIndicator.instance.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
-        
         let urlRequest = self.urlRequestWithComponents(EndpointUtils.POST, parameters: params, data: false)
         print(4)
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
@@ -534,8 +514,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let contentType = "multipart/form-data;boundary="+boundaryConstant
         mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        
-        
         // create upload data to send
         let uploadData = NSMutableData()
         
@@ -569,8 +547,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
         }
         uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        
         
         // return URLRequestConvertible and NSData
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
@@ -642,7 +618,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     // note:  since it's a URL now, the color is set to the project's tint color
                     attrString.addAttribute(NSLinkAttributeName, value: "hash:\(stringifiedWord)", range: matchRange)
                 }
-                
             }
         }
         
@@ -651,14 +626,15 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // again, this will also wipe out any fonts and colors from the storyboard,
         // so remember to re-add them in the attrs dictionary above
         
-        
         textPostView.attributedText = attrString
     }
+
     
+    // MARK: Others
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // Set navigation bar background colour
         self.navigationController!.navigationBar.barTintColor = UIColor(hex: 0x3399CC)
         
@@ -666,10 +642,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         recordButton.enabled = true
-        playButton.enabled = false
-        audioSlider.enabled = false
-        
-        
     }
     
     override func canBecomeFirstResponder() -> Bool {
@@ -681,10 +653,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showRewards" {
             let rewardController:RewardViewController = segue.destinationViewController as! RewardViewController

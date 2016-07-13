@@ -95,11 +95,6 @@ class ProfileVC: UIViewController {
     }
 
     
-    
-    func showProfileGameVC() {
-        self.performSegueWithIdentifier("showBadges", sender: self)
-    }
-    
     func retrieveLoggedUser() {
         
         // recupera os dados do usuário logado no app
@@ -197,7 +192,7 @@ class ProfileVC: UIViewController {
         self.upServerUser()
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
 //        print(sender)
 //        if segue.identifier == "show_followers" {
 //            let navigationController = segue.destinationViewController as! UINavigationController
@@ -205,7 +200,18 @@ class ProfileVC: UIViewController {
 //            
 //            
 //        }
-//    }
+        
+//        if segue.identifier == "show_points" {
+//            let pointsController: ProfileGameVC = segue.destinationViewController as! ProfileGameVC
+//            
+//                if contact != self.userId {
+//                    pointsController.navigationItem.title = "Points de " + contact.name
+//                    pointsController.navigationItem.backBarButtonItem?.title = " "
+//                    
+//                }
+//            
+//        }
+        
+    }
 
-    
 }
