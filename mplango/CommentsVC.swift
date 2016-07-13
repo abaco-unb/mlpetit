@@ -17,7 +17,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     // MARK: Properties
     var indicator:ActivityIndicator = ActivityIndicator()
     
-    var comments: Array<Comment>!
+    var comments: Array<Comment> = [Comment]()
     
     var postId:Int!
     
@@ -49,32 +49,63 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.comTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        self.writeTxtView.delegate = self
-        
-        print("numero de comentarios: ", self.comments.count)
-        
-//
-//        if comment != nil {
-//            writeTxtView.text = comment?.text
-//        }
-        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsVC.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        self.view.addGestureRecognizer(tap)
         
-        //Para que a view acompanhe o teclado e poder escrever o comentário
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        ActivityIndicator.instance.showActivityIndicator(self.view)
+        Alamofire.request(.GET, EndpointUtils.COMMENT, parameters: ["post" : String(self.postId)])
+            .responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator()
+                if let comments = json["data"].array {
+                    for comment in comments {
+                        var comId = 0;
+                        
+                        if let id = comment["id"].int {
+                            comId = id
+                            
+                        }
+                        
+                        self.comments.append(Comment(id: comId,
+                            audio: comment["audio"].stringValue,
+                            text: comment["text"].stringValue,
+                            image: comment["image"].stringValue,
+                            postId: self.postId,
+                            created: comment["created"]["date"].stringValue,
+                            userId: Int( comment["user"]["id"].stringValue )!))
+                    }
+                    
+                }
+                
+                self.comTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+                
+                self.writeTxtView.delegate = self
+                
+                self.comTableView.reloadData()
+                
+                print("numero de comentarios: ", self.comments.count)
+                
+                //
+                //        if comment != nil {
+                //            writeTxtView.text = comment?.text
+                //        }
+                
+                
+                
+                //Para que a view acompanhe o teclado e poder escrever o comentário
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+                
+                self.writeTxtView.delegate = self
+                
+                self.postComBtn.hidden = true
+                self.removeImage.hidden = true
+                
+                self.comTableView.rowHeight = UITableViewAutomaticDimension
+                self.comTableView.estimatedRowHeight = 200.0
+        });
         
-        writeTxtView.delegate = self
         
-        postComBtn.hidden = true
-        removeImage.hidden = true
-
-        comTableView.rowHeight = UITableViewAutomaticDimension
-        comTableView.estimatedRowHeight = 200.0
 
     }
     
@@ -473,5 +504,5 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
     }
-    
+   
 }

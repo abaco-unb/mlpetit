@@ -14,16 +14,11 @@ import AlamofireSwiftyJSON
 import CoreLocation
 
 
-class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
+class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
 
     var post: PostAnnotation? = nil
-    
-    var audioPlayer: AVAudioPlayer!
-    var recordedAudio:RecordedAudio!
-    var recordingSession: AVAudioSession!
-    var audioRecorder: AVAudioRecorder!
     
     // Dados da coordenada do usuário
     var locationManager = CLLocationManager()
@@ -33,7 +28,6 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     var longitude:String = ""
     
     var videoPath: String = ""
-    var audioPath: String = ""
     var imagePath: String = ""
     var tags = [String]()
     var points = 0
@@ -117,45 +111,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             NSLog("Serviço de localização indisponível")
         }
         
-        recordingSession = AVAudioSession.sharedInstance()
-        
-        recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {
-                if allowed {
-                    self.loadRecordingUI()
-                } else {
-                    NSLog("Error: viewDidLoad -> microfone indisponível")
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        
-                        //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Ops!", message: "Favor conceda permissão de acesso do app ao seu microfone!", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                            print("The user not is okay.")
-                        }
-                        alertController.addAction(agreeAction)
-                        self.presentViewController(alertController, animated: true, completion: nil)
-                    }
-                }
-            }
-        }
-        
-        //required init to recording
-        
-        do {
-            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        } catch _ {
-            NSLog("Error: viewDidLoad -> set Category failed")
-        }
-        do {
-            try recordingSession.setActive(true)
-        } catch _ {
-            NSLog("Error: viewDidLoad -> set Active failed")
-        }
-        do {
-            try recordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
-        } catch _ {
-            NSLog("Error: viewDidLoad -> set override output Audio port     failed")
-        }
+        AudioHelper.instance._init(self, icon: self.iconAudio,
+                                   check: self.checkAudio,
+                                   background: self.backgroundRecord,
+                                   label: self.labelRecording,
+                                   btnStop: self.stopBtn,
+                                   btnPlay: self.playButton,
+                                   btnRecorder: self.recordButton,
+                                   slider: self.audioSlider)
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -353,7 +316,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         let gallaryAction = UIAlertAction(title: "Gallerie", style: UIAlertActionStyle.Default)
             {
                 UIAlertAction in
-                self.openGallary()
+                self.openGallery()
         }
         let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
             {
@@ -383,12 +346,14 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
         {
             picker!.sourceType = UIImagePickerControllerSourceType.Camera
             self .presentViewController(picker!, animated: true, completion: nil)
-        } else {
-            openGallary()
+        }
+        else
+        {
+            openGallery()
         }
     }
     
-    func openGallary()
+    func openGallery()
     {
         picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone
@@ -430,192 +395,17 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     //MARK: Audio Process
     
     @IBAction func playAudio(sender: UIButton) {
-        playButton.hidden = true
-        stopBtn.hidden = false
-        audioPlayer.prepareToPlay()
-        audioPlayer.enableRate = false
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
-        
+        AudioHelper.instance.play()
     }
     
     @IBAction func stopAudio(sender: UIButton) {
-        playButton.hidden = false
-        stopBtn.hidden = true
-        audioPlayer.pause()
+        AudioHelper.instance.stop()
     }
     
     @IBAction func changeAudioTime(sender: UISlider) {
-        audioPlayer.stop()
-        audioPlayer.currentTime = NSTimeInterval(audioSlider.value)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
+        AudioHelper.instance.changeAudioTime()
         
     }
-    
-    func handleLongPress(gestureRecognizer : UIGestureRecognizer){
-        if gestureRecognizer.state == .Began {
-            print("iniciar a gravação")
-            recording()
-            recordButton.enabled = false
-        }
-        
-        if gestureRecognizer.state == .Ended {
-            print("parar a gravação")
-            
-            audioRecorder.stop()
-            AVAudioSession.sharedInstance()
-            
-            recordButton.enabled = true
-            playButton.enabled = true
-            playButton.hidden = false
-            audioSlider.enabled = true
-            audioSlider.hidden = false
-            
-        }
-    }
-    
-    func updateSlider() {
-        audioSlider.value = Float(audioPlayer.currentTime)
-    }
-    
-    func finishRecording(success success: Bool) {
-        audioRecorder.stop()
-        audioRecorder = nil
-    }
-    
-    func recording() {
-        
-        let settings = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000.0,
-            AVNumberOfChannelsKey: 1 as NSNumber,
-            AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
-        ]
-        
-        let audioURL = self.getAudioURL()
-        
-        print(audioURL)
-        
-        do {
-            print("recording")
-            labelRecording.text = "En train d'enregistrer..."
-            labelRecording.textColor = UIColor(hex: 0xF95253)
-            self.blinkComponent(self.labelRecording)
-            iconAudio.image = UIImage(named: "icon_audio_red")
-            self.blinkComponent(self.iconAudio)
-            
-            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
-            audioRecorder.delegate = self
-            audioRecorder.record()
-            
-        } catch {
-            NSLog("Error: func recording")
-            finishRecording(success: false)
-        }
-    }
-    
-    func loadRecordingUI(){
-        
-        // Custom the visual identity of audio player's background
-        backgroundRecord.layer.borderWidth = 1
-        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        backgroundRecord.layer.cornerRadius = 15
-        backgroundRecord.layer.masksToBounds = true
-        
-        //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(PostViewController.handleLongPress(_:)))
-        longPressRecogniser.minimumPressDuration = 0.2
-        recordButton.addGestureRecognizer(longPressRecogniser)
-    }
-    
-    func getDocumentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-    
-    func getAudioURL() -> NSURL {
-        let recordingName = self.generateIndexName("audio", ext: "m4a")
-        let audioFilename = getDocumentsDirectory().stringByAppendingString("/").stringByAppendingString(recordingName)
-        
-        return NSURL(fileURLWithPath: audioFilename)
-    }
-    
-    func generateIndexName(text:String, ext:String) ->String {
-        let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        return text + "_" + formatter.stringFromDate(currentDateTime) + "." + ext
-    }
-    
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
-                                         successfully flag: Bool) {
-        if(flag) {
-            do {
-                print(" play fx")
-                let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-recorded", ofType: "wav")!)
-                try audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, fileTypeHint: nil)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                
-            }catch _ {
-                NSLog("Error: play effect ")
-            }
-            
-            do {
-                print(" audioRecorderDidFinishRecording")
-                playButton.enabled = true
-                
-                audioSlider.hidden = false
-                audioSlider.enabled = true
-                
-                labelRecording.text = "Audio ajouté."
-                labelRecording.textColor = UIColor(hex: 0x2C98D4)
-                
-                iconAudio.image = UIImage(named: "icon_audio")
-                iconAudio.layer.removeAllAnimations()
-                labelRecording.layer.removeAllAnimations()
-                
-                print(1)
-                recordedAudio = RecordedAudio()
-                recordedAudio.filePathUrl = recorder.url
-                recordedAudio.title = recorder.url.lastPathComponent
-                print(2)
-                print(recorder.url.description)
-                
-                try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
-                audioPath = recorder.url.description
-                audioSlider.maximumValue = Float(audioPlayer.duration)
-                
-                NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(PostViewController.updateSlider), userInfo: nil, repeats: true)
-                print(points)
-                points += 10
-                print(" depois points")
-                
-                //set audio as checked
-                //                    self.checkOn(checkAudio)
-                checkAudio.textColor = UIColor(hex: 0x43A047)
-                checkAudio.font = UIFont.boldSystemFontOfSize(15)
-                
-            } catch {
-                fatalError("Failure to ...: \(error)")
-            }
-        } else {
-            NSLog("Error: func audioRecorderDidFinishRecording")
-            finishRecording(success: false)
-            //recordButton.enabled = true
-        }
-    }
-    
-    func blinkComponent(comp: UIView) {
-        comp.alpha = 0;
-        UIView.animateWithDuration(0.7, delay: 0.0, options: [.Repeat, .Autoreverse, .CurveEaseInOut], animations:
-            {
-                comp.alpha = 1
-            }, completion: nil)
-    }
-
     
     //MARK: Post Actions
     
@@ -661,7 +451,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             "user": String(userId)
         ]
         
-        if(self.image != nil || self.audioPath != "") {
+        if(self.image != nil || AudioHelper.instance.audioPath != "") {
             print("com imagem")
             self.save(false, params: params)
         } else {
@@ -761,9 +551,12 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
             uploadData.appendData(imageData)
         
         }
-        if audioPath != "" {
+        if AudioHelper.instance.audioPath != "" {
+            print(AudioHelper.instance.audioPath)
+            print(AudioHelper.instance.recordedAudio.filePathUrl)
+            
             print("soundData")
-            let soundData = NSData(contentsOfURL: recordedAudio.filePathUrl)
+            let soundData = NSData(contentsOfURL: AudioHelper.instance.recordedAudio.filePathUrl)
             uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
             uploadData.appendData("Content-Disposition: form-data; name=\"audio\"; filename=\"audio.m4a\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
             uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -787,7 +580,7 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     @IBAction func cancelPost(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     func resolveHashTags(){
         // turn string in to NSString
         let nsText:NSString = textPostView.text
@@ -837,7 +630,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
 //                        self.checkOn(checkTextPost)
                         checkTag1.textColor = UIColor(hex: 0x43A047)
                         checkTag1.font = UIFont.boldSystemFontOfSize(12)
-
+                        checkTag1.text = "+ " + String(tags.count) + " (#)"
+                        
                     }
                     
                     // set a link for when the user clicks on this word.
@@ -883,7 +677,8 @@ class PostViewController: UIViewController, AVAudioRecorderDelegate, UIImagePick
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showRewards" {
             let rewardController:RewardViewController = segue.destinationViewController as! RewardViewController
-            points += tags.count * 5
+            points += (tags.count * 5) + AudioHelper.instance.points
+            print( "points : " + String(points) )
             rewardController.points = points
         }
     }
