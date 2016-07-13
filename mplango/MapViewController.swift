@@ -60,6 +60,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         let user:Int = prefs.integerForKey("id") as Int
         NSLog("usuário logado: %ld", user)
         
+        self.clusteringManager.delegate = self;
         
         self.mkMapView.showsUserLocation = true
         self.mkMapView.delegate = self
@@ -234,12 +235,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             var latitude:Double  = 0
                             var longitude:Double = 0
                             var category:Int = 0
-                            var likes:Int = 0
-                            var imageUrl:String = ""
+                            //var likes:Int = 0
+                            //var imageUrl:String = ""
                             var ownerId: Int = 0
-                            var audioUrl: String = ""
+                            //var audioUrl: String = ""
                             
-                            var comments: Array<Comment> = [Comment]();
+                            //var comments: Array<Comment> = [Comment]();
                             
                             
                             if let id = post["id"].int {
@@ -247,10 +248,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 
                             }
                             
-                            if let tLikes = post["likes"].array {
-                                likes = tLikes.count
-                                
-                            }
+//                            
                             
                             if let lat = post["latitude"].string {
                                 latitude = Double(lat)!
@@ -265,16 +263,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 category = cat
                             }
                             
-                            if let images = post["images"].array {
-                                print("IMAGE ARRAY")
-                                print(images)
-                                if ((post["images"].array?.count) > 0) {
-                                    if let imageId = images[0]["id"].int {
-                                        print("aqui dentro da imagem")
-                                        imageUrl = EndpointUtils.IMAGE + "/" + String(imageId)
-                                    }
-                                }
-                            }
+//                            
                             
                             if let owner = post["user"]["id"].int {
                                 print("+++++++++++++++++++")
@@ -283,53 +272,45 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 ownerId = owner
                             }
                             
-                            if let postComments = post["comments"].array {
-                                for comment in postComments {
-                                    var comId  = 0;
-                                    var userId = 0;
-                                    
-                                    if let commentId = comment["id"].int {
-                                        comId = commentId
-                                    }
-                                    
-                                    if let uId = comment["user"]["id"].int {
-                                        userId = uId
-                                    }
-                                    
-                                    comments.append(Comment(id: comId, audio: comment["audio"].stringValue, text: comment["text"].stringValue, image: comment["image"].stringValue, postId: postId, created: comment["created"].stringValue, userId: userId))
-                                }
-                            }
+//                            if let postComments = post["comments"].array {
+//                                for comment in postComments {
+//                                    var comId  = 0;
+//                                    var userId = 0;
+//                                    
+//                                    if let commentId = comment["id"].int {
+//                                        comId = commentId
+//                                    }
+//                                    
+//                                    if let uId = comment["user"]["id"].int {
+//                                        userId = uId
+//                                    }
+//                                    
+//                                    comments.append(Comment(id: comId, audio: comment["audio"].stringValue, text: comment["text"].stringValue, image: comment["image"].stringValue, postId: postId, created: comment["created"].stringValue, userId: userId))
+//                                }
+//                            }
                             
-                            if post["audio"].stringValue != "" {
-                                audioUrl = EndpointUtils.POST + "?id=" + post["id"].stringValue +  "&audio=true"
-                            }
+//                            
                             
-                            print("Comentários do Post", comments)
+                            //print("Comentários do Post", comments)
                              //show post on map
-                             let annotation = PostAnnotation(
+                             let postAnnotation = PostAnnotation(
                                 id: postId,
                                 title: post["user"]["name"].stringValue,
                                 text: post["text"].stringValue,
                                 locationName: post["location"].stringValue,
-                                audio: audioUrl,
-                                category: category,
                                 coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                timestamp:  post["created"].stringValue,
-                                userImage: EndpointUtils.USER + "?id=" + post["user"]["id"].stringValue +  "&avatar=true",
-                                userName:  post["user"]["name"].stringValue,
-                                likes: likes,
-                                postImageUrl: imageUrl,
-                                comments: comments,
-                                ownerId: ownerId
+                                category: category,
+                                owner: ownerId
                              )
                              //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
-                            self.posts.append(annotation);
+                            self.posts.append(postAnnotation);
                             //self.mkMapView.addAnnotation(annotation)
                         }
                    }
+                
                    print( "total de posts : ",self.posts.count)
                    self.clusteringManager.addAnnotations(self.posts)
-                   self.clusteringManager.delegate = self;
+                
                 
             });
         
@@ -663,7 +644,6 @@ extension MapViewController : MKMapViewDelegate {
             
             print( "titulo : ", annotation.title)
             let postAnnotation = annotation as! PostAnnotation
-            
             reuseId = "Post"
             
             var postView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
@@ -679,8 +659,18 @@ extension MapViewController : MKMapViewDelegate {
                 imageview.layer.masksToBounds = true
                 imageview.layer.borderWidth = 1
                 imageview.layer.borderColor = UIColor.greenColor().CGColor
-            let image: UIImage = ImageUtils.instance.loadImageFromPath(postAnnotation.userImage)!
-            imageview.image = image
+            
+            if let image : UIImage = NSCache.sharedInstance.objectForKey(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true") as? UIImage {
+                imageview.image = image
+                print("com cache : " + EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")
+            } else {
+                print("sem cache : " + EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")
+                let img: UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")!
+                NSCache.sharedInstance.setObject(img, forKey: EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")
+                imageview.image = img
+            }
+
+            
             
             postView!.leftCalloutAccessoryView = imageview
             
@@ -701,13 +691,17 @@ extension MapViewController : MKMapViewDelegate {
         print(sender)
         print("dentro calloutTap antes isKind")
         if sender.view!.isKindOfClass(MKAnnotationView) {
-            print("dentro calloutTap depois isKind")
             let postView : MKAnnotationView = sender.view as! MKAnnotationView
-            let post: PostAnnotation = postView.annotation as! PostAnnotation
-            //NSLog(post.getCategoryImageName())
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-            print("antes");
-            self.performSegueWithIdentifier("to_post_detail", sender: post)
+            
+            if postView.annotation!.isKindOfClass(PostAnnotation) {
+                print("dentro calloutTap depois isKind")
+                let post: PostAnnotation = postView.annotation as! PostAnnotation
+            
+                //NSLog(post.getCategoryImageName())
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                print("antes");
+                self.performSegueWithIdentifier("to_post_detail", sender: post)
+                }
             }
             
         }

@@ -128,123 +128,137 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.retrieveLoggedUser()
         
         if post != nil {
-            //print("post")
-            //print(post)
+            
             userPicture.layer.borderWidth = 1
             userPicture.layer.borderColor = UIColor.greenColor().CGColor
-
-            let image: UIImage = ImageUtils.instance.loadImageFromPath(post!.userImage)!
-            userPicture.image = image
-//            print(1)
-            textPost.text = post!.text
+            
+            var hasAudio = false
+            var hasImage = false
+            
+            userPicture.image  = post!.getOwnerImage()
+            textPost.text      = post!.text
             locationLabel.text = post!.locationName
-            userName.text = post!.userName
-            timeOfPost.text = post!.timestamp
-            likeNberLabel.text = String(post!.likes)
             
-//            let postVideo = false
-//            let postAudio = false
-//            print(2)
-            
-            if post!.image != "" {
-                let postImage: UIImage = ImageUtils.instance.loadImageFromPath(post!.image)!
-                itemPhoto.image = postImage
-            }
-//            print(3)
-//            print("----***-----");
-//            print(post!.image);
-//            print(4)
-            
-            
-            if post!.audio != "" {
-                
-                listenBtn.enabled = true
-                listenBtn2.enabled = true
-                
-                stopBtn.enabled = true
-                stopBtn2.enabled = true
-                
-                
-                //required init to play
-                do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
-                } catch _ {
-                    NSLog("Error: viewDidLoad -> set Category failed")
-                }
-                do {
-                    try AVAudioSession.sharedInstance().setActive(true)
-                } catch _ {
-                    NSLog("Error: viewDidLoad -> set Active failed")
-                }
-                do {
-                    try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
-                } catch _ {
-                    NSLog("Error: viewDidLoad -> set override output Audio port     failed")
-                }
-                
-                do {
+            ActivityIndicator.instance.showActivityIndicator(self.view)
+            Alamofire.request(.GET, EndpointUtils.POST, parameters: ["id" : (post?.id)!])
+                .responseSwiftyJSON({ (request, response, json, error) in
+                    ActivityIndicator.instance.hideActivityIndicator()
+                    let postComplete = json["data"]
                     
-                    print(" inicializando o audio do post")
-                    print(post!.audio)
                     
-                    let audioURL = NSURL(string: post!.audio)
+                    self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
                     
-                    print(audioURL)
+                    self.userName.text      = self.post!.getOwnerName()
+                    self.timeOfPost.text    = postComplete["created"].stringValue
                     
-                    if let soundData = NSData(contentsOfURL: audioURL!) {
-                        print("Loading audio from url path: \(audioURL)", terminator: "")
-                        try audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
-                        audioDuration.text = audioPlayer.duration.description
-                        audioDuration2.text = audioPlayer.duration.description
-                        
-                        print("audioPlayer.duration.description")
-                        print(audioPlayer.duration.description)
-                        self.playAudio()
-                    } else {
-                        print("missing audio at: \(audioURL)", terminator: "")
+                    if let tLikes = postComplete["likes"].array {
+                        self.likeNberLabel.text = String(tLikes.count)
                     }
-                
-                } catch {
-                    fatalError("Failure to ...: \(error)")
-                }
-            }
-            
-            // FOTO SEM ÁUDIO:
-            if (post!.image != "" && post!.audio == ""){
-                print("FOTO SEM ÁUDIO")
-                photoAudioView.hidden = false
-                audioInPhoto.hidden = true
-                AudioView.hidden = true
-                videoView.hidden = true
+                    
+                    //            let postVideo = false
+                    //            let postAudio = false
 
-            }
-                
-            // FOTO + ÁUDIO:
-            if (post!.image != "" && post!.audio != "") {
-                print("FOTO COM ÁUDIO")
-                photoAudioView.hidden = false
-                audioInPhoto.hidden = false
-                AudioView.hidden = true
-            }
-                
-            // ÁUDIO SEM FOTO:
-            if (post!.image == "" && post!.audio != "") {
-                print("AUDIO SEM FOTO")
-                photoAudioView.hidden = true
-                audioInPhoto.hidden = true
-                AudioView.hidden = false
-            }
-            
-            // TEXTO SEM MÍDIA:
-            if (post!.image == "" && post!.audio == ""){
-                print("SOMENTE TEXTO")
-                photoAudioView.hidden = true
-                audioInPhoto.hidden = true
-                AudioView.hidden = true
-                videoView.hidden = true
-                mediaView.hidden = true
-            }
-            showLikes()
+                    if let images = postComplete["images"].array {
+                        if ((postComplete["images"].array?.count) > 0) {
+                            hasImage = true
+                            if let imageId = images[0]["id"].int {
+                                print("aqui dentro da imagem")
+                                self.itemPhoto.image = self.post!.getImage(imageId)
+                            }
+                        }
+                    }
+                    
+                    if postComplete["audio"].stringValue != "" {
+                        hasAudio = true
+                        self.listenBtn.enabled = true
+                        self.listenBtn2.enabled = true
+                        
+                        self.stopBtn.enabled = true
+                        self.stopBtn2.enabled = true
+                        
+                        
+                        //required init to play
+                        do {
+                            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+                        } catch _ {
+                            NSLog("Error: viewDidLoad -> set Category failed")
+                        }
+                        do {
+                            try AVAudioSession.sharedInstance().setActive(true)
+                        } catch _ {
+                            NSLog("Error: viewDidLoad -> set Active failed")
+                        }
+                        do {
+                            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+                        } catch _ {
+                            NSLog("Error: viewDidLoad -> set override output Audio port     failed")
+                        }
+                        
+                        do {
+                            
+                            print(" inicializando o audio do post")
+                            print(self.post!.getAudioUrl())
+                            
+                            let audioURL = NSURL(string: self.post!.getAudioUrl())
+                            
+                            print(audioURL)
+                            
+                            if let soundData = NSData(contentsOfURL: audioURL!) {
+                                print("Loading audio from url path: \(audioURL)", terminator: "")
+                                try self.audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
+                                self.audioDuration.text = self.audioPlayer.duration.description
+                                self.audioDuration2.text = self.audioPlayer.duration.description
+                                
+                                print("audioPlayer.duration.description")
+                                print(self.audioPlayer.duration.description)
+                                self.playAudio()
+                            } else {
+                                print("missing audio at: \(audioURL)", terminator: "")
+                            }
+                            
+                        } catch {
+                            fatalError("Failure to ...: \(error)")
+                        }
+                    }
+                    
+                    // FOTO SEM ÁUDIO:
+                    if (hasImage && !hasAudio){
+                        print("FOTO SEM ÁUDIO")
+                        self.photoAudioView.hidden = false
+                        self.audioInPhoto.hidden = true
+                        self.AudioView.hidden = true
+                        self.videoView.hidden = true
+                        
+                    }
+                    
+                    // FOTO + ÁUDIO:
+                    if (hasImage && hasAudio) {
+                        print("FOTO COM ÁUDIO")
+                        self.photoAudioView.hidden = false
+                        self.audioInPhoto.hidden = false
+                        self.AudioView.hidden = true
+                    }
+                    
+                    // ÁUDIO SEM FOTO:
+                    if (!hasImage && hasAudio) {
+                        print("AUDIO SEM FOTO")
+                        self.photoAudioView.hidden = true
+                        self.audioInPhoto.hidden = true
+                        self.AudioView.hidden = false
+                    }
+                    
+                    // TEXTO SEM MÍDIA:
+                    if (!hasImage && !hasAudio){
+                        print("SOMENTE TEXTO")
+                        self.photoAudioView.hidden = true
+                        self.audioInPhoto.hidden = true
+                        self.AudioView.hidden = true
+                        self.videoView.hidden = true
+                        self.mediaView.hidden = true
+                    }
+                    
+                    self.showLikes()
+                });
         }
         
         //Como vai aparecer a photoAudioView
@@ -419,7 +433,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             UIAlertAction in
         }
         
-        let followAction = UIAlertAction(title: String("Suivre " + String(post!.userName)), style: UIAlertActionStyle.Default)
+        let followAction = UIAlertAction(title: String("Suivre " + String(self.post!.getOwnerName())), style: UIAlertActionStyle.Default)
         {
             UIAlertAction in
         }
@@ -431,7 +445,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         // Add the actions
         
-        if self.userId != post!.ownerId {
+        if self.userId != post!.owner {
             alert.addAction(reportAction)
             alert.addAction(followAction)
             alert.addAction(cancelAction)
@@ -469,6 +483,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         ]
         
         //Checagem remota
+        ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
@@ -477,7 +492,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 print("Request: \(request)")
                 print("request: \(error)")
                 
-                //                self.indicator.hideActivityIndicator();
+                ActivityIndicator.instance.hideActivityIndicator();
                 if json["data"].array?.count > 0 {
                     
                     if let id = json["data"]["id"].int {
@@ -530,9 +545,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     self.dislikeBtn.enabled = true
                     self.likeBtn.hidden = true
                     self.likeBtn.enabled = false
-                    
-                    let total:Int = Int(self.post!.likes) + 1;
-                    self.likeNberLabel.text = String(total)
+                    //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
+                    //let total:Int = Int(self.post!.likes) + 1;
+                    //self.likeNberLabel.text = String(total)
                 } else {
                     NSLog("@resultado : %@", "LIKE LOGIN !!!")
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -582,8 +597,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     self.likeBtn.hidden = false
                     self.likeBtn.enabled = true
                     
-                    let total:Int = Int(self.post!.likes) - 1;
-                    self.likeNberLabel.text = String(total)
+                    //let total:Int = Int(self.post!.likes) - 1;
+                    //self.likeNberLabel.text = String(total)
                 } else {
                     NSLog("@resultado : %@", "UNLIKE LOGIN !!!")
                     NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -671,7 +686,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         if segue.identifier == "post_to_comments" {
             let navigationController = segue.destinationViewController as! UINavigationController
             let commentController:CommentsVC = navigationController.viewControllers[0] as! CommentsVC
-            commentController.comments = self.post?.comments
             commentController.postId = self.post?.id
             
         }

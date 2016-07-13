@@ -15,49 +15,61 @@ class PostAnnotation: FBAnnotation{
     let id: Int
     let locationName: String
     let category: NSNumber
-    let userImage: String
-    let userName: String
-    var audio: String = ""
     let text: String
-    let timestamp: String
-    let likes: Int
-    var image: String = ""
-    var comments: Array<Comment>
-    var ownerId: Int
-
-    init(id: Int, title: String, text: String, locationName: String, audio: String, category: Int, coordinate: CLLocationCoordinate2D, timestamp: String, userImage: String, userName: String, likes: Int, postImageUrl: String, comments: Array<Comment>, ownerId: Int) {
+    let owner: Int
+    
+    var ownername:String = ""
+    
+    
+    init(id: Int, title: String, text: String, locationName: String, coordinate: CLLocationCoordinate2D, category: Int, owner: Int) {
         self.id = id
         self.locationName = locationName
         self.category = category
-        self.userImage = userImage
-        self.userName = userName
-        self.timestamp = timestamp
         self.text = text
-        self.audio = audio
-        self.likes = likes
-        self.image = postImageUrl
-        self.comments = comments
-        self.ownerId = ownerId
+        self.owner = owner
         super.init()
+        
         super.coordinate = coordinate
         super.title = title
         
     }
     
-    /**
-     * GET STREET ADDRESS NAME
-     */
+    var subtitle: String? {
+        return text
+    }
+    
     func getLocationStreetAdreessName(coordinate: CLLocationCoordinate2D){
         
     }
     
-    var subtitle: String? {
-//        return locationName
-        return text
+    func setOwnerName(name:String) {
+        self.ownername = name
     }
     
+    func getOwnerName() -> String {
+        return self.ownername
+    }
     
-    // annotation callout info button opens this mapItem in Maps app
+    func getImage(imageId : Int) -> UIImage {
+       
+        let image: UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.IMAGE + "/" + String(imageId) )!
+        return image
+       
+    }
+    
+    func getOwnerImage() -> UIImage {
+        
+        let image: UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String( self.owner ) + "&avatar=true" )!
+        return image
+        
+    }
+    
+    func getAudioUrl() -> String {
+        
+        return EndpointUtils.POST + "?id=" + self.id.description +  "&audio=true"
+        
+    }
+    
     func mapItem() -> MKMapItem {
         let addressDictionary = [String(CNPostalAddressStreetKey): self.subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDictionary)
