@@ -198,8 +198,29 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
         }
         
-        
     }
+    
+    
+//    func checkValidChange() {
+//        // Disable the Save button if the text field is empty.
+//        let text = userName.text ?? ""
+//        let text2 = userNation.text ?? ""
+//        let text3 = userBio.text ?? ""
+//        
+//        if (!text.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else if (!text2.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else if (!text3.isEmpty) {
+//            confirmEditProf.enabled = true
+//            
+//        } else {
+//            confirmEditProf.enabled = false
+//        }
+//    }
+    
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
@@ -375,6 +396,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func playAudio(sender: UIButton) {
         AudioHelper.instance.play()
+    }
+    
+    @IBAction func stopAudio(sender: UIButton) {
+        AudioHelper.instance.stop()
     }
     
     @IBAction func changeAudioTime(sender: UISlider) {
@@ -554,10 +579,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func cancelPost(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func stopAudio(sender: UIButton) {
-        AudioHelper.instance.stop()
     }
 
     func resolveHashTags(){
