@@ -158,8 +158,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 
                 stopBtn.enabled = true
                 stopBtn2.enabled = true
-                
-                
+                                
                 //required init to play
                 do {
                     try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)

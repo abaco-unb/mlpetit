@@ -39,6 +39,8 @@
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DEE3F1B8A178800A09A00 /* TabBarController.swift */; };
+		54398EA11D04AF20005580FE /* ListActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54398EA01D04AF20005580FE /* ListActivitiesVC.swift */; };
+		54398EB01D04BA46005580FE /* StartTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54398EAF1D04BA46005580FE /* StartTestVC.swift */; };
 		543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A48721BDD4226008E9D71 /* tuto1VC.swift */; };
 		5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448EB001C1B71DB004D771A /* helpSettingsVC.swift */; };
 		544F17941CE25B8000B45683 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 544F17931CE25B8000B45683 /* Main.storyboard */; };
@@ -56,6 +58,10 @@
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
+		54E028621D085B3900F4BB3C /* TextActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E028611D085B3900F4BB3C /* TextActivityVC.swift */; };
+		54E028641D0863DD00F4BB3C /* AudioActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E028631D0863DD00F4BB3C /* AudioActivityVC.swift */; };
+		54E0D5CE1D02130400ECA1D1 /* MediatorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0D5CD1D02130400ECA1D1 /* MediatorTVC.swift */; };
+		54E0D5DD1D02333300ECA1D1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0D5DC1D02333300ECA1D1 /* Test.swift */; };
 		54E971941B6ED25B005F27F1 /* FiraMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */; };
 		54E971951B6ED25B005F27F1 /* FiraMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */; };
 		54E971961B6ED25B005F27F1 /* FiraMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */; };
@@ -312,6 +318,8 @@
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
 		542DEE3F1B8A178800A09A00 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		54398EA01D04AF20005580FE /* ListActivitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListActivitiesVC.swift; sourceTree = "<group>"; };
+		54398EAF1D04BA46005580FE /* StartTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartTestVC.swift; sourceTree = "<group>"; };
 		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tuto1VC.swift; path = mplango/tuto1VC.swift; sourceTree = "<group>"; };
 		5448EB001C1B71DB004D771A /* helpSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpSettingsVC.swift; sourceTree = "<group>"; };
 		544F17931CE25B8000B45683 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -330,6 +338,10 @@
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
+		54E028611D085B3900F4BB3C /* TextActivityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextActivityVC.swift; sourceTree = "<group>"; };
+		54E028631D0863DD00F4BB3C /* AudioActivityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioActivityVC.swift; sourceTree = "<group>"; };
+		54E0D5CD1D02130400ECA1D1 /* MediatorTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediatorTVC.swift; sourceTree = "<group>"; };
+		54E0D5DC1D02333300ECA1D1 /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		54E971711B6ED1F5005F27F1 /* FiraMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Bold.ttf"; sourceTree = "<group>"; };
 		54E971721B6ED1F5005F27F1 /* FiraMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Medium.ttf"; sourceTree = "<group>"; };
 		54E971731B6ED1F5005F27F1 /* FiraMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -502,6 +514,11 @@
 			isa = PBXGroup;
 			children = (
 				54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */,
+				54398EAF1D04BA46005580FE /* StartTestVC.swift */,
+				54398EA01D04AF20005580FE /* ListActivitiesVC.swift */,
+				54E028611D085B3900F4BB3C /* TextActivityVC.swift */,
+				54E028631D0863DD00F4BB3C /* AudioActivityVC.swift */,
+				54E0D5CD1D02130400ECA1D1 /* MediatorTVC.swift */,
 			);
 			name = Testes;
 			sourceTree = "<group>";
@@ -620,6 +637,7 @@
 				8283BE3C1B0162F00085F9A6 /* User.swift */,
 				82D73C9B1B8139DB00DFEAB0 /* Post.swift */,
 				54241A101B7E35040074D350 /* Carnet.swift */,
+				54E0D5DC1D02333300ECA1D1 /* Test.swift */,
 				159C11AD1BF5768A0018EBE1 /* RUser.swift */,
 				153C20EC1CEA71B700C3FB8F /* Comment.swift */,
 			);
@@ -1013,19 +1031,24 @@
 				544F17961CE260C400B45683 /* ChangeEmail.swift in Sources */,
 				542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */,
 				540A4A411C11EF5A00C166D8 /* PostDetailViewController.swift in Sources */,
+				54398EA11D04AF20005580FE /* ListActivitiesVC.swift in Sources */,
 				543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */,
 				82842E441B61EA7900E7C860 /* InitialViewController.swift in Sources */,
 				82D73C9C1B8139DB00DFEAB0 /* Post.swift in Sources */,
 				8283BE451B02364E0085F9A6 /* ForgotPassViewController.swift in Sources */,
 				82D73CA51B81720E00DFEAB0 /* PostViewController.swift in Sources */,
+				54398EB01D04BA46005580FE /* StartTestVC.swift in Sources */,
 				54C26FDF1C0FA08B002B5B5D /* TestsVC.swift in Sources */,
 				546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */,
+				54E0D5CE1D02130400ECA1D1 /* MediatorTVC.swift in Sources */,
+				54E028621D085B3900F4BB3C /* TextActivityVC.swift in Sources */,
 				1536E2FA1C6F711900471E86 /* ActivityIndicator.swift in Sources */,
 				5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */,
 				54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */,
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */,
+				54E028641D0863DD00F4BB3C /* AudioActivityVC.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
 				153C20ED1CEA71B700C3FB8F /* Comment.swift in Sources */,
 				15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */,
@@ -1038,6 +1061,7 @@
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
 				544F17AF1CE2627F00B45683 /* EditProfile.swift in Sources */,
 				54B130A01CEE00A400199245 /* ContactCell.swift in Sources */,
+				54E0D5DD1D02333300ECA1D1 /* Test.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
 				15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */,
 				8283BE1B1B0143AF0085F9A6 /* mplango.xcdatamodeld in Sources */,

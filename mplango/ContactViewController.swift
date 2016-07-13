@@ -225,6 +225,7 @@ class ContactViewController: UITableViewController {
         })
         
     }
+    
     // MARK: Search bar
     
     func filterContentForSearchText(searchText: String, scope: String = "Tous") {
