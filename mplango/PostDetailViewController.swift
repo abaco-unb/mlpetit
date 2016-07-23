@@ -90,7 +90,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         self.navigationItem.title = String(post?.category)
         
-        
         if (post?.category) == Optional(1) {
             let defi = UIImage(named: "cat_defi_bar")
             let imageView = UIImageView(image:defi)
@@ -134,32 +133,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             textPost.text      = post!.text
             locationLabel.text = post!.locationName
             
-            if post!.audio != "" {
-                
-                listenBtn.enabled = true
-                listenBtn2.enabled = true
-                
-                stopBtn.enabled = true
-                stopBtn2.enabled = true
-                                
-                //required init to play
-                do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
-                } catch _ {
-                    NSLog("Error: viewDidLoad -> set Category failed")
-                }
-                do {
-                    try AVAudioSession.sharedInstance().setActive(true)
-                } catch _ {
-                    NSLog("Error: viewDidLoad -> set Active failed")
-                }
-                do {
-                    try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
-                } catch _ {
-                    NSLog("Error: viewDidLoad -> set override output Audio port     failed")
-                }
-                
-                do {
+            ActivityIndicator.instance.showActivityIndicator(self.view)
+            Alamofire.request(.GET, EndpointUtils.POST, parameters: ["id" : (post?.id)!])
+                .responseSwiftyJSON({ (request, response, json, error) in
+                    ActivityIndicator.instance.hideActivityIndicator()
+                    let postComplete = json["data"]
                     
                     
                     self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
@@ -633,13 +611,19 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         }
     }
     
+    override func viewWillLayoutSubviews()
+    {
+        super.viewWillLayoutSubviews();
+        self.scrollView.contentSize.height = 600;
+    }
+    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
         
-        scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 600)
-
+//        scrollView.frame = view.bounds
+//        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 600)
+//
 
         //To adjust the height of TextField to its content
         let contentSize = self.textPost.sizeThatFits(self.textPost.bounds.size)

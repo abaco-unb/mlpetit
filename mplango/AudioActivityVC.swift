@@ -395,9 +395,9 @@ class AudioActivityVC: UIViewController, AVAudioRecorderDelegate, UIImagePickerC
         backgroundRecord.layer.masksToBounds = true
         
         //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(PostViewController.handleLongPress(_:)))
-        longPressRecogniser.minimumPressDuration = 0.2
-        recordButton.addGestureRecognizer(longPressRecogniser)
+//        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(PostViewController.handleLongPress(_:)))
+//        longPressRecogniser.minimumPressDuration = 0.2
+//        recordButton.addGestureRecognizer(longPressRecogniser)
     }
     
     func getDocumentsDirectory() -> String {

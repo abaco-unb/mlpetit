@@ -1188,7 +1188,7 @@
                                             <constraint firstAttribute="height" constant="30" id="mip-O0-DAf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="FiraSans-Medium" family="Fira Sans" pointSize="15"/>
-                                        <state key="normal" title="Posts récents">
+                                        <state key="normal" title="Toutes les catégories">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="default">
@@ -1730,14 +1730,14 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="activiteBtn" destination="gDX-8n-cxA" id="7bc-yH-7bY"/>
                         <outlet property="astucesBtn" destination="DQC-Hr-Xcm" id="IAx-BJ-CoF"/>
+                        <outlet property="curiositesBtn" destination="gDX-8n-cxA" id="qwP-p4-fbd"/>
                         <outlet property="defisBtn" destination="9V8-TJ-zDS" id="LEU-Qg-55N"/>
-                        <outlet property="doutesBtn" destination="Hkw-Cz-GFo" id="Fk1-KI-fMk"/>
+                        <outlet property="evenementsBtn" destination="Hkw-Cz-GFo" id="MQE-2k-ZnM"/>
                         <outlet property="filtersView" destination="A0w-xj-iPJ" id="jGy-ZM-oXN"/>
                         <outlet property="hideFiltersBtn" destination="Ft9-qi-9gP" id="cGN-Ui-VLq"/>
                         <outlet property="mkMapView" destination="T1a-EB-3ih" id="Xg4-rh-Ntb"/>
-                        <outlet property="recentsBtn" destination="19A-VB-gw9" id="vzC-n1-GUI"/>
+                        <outlet property="showAllBtn" destination="19A-VB-gw9" id="2cp-Fu-8la"/>
                         <outlet property="showFiltersBtn" destination="76z-RQ-41K" id="6at-eH-Zby"/>
                         <segue destination="KZQ-QK-y7F" kind="showDetail" identifier="to_post_detail" action="showViewController:sender:" id="pVN-rO-OTn"/>
                     </connections>
@@ -3956,7 +3956,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkX-KG-egn">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="277" y="84" width="45" height="32"/>
+                                    <rect key="frame" x="278" y="84" width="45" height="32"/>
                                 </variation>
                                 <connections>
                                     <segue destination="PaN-uT-b20" kind="presentation" identifier="show_followers" id="XXQ-Rc-i6j"/>
@@ -3987,7 +3987,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="277" y="102" width="45" height="14"/>
+                                    <rect key="frame" x="278" y="102" width="45" height="14"/>
                                     <mask key="constraints">
                                         <exclude reference="8Iv-lw-MUI"/>
                                     </mask>
@@ -5269,8 +5269,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="56" y="28" width="324" height="17"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
@@ -5282,7 +5281,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="356" y="50" width="34" height="14"/>
+                                                    <rect key="frame" x="356" y="49" width="34" height="14"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 pts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P85-cB-AB6">
@@ -5291,7 +5290,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="356" y="27" width="34" height="18"/>
+                                                    <rect key="frame" x="356" y="26" width="34" height="18"/>
                                                 </variation>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bYu-ti-T99">
@@ -9162,7 +9161,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="227" width="324" height="17"/>
+                                    <rect key="frame" x="56" y="226" width="324" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="8hB-66-XYH"/>
                                     </mask>
@@ -9601,7 +9600,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="440" width="324" height="17"/>
+                                    <rect key="frame" x="56" y="439" width="324" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="0Nk-zu-nbV"/>
                                     </mask>
@@ -10469,7 +10468,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="440" width="110" height="17"/>
+                                    <rect key="frame" x="56" y="439" width="110" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="6oW-i7-FGR"/>
                                     </mask>
@@ -13729,7 +13728,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="1sb-c3-xO2"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="56" y="191" width="324" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="1sb-c3-xO2"/>
                                     </mask>
@@ -15071,7 +15071,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="333" width="110" height="17"/>
+                                    <rect key="frame" x="56" y="332" width="110" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="1bM-Sx-YrL"/>
                                     </mask>
@@ -15689,8 +15689,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                         <exclude reference="F6s-1U-In1"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="187" width="324" height="18"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="F6s-1U-In1"/>
                                     </mask>
@@ -16780,7 +16779,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="285" width="324" height="17"/>
+                                    <rect key="frame" x="56" y="284" width="324" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="u1h-sA-u5h"/>
                                     </mask>
@@ -17024,7 +17023,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="186" width="324" height="18"/>
+                                    <rect key="frame" x="56" y="185" width="324" height="18"/>
                                     <mask key="constraints">
                                         <exclude reference="S26-l7-ydJ"/>
                                     </mask>
@@ -18526,7 +18525,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="209" width="34" height="17"/>
+                                    <rect key="frame" x="56" y="208" width="34" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="XsH-1B-noe"/>
                                     </mask>
@@ -19864,7 +19863,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="56" y="209" width="324" height="17"/>
+                                    <rect key="frame" x="56" y="208" width="324" height="17"/>
                                     <mask key="constraints">
                                         <exclude reference="6jG-y0-hyM"/>
                                     </mask>
@@ -21360,8 +21359,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="cGt-W9-uNY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="43" y="15" width="67" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="cGt-W9-uNY"/>
                                                         </mask>
@@ -21386,8 +21384,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="y2s-rM-boH"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="120" y="15" width="112" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="5Rx-uX-HOf"/>
                                                             <include reference="mi7-gz-MEa"/>
@@ -21440,8 +21437,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xvR-4s-Gzb"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="131" y="37" width="21" height="18"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="BAZ-5P-oEA"/>
                                                             <exclude reference="aWp-E0-Icm"/>
@@ -21473,8 +21469,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="unL-gK-SsY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="38" y="38" width="85" height="15"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="5DG-YH-ysf"/>
                                                             <exclude reference="fCz-GG-54l"/>
@@ -21579,8 +21574,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="eJD-r8-8GC"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="44" y="15" width="82" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="eJD-r8-8GC"/>
                                                         </mask>
@@ -21605,8 +21599,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="w3X-jA-WiW"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="136" y="15" width="112" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="1G8-aA-Q6U"/>
                                                             <include reference="mhJ-MQ-c9d"/>
@@ -21627,8 +21620,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="nl9-h3-8XB"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="9" y="8" width="30" height="30"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="jif-qV-IXt"/>
                                                             <include reference="nl9-h3-8XB"/>
@@ -21660,8 +21652,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="wdH-Qi-fcX"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="372" y="116" width="21" height="18"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="MJM-jp-Gbo"/>
                                                             <include reference="MWH-vC-9rU"/>
@@ -21695,8 +21686,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xWw-Yj-iSD"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="192" y="51" width="172" height="148"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="9iL-nN-lQn"/>
                                                             <include reference="Z12-4H-3yy"/>
@@ -21717,8 +21707,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="cYH-PL-CRO"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="44" y="51" width="140" height="140"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Eo2-YT-dJM"/>
                                                             <include reference="cYH-PL-CRO"/>
@@ -21832,8 +21821,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="N8a-Kc-3j8"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="43" y="15" width="67" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="N8a-Kc-3j8"/>
                                                         </mask>
@@ -21858,8 +21846,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xgG-Ne-zwk"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="120" y="15" width="112" height="16"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="9dU-hw-kuJ"/>
                                                             <exclude reference="IGk-Kr-lsf"/>
@@ -21955,8 +21942,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     <exclude reference="r5B-uP-xT3"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="104" y="7" width="40" height="32"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="JeI-sV-97E"/>
                                                                     <include reference="r5B-uP-xT3"/>
@@ -21988,8 +21974,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xME-6T-L0i"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="38" y="46" width="165" height="45"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="LKr-e9-nOM"/>
                                                             <include reference="qmC-cZ-2GY"/>
@@ -22029,8 +22014,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xAM-fI-pfi"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="211" y="60" width="21" height="18"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <exclude reference="7qZ-vk-Myd"/>
                                                             <include reference="Kim-bz-GiO"/>
@@ -22046,9 +22030,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 </button>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-0.5" minValue="-0.5" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="h3q-hD-TLO">
                                                     <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79" y="54" width="57" height="31"/>
-                                                    </variation>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -29568,7 +29549,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
         <segue reference="Ji6-1Z-JZP"/>
         <segue reference="dFm-z6-DIa"/>
         <segue reference="UED-MT-Gjd"/>
-        <segue reference="GC1-UV-19e"/>
+        <segue reference="L2S-SH-vTS"/>
         <segue reference="czo-L7-M1J"/>
         <segue reference="yhB-Xg-v2R"/>
     </inferredMetricsTieBreakers>

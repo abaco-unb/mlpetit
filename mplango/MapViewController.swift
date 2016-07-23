@@ -40,11 +40,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     //Filtros: background e botões
     
     @IBOutlet weak var filtersView: UIView!
-    @IBOutlet weak var recentsBtn: UIButton!
+    @IBOutlet weak var showAllBtn: UIButton!
     @IBOutlet weak var defisBtn: UIButton!
     @IBOutlet weak var astucesBtn: UIButton!
-    @IBOutlet weak var doutesBtn: UIButton!
-    @IBOutlet weak var activiteBtn: UIButton!
+    @IBOutlet weak var evenementsBtn: UIButton!
+    @IBOutlet weak var curiositesBtn: UIButton!
     
     @IBOutlet weak var showFiltersBtn: UIButton!
     @IBOutlet weak var hideFiltersBtn: UIButton!
@@ -150,11 +150,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         showFiltersBtn.hidden = true
         hideFiltersBtn.hidden = false
         hideFiltersBtn.enabled = true
-        recentsBtn.enabled = true
+        showAllBtn.enabled = true
         defisBtn.enabled = true
         astucesBtn.enabled = true
-        doutesBtn.enabled = true
-        activiteBtn.enabled = true
+        evenementsBtn.enabled = true
+        curiositesBtn.enabled = true
         
     }
     
@@ -179,16 +179,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         print("nome do botao:",sender.tag)
         var showCategory:Int!
         switch sender {
-        case recentsBtn:
+        case showAllBtn:
+            // aqui mostrar todas as categorias
             showCategory = 0
         case defisBtn:
             showCategory = Post.DEFIS
         case astucesBtn:
             showCategory = Post.ASTUCES
-        case doutesBtn:
-            showCategory = Post.CURIOSITE
-        case activiteBtn:
+        case evenementsBtn:
             showCategory = Post.EVENEMENTS
+        case curiositesBtn:
+            showCategory = Post.CURIOSITE
         default:
             showCategory = 5
         }

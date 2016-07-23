@@ -136,8 +136,7 @@ class CarnetTVC: UITableViewController {
         }
         
         cell.wordLabel.text = item.word
-        cell.picturePreview.image = UIImage(contentsOfFile: item.image)
-//            ImageUtils.instance.loadImageFromPath(item.image)
+        cell.picturePreview.image = ImageUtils.instance.loadImageFromPath(item.image)
 
         return cell
     }

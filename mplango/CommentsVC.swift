@@ -90,22 +90,19 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 //            writeTxtView.text = comment?.text
                 //        }
                 
-                
-                
-                //Para que a view acompanhe o teclado e poder escrever o comentário
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-                
-                self.writeTxtView.delegate = self
-                
-                self.postComBtn.hidden = true
-                self.removeImage.hidden = true
-                
-                self.comTableView.rowHeight = UITableViewAutomaticDimension
-                self.comTableView.estimatedRowHeight = 200.0
         });
         
+        //Para que a view acompanhe o teclado e poder escrever o comentário
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
+        self.writeTxtView.delegate = self
+        
+        self.postComBtn.hidden = true
+        self.removeImage.hidden = true
+        
+        self.comTableView.rowHeight = UITableViewAutomaticDimension
+        self.comTableView.estimatedRowHeight = 200.0
 
     }
     
@@ -144,14 +141,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             postComBtn.enabled = false
         }
         
-//        comPicture.image = nil
-//        writeTxtView.text = nil
-//        postComBtn.hidden = true
-//        recordBtn.hidden = false
-//        recordBtn.enabled = true
-//        writeHereImage.hidden = false
-//        removeImage.hidden = true
-//        picBtn.hidden = false
+        textViewDidChange(writeTxtView)
 
     }
     
@@ -175,7 +165,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             recordBtn.hidden = true
         }
         
-        else if text.characters.count < 1 {
+        else if text.characters.count == 0 {
             
             if comPicture != nil {
                 postComBtn.hidden = false
