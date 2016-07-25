@@ -15,6 +15,7 @@ class ContactCell: UITableViewCell {
     @IBOutlet weak var contactName: UILabel!
     @IBOutlet weak var contactCategory: UILabel!
     @IBOutlet weak var followBtn: UIView!
+    @IBOutlet weak var contactBadge: UIImageView!
     
     var contact: RUser!
     var userId:Int!

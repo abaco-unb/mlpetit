@@ -243,8 +243,11 @@ class ContactViewController: UITableViewController {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
         
+        searchController.hidesNavigationBarDuringPresentation = true
+        self.searchController.searchBar.delegate = self
+        presentViewController(searchController, animated: true, completion: nil)
+
         searchController.searchBar.placeholder = "Rechercher"
         searchController.searchBar.scopeButtonTitles = ["Tous", "Apprenants", "Médiateurs"]
 
@@ -326,6 +329,9 @@ class ContactViewController: UITableViewController {
             cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(String(contact.image))
             cell.contactPicture.layer.masksToBounds = true
             cell.contactPicture.layer.cornerRadius = 30
+        
+        //PARA IMPLEMENTAR A QUESTAO DO BADGE:
+            //cell.contactBadge.image =
 
             if (self.userFollowing.indexOf(contact.id) != nil) {
                 self.toggleFollowBtnView((cell.followBtn as! UIButton), state: true)

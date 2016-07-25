@@ -13,21 +13,21 @@ import SwiftyJSON
 import AlamofireSwiftyJSON
 import CoreLocation
 
-
-class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var mkMapView: MKMapView!
     
     let regionRadius: CLLocationDistance = 1000
     var locationManager = CLLocationManager()
+    
     var posts = [PostAnnotation]()
+    var filteredPosts = [PostAnnotation]()
     
     var location:CLLocation!
     var street: String!
     var loggedUser: User!
     
     var indicator:ActivityIndicator = ActivityIndicator()
-    
     
     var zoomLevel = Double()
     var iphoneScaleFactorLatitude = Double()
@@ -36,6 +36,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     var arrDicPostsWithLatitudeLongitude = [Dictionary<String, Double>]()
     
     let clusteringManager = FBClusteringManager()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     //Filtros: background e botões
     
@@ -49,12 +51,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     @IBOutlet weak var showFiltersBtn: UIButton!
     @IBOutlet weak var hideFiltersBtn: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         filtersView.hidden = true
-        
+    
         //recupera os dados do usuário logado no app
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let user:Int = prefs.integerForKey("id") as Int
@@ -135,6 +136,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
     }
     
+    // MARK: Search bar
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+      
+        /*
+        filteredPosts = posts.filter { posts in
+            //return itens.word.lowercaseString.containsString(searchText.lowercaseString)
+         
+             AQUI EM VEZ DO return ACIMA (APLICADO À TABELA DO CARNET)
+             deveria ter o que vai mostrar a busca no mapa.
+             em vez de buscar por "itens" busca por "posts", e em vez de buscar por "word", busca por "tag".
+             Daria tipo:
+             return posts.tag.lowercaseString.containsString(searchText.lowercaseString)
+            
+         }
+ 
+         */
+        
+        //tableView.reloadData()
+        // AQUI EM VEZ De fazer reload no tableView, deve ser no mapa
+        
+    }
+    
     //MARK: Actions
     
     
@@ -157,6 +181,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         curiositesBtn.enabled = true
         
     }
+    
+    @IBAction func showSearchBar(sender: AnyObject) {
+        
+//        searchController.searchResultsUpdater = self
+//        searchController.dimsBackgroundDuringPresentation = false
+//        definesPresentationContext = true
+        
+        searchController.searchBar.placeholder = "Rechercher"
+//        searchController.searchBar.canc
+    
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.delegate = self
+        presentViewController(searchController, animated: true, completion: nil)
+        
+    }
+    
+    
     
     @IBAction func refreshLocation(sender: AnyObject) {
         
@@ -182,14 +223,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         case showAllBtn:
             // aqui mostrar todas as categorias
             showCategory = 0
+            showFiltersBtn.setImage(UIImage(named: "filtros_map_on"), forState: .Normal)
         case defisBtn:
             showCategory = Post.DEFIS
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_desafio"), forState: .Normal)
         case astucesBtn:
             showCategory = Post.ASTUCES
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_dica"), forState: .Normal)
         case evenementsBtn:
             showCategory = Post.EVENEMENTS
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_evento"), forState: .Normal)
         case curiositesBtn:
             showCategory = Post.CURIOSITE
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_curiosidade"), forState: .Normal)
         default:
             showCategory = 5
         }
@@ -710,4 +756,10 @@ extension MapViewController : MKMapViewDelegate {
         
     }
     
+}
+
+extension MapViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }

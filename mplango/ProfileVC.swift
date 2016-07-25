@@ -37,6 +37,7 @@ class ProfileVC: UIViewController {
             self.navigationItem.leftBarButtonItem = nil
             self.navigationItem.backBarButtonItem!.enabled = true
             self.navigationItem.backBarButtonItem!.title = "liste"
+            self.navigationItem.rightBarButtonItem = nil
     
             self.navigationItem.title = contact.name
             self.profileNationality.text = contact.nationality
