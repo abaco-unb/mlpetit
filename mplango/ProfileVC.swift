@@ -177,9 +177,9 @@ class ProfileVC: UIViewController {
                     self.profileBio.text = (bio)
                 }
                 
-                if let posts = user["posts"].string {
-                    print("show total posts : ", posts)
-                    self.profileNumberPosts.text = posts
+                if let posts = user["posts"].int {
+                    print("show total posts : ", String(posts))
+                    self.profileNumberPosts.text = String(posts)
                 }
                 
         });

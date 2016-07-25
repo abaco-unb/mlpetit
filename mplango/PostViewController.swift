@@ -111,14 +111,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             NSLog("Serviço de localização indisponível")
         }
         
-        AudioHelper.instance._init(self, icon: self.iconAudio,
+        AudioHelper.instance._init(self.backgroundRecord,
+                                   icon: self.iconAudio,
                                    check: self.checkAudio,
-                                   background: self.backgroundRecord,
                                    label: self.labelRecording,
-                                   btnStop: self.stopBtn,
-                                   btnPlay: self.playButton,
-                                   btnRecorder: self.recordButton,
-                                   slider: self.audioSlider)
+                                   btnRecorder: self.recordButton)
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -378,7 +375,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         photoImage.image = fixOrientationImage
         
         self.image = photoImage.image!
-        
+        self.points += GamificationRules.IMAGE_TOTAL_POINTS;
         //set image as checked
 //        checkOn(checkImage)
         checkImage.textColor = UIColor(hex: 0x43A047)
@@ -395,11 +392,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     //MARK: Audio Process
     
     @IBAction func playAudio(sender: UIButton) {
-        AudioHelper.instance.play()
+        AudioHelper.instance.play(sender)
     }
     
     @IBAction func stopAudio(sender: UIButton) {
-        AudioHelper.instance.stop()
+        AudioHelper.instance.stop(sender)
     }
     
     @IBAction func changeAudioTime(sender: UISlider) {
@@ -415,7 +412,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let alertController = UIAlertController(title: "Confirmer ?", message: "Tu confirmes la publication de ton post ?", preferredStyle: .Alert)
         
         let agreeAction = UIAlertAction(title: "Oui, je confirme", style: .Default) { (action) -> Void in
-            print("Post was sent")
             self.confirmSavePost()
         }
         
@@ -429,25 +425,21 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func confirmSavePost (){
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
-        print("enviando esse post...")
-        print(self.latitude)
-        print(self.longitude)
-        print(self.address)
-        print(self.category)
-        print((textPostView.text != nil || textPostView.text != "") ? textPostView.text : "nada informado")
-        print(userId)
-        
         let text = (textPostView.text != nil || textPostView.text != "") ? textPostView.text : ""
         
-//        tagsView.resolveHashTags()
+        self.points += ((tags.count + GamificationRules.TEXT_TOTAL_POINTS) + AudioHelper.instance.points)
+        print( "points : " + String(points) )
+        
         let params : [String: String] = [
             "text" : text,
             "location" : self.address,
             "latitude" : String(self.latitude),
             "longitude" : String(self.longitude),
             "category" : String(self.category),
+            "points"   : String(self.points),
             "user": String(userId)
         ]
         
@@ -487,19 +479,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func save(upload: Bool, params: Dictionary<String, String>) {
-        print(0)
         var imageData:NSData!
-        print(1)
         if self.image != nil {
-            print(2)
             imageData = image.lowestQualityJPEGNSData
         }
-        print(3)
         ActivityIndicator.instance.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
         let urlRequest = self.urlRequestWithComponents(EndpointUtils.POST, parameters: params, data: false)
-        print(4)
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
@@ -524,9 +511,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         }
                         alertController.addAction(agreeAction)
                         self.presentViewController(alertController, animated: true, completion: nil)
-                    }
                 }
-            })
+            }
+        })
     }
     
     
@@ -675,9 +662,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showRewards" {
+        if segue.identifier == "go_to_points_notification" {
             let rewardController:RewardViewController = segue.destinationViewController as! RewardViewController
-            points += (tags.count * 5) + AudioHelper.instance.points
+            print("prepareForSegue")
             print( "points : " + String(points) )
             rewardController.points = points
         }

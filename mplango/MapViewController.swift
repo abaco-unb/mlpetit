@@ -22,12 +22,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     var locationManager = CLLocationManager()
     var posts = [PostAnnotation]()
     
+    var showCategory:Int = 0
+    
     var location:CLLocation!
     var street: String!
     var loggedUser: User!
-    
-    var indicator:ActivityIndicator = ActivityIndicator()
-    
     
     var zoomLevel = Double()
     var iphoneScaleFactorLatitude = Double()
@@ -60,20 +59,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         let user:Int = prefs.integerForKey("id") as Int
         NSLog("usuário logado: %ld", user)
         
-        self.clusteringManager.delegate = self;
+        self.clusteringManager.delegate = self
         
         self.mkMapView.showsUserLocation = true
         self.mkMapView.delegate = self
         self.mkMapView.mapType = MKMapType.Standard
-        
-        let worldRect = MKMapRectWorld
-        let point1 = MKMapRectWorld.origin
-        let point2 = MKMapPointMake(point1.x + worldRect.size.width, point1.y)
-        let point3 = MKMapPointMake(point2.x, point2.y + worldRect.size.height)
-        let point4 = MKMapPointMake(point1.x, point3.y)
-        var points = [point1, point2, point3, point4]
-        let polygon = MKPolygon(points: &points, count: points.count)
-        self.mkMapView.addOverlay(polygon)
         
         //inicializa : get geo location data
         locationManager.requestAlwaysAuthorization()
@@ -90,54 +80,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
         //recupera todos os posts e adiciona no mapa
         self.upServerPosts()
-//        let numberOfLocations = 1000
-//        let array:[MKAnnotation] = randomLocationsWithCount(numberOfLocations)
-   
-        
-        //self.mkMapView.userTrackingMode = MKUserTrackingModeFollow;
-        
-        
-        /**
-         * GET STREET ADDRESS NAME
-         */
-                //MARK - add circle rounded user location
-        ///addRadiusCircle(location)
-        
-        //let geocoder = CLGeocoder()
-        //geocoder.reverseGeocodeLocation(location) {
-            //(placemarks, error) -> Void in
-            //if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
-            //var placemark = placemarks[0]
-            
-            //if let validPlacemark = placemarks?[0]{
-               // let placemark = validPlacemark as CLPlacemark;
-                
-                //println("placemark")
-                //println(placemark)
-                // Street addres
-                //println("street")
-                //println(placemark)
-                //self.street = st
-                //println("self.street")
-                //println(self.street)
-//            }
-//        }
-        //println("self.street")
-        //println(self.street)
-        //let location = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        //let userLocation = CLLocationCoordinate2D(latitude: -15.9041234,longitude: -48.079856)
-        
-        
-        //let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
-        
-        //longPressRecogniser.minimumPressDuration = 1.0
-        //mkMapView.addGestureRecognizer(longPressRecogniser)
-        
     }
     
     //MARK: Actions
-    
-    
+
     @IBAction func popover(sender: AnyObject) {
         
         self.performSegueWithIdentifier("showNotifications", sender: self)
@@ -176,57 +122,64 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     }
     
     @IBAction func filterPosts(sender: UIButton) {
+        
+        resetMapFilter();
+        
         print("nome do botao:",sender.tag)
-        var showCategory:Int!
+        
         switch sender {
-        case recentsBtn:
-            showCategory = 0
-        case defisBtn:
-            showCategory = Post.DEFIS
-        case astucesBtn:
-            showCategory = Post.ASTUCES
-        case doutesBtn:
-            showCategory = Post.CURIOSITE
-        case activiteBtn:
-            showCategory = Post.EVENEMENTS
-        default:
-            showCategory = 5
+            case defisBtn:
+                showCategory = Post.DEFIS
+            case astucesBtn:
+                showCategory = Post.ASTUCES
+            case doutesBtn:
+                showCategory = Post.CURIOSITE
+            case activiteBtn:
+                showCategory = Post.EVENEMENTS
+            default:
+                showCategory = 5
         }
+        
+        print(Post.IMG_CATEGORIES[showCategory])
         
         showFiltersBtn.imageView?.image = UIImage(named: Post.IMG_CATEGORIES[showCategory])
         self.hideFilters(sender);
         
-        for annotation in self.clusteringManager.allAnnotations() {
-            self.mkMapView.viewForAnnotation(annotation)?.hidden = true
-            print("iniciou o loop de cluster annotation")
-//            if showCategory == 5 {
-//                self.mkMapView.viewForAnnotation(annotation)?.hidden = false
-//                continue
-//            }
-            
-            if annotation.isKindOfClass(PostAnnotation) {
-                print("é classe de Post")
-                let post: PostAnnotation = annotation as! PostAnnotation
-                
-                if post.category.integerValue == showCategory {
-                    print("coloca como visivel")
-                    self.mkMapView.viewForAnnotation(post)?.hidden = false
-                }
-            }
-        }
-        
+        mapFilter()
         
     }
     
+    func mapFilter() {
+        
+        if(showCategory != 0 && showCategory < 5 ) {
+            for annotation in self.mkMapView.annotations {
+                if annotation.isKindOfClass(PostAnnotation) {
+                    
+                    let post: PostAnnotation = annotation as! PostAnnotation
+                    
+                    if post.category.integerValue != showCategory {
+                        self.mkMapView.viewForAnnotation(post)?.hidden = true
+                    }
+                }
+            }
+        }
+    }
+    
+    func resetMapFilter() {
+        for annotation in self.clusteringManager.allAnnotations() {
+            self.mkMapView.viewForAnnotation(annotation)?.hidden = true
+        }
+    }
+    
     func upServerPosts() {
-        self.indicator.showActivityIndicator(self.view)
+        ActivityIndicator.instance.showActivityIndicator(self.view)
         //Checagem remota
         Alamofire.request(.GET, EndpointUtils.POST)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
-                self.indicator.hideActivityIndicator();
+                ActivityIndicator.instance.hideActivityIndicator()
                    if let posts = json["data"].array {
                     
                         for post in posts {
@@ -272,25 +225,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                                 ownerId = owner
                             }
                             
-//                            if let postComments = post["comments"].array {
-//                                for comment in postComments {
-//                                    var comId  = 0;
-//                                    var userId = 0;
-//                                    
-//                                    if let commentId = comment["id"].int {
-//                                        comId = commentId
-//                                    }
-//                                    
-//                                    if let uId = comment["user"]["id"].int {
-//                                        userId = uId
-//                                    }
-//                                    
-//                                    comments.append(Comment(id: comId, audio: comment["audio"].stringValue, text: comment["text"].stringValue, image: comment["image"].stringValue, postId: postId, created: comment["created"].stringValue, userId: userId))
-//                                }
-//                            }
-                            
-//                            
-                            
                             //print("Comentários do Post", comments)
                              //show post on map
                              let postAnnotation = PostAnnotation(
@@ -310,8 +244,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                 
                    print( "total de posts : ",self.posts.count)
                    self.clusteringManager.addAnnotations(self.posts)
-                
-                
+                   self.displayPostsInMap()
             });
         
     }
@@ -436,6 +369,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
+    
+    
     
     
 //    
@@ -595,6 +530,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
 //        
 //        self.mkMapView.setRegion(region, animated: true)
 //    }
+    
+    func displayPostsInMap() {
+        
+        let mapBoundsWidth = Double(self.mkMapView.bounds.size.width)
+        let mapRectWidth:Double = self.mkMapView.visibleMapRect.size.width
+        let scale:Double = mapBoundsWidth / mapRectWidth
+        let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mkMapView.visibleMapRect, withZoomScale:scale)
+        
+        self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mkMapView)
+        
+        mapFilter()
+    }
 }
 
 extension MapViewController : FBClusteringManagerDelegate {
@@ -612,15 +559,7 @@ extension MapViewController : MKMapViewDelegate {
         
         NSOperationQueue().addOperationWithBlock({
             
-            let mapBoundsWidth = Double(self.mkMapView.bounds.size.width)
-            
-            let mapRectWidth:Double = self.mkMapView.visibleMapRect.size.width
-            
-            let scale:Double = mapBoundsWidth / mapRectWidth
-            
-            let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mkMapView.visibleMapRect, withZoomScale:scale)
-            
-            self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mkMapView)
+            self.displayPostsInMap()
             
         })
         
@@ -660,17 +599,9 @@ extension MapViewController : MKMapViewDelegate {
                 imageview.layer.borderWidth = 1
                 imageview.layer.borderColor = UIColor.greenColor().CGColor
             
-            if let image : UIImage = NSCache.sharedInstance.objectForKey(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true") as? UIImage {
+            if let image : UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")! {
                 imageview.image = image
-                print("com cache : " + EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")
-            } else {
-                print("sem cache : " + EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")
-                let img: UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")!
-                NSCache.sharedInstance.setObject(img, forKey: EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")
-                imageview.image = img
             }
-
-            
             
             postView!.leftCalloutAccessoryView = imageview
             
