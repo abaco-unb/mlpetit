@@ -24,6 +24,8 @@
 		159C11B71BF58B1C0018EBE1 /* EndpointUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */; };
 		159F1AD91D34392C0074762A /* NSCacheSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1AD81D34392C0074762A /* NSCacheSingleton.swift */; };
 		159F1AE81D35D8F00074762A /* AudioHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1AE71D35D8F00074762A /* AudioHelper.swift */; };
+		159F1B011D3C56170074762A /* MplScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B001D3C56170074762A /* MplScrollView.swift */; };
+		159F1B031D3E9B060074762A /* GamificationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159F1B021D3E9B060074762A /* GamificationRules.swift */; };
 		15FB25D41CFBBEC8000417A3 /* beep-recorded.wav in Resources */ = {isa = PBXBuildFile; fileRef = 15FB25D31CFBBEC8000417A3 /* beep-recorded.wav */; };
 		15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BA1CA6F6B0002A28CC /* FBAnnotation.swift */; };
 		15FE53C21CA6F6B0002A28CC /* FBAnnotationCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BB1CA6F6B0002A28CC /* FBAnnotationCluster.swift */; };
@@ -291,6 +293,8 @@
 		159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointUtils.swift; sourceTree = "<group>"; };
 		159F1AD81D34392C0074762A /* NSCacheSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSCacheSingleton.swift; sourceTree = "<group>"; };
 		159F1AE71D35D8F00074762A /* AudioHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioHelper.swift; sourceTree = "<group>"; };
+		159F1B001D3C56170074762A /* MplScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MplScrollView.swift; sourceTree = "<group>"; };
+		159F1B021D3E9B060074762A /* GamificationRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamificationRules.swift; sourceTree = "<group>"; };
 		15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -485,12 +489,13 @@
 			children = (
 				159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */,
 				54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */,
-				1513D99A1C4D163600D1729C /* ImageUtils.swift */,
 				1536E2F91C6F711900471E86 /* ActivityIndicator.swift */,
 				1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */,
 				157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */,
 				159F1AD81D34392C0074762A /* NSCacheSingleton.swift */,
+				1513D99A1C4D163600D1729C /* ImageUtils.swift */,
 				159F1AE71D35D8F00074762A /* AudioHelper.swift */,
+				159F1B021D3E9B060074762A /* GamificationRules.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
 				8283BE151B0143AF0085F9A6 /* Supporting Files */,
 				15A1DBE11CED3F9500D5BA8A /* mplango-Bridging-Header.h */,
+				159F1B001D3C56170074762A /* MplScrollView.swift */,
 			);
 			path = mplango;
 			sourceTree = "<group>";
@@ -765,7 +771,7 @@
 				TargetAttributes = {
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 2B3UEHLLJ3;
+						DevelopmentTeam = 3MS9SHWCHS;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1031,6 +1037,7 @@
 				54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */,
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				159F1AD91D34392C0074762A /* NSCacheSingleton.swift in Sources */,
+				159F1B031D3E9B060074762A /* GamificationRules.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */,
 				8283BE3D1B0162F00085F9A6 /* User.swift in Sources */,
@@ -1041,6 +1048,7 @@
 				8283BE471B0236880085F9A6 /* MapViewController.swift in Sources */,
 				8283BE1D1B0143AF0085F9A6 /* AccountViewController.swift in Sources */,
 				157970FF1CDD7E2D00C512F6 /* UrlRequestUtils.swift in Sources */,
+				159F1B011D3C56170074762A /* MplScrollView.swift in Sources */,
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
 				544F17AF1CE2627F00B45683 /* EditProfile.swift in Sources */,
