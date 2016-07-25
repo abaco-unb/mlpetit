@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ImageUtils {
+class ImageUtils : NSObject {
     
     static let instance = ImageUtils()
     
@@ -35,16 +35,25 @@ class ImageUtils {
     }
     
     func loadImageFromPath(remotePath: String) -> UIImage? {
-        
-        if let url = NSURL(string: remotePath) {
-            print("url:", url )
-            if let data = NSData(contentsOfURL: url) {
-                print("Loading image from url path: \(remotePath)", terminator: "")
-                return UIImage(data: data)
-            }        
+
+        if let image : UIImage = NSCache.sharedInstance.objectForKey(remotePath) as? UIImage {
+            print("imagem recuperado do cache : " + remotePath)
+            return image
+            
         } else {
-            print("missing image at: \(remotePath)", terminator: "")
+            if let url = NSURL(string: remotePath) {
+                print( "3" )
+                if let data = NSData(contentsOfURL: url) {
+                    print("imagem recuperado sem cache : " + remotePath)
+                    let img: UIImage = UIImage(data: data)!
+                    NSCache.sharedInstance.setObject(img, forKey: remotePath)
+                    return img
+                }
+            } else {
+                print("imagem não pode ser recuperada sem cache : " + remotePath)
+            }
+        
+            return nil
         }
-        return nil
     }
 }
