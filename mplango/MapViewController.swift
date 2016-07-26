@@ -29,6 +29,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     var street: String!
     var loggedUser: User!
     
+    var indicator:ActivityIndicator = ActivityIndicator()
+    
     var zoomLevel = Double()
     var iphoneScaleFactorLatitude = Double()
     var iphoneScaleFactorLongitude = Double()
@@ -170,16 +172,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         print("nome do botao:",sender.tag)
         
         switch sender {
-            case defisBtn:
-                showCategory = Post.DEFIS
-            case astucesBtn:
-                showCategory = Post.ASTUCES
-            case doutesBtn:
-                showCategory = Post.CURIOSITE
-            case activiteBtn:
-                showCategory = Post.EVENEMENTS
-            default:
-                showCategory = 5
+        case showAllBtn:
+            // aqui mostrar todas as categorias
+            showCategory = 0
+            showFiltersBtn.setImage(UIImage(named: "filtros_map_on"), forState: .Normal)
+        case defisBtn:
+            showCategory = Post.DEFIS
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_desafio"), forState: .Normal)
+        case astucesBtn:
+            showCategory = Post.ASTUCES
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_dica"), forState: .Normal)
+        case evenementsBtn:
+            showCategory = Post.EVENEMENTS
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_evento"), forState: .Normal)
+        case curiositesBtn:
+            showCategory = Post.CURIOSITE
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_curiosidade"), forState: .Normal)
+        default:
+            showCategory = 5
         }
         
         print(Post.IMG_CATEGORIES[showCategory])
@@ -682,10 +692,10 @@ extension MapViewController : MKMapViewDelegate {
         
     }
     
-}
 
 extension MapViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
+}
 }
