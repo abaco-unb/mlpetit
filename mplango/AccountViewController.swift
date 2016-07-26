@@ -204,8 +204,6 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     var picker:UIImagePickerController? = UIImagePickerController()
     var popover:UIPopoverPresentationController? = nil
     
-    
-    
     @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
         
         //Hide the keyboard
@@ -300,7 +298,6 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
     
     
     //MARK: UIScrollView moves up (textField) when keyboard appears
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()

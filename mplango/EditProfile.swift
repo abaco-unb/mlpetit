@@ -67,7 +67,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         userGender.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         userGender.layer.cornerRadius = 20
         userGender.layer.masksToBounds = true
-        
 
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EditProfile.dismissKeyboard))
@@ -437,7 +436,6 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
         print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
     
     
     //MARK: enable confirm button

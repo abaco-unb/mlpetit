@@ -34,8 +34,6 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
         // Enable the Save button only if the screen has a valid change
         checkValidChange()
         
-        
-
     }
     
     //MARK: Actions

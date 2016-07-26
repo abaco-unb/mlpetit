@@ -13,14 +13,15 @@ import SwiftyJSON
 import AlamofireSwiftyJSON
 import CoreLocation
 
-
-class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var mkMapView: MKMapView!
     
     let regionRadius: CLLocationDistance = 1000
     var locationManager = CLLocationManager()
+    
     var posts = [PostAnnotation]()
+    var filteredPosts = [PostAnnotation]()
     
     var showCategory:Int = 0
     
@@ -36,24 +37,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     
     let clusteringManager = FBClusteringManager()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //Filtros: background e botões
     
     @IBOutlet weak var filtersView: UIView!
-    @IBOutlet weak var recentsBtn: UIButton!
+    @IBOutlet weak var showAllBtn: UIButton!
     @IBOutlet weak var defisBtn: UIButton!
     @IBOutlet weak var astucesBtn: UIButton!
-    @IBOutlet weak var doutesBtn: UIButton!
-    @IBOutlet weak var activiteBtn: UIButton!
+    @IBOutlet weak var evenementsBtn: UIButton!
+    @IBOutlet weak var curiositesBtn: UIButton!
     
     @IBOutlet weak var showFiltersBtn: UIButton!
     @IBOutlet weak var hideFiltersBtn: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         filtersView.hidden = true
-        
+    
         //recupera os dados do usuário logado no app
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let user:Int = prefs.integerForKey("id") as Int
@@ -82,6 +84,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         self.upServerPosts()
     }
     
+    // MARK: Search bar
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+      
+        /*
+        filteredPosts = posts.filter { posts in
+            //return itens.word.lowercaseString.containsString(searchText.lowercaseString)
+         
+             AQUI EM VEZ DO return ACIMA (APLICADO À TABELA DO CARNET)
+             deveria ter o que vai mostrar a busca no mapa.
+             em vez de buscar por "itens" busca por "posts", e em vez de buscar por "word", busca por "tag".
+             Daria tipo:
+             return posts.tag.lowercaseString.containsString(searchText.lowercaseString)
+            
+         }
+ 
+         */
+        
+        //tableView.reloadData()
+        // AQUI EM VEZ De fazer reload no tableView, deve ser no mapa
+        
+    }
+    
     //MARK: Actions
 
     @IBAction func popover(sender: AnyObject) {
@@ -96,13 +121,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         showFiltersBtn.hidden = true
         hideFiltersBtn.hidden = false
         hideFiltersBtn.enabled = true
-        recentsBtn.enabled = true
+        showAllBtn.enabled = true
         defisBtn.enabled = true
         astucesBtn.enabled = true
-        doutesBtn.enabled = true
-        activiteBtn.enabled = true
+        evenementsBtn.enabled = true
+        curiositesBtn.enabled = true
         
     }
+    
+    @IBAction func showSearchBar(sender: AnyObject) {
+        
+//        searchController.searchResultsUpdater = self
+//        searchController.dimsBackgroundDuringPresentation = false
+//        definesPresentationContext = true
+        
+        searchController.searchBar.placeholder = "Rechercher"
+//        searchController.searchBar.canc
+    
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.delegate = self
+        presentViewController(searchController, animated: true, completion: nil)
+        
+    }
+    
+    
     
     @IBAction func refreshLocation(sender: AnyObject) {
         
@@ -640,4 +682,10 @@ extension MapViewController : MKMapViewDelegate {
         
     }
     
+}
+
+extension MapViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }

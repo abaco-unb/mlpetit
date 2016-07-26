@@ -115,7 +115,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         self.navigationItem.title = String(post?.category)
         
-        
         if (post?.category) == Optional(1) {
             let defi = UIImage(named: "cat_defi_bar")
             let imageView = UIImageView(image:defi)
@@ -577,13 +576,19 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         }
     }
     
+    override func viewWillLayoutSubviews()
+    {
+        super.viewWillLayoutSubviews();
+        self.scrollView.contentSize.height = 600;
+    }
+    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
         
-        scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 600)
-
+//        scrollView.frame = view.bounds
+//        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 600)
+//
 
         //To adjust the height of TextField to its content
         let contentSize = self.textPost.sizeThatFits(self.textPost.bounds.size)
