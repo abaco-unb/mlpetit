@@ -691,11 +691,10 @@ extension MapViewController : MKMapViewDelegate {
         print("teste fora")
         
     }
-    
+}
 
 extension MapViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
-}
 }

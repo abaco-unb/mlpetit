@@ -36,7 +36,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     var indicator:ActivityIndicator = ActivityIndicator()
     
-    @IBOutlet weak var scrollView: ScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var exit: UIBarButtonItem!
     

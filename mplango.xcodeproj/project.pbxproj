@@ -47,7 +47,6 @@
 		54398EB01D04BA46005580FE /* StartTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54398EAF1D04BA46005580FE /* StartTestVC.swift */; };
 		543A48741BDD4226008E9D71 /* tuto1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543A48721BDD4226008E9D71 /* tuto1VC.swift */; };
 		5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448EB001C1B71DB004D771A /* helpSettingsVC.swift */; };
-		544F17941CE25B8000B45683 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 544F17931CE25B8000B45683 /* Main.storyboard */; };
 		544F17961CE260C400B45683 /* ChangeEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544F17951CE260C400B45683 /* ChangeEmail.swift */; };
 		544F17AF1CE2627F00B45683 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544F17AE1CE2627F00B45683 /* EditProfile.swift */; };
 		545A1E4D1CFB9FF300600072 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */; };
@@ -330,7 +329,6 @@
 		54398EAF1D04BA46005580FE /* StartTestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartTestVC.swift; sourceTree = "<group>"; };
 		543A48721BDD4226008E9D71 /* tuto1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tuto1VC.swift; path = mplango/tuto1VC.swift; sourceTree = "<group>"; };
 		5448EB001C1B71DB004D771A /* helpSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helpSettingsVC.swift; sourceTree = "<group>"; };
-		544F17931CE25B8000B45683 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		544F17951CE260C400B45683 /* ChangeEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmail.swift; sourceTree = "<group>"; };
 		544F17AE1CE2627F00B45683 /* EditProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
@@ -572,7 +570,6 @@
 				828C717F1B83C424009FE9B5 /* Controller */,
 				543A48761BDD422E008E9D71 /* Tutorial screens */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
-				544F17931CE25B8000B45683 /* Main.storyboard */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
 				8283BE151B0143AF0085F9A6 /* Supporting Files */,
@@ -1009,7 +1006,6 @@
 				54E971B11B6ED25B005F27F1 /* FiraSans-Two.ttf in Resources */,
 				54E971B21B6ED25B005F27F1 /* FiraSans-TwoItalic.ttf in Resources */,
 				54E971B31B6ED25B005F27F1 /* FiraSans-Ultra.ttf in Resources */,
-				544F17941CE25B8000B45683 /* Main.storyboard in Resources */,
 				54E971B41B6ED25B005F27F1 /* FiraSans-UltraItalic.ttf in Resources */,
 				54E971B51B6ED25B005F27F1 /* FiraSans-UltraLight.ttf in Resources */,
 				54E971B61B6ED25B005F27F1 /* FiraSans-UltraLightItalic.ttf in Resources */,
@@ -1239,8 +1235,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = mplango/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.non.unb.br;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "mplango/mplango-Bridging-Header.h";
@@ -1261,8 +1258,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = mplango/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.non.unb.br;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "mplango/mplango-Bridging-Header.h";
