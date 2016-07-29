@@ -24,10 +24,15 @@ class ProfileGameVC: UIViewController {
     var currentCom: Float = 0.0
     var currentCol: Float = 0.0
     
+    var stopComIncrement:Bool = false
+    var stopColIncrement:Bool = false
+    
     @IBOutlet weak var bgProgressBarComp: UIImageView!
     
     @IBOutlet weak var bgProgressBarColab: UIImageView!
     
+    @IBOutlet weak var msgBadge: UILabel!
+    @IBOutlet weak var msgFunction: UILabel!
     @IBOutlet weak var badge1: UIImageView!
     @IBOutlet weak var badge2: UIImageView!
     @IBOutlet weak var badge3: UIImageView!
@@ -41,6 +46,9 @@ class ProfileGameVC: UIViewController {
         super.viewDidLoad()
         
         retrieveLoggedUser()
+        
+        self.msgBadge.hidden = true
+        self.msgFunction.hidden = true
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         let params : [String: Int] = [
@@ -65,14 +73,14 @@ class ProfileGameVC: UIViewController {
                 
                 if let badge = user["badge"].int {
                     self.currentBadge = badge
-                    self.displayBadge(badge)
+                    
                 }
                 print("----------------")
                 print(self.comPoints)
                 print(self.colPoints)
                 print("----------------")
                 print("passou da segunda parte")
-                NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(ProfileGameVC.updateProgress), userInfo: nil, repeats: true)
+                NSTimer.scheduledTimerWithTimeInterval(0.000001, target: self, selector: #selector(ProfileGameVC.updateProgress), userInfo: nil, repeats: true)
                 
             });
         
@@ -86,45 +94,114 @@ class ProfileGameVC: UIViewController {
     func displayBadge(number: Int) {
         
         print("display interno")
-        
-        for i in 0...number {
-            switch i {
+        var view : UIImageView = self.badge1
+        switch number {
             case 1:
-                self.badge1.image = UIImage( named: "badge_1_on")
+                view = self.badge1
             case 2:
-                self.badge2.image = UIImage( named: "badge_2_on")
+                view = self.badge2
             case 3:
-                self.badge3.image = UIImage( named: "badge_3_on")
+                view = self.badge3
             case 4:
-                self.badge4.image = UIImage( named: "badge_4_on")
+                view = self.badge4
             case 5:
-                self.badge5.image = UIImage( named: "badge_5_on")
+                view = self.badge5
             default:
                 break
-            }
         }
+        self.animationScaleEffect(view, animationTime: 0.7)
+        view.image = UIImage( named: GamificationRules.IMG_BADGE[number])
+        
+        let firstBadge : String = number < 5 ? GamificationRules.NAME_BADGE[number+1] : ""
+        let msg = "Le badge " + GamificationRules.NAME_BADGE[number] + " a été obtenu ! Prochaine étape: " + firstBadge
+        
+        self.msgBadge.text = msg
+        self.msgBadge.hidden = false
+        
+        let msg2 : String = "Fonction " + GamificationRules.FUCTION_BADGE[number] + " débloquée"
+        
+        self.msgFunction.text = msg2
+        self.msgFunction.hidden = false
+        
         print("display interno fim")
+    }
+    
+    func animationScaleEffect(view:UIImageView,animationTime:Float)
+    {
+        UIView.animateWithDuration(NSTimeInterval(animationTime), animations: {
+            
+            view.transform = CGAffineTransformMakeScale(0.6, 0.6)
+            
+            },completion:{completion in
+                UIView.animateWithDuration(NSTimeInterval(animationTime), animations: { () -> Void in
+                    
+                    view.transform = CGAffineTransformMakeScale(1, 1)
+                })
+        })
+        
     }
     
     func updateProgress() {
         
-        //self.comPoints/100
-        
-        self.currentCom += 0.5
-        self.currentCol += 0.5
-        
         if self.currentCom <= Float(self.comPoints) {
-            print("preencher com : " + String(self.currentCom/100))
+            if((stopComIncrement) != true) {
+                self.currentCom += 0.5
+                
+            }
+            //print("preencher com : " + String(self.currentCom/100))
             fillComp(CGFloat(self.currentCom/100))
+            print("igual")
+            print(self.currentCom == 32.0)
+            
+        } else {
+            stopComIncrement = true
         }
         
         if self.currentCol <= Float(self.colPoints) {
-            print("preencher colab : " + String(self.currentCol/100))
+            if((stopColIncrement) != true) {
+                self.currentCol += 0.5
+                
+            }
+            //print("preencher colab : " + String(self.currentCol/100))
             fillColab(CGFloat(self.currentCol/100))
+        } else {
+            stopColIncrement = true
         }
+        
+        if self.currentCom == 13.5 && self.currentCol == 13.5{
+            print("(1)")
+            self.displayBadge(1)
+        }
+        
+        if self.currentCom == 32.0 && self.currentCol == 32.0{
+            print("(2)")
+            self.displayBadge(2)
+        }
+        
+        if self.currentCom == 52.0 && self.currentCol == 52.0{
+            print("(3)")
+            self.displayBadge(3)
+        }
+        
+        if self.currentCom == 71.0 && self.currentCol == 71.0{
+            print("(4)")
+            self.displayBadge(4)
+        }
+        
+        if self.currentCom == 90.0 && self.currentCol == 90.0{
+            print("(5)")
+            self.displayBadge(5)
+        }
+        
+        
+        if(self.currentCom == 100.0) {
+            stopComIncrement = true
+            stopColIncrement = true
+        }
+        
     }
     
-    func redraw (bg: UIImageView, imgName: String, percent : CGFloat )  {
+    func redraw (bg: UIImageView, imgName: String, percent : CGFloat, color: String)  {
         
         let tear:UIImage! = UIImage(named : imgName )!
         
@@ -133,7 +210,11 @@ class ProfileGameVC: UIViewController {
         let top = sz.height*( 1 - percent )
         UIGraphicsBeginImageContextWithOptions ( sz ,  false ,  0 )
         let con =  UIGraphicsGetCurrentContext ()
-        UIColor.greenColor().setFill()
+        if color == "y" {
+            UIColor.yellowColor().setFill()
+        } else if color == "r" {
+            UIColor.redColor().setFill()
+        }
         CGContextFillRect ( con ,  CGRectMake ( 0 , top , sz . width , sz . height ))
         tear.drawAtPoint ( CGPointMake ( 0 , 0 ))
         bg.image =  UIGraphicsGetImageFromCurrentImageContext ()
@@ -143,11 +224,11 @@ class ProfileGameVC: UIViewController {
     
     
     func fillComp(value : CGFloat) {
-        redraw(self.bgProgressBarComp, imgName: "barra_esquerda", percent: value)
+        redraw(self.bgProgressBarComp, imgName: "barra_esquerda", percent: value, color: "y")
     }
     
     func fillColab(value : CGFloat) {
-        redraw(self.bgProgressBarColab, imgName: "barra_direita", percent: value)
+        redraw(self.bgProgressBarColab, imgName: "barra_direita", percent: value, color : "r")
     }
     
     

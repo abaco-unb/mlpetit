@@ -55,7 +55,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeOfPost: UILabel!
-    @IBOutlet weak var audioDuration: UILabel!
     
     //Outlet do texto do post
     @IBOutlet weak var textPost: UITextView!
@@ -65,18 +64,13 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
     @IBOutlet weak var audioInPhoto: UIView!
-    @IBOutlet weak var audioSlider: UISlider!
+
     
-    @IBOutlet weak var backgroundRecord: UIView!
-    @IBOutlet weak var listenBtn: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
+
+    @IBOutlet weak var bgPlayerAudioInPhoto: UIView!
     
     //Outlets da AudioView (quando o Post inclui apenas um audio)
     @IBOutlet weak var AudioView: UIView!
-    @IBOutlet weak var listenBtn2: UIButton!
-    @IBOutlet weak var stopBtn2: UIButton!
-    @IBOutlet weak var audioSlider2: UISlider!
-    @IBOutlet weak var audioDuration2: UILabel!
     
     //Outlets do Video View (
     @IBOutlet weak var videoView: UIView!
@@ -143,6 +137,35 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
+        
+        //Como vai aparecer a photoAudioView
+        photoAudioView.layer.cornerRadius = 10
+        photoAudioView.layer.masksToBounds = true
+        
+        bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
+        bgPlayerAudioInPhoto.layer.masksToBounds = true
+        
+        
+        //Como vai aparecer a AudioView
+        AudioView.layer.borderWidth = 1
+        AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        AudioView.layer.cornerRadius = 10
+        AudioView.layer.masksToBounds = true
+        
+        
+        //Como vai aparecer a videoView
+        videoView.layer.borderWidth = 1
+        videoView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        videoView.layer.cornerRadius = 10
+        videoView.layer.masksToBounds = true
+        
+        
+        scrollView.bounces = false
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostDetailViewController.panRecognized(_:)))
+        panGestureRecognizer.delegate = self
+        scrollView.addGestureRecognizer(panGestureRecognizer)
+        
+        enableCustomMenu()
         
         self.retrieveLoggedUser()
         
@@ -212,11 +235,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.audioInPhoto.hidden = false
                         self.AudioView.hidden = true
                         
-                        
-                        
-                        AudioHelper.instance._init(self.backgroundRecord, label: self.audioDuration, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
+                        AudioHelper.instance._init(self.audioInPhoto, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
 
-                        
                         print("passou do botão 2")
 
 //
@@ -230,10 +250,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.AudioView.hidden = false
                         
                         print(self.AudioView)
-                        self.scrollView.delaysContentTouches = false
-
                         
-                        AudioHelper.instance._init(self.AudioView, label: self.audioDuration2, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
+                        
+                        AudioHelper.instance._init(self.AudioView, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
                         
                         print("passou do botão 3")
                     }
@@ -255,37 +274,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     print("depois dos likes");
                 });
         }
-        
-        
-        
-        //Como vai aparecer a photoAudioView
-        photoAudioView.layer.cornerRadius = 10
-        photoAudioView.layer.masksToBounds = true
-        
-        backgroundRecord.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
-        backgroundRecord.layer.masksToBounds = true
-        
-        
-        //Como vai aparecer a AudioView
-        AudioView.layer.borderWidth = 1
-        AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        AudioView.layer.cornerRadius = 10
-        AudioView.layer.masksToBounds = true
-        
-        
-        //Como vai aparecer a videoView
-        videoView.layer.borderWidth = 1
-        videoView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        videoView.layer.cornerRadius = 10
-        videoView.layer.masksToBounds = true
-        
-        
-        scrollView.bounces = false
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostDetailViewController.panRecognized(_:)))
-        panGestureRecognizer.delegate = self
-        scrollView.addGestureRecognizer(panGestureRecognizer)
-
-        enableCustomMenu()
         
     }
     
@@ -478,6 +466,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBAction func like(sender: AnyObject) {
         
         //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        print("String(self.post!.id)")
+        print(String(self.post!.id))
         
         if self.liked == false {
         
