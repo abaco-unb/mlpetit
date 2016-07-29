@@ -18,6 +18,9 @@ class User: NSObject {
     let profile:NSNumber = 0.0
     let posts:NSSet = []
     let users:NSSet = []
+    let following:NSSet = []
+    let followers:NSSet = []
+    
     
     static let BEGINNER = 1
     static let HIGH_BEGINNER = 2

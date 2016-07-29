@@ -41,54 +41,39 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
     
     var delegate : UIViewController!
     
-    func _init(container: UIView,label: UILabel, audioPath : String) {
-        print("Init 1 : ")
+    func _init(container: UIView, audioPath : String) {
         
-        //required init to play
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
-        } catch _ {
-            NSLog("Error: viewDidLoad -> set Category failed")
-        }
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch _ {
-            NSLog("Error: viewDidLoad -> set Active failed")
-        }
-        do {
-            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
-        } catch _ {
-            NSLog("Error: viewDidLoad -> set override output Audio port     failed")
-        }
+        print("Init Player forever alone : ")
+        self.initAudio()
         
-        container.hidden = false
         
-        self.labelDuration = label
-        
-        self.prepareToListen(audioPath)
-        
-        self.audioSlider = self.createSlider()
-        audioSlider.maximumValue = Float(audioPlayer.duration)
-        container.addSubview(audioSlider)
-        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: 0, wcons: 200, hcons: 100)
-        
-        self.playButton = self.createButton("listen_btn")
+        print("criando botão play")
+        self.playButton = self.createButton("listen_btn.png", frame: CGRectMake(15, 10, 20, 20))
         playButton.addTarget(self, action: #selector(AudioHelper.play(_:)), forControlEvents: .TouchUpInside)
         container.addSubview(playButton)
-        self.addConstraint(container, ui: playButton, xattr: NSLayoutAttribute.Left, xcons: 5, wcons: 20, hcons: 20)
         
-        self.stopBtn = self.createButton("stop_btn")
+        print("criando botão stop")
+        self.stopBtn = self.createButton("stop_btn.png", frame: CGRectMake(15, 10, 20, 20))
         stopBtn.addTarget(self, action: #selector(AudioHelper.stop(_:)), forControlEvents: .TouchUpInside)
         stopBtn.hidden = true
         container.addSubview(stopBtn)
-        self.addConstraint(container, ui: stopBtn, xattr: NSLayoutAttribute.Left, xcons: 6, wcons: 20, hcons: 20)
         
-        self.play(playButton);
+        print("criando slider")
+        self.audioSlider = self.createSlider()
+        container.addSubview(audioSlider)
+        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: 0, wcons: 200, hcons: 100)
         
+        print(container.frame.height)
+        print("criando label")
+        self.labelDuration = createLabel(CGRectMake(container.frame.width - 50, 10, 50, 21))
+        container.addSubview(labelDuration)
+        
+        self.prepareToListen(audioPath)
     }
     
     func _init(container: UIView, icon: UIImageView, check: UILabel, label: UILabel, btnRecorder: UIButton) {
-        print("Init 2 : ")
+        
+        print("Init Player with record button ")
         
         self.iconAudio = icon
         self.checkAudio = check
@@ -96,23 +81,21 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         self.labelRecording = label
         self.recordButton = btnRecorder
         
-        
-        
-        self.audioSlider = self.createSlider()
-        container.addSubview(audioSlider)
-        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: 0, wcons: 200, hcons: 100)
-        
-        
-        self.playButton = self.createButton("listen_btn")
+        print("criando botão play")
+        self.playButton = self.createButton("listen_btn.png", frame: CGRectMake(15, 11, 23, 23))
         playButton.addTarget(self, action: #selector(AudioHelper.play(_:)), forControlEvents: .TouchUpInside)
         container.addSubview(playButton)
-        self.addConstraint(container, ui: playButton, xattr: NSLayoutAttribute.Left, xcons: 5, wcons: 20, hcons: 20)
         
-        self.stopBtn = self.createButton("stop_btn")
+        print("criando botão stop")
+        self.stopBtn = self.createButton("stop_btn.png", frame: CGRectMake(15, 11, 23, 23))
         stopBtn.addTarget(self, action: #selector(AudioHelper.stop(_:)), forControlEvents: .TouchUpInside)
         stopBtn.hidden = true
         container.addSubview(stopBtn)
-        self.addConstraint(container, ui: stopBtn, xattr: NSLayoutAttribute.Left, xcons: 6, wcons: 20, hcons: 20)
+        
+        print("criando slider")
+        self.audioSlider = self.createSlider()
+        container.addSubview(audioSlider)
+        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: -4, wcons: 180, hcons: 100)
         
         initRecorder()
         
@@ -192,13 +175,48 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         }
     }
     
-    func createButton (imagee : String) -> UIButton {
-        let button = UIButton(type: .Custom)
+    func initAudio() -> Bool {
+        var result = true
+        
+        //required init to play
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+        } catch _ {
+            result = false
+            NSLog("Error: viewDidLoad -> set Category failed")
+        }
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch _ {
+            result = false
+            NSLog("Error: viewDidLoad -> set Active failed")
+        }
+        do {
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+        } catch _ {
+            result = false
+            NSLog("Error: viewDidLoad -> set override output Audio port     failed")
+        }
+        
+        return result
+    }
+    
+    func createLabel(frame : CGRect) -> UILabel {
+        let label = UILabel(frame: frame)
+        //label.center = CGPointMake(160, 284)
+        label.textAlignment = NSTextAlignment.Center
+        label.text = "2:00"
+        label.font = UIFont.systemFontOfSize(12)
+        label.textColor = UIColor.grayColor()
+        return label
+    }
+    
+    func createButton (imagee : String, frame : CGRect ) -> UIButton {
+        
+        let button = UIButton(frame: frame)
         let image = UIImage(named: imagee) as UIImage?
         button.setImage(image, forState: UIControlState.Normal)
-        button.frame = CGRectMake(10, 10, 20, 20)
-        button.enabled = true
-        button.hidden = false
+        button.enabled = false
         button.userInteractionEnabled = true
         return button
     }
@@ -246,7 +264,10 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
             if let soundData = self.loadAudioFromPath(audio) {
                 
                 try self.audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
-                    self.labelDuration.text = self.audioPlayer.duration.description
+                
+                    self.labelDuration.text = String(format: "%.2f", Double(audioPlayer.duration))
+                    self.audioSlider.maximumValue = Float(audioPlayer.duration)
+                    self.playButton.enabled = true
                 
                     print("audioPlayer.duration.description")
                     print(self.audioPlayer.duration.description)
@@ -298,7 +319,9 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         let audioURL = self.getAudioURL()
         
         print(audioURL)
+        
         self.points = 0;
+        
         do {
             
             let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-recorded", ofType: "wav")!)
@@ -444,7 +467,10 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         print("teste stop now")
         
         stopBtn.hidden = true
+        
         playButton.hidden = false
+        playButton.enabled = true
+        
         audioPlayer.pause()
     }
     
@@ -452,7 +478,8 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         print("teste play now")
         
         playButton.hidden = true
-        //stopBtn.hidden = false
+        stopBtn.hidden = false
+        stopBtn.enabled = true
         
         audioPlayer.prepareToPlay()
         
