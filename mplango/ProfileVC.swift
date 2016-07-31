@@ -36,6 +36,12 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.clusteringManager.delegate = self
+        
+        self.mkMapView.showsUserLocation = true
+        self.mkMapView.delegate = self
+        self.mkMapView.mapType = MKMapType.Standard
+        
         if contact != self.userId {
             
             self.navigationItem.leftBarButtonItem = nil
@@ -292,6 +298,8 @@ extension ProfileVC : MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        print("entrou no mapa")
         
         var reuseId = ""
         
