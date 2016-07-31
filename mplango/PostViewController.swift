@@ -106,14 +106,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.playButton.hidden = true
         self.stopBtn.hidden = true
         
+        //inicializa : get geo location data
         locationManager.requestAlwaysAuthorization()
-        //get geo location data
-        if (CLLocationManager.locationServicesEnabled())
-        {
+        if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self;
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
+            print("passou aqui e habilitou o serviço de localização")
+            print(locationManager.location!.coordinate)
             
         } else {
             NSLog("Serviço de localização indisponível")
@@ -196,7 +196,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("location Manager")
-        locationManager.stopUpdatingLocation();
         
         self.location = manager.location!
         let userLocation:CLLocationCoordinate2D = manager.location!.coordinate
@@ -213,10 +212,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             if let validPlacemark = placemarks?[0]{
                 let placemark = validPlacemark as CLPlacemark;
                 self.address = String(placemark.name!) + ", " + String(placemark.locality!)
-                
+                print(placemark.locality)
+                print("locations = \(self.address)")
             }
         }
-        
+        locationManager.stopUpdatingLocation();
     }
     
     
