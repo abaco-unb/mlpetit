@@ -235,6 +235,7 @@ class ProfileGameVC: UIViewController {
     func retrieveLoggedUser() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         self.userId = prefs.integerForKey("id") as Int
+        
     }
     
 }

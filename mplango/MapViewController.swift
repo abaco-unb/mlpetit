@@ -76,7 +76,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             print("passou aqui e habilitou o serviço de localização")
-            print(locationManager)
+            print(locationManager.location!.coordinate)
             
         } else {
             NSLog("Serviço de localização indisponível")
@@ -85,6 +85,89 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         //recupera todos os posts e adiciona no mapa
         self.upServerPosts()
     }
+    
+    func upServerPosts() {
+        ActivityIndicator.instance.showActivityIndicator(self.view)
+        //Checagem remota
+        Alamofire.request(.GET, EndpointUtils.POST)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator()
+                if let posts = json["data"].array {
+                    print(1)
+                    for post in posts {
+                        print(post)
+                        var postId:Int = 0
+                        var latitude:Double  = 0
+                        var longitude:Double = 0
+                        var category:Int = 0
+                        //var likes:Int = 0
+                        //var imageUrl:String = ""
+                        var ownerId: Int = 0
+                        //var audioUrl: String = ""
+                        
+                        //var comments: Array<Comment> = [Comment]();
+                        
+                        if let id = post["id"].int {
+                            postId = id
+                            
+                        }
+                        
+                        if let lat = post["latitude"].string {
+                            latitude = Double(lat)!
+                            
+                        }
+                        
+                        if let long = post["longitude"].string {
+                            longitude = Double(long)!
+                        }
+                        
+                        if let cat = post["category_id"].int {
+                            category = cat
+                        }
+                        
+                        //
+                        
+                        if let owner = post["user"]["id"].int {
+                            print("+++++++++++++++++++")
+                            print(owner)
+                            print("+++++++++++++++++++")
+                            ownerId = owner
+                        }
+                        
+                        //print("Comentários do Post", comments)
+                        //show post on map
+                        let postAnnotation = PostAnnotation(
+                            id: postId,
+                            title: post["user"]["name"].stringValue,
+                            text: post["text"].stringValue,
+                            locationName: post["location"].stringValue,
+                            coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                            category: category,
+                            owner: ownerId
+                        )
+                        //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
+                        self.posts.append(postAnnotation);
+                        //self.mkMapView.addAnnotation(annotation)
+                    }
+                }
+                print(2)
+                print( "total de posts : ",self.posts.count)
+                self.clusteringManager.addAnnotations(self.posts)
+                self.displayPostsInMap()
+                
+                print(self.posts.first!.coordinate)
+                if self.posts.count >= 1 {
+                    self.centerMapOnLocation(self.posts.last!.coordinate)
+                } else {
+                    self.centerMapOnLocation(self.location.coordinate)
+                }
+            });
+        
+    }
+
     
     // MARK: Search bar
     
@@ -223,84 +306,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         }
     }
     
-    func upServerPosts() {
-        ActivityIndicator.instance.showActivityIndicator(self.view)
-        //Checagem remota
-        Alamofire.request(.GET, EndpointUtils.POST)
-            .responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
-            }.responseSwiftyJSON({ (request, response, json, error) in
-                ActivityIndicator.instance.hideActivityIndicator()
-                   if let posts = json["data"].array {
-                    
-                        for post in posts {
-                            print(post)
-                            var postId:Int = 0
-                            var latitude:Double  = 0
-                            var longitude:Double = 0
-                            var category:Int = 0
-                            //var likes:Int = 0
-                            //var imageUrl:String = ""
-                            var ownerId: Int = 0
-                            //var audioUrl: String = ""
-                            
-                            //var comments: Array<Comment> = [Comment]();
-                            
-                            
-                            if let id = post["id"].int {
-                                postId = id
-                                
-                            }
-                            
-//                            
-                            
-                            if let lat = post["latitude"].string {
-                                latitude = Double(lat)!
-                                
-                            }
-                            
-                            if let long = post["longitude"].string {
-                                longitude = Double(long)!
-                            }
-                            
-                            if let cat = post["category_id"].int {
-                                category = cat
-                            }
-                            
-//                            
-                            
-                            if let owner = post["user"]["id"].int {
-                                print("+++++++++++++++++++")
-                                print(owner)
-                                print("+++++++++++++++++++")
-                                ownerId = owner
-                            }
-                            
-                            //print("Comentários do Post", comments)
-                             //show post on map
-                             let postAnnotation = PostAnnotation(
-                                id: postId,
-                                title: post["user"]["name"].stringValue,
-                                text: post["text"].stringValue,
-                                locationName: post["location"].stringValue,
-                                coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                category: category,
-                                owner: ownerId
-                             )
-                             //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
-                            self.posts.append(postAnnotation);
-                            //self.mkMapView.addAnnotation(annotation)
-                        }
-                   }
-                
-                   print( "total de posts : ",self.posts.count)
-                   self.clusteringManager.addAnnotations(self.posts)
-                   self.displayPostsInMap()
-            });
-        
-    }
-    
     func randomLocationsWithCount(count:Int) -> [FBAnnotation] {
         var array:[FBAnnotation] = []
         for _ in 0...count {
@@ -353,39 +358,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        print("passou aqui no método")
+        //print("passou aqui no método")
         self.location = manager.location!
-        print(self.location)
-        print("-------------------------------")
-        let userLocation = self.location.coordinate;
-        
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(manager.location!) {
-            (placemarks, error) -> Void in
-            //if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
-            //var placemark = placemarks[0]
-            
-            if let validPlacemark = placemarks?[0]{
-                let placemark = validPlacemark as CLPlacemark;
-                print("placemark")
-                print(String(placemark.name))
-
-            }
-            print(userLocation)
-        }
-        
-        locationManager.stopUpdatingLocation();
-        
-        if manager.location != nil {
-            let regionToZone = MKCoordinateRegionMake(manager.location!.coordinate, MKCoordinateSpanMake(1,10))
-            mkMapView.setRegion(regionToZone, animated: true)
-        }
-        print("userLocation")
-        print(userLocation)
-        
-        centerMapOnLocation(userLocation)
-        
-        self.mkMapView.showAnnotations(self.mkMapView.annotations, animated: true)
+        //print(self.location)
+        //print("-------------------------------")
+//        let userLocation = self.location.coordinate;
+//        
+//        let geocoder = CLGeocoder()
+//        geocoder.reverseGeocodeLocation(manager.location!) {
+//            (placemarks, error) -> Void in
+//            if let placemarks = placemarks as? [CLPlacemark] where placemarks.count > 0 {
+//            var placemark = placemarks[0]
+//            
+//            if let validPlacemark = placemarks?[0]{
+//                let placemark = validPlacemark as CLPlacemark;
+//                print("placemark")
+//                print(String(placemark.name))
+//
+//            }
+//            print(userLocation)
+//            }
+//        }
+        //locationManager.stopUpdatingLocation();
         
     }
     

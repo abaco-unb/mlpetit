@@ -19,12 +19,17 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     var indicator:ActivityIndicator = ActivityIndicator()
     var item : String? = nil
 
+    
+    
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
     var audioPath: String = ""
+    
+    var userBadge:Int!
+    var userId: Int!
     
     var myImage = "profile.png"
     var imagePath: String = ""
@@ -42,10 +47,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     //Outlets para o audio
     @IBOutlet weak var backgroundRecord: UIView!
-    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet weak var audioSlider: UISlider!
+    @IBOutlet weak var labelRecord: UILabel!
+    @IBOutlet weak var iconRecord: UIImageView!
+    @IBOutlet weak var checkAudioFake: UILabel!
+    @IBOutlet weak var lineRecord: UIView!
+
     
     //Outlets para a foto
     @IBOutlet var photoImage: UIImageView!
@@ -61,21 +68,12 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
 
         removeImage.hidden = true
         
-        // botões do audio recorder
-        playButton.hidden = true
-        stopBtn.hidden = true
-        
         // Enable the Save button only if the text field has a valid Word name
         checkValidWordName()
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CarnetAddVC.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(CarnetAddVC.handleLongPress(_:)))
-        
-        longPressRecogniser.minimumPressDuration = 1.0
-        recordButton.addGestureRecognizer(longPressRecogniser)
         
         wordTextField.delegate = self
         descTextView.delegate = self
@@ -84,24 +82,31 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
 //            wordTextField.text = item.word
 //        }
         
-        recordingSession = AVAudioSession.sharedInstance()
+        self.displayAudioFunction(false)
         
-        //required init to recording
-        do {
-            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try recordingSession.setActive(true)
-            recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
-                dispatch_async(dispatch_get_main_queue()) {
-                    if allowed {
-                        self.loadRecordingUI()
-                    } else {
-                        // failed to record!
+        ActivityIndicator.instance.showActivityIndicator(self.view)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: ["id" : retrieveLoggedUserInfo()])
+            .responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator()
+                let user = json["data"]
+                
+                if let badgeRef = user["badge"].int {
+                    print("badgeRef")
+                    print(badgeRef)
+                    self.userBadge = badgeRef
+                    if badgeRef >= 1 {
+                        self.displayAudioFunction(true)
+                        AudioHelper.instance._init(self.backgroundRecord,
+                            icon: self.iconRecord,
+                            check: self.checkAudioFake,
+                            label: self.labelRecord,
+                            btnRecorder: self.recordButton)
                     }
                 }
-            }
-        } catch {
-            // failed to record!
-        }
+                
+            });
+        
+        
 
         
         // Custom the visual identity of Text Fields
@@ -161,21 +166,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     func textViewDidBeginEditing(textView: UITextView) {
         writeHereImage.hidden = true
     }
-    
-    func loadRecordingUI(){
-        
-        // Custom the visual identity of audio player's background
-        backgroundRecord.layer.borderWidth = 1
-        backgroundRecord.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        backgroundRecord.layer.cornerRadius = 15
-        backgroundRecord.layer.masksToBounds = true
-        
-        //LongPress para a criação de post
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(CarnetAddVC.handleLongPress(_:)))
-        longPressRecogniser.minimumPressDuration = 0.2
-        recordButton.addGestureRecognizer(longPressRecogniser)
-    }
-
     
     //MARK: Actions
     
@@ -291,134 +281,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         print("picker cancel.")
         dismissViewControllerAnimated(true, completion: nil)
     }
-
-    func generateIndexName(text:String, ext:String) ->String {
-        let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        return text + "_" + formatter.stringFromDate(currentDateTime) + "." + ext
-    }
-
-    // MARK: Audio Process
-    
-    @IBAction func playAudio(sender: UIButton) {
-        audioPlayer.prepareToPlay()
-        audioPlayer.enableRate = false
-        audioPlayer.stop()
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
-        //audioTimerLabel.hidden = false
-    }
-    
-    @IBAction func changeAudioTime(sender: UISlider) {
-        audioPlayer.stop()
-        audioPlayer.currentTime = NSTimeInterval(audioSlider.value)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
-    }
-    
-    func updateSlider() {
-        audioSlider.value = Float(audioPlayer.currentTime)
-    }
-
-    
-    func stopAudio(sender: UIButton) {
-        audioPlayer.stop()
-    }
-    
-    func finishRecording(success success: Bool) {
-        audioRecorder.stop()
-        audioRecorder = nil
-    }
-    
-    func recording() {
-        do {
-            print("recording")
-            
-            let settings = [
-                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 12000.0,
-                AVNumberOfChannelsKey: 1 as NSNumber,
-                AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
-            ]
-            
-            let audioURL = self.getAudioURL()
-            
-            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
-            audioRecorder.delegate = self
-            audioRecorder.record()
-            
-        } catch {
-            finishRecording(success: false)
-        }
-    }
-    
-    func getDocumentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-    
-    func getAudioURL() -> NSURL {
-        
-        let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".m4a"
-        let audioFilename = getDocumentsDirectory().stringByAppendingString(recordingName)
-        
-        return NSURL(fileURLWithPath: audioFilename)
-    }
-    
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
-        successfully flag: Bool) {
-            if(flag) {
-                do {
-                    playButton.enabled = true
-                    audioSlider.enabled = true
-                    
-                    recordedAudio = RecordedAudio()
-                    recordedAudio.filePathUrl = recorder.url
-                    recordedAudio.title = recorder.url.lastPathComponent
-                    
-                    try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
-                    audioPath = recorder.url.description
-                    audioSlider.maximumValue = Float(audioPlayer.duration)
-                    
-                    NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(CarnetAddVC.updateSlider), userInfo: nil, repeats: true)
-                    
-                } catch {
-                    fatalError("Failure to ...: \(error)")
-                }
-            } else {
-                finishRecording(success: false)
-                print("Ocorreu algum erro na gravação ")
-                //recordButton.enabled = true
-            }
-    }
-
-
-    func handleLongPress(gestureRecognizer : UIGestureRecognizer){
-        if gestureRecognizer.state == .Began {
-            print("iniciar a gravação")
-            recording()
-            recordButton.enabled = false
-        }
-        
-        if gestureRecognizer.state == .Ended {
-            print("parar a gravação")
-            
-            audioRecorder.stop()
-            _ = AVAudioSession.sharedInstance()
-            //audioSession.setActive(false)
-            
-            recordButton.enabled = true
-            playButton.enabled = false
-            
-        }
-    }
-
-   
     
     // MARK: Item Carnet Process
     
@@ -440,8 +302,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
             "user": String(userId)
         ]
         
-        if self.image != nil {
-            self.saveNote(self.image, params: params)
+        if self.image != nil  || (self.userBadge >= 1 && AudioHelper.instance.audioPath != "") {
+            self.saveNote(false, params: params)
         } else {
             self.saveNote(params)
         }
@@ -478,19 +340,21 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
         })
     }
     
-    func saveNote(image: UIImage, params: Dictionary<String, String>) {
-        // example image data
-        let imageData = image.lowestQualityJPEGNSData
+    func saveNote(upload: Bool, params: Dictionary<String, String>) {
         
-        // save image in directory
-        let imgUtils:ImageUtils = ImageUtils()
-        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("note_image", ext: "png"))
-        ImageUtils.instance.saveImage(self.photoImage.image!, path: self.imagePath);
+//        var imageData:NSData!
+//        if self.image != nil {
+//            imageData = self.image.lowestQualityJPEGNSData
+//        }
+        ActivityIndicator.instance.showActivityIndicator(self.view)
         
-        self.indicator.showActivityIndicator(self.view)
+//        // save image in directory
+//        let imgUtils:ImageUtils = ImageUtils()
+//        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("note_image", ext: "png"))
+//        ImageUtils.instance.saveImage(self.photoImage.image!, path: self.imagePath);
         
         // CREATE AND SEND REQUEST ----------
-        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.CARNET, parameters: params, imageData: imageData)
+        let urlRequest = self.urlRequestWithComponents(EndpointUtils.CARNET, parameters: params, data: false)
         
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
@@ -500,8 +364,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator();
                 if (error == nil) {
-                    self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         
                         self.performSegueWithIdentifier("go_to_carnet", sender: self)
@@ -519,6 +383,53 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                     }
                 }
             })
+    }
+    
+    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, data:Bool) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        let boundaryConstant = "myRandomBoundary12345";
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        if self.image != nil {
+            let imageData:NSData = image.lowestQualityJPEGNSData
+            // add image
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData(imageData)
+            
+        }
+        if AudioHelper.instance.audioPath != "" {
+            print(AudioHelper.instance.audioPath)
+            print(AudioHelper.instance.recordedAudio.filePathUrl)
+            
+            print("soundData")
+            let soundData = NSData(contentsOfURL: AudioHelper.instance.recordedAudio.filePathUrl)
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"audio\"; filename=\"audio.m4a\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData(soundData!)
+            
+        } else {
+            print("error: append audio data")
+        }
+        
+        // add parameters
+        for (key, value) in parameters {
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
     //MARK: UITextFieldDelegate
@@ -543,6 +454,24 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     func textFieldDidEndEditing(textField: UITextField) {
         checkValidWordName()
         navigationItem.title = wordTextField.text
+    }
+    
+    func displayAudioFunction( show : Bool) {
+        
+        self.iconRecord.hidden = !show
+        self.labelRecord.hidden = !show
+        self.backgroundRecord.hidden = !show
+        self.recordButton.hidden = !show
+        self.lineRecord.hidden = !show
+        
+    }
+    
+    func retrieveLoggedUserInfo() -> Int {
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userBadge = prefs.integerForKey("badge") as Int
+        self.userId =  prefs.integerForKey("id") as Int
+        return self.userId
     }
     
 
