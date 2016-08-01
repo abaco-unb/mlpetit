@@ -253,7 +253,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.photoAudioView.hidden = true
                         self.audioInPhoto.hidden = true
                         self.AudioView.hidden = true
-                        self.mediaView.hidden = true
                     }
                     
                     print("antes dos likes");
