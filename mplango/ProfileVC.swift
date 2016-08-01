@@ -17,7 +17,11 @@ class ProfileVC: UIViewController {
     var contact: RUser!
     var userId:Int!
     
-    var indicator:ActivityIndicator = ActivityIndicator()
+    var myAnnotations = [PostAnnotation]()
+    
+    @IBOutlet weak var mkMapView: MKMapView!
+    
+    let clusteringManager = FBClusteringManager()
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileGender: UIImageView!
@@ -31,6 +35,12 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.clusteringManager.delegate = self
+        
+        self.mkMapView.showsUserLocation = true
+        self.mkMapView.delegate = self
+        self.mkMapView.mapType = MKMapType.Standard
         
         if contact != self.userId {
             
@@ -106,7 +116,7 @@ class ProfileVC: UIViewController {
     }
     
     func upServerUser() {
-        self.indicator.showActivityIndicator(self.view)
+        ActivityIndicator.instance.showActivityIndicator(self.view)
 
         let params : [String: Int] = [
             "id": self.userId
@@ -116,7 +126,7 @@ class ProfileVC: UIViewController {
         //Checagem remota
         Alamofire.request(.GET, EndpointUtils.USER, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
-                self.indicator.hideActivityIndicator();
+                ActivityIndicator.instance.hideActivityIndicator();
                 let user = json["data"]
                 print(user);
                 
@@ -178,9 +188,50 @@ class ProfileVC: UIViewController {
                     self.profileBio.text = (bio)
                 }
                 
-                if let posts = user["posts"].string {
-                    print("show total posts : ", posts)
-                    self.profileNumberPosts.text = posts
+                if let posts = user["posts"].array {
+                    
+                    self.profileNumberPosts.text = String(posts.count)
+                    
+                    for post in posts {
+                        var postId:Int = 0
+                        var latitude:Double  = 0
+                        var longitude:Double = 0
+                        var category:Int = 0
+                        
+                        if let id = post["id"].int {
+                            postId = id
+                            
+                        }
+                        
+                        if let lat = post["latitude"].string {
+                            latitude = Double(lat)!
+                            
+                        }
+                        
+                        if let long = post["longitude"].string {
+                            longitude = Double(long)!
+                        }
+                        
+                        if let cat = post["category_id"].int {
+                            category = cat
+                        }
+
+                        let postAnnotation = PostAnnotation(
+                            id: postId,
+                            title: post["user"]["name"].stringValue,
+                            text: post["text"].stringValue,
+                            locationName: post["location"].stringValue,
+                            coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                            category: category,
+                            owner: self.userId
+                        )
+                        self.myAnnotations.append(postAnnotation);
+                        
+                    }
+                    
+                    self.clusteringManager.addAnnotations(self.myAnnotations)
+                    self.displayPostsInMap()
+                    
                 }
                 
         });
@@ -214,5 +265,84 @@ class ProfileVC: UIViewController {
 //        }
         
     }
+    
+    func displayPostsInMap() {
+        
+        let mapBoundsWidth = Double(self.mkMapView.bounds.size.width)
+        let mapRectWidth:Double = self.mkMapView.visibleMapRect.size.width
+        let scale:Double = mapBoundsWidth / mapRectWidth
+        let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mkMapView.visibleMapRect, withZoomScale:scale)
+        
+        self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mkMapView)
 
+    }
+
+}
+extension ProfileVC : FBClusteringManagerDelegate {
+    
+    func cellSizeFactorForCoordinator(coordinator:FBClusteringManager) -> CGFloat{
+        return 1.0
+    }
+    
+}
+
+extension ProfileVC : MKMapViewDelegate {
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool){
+        
+        NSOperationQueue().addOperationWithBlock({
+            
+            self.displayPostsInMap()
+            
+        })
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        print("entrou no mapa")
+        
+        var reuseId = ""
+        
+        if annotation.isKindOfClass(FBAnnotationCluster) {
+            
+            reuseId = "Cluster"
+            var clusterView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            clusterView = FBAnnotationClusterView(annotation: annotation, reuseIdentifier: reuseId, options: nil)
+            
+            return clusterView
+            
+        }
+        
+        if annotation.isKindOfClass(PostAnnotation) {
+            
+            print( "titulo : ", annotation.title)
+            let postAnnotation = annotation as! PostAnnotation
+            reuseId = "Post"
+            
+            var postView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            postView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            postView!.canShowCallout = true
+            postView!.image = UIImage(named: String((annotation as! PostAnnotation).getCategoryImageName()))
+            postView!.backgroundColor = UIColor.clearColor()
+            postView!.calloutOffset = CGPoint(x: -5, y: 5)
+            //              postView.rightCalloutAccessoryView = postButton
+            
+            let imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
+            imageview.layer.cornerRadius = 22
+            imageview.layer.masksToBounds = true
+            imageview.layer.borderWidth = 1
+            imageview.layer.borderColor = UIColor.greenColor().CGColor
+            
+            if let image : UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")! {
+                imageview.image = image
+            }
+            
+            postView!.leftCalloutAccessoryView = imageview
+            
+            return postView
+        }
+        
+        return nil
+    }
+    
 }

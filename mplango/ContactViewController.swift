@@ -14,7 +14,6 @@ import AlamofireSwiftyJSON
 class ContactViewController: UITableViewController {
     
     //MARK: Properties
-    
     var list = [RUser]()
     var filteredList = [RUser]()
 
@@ -66,6 +65,7 @@ class ContactViewController: UITableViewController {
                         var imageUrl:String = ""
                         var level:Int = 0
                         var bio:String = ""
+                        var badge:Int = 0
                         var category: String = ""
                         var followers: Int = 0
                         var following: Int = 0;
@@ -88,6 +88,11 @@ class ContactViewController: UITableViewController {
                         
                         if let userName = user["name"].string {
                             name = userName
+                            
+                        }
+                        
+                        if let badgeRef = user["badge"].int {
+                            badge = badgeRef
                             
                         }
                         
@@ -160,7 +165,7 @@ class ContactViewController: UITableViewController {
                             continue
                         }
                         
-                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following))
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following, badge: badge))
                         
                     }
                     
@@ -213,7 +218,7 @@ class ContactViewController: UITableViewController {
                             let fPicture = friend.valueForKey("picture")?.valueForKey("data")?.valueForKey("url") as? String
                             
                             print("\(count) \(fName)")
-                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName, followers: 0, following: 0))
+                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName, followers: 0, following: 0, badge: 0))
                             count += 1                        }
                         self.indicator.hideActivityIndicator();
                         self.tableView.reloadData()
@@ -329,6 +334,8 @@ class ContactViewController: UITableViewController {
             cell.contactPicture.image = ImageUtils.instance.loadImageFromPath(String(contact.image))
             cell.contactPicture.layer.masksToBounds = true
             cell.contactPicture.layer.cornerRadius = 30
+        
+            cell.contactBadge.image = UIImage(named: GamificationRules.IMG_BADGE[contact.badge])
         
         //PARA IMPLEMENTAR A QUESTAO DO BADGE:
             //cell.contactBadge.image =

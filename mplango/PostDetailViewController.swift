@@ -55,7 +55,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeOfPost: UILabel!
-    @IBOutlet weak var audioDuration: UILabel!
     
     //Outlet do texto do post
     @IBOutlet weak var textPost: UITextView!
@@ -65,19 +64,13 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
     @IBOutlet weak var audioInPhoto: UIView!
-    @IBOutlet weak var audioSlider: UISlider!
+
     
-    @IBOutlet weak var backgroundRecord: UIView!
-    @IBOutlet weak var listenBtn: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
-    
+
+    @IBOutlet weak var bgPlayerAudioInPhoto: UIView!
     
     //Outlets da AudioView (quando o Post inclui apenas um audio)
     @IBOutlet weak var AudioView: UIView!
-    @IBOutlet weak var listenBtn2: UIButton!
-    @IBOutlet weak var stopBtn2: UIButton!
-    @IBOutlet weak var audioSlider2: UISlider!
-    @IBOutlet weak var audioDuration2: UILabel!
     
     //Outlets do Video View (
     @IBOutlet weak var videoView: UIView!
@@ -87,6 +80,32 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+//        let playButton = UIButton(type: .RoundedRect)
+//        let image = UIImage(named: "listen_btn") as UIImage?
+//        playButton.setImage(image, forState: UIControlState.Normal)
+//        playButton.frame = CGRectMake(0, 0, 300, 700)
+//        playButton.addTarget(self, action: #selector(self.testep), forControlEvents: .TouchUpInside)
+//        playButton.tag = 98;
+//        playButton.enabled = true
+//        playButton.userInteractionEnabled = true
+//        likeView.addSubview(playButton)
+//        playButton.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let horizontalConstraint = NSLayoutConstraint(item: playButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: likeView, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 10)
+//        likeView.addConstraint(horizontalConstraint)
+//        
+//        let verticalConstraint = NSLayoutConstraint(item: playButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: likeView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+//        likeView.addConstraint(verticalConstraint)
+//        
+//        let widthConstraint = NSLayoutConstraint(item: playButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 20)
+//        likeView.addConstraint(widthConstraint)
+//        
+//        let heightConstraint = NSLayoutConstraint(item: playButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 20)
+//        likeView.addConstraint(heightConstraint)
+        
+        //scrollView.delaysContentTouches = false;
         
         self.navigationItem.title = String(post?.category)
         
@@ -119,148 +138,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         userPicture.layer.cornerRadius = 25
         userPicture.layer.masksToBounds = true
         
-        self.retrieveLoggedUser()
-        
-        if post != nil {
-            
-            userPicture.layer.borderWidth = 1
-            userPicture.layer.borderColor = UIColor.greenColor().CGColor
-            
-            var hasAudio = false
-            var hasImage = false
-            
-            userPicture.image  = post!.getOwnerImage()
-            textPost.text      = post!.text
-            locationLabel.text = post!.locationName
-            
-            ActivityIndicator.instance.showActivityIndicator(self.view)
-            Alamofire.request(.GET, EndpointUtils.POST, parameters: ["id" : (post?.id)!])
-                .responseSwiftyJSON({ (request, response, json, error) in
-                    ActivityIndicator.instance.hideActivityIndicator()
-                    let postComplete = json["data"]
-                    
-                    
-                    self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
-                    
-                    self.userName.text      = self.post!.getOwnerName()
-                    self.timeOfPost.text    = postComplete["created"].stringValue
-                    
-                    if let tLikes = postComplete["likes"].array {
-                        self.likeNberLabel.text = String(tLikes.count)
-                    }
-                    
-                    //            let postVideo = false
-                    //            let postAudio = false
-
-                    if let images = postComplete["images"].array {
-                        if ((postComplete["images"].array?.count) > 0) {
-                            hasImage = true
-                            if let imageId = images[0]["id"].int {
-                                print("aqui dentro da imagem")
-                                self.itemPhoto.image = self.post!.getImage(imageId)
-                            }
-                        }
-                    }
-                    
-                    if postComplete["audio"].stringValue != "" {
-                        hasAudio = true
-                        self.listenBtn.enabled = true
-                        self.listenBtn2.enabled = true
-                        
-                        self.stopBtn.enabled = true
-                        self.stopBtn2.enabled = true
-                        
-                        
-                        //required init to play
-                        do {
-                            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
-                        } catch _ {
-                            NSLog("Error: viewDidLoad -> set Category failed")
-                        }
-                        do {
-                            try AVAudioSession.sharedInstance().setActive(true)
-                        } catch _ {
-                            NSLog("Error: viewDidLoad -> set Active failed")
-                        }
-                        do {
-                            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
-                        } catch _ {
-                            NSLog("Error: viewDidLoad -> set override output Audio port     failed")
-                        }
-                        
-                        do {
-                            
-                            print(" inicializando o audio do post")
-                            print(self.post!.getAudioUrl())
-                            
-                            let audioURL = NSURL(string: self.post!.getAudioUrl())
-                            
-                            print(audioURL)
-                            
-                            if let soundData = NSData(contentsOfURL: audioURL!) {
-                                print("Loading audio from url path: \(audioURL)", terminator: "")
-                                try self.audioPlayer = AVAudioPlayer(data: soundData, fileTypeHint: "m4a")
-                                self.audioDuration.text = self.audioPlayer.duration.description
-                                self.audioDuration2.text = self.audioPlayer.duration.description
-                                
-                                print("audioPlayer.duration.description")
-                                print(self.audioPlayer.duration.description)
-                                self.playAudio()
-                            } else {
-                                print("missing audio at: \(audioURL)", terminator: "")
-                            }
-                            
-                        } catch {
-                            fatalError("Failure to ...: \(error)")
-                        }
-                    }
-                    
-                    // FOTO SEM ÁUDIO:
-                    if (hasImage && !hasAudio){
-                        print("FOTO SEM ÁUDIO")
-                        self.photoAudioView.hidden = false
-                        self.audioInPhoto.hidden = true
-                        self.AudioView.hidden = true
-                        self.videoView.hidden = true
-                        
-                    }
-                    
-                    // FOTO + ÁUDIO:
-                    if (hasImage && hasAudio) {
-                        print("FOTO COM ÁUDIO")
-                        self.photoAudioView.hidden = false
-                        self.audioInPhoto.hidden = false
-                        self.AudioView.hidden = true
-                    }
-                    
-                    // ÁUDIO SEM FOTO:
-                    if (!hasImage && hasAudio) {
-                        print("AUDIO SEM FOTO")
-                        self.photoAudioView.hidden = true
-                        self.audioInPhoto.hidden = true
-                        self.AudioView.hidden = false
-                    }
-                    
-                    // TEXTO SEM MÍDIA:
-                    if (!hasImage && !hasAudio){
-                        print("SOMENTE TEXTO")
-                        self.photoAudioView.hidden = true
-                        self.audioInPhoto.hidden = true
-                        self.AudioView.hidden = true
-                        self.videoView.hidden = true
-                        self.mediaView.hidden = true
-                    }
-                    
-                    self.showLikes()
-                });
-        }
-        
         //Como vai aparecer a photoAudioView
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         
-        backgroundRecord.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
-        backgroundRecord.layer.masksToBounds = true
+        bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
+        bgPlayerAudioInPhoto.layer.masksToBounds = true
         
         
         //Como vai aparecer a AudioView
@@ -281,9 +164,125 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PostDetailViewController.panRecognized(_:)))
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
-
+        
         enableCustomMenu()
         
+        self.retrieveLoggedUser()
+        
+        if post != nil {
+            
+            userPicture.layer.borderWidth = 1
+            userPicture.layer.borderColor = UIColor.greenColor().CGColor
+            
+            var hasAudio = false
+            var hasImage = false
+            
+            userPicture.image  = post!.getOwnerImage()
+            textPost.text      = post!.text
+            locationLabel.text = post!.locationName
+            
+            ActivityIndicator.instance.showActivityIndicator(self.view)
+            Alamofire.request(.GET, EndpointUtils.POST, parameters: ["id" : (post?.id)!])
+                .responseSwiftyJSON({ (request, response, json, error) in
+                    ActivityIndicator.instance.hideActivityIndicator()
+                    let postComplete = json["data"]
+                    var postId = 0
+                    
+                    self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
+                    
+                    self.userName.text      = self.post!.getOwnerName()
+                    self.timeOfPost.text    = postComplete["created"].stringValue
+                    
+                    if let tLikes = postComplete["likes"].array {
+                        self.likeNberLabel.text = String(tLikes.count)
+                    }
+                    
+                    if let id = postComplete["id"].int {
+                        postId = id
+                    }
+                    
+                    //            let postVideo = false
+                    //            let postAudio = false
+
+                    if let images = postComplete["images"].array {
+                        if ((postComplete["images"].array?.count) > 0) {
+                            hasImage = true
+                            if let imageId = images[0]["id"].int {
+                                print("aqui dentro da imagem")
+                                self.itemPhoto.image = self.post!.getImage(imageId)
+                            }
+                        }
+                    }
+                    
+                    if postComplete["audio"].stringValue != "" {
+                        hasAudio = true
+                    }
+                    
+                    // FOTO SEM ÁUDIO:
+                    if (hasImage && !hasAudio){
+                        print("FOTO SEM ÁUDIO")
+                        self.photoAudioView.hidden = false
+                        self.audioInPhoto.hidden = true
+                        self.AudioView.hidden = true
+                        self.videoView.hidden = true
+                        
+                    }
+                    
+                    // FOTO + ÁUDIO:
+                    if (hasImage && hasAudio) {
+                        print("FOTO COM ÁUDIO")
+                        self.photoAudioView.hidden = false
+                        self.audioInPhoto.hidden = false
+                        self.AudioView.hidden = true
+                        
+                        AudioHelper.instance._init(self.audioInPhoto, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
+
+                        print("passou do botão 2")
+
+//
+                    }
+                    
+                    // ÁUDIO SEM FOTO:
+                    if (!hasImage && hasAudio) {
+                        print("AUDIO SEM FOTO")
+                        self.photoAudioView.hidden = true
+                        self.audioInPhoto.hidden = true
+                        self.AudioView.hidden = false
+                        
+                        print(self.AudioView)
+                        
+                        
+                        AudioHelper.instance._init(self.AudioView, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
+                        
+                        print("passou do botão 3")
+                    }
+                    
+                    // TEXTO SEM MÍDIA:
+                    if (!hasImage && !hasAudio){
+                        print("SOMENTE TEXTO")
+                        self.photoAudioView.hidden = true
+                        self.audioInPhoto.hidden = true
+                        self.AudioView.hidden = true
+                        self.videoView.hidden = true
+                        self.mediaView.hidden = true
+                    }
+                    
+                    print("antes dos likes");
+                    
+                    self.showLikes()
+                    
+                    print("depois dos likes");
+                });
+        }
+        
+    }
+    
+    @IBAction func teste(sender: UIButton) {
+        print("Tapped now")
+    }
+    
+    func testep() {
+        print("Tapped addTarget now")
     }
     
     func retrieveLoggedUser() {
@@ -354,55 +353,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(false, completion: nil)
-    }
-    
-    
-    @IBAction func btnStopTapped(sender: UIButton) {
-        self.stopAudio()
-    }
-    
-    @IBAction func btnStop2Tapped(sender: UIButton) {
-        self.stopAudio()
-    }
-    
-    @IBAction func btnPlayTapped(sender: UIButton) {
-        self.playAudio()
-    }
-    
-    @IBAction func btnPlay2Tapped(sender: UIButton) {
-        self.playAudio()
-    }
-    
-    func stopAudio() {
-        
-        print("stop audio...")
-        
-        listenBtn2.hidden = true
-        stopBtn2.hidden = false
-        
-        listenBtn.hidden = true
-        stopBtn.hidden = false
-        
-        audioPlayer.stop()
-    }
-    
-    
-    
-    func playAudio() {
-        
-        print("play audio...")
-        stopBtn.hidden = true
-        listenBtn.hidden = false
-        
-        stopBtn2.hidden = true
-        listenBtn2.hidden = false
-        
-        audioPlayer.prepareToPlay()
-        audioPlayer.enableRate = false
-        audioPlayer.stop()
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
-        
     }
     
     @IBAction func options(sender: AnyObject) {
@@ -493,6 +443,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.likedId = id
                     }
                     
+                    let total:Int = Int((json["data"].array?.count)!);
+                    self.likeNberLabel.text = String(total)
+                    
                     self.likeNberLabel.textColor = UIColor.whiteColor()
                     self.dislikeBtn.hidden = false
                     self.likeBtn.hidden = true;
@@ -513,6 +466,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBAction func like(sender: AnyObject) {
         
         //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        print("String(self.post!.id)")
+        print(String(self.post!.id))
         
         if self.liked == false {
         
@@ -540,8 +495,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     self.likeBtn.hidden = true
                     self.likeBtn.enabled = false
                     //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
-                    //let total:Int = Int(self.post!.likes) + 1;
-                    //self.likeNberLabel.text = String(total)
+                    let total:Int = Int(self.likeNberLabel.text!)! + 1;
+                    self.likeNberLabel.text = String(total)
                 } else {
                     NSLog("@resultado : %@", "LIKE LOGIN !!!")
                     NSOperationQueue.mainQueue().addOperationWithBlock {

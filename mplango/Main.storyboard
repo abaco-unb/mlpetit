@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Aw-5F-vHQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Aw-5F-vHQ">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -169,8 +170,6 @@
             <string>FiraSans-Medium</string>
         </mutableArray>
         <mutableArray key="FiraSans-Regular.ttf">
-            <string>FiraSans-Regular</string>
-            <string>FiraSans-Regular</string>
             <string>FiraSans-Regular</string>
             <string>FiraSans-Regular</string>
             <string>FiraSans-Regular</string>
@@ -2564,7 +2563,7 @@
                                     <constraint firstAttribute="height" constant="110" id="z4Q-3Y-Gw1"/>
                                 </constraints>
                                 <string key="text">Nível limiar para aprendentes que começam a ser independentes em francês: contar experiências passadas e futuras, dar uma opinião ou um conselho, estar à vontade
-em conversações relativas a interesses pessoais... Este nível corresponde ao B1 do QECR.</string>
+                                    em conversações relativas a interesses pessoais... Este nível corresponde ao B1 do QECR.</string>
                                 <fontDescription key="fontDescription" name="FiraSans-Regular" family="Fira Sans" pointSize="15"/>
                                 <color key="textColor" red="0.22352941179999999" green="0.63529411759999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -4678,6 +4677,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="mkMapView" destination="PDF-wN-FIF" id="ceS-3o-Dqw"/>
                         <outlet property="profileBio" destination="kIR-o5-dA0" id="1NE-3h-S07"/>
                         <outlet property="profileGender" destination="BmD-Qv-XKP" id="9Zm-Cp-gqJ"/>
                         <outlet property="profileLangLevel" destination="SGV-2d-71Z" id="tNc-38-onh"/>
@@ -5376,7 +5376,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="56" y="28" width="324" height="17"/>
                                                     <mask key="constraints">
                                                         <exclude reference="MhO-Iz-Jni"/>
                                                     </mask>
@@ -6460,6 +6461,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="continueBtn" destination="fYr-ez-FLK" id="esc-2y-StF"/>
                         <outlet property="iconAudio" destination="JNM-Ws-fIe" id="0ht-te-L9U"/>
                         <outlet property="labelRecording" destination="g6l-8G-3NC" id="PAP-Om-0Rb"/>
+                        <outlet property="lineAudio" destination="RiK-lf-Qa0" id="jKy-KX-rR7"/>
                         <outlet property="maxLenghtLabel" destination="zqp-YH-LYH" id="2xN-nx-5xd"/>
                         <outlet property="photoImage" destination="heG-1a-lU9" id="B1h-eG-wBs"/>
                         <outlet property="playButton" destination="Guh-yD-Xr5" id="Kgl-Fx-YNH"/>
@@ -6956,6 +6958,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     <connections>
                         <outlet property="goToMapBTN" destination="bKw-K0-RZZ" id="fk1-Qj-1lL"/>
                         <outlet property="goToPointsBTN" destination="Hxc-mQ-DaQ" id="Ruo-Yj-oe1"/>
+                        <outlet property="pointsLabel" destination="tgg-83-M5a" id="Nw3-7C-PEe"/>
                         <outlet property="shareFbBTN" destination="2lt-HA-xWn" id="378-zp-cvL"/>
                         <outlet property="shareInstBTN" destination="i9q-zE-jV6" id="vep-5u-OJr"/>
                         <outlet property="shareTwBTN" destination="RTr-mT-7tJ" id="0eK-iZ-yTz"/>
@@ -7406,60 +7409,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfp-kg-K1y">
-                                                <rect key="frame" x="30" y="250" width="25" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="32" id="Gs2-cj-dMf">
-                                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
-                                                    </constraint>
-                                                    <constraint firstAttribute="height" constant="32" id="cn2-MU-ca4">
-                                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
-                                                    </constraint>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="listen_btn"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="Gs2-cj-dMf"/>
-                                                        <exclude reference="cn2-MU-ca4"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <include reference="Gs2-cj-dMf"/>
-                                                        <include reference="cn2-MU-ca4"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="playAudio:" destination="IxI-Zr-qM7" eventType="touchUpInside" id="H9h-gY-Cw4"/>
-                                                </connections>
-                                            </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJD-zb-QJq">
-                                                <rect key="frame" x="30" y="266" width="25" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="6yR-nd-VkV">
-                                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
-                                                    </constraint>
-                                                    <constraint firstAttribute="width" constant="32" id="WkX-ba-15e">
-                                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
-                                                    </constraint>
-                                                </constraints>
-                                                <state key="normal" image="stop_btn"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="6yR-nd-VkV"/>
-                                                        <exclude reference="WkX-ba-15e"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <exclude reference="6yR-nd-VkV"/>
-                                                        <exclude reference="WkX-ba-15e"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="stopAudio:" destination="IxI-Zr-qM7" eventType="touchUpInside" id="ojP-Mk-R19"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bkc-9k-hTL">
                                                 <rect key="frame" x="338" y="246" width="32" height="32"/>
                                                 <constraints>
@@ -7650,6 +7599,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKI-Oz-caJ">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                    <rect key="frame" x="274" y="779" width="37" height="21"/>
+                                                </variation>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -7658,8 +7616,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <constraint firstItem="BDH-08-fFk" firstAttribute="top" secondItem="9wM-s4-kOl" secondAttribute="top" id="4RN-Jp-xQf"/>
                                             <constraint firstItem="s79-0R-YPo" firstAttribute="leading" secondItem="ive-Nd-LOG" secondAttribute="trailing" constant="10" id="5Rm-4r-RTg"/>
                                             <constraint firstAttribute="trailing" secondItem="f4A-Zy-fPP" secondAttribute="trailing" constant="8" id="5ZO-pQ-nu5"/>
-                                            <constraint firstItem="wJD-zb-QJq" firstAttribute="height" secondItem="Wfp-kg-K1y" secondAttribute="height" id="6gh-2e-tkO"/>
-                                            <constraint firstItem="wJD-zb-QJq" firstAttribute="leading" secondItem="Wfp-kg-K1y" secondAttribute="leading" id="9Av-lU-ATN"/>
                                             <constraint firstItem="ive-Nd-LOG" firstAttribute="top" secondItem="ayS-Rd-49O" secondAttribute="bottom" constant="156" id="Bkf-tt-9Zq">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                                             </constraint>
@@ -7674,22 +7630,16 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <constraint firstItem="BDH-08-fFk" firstAttribute="top" secondItem="ive-Nd-LOG" secondAttribute="bottom" constant="20" id="MbP-I8-NFb"/>
                                             <constraint firstItem="BDH-08-fFk" firstAttribute="leading" secondItem="ive-Nd-LOG" secondAttribute="leading" id="NAG-wf-4Ib"/>
                                             <constraint firstAttribute="trailing" secondItem="YoS-f0-ENt" secondAttribute="trailing" id="Nxs-wB-drk"/>
-                                            <constraint firstItem="wJD-zb-QJq" firstAttribute="top" secondItem="Oz5-xv-kyu" secondAttribute="bottom" constant="30" id="RMu-fl-BKs"/>
-                                            <constraint firstItem="Bkc-9k-hTL" firstAttribute="leading" secondItem="C2I-PQ-cLi" secondAttribute="trailing" constant="104" id="U38-6Y-UL0">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="Bkc-9k-hTL" secondAttribute="trailing" constant="30" id="VL2-VG-Uvr"/>
                                             <constraint firstItem="h1e-rb-Id8" firstAttribute="top" secondItem="9wM-s4-kOl" secondAttribute="top" id="WYl-6f-eAP">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                                             </constraint>
-                                            <constraint firstItem="wJD-zb-QJq" firstAttribute="top" secondItem="Wfp-kg-K1y" secondAttribute="top" id="XNA-Go-3uW"/>
                                             <constraint firstItem="LlV-O5-LQj" firstAttribute="leading" secondItem="LeO-FD-EgH" secondAttribute="trailing" constant="8" id="Yao-d1-v0e">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="iNn-dg-d1u" firstAttribute="trailing" secondItem="ayS-Rd-49O" secondAttribute="trailing" id="YbF-dY-mid"/>
                                             <constraint firstItem="f4A-Zy-fPP" firstAttribute="centerY" secondItem="LlV-O5-LQj" secondAttribute="centerY" id="ZGg-8m-yEx"/>
                                             <constraint firstItem="LE0-TE-t9x" firstAttribute="leading" secondItem="weh-85-NXH" secondAttribute="leading" constant="20" id="bhH-Y2-fZj"/>
-                                            <constraint firstItem="C2I-PQ-cLi" firstAttribute="centerY" secondItem="Bkc-9k-hTL" secondAttribute="centerY" id="bhv-kS-3cl"/>
                                             <constraint firstAttribute="trailing" secondItem="UGh-wp-xma" secondAttribute="trailing" constant="20" id="cSk-9b-QyK"/>
                                             <constraint firstItem="s79-0R-YPo" firstAttribute="leading" secondItem="not-FG-2tv" secondAttribute="leading" id="cny-YF-NSv"/>
                                             <constraint firstItem="h1e-rb-Id8" firstAttribute="trailing" secondItem="9wM-s4-kOl" secondAttribute="trailing" id="dVl-6F-MaD">
@@ -7705,7 +7655,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             </constraint>
                                             <constraint firstItem="Oz5-xv-kyu" firstAttribute="leading" secondItem="ayS-Rd-49O" secondAttribute="leading" id="ffI-oi-9TT"/>
                                             <constraint firstItem="ayS-Rd-49O" firstAttribute="top" secondItem="LE0-TE-t9x" secondAttribute="bottom" constant="20" id="gFn-Dd-GY3"/>
-                                            <constraint firstItem="wJD-zb-QJq" firstAttribute="width" secondItem="Wfp-kg-K1y" secondAttribute="width" id="hRI-Wz-9pH"/>
                                             <constraint firstItem="iNn-dg-d1u" firstAttribute="leading" secondItem="ive-Nd-LOG" secondAttribute="leading" id="jfa-fE-XjJ"/>
                                             <constraint firstItem="TcK-IJ-SVM" firstAttribute="centerY" secondItem="Bkc-9k-hTL" secondAttribute="centerY" id="jiS-FS-2c0"/>
                                             <constraint firstAttribute="trailing" secondItem="iNn-dg-d1u" secondAttribute="trailing" id="lWP-qZ-Upt"/>
@@ -7715,17 +7664,11 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             <constraint firstItem="Oz5-xv-kyu" firstAttribute="centerY" secondItem="not-FG-2tv" secondAttribute="centerY" id="oyR-2D-RCo"/>
                                             <constraint firstItem="ive-Nd-LOG" firstAttribute="centerY" secondItem="s79-0R-YPo" secondAttribute="centerY" id="pPy-or-0HN"/>
                                             <constraint firstItem="LE0-TE-t9x" firstAttribute="top" secondItem="YoS-f0-ENt" secondAttribute="bottom" constant="10" id="pvd-ug-ox8"/>
-                                            <constraint firstItem="Wfp-kg-K1y" firstAttribute="top" secondItem="Oz5-xv-kyu" secondAttribute="bottom" constant="31" id="pxj-OB-YUZ"/>
-                                            <constraint firstItem="Wfp-kg-K1y" firstAttribute="trailing" secondItem="BDH-08-fFk" secondAttribute="trailing" id="pz5-5S-Zlb"/>
                                             <constraint firstItem="iNn-dg-d1u" firstAttribute="top" secondItem="9wM-s4-kOl" secondAttribute="bottom" constant="17" id="qSd-gk-IIq">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                                             </constraint>
-                                            <constraint firstItem="wJD-zb-QJq" firstAttribute="leading" secondItem="weh-85-NXH" secondAttribute="leading" constant="30" id="tBz-G1-5j1"/>
                                             <constraint firstItem="TcK-IJ-SVM" firstAttribute="trailing" secondItem="not-FG-2tv" secondAttribute="trailing" id="v1X-E9-a5y"/>
                                             <constraint firstItem="Oz5-xv-kyu" firstAttribute="leading" secondItem="TcK-IJ-SVM" secondAttribute="leading" id="wOU-dH-MST"/>
-                                            <constraint firstItem="C2I-PQ-cLi" firstAttribute="leading" secondItem="Wfp-kg-K1y" secondAttribute="trailing" constant="65" id="zCm-1n-Kav">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
@@ -7740,16 +7683,14 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <exclude reference="Oz5-xv-kyu"/>
                                                 <exclude reference="not-FG-2tv"/>
                                                 <exclude reference="TcK-IJ-SVM"/>
-                                                <exclude reference="Wfp-kg-K1y"/>
-                                                <exclude reference="wJD-zb-QJq"/>
                                                 <exclude reference="Bkc-9k-hTL"/>
                                                 <exclude reference="ive-Nd-LOG"/>
                                                 <exclude reference="s79-0R-YPo"/>
                                                 <exclude reference="9wM-s4-kOl"/>
                                                 <exclude reference="BDH-08-fFk"/>
                                                 <exclude reference="h1e-rb-Id8"/>
-                                                <exclude reference="C2I-PQ-cLi"/>
                                                 <exclude reference="iNn-dg-d1u"/>
+                                                <exclude reference="bKI-Oz-caJ"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="bhv-kS-3cl"/>
@@ -7823,16 +7764,14 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <include reference="Oz5-xv-kyu"/>
                                                 <include reference="not-FG-2tv"/>
                                                 <include reference="TcK-IJ-SVM"/>
-                                                <include reference="Wfp-kg-K1y"/>
-                                                <include reference="wJD-zb-QJq"/>
                                                 <include reference="Bkc-9k-hTL"/>
                                                 <include reference="ive-Nd-LOG"/>
                                                 <include reference="s79-0R-YPo"/>
                                                 <include reference="9wM-s4-kOl"/>
                                                 <include reference="BDH-08-fFk"/>
                                                 <include reference="h1e-rb-Id8"/>
-                                                <include reference="C2I-PQ-cLi"/>
                                                 <include reference="iNn-dg-d1u"/>
+                                                <include reference="bKI-Oz-caJ"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="bhv-kS-3cl"/>
@@ -7978,15 +7917,17 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     <connections>
                         <outlet property="addPicture" destination="BDH-08-fFk" id="eDt-HT-URa"/>
                         <outlet property="backgroundRecord" destination="TcK-IJ-SVM" id="A4Z-qC-h2O"/>
+                        <outlet property="checkAudioFake" destination="bKI-Oz-caJ" id="FGm-97-lap"/>
                         <outlet property="descTextView" destination="LE0-TE-t9x" id="isg-fX-vKT"/>
+                        <outlet property="iconRecord" destination="Oz5-xv-kyu" id="3yr-rn-6oF"/>
+                        <outlet property="labelRecord" destination="not-FG-2tv" id="J9l-Ry-aOu"/>
+                        <outlet property="lineRecord" destination="iNn-dg-d1u" id="CXX-nv-q2U"/>
                         <outlet property="maxLenghtLabel" destination="LeO-FD-EgH" id="WTa-h8-Ad5"/>
                         <outlet property="photoImage" destination="9wM-s4-kOl" id="9J3-TJ-W7n"/>
-                        <outlet property="playButton" destination="Wfp-kg-K1y" id="c9p-eX-dDy"/>
-                        <outlet property="recordButton" destination="Bkc-9k-hTL" id="kDb-Ui-gen"/>
+                        <outlet property="recordButton" destination="Bkc-9k-hTL" id="YOq-OI-a5n"/>
                         <outlet property="removeImage" destination="h1e-rb-Id8" id="N9f-5x-xBv"/>
                         <outlet property="saveBtn" destination="6Mp-Fi-7Jd" id="vq2-2c-2bQ"/>
                         <outlet property="scrollView" destination="yx3-Gf-mLG" id="yVJ-mf-q7P"/>
-                        <outlet property="stopBtn" destination="wJD-zb-QJq" id="Qaa-IM-BsD"/>
                         <outlet property="wordTextField" destination="UGh-wp-xma" id="8BP-yP-YNM"/>
                         <outlet property="writeHereImage" destination="1QG-1W-auO" id="YJF-Gs-g7a"/>
                         <segue destination="O4F-Fi-N69" kind="presentation" identifier="go_to_carnet" id="gLP-V6-6JN"/>
@@ -11570,7 +11511,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <viewControllerLayoutGuide type="bottom" id="mFq-uc-uwW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oaI-41-fux">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R8i-j5-zNF">
@@ -11626,7 +11567,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="122" width="360" height="20"/>
+                                                    <rect key="frame" x="20" y="122" width="560" height="20"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Toi :" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOX-Rk-sKB">
@@ -11673,7 +11614,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="63" y="158" width="317" height="40"/>
+                                                    <rect key="frame" x="63" y="158" width="517" height="40"/>
                                                     <mask key="constraints">
                                                         <exclude reference="WIF-Rd-wHk"/>
                                                         <include reference="lNd-Qh-QTb"/>
@@ -11713,7 +11654,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="214" width="360" height="20"/>
+                                                    <rect key="frame" x="20" y="214" width="560" height="20"/>
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxe-O6-I7d">
@@ -12112,7 +12053,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <viewControllerLayoutGuide type="bottom" id="FL5-oG-fNN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WgD-Zw-nr6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Wb-Qd-IDw">
@@ -12567,7 +12508,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <viewControllerLayoutGuide type="bottom" id="S2u-Cg-uI8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="siT-vi-6EX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkn-xP-VpW">
@@ -12582,7 +12523,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" red="1" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="20" width="360" height="21"/>
+                                                    <rect key="frame" x="20" y="20" width="560" height="21"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Cite quelque chose que :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsr-ep-aiD">
@@ -12591,7 +12532,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="61" width="360" height="18"/>
+                                                    <rect key="frame" x="20" y="61" width="560" height="18"/>
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltR-2c-O43" userLabel="barra">
@@ -12610,7 +12551,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="99" width="400" height="1"/>
+                                                    <rect key="frame" x="0.0" y="99" width="600" height="1"/>
                                                     <mask key="constraints">
                                                         <exclude reference="Hgv-Qf-nhF"/>
                                                         <include reference="eBe-ZT-7P6"/>
@@ -12658,7 +12599,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="155" y="131" width="225" height="1"/>
+                                                    <rect key="frame" x="155" y="131" width="425" height="1"/>
                                                     <mask key="constraints">
                                                         <exclude reference="b0r-qL-eeM"/>
                                                         <include reference="dJv-jm-1sG"/>
@@ -12774,7 +12715,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="152" width="360" height="45"/>
+                                                    <rect key="frame" x="20" y="152" width="560" height="45"/>
                                                     <mask key="subviews">
                                                         <include reference="m4U-lc-4c7"/>
                                                         <include reference="h5f-4U-uGm"/>
@@ -12830,7 +12771,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="186" y="228" width="194" height="1"/>
+                                                    <rect key="frame" x="186" y="228" width="394" height="1"/>
                                                     <mask key="constraints">
                                                         <exclude reference="EPd-RT-J7O"/>
                                                         <include reference="lFX-Yb-Qh5"/>
@@ -12852,7 +12793,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="259" width="360" height="110"/>
+                                                    <rect key="frame" x="20" y="259" width="560" height="110"/>
                                                     <mask key="constraints">
                                                         <include reference="lqK-gC-hYF"/>
                                                     </mask>
@@ -13264,7 +13205,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <viewControllerLayoutGuide type="bottom" id="Ybq-El-iQR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b7b-tO-aj4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHf-0s-fgR">
@@ -13288,7 +13229,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                 <color key="textColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="40" y="63" width="320" height="35"/>
+                                                    <rect key="frame" x="40" y="63" width="520" height="18"/>
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SpL-jd-SYD">
@@ -13307,7 +13248,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="118" width="400" height="1"/>
+                                                    <rect key="frame" x="0.0" y="101" width="600" height="1"/>
                                                     <mask key="constraints">
                                                         <exclude reference="ByI-st-1vm"/>
                                                         <include reference="fcp-SO-BZ7"/>
@@ -13327,7 +13268,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="139" width="26" height="20"/>
+                                                    <rect key="frame" x="20" y="122" width="26" height="20"/>
                                                     <mask key="constraints">
                                                         <include reference="VnV-K1-XqM"/>
                                                         <include reference="blI-4B-Xl4"/>
@@ -13348,7 +13289,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="56" y="141" width="324" height="17"/>
+                                                    <rect key="frame" x="56" y="124" width="524" height="17"/>
                                                     <mask key="constraints">
                                                         <exclude reference="lMI-6i-hVo"/>
                                                     </mask>
@@ -13384,7 +13325,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="179" width="150" height="150"/>
+                                                    <rect key="frame" x="20" y="162" width="150" height="150"/>
                                                     <mask key="constraints">
                                                         <exclude reference="6sA-DM-OL6"/>
                                                         <exclude reference="KCf-QB-jyn"/>
@@ -13415,7 +13356,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="20" y="179" width="35" height="35"/>
+                                                    <rect key="frame" x="20" y="162" width="35" height="35"/>
                                                     <mask key="constraints">
                                                         <include reference="5i9-bS-hTY"/>
                                                         <include reference="UuL-WX-P98"/>
@@ -13444,7 +13385,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="150" y="174" width="25" height="25"/>
+                                                    <rect key="frame" x="150" y="157" width="25" height="25"/>
                                                     <mask key="constraints">
                                                         <include reference="Gv7-g0-YwN"/>
                                                         <include reference="dcf-xf-LER"/>
@@ -17855,7 +17796,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="222" y="51" width="50" height="50"/>
+                                            <rect key="frame" x="422" y="51" width="50" height="50"/>
                                             <mask key="constraints">
                                                 <exclude reference="MoA-tf-3Fn"/>
                                                 <exclude reference="m0Z-YF-Ocv"/>
@@ -17878,7 +17819,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="214" y="20" width="66" height="21"/>
+                                            <rect key="frame" x="414" y="20" width="66" height="21"/>
                                             <mask key="constraints">
                                                 <include reference="gye-Cd-Gdb"/>
                                             </mask>
@@ -17922,7 +17863,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="235" y="111" width="25" height="20"/>
+                                            <rect key="frame" x="435" y="111" width="25" height="20"/>
                                             <mask key="constraints">
                                                 <include reference="4da-rD-pMR"/>
                                                 <include reference="cJG-ad-VtG"/>
@@ -18012,7 +17953,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="50" y="180" width="300" height="151"/>
+                                    <rect key="frame" x="50" y="163" width="500" height="151"/>
                                     <mask key="constraints">
                                         <exclude reference="Web-64-AkS"/>
                                         <include reference="nAs-4A-q8U"/>
@@ -21682,7 +21623,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="cGt-W9-uNY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="43" y="15" width="67" height="16"/>
                                                         <mask key="constraints">
                                                             <include reference="cGt-W9-uNY"/>
                                                         </mask>
@@ -21707,7 +21649,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="y2s-rM-boH"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="120" y="15" width="112" height="16"/>
                                                         <mask key="constraints">
                                                             <exclude reference="5Rx-uX-HOf"/>
                                                             <include reference="mi7-gz-MEa"/>
@@ -21760,7 +21703,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="xvR-4s-Gzb"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="131" y="37" width="21" height="18"/>
                                                         <mask key="constraints">
                                                             <exclude reference="BAZ-5P-oEA"/>
                                                             <exclude reference="aWp-E0-Icm"/>
@@ -21792,7 +21736,8 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <exclude reference="unL-gK-SsY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="38" y="38" width="85" height="15"/>
                                                         <mask key="constraints">
                                                             <include reference="5DG-YH-ysf"/>
                                                             <exclude reference="fCz-GG-54l"/>
@@ -23149,6 +23094,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="badge1" destination="DPR-na-AF5" id="jWa-Xs-kXi"/>
+                        <outlet property="badge2" destination="qtd-eF-ma9" id="TLc-hN-uGM"/>
+                        <outlet property="badge3" destination="ej4-8S-7w0" id="Ue1-zp-72T"/>
+                        <outlet property="badge4" destination="fot-eo-W1c" id="Gw7-Ev-zTL"/>
+                        <outlet property="badge5" destination="OBl-Ld-263" id="GXf-3R-kLp"/>
+                        <outlet property="bgProgressBarColab" destination="hAk-GI-zPx" id="wB6-zq-cTt"/>
+                        <outlet property="bgProgressBarComp" destination="iz1-5f-l8T" id="A7V-Mk-koZ"/>
+                        <outlet property="msgBadge" destination="S6W-oU-Pul" id="hXX-Va-v6j"/>
+                        <outlet property="msgFunction" destination="YUm-Ky-mQ7" id="5A3-61-Y7M"/>
                         <segue destination="AMX-38-5PD" kind="unwind" identifier="showBadgesUnwind" unwindAction="returnFromSegueActions:" id="4vm-qF-JgD"/>
                     </connections>
                 </viewController>
@@ -26812,44 +26766,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                 <constraints>
                                                                     <constraint firstItem="V0R-An-TGN" firstAttribute="leading" secondItem="LDz-6r-0Rl" secondAttribute="leading" constant="1" id="7KU-bb-EFg"/>
                                                                     <constraint firstAttribute="trailing" secondItem="V0R-An-TGN" secondAttribute="trailing" id="8IU-90-R8y"/>
-                                                                    <constraint firstItem="Pf3-ZF-eTb" firstAttribute="top" secondItem="LDz-6r-0Rl" secondAttribute="top" constant="7" id="G4j-NG-yrr"/>
                                                                     <constraint firstAttribute="height" constant="45" id="IcF-UO-ri0"/>
                                                                     <constraint firstAttribute="bottom" secondItem="V0R-An-TGN" secondAttribute="bottom" constant="1" id="RmC-bj-mro"/>
-                                                                    <constraint firstItem="Pf3-ZF-eTb" firstAttribute="leading" secondItem="ipt-Gd-3SZ" secondAttribute="trailing" constant="10" id="Uhq-ft-0U8"/>
-                                                                    <constraint firstItem="xFl-jJ-fyx" firstAttribute="leading" secondItem="LDz-6r-0Rl" secondAttribute="leading" constant="10" id="a3s-dJ-YIo"/>
-                                                                    <constraint firstItem="xFl-jJ-fyx" firstAttribute="leading" secondItem="LDz-6r-0Rl" secondAttribute="leading" constant="10" id="ckS-dR-OpH"/>
-                                                                    <constraint firstItem="ipt-Gd-3SZ" firstAttribute="centerY" secondItem="Pf3-ZF-eTb" secondAttribute="centerY" id="d43-Pj-YRt"/>
-                                                                    <constraint firstItem="uiv-mH-rLY" firstAttribute="top" secondItem="LDz-6r-0Rl" secondAttribute="top" constant="10" id="eFb-eR-fxq"/>
-                                                                    <constraint firstItem="ipt-Gd-3SZ" firstAttribute="centerY" secondItem="xFl-jJ-fyx" secondAttribute="centerY" id="eHG-lI-UO6"/>
-                                                                    <constraint firstItem="xFl-jJ-fyx" firstAttribute="top" secondItem="LDz-6r-0Rl" secondAttribute="top" constant="10" id="ewv-FU-Afw"/>
-                                                                    <constraint firstItem="ipt-Gd-3SZ" firstAttribute="leading" secondItem="uiv-mH-rLY" secondAttribute="trailing" constant="10" id="fxT-Hz-osh"/>
-                                                                    <constraint firstItem="xFl-jJ-fyx" firstAttribute="top" secondItem="uiv-mH-rLY" secondAttribute="top" id="h6a-IF-FjG"/>
-                                                                    <constraint firstItem="xFl-jJ-fyx" firstAttribute="leading" secondItem="uiv-mH-rLY" secondAttribute="leading" id="oEM-UX-BH4"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Pf3-ZF-eTb" secondAttribute="trailing" constant="9" id="p9M-vh-ocY"/>
-                                                                    <constraint firstItem="uiv-mH-rLY" firstAttribute="leading" secondItem="LDz-6r-0Rl" secondAttribute="leading" constant="10" id="qP3-fI-lQT"/>
                                                                 </constraints>
                                                                 <variation key="default">
-                                                                    <mask key="subviews">
-                                                                        <exclude reference="ipt-Gd-3SZ"/>
-                                                                    </mask>
                                                                     <mask key="constraints">
                                                                         <exclude reference="IcF-UO-ri0"/>
-                                                                        <exclude reference="d43-Pj-YRt"/>
-                                                                        <exclude reference="eHG-lI-UO6"/>
-                                                                        <exclude reference="fxT-Hz-osh"/>
                                                                         <exclude reference="7KU-bb-EFg"/>
                                                                         <exclude reference="8IU-90-R8y"/>
                                                                         <exclude reference="RmC-bj-mro"/>
-                                                                        <exclude reference="eFb-eR-fxq"/>
-                                                                        <exclude reference="qP3-fI-lQT"/>
-                                                                        <exclude reference="a3s-dJ-YIo"/>
-                                                                        <exclude reference="ckS-dR-OpH"/>
-                                                                        <exclude reference="ewv-FU-Afw"/>
-                                                                        <exclude reference="h6a-IF-FjG"/>
-                                                                        <exclude reference="oEM-UX-BH4"/>
-                                                                        <exclude reference="G4j-NG-yrr"/>
-                                                                        <exclude reference="Uhq-ft-0U8"/>
-                                                                        <exclude reference="p9M-vh-ocY"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -26859,22 +26784,9 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                                     </mask>
                                                                     <mask key="constraints">
                                                                         <include reference="IcF-UO-ri0"/>
-                                                                        <include reference="d43-Pj-YRt"/>
-                                                                        <include reference="eHG-lI-UO6"/>
-                                                                        <include reference="fxT-Hz-osh"/>
                                                                         <include reference="7KU-bb-EFg"/>
                                                                         <include reference="8IU-90-R8y"/>
                                                                         <include reference="RmC-bj-mro"/>
-                                                                        <exclude reference="eFb-eR-fxq"/>
-                                                                        <exclude reference="qP3-fI-lQT"/>
-                                                                        <exclude reference="a3s-dJ-YIo"/>
-                                                                        <include reference="ckS-dR-OpH"/>
-                                                                        <exclude reference="ewv-FU-Afw"/>
-                                                                        <include reference="h6a-IF-FjG"/>
-                                                                        <include reference="oEM-UX-BH4"/>
-                                                                        <include reference="G4j-NG-yrr"/>
-                                                                        <include reference="Uhq-ft-0U8"/>
-                                                                        <include reference="p9M-vh-ocY"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
@@ -27015,39 +26927,15 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="OzT-ZM-dcG" firstAttribute="leading" secondItem="ltY-i9-J8V" secondAttribute="leading" constant="10" id="K4T-td-S45"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Kjy-2T-exT" secondAttribute="trailing" constant="10" id="MH2-qn-J9C"/>
-                                                            <constraint firstItem="Bqw-pR-gBB" firstAttribute="centerY" secondItem="Cvh-ke-2Lk" secondAttribute="centerY" id="Nhi-GR-c38"/>
-                                                            <constraint firstItem="Bqw-pR-gBB" firstAttribute="leading" secondItem="Cvh-ke-2Lk" secondAttribute="trailing" constant="10" id="TwB-y0-oK2"/>
-                                                            <constraint firstItem="Cvh-ke-2Lk" firstAttribute="leading" secondItem="OzT-ZM-dcG" secondAttribute="leading" id="UhS-ik-DyJ"/>
-                                                            <constraint firstItem="Cvh-ke-2Lk" firstAttribute="top" secondItem="OzT-ZM-dcG" secondAttribute="top" id="WZu-fg-cwV"/>
-                                                            <constraint firstItem="Kjy-2T-exT" firstAttribute="centerY" secondItem="ltY-i9-J8V" secondAttribute="centerY" id="XTg-dt-QPM"/>
-                                                            <constraint firstItem="Bqw-pR-gBB" firstAttribute="centerY" secondItem="Kjy-2T-exT" secondAttribute="centerY" id="cLz-Dy-Xrg"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="67" id="dOy-Wa-WYt">
                                                                 <variation key="heightClass=regular-widthClass=compact" constant="45"/>
                                                             </constraint>
-                                                            <constraint firstItem="Kjy-2T-exT" firstAttribute="leading" secondItem="Bqw-pR-gBB" secondAttribute="trailing" constant="10" id="fmA-iY-5mU"/>
                                                             <constraint firstAttribute="width" secondItem="ltY-i9-J8V" secondAttribute="height" multiplier="8:1" id="nn6-Ym-b18"/>
                                                         </constraints>
                                                         <variation key="default">
-                                                            <mask key="subviews">
-                                                                <exclude reference="OzT-ZM-dcG"/>
-                                                                <exclude reference="Cvh-ke-2Lk"/>
-                                                                <exclude reference="Kjy-2T-exT"/>
-                                                                <exclude reference="Bqw-pR-gBB"/>
-                                                            </mask>
                                                             <mask key="constraints">
                                                                 <exclude reference="dOy-Wa-WYt"/>
                                                                 <exclude reference="nn6-Ym-b18"/>
-                                                                <exclude reference="Nhi-GR-c38"/>
-                                                                <exclude reference="TwB-y0-oK2"/>
-                                                                <exclude reference="cLz-Dy-Xrg"/>
-                                                                <exclude reference="MH2-qn-J9C"/>
-                                                                <exclude reference="XTg-dt-QPM"/>
-                                                                <exclude reference="fmA-iY-5mU"/>
-                                                                <exclude reference="K4T-td-S45"/>
-                                                                <exclude reference="UhS-ik-DyJ"/>
-                                                                <exclude reference="WZu-fg-cwV"/>
                                                             </mask>
                                                         </variation>
                                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -27061,15 +26949,6 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                                                             <mask key="constraints">
                                                                 <include reference="dOy-Wa-WYt"/>
                                                                 <include reference="nn6-Ym-b18"/>
-                                                                <include reference="Nhi-GR-c38"/>
-                                                                <include reference="TwB-y0-oK2"/>
-                                                                <include reference="cLz-Dy-Xrg"/>
-                                                                <include reference="MH2-qn-J9C"/>
-                                                                <include reference="XTg-dt-QPM"/>
-                                                                <include reference="fmA-iY-5mU"/>
-                                                                <include reference="K4T-td-S45"/>
-                                                                <include reference="UhS-ik-DyJ"/>
-                                                                <include reference="WZu-fg-cwV"/>
                                                             </mask>
                                                         </variation>
                                                     </view>
@@ -27618,9 +27497,7 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                     <connections>
                         <outlet property="AudioView" destination="ltY-i9-J8V" id="ldJ-pF-FtW"/>
                         <outlet property="audioInPhoto" destination="LDz-6r-0Rl" id="k54-hf-7au"/>
-                        <outlet property="audioSlider" destination="ipt-Gd-3SZ" id="XL9-gd-JfT"/>
-                        <outlet property="audioSlider2" destination="Bqw-pR-gBB" id="LUV-aD-mpb"/>
-                        <outlet property="backgroundRecord" destination="V0R-An-TGN" id="73E-T5-tH3"/>
+                        <outlet property="bgPlayerAudioInPhoto" destination="V0R-An-TGN" id="QQ7-Hm-GZF"/>
                         <outlet property="commentBtn" destination="h8s-cu-df8" id="xjA-ac-nvY"/>
                         <outlet property="contentView" destination="tKE-M7-Cg2" id="exT-Sb-Ptg"/>
                         <outlet property="dislikeBtn" destination="P0p-FP-nXu" id="X05-o4-pEO"/>
@@ -27629,16 +27506,12 @@ em conversações relativas a interesses pessoais... Este nível corresponde ao 
                         <outlet property="likeBtn" destination="bBk-7K-ljS" id="saC-a7-jeo"/>
                         <outlet property="likeNberLabel" destination="YMH-Fp-VZK" id="Nck-5l-heK"/>
                         <outlet property="likeView" destination="b8v-Nt-wtX" id="v86-ka-dVz"/>
-                        <outlet property="listenBtn" destination="xFl-jJ-fyx" id="6Lf-sd-4Wd"/>
-                        <outlet property="listenBtn2" destination="OzT-ZM-dcG" id="vVq-Yb-dgI"/>
                         <outlet property="locationLabel" destination="vpd-pi-EoJ" id="YVP-IS-vow"/>
                         <outlet property="mediaView" destination="Chk-n0-05s" id="Cfu-Ar-6op"/>
                         <outlet property="photoAudioView" destination="rYe-Ho-dUa" id="99R-HV-pj2"/>
                         <outlet property="playVideo" destination="yok-TJ-ngI" id="W7r-Uc-PUI"/>
                         <outlet property="previewVideo" destination="6Mg-AH-QgR" id="ife-4q-ev3"/>
                         <outlet property="scrollView" destination="lmz-Pk-607" id="jeE-YT-8dl"/>
-                        <outlet property="stopBtn" destination="uiv-mH-rLY" id="wwS-ct-sZO"/>
-                        <outlet property="stopBtn2" destination="Cvh-ke-2Lk" id="90k-HM-Vkl"/>
                         <outlet property="textPost" destination="eIA-LB-ew7" id="N4k-cs-RBB"/>
                         <outlet property="timeOfPost" destination="lLT-J1-IpN" id="eh3-6J-qgZ"/>
                         <outlet property="userName" destination="RiO-OL-Hs8" id="cN0-2s-RGv"/>

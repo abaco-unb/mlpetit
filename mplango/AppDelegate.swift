@@ -160,3 +160,11 @@ extension UIImage
     var lowestQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.0)! }
 }
 
+extension NSCache {
+    class var sharedInstance : NSCache {
+        struct Static {
+            static let instance : NSCache = NSCache()
+        }
+        return Static.instance
+    }
+}

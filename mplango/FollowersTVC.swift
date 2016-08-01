@@ -67,7 +67,8 @@ class FollowersTVC: UITableViewController {
                         var bio:String = ""
                         var category: String = ""
                         var followers: Int = 0
-                        var following: Int = 0;
+                        var following: Int = 0
+                        var badge:Int =  0
                         
                         if let userId = user["id"].int {
                             print("show id : ", userId)
@@ -120,6 +121,11 @@ class FollowersTVC: UITableViewController {
                             
                         }
                         
+                        if let badgeRef = user["badge"].int {
+                            badge = badgeRef
+                            
+                        }
+                        
                         //AQUI MUDAR PELA CATEGORIA (MEDIADOR OU APRENDENTE)
                         if let userCat = user["name"].string {
                             category = userCat
@@ -157,7 +163,7 @@ class FollowersTVC: UITableViewController {
                             continue
                         }
                         
-                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following))
+                        self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following, badge: badge))
                         
                     }
                     self.indicator.hideActivityIndicator();
@@ -208,7 +214,7 @@ class FollowersTVC: UITableViewController {
                             let fPicture = friend.valueForKey("picture")?.valueForKey("data")?.valueForKey("url") as? String
                             
                             print("\(count) \(fName)")
-                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName, followers: 0, following: 0))
+                            self.list.append(RUser(id: 0, email: "", name: fName, gender: "", password: "", nationality: "", image: fPicture!, level: User.BEGINNER, bio: "", category: fName, followers: 0, following: 0, badge: 0))
                             count += 1                        }
                         self.indicator.hideActivityIndicator();
                         self.tableView.reloadData()

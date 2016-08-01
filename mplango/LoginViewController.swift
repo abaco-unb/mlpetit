@@ -129,6 +129,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             if let name = user["name"].string {
                                 prefs.setObject(name, forKey: "name")
                             }
+                            
+                            if let badgeRef = user["badge"].int {
+                                prefs.setInteger(badgeRef, forKey: "badge")
+                            }
+                            
                             prefs.synchronize()
                             
                             self.performSegueWithIdentifier("goto_map", sender: self)

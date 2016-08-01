@@ -10,7 +10,7 @@ import UIKit
 
 class RewardViewController: UIViewController, UINavigationControllerDelegate {
     
-    var points = 0
+    var points: Int = 0
     
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var goToMapBTN: UIButton!
@@ -21,6 +21,7 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var shareTwBTN: UIButton!
     
     @IBOutlet weak var shareInstBTN: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,10 +35,10 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate {
         goToPointsBTN.layer.cornerRadius = 10
         goToPointsBTN.layer.masksToBounds = true
         
-        print("points")
-        print(points)
-        //pointsLabel.text = points.description
+        print("points acumulados")
+        print(self.points)
         
+        self.pointsLabel.text = String(self.points)
         
     }
 

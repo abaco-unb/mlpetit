@@ -33,6 +33,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var points = 0
     var category = 0
     
+    var userBadge:Int!
+    var userId: Int!
+    
+    
     var image:UIImage!
     
     @IBOutlet weak var continueBtn: UIBarButtonItem!
@@ -60,6 +64,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var audioSlider: UISlider!
     //@IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var checkAudio: UILabel!
+    @IBOutlet weak var lineAudio: UIView!
     
     //Outlets para a foto
     @IBOutlet weak var addPicture: UIButton!
@@ -98,27 +103,46 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.navigationItem.titleView = imageView
         }
         
+        self.playButton.hidden = true
+        self.stopBtn.hidden = true
+        
+        //inicializa : get geo location data
         locationManager.requestAlwaysAuthorization()
-        //get geo location data
-        if (CLLocationManager.locationServicesEnabled())
-        {
+        if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self;
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
+            print("passou aqui e habilitou o serviço de localização")
+            print(locationManager.location!.coordinate)
             
         } else {
             NSLog("Serviço de localização indisponível")
         }
         
-        AudioHelper.instance._init(self, icon: self.iconAudio,
-                                   check: self.checkAudio,
-                                   background: self.backgroundRecord,
-                                   label: self.labelRecording,
-                                   btnStop: self.stopBtn,
-                                   btnPlay: self.playButton,
-                                   btnRecorder: self.recordButton,
-                                   slider: self.audioSlider)
+        self.displayAudioFunction(false)
+        
+        ActivityIndicator.instance.showActivityIndicator(self.view)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: ["id" : retrieveLoggedUserInfo()])
+            .responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator()
+                let user = json["data"]
+                
+                if let badgeRef = user["badge"].int {
+                    print("badgeRef")
+                    print(badgeRef)
+                    self.userBadge = badgeRef
+                    if badgeRef >= 1 {
+                        self.displayAudioFunction(true)
+                        AudioHelper.instance._init(self.backgroundRecord,
+                            icon: self.iconAudio,
+                            check: self.checkAudio,
+                            label: self.labelRecording,
+                            btnRecorder: self.recordButton)
+                    }
+                    
+                }
+                
+            });
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -130,11 +154,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         continueBtn.enabled = true
         removeImage.hidden = true
         removeVideo.hidden = true
-        
-        // esconder os botões do áudio para não confundir o usuário e deixar visível apenas o botão para gravar
-        playButton.hidden = true
-        stopBtn.hidden = true
-        audioSlider.hidden = true
         
         // Custom the visual identity of Image View
         photoImage.layer.cornerRadius = 10
@@ -176,11 +195,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("location Manager")
         
-        locationManager.stopUpdatingLocation();
-        
-        let userLocation:CLLocationCoordinate2D = locations.last!.coordinate
         self.location = manager.location!
+        let userLocation:CLLocationCoordinate2D = manager.location!.coordinate
         
         self.latitude = String(userLocation.latitude);
         self.longitude = String(userLocation.longitude);
@@ -193,11 +211,12 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
             if let validPlacemark = placemarks?[0]{
                 let placemark = validPlacemark as CLPlacemark;
-                self.address = String(placemark.name!)
-                
+                self.address = String(placemark.name!) + ", " + String(placemark.locality!)
+                print(placemark.locality)
+                print("locations = \(self.address)")
             }
         }
-        
+        locationManager.stopUpdatingLocation();
     }
     
     
@@ -283,7 +302,13 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // MARK: Actions
     
     @IBAction func removeImage(sender: AnyObject) {
+ 
         self.image = nil
+        self.points -= GamificationRules.IMAGE_TOTAL_POINTS;
+        
+        checkImage.textColor = UIColor.grayColor()
+        checkImage.font = UIFont.boldSystemFontOfSize(12)
+        
         photoImage.image = nil
         addPicture.hidden = false
         addPicture.enabled = true
@@ -378,7 +403,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         photoImage.image = fixOrientationImage
         
         self.image = photoImage.image!
-        
+        self.points += GamificationRules.IMAGE_TOTAL_POINTS;
         //set image as checked
 //        checkOn(checkImage)
         checkImage.textColor = UIColor(hex: 0x43A047)
@@ -395,11 +420,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     //MARK: Audio Process
     
     @IBAction func playAudio(sender: UIButton) {
-        AudioHelper.instance.play()
+        AudioHelper.instance.play(sender)
     }
     
     @IBAction func stopAudio(sender: UIButton) {
-        AudioHelper.instance.stop()
+        AudioHelper.instance.stop(sender)
     }
     
     @IBAction func changeAudioTime(sender: UISlider) {
@@ -415,7 +440,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let alertController = UIAlertController(title: "Confirmer ?", message: "Tu confirmes la publication de ton post ?", preferredStyle: .Alert)
         
         let agreeAction = UIAlertAction(title: "Oui, je confirme", style: .Default) { (action) -> Void in
-            print("Post was sent")
             self.confirmSavePost()
         }
         
@@ -429,29 +453,26 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func confirmSavePost (){
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
-        print("enviando esse post...")
-        print(self.latitude)
-        print(self.longitude)
-        print(self.address)
-        print(self.category)
-        print((textPostView.text != nil || textPostView.text != "") ? textPostView.text : "nada informado")
-        print(userId)
-        
         let text = (textPostView.text != nil || textPostView.text != "") ? textPostView.text : ""
         
-//        tagsView.resolveHashTags()
+        self.points += ((tags.count + GamificationRules.TEXT_TOTAL_POINTS) + AudioHelper.instance.points)
+        
+        print( "points : " + String(points) )
+        
         let params : [String: String] = [
             "text" : text,
             "location" : self.address,
             "latitude" : String(self.latitude),
             "longitude" : String(self.longitude),
             "category" : String(self.category),
+            "points"   : String(self.points),
             "user": String(userId)
         ]
         
-        if(self.image != nil || AudioHelper.instance.audioPath != "") {
+        if(self.image != nil || (self.userBadge >= 1 && AudioHelper.instance.audioPath != "")) {
             print("com imagem")
             self.save(false, params: params)
         } else {
@@ -487,19 +508,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func save(upload: Bool, params: Dictionary<String, String>) {
-        print(0)
-        var imageData:NSData!
-        print(1)
-        if self.image != nil {
-            print(2)
-            imageData = image.lowestQualityJPEGNSData
-        }
-        print(3)
+//        var imageData:NSData!
+//        if self.image != nil {
+//            imageData = image.lowestQualityJPEGNSData
+//        }
         ActivityIndicator.instance.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
         let urlRequest = self.urlRequestWithComponents(EndpointUtils.POST, parameters: params, data: false)
-        print(4)
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
@@ -524,9 +540,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         }
                         alertController.addAction(agreeAction)
                         self.presentViewController(alertController, animated: true, completion: nil)
-                    }
                 }
-            })
+            }
+        })
     }
     
     
@@ -665,6 +681,25 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         recordButton.enabled = true
     }
     
+    func displayAudioFunction( show : Bool) {
+        
+        self.iconAudio.hidden = !show
+        self.labelRecording.hidden = !show
+        self.backgroundRecord.hidden = !show
+        self.recordButton.hidden = !show
+        self.checkAudio.hidden = !show
+        self.lineAudio.hidden = !show
+
+    }
+    
+    func retrieveLoggedUserInfo() -> Int {
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userBadge = prefs.integerForKey("badge") as Int
+        self.userId =  prefs.integerForKey("id") as Int
+        return self.userId
+    }
+    
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
@@ -675,9 +710,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showRewards" {
+        if segue.identifier == "go_to_points_notification" {
             let rewardController:RewardViewController = segue.destinationViewController as! RewardViewController
-            points += (tags.count * 5) + AudioHelper.instance.points
+            print("prepareForSegue")
             print( "points : " + String(points) )
             rewardController.points = points
         }
