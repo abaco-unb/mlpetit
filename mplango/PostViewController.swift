@@ -274,7 +274,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if(newLength == 10) {
             //set text as checked
 //            checkOn(checkTextPost)
-            checkTextPost.textColor = UIColor(hex: 0x43A047)
+            checkTextPost.textColor = UIColor(hex: 0xFFC400)
             checkTextPost.font = UIFont.boldSystemFontOfSize(15)
 
         }
@@ -406,7 +406,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.points += GamificationRules.IMAGE_TOTAL_POINTS;
         //set image as checked
 //        checkOn(checkImage)
-        checkImage.textColor = UIColor(hex: 0x43A047)
+        checkImage.textColor = UIColor(hex: 0xFFC400)
         checkImage.font = UIFont.boldSystemFontOfSize(15)
     }
     
@@ -644,7 +644,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         }
                         //set tags as checked
 //                        self.checkOn(checkTextPost)
-                        checkTag1.textColor = UIColor(hex: 0x43A047)
+                        checkTag1.textColor = UIColor(hex: 0xFFC400)
                         checkTag1.font = UIFont.boldSystemFontOfSize(12)
                         checkTag1.text = "+ " + String(tags.count) + " (#)"
                         

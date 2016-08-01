@@ -485,6 +485,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
+        
+        cell.userName.text = String(comments[indexPath.row].userId)
+        
         cell.comTxtView.text = comments[indexPath.row].text
         cell.dateLabel.text = comments[indexPath.row].created
         cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
