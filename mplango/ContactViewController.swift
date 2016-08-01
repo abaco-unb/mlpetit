@@ -336,9 +336,6 @@ class ContactViewController: UITableViewController {
             cell.contactPicture.layer.cornerRadius = 30
         
             cell.contactBadge.image = UIImage(named: GamificationRules.IMG_BADGE[contact.badge])
-        
-        //PARA IMPLEMENTAR A QUESTAO DO BADGE:
-            //cell.contactBadge.image =
 
             if (self.userFollowing.indexOf(contact.id) != nil) {
                 self.toggleFollowBtnView((cell.followBtn as! UIButton), state: true)
@@ -488,7 +485,7 @@ class ContactViewController: UITableViewController {
    
 }
 
-extension FollowersTVC: UISearchResultsUpdating {
+extension ContactViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
@@ -496,7 +493,7 @@ extension FollowersTVC: UISearchResultsUpdating {
     }
 }
 
-extension FollowersTVC: UISearchBarDelegate {
+extension ContactViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }

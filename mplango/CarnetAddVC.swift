@@ -20,7 +20,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     var item : String? = nil
 
     
-    
     var audioPlayer: AVAudioPlayer!
     var recordedAudio:RecordedAudio!
     var recordingSession: AVAudioSession!

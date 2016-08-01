@@ -211,9 +211,9 @@ class ProfileGameVC: UIViewController {
         UIGraphicsBeginImageContextWithOptions ( sz ,  false ,  0 )
         let con =  UIGraphicsGetCurrentContext ()
         if color == "y" {
-            UIColor.yellowColor().setFill()
+            UIColor(hex: 0xFFC400).setFill()
         } else if color == "r" {
-            UIColor.redColor().setFill()
+            UIColor(hex: 0xFF5252).setFill()
         }
         CGContextFillRect ( con ,  CGRectMake ( 0 , top , sz . width , sz . height ))
         tear.drawAtPoint ( CGPointMake ( 0 , 0 ))
