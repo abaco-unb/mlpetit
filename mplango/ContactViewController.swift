@@ -446,7 +446,7 @@ class ContactViewController: UITableViewController {
             button.backgroundColor = UIColor.clearColor()
             button.layer.borderWidth = 1.0
             button.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-            button.setTitle("Abonné(e)", forState: UIControlState.Normal)
+            button.setTitle("Mappé(e)", forState: UIControlState.Normal)
             button.setTitleColor(UIColor(hex: 0x2C98D4), forState: UIControlState.Normal)
             return
         }
