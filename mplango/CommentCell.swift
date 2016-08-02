@@ -22,7 +22,8 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeBtn: UIButton!
-    
+    @IBOutlet weak var checkPointsLabel: UILabel!
+
     // para a BasicCell (só texto)
     @IBOutlet weak var comTxtView: UITextView!
     
@@ -31,10 +32,7 @@ class CommentCell: UITableViewCell {
     
     // para a AudioCell (só som)
     @IBOutlet weak var audioView: UIView!
-    @IBOutlet weak var playBtn: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var audioSlider: UISlider!
+
 
     
     override func layoutSubviews() {

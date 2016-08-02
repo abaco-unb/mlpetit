@@ -336,9 +336,6 @@ class ContactViewController: UITableViewController {
             cell.contactPicture.layer.cornerRadius = 30
         
             cell.contactBadge.image = UIImage(named: GamificationRules.IMG_BADGE[contact.badge])
-        
-        //PARA IMPLEMENTAR A QUESTAO DO BADGE:
-            //cell.contactBadge.image =
 
             if (self.userFollowing.indexOf(contact.id) != nil) {
                 self.toggleFollowBtnView((cell.followBtn as! UIButton), state: true)
@@ -453,7 +450,7 @@ class ContactViewController: UITableViewController {
             button.backgroundColor = UIColor.clearColor()
             button.layer.borderWidth = 1.0
             button.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-            button.setTitle("Abonné(e)", forState: UIControlState.Normal)
+            button.setTitle("Mappé(e)", forState: UIControlState.Normal)
             button.setTitleColor(UIColor(hex: 0x2C98D4), forState: UIControlState.Normal)
             return
         }
@@ -488,7 +485,7 @@ class ContactViewController: UITableViewController {
    
 }
 
-extension FollowersTVC: UISearchResultsUpdating {
+extension ContactViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
@@ -496,7 +493,7 @@ extension FollowersTVC: UISearchResultsUpdating {
     }
 }
 
-extension FollowersTVC: UISearchBarDelegate {
+extension ContactViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }

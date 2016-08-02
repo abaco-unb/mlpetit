@@ -39,7 +39,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     
     let clusteringManager = FBClusteringManager()
     
-    let searchController = UISearchController(searchResultsController: nil)
+//  let searchController = UISearchController(searchResultsController: nil)
+
+    var resultSearchController:UISearchController? = nil
     
     //Filtros: background e botões
     
@@ -58,6 +60,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     
         filtersView.hidden = true
     
+        // para a busca no mapa
+        
+//        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
+//        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+//        resultSearchController?.searchResultsUpdater = locationSearchTable
+        
+      
+//        let searchBar = resultSearchController!.searchBar
+//        searchBar.sizeToFit()
+//        searchBar.placeholder = "Search for places"
+//        navigationItem.titleView = resultSearchController?.searchBar
+//        
+//        
+//        resultSearchController?.hidesNavigationBarDuringPresentation = false
+//        resultSearchController?.dimsBackgroundDuringPresentation = true
+//        definesPresentationContext = true
+        
+        
+//        locationSearchTable.mapView = mkMapView
+        
+        
+        
+        
+        
         //recupera os dados do usuário logado no app
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let user:Int = prefs.integerForKey("id") as Int
@@ -171,26 +197,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     
     // MARK: Search bar
     
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
-      
-        /*
-        filteredPosts = posts.filter { posts in
-            //return itens.word.lowercaseString.containsString(searchText.lowercaseString)
-         
-             AQUI EM VEZ DO return ACIMA (APLICADO À TABELA DO CARNET)
-             deveria ter o que vai mostrar a busca no mapa.
-             em vez de buscar por "itens" busca por "posts", e em vez de buscar por "word", busca por "tag".
-             Daria tipo:
-             return posts.tag.lowercaseString.containsString(searchText.lowercaseString)
-            
-         }
- 
-         */
-        
-        //tableView.reloadData()
-        // AQUI EM VEZ De fazer reload no tableView, deve ser no mapa
-        
-    }
+//    func filterContentForSearchText(searchText: String, scope: String = "All") {
+//        
+//        filteredPosts = posts.filter { posts in
+//            return posts.title!.lowercaseString.containsString(searchText.lowercaseString)
+//        }
+// 
+//        //tableView.reloadData()
+//        
+//    }
     
     //MARK: Actions
 
@@ -216,18 +231,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     
     @IBAction func showSearchBar(sender: AnyObject) {
         
-//        searchController.searchResultsUpdater = self
-//        searchController.dimsBackgroundDuringPresentation = false
-//        definesPresentationContext = true
+        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable
         
-        searchController.searchBar.placeholder = "Rechercher"
-//        searchController.searchBar.canc
-    
-        searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchBar.delegate = self
-        presentViewController(searchController, animated: true, completion: nil)
+        locationSearchTable.mapView = mkMapView
+        
+        let searchBar = resultSearchController!.searchBar
+        searchBar.placeholder = "#tag ou un nom d'utilisateur"
+        searchBar.delegate = self
+        presentViewController(resultSearchController!, animated: true, completion: nil)
+        
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+
+        
+        
+        //        searchController.searchResultsUpdater = self
+        //        searchController.dimsBackgroundDuringPresentation = false
+        //        definesPresentationContext = true
+        
+//        searchController.searchBar.placeholder = "Rechercher"
+//
+//        searchController.hidesNavigationBarDuringPresentation = false
+//        self.searchController.searchBar.delegate = self
+//        presentViewController(searchController, animated: true, completion: nil)
+        
         
     }
+
     
     
     
@@ -642,8 +675,8 @@ extension MapViewController : MKMapViewDelegate {
             let imageview = UIImageView(frame: CGRectMake(0, 0, 45, 45))
                 imageview.layer.cornerRadius = 22
                 imageview.layer.masksToBounds = true
-                imageview.layer.borderWidth = 1
-                imageview.layer.borderColor = UIColor.greenColor().CGColor
+//                imageview.layer.borderWidth = 1
+//                imageview.layer.borderColor = UIColor.greenColor().CGColor
             
             if let image : UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")! {
                 imageview.image = image
@@ -687,8 +720,8 @@ extension MapViewController : MKMapViewDelegate {
     }
 }
 
-extension MapViewController: UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-}
+//extension MapViewController: UISearchResultsUpdating {
+//    func updateSearchResultsForSearchController(searchController: UISearchController) {
+//        filterContentForSearchText(searchController.searchBar.text!)
+//    }
+//}

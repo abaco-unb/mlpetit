@@ -35,6 +35,7 @@
 		15FE53C51CA6F6B0002A28CC /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BE1CA6F6B0002A28CC /* FBClusteringManager.swift */; };
 		15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */; };
 		15FE53C71CA6F6B0002A28CC /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */; };
+		540131721D4F9B96008540AD /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540131711D4F9B96008540AD /* LocationSearchTable.swift */; };
 		5408F3381CF915A9004B6A76 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */; };
 		5408F3391CF915A9004B6A76 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */; };
 		5408F33A1CF915A9004B6A76 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */; };
@@ -59,6 +60,7 @@
 		54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */; };
 		54C26FDF1C0FA08B002B5B5D /* TestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */; };
 		54C3621B1CDBCDDC00396754 /* fixedOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */; };
+		54CBB4131D4F714C001756A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54CBB4121D4F714C001756A0 /* Main.storyboard */; };
 		54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB61BD949F900B62860 /* UITextViewExt.swift */; };
 		54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D02AB91BD94C0700B62860 /* RewardViewController.swift */; };
 		54D750621B763F7200A78824 /* CarnetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D750611B763F7200A78824 /* CarnetTVC.swift */; };
@@ -314,6 +316,7 @@
 		15FE53BE1CA6F6B0002A28CC /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
 		15FE53BF1CA6F6B0002A28CC /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
 		15FE53C01CA6F6B0002A28CC /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
+		540131711D4F9B96008540AD /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		541546141B7D1548008E182C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		5415F8311C1F22DE0036D4E0 /* mplango.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mplango.entitlements; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 		54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswrd.swift; sourceTree = "<group>"; };
 		54C26FDE1C0FA08B002B5B5D /* TestsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsVC.swift; sourceTree = "<group>"; };
 		54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fixedOrientation.swift; sourceTree = "<group>"; };
+		54CBB4121D4F714C001756A0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		54D02AB61BD949F900B62860 /* UITextViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExt.swift; sourceTree = "<group>"; };
 		54D02AB91BD94C0700B62860 /* RewardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		54D750611B763F7200A78824 /* CarnetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTVC.swift; sourceTree = "<group>"; };
@@ -576,6 +580,7 @@
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
 				8283BE151B0143AF0085F9A6 /* Supporting Files */,
+				54CBB4121D4F714C001756A0 /* Main.storyboard */,
 				15A1DBE11CED3F9500D5BA8A /* mplango-Bridging-Header.h */,
 				159F1B001D3C56170074762A /* MplScrollView.swift */,
 			);
@@ -695,6 +700,7 @@
 				15FE53AC1CA6F67F002A28CC /* Cluster */,
 				8283BE461B0236880085F9A6 /* MapViewController.swift */,
 				823CC00C1B4629C000F633F8 /* MapView.swift */,
+				540131711D4F9B96008540AD /* LocationSearchTable.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -789,7 +795,7 @@
 				TargetAttributes = {
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 3MS9SHWCHS;
+						DevelopmentTeam = 2B3UEHLLJ3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1075,6 +1081,7 @@
 				5448EB011C1B71DB004D771A /* helpSettingsVC.swift in Sources */,
 				15FE53C11CA6F6B0002A28CC /* FBAnnotation.swift in Sources */,
 				544F17AF1CE2627F00B45683 /* EditProfile.swift in Sources */,
+				540131721D4F9B96008540AD /* LocationSearchTable.swift in Sources */,
 				54B130A01CEE00A400199245 /* ContactCell.swift in Sources */,
 				54E0D5DD1D02333300ECA1D1 /* Test.swift in Sources */,
 				546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */,
@@ -1241,7 +1248,7 @@
 				INFOPLIST_FILE = mplango/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.non.unb.br;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1265,7 +1272,7 @@
 				INFOPLIST_FILE = mplango/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.non.unb.br;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

@@ -65,17 +65,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var itemPhoto: UIImageView!
     @IBOutlet weak var audioInPhoto: UIView!
 
-    
 
     @IBOutlet weak var bgPlayerAudioInPhoto: UIView!
     
     //Outlets da AudioView (quando o Post inclui apenas um audio)
     @IBOutlet weak var AudioView: UIView!
-    
-    //Outlets do Video View (
-    @IBOutlet weak var videoView: UIView!
-    @IBOutlet weak var previewVideo: UIImageView!
-    @IBOutlet weak var playVideo: UIButton!
     
     
     override func viewDidLoad() {
@@ -147,17 +141,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         
         //Como vai aparecer a AudioView
-        AudioView.layer.borderWidth = 1
-        AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         AudioView.layer.cornerRadius = 10
         AudioView.layer.masksToBounds = true
-        
-        
-        //Como vai aparecer a videoView
-        videoView.layer.borderWidth = 1
-        videoView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        videoView.layer.cornerRadius = 10
-        videoView.layer.masksToBounds = true
         
         
         scrollView.bounces = false
@@ -171,8 +156,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         if post != nil {
             
-            userPicture.layer.borderWidth = 1
-            userPicture.layer.borderColor = UIColor.greenColor().CGColor
+//            userPicture.layer.borderWidth = 1
+//            userPicture.layer.borderColor = UIColor.greenColor().CGColor
             
             var hasAudio = false
             var hasImage = false
@@ -224,7 +209,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.photoAudioView.hidden = false
                         self.audioInPhoto.hidden = true
                         self.AudioView.hidden = true
-                        self.videoView.hidden = true
                         
                     }
                     
@@ -234,6 +218,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.photoAudioView.hidden = false
                         self.audioInPhoto.hidden = false
                         self.AudioView.hidden = true
+                        
+                        self.photoAudioView.layer.borderWidth = 1
+                        self.photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
                         
                         AudioHelper.instance._init(self.audioInPhoto, audioPath: EndpointUtils.POST + "?id=" + String(postId) + "&audio=true")
 
@@ -249,6 +236,9 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.audioInPhoto.hidden = true
                         self.AudioView.hidden = false
                         
+                        self.AudioView.layer.borderWidth = 1
+                        self.AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+                        
                         print(self.AudioView)
                         
                         
@@ -263,8 +253,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                         self.photoAudioView.hidden = true
                         self.audioInPhoto.hidden = true
                         self.AudioView.hidden = true
-                        self.videoView.hidden = true
-                        self.mediaView.hidden = true
                     }
                     
                     print("antes dos likes");
@@ -274,6 +262,15 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     print("depois dos likes");
                 });
         }
+        
+        //Like desativado quando o usuário for o autor do post
+        if self.userId != post!.owner {
+            likeBtn.enabled = true
+        }
+        else {
+            likeBtn.enabled = false
+        }
+
         
     }
     

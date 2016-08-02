@@ -16,7 +16,6 @@ class FollowersTVC: UITableViewController {
     //MARK: Properties
     
     var list = [RUser]()
-    var filteredList = [RUser]()
     
     var userId:Int!
     var userFollowing = [Int]()
@@ -34,8 +33,6 @@ class FollowersTVC: UITableViewController {
         print("self.userId : ", self.userId)
         self.upServerListUsers()
         
-        searchController.searchBar.delegate = self
-        searchController.searchBar.tintColor = UIColor.whiteColor()
         
     }
     
@@ -50,9 +47,13 @@ class FollowersTVC: UITableViewController {
     
     func upServerListUsers() {
         
+        let params : [String: Int] = [
+            "user": self.userId
+        ]
+        
         self.indicator.showActivityIndicator(self.view)
         //        Checagem remota
-        Alamofire.request(.GET, EndpointUtils.USER)
+        Alamofire.request(.GET, EndpointUtils.USER, parameters: params)
             .responseSwiftyJSON({ (request, response, json, error) in
                 if let users = json["data"].array {
                     for user in users {
@@ -226,30 +227,7 @@ class FollowersTVC: UITableViewController {
         })
         
     }
-    
-    // MARK: Search bar
-    
-    func filterContentForSearchText(searchText: String, scope: String = "Tous") {
-        filteredList = list.filter { contact in
-            let categoryMatch = (scope == "Tous") || (contact.category == scope)
-            return categoryMatch && contact.name.lowercaseString.containsString(searchText.lowercaseString)
-        }
-        
-        tableView.reloadData()
-    }
-    
-    
-    @IBAction func showSearchBar(sender: AnyObject) {
-        
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-        
-        searchController.searchBar.placeholder = "Rechercher"
-        searchController.searchBar.scopeButtonTitles = ["Tous", "Apprenants", "Médiateurs"]
-        
-    }
+
     
     
     // MARK:- Table view data source
@@ -259,9 +237,6 @@ class FollowersTVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
-            return filteredList.count
-        }
         return self.list.count
     }
     
@@ -271,11 +246,8 @@ class FollowersTVC: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ContactCell
         
         let contact: RUser
-        if searchController.active && searchController.searchBar.text != "" {
-            contact = self.filteredList[indexPath.row]
-        } else {
-            contact = self.list[indexPath.row]
-        }
+        contact = self.list[indexPath.row]
+        
         
         if contact.level == User.BEGINNER {
             if contact.gender == "Homme" {
@@ -405,11 +377,7 @@ class FollowersTVC: UITableViewController {
             let contactViewController:ProfileVC = segue.destinationViewController as! ProfileVC
             
             let contact: RUser
-            if searchController.active && searchController.searchBar.text != "" {
-                contact = self.filteredList[indexPath!.row]
-            } else {
-                contact = self.list[indexPath!.row]
-            }
+            contact = self.list[indexPath!.row]
             
             contactViewController.contact = contact
             
@@ -423,20 +391,5 @@ class FollowersTVC: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-}
-
-
-extension ContactViewController: UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-    }
-}
-
-extension ContactViewController: UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
-    }
 }
 

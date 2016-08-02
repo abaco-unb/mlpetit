@@ -49,9 +49,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var checkTextPost: UILabel!
     @IBOutlet weak var writeHereImage: UIImageView!
     @IBOutlet weak var checkTag1: UILabel!
-    @IBOutlet weak var checkTag2: UILabel!
-    @IBOutlet weak var checkTag3: UILabel!
     
+    @IBOutlet weak var unlockBadge: UIView!
+    @IBOutlet weak var badge: UIImageView!
     
     @IBOutlet weak var iconAudio: UIImageView!
     @IBOutlet weak var labelRecording: UILabel!
@@ -120,6 +120,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         
         self.displayAudioFunction(false)
+        self.unlockBadge.hidden = false
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.USER, parameters: ["id" : retrieveLoggedUserInfo()])
@@ -174,7 +175,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews();
-        self.scrollView.contentSize.height = 800;
+        self.scrollView.contentSize.height = 600;
     }
     
     
@@ -274,7 +275,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if(newLength == 10) {
             //set text as checked
 //            checkOn(checkTextPost)
-            checkTextPost.textColor = UIColor(hex: 0x43A047)
+            checkTextPost.textColor = UIColor(hex: 0xFFC400)
             checkTextPost.font = UIFont.boldSystemFontOfSize(15)
 
         }
@@ -406,7 +407,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.points += GamificationRules.IMAGE_TOTAL_POINTS;
         //set image as checked
 //        checkOn(checkImage)
-        checkImage.textColor = UIColor(hex: 0x43A047)
+        checkImage.textColor = UIColor(hex: 0xFFC400)
         checkImage.font = UIFont.boldSystemFontOfSize(15)
     }
     
@@ -644,7 +645,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                         }
                         //set tags as checked
 //                        self.checkOn(checkTextPost)
-                        checkTag1.textColor = UIColor(hex: 0x43A047)
+                        checkTag1.textColor = UIColor(hex: 0xFFC400)
                         checkTag1.font = UIFont.boldSystemFontOfSize(12)
                         checkTag1.text = "+ " + String(tags.count) + " (#)"
                         
@@ -683,12 +684,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func displayAudioFunction( show : Bool) {
         
-        self.iconAudio.hidden = !show
-        self.labelRecording.hidden = !show
         self.backgroundRecord.hidden = !show
         self.recordButton.hidden = !show
         self.checkAudio.hidden = !show
-        self.lineAudio.hidden = !show
+        self.unlockBadge.hidden = true
+        
+//        self.iconAudio.hidden = !show
+//        self.labelRecording.hidden = !show
+//        self.lineAudio.hidden = !show
 
     }
     

@@ -90,7 +90,7 @@ class ProfileVC: UIViewController {
             self.profileNumberFollowers.text = String([contact.followers].count)
             self.profileNumberFollowing.text = String([contact.following].count)
             
-//            self.profileNumberPosts.text =
+//            self.profileNumberPosts.text = String([contact.posts].count)
             
         } else {
             
