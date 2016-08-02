@@ -27,6 +27,9 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     var audioPath: String = ""
     
+    @IBOutlet weak var unlockBadge: UIView!
+    @IBOutlet weak var badge: UIImageView!
+    
     var userBadge:Int!
     var userId: Int!
     
@@ -82,6 +85,7 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
 //        }
         
         self.displayAudioFunction(false)
+        self.unlockBadge.hidden = false
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.USER, parameters: ["id" : retrieveLoggedUserInfo()])
@@ -457,11 +461,14 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
     
     func displayAudioFunction( show : Bool) {
         
-        self.iconRecord.hidden = !show
-        self.labelRecord.hidden = !show
         self.backgroundRecord.hidden = !show
         self.recordButton.hidden = !show
-        self.lineRecord.hidden = !show
+        self.unlockBadge.hidden = true
+        
+//        self.iconRecord.hidden = !show
+//        self.labelRecord.hidden = !show
+//        self.lineRecord.hidden = !show
+
         
     }
     

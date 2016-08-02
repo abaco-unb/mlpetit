@@ -49,9 +49,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var checkTextPost: UILabel!
     @IBOutlet weak var writeHereImage: UIImageView!
     @IBOutlet weak var checkTag1: UILabel!
-    @IBOutlet weak var checkTag2: UILabel!
-    @IBOutlet weak var checkTag3: UILabel!
     
+    @IBOutlet weak var unlockBadge: UIView!
+    @IBOutlet weak var badge: UIImageView!
     
     @IBOutlet weak var iconAudio: UIImageView!
     @IBOutlet weak var labelRecording: UILabel!
@@ -120,6 +120,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         
         self.displayAudioFunction(false)
+        self.unlockBadge.hidden = false
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.USER, parameters: ["id" : retrieveLoggedUserInfo()])
@@ -174,7 +175,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews();
-        self.scrollView.contentSize.height = 800;
+        self.scrollView.contentSize.height = 600;
     }
     
     
@@ -683,12 +684,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func displayAudioFunction( show : Bool) {
         
-        self.iconAudio.hidden = !show
-        self.labelRecording.hidden = !show
         self.backgroundRecord.hidden = !show
         self.recordButton.hidden = !show
         self.checkAudio.hidden = !show
-        self.lineAudio.hidden = !show
+        self.unlockBadge.hidden = true
+        
+//        self.iconAudio.hidden = !show
+//        self.labelRecording.hidden = !show
+//        self.lineAudio.hidden = !show
 
     }
     
