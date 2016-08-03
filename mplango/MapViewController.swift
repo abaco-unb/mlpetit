@@ -39,9 +39,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
     
     let clusteringManager = FBClusteringManager()
     
-//  let searchController = UISearchController(searchResultsController: nil)
+//    let searchController = UISearchController(searchResultsController: nil)
 
-    var resultSearchController:UISearchController? = nil
+    var resultSearchController = UISearchController(searchResultsController: nil)
     
     //Filtros: background e botões
     
@@ -59,30 +59,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         super.viewDidLoad()
     
         filtersView.hidden = true
-    
-        // para a busca no mapa
-        
-//        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
-//        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-//        resultSearchController?.searchResultsUpdater = locationSearchTable
-        
-      
-//        let searchBar = resultSearchController!.searchBar
-//        searchBar.sizeToFit()
-//        searchBar.placeholder = "Search for places"
-//        navigationItem.titleView = resultSearchController?.searchBar
-//        
-//        
-//        resultSearchController?.hidesNavigationBarDuringPresentation = false
-//        resultSearchController?.dimsBackgroundDuringPresentation = true
-//        definesPresentationContext = true
-        
-        
-//        locationSearchTable.mapView = mkMapView
-        
-        
-        
-        
         
         //recupera os dados do usuário logado no app
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -233,24 +209,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
         let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController?.searchResultsUpdater = locationSearchTable
+        resultSearchController.searchResultsUpdater = locationSearchTable
         
         locationSearchTable.mapView = mkMapView
         
-        let searchBar = resultSearchController!.searchBar
-        searchBar.placeholder = "#tag ou un nom d'utilisateur"
+        let searchBar = resultSearchController.searchBar
+        searchBar.placeholder = "Rechercher"
         searchBar.delegate = self
-        presentViewController(resultSearchController!, animated: true, completion: nil)
+        presentViewController(resultSearchController, animated: true, completion: nil)
         
-        resultSearchController?.hidesNavigationBarDuringPresentation = false
-        resultSearchController?.dimsBackgroundDuringPresentation = true
+        resultSearchController.hidesNavigationBarDuringPresentation = false
+        resultSearchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
 
         
         
-        //        searchController.searchResultsUpdater = self
-        //        searchController.dimsBackgroundDuringPresentation = false
-        //        definesPresentationContext = true
+//        searchController.searchResultsUpdater = self
+//        searchController.dimsBackgroundDuringPresentation = false
+//        definesPresentationContext = true
         
 //        searchController.searchBar.placeholder = "Rechercher"
 //
@@ -718,6 +694,7 @@ extension MapViewController : MKMapViewDelegate {
         print("teste fora")
         
     }
+    
 }
 
 //extension MapViewController: UISearchResultsUpdating {

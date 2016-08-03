@@ -13,12 +13,13 @@ class Carnet: NSObject {
     let word : String
     let text : String
     let image : String
-    //let audio : String
+    let audio : String
     
-    init(id:Int, word:String, text:String, image:String) {
+    init(id:Int, word:String, text:String, image:String, audio:String) {
             self.id = id
             self.word = word
             self.text = text
             self.image = image
+            self.audio = audio
     }
 }
