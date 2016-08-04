@@ -58,6 +58,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsVC.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
         
+        initRecorder()
+        print("post: ",  self.postId)
+        
         ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.COMMENT, parameters: ["post" : String(self.postId)])
             .responseSwiftyJSON({ (request, response, json, error) in
@@ -108,7 +111,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         self.comTableView.rowHeight = UITableViewAutomaticDimension
         self.comTableView.estimatedRowHeight = 200.0
-
+        
     }
     
 
@@ -174,8 +177,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             if comPicture != nil {
                 postComBtn.hidden = false
-                recordBtn.hidden = true
-                recordBtn.enabled = false
+                //recordBtn.hidden = true
+                //recordBtn.enabled = false
             }
             
             else {
@@ -431,7 +434,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         let alertController = UIAlertController(title: "Ops!", message: "Tivemos um problema ao tentar criar seu comentário. Favor tente novamente.", preferredStyle: .Alert)
                         let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
                             print("The comment is fail.")
-                            self.indicator.hideActivityIndicator();
+                            ActivityIndicator.instance.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
                         self.presentViewController(alertController, animated: true, completion: nil)
@@ -519,6 +522,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         self.recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
             dispatch_async(dispatch_get_main_queue()) {
                 if allowed {
+                    print("habilitou o botão")
                     self.loadRecordingGesture()
                 } else {
                     NSLog("Error: viewDidLoad -> microfone indisponível")
@@ -560,14 +564,15 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //LongPress para a criação de post
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressRecogniser.minimumPressDuration = 0.2
-        recordBtn.addGestureRecognizer(longPressRecogniser)
+        print("add Gesture par o botão rec ")
+        self.recordBtn.addGestureRecognizer(longPressRecogniser)
     }
     
     func handleLongPress(gestureRecognizer : UIGestureRecognizer){
         if gestureRecognizer.state == .Began {
             print("iniciar a gravação")
             recording()
-            recordBtn.enabled = false
+            self.recordBtn.enabled = false
         }
         
         if gestureRecognizer.state == .Ended {
@@ -576,10 +581,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             audioRecorder.stop()
             AVAudioSession.sharedInstance()
             
-            recordBtn.enabled = true
-            
-            //Aqui vamos postar o audio...
-            
+            self.recordBtn.enabled = true
             
         }
     }
@@ -611,6 +613,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
                 self.audioPath = recorder.url.description
                 
+                //Aqui vamos postar o audio...
+                print("POSTAR PRO SERVER...")
+                self.postingComment(self.recordBtn)
                 
                 
             } catch {

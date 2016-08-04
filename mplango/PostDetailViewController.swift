@@ -638,6 +638,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         if segue.identifier == "post_to_comments" {
             let navigationController = segue.destinationViewController as! UINavigationController
             let commentController:CommentsVC = navigationController.viewControllers[0] as! CommentsVC
+            print(self.post?.id)
             commentController.postId = self.post?.id
             
         }
