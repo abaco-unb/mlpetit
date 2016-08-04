@@ -78,7 +78,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             print("passou aqui e habilitou o serviço de localização")
-            print(locationManager.location!.coordinate)
+            print(locationManager.location!)
             
         } else {
             NSLog("Serviço de localização indisponível")
@@ -682,7 +682,8 @@ extension MapViewController : MKMapViewDelegate {
             if postView.annotation!.isKindOfClass(PostAnnotation) {
                 print("dentro calloutTap depois isKind")
                 let post: PostAnnotation = postView.annotation as! PostAnnotation
-            
+                print("post ID [AQUI]")
+                print(post.id)
                 //NSLog(post.getCategoryImageName())
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                 print("antes");
