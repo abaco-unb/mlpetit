@@ -26,7 +26,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var comments: Array<Comment> = [Comment]()
     
-    var postId:Int!
+    var postId:Int = 0
     
     let basicCellIdentifier = "BasicCell"
     
@@ -57,9 +57,11 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsVC.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
+        print("teste 1")
         
         initRecorder()
-        print("post: ",  self.postId)
+        print("teste 2")
+        //print(self.postId)
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.COMMENT, parameters: ["post" : String(self.postId)])
