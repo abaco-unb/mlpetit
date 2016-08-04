@@ -639,7 +639,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             let navigationController = segue.destinationViewController as! UINavigationController
             let commentController:CommentsVC = navigationController.viewControllers[0] as! CommentsVC
             print(self.post?.id)
-            commentController.postId = self.post?.id
+            commentController.postId = (self.post?.id)!
             
         }
 //        if segue.identifier == "copy_to_carnet" {

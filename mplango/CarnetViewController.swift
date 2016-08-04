@@ -62,19 +62,18 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         itemDescTxtView.delegate = self
         itemWordTxtView.delegate = self
         
+        itemDescTxtView.editable = false
+        
         writeHereIndicator.hidden = true
         
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         
-//        backgroundRecord.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
-//        backgroundRecord.layer.masksToBounds = true
-        
         bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
         bgPlayerAudioInPhoto.layer.masksToBounds = true
         
-        AudioView.layer.borderWidth = 1
-        AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+//        AudioView.layer.borderWidth = 1
+//        AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
         AudioView.layer.cornerRadius = 10
         AudioView.layer.masksToBounds = true
         
@@ -92,11 +91,15 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
             print(ImageUtils.instance.loadImageFromPath(item.image));
         print("----***-----");
         
+        print("----***-----");
+            print(AudioHelper.instance.loadAudioFromPath(item.audio));
+        print("----***-----");
+        
         let image = ImageUtils.instance.loadImageFromPath(item.image)
         let audio = AudioHelper.instance.loadAudioFromPath(item.audio)
         
         // FOTO SEM ÁUDIO:
-        if (!item.image.isEmpty && image != nil /*|| audio == nil*/){
+        if (image != nil && audio == nil){
             print("image inneer")
             print(image)
             
@@ -107,29 +110,35 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         }
         
         // FOTO + ÁUDIO:
-//        else if (!item.image.isEmpty && image != nil /*|| !item.audio.isEmpty && audio != nil*/) {
-//            photoAudioView.hidden = false
-//            audioInPhotoView.hidden = false
-//            AudioView.hidden = true
-//            photoAudioView.layer.borderWidth = 1
-//            photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+        else if (image != nil && audio != nil) {
             
-//        AudioHelper.instance._init(self.audioInPhotoView, audioPath: EndpointUtils.CARNET + "?id=" + String(noteId) + "&audio=true")
-
+            itemPhoto.image = image
+            
+            self.photoAudioView.hidden = false
+            self.audioInPhotoView.hidden = false
+            self.AudioView.hidden = true
+            
+            self.photoAudioView.layer.borderWidth = 1
+            self.photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            
+        AudioHelper.instance._init(self.audioInPhotoView, audioPath: EndpointUtils.CARNET + "?id=" + String(item.id) + "&audio=true")
         
-//        }
+        }
         
         // ÁUDIO SEM FOTO:
-        else if (!item.audio.isEmpty && audio != nil || image == nil) {
+        else if (audio != nil && image == nil) {
             photoAudioView.hidden = true
             audioInPhotoView.hidden = true
             AudioView.hidden = false
             
-            AudioHelper.instance._init(self.AudioView, audioPath: EndpointUtils.CARNET + "?id=" + String(noteId) + "&audio=true")
+            self.AudioView.layer.borderWidth = 1
+            self.AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            
+            AudioHelper.instance._init(self.AudioView, audioPath: EndpointUtils.CARNET + "?id=" + String(item.id) + "&audio=true")
         }
             
-        // NEM FOTO NEM ÁUDIO:
-        else if (image == nil || audio == nil) {
+        // TEXTO SEM MÍDIA:
+        else if (image == nil && audio == nil) {
             photoAudioView.hidden = true
             audioInPhotoView.hidden = true
             AudioView.hidden = true
@@ -139,6 +148,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CarnetViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        writeHereIndicator.hidden = true
         
         checkValidChange()
         
@@ -172,10 +183,10 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
                 writeHereIndicator.hidden = false
             }
             
-            if mediaView.hidden == false {
-                removeImage.hidden = false
-                removeImage.enabled = true
-            }
+//            if mediaView.hidden == false {
+//                removeImage.hidden = false
+//                removeImage.enabled = true
+//            }
 
             editBtn.title = "Confirmer"
             editBtn.enabled = false
@@ -360,14 +371,9 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     func checkValidChange() {
         // Disable the Save button if the text field is empty.
         let text = itemWordTxtView.text ?? ""
-        let text2 = itemDescTxtView.text ?? ""
         
         if (!text.isEmpty) {
             editBtn.enabled = true
-            
-        } else if (!text2.isEmpty) {
-            editBtn.enabled = true
-            
             
         } else {
             editBtn.enabled = false

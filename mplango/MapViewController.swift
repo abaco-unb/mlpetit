@@ -221,8 +221,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         resultSearchController.hidesNavigationBarDuringPresentation = false
         resultSearchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-
-        
         
 //        searchController.searchResultsUpdater = self
 //        searchController.dimsBackgroundDuringPresentation = false
@@ -257,6 +255,56 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
     }
     
+    @IBAction func filterPosts(sender: UIButton) {
+        print("nome do botao:",sender.tag)
+        var showCategory:Int!
+        switch sender {
+        case showAllBtn:
+            // aqui mostrar todas as categorias
+            showCategory = 0
+            showFiltersBtn.setImage(UIImage(named: "filtros_map_on"), forState: .Normal)
+        case defisBtn:
+            showCategory = Post.DEFIS
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_desafio"), forState: .Normal)
+        case astucesBtn:
+            showCategory = Post.ASTUCES
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_dica"), forState: .Normal)
+        case evenementsBtn:
+            showCategory = Post.EVENEMENTS
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_evento"), forState: .Normal)
+        case curiositesBtn:
+            showCategory = Post.CURIOSITE
+            showFiltersBtn.setImage(UIImage(named: "filtro_map_curiosidade"), forState: .Normal)
+        default:
+            showCategory = 5
+        }
+        
+        showFiltersBtn.imageView?.image = UIImage(named: Post.IMG_CATEGORIES[showCategory])
+        self.hideFilters(sender);
+        
+        for annotation in self.clusteringManager.allAnnotations() {
+            self.mkMapView.viewForAnnotation(annotation)?.hidden = true
+            print("iniciou o loop de cluster annotation")
+            //            if showCategory == 5 {
+            //                self.mkMapView.viewForAnnotation(annotation)?.hidden = false
+            //                continue
+            //            }
+            
+            if annotation.isKindOfClass(PostAnnotation) {
+                print("é classe de Post")
+                let post: PostAnnotation = annotation as! PostAnnotation
+                
+                if post.category.integerValue == showCategory {
+                    print("coloca como visivel")
+                    self.mkMapView.viewForAnnotation(post)?.hidden = false
+                }
+            }
+        }
+        
+        
+    }
+
+  /*
     @IBAction func filterPosts(sender: UIButton) {
         
         resetMapFilter();
@@ -293,6 +341,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         
     }
     
+    */
+    
     func mapFilter() {
         
         if(showCategory != 0 && showCategory < 5 ) {
@@ -314,6 +364,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             self.mkMapView.viewForAnnotation(annotation)?.hidden = true
         }
     }
+ 
+
     
     func randomLocationsWithCount(count:Int) -> [FBAnnotation] {
         var array:[FBAnnotation] = []

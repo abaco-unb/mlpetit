@@ -68,7 +68,7 @@ class CarnetTVC: UITableViewController {
                         var word:String  = ""
                         var text:String = ""
                         var imageUrl:String = ""
-                        var audio:String = ""
+                        var audioUrl:String = ""
                         
                         if let noteId = note["id"].int {
                             id = noteId
@@ -85,16 +85,17 @@ class CarnetTVC: UITableViewController {
                         }
                         
                         if (note["photo"].string != nil) {
-                            imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "&image=true"
-//                            ImageUtils.instance.loadImageFromPath(EndpointUtils.CARNET + "?id=" + String(id) + "&image=true")
-
+                            imageUrl = EndpointUtils.CARNET + "?id=" + String(id) + "&image=true"                          
                         }
                         
-                        if let noteAudio = note["audio"].string {
-                            audio = noteAudio
+                        if (note["audio"].string != nil) {
+                            audioUrl = EndpointUtils.CARNET + "?id=" + String(id) + "&audio=true"
+                            print("----***-----");
+                            print(audioUrl);
+                            print("----***-----")
                         }
                         
-                        self.itens.append(Carnet(id: id, word: word, text: text, image: imageUrl, audio: audio))
+                        self.itens.append(Carnet(id: id, word: word, text: text, image: imageUrl, audio: audioUrl))
                     }
                     self.indicator.hideActivityIndicator();
                     self.tableView.reloadData()
