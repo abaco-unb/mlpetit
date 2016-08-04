@@ -32,6 +32,9 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var profileNumberFollowing: UILabel!
     @IBOutlet weak var profileBio: UILabel!
     
+    @IBOutlet var followersBtn: UIButton!
+    @IBOutlet var followingBtn: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,10 +88,13 @@ class ProfileVC: UIViewController {
             else if contact.level == User.MEDIATOR {
                 self.profileLangLevel.image = UIImage(named: "profile_nivM")
             }
-
             
             self.profileNumberFollowers.text = String([contact.followers].count)
             self.profileNumberFollowing.text = String([contact.following].count)
+            
+            print("+++++++++++++++++++")
+                        print(contact.followers)
+            print("+++++++++++++++++++")
             
 //            self.profileNumberPosts.text = String([contact.posts].count)
             
@@ -120,7 +126,6 @@ class ProfileVC: UIViewController {
 
         let params : [String: Int] = [
             "id": self.userId
-            
         ]
 
         //Checagem remota
@@ -245,24 +250,26 @@ class ProfileVC: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-//        print(sender)
-//        if segue.identifier == "show_followers" {
-//            let navigationController = segue.destinationViewController as! UINavigationController
-//            let followersController:FollowersTVC = navigationController.viewControllers[0] as! FollowersTVC
-//            
-//            
-//        }
+        print(sender)
+        if segue.identifier == "show_followers" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let followersController:ContactViewController = navigationController.viewControllers[0] as! ContactViewController
+            
+            followersController.navigationItem.title = "Mappé(e)s"
+//            followersController.tableView.numberOfRowsInSection([contact.followers].count)
+           
+            print("+++++++++++++++++++")
+//            print(contact.followers)
+            print("+++++++++++++++++++")
+        }
         
-//        if segue.identifier == "show_points" {
-//            let pointsController: ProfileGameVC = segue.destinationViewController as! ProfileGameVC
-//            
-//                if contact != self.userId {
-//                    pointsController.navigationItem.title = "Points de " + contact.name
-//                    pointsController.navigationItem.backBarButtonItem?.title = " "
-//                    
-//                }
-//            
-//        }
+        if segue.identifier == "show_following" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let followingController:ContactViewController = navigationController.viewControllers[0] as! ContactViewController
+            
+            followingController.navigationItem.title = "Mappeurs"
+            
+        }
         
     }
     
@@ -278,12 +285,12 @@ class ProfileVC: UIViewController {
     }
 
 }
+
 extension ProfileVC : FBClusteringManagerDelegate {
     
     func cellSizeFactorForCoordinator(coordinator:FBClusteringManager) -> CGFloat{
         return 1.0
     }
-    
 }
 
 extension ProfileVC : MKMapViewDelegate {

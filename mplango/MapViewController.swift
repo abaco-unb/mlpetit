@@ -260,9 +260,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
         var showCategory:Int!
         switch sender {
         case showAllBtn:
-            // aqui mostrar todas as categorias
-            showCategory = 0
-            showFiltersBtn.setImage(UIImage(named: "filtros_map_on"), forState: .Normal)
+            showCategory = Post.ALL
+            showFiltersBtn.setImage(UIImage(named: "filtros_map"), forState: .Normal)
         case defisBtn:
             showCategory = Post.DEFIS
             showFiltersBtn.setImage(UIImage(named: "filtro_map_desafio"), forState: .Normal)
@@ -300,7 +299,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                 }
             }
         }
-        
         
     }
 

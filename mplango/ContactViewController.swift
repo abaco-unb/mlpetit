@@ -161,8 +161,8 @@ class ContactViewController: UITableViewController {
                             
                             print("following.count logged user")
                             print(self.userFollowing.count)
-                            
                             continue
+                            
                         }
                         
                         self.list.append(RUser(id: id, email: email, name: name, gender: gender, password: password, nationality: nationality, image: imageUrl, level: level, bio: bio, category: category, followers: followers, following: following, badge: badge))
@@ -382,7 +382,7 @@ class ContactViewController: UITableViewController {
         }*/
     }*/
     
-    
+    // MARK: Action
     
     @IBAction func indexSegment(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -395,6 +395,14 @@ class ContactViewController: UITableViewController {
         }
     }
     
+    
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
+
+
 //    @IBAction func segmentedTapped(sender: UISegmentedControl) {
 //        switch sender.selectedSegmentIndex {
 //        case 0:
@@ -457,7 +465,7 @@ class ContactViewController: UITableViewController {
         
         button.backgroundColor = UIColor(hex: 0x2C98D4)
         button.layer.borderWidth = 0
-        button.setTitle("Suivre", forState: UIControlState.Normal)
+        button.setTitle("Mapper", forState: UIControlState.Normal)
         button.setTitleColor(UIColor(hex: 0xFFFFFF), forState: UIControlState.Normal)
         
     }

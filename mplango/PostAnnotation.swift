@@ -84,6 +84,7 @@ class PostAnnotation: FBAnnotation{
         var name:String!
         
         switch self.category {
+            
         case Post.DEFIS:
             name =  "cat_defi.png"
         case Post.CURIOSITE:

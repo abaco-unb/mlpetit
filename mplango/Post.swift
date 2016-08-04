@@ -9,6 +9,7 @@ import Foundation
 
 class Post: NSObject {
     
+    static var ALL        = 0
     static let DEFIS      = 1
     static let CURIOSITE  = 2
     static let ASTUCES    = 3
