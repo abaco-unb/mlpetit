@@ -30,10 +30,10 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate {
         goToMapBTN.layer.cornerRadius = 10
         goToMapBTN.layer.masksToBounds = true
         
-        goToPointsBTN.layer.borderWidth = 2
-        goToPointsBTN.layer.borderColor = UIColor(hex: 0xFFCC66).CGColor
-        goToPointsBTN.layer.cornerRadius = 10
-        goToPointsBTN.layer.masksToBounds = true
+//        goToPointsBTN.layer.borderWidth = 2
+//        goToPointsBTN.layer.borderColor = UIColor(hex: 0xFFCC66).CGColor
+//        goToPointsBTN.layer.cornerRadius = 10
+//        goToPointsBTN.layer.masksToBounds = true
         
         print("points acumulados")
         print(self.points)

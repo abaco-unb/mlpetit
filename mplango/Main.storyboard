@@ -28227,7 +28227,8 @@
                                                         <exclude reference="wej-to-y17"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="10" y="203" width="380" height="47"/>
                                                     <mask key="constraints">
                                                         <include reference="K5Y-Yf-LgS"/>
                                                         <include reference="wej-to-y17"/>
@@ -28828,12 +28829,12 @@
         <image name="write_here_indicator" width="106" height="95"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qil-8c-pdq"/>
+        <segue reference="CD6-Ba-jH8"/>
+        <segue reference="gvL-cc-QUb"/>
         <segue reference="GC1-UV-19e"/>
         <segue reference="czo-L7-M1J"/>
-        <segue reference="gvL-cc-QUb"/>
-        <segue reference="Ji6-1Z-JZP"/>
         <segue reference="dFm-z6-DIa"/>
+        <segue reference="Ji6-1Z-JZP"/>
         <segue reference="UED-MT-Gjd"/>
     </inferredMetricsTieBreakers>
 </document>
