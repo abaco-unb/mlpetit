@@ -26,6 +26,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var comments: Array<Comment> = [Comment]()
     
+    var user: RUser!
+    var userId:Int!
     var postId:Int = 0
     
     let basicCellIdentifier = "BasicCell"
@@ -41,14 +43,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     @IBOutlet weak var removeImage: UIButton!
     
-    
     @IBOutlet weak var postComBtn: UIButton!
 
     //Outlet de áudio do RECORD
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var recordBtn: UIButton!
+    @IBOutlet weak var iconAudio: UIImageView!
+    @IBOutlet weak var labelRecording: UILabel!
 
-    
     var image: UIImage!
     
     override func viewDidLoad() {
@@ -82,7 +84,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             image: comment["image"].stringValue,
                             postId: self.postId,
                             created: comment["created"]["date"].stringValue,
-                            userId: Int( comment["user"]["id"].stringValue )!))
+                            userId: Int( comment["user"]["id"].stringValue )!,
+                            userName: comment["user"]["name"].stringValue
+                            ))
                     }
                     
                 }
@@ -366,7 +370,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             uId = commentUser
         }
         
-        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId)
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: json["data"]["user"]["name"].stringValue)
         
         comments.append(comment)
         comTableView.reloadData()
@@ -505,11 +509,24 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
         
-        cell.userName.text = String(comments[indexPath.row].userId)
+        cell.userName.text = String(comments[indexPath.row].userName)
         
         cell.comTxtView.text = comments[indexPath.row].text
         cell.dateLabel.text = comments[indexPath.row].created
         cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
+        
+        if user == userId {
+            cell.likeBtn.enabled = false
+            cell.likeBtn.hidden = true
+            cell.checkPointsLabel.hidden = false
+        }
+        
+        else {
+            cell.likeBtn.enabled = true
+            cell.likeBtn.hidden = false
+            cell.checkPointsLabel.hidden = true
+        }
+        
         return cell
     }
     
