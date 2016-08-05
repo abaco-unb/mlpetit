@@ -68,6 +68,7 @@ class CarnetTVC: UITableViewController {
                         var word:String  = ""
                         var text:String = ""
                         var imageUrl:String = ""
+                        var audio:String = ""
                         
                         if let noteId = note["id"].int {
                             id = noteId
@@ -89,7 +90,11 @@ class CarnetTVC: UITableViewController {
 
                         }
                         
-                        self.itens.append(Carnet(id: id, word: word, text: text, image: imageUrl))
+                        if let noteAudio = note["audio"].string {
+                            audio = noteAudio
+                        }
+                        
+                        self.itens.append(Carnet(id: id, word: word, text: text, image: imageUrl, audio: audio))
                     }
                     self.indicator.hideActivityIndicator();
                     self.tableView.reloadData()

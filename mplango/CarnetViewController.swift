@@ -25,6 +25,8 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     var imagePath: String = ""
     var image: UIImage!
     
+    var audioPlayer: AVAudioPlayer!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var editBtn: UIBarButtonItem!
     @IBOutlet weak var removeImage: UIButton!
@@ -41,18 +43,13 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var photoAudioView: UIView!
     @IBOutlet weak var itemPhoto: UIImageView!
     @IBOutlet weak var backgroundRecord: UIView!
-    @IBOutlet weak var listenBtn: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet weak var audioTimerLabel: UILabel!
     @IBOutlet weak var audioInPhotoView: UIView!
-    @IBOutlet weak var audioSlider: UISlider!
   
     //Outlets da AudioView (quando o item do Carnet inclui apenas uma mídia audio (sem imagem))
     @IBOutlet weak var AudioView: UIView!
-    @IBOutlet weak var listenBtn2: UIButton!
-    @IBOutlet weak var stopBtn2: UIButton!
-    @IBOutlet weak var audioSlider2: UISlider!
     
+    @IBOutlet weak var bgPlayerAudioInPhoto: UIView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +67,11 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         photoAudioView.layer.cornerRadius = 10
         photoAudioView.layer.masksToBounds = true
         
-        backgroundRecord.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
-        backgroundRecord.layer.masksToBounds = true
+//        backgroundRecord.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
+//        backgroundRecord.layer.masksToBounds = true
+        
+        bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
+        bgPlayerAudioInPhoto.layer.masksToBounds = true
         
         AudioView.layer.borderWidth = 1
         AudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
@@ -93,7 +93,7 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
         print("----***-----");
         
         let image = ImageUtils.instance.loadImageFromPath(item.image)
-//        let audio = 
+        let audio = AudioHelper.instance.loadAudioFromPath(item.audio)
         
         // FOTO SEM ÁUDIO:
         if (!item.image.isEmpty && image != nil /*|| audio == nil*/){
@@ -113,17 +113,23 @@ class CarnetViewController: UIViewController, UITextViewDelegate {
 //            AudioView.hidden = true
 //            photoAudioView.layer.borderWidth = 1
 //            photoAudioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            
+//        AudioHelper.instance._init(self.audioInPhotoView, audioPath: EndpointUtils.CARNET + "?id=" + String(noteId) + "&audio=true")
+
+        
 //        }
         
         // ÁUDIO SEM FOTO:
-//        else if (!item.audio.isEmpty && audio != nil || image == nil) {
-//            photoAudioView.hidden = true
-//            audioInPhotoView.hidden = true
-//            AudioView.hidden = false
-//        }
+        else if (!item.audio.isEmpty && audio != nil || image == nil) {
+            photoAudioView.hidden = true
+            audioInPhotoView.hidden = true
+            AudioView.hidden = false
+            
+            AudioHelper.instance._init(self.AudioView, audioPath: EndpointUtils.CARNET + "?id=" + String(noteId) + "&audio=true")
+        }
             
         // NEM FOTO NEM ÁUDIO:
-        else if (image == nil /*|| audio == nil*/) {
+        else if (image == nil || audio == nil) {
             photoAudioView.hidden = true
             audioInPhotoView.hidden = true
             AudioView.hidden = true
