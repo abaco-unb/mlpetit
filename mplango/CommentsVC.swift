@@ -12,10 +12,17 @@ import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
 
-class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
+class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate, AVAudioRecorderDelegate {
 
     // MARK: Properties
-    var indicator:ActivityIndicator = ActivityIndicator()
+    var audioPlayer: AVAudioPlayer!
+    var recordedAudio:RecordedAudio!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
+    
+    var audioPath:String = ""
+    
+    var tapper: UITapGestureRecognizer?
     
     var comments: Array<Comment> = [Comment]()
     
@@ -40,9 +47,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     //Outlet de áudio do RECORD
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var recordBtn: UIButton!
-    @IBOutlet weak var playRecBtn: UIButton!
-    @IBOutlet weak var stopRecBtn: UIButton!
-    @IBOutlet weak var audioSliderRec: UISlider!
+
     
     var image: UIImage!
     
@@ -206,8 +211,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         print("post", String(self.postId), "user", String(userId))
         
-        if(comPicture.image != nil) {
-            self.postComment(comPicture.image!, params: params)
+        if(self.image != nil) {
+            self.postComment(self.image, params: params)
         } else {
             self.postComment(params)
         }
@@ -365,19 +370,18 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 
 
     func postComment(params: Dictionary<String, String>) {
-        self.indicator.showActivityIndicator(self.view)
+        ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.POST, EndpointUtils.COMMENT, parameters: params)
             .responseString { response in
                 print("Request: \(EndpointUtils.COMMENT)")
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator();
                 print("Request: \(request)")
                 print("request: \(error)")
                 if (error == nil) {
-                    self.indicator.hideActivityIndicator();
                     self.afterPosting(json)
-                    
                     
                 } else {
                     
@@ -386,7 +390,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
                         let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
                             print("The post is not okay.")
-                            self.indicator.hideActivityIndicator();
+                            ActivityIndicator.instance.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
                         self.presentViewController(alertController, animated: true, completion: nil)
@@ -397,19 +401,17 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func postComment(image: UIImage, params: Dictionary<String, String>) {
         
-        let imageData = image.lowestQualityJPEGNSData
-        
         // save image in directory
 //        let imgUtils:ImageUtils = ImageUtils()
 //        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
 //        imgUtils.saveImage(comPicture.image!, path: self.imagePath);
 
         
-        self.indicator.showActivityIndicator(self.view)
+        ActivityIndicator.instance.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
         
-        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.COMMENT, parameters: params, imageData: imageData)
+        let urlRequest = self.urlRequestWithComponents(EndpointUtils.COMMENT, parameters: params, data: true)
         
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
@@ -420,11 +422,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
             }.responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator();
                 if (error == nil) {
-                    self.indicator.hideActivityIndicator();
                     self.afterPosting(json)
                 } else {
-                    
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
                         let alertController = UIAlertController(title: "Ops!", message: "Tivemos um problema ao tentar criar seu comentário. Favor tente novamente.", preferredStyle: .Alert)
@@ -439,8 +440,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             })
     }
     
-    
-    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, imageData:NSData) -> (URLRequestConvertible, NSData) {
+    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, data:Bool) -> (URLRequestConvertible, NSData) {
         
         // create url request to send
         let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
@@ -449,16 +449,32 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let contentType = "multipart/form-data;boundary="+boundaryConstant
         mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
         
-        
-        
         // create upload data to send
         let uploadData = NSMutableData()
         
-        // add image
-        uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        uploadData.appendData(imageData)
+        if self.image != nil {
+            let imageData:NSData = image.lowestQualityJPEGNSData
+            // add image
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData(imageData)
+            
+        }
+        if AudioHelper.instance.audioPath != "" {
+            print(AudioHelper.instance.audioPath)
+            print(AudioHelper.instance.recordedAudio.filePathUrl)
+            
+            print("soundData")
+            let soundData = NSData(contentsOfURL: AudioHelper.instance.recordedAudio.filePathUrl)
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"audio\"; filename=\"audio.m4a\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData(soundData!)
+            
+        } else {
+            print("error: append audio data")
+        }
         
         // add parameters
         for (key, value) in parameters {
@@ -467,12 +483,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        
-        
         // return URLRequestConvertible and NSData
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
-
+    
     // Table view
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -498,4 +512,187 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         print("You selected cell #\(indexPath.row)!")
     }
    
+    /** @TODO Pra verificar uma melhor maneira de adicionar esses recursos aqui */
+    
+    func initRecorder() {
+        self.recordingSession = AVAudioSession.sharedInstance()
+        self.recordingSession.requestRecordPermission() { [unowned self] (allowed: Bool) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                if allowed {
+                    self.loadRecordingGesture()
+                } else {
+                    NSLog("Error: viewDidLoad -> microfone indisponível")
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        
+                        //New Alert Ccontroller
+                        let alertController = UIAlertController(title: "Ops!", message: "Favor conceda permissão de acesso do app ao seu microfone!", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The user not is okay.")
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+        
+        //required init to recording
+        
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        } catch _ {
+            NSLog("Error: viewDidLoad -> set Category failed")
+        }
+        do {
+            try recordingSession.setActive(true)
+        } catch _ {
+            NSLog("Error: viewDidLoad -> set Active failed")
+        }
+        do {
+            try recordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+        } catch _ {
+            NSLog("Error: viewDidLoad -> set override output Audio port     failed")
+        }
+    }
+    
+    func loadRecordingGesture(){
+        
+        //LongPress para a criação de post
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressRecogniser.minimumPressDuration = 0.2
+        recordBtn.addGestureRecognizer(longPressRecogniser)
+    }
+    
+    func handleLongPress(gestureRecognizer : UIGestureRecognizer){
+        if gestureRecognizer.state == .Began {
+            print("iniciar a gravação")
+            recording()
+            recordBtn.enabled = false
+        }
+        
+        if gestureRecognizer.state == .Ended {
+            print("parar a gravação")
+            
+            audioRecorder.stop()
+            AVAudioSession.sharedInstance()
+            
+            recordBtn.enabled = true
+            
+            //Aqui vamos postar o audio...
+            
+            
+        }
+    }
+    
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,successfully flag: Bool) {
+        if(flag) {
+            do {
+                print(" audioRecorderDidFinishRecording")
+                
+                   let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-recorded", ofType: "wav")!)
+                   try audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, fileTypeHint: nil)
+                   audioPlayer.prepareToPlay()
+                   audioPlayer.play()
+                
+//                labelRecording.text = "Audio ajouté."
+//                labelRecording.textColor = UIColor(hex: 0x2C98D4)
+//                
+//                iconAudio.image = UIImage(named: "icon_audio")
+//                iconAudio.layer.removeAllAnimations()
+//                labelRecording.layer.removeAllAnimations()
+                
+                print(1)
+                recordedAudio = RecordedAudio()
+                recordedAudio.filePathUrl = recorder.url
+                recordedAudio.title = recorder.url.lastPathComponent
+                print(2)
+                print(recorder.url.description)
+                
+                try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
+                self.audioPath = recorder.url.description
+                
+                
+                
+            } catch {
+                fatalError("Failure to ...: \(error)")
+            }
+        } else {
+            NSLog("Error: func audioRecorderDidFinishRecording")
+            finishRecording()
+            //recordButton.enabled = true
+        }
+    }
+    
+    func recording() {
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000.0,
+            AVNumberOfChannelsKey: 1 as NSNumber,
+            AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+        ]
+        
+        let audioURL = self.getAudioURL()
+        
+        print(audioURL)
+        
+        do {
+            
+            let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-recorded", ofType: "wav")!)
+            try audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, fileTypeHint: nil)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            
+            print("recording")
+            
+//            labelRecording.text = "En train d'enregistrer..."
+//            labelRecording.textColor = UIColor(hex: 0xF95253)
+            
+//            self.blinkComponent(self.labelRecording)
+//            iconAudio.image = UIImage(named: "icon_audio_red")
+//            self.blinkComponent(self.iconAudio)
+            
+            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+            
+            
+        } catch {
+            NSLog("Error: func recording")
+            finishRecording()
+        }
+    }
+    
+    func blinkComponent(comp: UIView) {
+        comp.alpha = 0;
+        UIView.animateWithDuration(0.7, delay: 0.0, options: [.Repeat, .Autoreverse, .CurveEaseInOut], animations:
+            {
+                comp.alpha = 1
+            }, completion: nil)
+    }
+    
+    func getDocumentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func getAudioURL() -> NSURL {
+        let recordingName = self.generateIndexName("audio", ext: "m4a")
+        let audioFilename = getDocumentsDirectory().stringByAppendingString("/").stringByAppendingString(recordingName)
+        
+        return NSURL(fileURLWithPath: audioFilename)
+    }
+    
+    func generateIndexName(text:String, ext:String) ->String {
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        return text + "_" + formatter.stringFromDate(currentDateTime) + "." + ext
+    }
+    
+    func finishRecording() {
+        audioRecorder.stop()
+        audioRecorder = nil
+    }
 }
