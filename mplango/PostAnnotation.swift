@@ -17,16 +17,17 @@ class PostAnnotation: FBAnnotation{
     let category: NSNumber
     let text: String
     let owner: Int
-    
+    var time: String = ""
     var ownername:String = ""
     
     
-    init(id: Int, title: String, text: String, locationName: String, coordinate: CLLocationCoordinate2D, category: Int, owner: Int) {
+    init(id: Int, title: String, text: String, locationName: String, coordinate: CLLocationCoordinate2D, category: Int, owner: Int, time: String) {
         self.id = id
         self.locationName = locationName
         self.category = category
         self.text = text
         self.owner = owner
+        self.time = time
         super.init()
         
         super.coordinate = coordinate

@@ -56,6 +56,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.retrieveLoggedUser()
+        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsVC.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
@@ -75,8 +77,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         
                         if let id = comment["id"].int {
                             comId = id
-                            
                         }
+                        
                         
                         self.comments.append(Comment(id: comId,
                             audio: comment["audio"].stringValue,
@@ -84,9 +86,15 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             image: comment["image"].stringValue,
                             postId: self.postId,
                             created: comment["created"]["date"].stringValue,
-                            userId: Int( comment["user"]["id"].stringValue )!,
-                            userName: comment["user"]["name"].stringValue
+                            userId: Int( comment["user"]["id"].stringValue )!
+//                            ,
+//                            userName: Int( comment["user"]["name"].stringValue )!
                             ))
+                        
+                        print("*************")
+//                        print(self.image)
+                        print("*************")
+                        
                     }
                     
                 }
@@ -117,6 +125,13 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         self.comTableView.rowHeight = UITableViewAutomaticDimension
         self.comTableView.estimatedRowHeight = 200.0
+        
+    }
+    
+    func retrieveLoggedUser() {
+        // recupera os dados do usuário logado no app
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.userId = prefs.integerForKey("id") as Int
         
     }
     
@@ -355,12 +370,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         recordBtn.hidden = false
         recordBtn.enabled = true
         writeHereImage.hidden = false
-        if self.comPicture != nil {
-            self.removeImage(self)
-        }
+        
+//        if self.comPicture != nil {
+//            self.removeImage(self)
+//        }
         
         var id: Int = 0
         var uId: Int = 0
+//        var uName: Int = 0
         
         if let commentId = json["data"]["id"].int {
             id = commentId
@@ -370,7 +387,11 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             uId = commentUser
         }
         
-        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: json["data"]["user"]["name"].stringValue)
+//        if let commentUserName = json["data"]["user"]["name"].int {
+//            uName = commentUserName
+//        }
+        
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId  /*, userName: uName*/)
         
         comments.append(comment)
         comTableView.reloadData()
@@ -509,13 +530,17 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
         
-        cell.userName.text = String(comments[indexPath.row].userName)
+//        cell.userName.text = String(comments[indexPath.row].userName)
         
         cell.comTxtView.text = comments[indexPath.row].text
         cell.dateLabel.text = comments[indexPath.row].created
         cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
         
-        if user == userId {
+        if image != nil {
+            cell.comPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true" )
+        }
+        
+        if comments[indexPath.row].userId == userId {
             cell.likeBtn.enabled = false
             cell.likeBtn.hidden = true
             cell.checkPointsLabel.hidden = false

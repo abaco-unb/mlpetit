@@ -31,6 +31,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     var likedId:Int!
     
     var audioPlayer: AVAudioPlayer!
+    var image:UIImage!
+    var imagePath: String = ""
     
     @IBOutlet weak var likeView: UIView!
     
@@ -40,6 +42,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     @IBOutlet weak var exit: UIBarButtonItem!
     
+    @IBOutlet weak var optionsBtn: UIBarButtonItem!
     //Outlets do like
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var dislikeBtn: UIButton!
@@ -58,7 +61,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     //Outlet do texto do post
     @IBOutlet weak var textPost: UITextView!
-    
     
     //Outlets da photoAudioView (quando o Post inclui uma foto e eventualmente, ao mesmo tempo, um audio)
     @IBOutlet weak var photoAudioView: UIView!
@@ -150,7 +152,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
         
-        enableCustomMenu()
+//        enableCustomMenu()
         
         self.retrieveLoggedUser()
         
@@ -165,6 +167,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             userPicture.image  = post!.getOwnerImage()
             textPost.text      = post!.text
             locationLabel.text = post!.locationName
+            userName.text      = post!.title
+            timeOfPost.text    = post!.time
             
             ActivityIndicator.instance.showActivityIndicator(self.view)
             Alamofire.request(.GET, EndpointUtils.POST, parameters: ["id" : (post?.id)!])
@@ -173,10 +177,10 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     let postComplete = json["data"]
                     var postId = 0
                     
-                    self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
+//                    self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
+//                    self.userName.text      = self.post!.getOwnerName()
                     
-                    self.userName.text      = self.post!.getOwnerName()
-                    self.timeOfPost.text    = postComplete["created"].stringValue
+//                    self.timeOfPost.text    = postComplete["created"].stringValue
                     
                     if let tLikes = postComplete["likes"].array {
                         self.likeNberLabel.text = String(tLikes.count)
@@ -266,6 +270,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         //Like desativado quando o usuário for o autor do post
         if self.userId != post!.owner {
             likeBtn.enabled = true
+            optionsBtn.enabled = false
+            optionsBtn = nil
         }
         else {
             likeBtn.enabled = false
@@ -344,6 +350,153 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     {
         return true
     }
+    
+    
+    
+    // MARK: Edição do texto do post
+    
+    func cancelEdit(sender: UIBarButtonItem) {
+        
+        self.textPost.editable = false
+        self.textPost.textColor = UIColor(hex: 0x9E9E9E)
+        
+        self.optionsBtn.enabled = true
+        self.optionsBtn.title = "options"
+        
+        textPost.text = post?.text
+    }
+    
+    
+    func editPost() {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userId:Int = prefs.integerForKey("id") as Int
+        print("atualizando o texto do post...")
+        print(self.textPost.text)
+        print(userId)
+        
+        var params : [String: String] = [
+            "id" : String(post!.id),
+            "text" : self.textPost.text!,
+            "user": String(self.userId),
+        ]
+        
+        if self.image != nil {
+            self.saveNewText(self.image, params: params)
+        } else {
+            params["photo"] = ""
+            self.saveNewText(params)
+        }
+
+    }
+    
+    func saveNewText(params: Dictionary<String, String>) {
+        Alamofire.request(.POST, EndpointUtils.POST, parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator();
+                if (error == nil) {
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_points_notification", sender: self)
+                    }
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Controller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The post is not okay.")
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
+    
+    func saveNewText(image: UIImage, params: Dictionary<String, String>) {
+
+        ActivityIndicator.instance.showActivityIndicator(self.view)
+        
+        // CREATE AND SEND REQUEST ----------
+        let urlRequest = self.urlRequestWithComponents(EndpointUtils.POST, parameters: params, data: false)
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                ActivityIndicator.instance.hideActivityIndicator();
+                if (error == nil) {
+                    print("ok post notification")
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.performSegueWithIdentifier("go_to_points_notification", sender: self)
+                    }
+                } else {
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        //New Alert Controller
+                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            print("The post is not okay.")
+                        }
+                        alertController.addAction(agreeAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
+    }
+    
+    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, data:Bool) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        let boundaryConstant = "myRandomBoundary12345";
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        if self.image != nil {
+            let imageData:NSData = image.lowestQualityJPEGNSData
+            // add image
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData(imageData)
+            
+        }
+        if AudioHelper.instance.audioPath != "" {
+            print(AudioHelper.instance.audioPath)
+            print(AudioHelper.instance.recordedAudio.filePathUrl)
+            
+            print("soundData")
+            let soundData = NSData(contentsOfURL: AudioHelper.instance.recordedAudio.filePathUrl)
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"audio\"; filename=\"audio.m4a\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData(soundData!)
+            
+        } else {
+            print("error: append audio data")
+        }
+        
+        // add parameters
+        for (key, value) in parameters {
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
+    }
+
 
     
     //MARK Actions:
@@ -354,62 +507,76 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     @IBAction func options(sender: AnyObject) {
         
-        var popover:UIPopoverPresentationController? = nil
+        if self.optionsBtn.title == "Modifier" {        
         
-        let alert:UIAlertController=UIAlertController(title: "Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            self.textPost.editable = true
+            self.textPost.textColor = UIColor.darkGrayColor()
         
-        let modifyAction = UIAlertAction(title: "Modifier", style: UIAlertActionStyle.Default)
-        {
-            UIAlertAction in
-//            self.openCamera()
-        }
-        let deleteAction = UIAlertAction(title: "Supprimer", style: UIAlertActionStyle.Default)
-        {
-            UIAlertAction in
-//            self.openGallary()
-        }
+            self.optionsBtn.title = "Confirmer"
+            self.optionsBtn.enabled = true
         
-        let reportAction = UIAlertAction(title: "Signaler", style: UIAlertActionStyle.Default)
-        {
-            UIAlertAction in
         }
+    
+        else if self.optionsBtn.title == "Confirmer" {
+            self.editPost()
+        }
+    
+    
+//        var popover:UIPopoverPresentationController? = nil
+//        
+//        let alert:UIAlertController=UIAlertController(title: "Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+//        
+//        let modifyAction = UIAlertAction(title: "Modifier", style: UIAlertActionStyle.Default)
+//        {
+//            UIAlertAction in
         
-        let followAction = UIAlertAction(title: String("Suivre " + String(self.post!.getOwnerName())), style: UIAlertActionStyle.Default)
-        {
-            UIAlertAction in
-        }
+//        let deleteAction = UIAlertAction(title: "Supprimer", style: UIAlertActionStyle.Default)
+//        {
+//            UIAlertAction in
+////            self.openGallary()
+//        }
         
-        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
-        {
-            UIAlertAction in
-        }
-        
-        // Add the actions
-        
-        if self.userId != post!.owner {
-            alert.addAction(reportAction)
-            alert.addAction(followAction)
-            alert.addAction(cancelAction)
-        }
-        else {
-            alert.addAction(modifyAction)
-            alert.addAction(deleteAction)
-            alert.addAction(cancelAction)
-        }
-        
-        // Present the controller
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
-        {
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-        else
-        {
-            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
-            popover?.sourceView = self.view
-            popover?.sourceRect = likeBtn.frame
-            popover?.permittedArrowDirections = .Any
-        }
-        
+//        let reportAction = UIAlertAction(title: "Signaler", style: UIAlertActionStyle.Default)
+//        {
+//            UIAlertAction in
+//        }
+//        
+//        let followAction = UIAlertAction(title: String("Suivre " + String(self.post!.getOwnerName())), style: UIAlertActionStyle.Default)
+//        {
+//            UIAlertAction in
+//        }
+//        
+//        let cancelAction = UIAlertAction(title: "Annuler", style: UIAlertActionStyle.Cancel)
+//        {
+//            UIAlertAction in
+//        }
+//        
+//        // Add the actions
+//        
+//        if self.userId != post!.owner {
+//            alert.addAction(reportAction)
+//            alert.addAction(followAction)
+//            alert.addAction(cancelAction)
+//        }
+//        else {
+//            alert.addAction(modifyAction)
+////            alert.addAction(deleteAction)
+//            alert.addAction(cancelAction)
+//        }
+//        
+//        // Present the controller
+//        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+//        {
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        }
+//        else
+//        {
+//            popover = UIPopoverPresentationController(presentedViewController: alert, presentingViewController: alert)
+//            popover?.sourceView = self.view
+//            popover?.sourceRect = likeBtn.frame
+//            popover?.permittedArrowDirections = .Any
+//        }
+    
     }
     
     // MARK : like
@@ -566,7 +733,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews();
-        self.scrollView.contentSize.height = 600;
+        self.scrollView.contentSize.height = 700;
     }
     
     override func viewDidLayoutSubviews() {

@@ -148,7 +148,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
                             locationName: post["location"].stringValue,
                             coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
                             category: category,
-                            owner: ownerId
+                            owner: ownerId,
+                            time: post["created"].stringValue
                         )
                         //self.arrDicPostsWithLatitudeLongitude.append(["latitude" : latitude, "longitude" : longitude])
                         self.posts.append(postAnnotation);

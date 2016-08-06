@@ -228,7 +228,8 @@ class ProfileVC: UIViewController {
                             locationName: post["location"].stringValue,
                             coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
                             category: category,
-                            owner: self.userId
+                            owner: self.userId,
+                            time: post["created"].stringValue
                         )
                         self.myAnnotations.append(postAnnotation);
                         

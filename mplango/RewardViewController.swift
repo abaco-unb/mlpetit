@@ -25,11 +25,12 @@ class RewardViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        goToMapBTN.layer.borderWidth = 2
         goToMapBTN.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-        goToMapBTN.layer.cornerRadius = 10
         goToMapBTN.layer.masksToBounds = true
-        
+//        goToMapBTN.layer.cornerRadius = 10
+//        goToMapBTN.layer.borderWidth = 2
+
+
 //        goToPointsBTN.layer.borderWidth = 2
 //        goToPointsBTN.layer.borderColor = UIColor(hex: 0xFFCC66).CGColor
 //        goToPointsBTN.layer.cornerRadius = 10
