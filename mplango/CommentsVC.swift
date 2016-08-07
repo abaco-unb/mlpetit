@@ -50,7 +50,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var recordBtn: UIButton!
     @IBOutlet weak var iconAudio: UIImageView!
     @IBOutlet weak var labelRecording: UILabel!
-
+    
     var image: UIImage!
     
     override func viewDidLoad() {
@@ -124,7 +124,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         self.removeImage.hidden = true
         
         self.comTableView.rowHeight = UITableViewAutomaticDimension
-        self.comTableView.estimatedRowHeight = 200.0
+        self.comTableView.estimatedRowHeight = 350.0
         
     }
     
@@ -134,7 +134,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         self.userId = prefs.integerForKey("id") as Int
         
     }
-    
+
 
     func keyboardWillShow(notification: NSNotification) {
         
@@ -230,7 +230,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let params : [String: String] = [
             "text" : writeTxtView.text,
             "post" : String(self.postId),
-            "user": String(userId)
+            "user": String(userId),
+            "image": String(self.image)
         ]
         
         print("post", String(self.postId), "user", String(userId))
@@ -242,9 +243,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         
         // Gamification: contar 5 pontos aqui para a ação de postar 1 comentário
-        
     }
-    
     
     // MARK : Image Picker Process
     
@@ -273,7 +272,6 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             recordBtn.hidden = false
             recordBtn.enabled = true
         }
-
         
     }
     
@@ -326,7 +324,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
         }
     
-        func openGallary() {
+    func openGallary() {
 
         picker!.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
@@ -370,10 +368,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         recordBtn.hidden = false
         recordBtn.enabled = true
         writeHereImage.hidden = false
-        
-//        if self.comPicture != nil {
-//            self.removeImage(self)
-//        }
+        if self.comPicture != nil {
+            self.removeImage(self)
+        }
         
         var id: Int = 0
         var uId: Int = 0
@@ -391,13 +388,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 //            uName = commentUserName
 //        }
         
-        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId  /*, userName: uName*/)
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId/*, userName: uName*/)
         
         comments.append(comment)
         comTableView.reloadData()
         
     }
-
 
     func postComment(params: Dictionary<String, String>) {
         ActivityIndicator.instance.showActivityIndicator(self.view)
@@ -430,12 +426,6 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func postComment(image: UIImage, params: Dictionary<String, String>) {
-        
-        // save image in directory
-//        let imgUtils:ImageUtils = ImageUtils()
-//        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("post_image", ext: "png"))
-//        imgUtils.saveImage(comPicture.image!, path: self.imagePath);
-
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         
@@ -530,22 +520,52 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
         
+        let text = comments[indexPath.row].text
+        let image = comments[indexPath.row].image
+        let audio = comments[indexPath.row].audio
+        
 //        cell.userName.text = String(comments[indexPath.row].userName)
         
-        cell.comTxtView.text = comments[indexPath.row].text
         cell.dateLabel.text = comments[indexPath.row].created
         cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
         
-        if image != nil {
-            cell.comPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true" )
+        // Se tiver texto:
+        if text != "" {
+            cell.comTxtView.text = comments[indexPath.row].text
+        }
+        else {
+            cell.comTxtView.text = ""
         }
         
+        // Se tiver imagem:
+        if image != "" {
+            cell.comPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true" )
+            let aspectRatioImageViewConstraint = NSLayoutConstraint(item: cell.comPicture, attribute: .Height, relatedBy: .Equal, toItem: cell.comPicture, attribute: .Width, multiplier: 1/1, constant: 1)
+            cell.comPicture.addConstraint(aspectRatioImageViewConstraint)
+        }
+        else {
+            cell.comPicture.image = nil
+        }
+        
+        // Se tiver áudio
+        if audio != "" {
+            
+            cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
+            cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
+            
+            cell.audioView.layer.borderWidth = 1
+            cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            
+            AudioHelper.instance._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
+        }
+        
+        
+        // Para decidir se o usuário vai ver o label "+5pts" ou o botão like
         if comments[indexPath.row].userId == userId {
             cell.likeBtn.enabled = false
             cell.likeBtn.hidden = true
             cell.checkPointsLabel.hidden = false
         }
-        
         else {
             cell.likeBtn.enabled = true
             cell.likeBtn.hidden = false

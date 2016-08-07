@@ -24,14 +24,11 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var checkPointsLabel: UILabel!
 
-    // para a BasicCell (só texto)
-    @IBOutlet weak var comTxtView: UITextView!
-    
-    // para a PhotoCell (foto com ou sem texto)
+    // para a BasicCell 
+    @IBOutlet weak var comTxtView: UILabel!
     @IBOutlet weak var comPicture: UIImageView!
-    
-    // para a AudioCell (só som)
     @IBOutlet weak var audioView: UIView!
+    @IBOutlet weak var bgPlayerAudioInPhoto: UIView!
 
 
     
@@ -52,17 +49,19 @@ class CommentCell: UITableViewCell {
         */
         
     }
+//    
+//    func textViewDidChange(textView: UITextView) {
+//        
+//        let contentSize = self.sizeThatFits(self.comTxtView.bounds.size)
+//        var frame = self.comTxtView.frame
+//        frame.size.height = contentSize.height
+//        self.comTxtView.frame = frame
+//        
+//        let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.comTxtView, attribute: .Height, relatedBy: .Equal, toItem: self.comTxtView, attribute: .Width, multiplier: comTxtView.bounds.height/comTxtView.bounds.width, constant: 1)
+//        self.comTxtView.addConstraint(aspectRatioTextViewConstraint)
+//        
+//    }
     
-    func textViewDidChange(textView: UITextView) {
-        
-        let contentSize = self.sizeThatFits(self.comTxtView.bounds.size)
-        var frame = self.comTxtView.frame
-        frame.size.height = contentSize.height
-        self.comTxtView.frame = frame
-        
-        let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.comTxtView, attribute: .Height, relatedBy: .Equal, toItem: self.comTxtView, attribute: .Width, multiplier: comTxtView.bounds.height/comTxtView.bounds.width, constant: 1)
-        self.comTxtView.addConstraint(aspectRatioTextViewConstraint)
-    }
     
     
     // MARK: Actions

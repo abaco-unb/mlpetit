@@ -67,7 +67,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     @IBOutlet weak var itemPhoto: UIImageView!
     @IBOutlet weak var audioInPhoto: UIView!
 
-
     @IBOutlet weak var bgPlayerAudioInPhoto: UIView!
     
     //Outlets da AudioView (quando o Post inclui apenas um audio)
@@ -564,7 +563,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     func showLikes() {
         
-        //        self.indicator.showActivityIndicator(self.view)
+//                self.indicator.showActivityIndicator(self.view)
         
         let params : [String: String] = [
             "post": String(post!.id),
@@ -572,7 +571,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         ]
         
         //Checagem remota
-        ActivityIndicator.instance.showActivityIndicator(self.view)
+//        ActivityIndicator.instance.showActivityIndicator(self.view)
         Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
             .responseString { response in
                 print("Success: \(response.result.isSuccess)")
@@ -581,7 +580,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 print("Request: \(request)")
                 print("request: \(error)")
                 
-                ActivityIndicator.instance.hideActivityIndicator();
+//                ActivityIndicator.instance.hideActivityIndicator();
                 if json["data"].array?.count > 0 {
                     
                     if let id = json["data"]["id"].int {
