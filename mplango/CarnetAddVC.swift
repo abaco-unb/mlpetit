@@ -331,8 +331,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ta note n'a pas pu être enregistrée. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The item is not okay.")
                             self.indicator.hideActivityIndicator();
                         }
@@ -350,11 +350,6 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
 //            imageData = self.image.lowestQualityJPEGNSData
 //        }
         ActivityIndicator.instance.showActivityIndicator(self.view)
-        
-//        // save image in directory
-//        let imgUtils:ImageUtils = ImageUtils()
-//        self.imagePath = imgUtils.fileInDocumentsDirectory(self.generateIndexName("note_image", ext: "png"))
-//        ImageUtils.instance.saveImage(self.photoImage.image!, path: self.imagePath);
         
         // CREATE AND SEND REQUEST ----------
         let urlRequest = self.urlRequestWithComponents(EndpointUtils.CARNET, parameters: params, data: false)
@@ -376,8 +371,8 @@ class CarnetAddVC: UIViewController, UITextFieldDelegate, UIImagePickerControlle
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu item. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ta note n'a pas pu être enregistrée. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The item is not okay.")
                             self.indicator.hideActivityIndicator();
                         }

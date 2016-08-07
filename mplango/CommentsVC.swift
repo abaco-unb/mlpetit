@@ -417,8 +417,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton commentaire n'a pas pu être publié. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The post is not okay.")
                             ActivityIndicator.instance.hideActivityIndicator();
                         }
@@ -458,8 +458,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
-                        let alertController = UIAlertController(title: "Ops!", message: "Tivemos um problema ao tentar criar seu comentário. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton commentaire n'a pas pu être publié. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The comment is fail.")
                             ActivityIndicator.instance.hideActivityIndicator();
                         }
@@ -573,8 +573,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Ops!", message: "Favor conceda permissão de acesso do app ao seu microfone!", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups!", message: "MapLango doit être autorisé à accéder au microphone", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The user not is okay.")
                         }
                         alertController.addAction(agreeAction)

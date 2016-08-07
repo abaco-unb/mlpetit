@@ -440,9 +440,8 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
                 //set audio as checked
                 //                    self.checkOn(checkAudio)
                 
-                self.checkAudio.textColor = UIColor(hex: 0x43A047)
+                self.checkAudio.textColor = UIColor(hex: 0xFFC400)
                 self.checkAudio.font = UIFont.boldSystemFontOfSize(15)
-                
                 
             } catch {
                 fatalError("Failure to ...: \(error)")

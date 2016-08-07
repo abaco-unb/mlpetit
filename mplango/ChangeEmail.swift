@@ -55,18 +55,19 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
         if ( email.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo email obrigatório", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il est nécessaire d'insérer un email valide", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord je vais en insérer un", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
             self.presentViewController(alertController, animated: true, completion: nil)
             
+            
         } else if (!email.isEmail()) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Por favor, insira um email válido", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Email non valide", message: "Le format d'email proposé n'est pas valide", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -77,8 +78,8 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
         } else if (!email.isEmpty  && confEmail.isEmpty) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário confirmar sua senha", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il faut confirmer l'email", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -88,8 +89,8 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
         } else if (email != confEmail) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "O e-mail não confere com a confirmação", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Confirmation non valide", message: "La confirmation ne correspond pas au premier email indiqué", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -114,7 +115,7 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
                         
                         //New Alert Ccontroller
                         let alertController = UIAlertController(title: "Félicitations", message: "Email changé avec succès", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The user is okay.")
                             self.indicator.hideActivityIndicator();
                             self.performSegueWithIdentifier("change_email", sender: self)
@@ -128,8 +129,8 @@ class ChangeEmail: UIViewController, UITextFieldDelegate {
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu e-mail. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton email n'a pas pu être édité. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The email update is not okay.")
                             self.indicator.hideActivityIndicator();
                         }

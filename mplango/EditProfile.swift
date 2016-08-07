@@ -201,8 +201,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu perfil. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton profil n'a pas pu être édité. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The profile update is not okay.")
                             self.indicator.hideActivityIndicator();
                         }
@@ -241,8 +241,8 @@ class EditProfile: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar seu perfil. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton profil n'a pas pu être édité. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The profile update is not okay.")
                             self.indicator.hideActivityIndicator();
                         }

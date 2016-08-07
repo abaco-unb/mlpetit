@@ -344,8 +344,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         if ( gender.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário escolher o seu gênero", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "On doit s'adresser à toi comme une femme ou comme un homme", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord, je vais l'indiquer", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -355,8 +355,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if ( username.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "O nome é obrigatório", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il est nécessaire de créer un nom d'utilisateur", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord, je vais le créer", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -366,8 +366,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if ( email.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo email obrigatório", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il est nécessaire d'insérer un email valide", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord je vais en insérer un", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -377,8 +377,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if (!email.isEmail()) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Por favor, insira um email válido", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Email non valide", message: "Le format d'email proposé n'est pas valide", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -388,8 +388,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if ( password.isEmpty  ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo senha é obrigatório", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il est nécessaire de créer un mot de passe", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -399,8 +399,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if ( !password.isEmpty  && confirmPassword.isEmpty) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário confirmar sua senha", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il faut confirmer le mot de passe", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -410,8 +410,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if (password != confirmPassword) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "A senha não confere com a confirmação", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Confirmation non valide", message: "La confirmation ne correspond pas au mot de passe", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -421,8 +421,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
         } else if ( nationality.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário escolher sua nacionalidade", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il est nécessaire de choisir une nationalité", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -439,8 +439,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             self.indicator.hideActivityIndicator();
                             //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Oops", message: "E-mail já utilizado, favor utilize outro!", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            let alertController = UIAlertController(title: "Oups", message: "Email déjà utilisé. Il faut en choisir un autre", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                                 print("The user is okay.")
                             }
                             alertController.addAction(agreeAction)

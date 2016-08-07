@@ -33,8 +33,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             NSOperationQueue.mainQueue().addOperationWithBlock{
                 
                 //New Alert Ccontroller
-                let alertController = UIAlertController(title: "Registro de conta!", message: "Cadastro realizado com sucesso!", preferredStyle: .Alert)
-                let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                let alertController = UIAlertController(title: "Inscription finalisée", message: "Bienvenue dans le réseau MapLango", preferredStyle: .Alert)
+                let agreeAction = UIAlertAction(title: "Merci", style: .Default) { (action) -> Void in
                     print("The user is okay.")
                 }
                 alertController.addAction(agreeAction)
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textFieldUsername.layer.borderWidth = 3.0
         textFieldUsername.layer.borderColor = UIColor(hex: 0xFFFFFF).CGColor
         textFieldUsername.attributedPlaceholder =
-            NSAttributedString(string: "Email ou nom d'utilisateur", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+            NSAttributedString(string: "Email du compte", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
         
         textFieldPassword.backgroundColor = UIColor.clearColor()
         textFieldPassword.layer.borderWidth = 3.0
@@ -89,8 +89,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if ( self.username.isEmpty || self.pwd.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Login falhou!", message: "É necessário inserir seu email e senha", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "La connexion a échoué", message: "Il faut insérer l'email et le mot de passe du compte", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -143,8 +143,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             NSOperationQueue.mainQueue().addOperationWithBlock {
                                     
                                 //New Alert Ccontroller
-                                let alertController = UIAlertController(title: "Login falhou!", message: "Usuário ou senha incorretos!", preferredStyle: .Alert)
-                                let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                let alertController = UIAlertController(title: "La connexion a échoué", message: "Email et/ou mot de passe invalide(s)", preferredStyle: .Alert)
+                                let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                                     print("The user not is okay.")
                                 }
                                 alertController.addAction(agreeAction)
@@ -158,8 +158,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                             
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Login falhou!", message: "Usuário ou senha incorretos!", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "La connexion a échoué", message: "Email et/ou mot de passe invalide(s)", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The user is not okay.")
                         }
                         alertController.addAction(agreeAction)

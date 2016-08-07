@@ -156,8 +156,8 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
         if ( passwrd.isEmpty ) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "Campo email obrigatório", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il est nécessaire d'insérer un mot de passe", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -167,8 +167,8 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
         } else if ( !passwrd.isEmpty  && confPasswrd.isEmpty) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "É necessário confirmar sua senha", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Élément(s) manquant(s)", message: "Il faut confirmer le mot de passe", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -178,8 +178,8 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
         } else if (passwrd != confPasswrd) {
             
             //New Alert Ccontroller
-            let alertController = UIAlertController(title: "Erro ao tentar Registrar os Dados!", message: "O e-mail não confere com a confirmação", preferredStyle: .Alert)
-            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            let alertController = UIAlertController(title: "Confirmation non valide", message: "La confirmation ne correspond pas au nouveau mot de passe proposé", preferredStyle: .Alert)
+            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                 print("The user is okay.")
             }
             alertController.addAction(agreeAction)
@@ -202,7 +202,7 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
                             
                             //New Alert Ccontroller
                             let alertController = UIAlertController(title: "Félicitations", message: "Mot de passe changé avec succès", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                                 print("The user is okay.")
                                 self.indicator.hideActivityIndicator();
                                 self.performSegueWithIdentifier("change_password", sender: self)
@@ -215,8 +215,8 @@ class ChangePasswrd: UIViewController, UITextFieldDelegate {
                     } else {
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             //New Alert Ccontroller
-                            let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar atualizar sua senha. Favor tente novamente.", preferredStyle: .Alert)
-                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                            let alertController = UIAlertController(title: "Oups", message: "Ton mot de passe n'a pas pu être édité. Essaie à nouveau", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                                 print("The password update is not okay.")
                                 self.indicator.hideActivityIndicator();
                             }

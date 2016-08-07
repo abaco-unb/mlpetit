@@ -152,6 +152,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         panGestureRecognizer.delegate = self
         scrollView.addGestureRecognizer(panGestureRecognizer)
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PostDetailViewController.cancelEdit))
+        view.addGestureRecognizer(tap)
+        
+        
 //        enableCustomMenu()
         
         self.retrieveLoggedUser()
@@ -270,8 +275,8 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         //Like desativado quando o usuário for o autor do post
         if self.userId != post!.owner {
             likeBtn.enabled = true
-            optionsBtn.enabled = false
-            optionsBtn = nil
+            self.navigationItem.rightBarButtonItem = nil
+
         }
         else {
             likeBtn.enabled = false
@@ -294,6 +299,18 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.userId = prefs.integerForKey("id") as Int
         
     }
+    
+    // MARK: TextView properties
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+                
+        self.textPost.textColor = UIColor(hex: 0x9E9E9E)
+
+    }
+    
     
     // MARK: UiMenuItem
     
@@ -361,22 +378,26 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.textPost.textColor = UIColor(hex: 0x9E9E9E)
         
         self.optionsBtn.enabled = true
-        self.optionsBtn.title = "options"
+        self.optionsBtn.title = "Modifier"
         
         textPost.text = post?.text
+        
+        dismissKeyboard()
     }
     
     
     func editPost() {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let userId:Int = prefs.integerForKey("id") as Int
+        let text = (textPost.text != nil || textPost.text != "") ? textPost.text : ""
+        
         print("atualizando o texto do post...")
         print(self.textPost.text)
         print(userId)
         
         var params : [String: String] = [
+            "text" : text,
             "id" : String(post!.id),
-            "text" : self.textPost.text!,
             "user": String(self.userId),
         ]
         
@@ -390,23 +411,29 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     }
     
     func saveNewText(params: Dictionary<String, String>) {
+        
+        self.indicator.showActivityIndicator(self.view)
+        
         Alamofire.request(.POST, EndpointUtils.POST, parameters: params)
             .responseString { response in
-                print("Success: \(response.result.isSuccess)")
+                print("Success POST: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
-            }.responseSwiftyJSON({ (request, response, json, error) in
-                ActivityIndicator.instance.hideActivityIndicator();
+            }
+            .responseSwiftyJSON({ (request, response, json, error) in
+                print("Request POST: \(request)")
                 if (error == nil) {
-                    
+                    self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("go_to_points_notification", sender: self)
+                        self.performSegueWithIdentifier("editPost_to_map", sender: self)
                     }
+                    
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton post n'a pas pu être édité. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The post is not okay.")
+                            self.indicator.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
                         self.presentViewController(alertController, animated: true, completion: nil)
@@ -416,11 +443,14 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     }
     
     func saveNewText(image: UIImage, params: Dictionary<String, String>) {
-
-        ActivityIndicator.instance.showActivityIndicator(self.view)
+        // example image data
+        let imageData = image.lowestQualityJPEGNSData
+        
+        self.indicator.showActivityIndicator(self.view)
         
         // CREATE AND SEND REQUEST ----------
-        let urlRequest = self.urlRequestWithComponents(EndpointUtils.POST, parameters: params, data: false)
+        let urlRequest = UrlRequestUtils.instance.urlRequestWithComponents(EndpointUtils.POST, parameters: params, imageData: imageData)
+        
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
@@ -431,17 +461,17 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             }.responseSwiftyJSON({ (request, response, json, error) in
                 ActivityIndicator.instance.hideActivityIndicator();
                 if (error == nil) {
-                    print("ok post notification")
+                    self.indicator.hideActivityIndicator();
                     NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.performSegueWithIdentifier("go_to_points_notification", sender: self)
+                        self.performSegueWithIdentifier("editPost_to_map", sender: self)
                     }
                 } else {
-                    
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                            print("The post is not okay.")
+                        let alertController = UIAlertController(title: "Oups", message: "Ton post n'a pas pu être édité. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
+                            print("The post update is not okay.")
+                            self.indicator.hideActivityIndicator();
                         }
                         alertController.addAction(agreeAction)
                         self.presentViewController(alertController, animated: true, completion: nil)
@@ -449,55 +479,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 }
             })
     }
-    
-    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, data:Bool) -> (URLRequestConvertible, NSData) {
-        
-        // create url request to send
-        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
-        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
-        let boundaryConstant = "myRandomBoundary12345";
-        let contentType = "multipart/form-data;boundary="+boundaryConstant
-        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        
-        // create upload data to send
-        let uploadData = NSMutableData()
-        
-        if self.image != nil {
-            let imageData:NSData = image.lowestQualityJPEGNSData
-            // add image
-            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData(imageData)
-            
-        }
-        if AudioHelper.instance.audioPath != "" {
-            print(AudioHelper.instance.audioPath)
-            print(AudioHelper.instance.recordedAudio.filePathUrl)
-            
-            print("soundData")
-            let soundData = NSData(contentsOfURL: AudioHelper.instance.recordedAudio.filePathUrl)
-            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Disposition: form-data; name=\"audio\"; filename=\"audio.m4a\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData(soundData!)
-            
-        } else {
-            print("error: append audio data")
-        }
-        
-        // add parameters
-        for (key, value) in parameters {
-            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        }
-        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        // return URLRequestConvertible and NSData
-        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
-    }
-
-
     
     //MARK Actions:
     
@@ -739,10 +720,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
-        
-//        scrollView.frame = view.bounds
-//        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: 600)
-//
 
         //To adjust the height of TextField to its content
         let contentSize = self.textPost.sizeThatFits(self.textPost.bounds.size)
@@ -799,8 +776,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
 //            mediaView.addConstraint(aspectRatioViewConstraint)
 //        }
 //    }
-
     
+    
+    
+
+    // MARK: - Navigation
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "post_to_comments" {
             let navigationController = segue.destinationViewController as! UINavigationController
@@ -809,14 +790,19 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             commentController.postId = (self.post?.id)!
             
         }
-//        if segue.identifier == "copy_to_carnet" {
-//            let navigationController = segue.destinationViewController as! UINavigationController
-//            let carnetController:CarnetAddVC = navigationController.viewControllers[0] as! CarnetAddVC
-//            let copyString = textPost.copy()
-//            let pasteBoard = UIPasteboard.generalPasteboard()
-//            pasteBoard.string = copyString as? String
-//            carnetController.wordTextField.text = copyString as? String
-//        }
+        
+        if(segue.identifier == "editPost_to_map"){
+//            let tabController = segue.destinationViewController as! UITabBarController
+//            tabController.selectedIndex = 0
+//            
+//            let mapVC: MapViewController = tabController.viewControllers![0] as!  MapViewController
+            
+            let mapVC = segue.destinationViewController as! UITabBarController
+            mapVC.selectedIndex = 0
+            
+            
+        }
+        
     }
 
 }

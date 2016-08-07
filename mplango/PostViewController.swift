@@ -221,27 +221,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     
-//    func checkValidChange() {
-//        // Disable the Save button if the text field is empty.
-//        let text = userName.text ?? ""
-//        let text2 = userNation.text ?? ""
-//        let text3 = userBio.text ?? ""
-//        
-//        if (!text.isEmpty) {
-//            confirmEditProf.enabled = true
-//            
-//        } else if (!text2.isEmpty) {
-//            confirmEditProf.enabled = true
-//            
-//        } else if (!text3.isEmpty) {
-//            confirmEditProf.enabled = true
-//            
-//        } else {
-//            confirmEditProf.enabled = false
-//        }
-//    }
-    
-    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         if text == "\n"  // Recognizes enter key in keyboard
@@ -252,6 +231,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         let limitLength = 149
         
+/*
         let char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
         
         //if (textView == tagsView) {
@@ -262,6 +242,8 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
             //return true;
         //}
+ 
+*/
         
         let text : String = textPostView.text
         
@@ -274,7 +256,6 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         if(newLength == 10) {
             //set text as checked
-//            checkOn(checkTextPost)
             checkTextPost.textColor = UIColor(hex: 0xFFC400)
             checkTextPost.font = UIFont.boldSystemFontOfSize(15)
 
@@ -290,7 +271,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func touchOutsideTextField(){
         NSLog("touchOutsideTextField")
         self.view.endEditing(true)
-        textPostView.resolveHashTags();
+//        textPostView.resolveHashTags();
         
     }
     
@@ -497,8 +478,8 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 } else {
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton post n'a pas pu être publié. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The post is not okay.")
                         }
                         alertController.addAction(agreeAction)
@@ -535,8 +516,8 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         //New Alert Controller
-                        let alertController = UIAlertController(title: "Oops", message: "Tivemos um problema ao tentar criar seu post. Favor tente novamente.", preferredStyle: .Alert)
-                        let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                        let alertController = UIAlertController(title: "Oups", message: "Ton post n'a pas pu être publié. Essaie à nouveau", preferredStyle: .Alert)
+                        let agreeAction = UIAlertAction(title: "D'accord", style: .Default) { (action) -> Void in
                             print("The post is not okay.")
                         }
                         alertController.addAction(agreeAction)
