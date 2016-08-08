@@ -369,6 +369,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         recordBtn.enabled = true
         writeHereImage.hidden = false
         
+        // para zerar as mídias
+        image = nil
+        audioPath = ""
+        
         if self.comPicture != nil {
             self.removeImage(self)
         }
