@@ -26,6 +26,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var comments: Array<Comment> = [Comment]()
     
+    var liked:Bool = false
+    var likedId:Int!
+    
     var user: RUser!
     var userId:Int!
     var postId:Int = 0
@@ -510,6 +513,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
+    
+    
+    
     // Table view
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -572,6 +578,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if comments[indexPath.row].userId == userId {
             cell.likeBtn.enabled = false
             cell.likeBtn.hidden = true
+            cell.likeNberLabel.hidden = true
             cell.checkPointsLabel.hidden = false
         }
         else {

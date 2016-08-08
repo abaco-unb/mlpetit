@@ -7,11 +7,21 @@
 //
 
 import UIKit
+import AVFoundation
+import Alamofire
+import SwiftyJSON
+import AlamofireSwiftyJSON
 
 class CommentCell: UITableViewCell {
     
     var comment: Post? = nil
-    var user: User!
+    
+    var liked:Bool = false
+    var likedId:Int!
+    
+    var user: RUser!
+    var userId:Int!
+    var postId:Int = 0
     
     
     // MARK: Properties
@@ -23,6 +33,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var checkPointsLabel: UILabel!
+    @IBOutlet weak var likeNberLabel: UILabel!
 
     // para a BasicCell 
     @IBOutlet weak var comTxtView: UILabel!
@@ -64,27 +75,106 @@ class CommentCell: UITableViewCell {
     
     
     
-    // MARK: Actions
+    // MARK : like
+    
+    func showLikes() {
+        
+        //                self.indicator.showActivityIndicator(self.view)
+        
+        let params : [String: String] = [
+            //            "post": String(post!.id),
+            "user": String(self.userId)
+        ]
+        
+        //Checagem remota
+        //        ActivityIndicator.instance.showActivityIndicator(self.view)
+        Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+            }.responseSwiftyJSON({ (request, response, json, error) in
+                print("Request: \(request)")
+                print("request: \(error)")
+                
+                //                ActivityIndicator.instance.hideActivityIndicator();
+                if json["data"].array?.count > 0 {
+                    
+                    if let id = json["data"]["id"].int {
+                        self.likedId = id
+                    }
+                    
+                    let total:Int = Int((json["data"].array?.count)!);
+                    self.likeNberLabel.text = String(total)
+                    
+                    self.likeNberLabel.textColor = UIColor.whiteColor()
+                    self.likeBtn.hidden = true;
+                    //print("já laicou esse post")
+                    self.liked = true
+                    
+                } else {
+                    
+                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
+                    self.likeBtn.hidden = false;
+                    self.liked = false
+                    //print("pode laicar!")
+                }
+            })
+    }
     
     @IBAction func like(sender: AnyObject) {
         
-        // quando o botão like é clicado, ele é bloqueado e no lugar dele aparece uma image view com a mesma imagem, em vermelho
+        //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
+        print("String(self.post!.id)")
+//        print(String(self.post!.id))
         
-        likeBtn.enabled = false
-        
-        likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
-        
-        
-        
+        if self.liked == false {
+            
+            //        self.indicator.showActivityIndicator(self.view)
+            let params : [String: String] = [
+                "user" : String(self.userId),
+//                "post" : String(self.post!.id),
+                ]
+            Alamofire.request(.POST, EndpointUtils.LIKE, parameters: params)
+                .responseString { response in
+                    print("Success: \(response.result.isSuccess)")
+                    print("Response String: \(response.result.value)")
+                }.responseSwiftyJSON({ (request, response, json, error) in
+                    print("Request: \(request)")
+                    print("request: \(error)")
+                    //                self.indicator.hideActivityIndicator();
+                    if (error == nil) {
+                        self.liked = true
+                        if let insertedId: Int = json["data"].int {
+                            self.likedId = insertedId
+                        }
+                        self.likeNberLabel.textColor = UIColor.whiteColor()
+                        self.likeBtn.hidden = true
+                        self.likeBtn.enabled = false
+                        //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
+                        let total:Int = Int(self.likeNberLabel.text!)! + 1;
+                        self.likeNberLabel.text = String(total)
+                    } else {
+                        NSLog("@resultado : %@", "LIKE LOGIN !!!")
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            
+                            //New Alert Ccontroller
+                            let alertController = UIAlertController(title: "Oops!", message: "Tivemos um problema para registrar seu like!", preferredStyle: .Alert)
+                            let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                                print("The user is okay about it.")
+                            }
+                            alertController.addAction(agreeAction)
+//                            self.presentViewController(alertController, animated: true, completion: nil)
+                            
+                        }
+                    }
+                })
+        }
         //aqui deve atualizar o label dos números de likes (likeNberLabel)
-        
         //aqui deve tirar 1 ponto de participação do usuário que usa o botão
-        
         //aqui o usuário do post deve ganhar 5 pontos de colaboração
-        
-        //aqui desativar o botão like quando o usuário é o autor do post
-        
+        //aqui desativar o botão like quando o usuário for o autor do post
     }
+
     
     
     
