@@ -78,7 +78,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UIPopoverP
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             print("passou aqui e habilitou o serviço de localização")
-            print(locationManager.location!)
+            //print(locationManager.location!)
             
         } else {
             NSLog("Serviço de localização indisponível")

@@ -86,13 +86,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             image: comment["image"].stringValue,
                             postId: self.postId,
                             created: comment["created"]["date"].stringValue,
-                            userId: Int( comment["user"]["id"].stringValue )!
-//                            ,
-//                            userName: Int( comment["user"]["name"].stringValue )!
+                            userId: Int( comment["user"]["id"].stringValue )!,
+                            userName: comment["user"]["name"].stringValue
                             ))
                         
                         print("*************")
-//                        print(self.image)
+                        print(self.comments)
                         print("*************")
                         
                     }
@@ -231,13 +230,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             "text" : writeTxtView.text,
             "post" : String(self.postId),
             "user": String(userId),
-            "image": String(self.image)
+            //"image": String(self.image)
         ]
         
         print("post", String(self.postId), "user", String(userId))
+        print("Audio", AudioHelper.instance.audioPath)
         
-        if(self.image != nil) {
-            self.postComment(self.image, params: params)
+        if(self.image != nil || self.audioPath != "") {
+            self.postCommentMidia(params)
         } else {
             self.postComment(params)
         }
@@ -368,13 +368,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         recordBtn.hidden = false
         recordBtn.enabled = true
         writeHereImage.hidden = false
+        
         if self.comPicture != nil {
             self.removeImage(self)
         }
         
         var id: Int = 0
         var uId: Int = 0
-//        var uName: Int = 0
+        var uName: String = "Pas trouvé"
         
         if let commentId = json["data"]["id"].int {
             id = commentId
@@ -384,11 +385,11 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             uId = commentUser
         }
         
-//        if let commentUserName = json["data"]["user"]["name"].int {
-//            uName = commentUserName
-//        }
+        if let commentUserName = json["data"]["user"]["name"].string {
+            uName = commentUserName
+        }
         
-        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId/*, userName: uName*/)
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: uName)
         
         comments.append(comment)
         comTableView.reloadData()
@@ -425,7 +426,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             })
     }
     
-    func postComment(image: UIImage, params: Dictionary<String, String>) {
+    func postCommentMidia(params: Dictionary<String, String>) {
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
         
@@ -481,12 +482,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             uploadData.appendData(imageData)
             
         }
-        if AudioHelper.instance.audioPath != "" {
-            print(AudioHelper.instance.audioPath)
-            print(AudioHelper.instance.recordedAudio.filePathUrl)
-            
+        if self.audioPath != "" {
+            print(self.recordedAudio.filePathUrl)
             print("soundData")
-            let soundData = NSData(contentsOfURL: AudioHelper.instance.recordedAudio.filePathUrl)
+            let soundData = NSData(contentsOfURL: self.recordedAudio.filePathUrl)
             uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
             uploadData.appendData("Content-Disposition: form-data; name=\"audio\"; filename=\"audio.m4a\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
             uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -521,8 +520,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
         
         let text = comments[indexPath.row].text
-        let image = comments[indexPath.row].image
-        let audio = comments[indexPath.row].audio
+        let image: String = comments[indexPath.row].image as String
+        let audio: String = comments[indexPath.row].audio as String
         
 //        cell.userName.text = String(comments[indexPath.row].userName)
         
@@ -536,27 +535,32 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         else {
             cell.comTxtView.text = ""
         }
-        
+        print("aqui", image)
         // Se tiver imagem:
         if image != "" {
+             print("1 image", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true")
             cell.comPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true" )
+             print("2 image")
             let aspectRatioImageViewConstraint = NSLayoutConstraint(item: cell.comPicture, attribute: .Height, relatedBy: .Equal, toItem: cell.comPicture, attribute: .Width, multiplier: 1/1, constant: 1)
+             print("3 image")
             cell.comPicture.addConstraint(aspectRatioImageViewConstraint)
+             print("4 image")
         }
-        else {
-            cell.comPicture.image = nil
-        }
+        
+        print("Audio CEll : ", audio)
         
         // Se tiver áudio
         if audio != "" {
-            
-            cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
-            cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
-            
-            cell.audioView.layer.borderWidth = 1
-            cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
-            
-            AudioHelper.instance._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
+             print("1 audio")
+            //cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
+            //cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
+            print("2 audio")
+            //cell.audioView.layer.borderWidth = 1
+            //cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            print("3 audio", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
+            let audioHelper: AudioHelper = AudioHelper()
+            audioHelper._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
+            print("4 audio")
         }
         
         
@@ -642,6 +646,16 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if gestureRecognizer.state == .Ended {
             print("parar a gravação")
             
+            do {
+                let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep-recorded", ofType: "wav")!)
+                try audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, fileTypeHint: nil)
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+                
+            } catch {
+                NSLog("Error: ")
+            }
+            
             audioRecorder.stop()
             AVAudioSession.sharedInstance()
             
@@ -662,10 +676,11 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
 //                labelRecording.text = "Audio ajouté."
 //                labelRecording.textColor = UIColor(hex: 0x2C98D4)
-//                
+////                
 //                iconAudio.image = UIImage(named: "icon_audio")
 //                iconAudio.layer.removeAllAnimations()
 //                labelRecording.layer.removeAllAnimations()
+                
                 
                 print(1)
                 recordedAudio = RecordedAudio()
@@ -676,6 +691,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
                 try audioPlayer = AVAudioPlayer(contentsOfURL: recorder.url, fileTypeHint: nil)
                 self.audioPath = recorder.url.description
+                
+                
+                //recordView.hidden = false
                 
                 //Aqui vamos postar o audio...
                 print("POSTAR PRO SERVER...")
@@ -716,10 +734,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
 //            labelRecording.text = "En train d'enregistrer..."
 //            labelRecording.textColor = UIColor(hex: 0xF95253)
-            
+//            
 //            self.blinkComponent(self.labelRecording)
 //            iconAudio.image = UIImage(named: "icon_audio_red")
 //            self.blinkComponent(self.iconAudio)
+//            
+//            recordView.hidden = false
             
             audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
             audioRecorder.delegate = self
