@@ -41,7 +41,7 @@
 		540A4A411C11EF5A00C166D8 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */; };
 		541546161B7D1548008E182C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541546141B7D1548008E182C /* ProfileVC.swift */; };
 		54241A111B7E35040074D350 /* Carnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54241A101B7E35040074D350 /* Carnet.swift */; };
-		5425C2931D5407AC006615C7 /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5425C2921D5407AC006615C7 /* Main2.storyboard */; };
+		5425C2931D5407AC006615C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5425C2921D5407AC006615C7 /* Main.storyboard */; };
 		542B4B041B73A06F0099349E /* CarnetAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B031B73A06F0099349E /* CarnetAddVC.swift */; };
 		542B4B101B73F4100099349E /* CarnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B4B0F1B73F4100099349E /* CarnetViewController.swift */; };
 		542DEE401B8A178800A09A00 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DEE3F1B8A178800A09A00 /* TabBarController.swift */; };
@@ -324,7 +324,7 @@
 		54241A0F1B7E34130074D350 /* mplango 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 6.xcdatamodel"; sourceTree = "<group>"; };
 		54241A101B7E35040074D350 /* Carnet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carnet.swift; sourceTree = "<group>"; };
 		54241A121B7E367A0074D350 /* mplango 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 7.xcdatamodel"; sourceTree = "<group>"; };
-		5425C2921D5407AC006615C7 /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
+		5425C2921D5407AC006615C7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5426BC2C1C62C24F000EBB74 /* mplango 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 9.xcdatamodel"; sourceTree = "<group>"; };
 		542B4B031B73A06F0099349E /* CarnetAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetAddVC.swift; sourceTree = "<group>"; };
 		542B4B0F1B73F4100099349E /* CarnetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetViewController.swift; sourceTree = "<group>"; };
@@ -574,7 +574,7 @@
 				828C717F1B83C424009FE9B5 /* Controller */,
 				543A48761BDD422E008E9D71 /* Tutorial screens */,
 				8283BE211B0143AF0085F9A6 /* Images.xcassets */,
-				5425C2921D5407AC006615C7 /* Main2.storyboard */,
+				5425C2921D5407AC006615C7 /* Main.storyboard */,
 				8283BE231B0143AF0085F9A6 /* LaunchScreen.xib */,
 				8283BE191B0143AF0085F9A6 /* mplango.xcdatamodeld */,
 				8283BE151B0143AF0085F9A6 /* Supporting Files */,
@@ -792,7 +792,7 @@
 				TargetAttributes = {
 					8283BE111B0143AF0085F9A6 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 3MS9SHWCHS;
+						DevelopmentTeam = 2B3UEHLLJ3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -990,7 +990,7 @@
 				54E9719C1B6ED25B005F27F1 /* FiraSans-EightItalic.ttf in Resources */,
 				54E9719D1B6ED25B005F27F1 /* FiraSans-ExtraBold.ttf in Resources */,
 				54E9719E1B6ED25B005F27F1 /* FiraSans-ExtraBoldItalic.ttf in Resources */,
-				5425C2931D5407AC006615C7 /* Main2.storyboard in Resources */,
+				5425C2931D5407AC006615C7 /* Main.storyboard in Resources */,
 				54E9719F1B6ED25B005F27F1 /* FiraSans-ExtraLight.ttf in Resources */,
 				54E971A01B6ED25B005F27F1 /* FiraSans-ExtraLightItalic.ttf in Resources */,
 				54E971A11B6ED25B005F27F1 /* FiraSans-Four.ttf in Resources */,
@@ -1245,7 +1245,7 @@
 				INFOPLIST_FILE = mplango/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br.tst;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1269,7 +1269,7 @@
 				INFOPLIST_FILE = mplango/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br.tst;
+				PRODUCT_BUNDLE_IDENTIFIER = mplango.unb.br;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
