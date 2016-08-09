@@ -541,9 +541,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let image: String = comments[indexPath.row].image as String
         let audio: String = comments[indexPath.row].audio as String
         
-//        cell.userName.text = String(comments[indexPath.row].userName)
-        
-        cell.dateLabel.text = comments[indexPath.row].created
+        cell.userName.text = String(comments[indexPath.row].userName)
+        cell.dateLabel.text = String(comments[indexPath.row].created)
         cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
         
         // Se tiver texto:
@@ -573,8 +572,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             //cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
             //cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
             print("2 audio")
-            //cell.audioView.layer.borderWidth = 1
-            //cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            cell.audioView.layer.borderWidth = 1
+            cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
             print("3 audio", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
             let audioHelper: AudioHelper = AudioHelper()
             audioHelper._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")

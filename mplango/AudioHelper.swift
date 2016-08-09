@@ -61,7 +61,7 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         print("criando slider")
         self.audioSlider = self.createSlider()
         container.addSubview(audioSlider)
-        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: 0, wcons: 200, hcons: 100)
+        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: 0, wcons: 150, hcons: 100)
         
         print(container.frame.height)
         print("criando label")
@@ -95,7 +95,7 @@ class AudioHelper: NSObject, AVAudioRecorderDelegate  {
         print("criando slider")
         self.audioSlider = self.createSlider()
         container.addSubview(audioSlider)
-        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: -4, wcons: 180, hcons: 100)
+        self.addConstraint(container, ui: audioSlider, xattr: NSLayoutAttribute.CenterX, xcons: -4, wcons: 150, hcons: 100)
         
         initRecorder()
         
