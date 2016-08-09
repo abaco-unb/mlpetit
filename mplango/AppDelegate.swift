@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Fabric
+import Crashlytics
 
 //para mudar a cor da nav bar com hex color
 extension UIColor {
@@ -48,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))  // types are UIUserNotificationType members
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        Fabric.with([Crashlytics.self])
         
         return true
         

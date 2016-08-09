@@ -162,23 +162,31 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
         
-        let text = writeTxtView.text
+        writeTxtView.text = nil
+        writeHereImage.hidden = false
+        postComBtn.hidden = true
+        comPicture.image = nil
+        removeImage.hidden = true
+        picBtn.hidden = false
+        recordBtn.hidden = false
         
-        if text.characters.count >= 1 {
-            postComBtn.hidden = false
-            postComBtn.enabled = true
-            recordBtn.hidden = true
-        }
-        
-        else if text.characters.count < 1 {
-            writeHereImage.hidden = false
-            recordBtn.hidden = false
-            recordBtn.enabled = true
-            postComBtn.hidden = true
-            postComBtn.enabled = false
-        }
-        
-        textViewDidChange(writeTxtView)
+//        let text = writeTxtView.text
+//        
+//        if text.characters.count >= 1 {
+//            postComBtn.hidden = false
+//            postComBtn.enabled = true
+//            recordBtn.hidden = true
+//        }
+//        
+//        else if text.characters.count < 1 {
+//            writeHereImage.hidden = false
+//            recordBtn.hidden = false
+//            recordBtn.enabled = true
+//            postComBtn.hidden = true
+//            postComBtn.enabled = false
+//        }
+//        
+//        textViewDidChange(writeTxtView)
 
     }
     
@@ -582,8 +590,13 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             //cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
             //cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
             print("2 audio")
+            
+            cell.audioView.layer.cornerRadius = 10
+            cell.audioView.layer.masksToBounds = true
             cell.audioView.layer.borderWidth = 1
             cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
+            
+            
             print("3 audio", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
             let audioHelper: AudioHelper = AudioHelper()
             audioHelper._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
