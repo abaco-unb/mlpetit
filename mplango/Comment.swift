@@ -17,8 +17,9 @@ class Comment: NSObject {
     let created: String
     let userId: Int
     let userName: String
+    let likes: Int
     
-    init(id:Int, audio:String, text:String, image:String, postId: Int, created: String, userId: Int, userName: String) {
+    init(id:Int, audio:String, text:String, image:String, postId: Int, created: String, userId: Int, userName: String, likes: Int) {
         self.id = id
         self.audio = audio
         self.text = text
@@ -27,5 +28,6 @@ class Comment: NSObject {
         self.created = created
         self.userId = userId
         self.userName = userName
+        self.likes = likes
     }
 }

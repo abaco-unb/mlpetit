@@ -77,9 +77,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 if let comments = json["data"].array {
                     for comment in comments {
                         var comId = 0;
+                        var comLikes = 0;
                         
                         if let id = comment["id"].int {
                             comId = id
+                        }
+                        
+                        if let likes = comment["likes"].array?.count {
+                            comLikes = likes
                         }
                         
                         
@@ -90,7 +95,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             postId: self.postId,
                             created: comment["created"]["date"].stringValue,
                             userId: Int( comment["user"]["id"].stringValue )!,
-                            userName: comment["user"]["name"].stringValue
+                            userName: comment["user"]["name"].stringValue,
+                            likes: comLikes
                             ))
                         
                         print("*************")
@@ -392,8 +398,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         var uId: Int = 0
         var uName: String = "Pas trouvé"
         
+        var tlikes: Int = 0
+        
         if let commentId = json["data"]["id"].int {
             id = commentId
+        }
+        
+        if let total = json["data"]["likes"].array?.count {
+            tlikes = total
         }
         
         if let commentUser = json["data"]["user"]["id"].int {
@@ -404,7 +416,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             uName = commentUserName
         }
         
-        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: uName)
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: uName, likes: tlikes)
         
         comments.append(comment)
         comTableView.reloadData()
@@ -537,6 +549,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! CommentCell
         
+        cell.comment = comments[indexPath.row] as Comment
+        cell.userId = self.userId
+        
         let text = comments[indexPath.row].text
         let image: String = comments[indexPath.row].image as String
         let audio: String = comments[indexPath.row].audio as String
@@ -544,6 +559,9 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         cell.userName.text = String(comments[indexPath.row].userName)
         cell.dateLabel.text = String(comments[indexPath.row].created)
         cell.profilePicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments[indexPath.row].userId)  + "&avatar=true" )
+        
+        cell.likeNberLabel.text =  String(comments[indexPath.row].likes)
+        
         
         // Se tiver texto:
         if text != "" {

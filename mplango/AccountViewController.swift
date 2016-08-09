@@ -454,7 +454,7 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             "password" : self.textFieldPassword.text!,
                             "gender" : self.gender,
                             "nationality" : String(nationality),
-                            "level" : String(7)
+                            "level" : String(3)
                         ]
                         
                         // example image data

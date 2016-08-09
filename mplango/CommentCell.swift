@@ -77,78 +77,78 @@ class CommentCell: UITableViewCell {
     
     // MARK : like
     
-    func showLikes() {
-        
-        //                self.indicator.showActivityIndicator(self.view)
-        
-        let params : [String: String] = [
-            "comment": String(comment!.id),
-            "user": String(self.userId)
-        ]
-        
-        //Checagem remota
-        //        ActivityIndicator.instance.showActivityIndicator(self.view)
-        Alamofire.request(.GET, EndpointUtils.LIKE, parameters: params)
-            .responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
-            }.responseSwiftyJSON({ (request, response, json, error) in
-                print("Request: \(request)")
-                print("request: \(error)")
-                
-                //                ActivityIndicator.instance.hideActivityIndicator();
-                if json["data"].array?.count > 0 {
-                    
-                    if let id = json["data"]["id"].int {
-                        self.likedId = id
-                    }
-                    
-                    let total:Int = Int((json["data"].array?.count)!);
-                    self.likeNberLabel.text = String(total)
-                    
-                    self.likeNberLabel.textColor = UIColor.whiteColor()
-                    self.likeBtn.hidden = true;
-                    //print("já laicou esse post")
-                    self.liked = true
-                    
-                } else {
-                    
-                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
-                    self.likeBtn.hidden = false;
-                    self.liked = false
-                    //print("pode laicar!")
-                }
-            })
-    }
+//    func showLikes() {
+//        
+//        //                self.indicator.showActivityIndicator(self.view)
+//        
+//        let params : [String: String] = [
+//            "comment": String(comment!.id),
+//            "user": String(self.userId)
+//        ]
+//        
+//        //Checagem remota
+//        //        ActivityIndicator.instance.showActivityIndicator(self.view)
+//        Alamofire.request(.GET, EndpointUtils.LIKE_COMMENT, parameters: params)
+//            .responseString { response in
+//                print("Success: \(response.result.isSuccess)")
+//                print("Response String: \(response.result.value)")
+//            }.responseSwiftyJSON({ (request, response, json, error) in
+//                print("Request: \(request)")
+//                print("request: \(error)")
+//                
+//                //                ActivityIndicator.instance.hideActivityIndicator();
+//                if json["data"].array?.count > 0 {
+//                    
+//                    if let id = json["data"]["id"].int {
+//                        self.likedId = id
+//                    }
+//                    
+//                    let total:Int = Int((json["data"].array?.count)!);
+//                    self.likeNberLabel.text = String(total)
+//                    
+//                    self.likeNberLabel.textColor = UIColor.whiteColor()
+//                    self.likeBtn.hidden = true;
+//                    //print("já laicou esse post")
+//                    self.liked = true
+//                    
+//                } else {
+//                    
+//                    self.likeNberLabel.textColor = UIColor(hex: 0xFF5252)
+//                    self.likeBtn.hidden = false;
+//                    self.liked = false
+//                    //print("pode laicar!")
+//                }
+//            })
+//    }
     
     @IBAction func like(sender: AnyObject) {
         
         //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
         print("String(comment!.id)")
-//        print(String(comment!.id))
+        print(String(self.comment))
         
         if self.liked == false {
             
-            //        self.indicator.showActivityIndicator(self.view)
+            //ActivityIndicator.instance.showActivityIndicator(self.view)
             let params : [String: String] = [
                 "user" : String(self.userId),
                 "comment" : String(self.comment!.id),
                 ]
-            Alamofire.request(.POST, EndpointUtils.LIKE, parameters: params)
+            Alamofire.request(.POST, EndpointUtils.LIKE_COMMENT, parameters: params)
                 .responseString { response in
                     print("Success: \(response.result.isSuccess)")
                     print("Response String: \(response.result.value)")
                 }.responseSwiftyJSON({ (request, response, json, error) in
                     print("Request: \(request)")
                     print("request: \(error)")
-                    //                self.indicator.hideActivityIndicator();
+                    //                ActivityIndicator.instance.indicator.hideActivityIndicator();
                     if (error == nil) {
                         self.liked = true
                         if let insertedId: Int = json["data"].int {
                             self.likedId = insertedId
                         }
-                        self.likeNberLabel.textColor = UIColor.whiteColor()
-                        self.likeBtn.hidden = true
+                        self.likeNberLabel.textColor = UIColor.blackColor()
+                        self.likeBtn.hidden = false
                         self.likeBtn.enabled = false
                         //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
                         let total:Int = Int(self.likeNberLabel.text!)! + 1;
