@@ -54,6 +54,8 @@
 		545A1E4D1CFB9FF300600072 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */; };
 		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
+		5478D9B01D59604F00FD6AA1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5478D9AE1D59604F00FD6AA1 /* Fabric.framework */; };
+		5478D9B11D59604F00FD6AA1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5478D9AF1D59604F00FD6AA1 /* Crashlytics.framework */; };
 		5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */; };
 		54B130A01CEE00A400199245 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1309F1CEE00A400199245 /* ContactCell.swift */; };
 		54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EB1BEB8E2400199613 /* Settings.swift */; };
@@ -338,6 +340,8 @@
 		545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
+		5478D9AE1D59604F00FD6AA1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		5478D9AF1D59604F00FD6AA1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTableViewCell.swift; sourceTree = "<group>"; };
 		54B1309F1CEE00A400199245 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
@@ -424,6 +428,8 @@
 				5408F33A1CF915A9004B6A76 /* FBSDKShareKit.framework in Frameworks */,
 				157971181CDE395C00C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */,
 				1536E2F01C6ECD0800471E86 /* SwiftyJSON.framework in Frameworks */,
+				5478D9B01D59604F00FD6AA1 /* Fabric.framework in Frameworks */,
+				5478D9B11D59604F00FD6AA1 /* Crashlytics.framework in Frameworks */,
 				82D73CA81B82419700DFEAB0 /* AVFoundation.framework in Frameworks */,
 				1536E2AC1C6E805700471E86 /* Alamofire.framework in Frameworks */,
 				157971191CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */,
@@ -542,6 +548,8 @@
 				15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */,
 				15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */,
 				15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */,
+				5478D9AE1D59604F00FD6AA1 /* Fabric.framework */,
+				5478D9AF1D59604F00FD6AA1 /* Crashlytics.framework */,
 				1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */,
 				1536E2D81C6ECCF500471E86 /* SwiftyJSON.xcodeproj */,
 				1536E2941C6E802000471E86 /* Alamofire.xcodeproj */,
@@ -748,6 +756,7 @@
 				8283BE0F1B0143AF0085F9A6 /* Frameworks */,
 				8283BE101B0143AF0085F9A6 /* Resources */,
 				54D3F5C31C6383FD003BDE76 /* Embed Frameworks */,
+				5478D9991D595B8200FD6AA1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1029,6 +1038,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5478D9991D595B8200FD6AA1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 512e927bc93c47f296cab8f6ef4ee00b72153220 c3b588107a9ac915aed33e8988e7d61632549446ed9160bee92b9736f64bef51";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8283BE0E1B0143AF0085F9A6 /* Sources */ = {
