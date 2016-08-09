@@ -14,7 +14,7 @@ import AlamofireSwiftyJSON
 
 class CommentCell: UITableViewCell {
     
-    var comment: Post? = nil
+    var comment: Comment? = nil
     
     var liked:Bool = false
     var likedId:Int!
@@ -82,7 +82,7 @@ class CommentCell: UITableViewCell {
         //                self.indicator.showActivityIndicator(self.view)
         
         let params : [String: String] = [
-            //            "post": String(post!.id),
+            "comment": String(comment!.id),
             "user": String(self.userId)
         ]
         
@@ -124,15 +124,15 @@ class CommentCell: UITableViewCell {
     @IBAction func like(sender: AnyObject) {
         
         //likeBtn.setImage(UIImage(named: "like_btn"), forState: UIControlState.Normal)
-        print("String(self.post!.id)")
-//        print(String(self.post!.id))
+        print("String(comment!.id)")
+//        print(String(comment!.id))
         
         if self.liked == false {
             
             //        self.indicator.showActivityIndicator(self.view)
             let params : [String: String] = [
                 "user" : String(self.userId),
-//                "post" : String(self.post!.id),
+                "comment" : String(self.comment!.id),
                 ]
             Alamofire.request(.POST, EndpointUtils.LIKE, parameters: params)
                 .responseString { response in
