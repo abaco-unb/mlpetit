@@ -454,9 +454,8 @@ class AccountViewController: UIViewController,UINavigationControllerDelegate, UI
                             "password" : self.textFieldPassword.text!,
                             "gender" : self.gender,
                             "nationality" : String(nationality),
-                            "level" : String(3)
                         ]
-                        
+                        print(params)
                         // example image data
                         let image = self.avatar
                         let imageData = image.lowestQualityJPEGNSData
