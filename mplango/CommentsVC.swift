@@ -85,6 +85,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         
                         if let likes = comment["likes"].array?.count {
                             comLikes = likes
+                            
+                            for userId in comment["likes"].array! {
+                                print("user comment", userId.numberValue)
+                            }
                         }
                         
                         
@@ -96,7 +100,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             created: comment["created"]["date"].stringValue,
                             userId: Int( comment["user"]["id"].stringValue )!,
                             userName: comment["user"]["name"].stringValue,
-                            likes: comLikes
+                            likes: comLikes,
+                            liked: false
                             ))
                         
                         print("*************")
@@ -408,6 +413,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         if let total = json["data"]["likes"].array?.count {
             tlikes = total
+            
         }
         
         if let commentUser = json["data"]["user"]["id"].int {
@@ -418,7 +424,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             uName = commentUserName
         }
         
-        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: uName, likes: tlikes)
+        let comment = Comment(id: id, audio: json["data"]["audio"].stringValue, text: json["data"]["text"].stringValue, image: json["data"]["image"].stringValue, postId: self.postId, created: json["data"]["created"]["date"].stringValue, userId: uId, userName: uName, likes: tlikes, liked: false)
         
         comments.append(comment)
         comTableView.reloadData()
