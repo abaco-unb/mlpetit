@@ -54,8 +54,7 @@
 		545A1E4D1CFB9FF300600072 /* ProfileGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */; };
 		546042111C19A62800A6A2C4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042101C19A62800A6A2C4 /* CommentCell.swift */; };
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
-		5478D9B01D59604F00FD6AA1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5478D9AE1D59604F00FD6AA1 /* Fabric.framework */; };
-		5478D9B11D59604F00FD6AA1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5478D9AF1D59604F00FD6AA1 /* Crashlytics.framework */; };
+		5468AD1F1D5FC5FB00F254F1 /* LikeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5468AD1E1D5FC5FB00F254F1 /* LikeIndicator.swift */; };
 		5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */; };
 		54B130A01CEE00A400199245 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1309F1CEE00A400199245 /* ContactCell.swift */; };
 		54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EB1BEB8E2400199613 /* Settings.swift */; };
@@ -106,6 +105,7 @@
 		54E971B61B6ED25B005F27F1 /* FiraSans-UltraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54E971931B6ED1F5005F27F1 /* FiraSans-UltraLightItalic.ttf */; };
 		54EEA4751C1F616A00AF6C71 /* FollowersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */; };
 		54F0896C1C20A05100089687 /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0896B1C20A05100089687 /* FollowingTVC.swift */; };
+		54FFD6991D60B0A80035928A /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FFD6981D60B0A80035928A /* LikeViewController.swift */; };
 		823CC0091B46291700F633F8 /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC0081B46291700F633F8 /* PostAnnotation.swift */; };
 		823CC00D1B4629C000F633F8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CC00C1B4629C000F633F8 /* MapView.swift */; };
 		8256CAFE1B40FD730002708C /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8256CAFD1B40FD730002708C /* ContactViewController.swift */; };
@@ -340,8 +340,7 @@
 		545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGameVC.swift; sourceTree = "<group>"; };
 		546042101C19A62800A6A2C4 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		546042141C19B4E300A6A2C4 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
-		5478D9AE1D59604F00FD6AA1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		5478D9AF1D59604F00FD6AA1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		5468AD1E1D5FC5FB00F254F1 /* LikeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeIndicator.swift; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTableViewCell.swift; sourceTree = "<group>"; };
 		54B1309F1CEE00A400199245 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
@@ -393,6 +392,7 @@
 		54E971931B6ED1F5005F27F1 /* FiraSans-UltraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-UltraLightItalic.ttf"; sourceTree = "<group>"; };
 		54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTVC.swift; sourceTree = "<group>"; };
 		54F0896B1C20A05100089687 /* FollowingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
+		54FFD6981D60B0A80035928A /* LikeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		823CC0081B46291700F633F8 /* PostAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAnnotation.swift; sourceTree = "<group>"; };
 		823CC00C1B4629C000F633F8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8256CAFD1B40FD730002708C /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -428,8 +428,6 @@
 				5408F33A1CF915A9004B6A76 /* FBSDKShareKit.framework in Frameworks */,
 				157971181CDE395C00C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */,
 				1536E2F01C6ECD0800471E86 /* SwiftyJSON.framework in Frameworks */,
-				5478D9B01D59604F00FD6AA1 /* Fabric.framework in Frameworks */,
-				5478D9B11D59604F00FD6AA1 /* Crashlytics.framework in Frameworks */,
 				82D73CA81B82419700DFEAB0 /* AVFoundation.framework in Frameworks */,
 				1536E2AC1C6E805700471E86 /* Alamofire.framework in Frameworks */,
 				157971191CDE396500C512F6 /* AlamofireSwiftyJSON.framework in Frameworks */,
@@ -510,6 +508,8 @@
 				159C11B61BF58B1C0018EBE1 /* EndpointUtils.swift */,
 				54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */,
 				1536E2F91C6F711900471E86 /* ActivityIndicator.swift */,
+				5468AD1E1D5FC5FB00F254F1 /* LikeIndicator.swift */,
+				54FFD6981D60B0A80035928A /* LikeViewController.swift */,
 				1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */,
 				157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */,
 				159F1AD81D34392C0074762A /* NSCacheSingleton.swift */,
@@ -548,8 +548,6 @@
 				15A1DBD61CED2A9500D5BA8A /* FBSDKCoreKit.framework */,
 				15A1DBD71CED2A9500D5BA8A /* FBSDKLoginKit.framework */,
 				15A1DBD81CED2A9500D5BA8A /* FBSDKShareKit.framework */,
-				5478D9AE1D59604F00FD6AA1 /* Fabric.framework */,
-				5478D9AF1D59604F00FD6AA1 /* Crashlytics.framework */,
 				1579710D1CDE394000C512F6 /* Alamofire-SwiftyJSON.xcodeproj */,
 				1536E2D81C6ECCF500471E86 /* SwiftyJSON.xcodeproj */,
 				1536E2941C6E802000471E86 /* Alamofire.xcodeproj */,
@@ -1051,7 +1049,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 512e927bc93c47f296cab8f6ef4ee00b72153220 c3b588107a9ac915aed33e8988e7d61632549446ed9160bee92b9736f64bef51";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1088,6 +1086,7 @@
 				541546161B7D1548008E182C /* ProfileVC.swift in Sources */,
 				159F1AD91D34392C0074762A /* NSCacheSingleton.swift in Sources */,
 				159F1B031D3E9B060074762A /* GamificationRules.swift in Sources */,
+				5468AD1F1D5FC5FB00F254F1 /* LikeIndicator.swift in Sources */,
 				8283BE431B0233440085F9A6 /* LoginViewController.swift in Sources */,
 				15FE53C61CA6F6B0002A28CC /* FBQuadTree.swift in Sources */,
 				54E028641D0863DD00F4BB3C /* AudioActivityVC.swift in Sources */,
@@ -1112,6 +1111,7 @@
 				54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */,
 				8256CAFE1B40FD730002708C /* ContactViewController.swift in Sources */,
+				54FFD6991D60B0A80035928A /* LikeViewController.swift in Sources */,
 				54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */,
 				159F1AE81D35D8F00074762A /* AudioHelper.swift in Sources */,
 				54D02AB71BD949F900B62860 /* UITextViewExt.swift in Sources */,

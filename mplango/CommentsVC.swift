@@ -131,6 +131,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         self.postComBtn.hidden = true
         self.removeImage.hidden = true
         
+        self.recordView.hidden = true
+        
         self.comTableView.rowHeight = UITableViewAutomaticDimension
         self.comTableView.estimatedRowHeight = 350.0
         
@@ -562,7 +564,6 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         cell.likeNberLabel.text =  String(comments[indexPath.row].likes)
         
-        
         // Se tiver texto:
         if text != "" {
             cell.comTxtView.text = comments[indexPath.row].text
@@ -571,15 +572,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             cell.comTxtView.text = ""
         }
         print("aqui", image)
+        
         // Se tiver imagem:
         if image != "" {
-             print("1 image", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true")
             cell.comPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true" )
-             print("2 image")
             let aspectRatioImageViewConstraint = NSLayoutConstraint(item: cell.comPicture, attribute: .Height, relatedBy: .Equal, toItem: cell.comPicture, attribute: .Width, multiplier: 1/1, constant: 1)
-             print("3 image")
             cell.comPicture.addConstraint(aspectRatioImageViewConstraint)
-             print("4 image")
         }
         
         print("Audio CEll : ", audio)
@@ -715,12 +713,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                    audioPlayer.prepareToPlay()
                    audioPlayer.play()
                 
-//                labelRecording.text = "Audio ajouté."
-//                labelRecording.textColor = UIColor(hex: 0x2C98D4)
-////                
-//                iconAudio.image = UIImage(named: "icon_audio")
-//                iconAudio.layer.removeAllAnimations()
-//                labelRecording.layer.removeAllAnimations()
+                labelRecording.text = "Audio ajouté."
+                labelRecording.textColor = UIColor(hex: 0x2C98D4)
+                
+                iconAudio.image = UIImage(named: "icon_audio")
+                iconAudio.layer.removeAllAnimations()
+                labelRecording.layer.removeAllAnimations()
                 
                 
                 print(1)
@@ -734,7 +732,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 self.audioPath = recorder.url.description
                 
                 
-                //recordView.hidden = false
+                recordView.hidden = false
                 
                 //Aqui vamos postar o audio...
                 print("POSTAR PRO SERVER...")
@@ -773,14 +771,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             
             print("recording")
             
-//            labelRecording.text = "En train d'enregistrer..."
-//            labelRecording.textColor = UIColor(hex: 0xF95253)
-//            
-//            self.blinkComponent(self.labelRecording)
-//            iconAudio.image = UIImage(named: "icon_audio_red")
-//            self.blinkComponent(self.iconAudio)
-//            
-//            recordView.hidden = false
+            labelRecording.text = "En train d'enregistrer..."
+            labelRecording.textColor = UIColor(hex: 0xF95253)
+            
+            self.blinkComponent(self.labelRecording)
+            iconAudio.image = UIImage(named: "icon_audio_red")
+            self.blinkComponent(self.iconAudio)
+            
+            recordView.hidden = false
             
             audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
             audioRecorder.delegate = self
@@ -825,4 +823,25 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         audioRecorder.stop()
         audioRecorder = nil
     }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "to_like_notif"){
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let likeController:LikeViewController = navigationController.viewControllers[0] as! LikeViewController
+            
+            // aqui importar a foto do autor do comentário
+//            likeController.likedUser.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments(userId))  + "&avatar=true" )
+            
+            self.user.id = userId
+            likeController.likingUser.image = UIImage(contentsOfFile: self.user.image)
+            
+        }
+    }
+    
+    
+    
+    
 }

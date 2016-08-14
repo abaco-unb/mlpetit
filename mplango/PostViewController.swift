@@ -265,7 +265,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        writeHereImage.hidden = true
+        writeHereImage.hidden = true        
     }
     
     func touchOutsideTextField(){

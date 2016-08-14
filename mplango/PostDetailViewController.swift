@@ -181,11 +181,6 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     let postComplete = json["data"]
                     var postId = 0
                     
-//                    self.post!.setOwnerName(postComplete["user"]["name"].stringValue)
-//                    self.userName.text      = self.post!.getOwnerName()
-                    
-//                    self.timeOfPost.text    = postComplete["created"].stringValue
-                    
                     if let tLikes = postComplete["likes"].array {
                         self.likeNberLabel.text = String(tLikes.count)
                     }
@@ -657,10 +652,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                 }
             })
         }
-            //aqui deve atualizar o label dos números de likes (likeNberLabel)
-            //aqui deve tirar 1 ponto de participação do usuário que usa o botão
-            //aqui o usuário do post deve ganhar 5 pontos de colaboração
-            //aqui desativar o botão like quando o usuário for o autor do post
+
     }
     
     @IBAction func dislike(sender: AnyObject) {
@@ -791,14 +783,18 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         }
         
         if(segue.identifier == "editPost_to_map"){
-//            let tabController = segue.destinationViewController as! UITabBarController
-//            tabController.selectedIndex = 0
-//            
-//            let mapVC: MapViewController = tabController.viewControllers![0] as!  MapViewController
-            
             let mapVC = segue.destinationViewController as! UITabBarController
             mapVC.selectedIndex = 0
             
+        }
+        
+        if(segue.identifier == "to_like_notif"){
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let likeController:LikeViewController = navigationController.viewControllers[0] as! LikeViewController
+           
+            likeController.likedUser.image = post!.getOwnerImage()
+            self.user.id = userId
+            likeController.likingUser.image = UIImage(contentsOfFile: self.user.image)
             
         }
         

@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         
         return true
         
