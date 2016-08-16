@@ -77,6 +77,12 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         super.viewDidLoad()
 
         
+          // tava rolando um delay para desabilitar o botão quando já havia feito o like
+          // Daí inverti o processo. Ele começa desabilitado e se não tem like para o usuário ele habilita
+          // Esse processo é mais seguro para evitar likes desonestos.
+          self.likeBtn.hidden = true;
+        
+        
 //        let playButton = UIButton(type: .RoundedRect)
 //        let image = UIImage(named: "listen_btn") as UIImage?
 //        playButton.setImage(image, forState: UIControlState.Normal)
@@ -183,6 +189,11 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     
                     if let tLikes = postComplete["likes"].array {
                         self.likeNberLabel.text = String(tLikes.count)
+                        print("----------------------------------------")
+                        for like in tLikes {
+                            print(like);
+                        }
+                        print("----------------------------------------")
                     }
                     
                     if let id = postComplete["id"].int {
@@ -389,18 +400,21 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         print(self.textPost.text)
         print(userId)
         
-        var params : [String: String] = [
+        let params : [String: String] = [
             "text" : text,
             "id" : String(post!.id),
             "user": String(self.userId),
         ]
+        //thomas, não entendi. O usuário pode atualizar a foto também ? 
+        // se não, só estou deixando o método que atualiza o texto. 
+        // Porque não vai rolar com o mesmo método para os dois no servidor.
         
-        if self.image != nil {
-            self.saveNewText(self.image, params: params)
-        } else {
-            params["photo"] = ""
+        //if self.image != nil {
+            //self.saveNewText(self.image, params: params)
+        //} else {
+            //params["photo"] = ""
             self.saveNewText(params)
-        }
+        //}
 
     }
     
@@ -408,7 +422,7 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         self.indicator.showActivityIndicator(self.view)
         
-        Alamofire.request(.POST, EndpointUtils.POST, parameters: params)
+        Alamofire.request(.PUT, EndpointUtils.POST + "/" + params["id"]!, parameters: params)
             .responseString { response in
                 print("Success POST: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
@@ -581,13 +595,15 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     if let id = json["data"]["id"].int {
                         self.likedId = id
                     }
-                    
-                    let total:Int = Int((json["data"].array?.count)!);
-                    self.likeNberLabel.text = String(total)
+                    // Thomas essa associação está incorreta, porque aqui a gente tem o total
+                    // de like que o usuário tém e não o total de likes do post, que inclui todos
+                    // os usuários. No carregamento da página já é atribuido corretamente esse valor
+                    // por isso estou comentando essa parte.
+                    //let total:Int = Int((json["data"].array?.count)!);
+                    //self.likeNberLabel.text = String(total)
                     
                     self.likeNberLabel.textColor = UIColor.whiteColor()
                     self.dislikeBtn.hidden = false
-                    self.likeBtn.hidden = true;
                     //print("já laicou esse post")
                     self.liked = true
                     
