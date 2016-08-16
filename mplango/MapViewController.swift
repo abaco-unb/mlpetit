@@ -704,6 +704,7 @@ extension MapViewController : MKMapViewDelegate {
                 imageview.layer.masksToBounds = true
 //                imageview.layer.borderWidth = 1
 //                imageview.layer.borderColor = UIColor.greenColor().CGColor
+                imageview.contentMode = .ScaleAspectFill
             
             if let image : UIImage = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(postAnnotation.owner) + "&avatar=true")! {
                 imageview.image = image

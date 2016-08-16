@@ -591,25 +591,17 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             cell.comPicture.addConstraint(aspectRatioImageViewConstraint)
         }
         
-        //print("Audio CEll : ", audio)
-        
         // Se tiver áudio
         if audio != "" {
-            // print("1 audio")
-            //cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
-            //cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
-            //print("2 audio")
-            
+
             cell.audioView.layer.cornerRadius = 10
             cell.audioView.layer.masksToBounds = true
             cell.audioView.layer.borderWidth = 1
             cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
             
-            
-            //print("3 audio", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
             let audioHelper: AudioHelper = AudioHelper()
             audioHelper._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
-            //print("4 audio")
+
         }
         
         
