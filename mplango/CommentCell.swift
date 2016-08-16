@@ -147,9 +147,11 @@ class CommentCell: UITableViewCell {
                         if let insertedId: Int = json["data"].int {
                             self.likedId = insertedId
                         }
-                        self.likeNberLabel.textColor = UIColor.blackColor()
+                        self.likeBtn.setImage(UIImage(named: "dislike_btn"), forState: .Normal)
+                        self.likeNberLabel.textColor = UIColor.whiteColor()
                         self.likeBtn.hidden = false
                         self.likeBtn.enabled = false
+                        self.likeBtn.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
                         //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
                         let total:Int = Int(self.likeNberLabel.text!)! + 1;
                         self.likeNberLabel.text = String(total)

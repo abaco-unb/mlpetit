@@ -64,10 +64,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsVC.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
-        print("teste 1")
+        //print("teste 1")
         
         initRecorder()
-        print("teste 2")
+       // print("teste 2")
         //print(self.postId)
         
         ActivityIndicator.instance.showActivityIndicator(self.view)
@@ -78,7 +78,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                     for comment in comments {
                         var comId = 0;
                         var comLikes = 0;
-                        
+                        var likedBool = false
                         if let id = comment["id"].int {
                             comId = id
                         }
@@ -86,8 +86,13 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                         if let likes = comment["likes"].array?.count {
                             comLikes = likes
                             
-                            for userId in comment["likes"].array! {
-                                print("user comment", userId.numberValue)
+                            for likedId in comment["likes"].array! {
+
+                                if likedId.intValue == self.userId {
+                                    print("já laicou esse comentário", String(likedId.intValue))
+                                    likedBool = true
+                                }
+                                
                             }
                         }
                         
@@ -101,12 +106,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                             userId: Int( comment["user"]["id"].stringValue )!,
                             userName: comment["user"]["name"].stringValue,
                             likes: comLikes,
-                            liked: false
+                            liked: likedBool
                             ))
                         
-                        print("*************")
-                        print(self.comments)
-                        print("*************")
+                        //print("*************")
+                        //print(self.comments)
+                        //print("*************")
                         
                     }
                     
@@ -118,7 +123,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 
                 self.comTableView.reloadData()
                 
-                print("numero de comentarios: ", self.comments.count)
+                //print("numero de comentarios: ", self.comments.count)
                 
                 //
                 //        if comment != nil {
@@ -255,8 +260,8 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             //"image": String(self.image)
         ]
         
-        print("post", String(self.postId), "user", String(userId))
-        print("Audio", AudioHelper.instance.audioPath)
+        //print("post", String(self.postId), "user", String(userId))
+        //print("Audio", AudioHelper.instance.audioPath)
         
         if(self.image != nil || self.audioPath != "") {
             self.postCommentMidia(params)
@@ -568,7 +573,14 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         cell.likeNberLabel.text =  String(comments[indexPath.row].likes)
         
-        cell.likeBtn.enabled = comments[indexPath.row].liked == true ? false : true
+        if comments[indexPath.row].liked {
+            cell.likeBtn.setImage(UIImage(named: "dislike_btn"), forState: .Normal)
+            cell.likeNberLabel.textColor = UIColor.whiteColor()
+            cell.likeBtn.enabled = false
+            cell.likeBtn.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        }
+        
+        
         
         // Se tiver texto:
         if text != "" {
@@ -577,26 +589,26 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         else {
             cell.comTxtView.text = ""
         }
-        print("aqui", image)
+        //print("aqui", image)
         // Se tiver imagem:
         if image != "" {
-             print("1 image", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true")
+            // print("1 image", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true")
             cell.comPicture.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id)  + "&image=true" )
-             print("2 image")
+            // print("2 image")
             let aspectRatioImageViewConstraint = NSLayoutConstraint(item: cell.comPicture, attribute: .Height, relatedBy: .Equal, toItem: cell.comPicture, attribute: .Width, multiplier: 1/1, constant: 1)
-             print("3 image")
+            // print("3 image")
             cell.comPicture.addConstraint(aspectRatioImageViewConstraint)
-             print("4 image")
+            // print("4 image")
         }
         
-        print("Audio CEll : ", audio)
+        //print("Audio CEll : ", audio)
         
         // Se tiver áudio
         if audio != "" {
-             print("1 audio")
+            // print("1 audio")
             //cell.bgPlayerAudioInPhoto.layer.backgroundColor = UIColor(hex: 0xFFFFFF).CGColor
             //cell.bgPlayerAudioInPhoto.layer.masksToBounds = true
-            print("2 audio")
+            //print("2 audio")
             
             cell.audioView.layer.cornerRadius = 10
             cell.audioView.layer.masksToBounds = true
@@ -604,10 +616,10 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             cell.audioView.layer.borderColor = UIColor(hex: 0x2C98D4).CGColor
             
             
-            print("3 audio", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
+            //print("3 audio", EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
             let audioHelper: AudioHelper = AudioHelper()
             audioHelper._init(cell.audioView, audioPath: EndpointUtils.COMMENT + "?id=" + String(comments[indexPath.row].id) + "&audio=true")
-            print("4 audio")
+            //print("4 audio")
         }
         
         
