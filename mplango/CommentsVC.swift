@@ -834,17 +834,16 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if(segue.identifier == "to_like_notif"){
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let likeController:LikeViewController = navigationController.viewControllers[0] as! LikeViewController
-            
-            // aqui importar a foto do autor do comentário
-//            likeController.likedUser.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments(userId))  + "&avatar=true" )
-            
-            self.user.id = userId
-            likeController.likingUser.image = UIImage(contentsOfFile: self.user.image)
-            
-        }
+//        if(segue.identifier == "to_like_notif"){
+//            let navigationController = segue.destinationViewController as! UINavigationController
+//            let likeController:LikeViewController = navigationController.viewControllers[0] as! LikeViewController
+//            
+//            // aqui importar a foto do autor do comentário
+////            likeController.likedUser.image = ImageUtils.instance.loadImageFromPath(EndpointUtils.USER + "?id=" + String(comments(userId))  + "&avatar=true" )
+//                        
+//            likeController.likingUser.image = UIImage(contentsOfFile: self.user.image)
+//            
+//        }
     }
     
     

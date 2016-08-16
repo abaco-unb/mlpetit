@@ -153,6 +153,7 @@ class CommentCell: UITableViewCell {
                         //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
                         let total:Int = Int(self.likeNberLabel.text!)! + 1;
                         self.likeNberLabel.text = String(total)
+                        
                     } else {
                         NSLog("@resultado : %@", "LIKE LOGIN !!!")
                         NSOperationQueue.mainQueue().addOperationWithBlock {

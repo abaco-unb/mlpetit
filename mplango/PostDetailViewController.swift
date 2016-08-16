@@ -636,12 +636,17 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
                     //TODO  RETORNAR O TOTAL NO METODO DO SERVER (no DATA)
                     let total:Int = Int(self.likeNberLabel.text!)! + 1;
                     self.likeNberLabel.text = String(total)
+                    
+//                    NSOperationQueue.mainQueue().addOperationWithBlock {
+//                        self.performSegueWithIdentifier("to_like_notif", sender: self)
+//                    }
+                    
                 } else {
                     NSLog("@resultado : %@", "LIKE LOGIN !!!")
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         
                         //New Alert Ccontroller
-                        let alertController = UIAlertController(title: "Oops!", message: "Tivemos um problema para registrar seu like!", preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: "Oops!", message: "Ton coup de coeur n'a pas pu être partagé", preferredStyle: .Alert)
                         let agreeAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
                             print("The user is okay about it.")
                         }
@@ -788,15 +793,15 @@ class PostDetailViewController: UIViewController, UIGestureRecognizerDelegate, U
             
         }
         
-        if(segue.identifier == "to_like_notif"){
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let likeController:LikeViewController = navigationController.viewControllers[0] as! LikeViewController
-           
-            likeController.likedUser.image = post!.getOwnerImage()
-            self.user.id = userId
-            likeController.likingUser.image = UIImage(contentsOfFile: self.user.image)
-            
-        }
+//        if(segue.identifier == "to_like_notif"){
+//            let navigationController = segue.destinationViewController as! UINavigationController
+//            let likeController:LikeViewController = navigationController.viewControllers[0] as! LikeViewController
+//           
+//            likeController.likedUser.image = post!.getOwnerImage()
+//            self.user.id = userId
+//            likeController.likingUser.image = UIImage(contentsOfFile: self.user.image)
+//            
+//        }
         
     }
 

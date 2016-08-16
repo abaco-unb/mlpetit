@@ -56,6 +56,7 @@
 		546042151C19B4E300A6A2C4 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546042141C19B4E300A6A2C4 /* CommentsVC.swift */; };
 		5468AD1F1D5FC5FB00F254F1 /* LikeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5468AD1E1D5FC5FB00F254F1 /* LikeIndicator.swift */; };
 		5484F8451CC6C59C002EFB41 /* CarnetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */; };
+		548D9DC31D62835E0028A00C /* RulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548D9DC21D62835E0028A00C /* RulesVC.swift */; };
 		54B130A01CEE00A400199245 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1309F1CEE00A400199245 /* ContactCell.swift */; };
 		54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7EB1BEB8E2400199613 /* Settings.swift */; };
 		54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */; };
@@ -343,6 +344,7 @@
 		5468AD1E1D5FC5FB00F254F1 /* LikeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeIndicator.swift; sourceTree = "<group>"; };
 		54841D5A1BF62CD900008022 /* mplango 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mplango 8.xcdatamodel"; sourceTree = "<group>"; };
 		5484F8441CC6C59C002EFB41 /* CarnetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnetTableViewCell.swift; sourceTree = "<group>"; };
+		548D9DC21D62835E0028A00C /* RulesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesVC.swift; sourceTree = "<group>"; };
 		54B1309F1CEE00A400199245 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		54B4A7EB1BEB8E2400199613 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		54B4A7F01BEB9DF100199613 /* ChangePasswrd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswrd.swift; sourceTree = "<group>"; };
@@ -509,7 +511,6 @@
 				54C3621A1CDBCDDC00396754 /* fixedOrientation.swift */,
 				1536E2F91C6F711900471E86 /* ActivityIndicator.swift */,
 				5468AD1E1D5FC5FB00F254F1 /* LikeIndicator.swift */,
-				54FFD6981D60B0A80035928A /* LikeViewController.swift */,
 				1536E30A1C6FBE0F00471E86 /* CountryUtils.swift */,
 				157970FE1CDD7E2D00C512F6 /* UrlRequestUtils.swift */,
 				159F1AD81D34392C0074762A /* NSCacheSingleton.swift */,
@@ -716,6 +717,7 @@
 				8283BE441B02364E0085F9A6 /* ForgotPassViewController.swift */,
 				541546141B7D1548008E182C /* ProfileVC.swift */,
 				545A1E4C1CFB9FF300600072 /* ProfileGameVC.swift */,
+				548D9DC21D62835E0028A00C /* RulesVC.swift */,
 				8256CAFD1B40FD730002708C /* ContactViewController.swift */,
 				54B1309F1CEE00A400199245 /* ContactCell.swift */,
 				54EEA4741C1F616A00AF6C71 /* FollowersTVC.swift */,
@@ -734,6 +736,7 @@
 			children = (
 				540A4A401C11EF5A00C166D8 /* PostDetailViewController.swift */,
 				82D73CA41B81720E00DFEAB0 /* PostViewController.swift */,
+				54FFD6981D60B0A80035928A /* LikeViewController.swift */,
 				54D02AB61BD949F900B62860 /* UITextViewExt.swift */,
 				54D02AB91BD94C0700B62860 /* RewardViewController.swift */,
 				82D73CA11B81718B00DFEAB0 /* CategoryViewController.swift */,
@@ -1111,6 +1114,7 @@
 				54D02ABA1BD94C0700B62860 /* RewardViewController.swift in Sources */,
 				54B4A7F11BEB9DF100199613 /* ChangePasswrd.swift in Sources */,
 				8256CAFE1B40FD730002708C /* ContactViewController.swift in Sources */,
+				548D9DC31D62835E0028A00C /* RulesVC.swift in Sources */,
 				54FFD6991D60B0A80035928A /* LikeViewController.swift in Sources */,
 				54B4A7EC1BEB8E2400199613 /* Settings.swift in Sources */,
 				159F1AE81D35D8F00074762A /* AudioHelper.swift in Sources */,
